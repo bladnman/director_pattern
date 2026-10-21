@@ -121,6 +121,46 @@ class BundleScenarioTests(unittest.TestCase):
         self.assertEqual(self.tree_bytes(remote), before_remote)
         self.assertEqual(self.tree_bytes(source_dir), captured_bytes)
 
+    def manage(self, record, handle="manager-handle-1"):
+        record = self.event(record, "plan", owner="🐙 Contract", acceptance=["Fix reported bug", "Regression tests pass", "Release verified in production", "Customer thanked after verified success"], human_gate={"required": False})
+        receipt = {"kind": "agent", "id": handle, "responsibility": "request-manager", "identity": "🐙 Contract", "requested": "Large/high", "selected": "unknown"}
+        return self.event(record, "dispatch", receipt=receipt)
+
+    def test_steering_keeps_same_manager_and_observed_handle_through_legal_replanning(self):
+        for entry in ("active", "review", "blocked"):
+            with self.subTest(entry=entry):
+                record = self.manage(self.new(f"complete outcome steered while {entry}"))
+                if entry == "review":
+                    record = self.event(record, "submit", evidence=["Integrated manager submission"])
+                steering = self.store.capture(f"Also cover the {entry} edge case.", f"steering-{entry}")["source_id"]
+                if entry != "blocked":
+                    with self.assertRaises(ValueError, msg="In-place active/review amendment is not supported"):
+                        self.event(record, "amend", source_id=steering)
+                record = self.event(record, "note", text="🐙 Contract handle manager-handle-1 observed live; partial diagnosis retained; steering delivered, incorporation pending")
+                transition = {"active": "requeue", "review": "revise", "blocked": "block"}[entry]
+                record = self.event(record, transition, reason="Replan with captured steering")
+                record = self.event(record, "amend", source_id=steering)
+                self.assertIsNone(record["execution_receipt"], "Replanning clears the current receipt")
+                self.assertEqual(record["acceptance"], [])
+                if entry == "blocked":
+                    record = self.event(record, "resume", reason="Steering captured; replan same outcome")
+                revised = ["Fix reported bug", f"Cover the {entry} edge case", "Regression tests pass", "Release verified in production", "Customer thanked after verified success"]
+                record = self.event(record, "plan", owner="🐙 Contract", acceptance=revised, human_gate={"required": False})
+                record = self.event(record, "dispatch", receipt={"kind": "agent", "id": "manager-handle-1", "responsibility": "request-manager", "identity": "🐙 Contract"})
+                self.assertEqual(record["state"], "active")
+                self.assertEqual(record["owner"], "🐙 Contract")
+                self.assertEqual(record["acceptance"], revised)
+                self.assertEqual(record["execution_receipt"]["id"], "manager-handle-1")
+                self.assertEqual(record["execution_receipt"]["identity"], "🐙 Contract")
+                self.assertEqual([s["source_id"] for s in record["sources"]][-1], steering)
+                dispatches = [h for h in record["history"] if h["type"] == "dispatch"]
+                self.assertEqual(len(dispatches), 2, "History retains the receipt cleared by replanning")
+                self.assertEqual(dispatches[0]["data"]["receipt"]["selected"], "unknown")
+                record = self.event(record, "submit", evidence=["Integrated outcome covering every obligation"])
+                record = self.event(record, "accept", director="🎬 project Director", evidence=["Director evaluated full revised obligations"])
+                self.assertEqual(record["director_acceptance"]["director"], "🎬 project Director")
+        self.store.validate()
+
     def test_grouping_does_not_gate_but_required_dependency_reopen_does(self):
         child = self.new("independent child")
         grouped = self.new("related independent outcome")

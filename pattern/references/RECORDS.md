@@ -62,6 +62,28 @@ event declarations; it cannot authenticate the person or truth behind them.
 Technical verification, rendered/native behavior, user/creator acceptance, deployment,
 and public release are distinct claims. Worker completion is a submission.
 
+## Outcome ownership in the record
+
+Config schema 1 and request-store schema 2 already carry complete-outcome
+management; no helper command, status, or schema change exists for named roles,
+models, identities, or manager phases. Map them onto existing validated fields:
+
+| Existing field or event | Use for a managed outcome |
+|---|---|
+| `owner` set by `plan` | Stable accountable Request Manager identity for the whole outcome, not each specialty or transient attempt. |
+| `acceptance` list | All known completion obligations and criteria, including release verification and follow-up. The evolving detailed approach belongs in manager artifacts/activity. |
+| `dispatch` and `execution_receipt` | The manager's actual execution handle and host receipt. Extra receipt keys carry selected role/reference package, requested and actual model/effort, and identity; acknowledgment only when actually received. |
+| `note` events and current activity | Specialist assignments and handles, read acknowledgments, evaluations and rework, partial results, observed status, obligations/resume pointers, and the identity roster/cursor. |
+| `submit` → review | Integrated manager submission to the Director. Worker-level evaluation does not submit the whole outcome; manager responsibility persists while its attempt waits. |
+| `accept` event `director`; stored `director_acceptance.director` | The project Director's final decision and identity. A manager does not close its own outcome; Director rework stays with the same manager and outcome. |
+
+Unknown top-level event keys are rejected, and canonical fields are reconstructed
+by replay with exact equality. Do not bolt manager metadata into request.md or
+invent JSON keys. Keep one outcome identity: distinguish its owner, its execution
+attempts, and its internal assignments without duplicating the request tree.
+Steering an active or reviewed outcome uses the existing replanning transitions in
+[TOOLING](TOOLING.md#steer-an-active-or-reviewed-outcome).
+
 ## Typed relationships, independent ownership
 
 Source provenance, grouping/decomposition, information links, required dependencies,

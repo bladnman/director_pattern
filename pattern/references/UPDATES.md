@@ -58,7 +58,16 @@ provenance is a review requirement, never evidence that replacement is safe.
 
 Preserve project context/overlays, host mappings, custom adapters, state mode, stable
 project/request IDs, source bundles and attachments, request history, activity,
-decisions, and actual handles. These are project-owned, not upstream payload.
+decisions, and actual handles. Also preserve the project-owned role index, its role
+definitions and overrides, project-wide guardrails, model/host mapping, and the
+private identity roster, cursor, and current activity. These are project-owned, not
+upstream payload; an initialized roster or cursor never overwrites current state.
+A project's replacement identity pool is an adaptation, merged like any other.
+
+Policy adoption does not reassign work. Existing open director-owned requests keep
+their owner, handles, and obligations until an explicit acknowledged assignment or
+handoff changes responsibility. Do not bulk-rewrite owners, spawn managers, or
+create a role index full of placeholder entries merely because the package changed.
 Keep one loaded startup hook and merge its role/privacy rules without erasing
 specialized project instructions. A template update changes only generic seeds;
 never copy a configured store, shared identity, runtime state, or a completed setup
@@ -68,15 +77,19 @@ Inspect helper/config/store schema compatibility before replacing a bundled help
 An incompatible or uncertain schema blocks that part of the update; preserve the
 old helper and state, report the boundary, and obtain a separate migration decision.
 Do not auto-migrate a tracker, initialize a second ledger, switch modes, or assign a
-new project identity to make an update pass. Lean and existing trackers retain their
+new project identity to make an update pass. A Producer Pattern installation is a
+separate predecessor package, not an earlier revision of this one: its `.producer/`
+store uses the `request-bundles` format with `producer` fields, and this helper
+refuses it before reading or writing. Moving from it is an explicit migration
+decision, never an update; do not edit its config or records to make it open. Lean and existing trackers retain their
 applicable workflow and do not acquire a bundled backend as an update side effect.
 
 ## Validate and record the result
 
 Check selected payload presence and local links, the single actual startup path,
 role resolution (including missing-role clarification and explicit bounded child
-directors), configured mode/canonical state, preserved adapters, and privacy/index
-boundaries. Verify a template remains generic and generated identities are separate.
+directors), configured mode/canonical state, preserved adapters, role index and
+Recorder route, private roster location, and privacy/index boundaries. Verify a template remains generic and generated identities are separate.
 Use read-only validation of actual state where supported; use disposable fixtures
 for necessary helper behavior checks, never dummy requests in the real backlog.
 Do not claim a cold-session behavioral trial unless one actually ran.

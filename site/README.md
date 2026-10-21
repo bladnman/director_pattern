@@ -67,25 +67,37 @@ promising automatic installation or version detection.
 
 ## Presentation and boundaries
 
-A warm neutral page with a restrained rust accent introduces the director,
-workers, and recorder with a diagram and one labeled illustrative request.
+A warm neutral page with a restrained rust accent introduces the Director, a
+Request Manager (one per complete outcome, directing specialists), and the shared
+recorder with a diagram and one labeled illustrative request.
 Installation, checking setup, and manual updates each have a copyable request.
 Tracked/lean options and existing tracker preservation stay visible. The status
 example explains the four sparse markers and the **📋 SitRep** report heading
 without claiming activity. That heading belongs to periodic report blocks, while
-the checked director retains its `🎬` response prefix.
+the checked project Director retains its `🎬` response prefix; managers and other
+actors use assigned identities. The page names the adoption prerequisites (role
+index, model/effort mapping, recorder route, identity roster) and that an update
+leaves those project-owned mappings in place.
 The site makes no adoption, performance, customer, or behavioral guarantees.
 
-## Local verification — October 17, 2026
+## Local verification
 
-Seven site contract cases pass. All 30 repository tests passed at the initial launch;
-the unchanged helper is outside this website revision. The production build
-contains ten allowlisted files. Background headless checks at 1440, 390 and 320
-pixels verify all three exact copy requests, keyboard activation and denied-
-clipboard selection, visible anchor navigation, reduced-motion rendering and no
-horizontal overflow. The page loads without script errors, failed requests or
-external asset requests. Installation text and navigation remain available with
-JavaScript disabled. Local Worker checks verify HTML/Markdown negotiation, HEAD,
-the guide's content type and a private-path 404. An independent review checked
-contract accuracy, role-first setup checks, privacy and publication scope.
-These local results do not establish deployment, adoption, or agent behavior.
+After the Director / Request Manager revision, all eight site contract cases pass.
+A quick headless look at 1440, 760, 390 and 320 pixels found no horizontal
+overflow and a readable diagram. The copy-button, keyboard, denied-clipboard,
+reduced-motion, JavaScript-disabled, Worker and independent-review checks in the
+next paragraph describe the earlier director/worker revision and are not re-run
+for this one.
+
+Earlier revision, October 17, 2026: seven site contract cases passed. All 30
+repository tests passed at the initial launch; the unchanged helper is outside this
+website revision. The production build contains ten allowlisted files. Background
+headless checks at 1440, 390 and 320 pixels verify all three exact copy requests,
+keyboard activation and denied-clipboard selection, visible anchor navigation,
+reduced-motion rendering and no horizontal overflow. The page loads without script
+errors, failed requests or external asset requests. Installation text and
+navigation remain available with JavaScript disabled. Local Worker checks verify
+HTML/Markdown negotiation, HEAD, the guide's content type and a private-path 404.
+An independent review checked contract accuracy, role-first setup checks, privacy
+and publication scope. These local results do not establish deployment, adoption,
+or agent behavior.

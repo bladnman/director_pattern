@@ -66,3 +66,53 @@ proof. No actual project installation/migration, human acceptance, authorized fo
 transport, authenticated remote proof, current liveness, or publication was tested.
 A cold CLI process restart is not a fresh-session agent/adoption trial; those gates
 remain distinct and open.
+
+## Request Manager scenarios — October 21, 2026
+
+These are proposed acceptance scenarios for the
+[complete-outcome design](RATIONALE.md#decision-history--october-21-2026). **None has
+run as a live agent or adoption trial.** Fixture coverage means a deterministic
+disposable-store or package check observed passing below; it exercises record or
+package shape, not agent behavior. The last column still needs a bounded adoption in
+an authorized fixture project with actual role definitions and real host handles.
+
+| Scenario | Deterministic fixture coverage | Awaits bounded live adoption |
+|---|---|---|
+| Bug → tests → release → production verification → customer follow-up | Steering fixture plans those obligations under one owner and keeps them through replanning to Director acceptance. | Obligations recognized at start, role selection, sequencing, approval/send authority, draft not recorded as sent, manager kept through review. |
+| Useful parallelism | None. | Independent work overlaps, dependent actors wait, handles and actual model/effort receipts are retained. |
+| A/B/C interruption and status | Steering fixture: C's addendum reaches A's same owner and observed handle via requeue (active), revise (review), or block/resume; in-place active/review amend is rejected. | Director resume point, B's own owner, no Manager C, status reply cancels nothing, A acknowledges incorporation. |
+| Early C during source analysis | None. | Known-source correction reaches the analyst, the proposal reflects it, no second user entrypoint. |
+| Conversational reply versus completion | None. | Replies leave obligations open; a final exit checkpoints and states the continuation limit. |
+| Role loading and guardrails | None; a dispatch receipt merely carries a responsibility key. | Definition and global guards supplied and acknowledged, descendants included; a missing definition stops only affected staffing. |
+| Model/effort selection | Requested and `unknown` selected values survive in history after replanning clears the current receipt. | Actual tool-selected settings differ by need; prompt labels are not reported as selections. |
+| Recorder routing and serialization | Existing helper tests: stale revisions and conflicting retries fail; concurrent CLI creates/updates converge in one store. | Direct versus via-assigner route, workers returning through managers, no competing recorder. |
+| Identity collision, late report, exhaustion | Package test: the static pool is base payload, distinct, and skips reserved markers. | Reserve, bind, retain, release, and exhaust through the shared roster; no machine enforcement exists. |
+| Resume with uncertain worker | Existing store-recovery fixtures only. | Real handle checks, completed artifact evaluated, only missing work replaced. |
+| Meaning and authority | None. | Overlapping sources do not create two owners; role name, model, or marker grants no send or release. |
+| Install/update preservation | Package tests: every contract is base payload, the startup hook names only installed files, base and tracked payload links close. | Tracked, lean, and custom-tracker installs and updates preserving roles, mappings, roster, and open requests. |
+| Tuning reaches the next assignment | None. | A reviewed correction updates a canonical reference that the next assignment loads. |
+| Non-coding outcome | None. | A research or operations outcome under the same generic Director and manager definitions. |
+
+## Executed checks — October 21, 2026
+
+From the repository root, `PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover
+-s development/tests -v` ran **34 tests in 3.287 seconds, OK**: 21 helper, 8 bundle
+scenario, and 5 package-boundary tests, before the first commit. New since October 16
+are the same-manager steering fixture, the predecessor-store refusal, the
+base-payload/startup-hook check, and the identity-pool check. All used disposable
+directories. From `site/`, `npm test` passed 8 of 8, including its dist-writing build.
+No live agent, installation, update, deployment, or publication was exercised.
+
+### Predecessor-store compatibility
+
+A disposable check outside the repository initialized a store with the predecessor
+helper at its pre-fork revision, accepted one request with its `producer` field, and
+validated it there. This fork's helper then opened that store, because the config 1,
+store 2, and format identifiers matched: validation failed with
+`Unknown event fields: ['producer']`, a mutation of an open record failed replay,
+and `create` still wrote a new request into the predecessor store. After the format
+became `director-request-bundles`, the same disposable check showed validate, apply,
+create, and init all refused the store before reading records, with its bytes
+unchanged; `test_init_and_open_refuse_a_predecessor_store_without_writing` keeps
+that. No real store was touched, and no alias or migration is implemented. See
+[R11](RATIONALE.md#r11--update-from-a-pinned-public-source-without-replacing-project-state).

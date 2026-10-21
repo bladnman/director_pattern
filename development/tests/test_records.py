@@ -213,6 +213,19 @@ class RecorderTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "cannot be replaced"):
             requests.Store.init(root, "PROJ-" + "a" * 32)
 
+    def test_init_and_open_refuse_a_predecessor_store_without_writing(self):
+        root = Path(self.temp.name) / "predecessor"
+        (root / "requests/pending").mkdir(parents=True)
+        config = {"schema_version": 1, "record_mode": "tracked", "request_store": {"schema_version": 2, "format": "request-bundles", "project_id": "PROJ-" + "b" * 32}}
+        (root / "config.json").write_text(json.dumps(config))
+        raw = root / "raw.txt"
+        raw.write_text("Fixture only")
+        before = {p: p.read_bytes() for p in root.rglob("*") if p.is_file() and p.name != ".requests.lock"}
+        for attempt in (lambda: requests.Store.init(root), lambda: requests.Store(root), lambda: requests.Store(root).create(raw="x", title="New", event_id="c1")):
+            with self.assertRaisesRegex(ValueError, "director-request-bundles store required"):
+                attempt()
+        self.assertEqual({p: p.read_bytes() for p in root.rglob("*") if p.is_file() and p.name != ".requests.lock"}, before)
+
     def test_immutable_source_capture_exact_attachments_and_retry(self):
         original = Path(self.temp.name) / "original.bin"
         original.write_bytes(b"\x00original\xff")

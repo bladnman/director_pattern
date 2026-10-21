@@ -24,37 +24,54 @@ Preserve existing instructions, local adaptations, private project context,
 unfinished work, and the canonical tracker. Do not copy this website, maintainer
 material, repository metadata, or private source material into the installation.
 
-The method assigns one director to discuss, decide, route work, evaluate returns,
-request rework, and accept the integrated result. Workers execute; a recorder
-handles routine state. A new project conversation defaults to its director;
-explicit assignments determine bounded roles and authority. Inherited history
-does not grant a role. Follow current package contracts for the full rules.
+The method gives the project a Director who discusses, decides, keeps unfinished
+commitments, and accepts each outcome. The Director entrusts each complete outcome
+to one Request Manager, who owns its planning, specialist tasks, evaluation,
+rework, and follow-up; a specialty is a task within the outcome, not a reason for
+another manager. Specialists execute, and one shared recorder handles routine
+state. The Director may dispatch substantial independent analysis that returns a
+proposal; no intake layer is mandatory. Assignment roles are only `worker` and
+`director`; Request Manager and Recorder are maintained responsibilities, not new
+role values. A new project conversation defaults to its Director; explicit
+assignments determine bounded roles and authority. Inherited history does not
+grant a role. Follow current package contracts for the full rules.
+
+Adoption also maps what staffing needs, in the project's PROJECT context: a
+canonical role index (reuse existing maintained roles and guardrails), the host's
+model and effort mapping, the recorder route and state location, and the identity
+roster location. A missing mapping stays a visible gap; do not invent generic
+specialists to fill it.
 
 Tracked is the default; lean is an explicit option. Existing trackers remain
-canonical. An installation does not add a service, scheduler, or automatic wakeup.
-Host capability limits must stay visible.
+canonical. An installation does not add a service, scheduler, runtime, or
+automatic wakeup, and promises no live agents. Host capability limits must stay
+visible.
 
 ## Verify an installation
 
 ```text
-Verify the Director Pattern installation in this project. Check the loaded startup wiring, required files, configured mode, and pinned source revision. Report any gaps and distinguish setup from current worker activity.
+Verify the Director Pattern installation in this project. Check the loaded startup wiring, required files, configured mode, role index, Recorder route, and pinned source revision. Report any gaps and distinguish setup from current worker activity.
 ```
 
 The website cannot inspect the visitor's project. Resolve the assignment role
-first. Only a director conversation requests the current-conversation setup check:
-a Small recorder checks actual wiring, required files, and project mode/state;
-the director judges that receipt and its own resolved role. Workers, reviewers,
-and recorders omit the badge without launching this director-only check.
-Only a checked director uses `🎬 Director Pattern · tracked` or
-`🎬 Director Pattern · lean` initially, then `🎬` on later director replies.
-That identifies checked setup and role, not behavioral verification or worker
-liveness. Missing setup/capabilities remain visible without the marker.
+first. Only the project Director requests the current-conversation setup check:
+a Small recorder checks actual wiring, required files, project mode/state, and
+whether PROJECT names the role index, model mapping, recorder route, and identity
+roster location; the Director judges that receipt and its own resolved role.
+Request Managers receive the checked facts in their assignment, and workers,
+reviewers, and recorders omit the badge without launching this Director-only check.
+Only a checked project Director uses `🎬 Director Pattern · tracked` or
+`🎬 Director Pattern · lean` initially, then `🎬` on later Director replies.
+Managers and other actors use an assigned identity such as `🐙 Contract —`, never
+the badge. The badge identifies checked setup and role, not behavioral
+verification or live managers or workers. Missing setup/capabilities remain
+visible without the marker.
 
 The four sparse markers have distinct meanings: `🎬` identifies the checked
-director, `❓` marks actionable questions/decisions, `🖐️` marks user-only actions,
-and `📋` introduces the periodic situation-report block with the exact heading
-**📋 SitRep**. Reserve that heading for report blocks so the user can scan or skip
-them; do not attach it to every progress sentence. A checked director keeps its
+project Director, `❓` marks actionable questions/decisions, `🖐️` marks user-only
+actions, and `📋` introduces the periodic situation-report block with the exact
+heading **📋 SitRep**. Reserve that heading for report blocks so the user can scan or skip
+them; do not attach it to every progress sentence. A checked Director keeps its
 required `🎬` response prefix before the report block.
 
 Use a periodic overview after several minutes of otherwise quiet managed work or
@@ -81,8 +98,10 @@ if the older installation has none. The canonical protocol is
 Published GitHub main is upstream truth; pin one exact reviewed SHA. Normal
 startup never silently updates. Back up managed files and wiring; compare the
 installed baseline, local current files, and incoming revision; preserve local
-adaptations and private state. Check compatibility and verify before recording
-the new revision. Do not migrate trackers, switch modes, or replace project
-identity as a side effect. Refer to the protocol for missing baselines/conflicts.
+adaptations and private state, including the project's role index and
+definitions, model mapping, and identity roster. Check compatibility and verify
+before recording the new revision. Do not migrate trackers, switch modes, or
+replace project identity as a side effect. Refer to the protocol for missing
+baselines/conflicts.
 
 The public contracts and package control when this summary differs from them.

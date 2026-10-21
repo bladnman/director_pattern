@@ -5,17 +5,31 @@ a complete-backlog promise. Keep an existing tracker canonical. State mode does
 not depend on project type, organization size, or staffing. An existing tracker
 must map the same intent/ownership/acceptance contract with its actual guarantees.
 
-A Small recorder owns **all routine state reading and writing** in either mode.
-The director interprets, decides, and evaluates; the recorder applies supplied
-facts and returns exact IDs, paths, revisions, and applied-update receipts. Ambiguous
-scope, authorization, priority, acceptance, and cancellation return to the director.
+A Small recorder owns **all routine state reading and writing** in either mode,
+through one coordinated [Recorder](RECORDER.md) route named in PROJECT. Harder
+reconciliation may warrant more capability under [MODELS.md](MODELS.md). Judgment is
+owner-relative: a Request Manager plans, evaluates, and reworks its bounded outcome;
+the project Director decides cross-outcome scope and priority, authorization, and
+final acceptance. The recorder applies supplied facts and returns exact IDs, paths,
+revisions, and applied-update receipts. Ambiguous scope, authorization, priority,
+acceptance, and cancellation return to the responsible owner. Workers report to
+their manager rather than writing canonical state or launching competing recorders.
 If unavailable, disclose unsupported persistence and continue director conversation;
-do not silently turn the director into a direct-helper worker.
+do not silently turn a director into a direct-helper worker.
 
-For a conversation resolved as director, the recorder checks installed wiring,
+Keep two depths of state. The Director's working commitments stay compact: each
+unfinished outcome or thought, its owner, current question or approach, next
+decision, and resume point. Each Request Manager's outcome record carries the full
+source and obligations, approach and decisions, assignments and handles, evidence,
+gates and review, and next actions. Durable owner identity and a replaceable
+execution attempt are different things. The shared identity roster and cursor
+([IDENTITIES.md](IDENTITIES.md)) live in current activity, serialized through the
+same Recorder route. Not every passing thought needs a durable write.
+
+For the project Director's conversation, the recorder checks installed wiring,
 required files, and project mode/configuration under the [identity check](PATTERN.md#check-installation-before-using-director-identity).
 It returns factual evidence through the existing setup receipt/PROJECT context;
-the director resolves its role and judges whether the `🎬` identity is warranted.
+the Director resolves its role and judges whether the `🎬` identity is warranted.
 Lean and existing trackers need no bundled backend for this check. If evidence or
 the recorder is unavailable, report that limitation without claiming verification.
 The receipt is setup evidence, not behavioral acceptance or worker liveness.
@@ -71,7 +85,8 @@ acceptance; independent completed outcomes remain complete while another waits.
 ## Recovery is explicit
 
 Recorder-maintained activity/decision pointers in both modes retain actual handles,
-write owners, last observations, results, pending evaluation, and next actions.
+write owners, identity bindings, last observations, results, pending evaluation,
+review/rework ownership, and next actions.
 They are not a second lifecycle authority or proof of liveness. The helper never
 starts workers, sends messages, schedules a wakeup, or authenticates supplied proof.
 

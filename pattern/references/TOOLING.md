@@ -24,7 +24,7 @@ python3 /project/.director/tools/requests.py validate
 ```
 
 `init` preserves config extras and adds `request_store` with schema version 2,
-format `request-bundles`, and a stable `PROJ-<32 lowercase hex>` project ID. Config's
+format `director-request-bundles`, and a stable `PROJ-<32 lowercase hex>` project ID. Config's
 own schema remains 1 and mode is tracked. Repeat init retains the identity; optional
 `--project-id PROJ-…` explicitly selects an identity for an empty new store. Legacy
 flat JSON or an unrecognized populated store is rejected without conversion.
@@ -94,7 +94,8 @@ receipt as described below, without pretending to launch a new worker. `direct`
 is a schema option for worker execution, not permission for a director role switch.
 Amend appends source provenance and clears acceptance/execution; replan before new
 dispatch. Capture active/review steering first, reconcile workers, then requeue/revise
-before amend. Done/canceled needs reopen; blocked needs resume before planning.
+before amend ([steering flow](#steer-an-active-or-reviewed-outcome)). Done/canceled
+needs reopen; blocked needs resume before planning.
 
 For a minimal no-human-gate lifecycle, save these as four separate event files.
 They are synthetic fixture inputs in a disposable test, never real execution proof:
@@ -115,6 +116,41 @@ They are synthetic fixture inputs in a disposable test, never real execution pro
 For real work replace fixture inputs with actual receipts/evidence. A planned human
 gate needs `"human_gate":{"status":"passed","evidence":["Actual acceptance reference"]}`
 on accept; omit human_gate when not planned. It cannot be waived at completion.
+
+A real dispatch receipt may carry extra host-detail keys, which are preserved. Use
+them for facts actually observed at dispatch, for example:
+
+```json
+{"event_id":"dispatch-2","type":"dispatch","receipt":{"kind":"agent","id":"<actual handle>","responsibility":"request-manager","identity":"🐙 Contract","requested":"Large/high","selected":"<actual model/effort or unknown>"}}
+```
+
+Record a later acknowledgment, specialist assignment, or evaluation as a `note`.
+The helper has no role, model, identity, or activity command; those stay in
+receipts, notes, and recorder-maintained current activity.
+
+### Steer an active or reviewed outcome
+
+`amend` is limited to inbox/queued/blocked, and `requeue`/`revise`/`resume` clear
+the current execution receipt; event history keeps the old one. Active/review
+in-place amendment is not supported. Steer through the existing legal flow:
+
+1. Capture the exact addendum as a new source and reconcile it with the existing
+   manager and affected work at a supported boundary.
+2. Retain the stable manager identity, actual existing handle, last live observation,
+   partial results, and incorporation state in activity/evidence before changing
+   the record. Message delivery alone is not incorporation.
+3. Apply `requeue` for an active request or `revise` for a review request. These
+   are replanning transitions, not host process stop/restart commands.
+4. While queued, apply `amend` with the new source_id, then `plan` the **same
+   manager owner** with the full revised acceptance obligations and human_gate.
+5. Apply `dispatch` binding the **same actually observed manager handle**. This
+   records existing execution; it does not spawn another manager or worker.
+
+When waiting on incorporation is genuinely the outcome's state, `block` → `amend` →
+`resume` → `plan` → factual `dispatch` of that same handle also works. If the handle
+is uncertain, inspect, wait, or settle ownership first. A returned manager that
+needs resumption uses an actually supported host continuation; record its observed
+attempt and handle. Durable responsibility does not prove an active attempt.
 
 ## Typed links and external outcome records
 

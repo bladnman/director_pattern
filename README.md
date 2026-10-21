@@ -1,8 +1,20 @@
 # Director Pattern
 
-**First candidate · October 16, 2026.** One project director stays in conversation,
-coordinates workers, evaluates evidence, and accepts the whole outcome. Workers
-execute; a small recorder preserves state. Tracked is default; lean is optional.
+**First candidate · October 21, 2026.** The project Director stays in conversation,
+keeps its unfinished commitments, and accepts each outcome. Each complete outcome has
+one accountable owner, normally a Request Manager; specialists execute; a shared
+recorder preserves state.
+Tracked is default; lean is optional.
+
+"Director Pattern" names the package. Assignment roles stay `worker` and `director`:
+the project Director and a Request Manager bounded to one outcome both carry
+`Role: director`, and Request Manager and Recorder are maintained responsibilities,
+not new role values. A specialty such as engineering, testing, or release is a task
+inside an outcome, not a reason for another manager. The Director can optionally
+dispatch substantial independent analysis that returns a proposal. Before staffing,
+an installation maps a project role index, the host's model and effort options, a
+Recorder route, and an identity roster; it adds no runtime and guarantees no live
+agents. An update leaves those project-owned mappings in place.
 
 **New here? [Start with the website](https://director.metal-sole.com/)** for the
 overview and copyable requests to install, check, or update it through your

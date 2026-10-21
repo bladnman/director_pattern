@@ -30,19 +30,25 @@ rationale, and tests remain outside the installable `pattern/`.
 
 When a local `.director/` installation exists, resolve your actual assignment role
 and read its `PATTERN.md`. Directors also load installed `PROJECT.md`, `MODELS.md`,
-and `STATE.md`; workers/reviewers load their assignment and applicable project
-rules, and recorders load STATE and its applicable references. A new project
-conversation defaults to its project director regardless of who opened it; an
-explicit assignment overrides that default. Bounded delegated assignments must
-name worker/director role, scope, and authority. Missing roles require clarification
-with the assigner; ancestry and inherited history confer neither role.
+and `STATE.md`, plus `DIRECTOR.md` for the project Director or `REQUEST_MANAGER.md`
+for a Request Manager; anyone staffing work follows its `ROLES.md`, `ASSIGNMENT.md`,
+and `IDENTITIES.md`. Workers/reviewers load their assignment and its supplied role
+references, and recorders load `RECORDER.md`, STATE, and applicable references. A
+new project conversation defaults to its project Director regardless of who opened
+it; an explicit assignment overrides that default. Bounded delegated assignments
+must name worker/director role, responsibility, scope, and authority. Missing roles
+require clarification with the assigner; ancestry and inherited history confer
+neither role.
 
-Existing project authority and product/release gates remain in force. The director
-judges selected primary evidence and artifacts; workers execute implementation and
-routine verification, and a recorder handles routine state I/O. Before using 🎬,
-a director has the recorder check actual startup wiring, required installed files,
-and project configuration/mode, then resolves its own role and judges that receipt.
-Other roles omit the badge. If the installation is absent or incomplete, explain
-that limitation without a badge; maintain the project rules above. Do not assume
-that source files or an inherited director conversation prove installation.
+Existing project authority and product/release gates remain in force. The Director
+judges selected primary evidence and artifacts; each complete outcome has one
+accountable owner, normally a Request Manager; workers execute implementation and
+routine verification, and a
+shared recorder handles routine state I/O. Before using 🎬, the project Director has
+the recorder check actual startup wiring, required installed files, and project
+configuration/mode, then resolves its own role and judges that receipt. Request
+Managers and other roles use their assigned identity instead of the badge. If the
+installation is absent or incomplete, explain that limitation without a badge;
+maintain the project rules above. Do not assume that source files or an inherited
+director conversation prove installation.
 <!-- director-pattern:end -->

@@ -17,6 +17,8 @@ not payload. A temporary staging clone is optional transport only.
 1. Inspect the target's actual startup instruction entrypoint and referenced rules.
    Identify root, existing owners/tracker, and real delegation, model, effort,
    context, observation, and return capabilities. A tier label proves no selection.
+   Find the project's existing maintained role definitions, runbooks, and
+   project-wide guardrails, and whether managers can reach a recorder directly.
    Before writing private context, config, state, sources, or receipts, verify
    effective exclusions and that none of those destinations are Git-indexed.
    Preserve already tracked user history and report a reconciliation need; ignore
@@ -31,6 +33,11 @@ not payload. A temporary staging clone is optional transport only.
    leaving unknowns visible. The director decides mode/mappings; the worker records
    them. Tracked is default; lean optional.
    An existing canonical tracker uses the contract without creating a second store.
+   Map PROJECT's role index, project-wide guardrails, model/host mapping, Recorder
+   route and state policy, and identity roster location. Reuse existing maintained
+   definitions; seed or link a local role index (the generic ROLES entries plus
+   actual project roles) only when none exists. Never present illustrative entries
+   as real roles. The roster lives in private current activity, never in a seed.
 3. For a new bundled tracked store, have the recorder run
    `python3 <target>/.director/tools/requests.py init`. It creates/preserves config
    schema 1 and initializes request-store schema 2 with a stable project ID.
@@ -46,18 +53,20 @@ not payload. A temporary staging clone is optional transport only.
    ```markdown
    <!-- director-pattern:start -->
    Read `.director/PATTERN.md` and resolve your assignment role first. New project
-   conversations default to their project director regardless of who opened them;
+   conversations default to their project Director regardless of who opened them;
    explicit assignments override that default. Bounded delegated assignments must
-   name Role: worker/director, scope, and authority. Clarify missing delegated roles
-   with the assigner; ancestry or inherited history grants neither role.
-   Directors also read PROJECT.md, MODELS.md, and STATE.md inside `.director/`.
-   Workers/reviewers load their assignment and applicable project rules; recorders
-   load STATE and its tracked
-   references when applicable. Follow the requirements for your resolved role;
-   director-only authority stays with directors. Before a director uses the 🎬
-   identity, have a Small recorder check this conversation's installed wiring,
-   required files, and project configuration/mode; the director resolves its role
-   and judges the receipt under PATTERN's startup check. Other roles omit the badge.
+   name Role: worker/director, responsibility, scope, and authority. Clarify missing
+   delegated roles with the assigner; ancestry or inherited history grants neither.
+   Directors also read PROJECT.md, MODELS.md, and STATE.md inside `.director/`: the
+   project Director reads DIRECTOR.md, a Request Manager reads REQUEST_MANAGER.md,
+   and anyone staffing work follows ROLES.md, ASSIGNMENT.md, and IDENTITIES.md.
+   Workers/reviewers load their assignment and its supplied role references;
+   recorders load RECORDER.md, STATE, and tracked references when applicable.
+   Director-only authority stays with directors. Before the project Director uses
+   the 🎬 identity, have a Small recorder check this conversation's installed
+   wiring, required files, and project configuration/mode; the Director judges the
+   receipt under PATTERN's startup check. Request Managers and other roles use
+   their assigned identity, never the badge.
    <!-- director-pattern:end -->
    ```
 
@@ -72,7 +81,9 @@ completed receipt.
 
 Verify that the host actually loads the entrypoint and referenced role/context
 files. Check canonical state, requested versus actual model controls, and truthful
-behavior when delegation/persistence is unavailable. For an existing tracker,
+behavior when delegation/persistence is unavailable. Confirm the role index and its
+listed definitions resolve, the Recorder route is one the host actually supports,
+and the identity roster location is private; record unmapped roles as gaps. For an existing tracker,
 verify its actual mapped workflow and persistence receipts without installing a
 new helper or second store. For lean, verify core wiring and current activity/
 decision persistence; honestly retain its lack of a complete-ledger promise.
@@ -87,8 +98,8 @@ in a newly created disposable directory, never by adding dummy actual requests:
 1. Copy the selected package helper to `<fixture>/tools/requests.py` and run its
    `init` command. Write a tiny UTF-8 `<fixture>/raw.txt` artificial request. The
    fixture must be separate from the actual project and have its own project ID.
-2. Save the literal plan, dispatch, submit, and accept JSON examples from
-   [TOOLING.md](references/TOOLING.md) as separate event files in the fixture.
+2. Save the four literal minimal-lifecycle plan, dispatch, submit, and accept JSON
+   examples from [TOOLING.md](references/TOOLING.md) as separate event files in the fixture.
    Its dispatch handle is synthetic fixture input, not an actual execution claim.
 3. Substitute the fixture path and returned ID, then run:
 
@@ -126,7 +137,8 @@ For an existing installation, follow the installed
 [update protocol](references/UPDATES.md). Published GitHub `main` is the upstream
 source of truth; resolve it to an exact reviewed SHA for each explicit update.
 Normal startup never silently updates. Reuse the existing hook and preserve local
-context, adaptations, identities, canonical state, and unfinished work. Missing
+context, adaptations, identities, role index and definitions, model mapping, identity
+roster, canonical state, and unfinished work. Missing
 baselines require comparison to the prior pinned upstream revision or explicit
 review, never blind replacement. Record a new source revision only after checks
 succeed; no tracker migration is an update side effect.

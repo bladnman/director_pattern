@@ -71,6 +71,28 @@ class PackageBoundaryTests(unittest.TestCase):
             self.manifest(isolated)
             self.check_links(isolated)
 
+    def test_every_contract_and_hooked_file_is_base_payload(self):
+        manifest = self.manifest(PATTERN)
+        guidance = {"README.md", "INSTALL.md"}
+        contracts = {p.relative_to(PATTERN).as_posix() for p in PATTERN.rglob("*.md")} - guidance
+        self.assertLessEqual(contracts, set(manifest["base_files"]), "Lean installs must be self-contained")
+        install = (PATTERN / "INSTALL.md").read_text(encoding="utf-8")
+        hook = re.search(r"<!-- director-pattern:start -->(.*?)<!-- director-pattern:end -->", install, re.S)
+        assert hook is not None, "INSTALL must carry the marked startup hook"
+        named = set(re.findall(r"\b[A-Z_]+\.md\b", hook.group(1)))
+        self.assertTrue({"PATTERN.md", "DIRECTOR.md", "REQUEST_MANAGER.md", "ROLES.md"} <= named, named)
+        self.assertLessEqual(named, set(manifest["base_files"]), "Startup hook names only installed files")
+
+    def test_identity_pool_is_static_unique_and_skips_reserved_markers(self):
+        manifest = self.manifest(PATTERN)
+        self.assertIn("IDENTITY_POOL.txt", manifest["base_files"])
+        markers = [line.strip() for line in (PATTERN / "IDENTITY_POOL.txt").read_text(encoding="utf-8").splitlines() if line.strip()]
+        self.assertTrue(markers)
+        bare = [marker.replace("️", "") for marker in markers]
+        self.assertEqual(len(bare), len(set(bare)), "Pool markers must be distinct")
+        for reserved in ("🎬", "📋", "❓", "🖐"):
+            self.assertNotIn(reserved, bare, reserved)
+
     def test_declared_payloads_have_only_internal_markdown_dependencies(self):
         with tempfile.TemporaryDirectory() as temporary:
             isolated = Path(temporary) / "pattern"

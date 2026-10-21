@@ -2,6 +2,13 @@
   "schema_version": 1,
   "base_files": [
     "PATTERN.md",
+    "DIRECTOR.md",
+    "REQUEST_MANAGER.md",
+    "ROLES.md",
+    "RECORDER.md",
+    "IDENTITIES.md",
+    "IDENTITY_POOL.txt",
+    "ASSIGNMENT.md",
     "MODELS.md",
     "STATE.md",
     "PROJECT.md",

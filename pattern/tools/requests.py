@@ -28,7 +28,7 @@ CONTAINERS = {"inbox": "pending", "queued": "pending", "active": "working", "rev
 ID = re.compile(r"REQ-[0-9a-f]{32}\Z")
 SOURCE_ID = re.compile(r"UR-[0-9a-f]{32}\Z")
 PROJECT_ID = re.compile(r"PROJ-[0-9a-f]{32}\Z")
-FORMAT = "request-bundles"
+FORMAT = "director-request-bundles"
 LINK_KINDS = {"group", "decomposes", "related", "depends_on"}
 
 
@@ -453,7 +453,7 @@ class Store:
         self.config = json.loads(safe(self.team / "config.json").read_bytes())
         spec = self.config.get("request_store", {})
         if self.config.get("schema_version") != 1 or self.config.get("record_mode") != "tracked" or spec.get("schema_version") != 2 or spec.get("format") != FORMAT or not PROJECT_ID.fullmatch(spec.get("project_id", "")):
-            fail("Schema-2 request-bundles store required; run init for an empty store. Legacy flat JSON is never migrated automatically.")
+            fail("Schema-2 director-request-bundles store required; run init for an empty store. Legacy flat JSON and Producer Pattern request-bundles stores are never migrated automatically.")
         self.project_id = spec["project_id"]
         self.directory = safe(self.team / "requests")
         self.sources = safe(self.team / "sources")

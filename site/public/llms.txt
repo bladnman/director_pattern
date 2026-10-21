@@ -1,7 +1,8 @@
 # Director Pattern
 
-One project director coordinates workers, evaluates returns, and accepts the
-integrated outcome. A recorder preserves continuity. First candidate.
+A project Director keeps the conversation and accepts each outcome. One Request
+Manager owns each complete outcome and directs specialists; a shared recorder
+preserves continuity. First candidate.
 
 - [For an agent](https://director.metal-sole.com/install.md): follow this guide directly for installation, verification or an explicit update; it points to the canonical GitHub protocols.
 - [Canonical package](https://github.com/bladnman/director_pattern/blob/main/pattern/README.md): authoritative installation entrypoint.

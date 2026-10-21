@@ -79,7 +79,24 @@ test('the four sparse markers and exact periodic report label agree with the sou
   assert.match(guide, /do not attach it to every progress sentence/);
   assert.match(contract, /no more than five minutes of silence/);
   assert.match(contract, /A stricter host update cadence wins/);
-  assert.match(contract, /A checked director keeps its required `🎬` response prefix/);
+  assert.match(contract, /A checked Director keeps its required `🎬` response prefix/);
+});
+
+test('the public narrative names the Director and one-manager-per-outcome responsibilities without new role values or badges', async () => {
+  const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
+  const guide = await readFile(new URL('../public/install.md', import.meta.url), 'utf8');
+  const llms = await readFile(new URL('../public/llms.txt', import.meta.url), 'utf8');
+  const contract = await readFile(new URL('../../pattern/PATTERN.md', import.meta.url), 'utf8');
+  for (const document of [html, guide, llms]) assert.match(document, /Request\s+Manager/);
+  assert.match(contract, /Request Manager/);
+  assert.match(contract, /A specialty[^.]*is a task within the outcome, not a reason for\s+another manager/);
+  assert.match(guide, /a specialty is a task within the outcome, not a reason for\s+another manager/);
+  assert.match(guide, /only `worker` and\s+`director`/);
+  assert.match(guide, /maintained responsibilities, not new\s+role values/);
+  assert.match(guide, /Managers and other actors use an assigned identity[^.]*never\s+the badge/);
+  assert.match(html, /Managers and other actors use an assigned name[^.]*never the badge/);
+  assert.match(guide, /role index[\s\S]*model and effort mapping[\s\S]*recorder route[\s\S]*identity\s+roster/);
+  assert.match(html, /<p class="status-limit">[^<]*project Director role[^<]*managers or workers[^<]*<\/p>/);
 });
 
 test('production output contains only reviewed public assets, not installation/private state', async () => {
