@@ -13,11 +13,19 @@ its grandparent. The historical `--team ROOT` option overrides that root and mus
 precede the subcommand; it creates no team. Commands below use an illustrative
 `/project/.director`; substitute the actual root. Files containing text use UTF-8.
 
+Every `--event-id` and event-file `event_id` ends in `-<32 lowercase hex>`. Run
+`event-id <kind>` once per new operation; it prints a fresh ID such as
+`capture-<32 hex>`. Keep that ID for any retry of the same operation. The CLI
+rejects counter-style IDs such as `request-1`: a counter restarts on every machine,
+and when the store travels through Git, two machines would give two different
+outcomes one ID.
+
 ```sh
 python3 /project/.director/tools/requests.py init
-python3 /project/.director/tools/requests.py capture --raw-file /path/to/exact-message.txt --event-id capture-1 --attachment /path/to/original.png
-python3 /project/.director/tools/requests.py create --source-id <returned-UR-ID> --title "Director-written outcome" --event-id request-1
-python3 /project/.director/tools/requests.py create --source-id <same-UR-ID> --title "Independent second outcome" --event-id request-2
+python3 /project/.director/tools/requests.py event-id capture
+python3 /project/.director/tools/requests.py capture --raw-file /path/to/exact-message.txt --event-id <capture-ID> --attachment /path/to/original.png
+python3 /project/.director/tools/requests.py create --source-id <returned-UR-ID> --title "Director-written outcome" --event-id <request-ID>
+python3 /project/.director/tools/requests.py create --source-id <same-UR-ID> --title "Independent second outcome" --event-id <another-request-ID>
 python3 /project/.director/tools/requests.py show <returned-REQ-ID>
 python3 /project/.director/tools/requests.py list --open
 python3 /project/.director/tools/requests.py validate
@@ -42,7 +50,8 @@ ID for several independent outcomes. Alternatively `create --raw-file FILE` inst
 of `--source-id` captures a source as a convenience; use explicit capture to share
 one source or include attachments. Capture/create IDs derive from project identity
 and event ID, so retries do not create extra outcomes. Reuse an event ID only for
-the same operation/payload. Record each returned receipt before dependent updates.
+the same operation/payload; every new operation gets a new ID from `event-id`.
+Record each returned receipt before dependent updates.
 
 ## Files, revisions, and lifecycle events
 
@@ -54,8 +63,8 @@ Do not cache old paths as identity. Never hand-edit the JSON block or derived bo
 To snapshot request-local material, use the command rather than a hand-built event:
 
 ```sh
-python3 /project/.director/tools/requests.py attach <REQ-ID> --file /path/to/research.txt --kind assets --event-id asset-1 --expect-revision <current-revision>
-python3 /project/.director/tools/requests.py attach <REQ-ID> --file /path/to/checks.txt --kind evidence --event-id evidence-1 --expect-revision <current-revision>
+python3 /project/.director/tools/requests.py attach <REQ-ID> --file /path/to/research.txt --kind assets --event-id <asset-ID> --expect-revision <current-revision>
+python3 /project/.director/tools/requests.py attach <REQ-ID> --file /path/to/checks.txt --kind evidence --event-id <evidence-ID> --expect-revision <current-revision>
 ```
 
 The copied file gets an event-derived filename, original-name/byte-count/SHA-256
@@ -69,7 +78,7 @@ Write director-supplied events as JSON files, then:
 python3 /project/.director/tools/requests.py apply <REQ-ID> --event-file /path/to/event.json --expect-revision <current-revision>
 ```
 
-Every event has `event_id` and `type`. Additional literal keys are below. Unknown
+Every event has `event_id` (from `event-id`) and `type`. Additional literal keys are below. Unknown
 keys fail. Strings must be nonempty; evidence/acceptance lists must be nonempty
 where required. All supplied facts/evidence still require director judgment.
 
@@ -98,19 +107,20 @@ before amend ([steering flow](#steer-an-active-or-reviewed-outcome)). Done/cance
 needs reopen; blocked needs resume before planning.
 
 For a minimal no-human-gate lifecycle, save these as four separate event files.
-They are synthetic fixture inputs in a disposable test, never real execution proof:
+They are synthetic fixture inputs in a disposable test, never real execution proof;
+their fixed event IDs are fixture literals, and real events take fresh IDs:
 
 ```json
-{"event_id":"plan-1","type":"plan","owner":"worker-1","acceptance":["Agreed outcome met"],"human_gate":{"required":false}}
+{"event_id":"plan-203fd3c1415f401d851bc6ee9575cdcb","type":"plan","owner":"worker-1","acceptance":["Agreed outcome met"],"human_gate":{"required":false}}
 ```
 ```json
-{"event_id":"dispatch-1","type":"dispatch","receipt":{"kind":"agent","id":"fixture-worker-1"}}
+{"event_id":"dispatch-2d3a0a4113b04b04b0ea518d24ee64ac","type":"dispatch","receipt":{"kind":"agent","id":"fixture-worker-1"}}
 ```
 ```json
-{"event_id":"submit-1","type":"submit","evidence":["Fixture result"]}
+{"event_id":"submit-e1780413fbb242fd817585d34a9d1bae","type":"submit","evidence":["Fixture result"]}
 ```
 ```json
-{"event_id":"accept-1","type":"accept","director":"director","evidence":["Fixture result evaluated against scope"]}
+{"event_id":"accept-a001b19efcce4f73a843eb60c32b23ec","type":"accept","director":"director","evidence":["Fixture result evaluated against scope"]}
 ```
 
 For real work replace fixture inputs with actual receipts/evidence. A planned human
@@ -121,7 +131,7 @@ A real dispatch receipt may carry extra host-detail keys, which are preserved. U
 them for facts actually observed at dispatch, for example:
 
 ```json
-{"event_id":"dispatch-2","type":"dispatch","receipt":{"kind":"agent","id":"<actual handle>","responsibility":"request-manager","identity":"🐙 Contract","requested":"Large/high","selected":"<actual model/effort or unknown>"}}
+{"event_id":"dispatch-e6f9261d35334496834f7c4537539053","type":"dispatch","receipt":{"kind":"agent","id":"<actual handle>","responsibility":"request-manager","identity":"🐙 Contract","requested":"Large/high","selected":"<actual model/effort or unknown>"}}
 ```
 
 Record a later acknowledgment, specialist assignment, or evaluation as a `note`.
@@ -228,6 +238,9 @@ stale revision; conflicting reuse or new events against stale revisions fail.
 Mutations serialize cooperating writers with `.requests.lock`. Atomic per-file
 replacement plus a journal makes relocation recoverable, not a multi-file or
 cross-machine transaction. Never raw-move a bundle to simulate a lifecycle event.
+The lock and journal are machine-local and ignored by Git. When the store travels
+through Git, one machine writes at a time; see
+[RECORDS](RECORDS.md#persistence-and-interruption-recovery).
 
 Validate checks source/file hashes, record/body consistency, history replay,
 directory/state/identity, and supported local links/cycles. It cannot prove evidence

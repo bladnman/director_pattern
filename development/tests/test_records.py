@@ -17,6 +17,11 @@ def load(name):
 
 requests = load("requests")
 
+
+def fixed_event_id(kind, n=0):
+    """CLI event IDs need a 32-hex suffix; tests use fixed, readable ones."""
+    return f"{kind}-{n:032x}"
+
 class RecorderTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
@@ -98,7 +103,7 @@ class RecorderTests(unittest.TestCase):
     def test_cli_raw_and_concurrent_creates_and_updates(self):
         raw = Path(self.temp.name) / "raw.txt"
         raw.write_bytes(b"  Exact\r\n\r\n")
-        jobs = [subprocess.Popen(self.command("create", "--raw-file", str(raw), "--title", "Concurrent", "--event-id", f"parallel-{n // 2}"), stdout=subprocess.PIPE, stderr=subprocess.PIPE) for n in range(8)]
+        jobs = [subprocess.Popen(self.command("create", "--raw-file", str(raw), "--title", "Concurrent", "--event-id", fixed_event_id("parallel", n // 2)), stdout=subprocess.PIPE, stderr=subprocess.PIPE) for n in range(8)]
         results = []
         for job in jobs:
             out, err = job.communicate(timeout=15)
@@ -109,7 +114,7 @@ class RecorderTests(unittest.TestCase):
         jobs = []
         for n in range(6):
             event = Path(self.temp.name) / f"event-{n}.json"
-            event.write_text(json.dumps({"event_id": f"concurrent-{n}", "type": "note", "text": "update"}))
+            event.write_text(json.dumps({"event_id": fixed_event_id("concurrent", n), "type": "note", "text": "update"}))
             jobs.append(subprocess.Popen(self.command("apply", self.r["id"], "--event-file", str(event), "--expect-revision", "1"), stdout=subprocess.PIPE, stderr=subprocess.PIPE))
         outcomes = [job.communicate(timeout=15) for job in jobs]
         self.assertEqual(sum(job.returncode == 0 for job in jobs), 1)
@@ -127,15 +132,15 @@ class RecorderTests(unittest.TestCase):
         raw.write_bytes(b"  Director layout\r\n")
         cmd = [sys.executable, str(script)]
         subprocess.run(cmd + ["init"], capture_output=True, check=True)
-        created = subprocess.run(cmd + ["create", "--raw-file", str(raw), "--title", "Director layout", "--event-id", "director-layout-create"], capture_output=True, check=True)
+        created = subprocess.run(cmd + ["create", "--raw-file", str(raw), "--title", "Director layout", "--event-id", fixed_event_id("director-layout-create")], capture_output=True, check=True)
         record = json.loads(created.stdout)
         request_id = record["id"]
         self.assertEqual((root / "sources" / record["sources"][0]["source_id"] / "input.txt").read_bytes(), b"  Director layout\r\n")
         events = [
-            {"event_id": "director-layout-plan", "type": "plan", "owner": "worker-layout", "acceptance": ["Worker result verified"], "human_gate": {"required": False}},
-            {"event_id": "director-layout-dispatch", "type": "dispatch", "receipt": {"kind": "agent", "id": "worker-layout-1"}},
-            {"event_id": "director-layout-submit", "type": "submit", "evidence": ["Worker verification complete"]},
-            {"event_id": "director-layout-accept", "type": "accept", "director": "director", "evidence": ["Director evaluated worker result"]},
+            {"event_id": fixed_event_id("director-layout-plan"), "type": "plan", "owner": "worker-layout", "acceptance": ["Worker result verified"], "human_gate": {"required": False}},
+            {"event_id": fixed_event_id("director-layout-dispatch"), "type": "dispatch", "receipt": {"kind": "agent", "id": "worker-layout-1"}},
+            {"event_id": fixed_event_id("director-layout-submit"), "type": "submit", "evidence": ["Worker verification complete"]},
+            {"event_id": fixed_event_id("director-layout-accept"), "type": "accept", "director": "director", "evidence": ["Director evaluated worker result"]},
         ]
         revision = record["revision"]
         for index, event in enumerate(events):
@@ -150,6 +155,32 @@ class RecorderTests(unittest.TestCase):
         self.assertEqual(json.loads(validated.stdout), {"valid": 1})
         self.assertTrue((root / "requests/archive" / request_id / "request.md").is_file())
         self.assertEqual(len(list((root / "requests").glob("*/*/request.md"))), 1)
+
+    def test_cli_generates_and_requires_machine_unique_event_ids(self):
+        made = [subprocess.run(self.command("event-id", "request"), capture_output=True, text=True, check=True).stdout.strip() for _ in range(2)]
+        self.assertTrue(all(requests.EVENT_ID.fullmatch(e) and e.startswith("request-") for e in made), made)
+        self.assertNotEqual(made[0], made[1])
+        default = subprocess.run(self.command("event-id"), capture_output=True, text=True, check=True).stdout.strip()
+        self.assertTrue(default.startswith("event-") and requests.EVENT_ID.fullmatch(default), default)
+        self.assertEqual(subprocess.run(self.command("event-id", "Bad Kind"), capture_output=True).returncode, 1)
+        raw = Path(self.temp.name) / "raw.txt"
+        raw.write_text("Counter IDs restart on each machine")
+        event = Path(self.temp.name) / "counter.json"
+        event.write_text(json.dumps({"event_id": "note-1", "type": "note", "text": "update"}))
+        before = self.store.records()
+        for args in (("create", "--raw-file", str(raw), "--title", "Counter", "--event-id", "request-1"),
+                     ("capture", "--raw-file", str(raw), "--event-id", "capture-1"),
+                     ("attach", self.r["id"], "--file", str(raw), "--kind", "assets", "--event-id", "asset-1", "--expect-revision", "1"),
+                     ("apply", self.r["id"], "--event-file", str(event), "--expect-revision", "1")):
+            with self.subTest(command=args[0]):
+                result = subprocess.run(self.command(*args), capture_output=True, text=True)
+                self.assertEqual(result.returncode, 1)
+                self.assertIn("event-id", result.stderr)
+        self.assertEqual(self.store.records(), before)
+        self.assertFalse(self.store.sources.exists() and any(
+            requests.Store(self.team).read_source(s.name)["event_id"] == "capture-1" for s in self.store.sources.iterdir()))
+        created = subprocess.run(self.command("create", "--raw-file", str(raw), "--title", "Unique", "--event-id", made[0]), capture_output=True, text=True, check=True)
+        self.assertEqual(json.loads(created.stdout)["history"][0]["event_id"], made[0])
 
     def test_store_rejects_symlinks_and_path_escape(self):
         with self.assertRaises(ValueError):

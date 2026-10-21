@@ -2,7 +2,8 @@
 
 Candidate installation status: [prepared / installed / fresh-session trial completed]
 Candidate source/version: [published repository URL + exact reviewed commit SHA; label unpublished candidates]
-Private setup/update receipt: [ignored path; selected managed-file SHA-256 baselines, startup wiring, adaptations, verification]
+Setup/update receipt: [committed path under .director/receipts/; selected managed-file SHA-256 baselines, startup wiring, adaptations, verification]
+Version control: [committed by default; paths the project chose to keep local in .director/.gitignore; public-remote warning given on date / not needed / no Git]
 Project root and outcome owner: [actual root; project Director]
 Scope and desired outcomes: [one project; constraints; explicit exclusions]
 Existing instruction authority and runbooks: [paths; preserve their authority]
@@ -20,7 +21,7 @@ Project-wide applicable guardrails: [paths that apply to every actor]
 Unmapped or conflicting roles: [known gaps that stop affected staffing until resolved]
 Recorder definition and route: [indexed Recorder entry; direct manager→Recorder only if supported, otherwise manager→assigner→Recorder]
 Recorder state policy/location: [canonical store and current activity; serialization and receipt requirements]
-Identity roster and cursor: [private current-activity location; never seeded or packaged]
+Identity roster and cursor: [current-activity location; never seeded or packaged]
 Identity pool: [IDENTITY_POOL.txt, a project replacement, or text labels]
 
 Fill these from the project's actual maintained definitions; illustrative entries in
@@ -67,16 +68,20 @@ Continuation after a final reply: [what the host keeps running or resumes; limit
 A prompt tier name is not a model selection. Retain actual per-assignment choices
 and differences from the request. If delegation or persistence is unsupported,
 disclose it and continue director conversation; no silent execution-role switch.
+These rows describe the host where they were observed. A conversation on another
+machine or a cloud host treats them as last observed and rechecks before relying
+on them.
 
 ## Source updates
 
 Use [UPDATES.md](references/UPDATES.md) for an explicitly requested update from
 published GitHub `main`. Record source URL and exact SHA plus installed managed-file
-baselines privately. Normal startup does not fetch or replace files. Preserve this
-project's context, canonical tracker, state mode, stable IDs, raw sources, role
-index and definitions, model mapping, identity roster, and local adapters. A
-template seed carries no completed receipt or initialized identity; actual
-generated-project context belongs in an ignored local overlay.
+baselines in the committed receipt. Normal startup does not fetch or replace files.
+Preserve this project's context, canonical tracker, state mode, stable IDs, raw
+sources, role index and definitions, model mapping, identity roster, local
+adapters, and version-control choices. A template seed carries no completed
+receipt or initialized identity; each generated project fills its own PROJECT
+and runs its own init.
 
 ## Working references
 

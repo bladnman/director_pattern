@@ -136,6 +136,13 @@ multi-machine/cloud transactions, authentication, or tamper-proof audit. Keep on
 canonical store across worktrees. Validation checks stored invariants and supported
 relationship consistency; it does not prove that real-world evidence is true.
 
+The store is committed with the project, so it can travel to another machine or a
+cloud checkout through Git. One machine writes at a time: commit and push before
+continuing elsewhere, and pull before the next write. Unique event IDs keep
+outcomes and sources created on different machines distinct. They do not merge two
+machines' edits to one request; that surfaces as a Git conflict. Preserve both
+copies and reconcile through the recorder, never by hand-editing a record.
+
 On restart, the recorder retrieves relevant open outcomes, sources, actual dispatch
 and handoff receipts, latest dated observations, results, and pending decisions.
 The director queries real host handles through authorized tools and assigns worker

@@ -1,0 +1,11 @@
+# Director Pattern: only machine-local files stay out of Git.
+# Everything else in .director/ is committed with the project.
+
+# Request helper lock and in-progress write scratch
+/.requests.lock
+/.request-txn
+/.request-stage-*
+/.request-complete-*
+
+# Pre-update safety copies; committed history already keeps prior versions
+/backups/

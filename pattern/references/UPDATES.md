@@ -22,18 +22,23 @@ or copy repository history into the target. Only the manifest-selected payload
 belongs under `.director/`; maintainer docs, tests, and private material do not.
 
 Identify the actual project root and loaded startup wiring. Read the existing
-private setup receipt, PROJECT (and local overlay if used), configured mode,
+setup receipt, PROJECT (and any local overlay an older installation uses), configured mode,
 canonical tracker, local adapters, and current installed files. Do not infer actual
 role, model support, or current worker liveness from a saved receipt.
 
 ## Compare before replacing
 
-Before edits, create a unique dated private backup of every managed file and
-startup file to be changed, with original paths and SHA-256 hashes. Verify backup
-bytes. Keep backups and receipts outside Git/public payload. Verify effective ignore
-rules and the index for all private destinations before any writes; an ignore rule
-does not remove indexed history. Preserve existing user material and report privacy
-conflicts rather than silently untracking or rewriting it.
+Before edits, create a unique dated backup under `.director/backups/` of every
+managed file and startup file to be changed, with original paths and SHA-256
+hashes. Verify backup bytes. Backups stay local through `.director/.gitignore`;
+committed history already keeps prior versions. If the installation has no
+`.director/.gitignore` yet, add the incoming one first (it is a new managed file),
+then write backups. Receipts are committed under `.director/receipts/`.
+
+Preserve the project's version-control choices. An installation whose files are
+ignored, under the earlier private default or by deliberate choice, stays ignored:
+report that the current default commits them and leave the decision to the user.
+Never silently start tracking, untrack, or rewrite history.
 
 Compare three versions for each selected managed path:
 
@@ -56,11 +61,12 @@ If a previous receipt lacks baselines, reconstruct a safe comparison from its pi
 upstream revision and inspect local differences, or require explicit review. Unknown
 provenance is a review requirement, never evidence that replacement is safe.
 
-Preserve project context/overlays, host mappings, custom adapters, state mode, stable
+Preserve project context/overlays, host mappings, custom adapters, additions to
+`.director/.gitignore`, state mode, stable
 project/request IDs, source bundles and attachments, request history, activity,
 decisions, and actual handles. Also preserve the project-owned role index, its role
 definitions and overrides, project-wide guardrails, model/host mapping, and the
-private identity roster, cursor, and current activity. These are project-owned, not
+identity roster, cursor, and current activity. These are project-owned, not
 upstream payload; an initialized roster or cursor never overwrites current state.
 A project's replacement identity pool is an adaptation, merged like any other.
 
@@ -89,12 +95,14 @@ applicable workflow and do not acquire a bundled backend as an update side effec
 Check selected payload presence and local links, the single actual startup path,
 role resolution (including missing-role clarification and explicit bounded child
 directors), configured mode/canonical state, preserved adapters, role index and
-Recorder route, private roster location, and privacy/index boundaries. Verify a template remains generic and generated identities are separate.
+Recorder route, roster location, and the version-control check in
+[STATE](../STATE.md#version-control). Verify a template remains generic and generated identities are separate.
 Use read-only validation of actual state where supported; use disposable fixtures
 for necessary helper behavior checks, never dummy requests in the real backlog.
 Do not claim a cold-session behavioral trial unless one actually ran.
 
-Only after all required checks succeed, write the private update receipt: source
+Only after all required checks succeed, write the update receipt under
+`.director/receipts/`: source
 URL/full SHA, prior revision, selected managed paths and resulting SHA-256 baseline
 hashes, startup wiring/hash, preserved adaptations, backup location/hashes, checks
 and limits. Update the project's source pointer to that successful receipt. A

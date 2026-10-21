@@ -5,6 +5,8 @@ request.md is canonical: `---json\n`, one JSON object, `\n---\n`, and a
 fully derived readable body. It is not arbitrary editable Markdown. Writers hold
 one flock. A durable .request-txn intent bridges folder moves and record writes;
 reads refuse pending recovery; recover (or the next mutation) finishes it.
+CLI event IDs end in 32 random hex digits (`event-id` makes one), so machines
+sharing the store through Git never derive one request or source ID twice.
 This records director decisions, not authentication, agent liveness or transport.
 """
 import argparse
@@ -28,6 +30,8 @@ CONTAINERS = {"inbox": "pending", "queued": "pending", "active": "working", "rev
 ID = re.compile(r"REQ-[0-9a-f]{32}\Z")
 SOURCE_ID = re.compile(r"UR-[0-9a-f]{32}\Z")
 PROJECT_ID = re.compile(r"PROJ-[0-9a-f]{32}\Z")
+EVENT_KIND = re.compile(r"[a-z][a-z0-9-]{0,47}\Z")
+EVENT_ID = re.compile(r"[a-z][a-z0-9-]{0,47}-[0-9a-f]{32}\Z")
 FORMAT = "director-request-bundles"
 LINK_KINDS = {"group", "decomposes", "related", "depends_on"}
 
@@ -39,6 +43,20 @@ def fail(message):
 def nonempty(value, name):
     if not isinstance(value, str) or not value.strip():
         fail(f"{name} must be a nonempty string")
+    return value
+
+
+def new_event_id(kind="event"):
+    if not isinstance(kind, str) or not EVENT_KIND.fullmatch(kind):
+        fail("event-id kind must start with a lowercase letter and use only lowercase letters, digits, and hyphens")
+    return f"{kind}-{uuid.uuid4().hex}"
+
+
+def unique_event_id(value, name="event_id"):
+    # A counter such as request-1 restarts on every machine; IDs derive from it.
+    nonempty(value, name)
+    if not EVENT_ID.fullmatch(value):
+        fail(f"{name} must end in -<32 lowercase hex>; generate one with the event-id command")
     return value
 
 
@@ -881,6 +899,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--team", type=Path, default=Path(__file__).resolve().parents[1], help="installed .director directory")
     sub = parser.add_subparsers(dest="command", required=True)
+    sub.add_parser("event-id").add_argument("kind", nargs="?", default="event")
     sub.add_parser("init").add_argument("--project-id")
     capture = sub.add_parser("capture")
     capture.add_argument("--raw-file", required=True)
@@ -909,6 +928,11 @@ def main():
     sub.add_parser("recover")
     args = parser.parse_args()
     try:
+        if args.command == "event-id":
+            print(new_event_id(args.kind))
+            return 0
+        if args.command in {"capture", "create", "attach"}:
+            unique_event_id(args.event_id)
         if args.command == "init":
             result = Store.init(args.team, args.project_id)
         else:
@@ -921,7 +945,11 @@ def main():
                 raw = safe(args.raw_file).read_bytes().decode("utf-8") if args.raw_file else None
                 result = store.create(raw, args.title, args.event_id, args.source_id)
             elif args.command == "apply":
-                result = store.apply(args.id, json.loads(safe(args.event_file).read_bytes()), args.expect_revision)
+                event = json.loads(safe(args.event_file).read_bytes())
+                if not isinstance(event, dict):
+                    fail("Event must be an object")
+                unique_event_id(event.get("event_id"))
+                result = store.apply(args.id, event, args.expect_revision)
             elif args.command == "attach":
                 result = store.attach(args.id, args.file, args.kind, args.event_id, args.expect_revision)
             elif args.command == "show":

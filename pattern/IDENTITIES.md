@@ -48,5 +48,5 @@ start another independent identity service.
 
 The roster needs assignment identity, display name and marker, reservation state,
 actual handle/attempt binding, pending-report/review state, retirement or release
-evidence, and one rotation cursor. It is private project state: never package a live
+evidence, and one rotation cursor. It is project state: never package a live
 roster, and never let an initialized roster or cursor overwrite current state.

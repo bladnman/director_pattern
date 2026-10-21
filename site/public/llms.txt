@@ -6,7 +6,7 @@ preserves continuity. First candidate.
 
 - [For an agent](https://director.metal-sole.com/install.md): follow this guide directly for installation, verification or an explicit update; it points to the canonical GitHub protocols.
 - [Canonical package](https://github.com/bladnman/director_pattern/blob/main/pattern/README.md): authoritative installation entrypoint.
-- [Update protocol](https://github.com/bladnman/director_pattern/blob/main/pattern/references/UPDATES.md): preserve project adaptations and private state.
+- [Update protocol](https://github.com/bladnman/director_pattern/blob/main/pattern/references/UPDATES.md): preserve project adaptations and project state.
 - [Public rationale](https://github.com/bladnman/director_pattern/blob/main/development/RATIONALE.md): reasons and tradeoffs.
 
 Reading is not adoption. Install/update only on an authorized request. Resolve

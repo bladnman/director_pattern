@@ -20,9 +20,12 @@ canonical GitHub installation protocol linked above. Do not send the user back
 to this website to repeat the same request. Resolve published
 GitHub main to one exact reviewed commit and read the package at that revision.
 Copy only the manifest-selected payload into the target project's `.director/`.
-Preserve existing instructions, local adaptations, private project context,
+Preserve existing instructions, local adaptations, project context,
 unfinished work, and the canonical tracker. Do not copy this website, maintainer
 material, repository metadata, or private source material into the installation.
+The installed `.director/` is committed with the target project so work continues
+on another machine or in a cloud checkout; the canonical INSTALL guide names the
+few machine-local files it keeps out of Git and warns once about a public remote.
 
 The method gives the project a Director who discusses, decides, keeps unfinished
 commitments, and accepts each outcome. The Director entrusts each complete outcome
@@ -98,7 +101,7 @@ if the older installation has none. The canonical protocol is
 Published GitHub main is upstream truth; pin one exact reviewed SHA. Normal
 startup never silently updates. Back up managed files and wiring; compare the
 installed baseline, local current files, and incoming revision; preserve local
-adaptations and private state, including the project's role index and
+adaptations and project state, including the project's role index and
 definitions, model mapping, and identity roster. Check compatibility and verify
 before recording the new revision. Do not migrate trackers, switch modes, or
 replace project identity as a side effect. Refer to the protocol for missing

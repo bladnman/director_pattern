@@ -30,6 +30,12 @@ shared immutable user sources and typed relationship/ownership records. Files
 preserve continuity, not agent liveness or an automatic wakeup. No service,
 scheduler, runtime, or new chat is installed.
 
+The installed `.director/` is committed with the project, including its requests
+and exact user sources, so work continues from another machine or a cloud
+checkout. Its own `.gitignore` keeps only the helper lock, in-progress write
+scratch, and pre-update backups local. A project may choose to keep more local;
+see [STATE.md](STATE.md#version-control).
+
 Before the Director can staff work, the installation maps four project facts in
 PROJECT.md: a canonical role index ([ROLES.md](ROLES.md)), the host's model and
 effort mapping ([MODELS.md](MODELS.md)), the Recorder route and state location, and
@@ -79,7 +85,7 @@ authorizes the reversible setup. Host restrictions and existing authority remain
 Ask the project agent to follow its installed [update protocol](references/UPDATES.md),
 or this package's [INSTALL.md](INSTALL.md) when the older installation has none.
 Use published GitHub `main` resolved to an exact reviewed commit, preserve local
-adaptations and private state, and verify before recording the new revision. The
+adaptations and project state, and verify before recording the new revision. The
 project's role index and definitions, model mapping, and identity roster belong to
 the project; an update does not replace them. An update request is distinct from
 reading the repository; startup does not silently update an installation.

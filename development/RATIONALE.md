@@ -393,6 +393,11 @@ write, schema numbers stay 1 and 2, and moving from it is an explicit migration
 decision, never an update. Reading old fields or an automatic migration was rejected
 as needless scope for a new package with no installations.
 
+**Superseded in part, October 21:** Setup and update receipts are committed under
+`.director/receipts/` rather than kept private, so an update from any checkout can
+compare baselines; only pre-update backups stay local. See
+[R14](#r14--commit-the-installation-with-the-project).
+
 ## R12 — Give people a readable front door without another contract layer
 
 **Accepted direction, October 17:** A public site at `director.metal-sole.com`
@@ -448,6 +453,68 @@ the skill leaves project installations intact.
 structure and boundaries, not fresh-session discovery, target adoption, or removal.
 **Revisit:** Real lifecycle requests misroute, pointer copies accumulate protocol,
 or discovery is mistaken for project authority.
+
+## R14 — Commit the installation with the project
+
+**Problem:** The installed `.director/` holds the method contracts next to project
+context, the request ledger, exact user sources, and receipts. The install guide
+told agents to keep everything but the contracts out of Git, without saying what
+to write in an ignore file, so the simplest compliant move was to ignore the whole
+folder. A committed startup hook then named files that a fresh clone lacked, and
+the missing-file check failed quietly. Work could not continue on another machine
+or in a cloud checkout, and a collaborator saw none of the project's roles,
+guardrails, or backlog.
+**Accepted decision, October 21:** Commit the installation with the project by
+default: contracts, filled PROJECT, config, requests, sources, current activity,
+and receipts. A payload `.director/.gitignore` keeps only the helper lock,
+in-progress write scratch, and pre-update backups local. Keeping more local is a
+project's explicit later choice, recorded in that file and preserved by updates.
+This supersedes the private treatment of project context, state, sources, and
+receipts in R11–R13 and the "ignored local overlay" for generated-project context.
+**Why/tradeoff:** The ledger is the project's request history and the backlog that
+lets work continue anywhere; role mappings and guardrails are definitions a team
+shares. Privacy matters in one case that a later opt-out cannot fix: exact messages
+and attachments pushed to a public remote stay in history after deletion. Setup
+warns once when a remote is public or its visibility cannot be checked, records the
+warning in PROJECT, and asks nothing on private repositories. A shared store also
+needs IDs that cannot collide. Request and source IDs derive from the project ID and
+event ID, and counter-style event IDs restart on every machine, so the CLI now
+requires event IDs ending in 32 random hex digits and offers `event-id` to make
+them. The lock still covers one machine, so one machine writes at a time. A template
+repository commits only contracts and a placeholder PROJECT, so generated projects
+never share an initialized identity.
+**Considered alternatives:** A committed `.director/` with an ignored `local/`
+subfolder for the ledger and receipts kept the backlog off other machines, which is
+the main reason to commit it. Renaming to a plain `director/` folder was not needed:
+Git tracks dot folders, and the problem was mixing shared and private files with no
+explicit ignore contract.
+**Implemented:** [.gitignore](../pattern/.gitignore) as base payload; the
+committed default, keep-more-local rules, and `git check-ignore` check in
+[STATE.md](../pattern/STATE.md#version-control), which installed files can reach;
+the setup step and public-remote warning in [INSTALL.md](../pattern/INSTALL.md); local
+backups, committed receipts, and existing ignored installations left alone in
+[UPDATES.md](../pattern/references/UPDATES.md); a version-control field in
+[PROJECT.md](../pattern/PROJECT.md); the one-writer rule in
+[RECORDS.md](../pattern/references/RECORDS.md#persistence-and-interruption-recovery);
+and the helper's `event-id` command and CLI check in
+[TOOLING.md](../pattern/references/TOOLING.md). This source repository still
+ignores its own `/.director/`: the repository is public, and a local installation
+here would hold the maintainer's exact conversations, which stay private. That is
+the deliberate local choice this decision allows, not the default.
+**Regression cases:** A fresh clone has every file its startup hook names, plus
+config, requests, and sources, and `validate` passes there. A solo user pushes from
+a laptop and a cloud checkout continues the open requests. Two machines starting
+from one commit each create a request; the IDs differ and both survive the merge.
+`create --event-id request-1` fails. The lock and a pre-update backup never appear
+in `git status`. A project that ignores `requests/` and `sources/` keeps them
+ignored through an update. An older installation ignored by a root rule is
+reported, not silently tracked. A public-remote warning appears once, not again on
+another machine.
+**Verification limit:** Unit tests cover the event-ID check and generator and the
+manifest payload. No real installation, cross-machine continuation, or public-remote
+warning has been observed.
+**Revisit:** committed sources leak sensitive material in real use, Git conflicts
+in shared state become common, or teams need per-person ledgers.
 
 ## Maintain this explanation
 
@@ -543,3 +610,8 @@ pointers. Public documentation must stand on its own.
 - Status: decided and implemented in contracts; deterministic fixtures cover the
   record mapping and package boundary. The acceptance scenarios have not run live
   ([design notes](DESIGN_NOTES.md#request-manager-scenarios--october-21-2026)).
+- Committed the installation with the project by default, superseding private
+  project context, state, sources, and receipts (R14, R11). A payload
+  `.director/.gitignore` keeps only the lock, write scratch, and backups local;
+  setup warns once on a public remote; CLI event IDs must be unique across machines.
+  Status: decided and implemented; unit tests pass, no real installation observed.

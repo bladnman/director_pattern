@@ -19,13 +19,20 @@ not payload. A temporary staging clone is optional transport only.
    context, observation, and return capabilities. A tier label proves no selection.
    Find the project's existing maintained role definitions, runbooks, and
    project-wide guardrails, and whether managers can reach a recorder directly.
-   Before writing private context, config, state, sources, or receipts, verify
-   effective exclusions and that none of those destinations are Git-indexed.
-   Preserve already tracked user history and report a reconciliation need; ignore
-   rules alone do not protect indexed files. Keep generic contracts versionable
-   where desired; customized context and setup facts stay private. Template seeds
-   carry placeholders, never shared initialized IDs or copied runtime state.
-   A generated project initializes its own identity only after this privacy gate.
+   The installation is committed with the project by default: contracts, filled
+   PROJECT, config, requests, sources, current activity, and receipts, so another
+   machine or a cloud checkout continues the same work. The payload's
+   `.director/.gitignore` keeps only the helper lock, in-progress write scratch,
+   and pre-update backups local. Check whether the repository has a remote and
+   whether it is public. If it is public, or its visibility cannot be checked,
+   warn the user once: `sources/` keeps their exact messages and attachments, and
+   pushed history stays readable after a later deletion. Record the warning in
+   PROJECT so later conversations and machines do not repeat it. Keeping more
+   local is the project's choice, never a setup default; see
+   [STATE](STATE.md#version-control). A template repository commits only the
+   contracts and a placeholder PROJECT, never initialized config, requests,
+   sources, activity, or a completed receipt; each generated project runs its
+   own init.
 2. Resolve published GitHub `main` to one exact commit SHA and inspect the selected
    revision before copying; retain its URL/SHA as the installation source. A local
    unpublished candidate must be labeled as such. Have an installation worker copy
@@ -37,12 +44,14 @@ not payload. A temporary staging clone is optional transport only.
    route and state policy, and identity roster location. Reuse existing maintained
    definitions; seed or link a local role index (the generic ROLES entries plus
    actual project roles) only when none exists. Never present illustrative entries
-   as real roles. The roster lives in private current activity, never in a seed.
+   as real roles. The roster lives in current activity, never in a seed.
 3. For a new bundled tracked store, have the recorder run
    `python3 <target>/.director/tools/requests.py init`. It creates/preserves config
    schema 1 and initializes request-store schema 2 with a stable project ID.
    Record the actual init receipt in PROJECT; do not hand-invent identity or
    convert legacy stores. Config is generated setup, not an extra copied file.
+   Commit it: its project ID is the root of every request and source ID, so a
+   clone that ran its own init would no longer match the committed records.
    Lean needs no helper; optional new lean config uses `"record_mode":"lean"`.
    Preserve existing config keys. Switching tracked to lean first requires
    reconciling commitments, live assignments, and pending evaluation; preserve the
@@ -71,11 +80,11 @@ not payload. A temporary staging clone is optional transport only.
    ```
 
 For every mode, record the source URL/SHA, selected managed-file paths and SHA-256
-baselines, startup wiring, adaptations, and verification in an ignored setup receipt.
-Baselines describe installed bytes after adaptation, not successful behavior. A
-generic template PROJECT remains versionable; actual generated-project context
-belongs in an ignored local overlay loaded by its startup hook. Never seed a
-completed receipt.
+baselines, startup wiring, adaptations, and verification in a setup receipt under
+`.director/receipts/`. It is committed so an update from any checkout can compare
+baselines. Baselines describe installed bytes after adaptation, not successful
+behavior. Committed files use project-relative paths. Never seed a completed
+receipt into a template.
 
 ## Verify without polluting the backlog
 
@@ -83,7 +92,9 @@ Verify that the host actually loads the entrypoint and referenced role/context
 files. Check canonical state, requested versus actual model controls, and truthful
 behavior when delegation/persistence is unavailable. Confirm the role index and its
 listed definitions resolve, the Recorder route is one the host actually supports,
-and the identity roster location is private; record unmapped roles as gaps. For an existing tracker,
+and the identity roster location is recorded; record unmapped roles as gaps. In a
+Git repository, run the `git check-ignore` check in [STATE](STATE.md#version-control)
+and report a parent or global rule that ignores `.director/`. For an existing tracker,
 verify its actual mapped workflow and persistence receipts without installing a
 new helper or second store. For lean, verify core wiring and current activity/
 decision persistence; honestly retain its lack of a complete-ledger promise.
@@ -105,7 +116,7 @@ in a newly created disposable directory, never by adding dummy actual requests:
 
    ```sh
    python3 <fixture>/tools/requests.py init
-   python3 <fixture>/tools/requests.py create --raw-file <fixture>/raw.txt --title "Fixture only" --event-id fixture-capture-1
+   python3 <fixture>/tools/requests.py create --raw-file <fixture>/raw.txt --title "Fixture only" --event-id "$(python3 <fixture>/tools/requests.py event-id create)"
    python3 <fixture>/tools/requests.py apply <returned-ID> --event-file <fixture>/plan.json --expect-revision 1
    python3 <fixture>/tools/requests.py apply <returned-ID> --event-file <fixture>/dispatch.json --expect-revision 2
    python3 <fixture>/tools/requests.py apply <returned-ID> --event-file <fixture>/submit.json --expect-revision 3

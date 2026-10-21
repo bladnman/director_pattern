@@ -1,8 +1,11 @@
 """Check package isolation and declared payload links, not agent installation behavior."""
 import json
+import os
 from pathlib import Path, PurePosixPath
 import re
 import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 from urllib.parse import unquote, urlsplit
@@ -106,6 +109,39 @@ class PackageBoundaryTests(unittest.TestCase):
                         target.parent.mkdir(parents=True, exist_ok=True)
                         shutil.copy2(isolated / name, target)
                     self.check_links(payload)
+
+    @unittest.skipUnless(shutil.which("git"), "git is required for ignore checks")
+    def test_installed_payload_commits_state_and_ignores_only_machine_local_files(self):
+        manifest = self.manifest(PATTERN)
+        self.assertIn(".gitignore", manifest["base_files"])
+        with tempfile.TemporaryDirectory() as temporary:
+            project = Path(temporary)
+            git = ["git", "-c", f"core.excludesFile={os.devnull}"]
+            subprocess.run(git + ["init", "-q"], cwd=project, check=True)
+            installed = project / ".director"
+            for name in manifest["base_files"] + manifest["tracked_files"]:
+                (installed / name).parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(PATTERN / name, installed / name)
+            helper = [sys.executable, str(installed / "tools/requests.py")]
+            subprocess.run(helper + ["init"], capture_output=True, check=True)
+            (project / "raw.txt").write_text("Committed by default")
+            event_id = subprocess.run(helper + ["event-id", "create"], capture_output=True, text=True, check=True).stdout.strip()
+            subprocess.run(helper + ["create", "--raw-file", str(project / "raw.txt"), "--title", "Shared", "--event-id", event_id], capture_output=True, check=True)
+            for scratch in (".request-txn/intent.json", ".request-stage-abc/bundle", ".request-complete-abc/file", "backups/2026-10-21/PATTERN.md", "receipts/2026-10-21-setup.md"):
+                (installed / scratch).parent.mkdir(parents=True, exist_ok=True)
+                (installed / scratch).write_text("fixture")
+
+            def listed(*flags):
+                out = subprocess.run(git + ["ls-files", "--others", "--exclude-standard", *flags], cwd=project, capture_output=True, text=True, check=True).stdout
+                return set(out.split())
+
+            ignored, kept = listed("--ignored"), listed()
+            self.assertEqual(ignored, {".director/.requests.lock", ".director/.request-txn/intent.json", ".director/.request-stage-abc/bundle",
+                                       ".director/.request-complete-abc/file", ".director/backups/2026-10-21/PATTERN.md"})
+            for name in manifest["base_files"] + manifest["tracked_files"] + ["config.json", "receipts/2026-10-21-setup.md"]:
+                self.assertIn(f".director/{name}", kept, name)
+            self.assertTrue(any(p.startswith(".director/requests/pending/") for p in kept), kept)
+            self.assertTrue(any(p.startswith(".director/sources/") for p in kept), kept)
 
 
 if __name__ == "__main__":

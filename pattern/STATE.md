@@ -97,3 +97,26 @@ recorder runs recover or a subsequent mutation resolves intent before continuing
 worker inspection of partial outputs before overlapping restarts. Preserve old
 attempts and uncertainty; do not infer termination from age. Claim saved state only
 after a receipt. Files preserve continuity but cannot keep an agent running.
+
+## Version control
+
+The installation is committed with the project by default: contracts, PROJECT,
+config, requests, sources, current activity, decisions, and receipts. Another
+machine or a cloud checkout then continues the same work. `.director/.gitignore`
+keeps only the helper lock, in-progress write scratch, and pre-update backups
+local. One machine writes state at a time: commit and push before continuing
+elsewhere, and pull before the next write
+([RECORDS](references/RECORDS.md#persistence-and-interruption-recovery)).
+Committed files use project-relative paths.
+
+A project may keep more local by adding paths to `.director/.gitignore`; updates
+preserve that choice. Ignore `requests/` and `sources/` together: reading a
+request verifies its linked sources, so committed requests with ignored sources
+cannot be read on another machine. A local store cannot be continued from another
+machine or a cloud checkout. Ignoring a path does not remove what is already
+committed or pushed; report that history to the user rather than rewriting it.
+
+In a Git repository, `git check-ignore` should show the lock and `backups/` as
+ignored and the rest of the installation as not ignored, apart from paths the
+project chose to keep local. Report a parent or global rule that ignores
+`.director/` instead of editing it; it may be deliberate.
