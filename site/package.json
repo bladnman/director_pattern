@@ -1,0 +1,12 @@
+{
+  "name": "director-pattern-site",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "dev": "wrangler dev --ip 127.0.0.1 --port 44431",
+    "deploy": "wrangler deploy"
+  }
+}

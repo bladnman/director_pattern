@@ -1,0 +1,376 @@
+# Why the Director Pattern has this shape
+
+Living design rationale · updated October 19, 2026. This repository authors a
+candidate pattern; it has not automatically adopted or installed that pattern.
+This document explains the current reasoning, tradeoffs, and revisit triggers.
+It is not an activity log or a claim that every design direction is approved.
+
+Keep four claims distinct: **stored** means preserved in a file; **decided** means
+an explicit choice has been made; **implemented** means the behavior exists;
+**verified** means relevant evidence demonstrates it. A requirement can be accepted
+while its implementation remains open. Tracked-by-default is accepted; the entire
+package is not thereby approved. The request-folder/link implementation is now
+authorized separately; implementation and verification still need their own evidence.
+
+The operational contracts are [PATTERN.md](../pattern/PATTERN.md),
+[MODELS.md](../pattern/MODELS.md), and [STATE.md](../pattern/STATE.md). This public
+rationale distills design decisions, alternatives, and regression cases. Source
+conversations and internal references remain private. Public contracts must be
+understandable without access to those materials or provider memory.
+
+## R1 — One accountable conversation, without a forced organization
+
+**Problem:** Delegation can leave the user assembling worker reports, or turn a
+simple project into departments and hierarchy before those solve any real problem.
+**Current direction:** One folder normally has one project director. It stays in
+conversation, interprets intent, coordinates execution, judges returns, requests
+concrete rework, and accepts the integrated outcome. This is the candidate contract,
+not a claim of successful adoption. Explicit child director scopes remain possible.
+**Why:** Accountability belongs to the outcome; team count, worker count, role,
+execution mechanism, model capability, and state mode are separate choices.
+**Consequence:** No fixed org tree, department registry, or mandatory network setup.
+See [PATTERN.md](../pattern/PATTERN.md). **Revisit:** recurring ownership or integration friction
+shows a specific missing responsibility that a bounded additional scope would solve.
+
+## R2 — Protect judgment and conversation from execution/bookkeeping
+
+**Problem:** A director doing every small implementation or state update can drift
+back into being the worker, consuming its attention and strongest model capacity.
+**Current direction:** Director is strictly non-worker. It answers discussion and
+critically reads selected primary evidence/artifacts for judgment. Workers execute;
+Small clerks map broad material; a Small recorder performs routine state I/O.
+**Why/tradeoff:** This preserves focus but requires actual delegation/persistence
+support; unavailable capability must be disclosed, not hidden by a silent role switch.
+**Consequence:** Capability tiers describe reliability/reasoning needs, not brands,
+cost guarantees, or selections made by a prompt label. Host model/effort mappings
+must be actual or unknown. See [MODELS.md](../pattern/MODELS.md) and [PATTERN.md](../pattern/PATTERN.md).
+**Revisit:** observed host limits or workload evidence justify a consciously chosen
+operating-mode change; they do not create a permanent direct-execution exception.
+
+## R3 — Retain commitments by default, preserve original intent
+
+**Problem:** Short/creative work can still carry commitments, corrections, and
+partial completion that must survive tomorrow; project type is a poor retention test.
+**Accepted decision, October 16:** Use tracked state by default, with lean as an
+explicit option. This supersedes choosing retention mode by project type. Lean
+omits a complete-backlog promise; creative work does not imply lean mode.
+Existing trackers stay canonical.
+**Why/tradeoff:** Small persistence receipts add overhead, but prevent entrusted work
+and tiny steering from disappearing. Whole exact user messages remain separate
+from interpreted titles, scope, acceptance, and decisions; attachments matter too.
+**Consequence:** Independent outcomes are independently visible, with sources and
+history intact. Status is not liveness, completion is not release, and files do not
+wake agents. See [STATE.md](../pattern/STATE.md). **Revisit:** evidence that a bounded exploration
+needs a different retention promise; do not silently cancel work when changing mode.
+
+## R4 — Relationships must support several orientations
+
+**Requirement:** Projects may coordinate with peer projects. Relationships must
+support different ownership and dependency arrangements without mandating a workflow.
+**Current design:** Separate source/provenance, optional grouping/decomposition,
+explicit required completion dependencies, and ownership handoffs. Directed links
+can express these without a universal parent tree, graph database, or central registry.
+**Why:** Shared source or a parent label cannot establish every completion rule.
+Informational backreferences may be reciprocal; only real blocking edges need
+cycle/unresolved-dependency checks. A director can derive required links within scope.
+**Consequence:** Flat request bundles can support graph-shaped relationships;
+optional umbrellas are useful only for real whole-scope commitments. See
+[REQUEST_RELATIONSHIPS.md](REQUEST_RELATIONSHIPS.md). **Revisit:** a concrete
+scenario cannot be represented without forcing ownership or completion into a tree.
+
+## R5 — Preserve the four-outcome restart truth across ownership boundaries
+
+**Regression story:** One message asks for a folder, research, a new repository,
+and a complex app. The first three finish; another project's director acknowledges
+the app deliverable. Tomorrow the answer must remain “three complete; the fourth
+waits on that owner,” with original context and last verified status/time intact.
+No untying, reopening, or rebundling completed siblings should be necessary.
+**Current design:** Receiver owns its requests and execution; source retains its
+commitment and judges the agreed returned outcome, without mirroring a remote task
+tree. Project/request IDs are identity; current roots/paths are locator hints.
+**Why/tradeoff:** Ownership stays clear while source observations may be stale.
+Attempted send, acknowledgment, execution, return, and acceptance are distinct.
+**Consequence:** Acknowledged external supervision lets the source go offline with
+a durable waiting commitment; it need not manage receiver descendants. It retains
+acceptance authority, with no promised wakeup. Unacknowledged sends do not qualify.
+Cancellation/removal preserves a non-success/revised-scope disposition, not fabricated
+success. Details and the restart table are in the [relationship design](REQUEST_RELATIONSHIPS.md).
+**Revisit:** lost acknowledgments, inaccessible source content, moved locators, or
+contradictory ownership expose a specific resolution/transport requirement.
+
+## R6 — Standardize request folders without losing recovery guarantees
+
+**Problem:** A flat request file can preserve state but leaves request-local assets
+and evidence at separate locations. Relocating the request then requires several
+references to remain consistent.
+**Accepted direction, October 16:** Standardize one folder per actionable request
+and implement flexible ownership/dependency links.
+Keep seven lifecycle states mapped to pending/working/archive, exact shared source
+bundles, stable project/request identities, and distinct relationship meanings.
+**Why/tradeoff:** Local assets/evidence should travel with a request, while shared
+originals and large outputs remain canonical through references. Moves require
+resolution, collisions/stale-write protection, retry identity, journaling, and repair;
+no multi-file atomicity or automatic migration is implied.
+**Consequence:** A versioned helper now implements this direction; disposable
+verification evidence is recorded in [DESIGN_NOTES.md](DESIGN_NOTES.md). Legacy stores remain intact and are never silently converted. Transport, liveness,
+authentication of supplied proof, and foreign writes are outside the helper.
+The [storage comparison](REQUEST_STORAGE_COMPARISON.md) explains the alternatives.
+**Revisit:** preservation, recovery, dependency, or ownership fixtures expose a gap;
+revise the bounded implementation, not the accepted independent-outcome requirement.
+
+## R7 — Keep the reasons durable, current, and revisable
+
+**Requirement:** Preserve the reasons behind formative decisions so future work
+can evaluate a change without repeatedly rediscovering earlier tradeoffs.
+**Current practice:** This is the canonical public explanation of WHY; contracts
+define behavior, detailed design docs explain mechanisms, and
+[DESIGN_NOTES.md](DESIGN_NOTES.md) records validation scope and open gates.
+**Why/tradeoff:** A coherent explanation is more useful than a growing transcript,
+but refactoring must not erase the evidence or reasons for changed decisions.
+**Consequence:** Repository authors read relevant rationale before changing design;
+this is authoring guidance, not automatic installation of director behavior here.
+**Revisit:** new formative evidence changes a decision, exposes a contradiction,
+or shows that guidance is unreachable or no longer improves behavior.
+
+## R8 — Separate the installed method from its workshop
+
+**Requirement:** Install only the method. Public development documentation and
+tests support maintenance but are not target-project installation payload.
+**Chosen layout:** Keep one repository to prevent rationale and method drifting,
+but isolate a self-contained `pattern/` package from `development/` rationale
+and tests. The layout is an implementation choice. Root README routes each
+audience explicitly.
+**Why/tradeoff:** The workshop remains shareable and refactorable while an agent can
+download/install just the method. `pattern/manifest.json` selects copied payload;
+guides and authoring AGENTS are not target instructions. Local adoption is a separate,
+explicit setup choice; a source checkout alone is not installation.
+**Consequence:** Generic rationale and tests remain public and outside the
+installation payload. Raw conversations and internal references remain private.
+**Revisit:** a boundary check reveals an external package dependency, accidental
+copying of authoring material, or unintended publication of private evidence.
+
+## R9 — Make attention and active supervision visible without decoration
+
+**Problem:** A real question or user-only action can disappear among progress
+updates. A polished update can also hide that supervision has stopped. A director
+label can imply an installation that was never checked.
+**Initial decision, October 17:** Use three semantic markers: `❓` for actionable
+user questions/decisions, `🖐️` for user-only actions, and `🎬` for director identity
+after a current-conversation installation and role check. Other expressive emoji
+remain discretionary; special markers are sparse, not routine status decoration.
+**Accepted refinement, October 17:** Add `📋` for the periodic situation-report
+block, using the exact heading **📋 SitRep**. This supersedes the earlier unmarked
+`Sitrep` opener and its capitalization. Four markers now distinguish checked
+director identity, user questions, user-only actions, and periodic report blocks.
+The checked director retains its `🎬` reply prefix; `📋 SitRep` labels a block
+inside that reply. Reserve the heading for periodic reports so readers can scan
+or skip them; it is not a prefix for every progress sentence. Cadence, evidence,
+continued supervision, and exit requirements are unchanged.
+**Reported friction, October 19:** Full reports appear too frequently during ordinary
+director exchanges. The frequency is reported; its cause has not been established.
+**Hypothesis:** Tying report formatting to meaningful changes and stricter host
+timing may encourage a full block on each reply.
+**Accepted refinement, October 19:** A SitRep is a useful periodic overview during
+ongoing supervision, not a default block on every director reply, worker return,
+or status change. Use ordinary prose for discussion, direct answers, and brief
+progress; communicate meaningful changes promptly. Meaningful ordinary updates
+already satisfy the cadence, so do not append a redundant report. A full overview
+helps after several minutes of otherwise quiet work or when multiple developments
+or workstreams benefit from one combined view. This supersedes interpreting the
+earlier cadence as requiring a full report with each change or host update.
+The five-minute silence limit and stricter host timing remain; stricter timing
+calls for concise progress, not a full report at each interval.
+**Why/tradeoff:** A small vocabulary makes attention needs recognizable. One marker
+can introduce several numbered questions. A checked identity exposes startup truth,
+while its limited meaning avoids implying tested behavior or live execution.
+**Consequence:** [PATTERN.md](../pattern/PATTERN.md) now defines the markers and
+separates timely progress updates from periodic overviews while managed work
+continues. Reports cover held work and current action/next proof, using actual
+observations.
+They remain intermediate commentary; existing handoff, blockage, and interruption
+boundaries still apply. A Small recorder returns setup facts under
+[STATE.md](../pattern/STATE.md); the director resolves its actual role. The existing
+[PROJECT](../pattern/PROJECT.md) and [installation](../pattern/INSTALL.md) receipts
+supply the context without a new state engine or runtime requirement for lean or
+an existing tracker. The cadence refinement is implemented in the contract and
+package/site summaries. Link and package checks do not establish fresh-session
+behavioral compliance; the [manual scenarios](DESIGN_NOTES.md#manual-scenarios-before-adoption-claims)
+remain proposed checks, not executed trials.
+**Regression cases:** A source checkout or inherited worker cannot display director
+identity. A correctly wired lean installation can pass without the bundled helper.
+With three workstreams, an active export, returned review, and waiting packaging
+all remain visible; the director evaluates the review and keeps supervising after
+its report. User questions stay actionable, and a host question tool is not echoed
+as a second question in chat. The heading identifies a periodic report without
+turning ordinary progress sentences into reports or suggesting that saved state
+proves live workers. Rapid exchanges and worker returns do not each get a full
+block; useful ordinary host updates satisfy timing without duplication. Quiet
+managed work still gets a timed overview, and meaningful changes are communicated
+promptly while supervision continues. **Revisit:** real use shows missed attention
+needs, noisy repetition, false setup claims, or supervision ending at a status report.
+
+## R10 — Assign roles explicitly; preserve project ownership across entry routes
+
+**Accepted decision, October 17:** A new project conversation defaults to that
+project's director regardless of who opened it. Explicit user/assigner roles
+supersede the default. Every bounded delegated assignment names worker/director
+role, outcome, scope, and authority; reviewers and recorders are bounded worker
+specializations. Missing delegated roles require clarification with the assigner,
+not inference from ancestry, tool type, or inherited history. This supersedes the
+earlier rule that all agents launched by agents defaulted to workers at every depth.
+**Why/tradeoff:** Entering another project should reach its accountable director,
+while a bounded worker must not acquire director authority merely by inheriting
+context. Explicit child directors can coordinate an entrusted scope; worker
+subdelegation never expands authority. The installation/badge check is independent.
+**Implemented:** [PATTERN.md](../pattern/PATTERN.md) and the
+[installation hook](../pattern/INSTALL.md) carry the revised contract.
+**Regression cases:** A session opened in a peer project by another director serves
+as that project's director by default. An explicit worker inheriting director history
+stays a worker. An explicit child director coordinates only its granted outcome.
+A delegated assignment with no role seeks clarification before role-specific action.
+**Verification limit:** Document/package checks do not establish actual fresh-session
+role behavior. Revisit if ambiguous assignment boundaries still cause role drift.
+
+## R11 — Update from a pinned public source without replacing project state
+
+**Accepted decision, October 17:** Published GitHub `main` is the upstream source of
+truth. Explicit agent-driven updates resolve one exact reviewed SHA, back up managed
+files and startup wiring, and compare installed baseline/current/incoming bytes.
+Normal startup does not silently update. Private setup receipts retain source URL/SHA
+and managed-file hashes; old receipts without baselines require safe prior-upstream
+comparison or review. No updater daemon, new version registry, or state engine is added.
+**Why/tradeoff:** A common upstream makes catch-up possible, but installations contain
+project context and adapters that upstream must not overwrite. Schema compatibility
+is checked; migration requires its own decision. Baselines describe installed bytes,
+not proof of behavior. Partial failures must remain visible rather than claim a new
+accepted revision.
+**Implemented:** The base manifest includes [UPDATES.md](../pattern/references/UPDATES.md);
+[INSTALL.md](../pattern/INSTALL.md) and [PROJECT.md](../pattern/PROJECT.md) route setup
+and updates through private receipts.
+**Regression cases:** An adapted existing-tracker installation merges upstream role
+rules while preserving tracker, context, IDs, raw sources, and unfinished work.
+Lean stays lean. Missing baselines block blind replacement. An incompatible helper
+schema leaves the existing helper/state intact. Template copies receive fresh local
+identities at first use, never cloned initialized state or completed receipts.
+**Verification limit:** Static/package checks establish reachable self-contained
+instructions; actual target catch-up and fresh-session trials need separate receipts.
+Revisit when a real update conflict exposes an insufficient preservation check.
+
+## R12 — Give people a readable front door without another contract layer
+
+**Accepted direction, October 17:** A public site at `director.metal-sole.com`
+explains the director/worker/recorder division and gives visitors copyable requests
+for their existing project agent to install, check, or explicitly update the pattern.
+GitHub's published package remains authoritative; the agent guide links to its
+current protocols instead of maintaining another installation implementation.
+**Front-door refinement, October 17:** Human-facing install/update requests use
+the public `director.metal-sole.com` address. A prominent “For an agent” link opens
+the readable guide, which sends authorized work directly to the canonical GitHub
+protocol and an exact reviewed revision. This supersedes copying the raw repository
+URL in the website's human-facing prompts; it does not change upstream authority.
+**Why/tradeoff:** Repository contracts are precise but dense for a first visit.
+A short visual introduction makes the next action clear, while a separate summary
+can drift. Keep installation/status/update claims bounded and link their source.
+**Implemented:** [site/](../site/README.md) contains a static page and agent guide,
+a small HTML/Markdown negotiation Worker, and an explicit public build allowlist.
+It is outside the manifest-selected payload. Initial publication remains a separate
+gate until a deployment receipt verifies the intended domain. Local content and
+browser checks are not evidence of public availability or successful adoption.
+**Regression cases:** The install button copies an agent request, not an executable
+installer. The browser cannot declare the visitor's project installed. A displayed
+director marker describes a checked setup/role, not running workers. Updates preserve
+adaptations and private state under [UPDATES.md](../pattern/references/UPDATES.md).
+The public build excludes project state, private sources, and maintainer archives.
+A domain-based request must reach the GitHub installation steps without sending
+the agent or user around a loop of copying the same website request again.
+**Revisit:** Real visitors cannot find the next step, summary copy contradicts
+contracts, or a public build includes files beyond its explicit allowlist.
+
+## R13 — Keep global discovery separate from project installation
+
+**Accepted decision, October 18:** Offer a tiny optional global skill that points
+to the current canonical [package guide](../pattern/README.md) for requested
+install/add/update/upgrade/remove operations. Its
+[source](../skill/director-pattern/SKILL.md) stays outside the manifest payload;
+[distribution guidance](../README.md#optional-global-skill) selects the host's
+per-user skill directory on request, without a project-local default.
+**Why/tradeoff:** Discoverability should not duplicate the protocol or silently
+adopt it in every project. Fetching the authoritative guide avoids stale copied
+rules; a global pointer does not confer director authority. This adds an optional
+entry route without changing the existing project adoption boundary.
+**Implemented:** The source skill and global distribution guidance exist; the
+package guide now explicitly distinguishes project removal from skill removal and
+preserves owned project records and shared trackers. Existing installation and
+update contracts remain authoritative for their operations.
+**Regression cases:** A global skill discovered in a new project routes to the
+canonical guide without declaring an installation. An explicit update reads the
+current protocol rather than copied skill rules. Removing a project hook preserves
+private context, requests, backups, and shared canonical trackers; removing only
+the skill leaves project installations intact.
+**Verification limit:** Skill validation and package isolation/link checks verify
+structure and boundaries, not fresh-session discovery, target adoption, or removal.
+**Revisit:** Real lifecycle requests misroute, pointer copies accumulate protocol,
+or discovery is mistaken for project authority.
+
+## Maintain this explanation
+
+At a material design choice, update the relevant topic rather than append every
+conversation. State context, current direction/status, why/tradeoff, affected contract
+or design reference, and a concrete scenario that should still work. Label uncertainty
+as hypothesis/open. Ordinary status chat or a hunch does not create universal policy.
+Refactor for coherence; preserve dated changes and superseded reasoning in a short
+history or linked design record rather than silently rewriting the past.
+
+Preserve source evidence privately without rewriting originals. Later steering
+gets a dated addition; current contracts and dated decisions/supersessions control.
+Publish distilled reasoning rather than verbatim conversations or internal-source
+pointers. Public documentation must stand on its own.
+
+## Initial decision history — October 16, 2026
+
+- Accepted tracked-by-default with lean optional, superseding project-type defaults.
+- Preserved the user's independent-outcome/peer-ownership restart requirement;
+  refined the candidate around flexible links and acknowledged external supervision.
+- Separated installable method from workshop material after the explicit boundary
+  request; retained one repository with an isolated package and manifest copy list.
+- Established a living rationale to retain decisions, alternatives, and revisit triggers.
+- Selected and implemented request folders with typed links, superseding the earlier
+  flat-file design; host mappings and real adoption remain separate gates.
+- Established a public/private authoring boundary: generic rationale and tests are
+  public; exact conversations and internal reference material are retained privately.
+
+## Decision history — October 17, 2026
+
+- Added sparse question, user-action, and checked director-identity markers.
+- Refined the marker vocabulary with **📋 SitRep** for periodic report blocks,
+  superseding the unmarked `Sitrep` opener while retaining director identity and
+  the existing supervision/cadence requirements.
+- Added a bounded situation-report cadence with continued supervision; preserved
+  existing host, handoff, pause, and interruption boundaries.
+- Required current setup facts from the recorder and role resolution by the director
+  before identity use, without claiming behavioral verification or worker liveness.
+- Superseded ancestry-based worker defaults with project-session director defaults
+  and explicit role/scope/authority on every bounded delegated assignment.
+- Added pinned GitHub-source update instructions and private managed-file baselines;
+  preserved project state, adapters, template identity boundaries, and explicit migration gates.
+- Added a public introduction outside the installable package, with copyable agent
+  requests and GitHub protocols remaining authoritative; publication is a separate gate.
+
+## Decision history — October 18, 2026
+
+- Added an optional global pointer skill outside the project payload, preserving
+  one canonical lifecycle guide and explicit project adoption.
+- Clarified conservative removal and the independent global-skill/project boundaries.
+
+## Decision history — October 19, 2026
+
+- Refined SitRep frequency around useful periodic overviews, preserving timely
+  ordinary progress, the five-minute silence limit, and stricter host timing.
+- Kept the reported repetition distinct from its hypothesized cause; documentation
+  implements the refinement, while fresh-session behavioral checks remain pending.
+- Added proportionality to verification and records. Evidence demands had no
+  counterweight and compounded: exhaustive layout sweeps and release-grade QA on a
+  throwaway prototype, and a per-message capture round-trip before work could move.
+  Verification now matches risk, reversibility, and audience; briefs state the
+  smallest sufficient check; routine records batch small and fast at checkpoints.
+  Scope-setting capture stays first and exact; the director still does no worker tasks.

@@ -1,0 +1,60 @@
+# OS
+.DS_Store
+.AppleDouble
+Thumbs.db
+
+# Editors
+.idea/
+*.swp
+*.swo
+
+# Logs & env
+*.log
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+dist/
+.cache/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Go
+/bin/
+
+# Rust
+target/
+
+# Java / Kotlin
+*.class
+build/
+.gradle/
+
+# .NET
+obj/
+
+# Ruby
+.bundle/
+
+# Terraform
+.terraform/
+*.tfstate*
+
+# Caches & temp
+tmp/
+temp/
+*.tmp
+
+# Local preserved source snapshots
+.reference/
+
+# Local Director Pattern installation, configuration, source messages and receipts
+/.director/
+# Legacy local Producer Pattern installation kept private
+/.producer/
