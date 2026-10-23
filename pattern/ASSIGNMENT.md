@@ -37,14 +37,20 @@ Scope, file/resource ownership, authority, reserved decisions, exclusions, depen
 Required selected role definitions + shared guardrails/runbooks/learnings:
 Required model/effort policy + host mapping; requested capability/effort:
 Actual selection/known limits: record from tool receipt after dispatch
-Shared capacity/budget; descendants permitted or prohibited:
+Shared capacity/budget; subagent limits (allowed by default; any prohibition states its reason):
+Parallel plan: parts that could run in parallel or suit a subagent, or none:
 Recorder route/state policy; what evidence/status/decisions to return:
-Verification appropriate to the outcome; review/rework/closure conditions:
+Verification tier (MODELS.md) and its checks; review/rework/closure conditions:
 You are not alone in the workspace. Preserve others' edits and adapt to them.
 Before action, read and acknowledge the supplied role and required references.
 Return missing/conflicting applicable definitions; no silent generic fallback.
 Use this same reference-loading/identity/authority rule for any descendants.
 ```
+
+Every assignment fills the parallel-plan and verification-tier lines; see the
+[parallelization check](DIRECTION.md#assign-bounded-work) and
+[verification tiers](MODELS.md#verification-tiers). Parallel actors share the
+project's one working tree and divide it by file and resource ownership.
 
 Use only supported assignment role values: `worker` or `director`. Name a Request
 Manager, Recorder, reviewer, or analyst as the maintained responsibility, not as a

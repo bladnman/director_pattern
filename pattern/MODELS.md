@@ -1,8 +1,9 @@
 # Capability, effort, and actual selection
 
 First candidate. Directors and Request Managers **read this policy before selecting
-staff**, and choose capability and effort per assignment. Tiers describe needed
-capability, not vendor names, prices, guaranteed controls, or model aliases.
+staff**, and choose capability, effort, and a [verification tier](#verification-tiers)
+per assignment. Capability tiers describe needed capability, not vendor names,
+prices, guaranteed controls, or model aliases.
 
 Pick capability and effort for the reasoning required, the uncertainty and
 consequence of error, the available context and tools, and the need for independent
@@ -49,11 +50,12 @@ project instructions take precedence over generic preferences.
 
 ## Parallelism and accountability
 
-Actively seek useful independent subagents within the shared capacity and authority.
-Give each a concrete responsibility, applicable role references, bounded writes,
-and proportionate verification. Sequence dependencies and exclusive resources.
-Reserve capacity for evaluation and integration; more concurrent actors are not
-automatically faster.
+Any actor that staffs, workers included, may use subagents where they help. Look
+for useful independent subagent work within the shared capacity and authority, in
+the project's one working tree. Give each a concrete responsibility, applicable
+role references, bounded writes, and a verification tier. Sequence dependencies and
+exclusive resources. Reserve capacity for evaluation and integration; more
+concurrent actors are not automatically faster.
 
 Role, maintained responsibility, runtime actor, capability/effort, and authority are
 separate choices. A Max worker remains a worker; a Small recorder applies supplied
@@ -61,3 +63,18 @@ decisions and returns ambiguity to its owner. A cheap model does not make an
 irreversible action safe. Host restrictions on model selection, context, threads,
 and delegation always apply. This policy promises no vendor pricing, throughput,
 continuous availability, or simultaneous thought in one model stream.
+
+## Verification tiers
+
+Every assignment names one tier, chosen like capability: by the claim's risk,
+reversibility, and audience. The assigner picks it; a receiver does not raise it on
+its own and asks when it looks wrong. Rework keeps its tier unless the claim changes.
+
+| Tier | Use for | Checks |
+|---|---|---|
+| Smoke | Exploration, mockups, prototypes, throwaway drafts | It renders or runs, and the key interactions work, such as a screenshot and a short interaction pass. No exhaustive automated suites, sweeps, or repeated polish loops. |
+| Focused | A production change still being built or reworked | Targeted tests for the changed behavior and its interfaces. Leave the full suite for integration. |
+| Full | Production code at integration, acceptance, or release | Full suites, freeze checks, and the project's release gates. |
+
+A tier selects checks; it does not turn technical evidence into observed behavior,
+human acceptance, or release. Live, soak, and other project gates still apply.

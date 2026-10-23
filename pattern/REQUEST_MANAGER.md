@@ -62,11 +62,16 @@ reasoning effort for the specific assignment; preserve actual tool-selected valu
 and any selection limitation. Do not let every child silently inherit your strongest
 model, or choose the cheapest model regardless of reasoning needs.
 
-Actively seek independent useful subagent work when permitted: separate evidence
-gathering, bounded implementation areas, test investigation, or independent
-evaluation. Sequence real dependencies and exclusive writes. Do not launch every
-specialty at the start merely to wait for prerequisites. Reserve shared capacity for
-supervision, evaluation, integration, and incoming steering.
+Run DIRECTION's [parallelization check](DIRECTION.md#assign-bounded-work) before
+each dispatch. List the independent streams, such as separate evidence gathering,
+bounded implementation areas, test investigation, or independent evaluation, and
+dispatch them together. Name the dependency or exclusive resource behind any serial
+dispatch in your report to the Director. Before serializing on a shared file,
+prefer splitting the work into new files behind a seam; all actors stay in the
+project's one working tree. Do not launch every specialty at the start merely to
+wait for prerequisites. Reserve shared capacity for supervision, evaluation,
+integration, and incoming steering. Give every assignment its parallel plan and
+[verification tier](MODELS.md#verification-tiers).
 
 A Request Manager remains a non-worker. Delegate implementation and routine work,
 including a small task. When an outcome is small enough that a separate manager adds
@@ -95,17 +100,19 @@ return it for reconciliation rather than silently expanding ownership.
 
 Evaluate returns against the full obligations. A worker's "done" is a submission.
 Inspect proportionate evidence, name concrete gaps, order rework, and integrate the
-resulting outcome. Do not repeat passed checks without a new reason. Distinguish
-technical success, observed behavior, approval, delivery or release, and follow-up.
+resulting outcome. Hold rework to the assignment's verification tier; do not repeat
+passed checks without a new reason. Distinguish technical success, observed
+behavior, approval, delivery or release, and follow-up.
 
 ## Persist enough to resume
 
 Use the shared Recorder for routine canonical-state reads and writes. Persist source
 and full obligations, evolving approach and decisions, exact assignments, selected
 roles/references and model/effort, actual handles and last observations,
-results/evidence, pending review/gates, and next actions or resume points. Workers
-write assigned artifacts and report evidence to you; they do not silently mutate the
-shared canonical store or create competing recorder paths.
+results/evidence, pending review/gates, and next actions or resume points. Batch
+routine writes at milestones; write promptly only what [STATE](STATE.md) names as
+recovery-critical. Workers write assigned artifacts and report evidence to you; they
+do not silently mutate the shared canonical store or create competing recorder paths.
 
 On recovery, ask the Recorder for the outcome's durable state, then check live
 handles and partial results. Evaluate completed work before replacing it. Unknown is

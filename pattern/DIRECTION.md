@@ -136,6 +136,16 @@ parallel work; serialize coupled writes, real dependencies, and exclusive
 resources. Reserve capacity for evaluation and integration. Reuse relevant workers
 within their authorized scope.
 
+Run a parallelization check before each dispatch: list the independent streams and
+dispatch them together. Serial dispatch needs a named dependency or exclusive
+resource; state it in the next SitRep. When the blocker is a shared file, prefer
+splitting the work into new files behind a seam, such as an interface or
+registration point, so the parts can still run in parallel. Keep every actor in the
+project's one working tree, under Git; do not create separate worktrees or
+checkouts. Parallelism comes from file and resource ownership, not separate trees.
+Each assignment carries a parallel plan, so its receiver knows which parts could
+use subagents.
+
 Before staffing, discover applicable maintained roles in the canonical project role
 index and load project-wide guardrails and selected references under
 [ROLES.md](ROLES.md). Choose capability and effort per assignment under
@@ -152,8 +162,9 @@ Each assignment follows [ASSIGNMENT.md](ASSIGNMENT.md) and supplies:
   obligations and acceptance criteria.
 - Selected role definitions, project-wide guardrails, runbooks, and reviewed
   learnings to read and acknowledge before action.
-- Exact file/module ownership, interfaces, dependencies, and the smallest
-  sufficient verification; workers do not add their own extra layers.
+- Exact file/module ownership, interfaces, dependencies, the parallel plan, and a
+  [verification tier](MODELS.md#verification-tiers) with its smallest sufficient
+  checks; workers do not add their own extra layers.
 - Requested model/effort, actual supported selection, shared budget/capacity, and
   limits, plus the Recorder route and state policy.
 - "You are not alone in the workspace. Preserve others' edits and adapt to them."
@@ -163,7 +174,8 @@ worker is a role, not a particular tool. Do not invent launch receipts or select
 model by merely naming its tier. No generic pattern instruction overrides host
 authorization or communication restrictions.
 
-Workers may delegate subsets of their authorized assignment when allowed. State
+Workers may delegate subsets of their authorized assignment when that helps,
+unless the assignment prohibits it with a reason. State
 each child's explicit role, bounded authority, ownership, evidence requirements,
 role references, and return route within the same shared budget and capacity. Each
 parent retains handles, supervises children, evaluates returns, requests rework,
@@ -184,8 +196,9 @@ receiver completion is not source acceptance. Links grant no access or messaging
 
 Obtain the capture receipt required by STATE before dispatch in tracked mode.
 After real dispatch, retain the host handle, actual model/effort, identity binding,
-and receipt through the recorder. Maintain a compact current activity/recovery
-pointer in either state mode. A saved status or existing chat is not proof that
+and receipt through the recorder. Batch other routine writes at milestones under
+[STATE](STATE.md); a recorder call after every step costs more than it protects.
+Maintain a compact current activity/recovery pointer in either state mode. A saved status or existing chat is not proof that
 execution is alive.
 
 Observe all held assignments using actual host tools and bounded waits. Do useful
@@ -248,7 +261,9 @@ audience, and use the smallest check that establishes the claim. Explorations an
 prototypes need a quick look, such as a screenshot and a short interaction check,
 not release-grade evidence. Avoid exhaustive sweeps and repeated full-suite runs
 during rework; run the full suite before a release. Once a claim is established,
-more evidence is not better evidence.
+more evidence is not better evidence. Every assignment names its
+[verification tier](MODELS.md#verification-tiers); rework keeps that tier unless
+the claim changes.
 
 For a gap, give concrete rework: expected result, observed evidence, remaining
 scope, owner, and the check that will establish repair. Director rework stays with

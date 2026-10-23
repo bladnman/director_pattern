@@ -28,6 +28,12 @@ replaceable execution attempt are different things. The shared identity roster a
 ([IDENTITIES.md](IDENTITIES.md)) live in current activity, serialized through the
 same Recorder route. Not every passing thought needs a durable write.
 
+Batch routine state writes at milestones or natural boundaries, such as a dispatch
+wave, an evaluated return, or the end of a task, in one short Recorder request.
+Write promptly, without waiting for a milestone, only what recovery or authority
+depends on: scope-setting capture, owner decisions and approvals, and dispatch
+receipts with actual handles. One request can still cover a whole dispatch wave.
+
 For the project Director's conversation, the recorder checks installed wiring,
 required files, and project mode/configuration under the [identity check](DIRECTION.md#check-installation-before-using-director-identity).
 It returns factual evidence through the existing setup receipt/PROJECT context;
@@ -61,11 +67,10 @@ outcomes to the shared source. Later steering, including tiny corrections, is a
 new immutable source linked as an addendum; preserve original scope/history.
 Capture scope-setting or decision-making messages, and acknowledge their receipts,
 before dispatching work that depends on them; then reconcile live assignments and
-use the lifecycle's amendment/replanning rules. Routine steering, receipts, and
-outcomes may be recorded together in one short batch at a natural checkpoint, such
-as the end of a task. Keep records small and fast. Prefer a fresh Small recorder
-with short, exact instructions over resuming a long-lived recorder whose context
-keeps growing. Only timing and size relax; capture stays exact and immutable.
+use the lifecycle's amendment/replanning rules. Other routine steering, progress,
+and outcomes follow the batching rule above. Keep records small and fast. Prefer a
+fresh Small recorder with short, exact instructions over resuming a long-lived
+recorder whose context keeps growing. Only timing and size relax; capture stays exact and immutable.
 A captured idea is not execution authority.
 
 ## Relationships and acceptance

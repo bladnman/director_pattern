@@ -32,8 +32,14 @@ not payload. A temporary staging clone is optional transport only.
    PROJECT, config, requests, sources, current activity, and receipts, so another
    machine or a cloud checkout continues the same work. The payload's
    `.director/.gitignore` keeps only the helper lock, in-progress write scratch,
-   pre-update backups, and daily update-check cache local. Check whether the
-   repository has a remote and
+   pre-update backups, and daily update-check cache local. If the project is not
+   under version control, report that as a parallelism and recovery limitation:
+   parallel actors share one working tree that cannot be reviewed or rolled back
+   by change, and the installation cannot continue elsewhere. Recommend
+   initializing Git in place in the existing root, with no new checkout, and with
+   the payload `.director/.gitignore` and the project's own ignore rules for
+   private material in place before the first commit; initialize only at the
+   user's request. Otherwise, check whether the repository has a remote and
    whether it is public. If it is public, or its visibility cannot be checked,
    warn the user once: `sources/` keeps their exact messages and attachments, and
    pushed history stays readable after a later deletion. Record the warning in
@@ -111,8 +117,9 @@ behavior when delegation/persistence is unavailable. Confirm the role index and 
 listed definitions resolve, the Recorder route is one the host actually supports,
 and the identity roster location is recorded; record unmapped roles as gaps. In a
 Git repository, run the `git check-ignore` check in [STATE](STATE.md#version-control)
-and report a parent or global rule that ignores `.director/`. For an existing tracker,
-verify its actual mapped workflow and persistence receipts without installing a
+and report a parent or global rule that ignores `.director/`; without version
+control, record the limitation and recommendation from step 1. For an existing
+tracker, verify its actual mapped workflow and persistence receipts without installing a
 new helper or second store. For lean, verify core wiring and current activity/
 decision persistence; honestly retain its lack of a complete-ledger promise.
 

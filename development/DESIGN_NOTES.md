@@ -180,3 +180,27 @@ up seven changed managed paths and verified 75 other installed files unchanged;
 the concurrent incremental-verification source change was kept out of that
 installation. These are static/fixture/scoped-file results, not fresh-session
 Director invocation or an unattended real update.
+
+## Parallel-default scenarios — October 23, 2026
+
+These scenarios cover [R15](RATIONALE.md#r15--allow-subagents-at-every-level-with-named-checks-and-batched-records).
+**All behavioral observations below remain pending.** Package checks verify links
+and payload structure only; the written plan and tier lines do not prove that
+actors use subagents sensibly, scope checks, or batch records.
+
+| Scenario | Required actual behavioral observation | Status |
+|---|---|---|
+| Independent phases | A manager dispatches independent streams together; any serial dispatch names its dependency or exclusive resource in the next SitRep. | Pending |
+| Worker subagents | A worker with independent parts and no prohibition uses subagents where they help, within its ownership, and keeps small or coupled work itself; a prohibition in a brief carries a reason. | Pending |
+| Shared-file blocker | Work blocked on one shared file is split into new files behind a seam and runs in parallel in the same working tree; no worktree or checkout is created. | Pending |
+| Tiered verification | A smoke-tier mockup gets a render and key-interaction check, with no exhaustive suite or repeated polish loop; production code at integration gets the full suite and freeze checks. | Pending |
+| Batched records | Routine updates reach the Recorder at milestones in one request with a receipt per item; scope-setting capture, approvals, and dispatch handles are written promptly. | Pending |
+| Project without Git | Setup reports the parallelism and recovery limitation and recommends in-place initialization, without initializing Git unasked. | Pending |
+
+**Executed static checks, October 23:** The integrated command
+`PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests`
+passed all 50 tests, including manifest/link closure and the rule that WORKER does
+not load DIRECTION. The 8 site tests passed under the bundled Node runtime, and
+`git diff --check` passed. No files were added, so the manifest is unchanged. No
+prose-matching tests were added. These checks do not establish any of the
+behavioral observations above.

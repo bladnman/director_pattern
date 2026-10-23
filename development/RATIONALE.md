@@ -841,6 +841,68 @@ warning has been observed.
 **Revisit:** committed sources leak sensitive material in real use, Git conflicts
 in shared state become common, or teams need per-person ledgers.
 
+## R15 — Allow subagents at every level, with named checks and batched records
+
+**Problem:** Only directors were told to work in parallel. DIRECTION and MODELS said
+to seek independent work, but WORKER said to delegate only when explicitly
+permitted, and the assignment template offered a neutral "descendants permitted or
+prohibited" line. Briefs filled it with a prohibition, so every worker stayed
+serial. The October 19 proportionality rule named no level a brief could state, so
+builders still defaulted to exhaustive checks. Outside tracked capture, nothing told
+callers to batch routine records, so a recorder call followed nearly every step.
+**Requested and implemented, October 23:** Any actor that staffs, workers included,
+may use subagents where they help. Before each dispatch, a director lists the
+independent streams, dispatches them together, and names the dependency or
+exclusive resource behind any serial dispatch in the next SitRep. A shared-file
+blocker is first split into new files behind a seam. Every assignment carries a
+parallel plan; subagents are allowed by default within stated limits, and a
+prohibition states its reason. A worker considers subagents for independent parts
+of its own assignment and keeps small or coupled work itself. The aim is
+permission, not splitting every task. Every actor works in the
+project's one working tree under Git; parallelism comes from file and resource
+ownership, not separate worktrees or checkouts. Every assignment names a
+[verification tier](../pattern/MODELS.md#verification-tiers): smoke for exploration
+and mockups, focused for production changes in progress, full for production code
+at integration, acceptance, or release. Routine state writes batch at milestones;
+scope-setting capture, owner decisions and approvals, and dispatch receipts are
+written promptly. Setup reports a project without version control as a parallelism
+and recovery limitation and recommends initializing Git in place.
+**Why/tradeoff:** A top-level instruction does not reach a worker that reads only
+its brief and WORKER. Some hosts keep agents from using subagents unless an
+instruction explicitly allows it, so opt-in wording and a neutral template line
+read as a prohibition. The permission has to sit where each role reads it, and the
+template has to ask for a plan rather than leave the question open. Serial dispatch still
+happens, but it now carries a reason the user can see. A named tier gives a brief a
+short, checkable verification instruction and keeps a receiver from raising it on
+its own. Batching gives up some recovery granularity for speed; the writes that
+recovery and authority depend on stay prompt. The cost is two required lines in each
+brief and a judgment at each dispatch. Role, authority, and privacy rules are
+unchanged: a default to delegate grants no scope a worker did not already have.
+**Considered alternatives:** A worktree or checkout per parallel actor isolates
+writes, but it adds merges, hides in-progress state from the one tree the owner
+inspects, and was explicitly declined. Keeping delegation opt-in and relying on
+directors to grant it had already failed: the grant was not given.
+**Regression case:** In a native-app project on the predecessor pattern, four
+independent implementation phases (diagrams, an add panel, help sheets, an icon) ran
+one after another. Every worker brief said not to spawn agents; HTML mockup builders
+ran 66 to 469 automated checks and three polish passes each; a recorder call
+followed nearly every step; and the project was not under Git. Under this decision
+the manager dispatches the four phases together, each brief carries a parallel plan
+and a tier (smoke for the mockups), records batch at the dispatch wave and at each
+evaluated return, and setup has already reported the missing Git.
+**Status and verification boundary:** Implemented at the owner's request in
+[WORKER](../pattern/WORKER.md), [ASSIGNMENT](../pattern/ASSIGNMENT.md),
+[DIRECTION](../pattern/DIRECTION.md#assign-bounded-work),
+[REQUEST_MANAGER](../pattern/REQUEST_MANAGER.md), [MODELS](../pattern/MODELS.md),
+[STATE](../pattern/STATE.md), [RECORDER](../pattern/RECORDER.md),
+[INSTALL](../pattern/INSTALL.md), and [PROJECT](../pattern/PROJECT.md); awaiting the
+owner's review of the wording. Package checks establish structure only; the
+[manual scenarios](DESIGN_NOTES.md#parallel-default-scenarios--october-23-2026)
+remain unobserved.
+**Revisit:** parallel actors in one tree collide often enough to cost more than
+serial work, smoke-tier work ships defects a focused check would have caught, or
+batched records lose state that recovery needed.
+
 ## Maintain this explanation
 
 At a material design choice, update the relevant topic rather than append every
@@ -977,3 +1039,11 @@ pointers. Public documentation must stand on its own.
   or schema change is introduced. Regression case: a newer main commit with an
   unchanged package tree still produces no update notice, regardless of tags.
   Release naming does not establish pending fresh-host or automatic-update trials.
+
+- Allowed subagents by default at every level (R15), superseding opt-in worker
+  delegation and the neutral descendants line in the assignment template. Every
+  assignment now carries a parallel plan and a verification tier; serial dispatch
+  names its reason; all actors share one working tree under Git; routine records
+  batch at milestones; setup reports a project without version control. Extends the
+  October 19 proportionality rule with named tiers. Status: implemented in contracts,
+  awaiting owner review and release naming; package checks only, behavior unobserved.

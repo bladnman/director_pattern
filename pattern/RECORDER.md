@@ -24,7 +24,9 @@ with short, exact instructions over a long-lived one whose context keeps growing
 resumed or replacement recorder uses the same canonical location, outstanding
 operations, identity roster, and receipt policy. If more than one execution instance
 is allowed, the owning implementation coordinates them so they cannot independently
-race the same state. Within one task the root can simply serialize requests. No
+race the same state. Within one task the root can simply serialize requests.
+Callers batch routine updates at milestones under [STATE](STATE.md); apply a batch
+as one request and return one receipt that accounts for each item. No
 daemon, database, or event bus is required. Do not invent a second local ledger to
 bypass an unavailable route.
 
