@@ -247,3 +247,15 @@ directory/state/identity, and supported local links/cycles. It cannot prove evid
 truth, human identity, live execution, or remote outcome completeness. Inspect actual
 host handles and partial artifacts before replacement work; state changes stop no
 agent. Neither files nor this helper provide continuous supervision or a wakeup.
+
+
+## Daily update discovery is separate from request storage
+
+The base-payload [update_check.py](../tools/update_check.py) implements the
+[UPDATES daily check](UPDATES.md#daily-discovery-and-project-preference). It needs
+no request store/config, so lean and existing trackers use the same discovery.
+Only the checked project Director arranges checks through the existing authorized
+execution route; no worker/Recorder startup invokes it automatically. It returns
+data and never updates contracts or request records. Runtime availability,
+metadata endpoints, policy commands, receipt schema, daily failure throttle,
+concurrency limits, and safe automatic-update handling are specified in UPDATES.

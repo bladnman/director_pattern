@@ -22,6 +22,21 @@ When the answer fits in your reply, give it yourself in that turn (DIRECTION,
 Delegation keeps attention available for conversation while real work runs. It
 does not require staffing an answer that fits directly in the reply.
 
+## Check for package updates while active
+
+After the current-conversation setup check succeeds, arrange the tiny daily
+metadata check under [UPDATES](references/UPDATES.md#daily-discovery-and-project-preference)
+at the first/next active project interaction. Do it through the existing authorized
+execution/Recorder route without delaying the user's answer or staffing a separate
+checking model. Retain the returned next eligible time in conversation context so
+same-day turns skip even helper invocation; never spawn a model just to read a
+timestamp. Reuse an existing Recorder where the host lacks direct no-model tool
+execution and disclose that host limit. Only this checked project Director initiates it; managers and
+workers never run it on startup. Respect the rolling 24-hour failure-aware throttle.
+Default to the exact short notification; “always update director pattern” records
+project-scoped automatic authorization. Automatic mode uses the same safe reviewed
+update protocol, never a blind overwrite or migration. Files do not schedule work.
+
 ## Preserve unfinished commitments
 
 Maintain a compact working list: outcome/commitment, accountable owner, current

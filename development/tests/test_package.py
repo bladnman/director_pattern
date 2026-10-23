@@ -164,7 +164,7 @@ class PackageBoundaryTests(unittest.TestCase):
             (project / "raw.txt").write_text("Committed by default")
             event_id = subprocess.run(helper + ["event-id", "create"], capture_output=True, text=True, check=True).stdout.strip()
             subprocess.run(helper + ["create", "--raw-file", str(project / "raw.txt"), "--title", "Shared", "--event-id", event_id], capture_output=True, check=True)
-            for scratch in (".request-txn/intent.json", ".request-stage-abc/bundle", ".request-complete-abc/file", "backups/2026-10-21/PATTERN.md", "receipts/2026-10-21-setup.md"):
+            for scratch in (".request-txn/intent.json", ".request-stage-abc/bundle", ".request-complete-abc/file", "backups/2026-10-21/PATTERN.md", "receipts/2026-10-21-setup.md", ".update-check.json", ".update-check.lock", ".update-check-fixture.tmp", "update-policy.json"):
                 (installed / scratch).parent.mkdir(parents=True, exist_ok=True)
                 (installed / scratch).write_text("fixture")
 
@@ -174,8 +174,9 @@ class PackageBoundaryTests(unittest.TestCase):
 
             ignored, kept = listed("--ignored"), listed()
             self.assertEqual(ignored, {".director/.requests.lock", ".director/.request-txn/intent.json", ".director/.request-stage-abc/bundle",
-                                       ".director/.request-complete-abc/file", ".director/backups/2026-10-21/PATTERN.md"})
-            for name in manifest["base_files"] + manifest["tracked_files"] + ["config.json", "receipts/2026-10-21-setup.md"]:
+                                       ".director/.request-complete-abc/file", ".director/backups/2026-10-21/PATTERN.md",
+                                       ".director/.update-check.json", ".director/.update-check.lock", ".director/.update-check-fixture.tmp"})
+            for name in manifest["base_files"] + manifest["tracked_files"] + ["config.json", "receipts/2026-10-21-setup.md", "update-policy.json"]:
                 self.assertIn(f".director/{name}", kept, name)
             self.assertTrue(any(p.startswith(".director/requests/pending/") for p in kept), kept)
             self.assertTrue(any(p.startswith(".director/sources/") for p in kept), kept)

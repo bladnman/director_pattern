@@ -19,7 +19,8 @@
     "references/RECORDS.md",
     "references/TOOLING.md",
     "references/UPDATES.md",
-    ".gitignore"
+    ".gitignore",
+    "tools/update_check.py"
   ],
   "tracked_files": [
     "tools/requests.py"

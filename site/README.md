@@ -79,12 +79,20 @@ actors use assigned identities. The page names the adoption prerequisites (role
 index, model/effort mapping, recorder route, identity roster) and that an update
 leaves those project-owned mappings in place. The agent guide explains the small
 common bootstrap and one canonical index, standalone role definitions, whole-chain
-startup audit for install and upgrade, and separate fresh-host verification. An
-installer need not already be a Director; it must not invent a pattern abstract in
-globally loaded startup files.
+startup audit for first install, incremental updates with checks selected from
+affected changes, and separate fresh-host verification. Updates pin and review the
+current protocol even when installed guidance predates incremental checks, while
+preserving project-owned rules and adaptations. Unchanged startup reuses applicable
+evidence; structural startup changes or defects require the full audit, and only
+affected behaviors require fresh trials. An installer need not already be a Director;
+it must not invent a pattern abstract in globally loaded startup files.
 The site makes no adoption, performance, customer, or behavioral guarantees.
 
 ## Local verification
+
+October 23, 2026, incremental-update copy: all 8 site tests and the 10-file build
+passed using the bundled Node runtime. These are static/Worker/asset checks;
+rendered layout and fresh-host update behavior were not re-tested for this copy.
 
 After the Director / Request Manager revision, all eight site contract cases pass.
 A quick headless look at 1440, 760, 390 and 320 pixels found no horizontal
@@ -105,3 +113,13 @@ HTML/Markdown negotiation, HEAD, the guide's content type and a private-path 404
 An independent review checked contract accuracy, role-first setup checks, privacy
 and publication scope. These local results do not establish deployment, adoption,
 or agent behavior.
+
+
+## Active-project update discovery — October 23, 2026
+
+The page/agent guide summarize the canonical daily discovery contract: notify by
+default while active, at most once per rolling 24 hours including failures, and
+“always update director pattern” for project-scoped standing authorization. The
+checked project Director alone initiates metadata checks. Automatic updates use
+the existing safe update protocol; no checking model, scheduler, or dependency
+installation is added. These source changes do not update the live website.

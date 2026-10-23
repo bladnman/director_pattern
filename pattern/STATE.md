@@ -107,8 +107,9 @@ after a receipt. Files preserve continuity but cannot keep an agent running.
 The installation is committed with the project by default: contracts, PROJECT,
 config, requests, sources, current activity, decisions, and receipts. Another
 machine or a cloud checkout then continues the same work. `.director/.gitignore`
-keeps only the helper lock, in-progress write scratch, and pre-update backups
-local. One machine writes state at a time: commit and push before continuing
+keeps only the helper lock, in-progress write scratch, pre-update backups,
+and the machine-local daily update-check cache/lock local. One machine writes
+state at a time: commit and push before continuing
 elsewhere, and pull before the next write
 ([RECORDS](references/RECORDS.md#persistence-and-interruption-recovery)).
 Committed files use project-relative paths.

@@ -141,3 +141,42 @@ records do not prove responsive conversation or natural identity selection.
 passed all 8 tests. Pool uniqueness/reserved-marker checks and manifest/link closure
 passed; `git diff --check` passed. No new prose-matching tests were added. These
 checks do not establish any of the behavioral observations above.
+
+
+## Daily update discovery — October 23, 2026
+
+The [R11 extension](RATIONALE.md#r11--update-from-a-pinned-public-source-without-replacing-project-state)
+adds a stdlib-only base helper and active-project Director policy. Disposable
+fixtures cover notify default/exact message, rolling 24-hour window and clock
+rollback, failure/interruption reservation, concurrent checks/preference writes,
+saved automatic/off/notify choices with same-day throttle preservation, legacy
+receipt gaps, corrupted metadata, source validation, optional cached tree identity,
+website-only commits, and unchanged adapted project/source/request bytes.
+The automatic result is a request to perform the existing safe update protocol;
+no actual unattended installation or tracker migration is exercised.
+
+Live metadata verification uses the real GitHub ref and root-tree endpoints from
+a disposable installation with the existing published receipt. Transport outcomes
+are recorded separately from deterministic fixture evidence. Default unauthenticated
+stdlib access encountered GitHub HTTP 403 rate limiting; that failure was retained
+as a failed attempt, with no actual project cache or policy change. Endpoint shape
+verification via the already available authenticated API transport is a separate
+check, not proof of unauthenticated success. No new software or credentials were
+installed. Fresh-agent invocation, automatic real-project updating, and public
+release remain separate unrun gates.
+
+
+**Executed checks for daily discovery:** The integrated command
+`PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests -v`
+passed **50 tests**, including 12 daily-discovery cases. Independent review found
+a corrupt cached-baseline case that could fetch before rejecting; validation now
+occurs before network/reservation, and all 12 daily cases passed again with the
+new zero-network/byte-preservation fixture variants. The eight existing site tests
+and allowlisted ten-file build passed using the already bundled Node runtime.
+The live authenticated GitHub ref/tree checks returned HTTP 200 and matched the
+accepted published commit/package tree; the unauthenticated rate-limit result
+above remains a distinct transport limitation. Local daily-only adoption backed
+up seven changed managed paths and verified 75 other installed files unchanged;
+the concurrent incremental-verification source change was kept out of that
+installation. These are static/fixture/scoped-file results, not fresh-session
+Director invocation or an unattended real update.

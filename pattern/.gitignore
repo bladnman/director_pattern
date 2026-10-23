@@ -9,3 +9,8 @@
 
 # Pre-update safety copies; committed history already keeps prior versions
 /backups/
+
+# Daily update discovery is machine-local; project policy remains committed
+/.update-check.json
+/.update-check.lock
+/.update-check-*.tmp

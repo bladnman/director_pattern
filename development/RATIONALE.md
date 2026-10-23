@@ -529,6 +529,13 @@ unassigned/default startup, malformed-assignment handling, discovery of a newly
 indexed role, another host's behavior, or any future session's compliance. Those
 trials remain pending; the result does not turn static checks into behavioral proof.
 
+**Later October 23 scope clarification:** The whole-chain audit and fresh-host
+trial requirements above remain the first-install and affected-change procedure.
+Routine updates reuse still-applicable evidence and expand checks only when their
+upstream delta or local drift requires it; see the dated supersession in
+[R11](#r11--update-from-a-pinned-public-source-without-replacing-project-state).
+This does not waive actual role loading or preservation of project-owned rules.
+
 ## R11 — Update from a pinned public source without replacing project state
 
 **Accepted decision, October 17:** Published GitHub `main` is the upstream source of
@@ -584,6 +591,107 @@ leaving its records and authorized tracker workflow intact. That instruction
 integration is distinct from migrating its store, which still needs its own
 authorization and compatibility work. Never leave two competing active defaults.
 See [STARTUP](../pattern/references/STARTUP.md).
+
+**Decided and implemented; superseded in part, later October 23:** Routine updates
+are incremental. This supersedes the unconditional whole-chain startup audit and
+fresh-host trial matrix added earlier today to every upgrade in R10/R11. First
+installation retains the full procedure. An update reviews the relevant upstream
+delta and local drift, then selects the smallest sufficient checks under
+[UPDATES](../pattern/references/UPDATES.md#select-the-smallest-sufficient-verification).
+Structural changes to startup, role routing/defaults, or inherited instruction
+placement, and detected defects requiring integration, trigger the whole-chain
+[STARTUP](../pattern/references/STARTUP.md) audit. Fresh-host tests cover affected
+role/runtime behavior with the relevant subset of trials. A helper-only delta
+requires compatibility and affected fixture checks, not fresh startup trials.
+
+**Why/tradeoff:** The previous instructions mandated expensive installation work
+for any update, even a prose correction. A reported slow-update experience is not
+a measured timing baseline or proof of its sole cause; the unconditional wording
+was directly inspectable. Reusing applicable evidence avoids repeating unrelated
+work while preserving source pins, manifest boundaries, verified backups of changed
+files, baseline/current/incoming and prior-upstream comparisons, persistent local
+adaptations, project-owned state/context/mappings/roles/identities, compatibility,
+and separate migration decisions. Missing baselines call for safe reconstruction
+or review, not automatically a startup audit. Unknown drift never becomes accepted
+merely because upstream is already current.
+
+**Entry and failure boundary:** On an explicit update, pin/review current upstream
+guidance and use its incremental procedure even if installed guidance mandates an
+audit on every upgrade or lacks a protocol. Preserve locally adapted guidance,
+project-owned authority and host restrictions; a conflict needs resolution rather
+than a silent waiver. [INSTALL](../pattern/INSTALL.md#repeat-upgrade-remove), both
+READMEs, and the public agent guide route existing installs here without rerunning
+first installation. A compact existing receipt records scope/reason, performed
+checks, reused evidence/limits, and prior gaps. Unrelated pending behavioral trials
+stay pending without failing a routine update. Newly required blocked checks leave
+the affected adoption incomplete; partial updates keep the old accepted revision.
+No schema, runtime, or separate approval process is introduced.
+
+**Concrete regression cases:** A prose correction merges into a bootstrap with a
+persistent canonical-index adaptation even when current equals installed baseline;
+focused preservation/link checks suffice. A helper-only change checks schema and
+relevant disposable fixtures without spawning startup trials. A structural
+role-routing upgrade performs the full audit and affected fresh trials. A missing
+baseline is safely reconstructed/reviewed before replacement, expanding tests only
+if that review finds affected behavior. A previously unrun default-Director trial
+remains explicitly pending through an unrelated prose update; it is neither newly
+passed nor a reason to block that update. An already-current check reports local
+drift without silently accepting it. Revisit if scoped checks miss a changed
+behavior or routine updates still impose unrelated installation work.
+
+**Verified, later October 23 (static scope):** All 8 package tests and all 8 site
+tests passed; the build retained its 10-file public allowlist and `git diff --check`
+passed. The revised contracts and entrypoints implement this instruction change.
+These checks establish static consistency, not an actual
+project update, fresh-agent behavior, or measured update-time improvement. Earlier
+trial gaps and the single assigned-worker observation in R10 keep their stated
+scope; no new fresh-host trial is claimed here.
+
+**Superseded in part, October 23 — active-project daily discovery:** The earlier
+no-startup-fetch direction now permits a tiny metadata-only check arranged by the
+checked project Director at the first/next active interaction, no more than once
+per rolling 24 hours. Default is notification; an explicit “always update director
+pattern” choice supplies project-scoped standing authorization. It does not grant
+migration, dependency installation, publication, or destructive overwrite authority.
+The safe baseline/current/incoming comparison, backups, compatibility checks,
+project ownership, and accepted-receipt boundary remain in force for automatic
+updates. [UPDATES](../pattern/references/UPDATES.md#daily-discovery-and-project-preference),
+[DIRECTOR](../pattern/DIRECTOR.md), and [PROJECT](../pattern/PROJECT.md) carry this
+extension. Global skills retain their native explicit-only invocation controls.
+
+**Why/tradeoff:** A deterministic helper makes a version comparison without a
+checking model or software installation. Existing GitHub ref/tree metadata gives
+a concrete pinned source and excludes website-only changes without maintaining a
+second release registry. The first check may need three short requests to bootstrap
+a legacy receipt's package tree; later checks need two. A last-attempt reservation
+before network work, a local nonblocking lock, and atomic cache replacement bound
+failure and concurrency costs. The Director retains the next eligible time so
+same-day turns do not invoke another model/helper merely to read a timestamp.
+The cache is machine-local, so another checkout can perform its own daily check;
+no global timing/liveness or inactive-project wakeup is promised. Missing runtime,
+unknown receipts, corrupt metadata, and HTTP rate limits are visible gaps, not
+permission to install software, reset state, or fabricate success.
+
+**Decided and implemented:** A generated, committed `update-policy.json` retains
+notify/automatic/off with its user authorization source; absent policy means notify.
+The ignored local cache includes failures/interruption. Policy changes preserve
+an existing cooldown; switching off makes no network request. The helper returns
+an update request, never executes an installer or rewrites receipts/contracts.
+Local unpublished deltas retain a published base; later publication still needs
+normal review and receipt promotion. No candidate-tree auto-promotion is added.
+
+**Regression cases:** Two active chats race and only one reserves the daily check;
+an offline failure suppresses retries for 24 hours; enabling automatic in the
+same window does not force another check. A website-only main commit produces no
+notice even when the receipt's SHA postdates the last package-changing commit.
+A local candidate cannot be advertised as newly published, and automatic mode
+leaves adapted PROJECT, role/index/pool, tracker, requests, raw sources, and helper
+bytes untouched until the existing update protocol is actually performed.
+Corrupt/unknown cache and policy schemas fail closed instead of silently resetting.
+**Verification:** Deterministic fixture results and live metadata transport limits
+are recorded in [DESIGN_NOTES](DESIGN_NOTES.md#daily-update-discovery--october-23-2026).
+They establish helper behavior, not fresh-agent adoption, automatic real-tree
+updates, publication, or a host-independent scheduler.
 
 ## R12 — Give people a readable front door without another contract layer
 
@@ -857,3 +965,9 @@ pointers. Public documentation must stand on its own.
 - Status: decided and implemented in owning contracts, with package checks scoped
   to static structure. Actual responsiveness, delegation, identity choice, and
   reservation behavior await the listed manual observations.
+
+- Made routine updates incremental (R11), superseding the earlier October 23
+  unconditional upgrade audit/trial requirements while preserving first-install
+  checks and project-specific adaptations. Current pinned update guidance selects
+  scope even for older installations; performed checks, reused evidence, and
+  unresolved prior gaps remain distinct.

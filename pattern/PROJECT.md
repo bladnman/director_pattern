@@ -4,7 +4,7 @@ Startup audit: [loaded chain, misplaced duties moved with exact preservation map
 Fresh host trials: [per-trial evidence or pending; distinct from static wiring]
 Candidate installation status: [prepared / installed / fresh-session trial completed]
 Candidate source/version: [published repository URL + exact reviewed commit SHA; label unpublished candidates]
-Setup/update receipt: [committed path under .director/receipts/; selected managed-file SHA-256 baselines, startup wiring, adaptations, verification]
+Setup/update receipt: [committed path under .director/receipts/; selected managed-file SHA-256 baselines, startup wiring, adaptations, verification scope/reason, performed checks, reused evidence and limits]
 Version control: [committed by default; paths the project chose to keep local in .director/.gitignore; public-remote warning given on date / not needed / no Git]
 Project root and outcome owner: [actual root; project Director]
 Scope and desired outcomes: [one project; constraints; explicit exclusions]
@@ -77,9 +77,15 @@ on them.
 
 ## Source updates
 
-Use [UPDATES.md](references/UPDATES.md) for an explicitly requested update from
-published GitHub `main`. Record source URL and exact SHA plus installed managed-file
-baselines in the committed receipt. Normal startup does not fetch or replace files.
+Use [UPDATES.md](references/UPDATES.md) for requested or standing-authorized updates
+from published GitHub `main`. The checked project Director arranges at most one
+metadata check per 24 hours while active; absent policy defaults to notify.
+Update preference: [notify by default / automatic only on explicit “always update director pattern” / off; update-policy.json and user-source reference]
+Daily check receipt pointer: [exact accepted .director/receipts/...json; source.url, source.sha, published:true, optional pattern_tree_sha; never newest-by-date]
+Local candidate delta: [none / explicitly unpublished files and evidence relative to the retained published base; no automatic source promotion]
+Record source URL and exact SHA plus installed managed-file baselines in the
+committed receipt. Keep the machine-local check cache ignored. Automatic mode uses
+the same backup/comparison/compatibility protocol and never bypasses conflicts.
 Preserve this project's context, canonical tracker, state mode, stable IDs, raw
 sources, role index and definitions, model mapping, identity roster, local
 adapters, and version-control choices. A template seed carries no completed

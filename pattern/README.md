@@ -35,7 +35,8 @@ scheduler, runtime, or new chat is installed.
 The installed `.director/` is committed with the project, including its requests
 and exact user sources, so work continues from another machine or a cloud
 checkout. Its own `.gitignore` keeps only the helper lock, in-progress write
-scratch, and pre-update backups local. A project may choose to keep more local;
+scratch, pre-update backups, and daily update-check cache local. A project may
+choose to keep more local;
 see [STATE.md](STATE.md#version-control).
 
 Before the Director can staff work, the installation maps four project facts in
@@ -61,12 +62,15 @@ Director/manager policies live in [DIRECTION.md](DIRECTION.md), outside worker
 startup. Recurring specialist rules live in maintained files registered in the
 same index, never an abstract appended to AGENTS.md.
 
-An installing agent need not already be a Director. Installation and upgrades
-must audit the entire loaded startup chain, preserve shared authority, and move
-exact misplaced specialist duties to reachable maintained definitions. Follow the
+An installing agent need not already be a Director. First installation audits the
+entire loaded startup chain, preserves shared authority, and moves exact misplaced
+specialist duties to reachable maintained definitions. Follow the
 [startup integration and verification procedure](references/STARTUP.md); an
-appended hook alone is insufficient. Static wiring and real fresh-agent trials
-are separate evidence.
+appended hook alone is insufficient. Updates use the
+[incremental procedure](references/UPDATES.md#select-the-smallest-sufficient-verification):
+a full startup audit or fresh-agent trial is required only by affected structure,
+behavior, or detected defects. Static wiring and real fresh-agent trials remain
+separate evidence.
 
 ## Adopt in a target project
 
@@ -99,13 +103,23 @@ authorizes the reversible setup. Host restrictions and existing authority remain
 
 ## Update an existing installation
 
-Ask the project agent to follow its installed [update protocol](references/UPDATES.md),
-or this package's [INSTALL.md](INSTALL.md) when the older installation has none.
-Use published GitHub `main` resolved to an exact reviewed commit, preserve local
-adaptations and project state, and verify before recording the new revision. The
+Ask the project agent to resolve published GitHub `main` to an exact reviewed
+commit and use that revision's [update protocol](references/UPDATES.md), including
+when installed guidance requires an audit on every update or has no protocol.
+Read installed guidance for local adaptations; preserve project-owned rules,
+adaptations, and state. Routine changes use focused checks and still-applicable
+evidence. Full startup audits and fresh-agent trials are triggered by affected
+structure, behavior, or defects; only required checks gate the new revision. The
 project's role index and definitions, model mapping, and identity roster belong to
 the project; an update does not replace them. An update request is distinct from
-reading the repository; startup does not silently update an installation.
+reading the repository. While a project is active, only its checked Director
+arranges a tiny metadata check at most once per 24 hours, including failures.
+Default to: **A new Director Pattern is available. Say “update director pattern”
+to install it.** The user can say **“always update director pattern”** to save
+project-scoped automatic updates; notify/off remain durable choices. Automatic
+mode follows the same safe backup, merge, compatibility and verification protocol.
+No scheduler, checking model, dependency installation, or inactive-project wakeup
+is added. See the [daily check contract](references/UPDATES.md#daily-discovery-and-project-preference).
 
 ## Remove a project installation
 

@@ -1,8 +1,16 @@
 # Establish and verify the startup route
 
-Use this procedure for installation and every upgrade. An installing agent need
-not already be a Director: follow the user's installation authority and actual
-host/assignment rules. The result should give every fresh actor a small common
+Use the full procedure for first installation. For updates,
+[UPDATES](UPDATES.md#select-the-smallest-sufficient-verification) selects scope from
+the upstream delta and local drift: whole-chain audit/integration is required for
+structural startup, role-routing, or inherited-instruction changes, or detected
+defects that need it. Routine updates preserve working startup wiring and reuse
+still-applicable evidence with focused file/link and preservation checks. Fresh
+host trials cover only affected behavior; unchanged startup needs no repeated
+trial or refactor solely because the upstream revision changed.
+
+An installing agent need not already be a Director: follow the user's installation
+authority and actual host/assignment rules. The result should give every fresh actor a small common
 bootstrap and the selected maintained role's instructions before action.
 Do not invent an abstract of the method in AGENTS.md.
 
@@ -66,7 +74,12 @@ entries, and preserved-instruction mapping. Disposable fixtures can check that
 selected manifest files are self-contained and project-owned files survive a
 merge. These establish wiring and preservation, not fresh-agent behavior.
 
-Then use the host's supported fresh-session mechanism, subject to its conversation
+For a first installation, use the applicable trials below. For an update, run only
+those selected by UPDATES for affected behavior; the table is a set of trial cases,
+not a mandatory matrix on every update. Preserve prior unrun trials as pending;
+newly required but unrun checks leave the affected update incomplete.
+
+Use the host's supported fresh-session mechanism, subject to its conversation
 creation and delegation restrictions. A fresh context must start through the real
 project entrypoint; do not simulate success by pasting all role instructions into
 an already running conversation. Use harmless read-only or disposable tasks and

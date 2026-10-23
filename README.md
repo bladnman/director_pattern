@@ -40,9 +40,15 @@ publication are separate steps. The source repository is
 [bladnman/director_pattern](https://github.com/bladnman/director_pattern);
 the agent installation entrypoint is [pattern/README.md](pattern/README.md).
 
-For an existing installation, use the [update protocol](pattern/references/UPDATES.md).
-Published GitHub `main` is the upstream source of truth; agents pin each installation
-or explicit update to an exact reviewed commit rather than silently updating at startup.
+For an existing installation, pin published GitHub `main` to an exact reviewed
+commit and use that revision's [update protocol](pattern/references/UPDATES.md),
+even when installed guidance predates incremental updates. Preserve project-owned
+rules and adaptations. Routine updates use focused checks and applicable prior
+evidence; full startup audits and fresh-agent trials run only for affected changes.
+While active, only the checked project Director arranges a tiny metadata check
+at most once per rolling 24 hours and defaults to a short notification. Say
+“always update director pattern” to enable project-scoped automatic updates through
+the same safe update protocol. No scheduler or new software is installed.
 
 ## Optional global skill
 

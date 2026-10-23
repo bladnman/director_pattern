@@ -5,6 +5,10 @@ confirmation. Reading alone is not adoption. Preserve existing authority, edits,
 canonical trackers, and unfinished work. No publication, request migration, app
 launch, scheduler, or executable installer is part of this setup. The installing
 agent need not already be a Director; follow its actual assignment and host rules.
+For an existing installation, go directly to [Repeat, upgrade, remove](#repeat-upgrade-remove)
+and the pinned current update protocol; the first-install audit and trials below
+are not an update fallback.
+
 Install the separation of responsibilities, not a homemade summary in AGENTS.md.
 Use [STARTUP.md](references/STARTUP.md) to audit the entire loaded instruction
 chain and preserve specialized rules in reachable standalone definitions.
@@ -28,7 +32,8 @@ not payload. A temporary staging clone is optional transport only.
    PROJECT, config, requests, sources, current activity, and receipts, so another
    machine or a cloud checkout continues the same work. The payload's
    `.director/.gitignore` keeps only the helper lock, in-progress write scratch,
-   and pre-update backups local. Check whether the repository has a remote and
+   pre-update backups, and daily update-check cache local. Check whether the
+   repository has a remote and
    whether it is public. If it is public, or its visibility cannot be checked,
    warn the user once: `sources/` keeps their exact messages and attachments, and
    pushed history stays readable after a later deletion. Record the warning in
@@ -80,6 +85,15 @@ not payload. A temporary staging clone is optional transport only.
    does not repair an oversized startup chain. No duplicate role table belongs in
    the hook. Preserve a predecessor’s records and remove competing startup defaults
    through reviewed reversible integration, separately from any store migration.
+
+For every mode, keep the daily discovery default **notify** unless the user has
+explicitly chosen another mode. Record the exact accepted receipt pointer in
+PROJECT's Source updates section. Only the checked project Director arranges
+active-project checks under [UPDATES](references/UPDATES.md#daily-discovery-and-project-preference);
+the shared bootstrap and worker startup do not run them. `update-policy.json` is
+project-owned generated configuration, preserved on upgrades and absent from seeds.
+The base helper uses an already available Python standard library; do not install
+a runtime or dependency for checking, and disclose unavailable capability.
 
 For every mode, record the source URL/SHA, selected managed-file paths and SHA-256
 baselines, startup wiring, adaptations, and verification in a setup receipt under
@@ -151,10 +165,18 @@ start workers, and the identity marker does not claim live supervision.
 
 ## Repeat, upgrade, remove
 
-For an existing installation, follow the installed
-[update protocol](references/UPDATES.md). Published GitHub `main` is the upstream
-source of truth; resolve it to an exact reviewed SHA for each explicit update.
-Normal startup never silently updates. Reuse the existing hook and preserve local
+For an existing installation, resolve published GitHub `main` to an exact reviewed
+SHA on an explicit or standing-authorized update, then use that revision's
+[update protocol](references/UPDATES.md), even if the installed version has no
+protocol or requires a full audit on every upgrade. Read installed guidance for
+local adaptations and preserve project-owned rules and host restrictions; resolve
+any conflict with the accountable owner. Select checks from the upstream delta and
+local drift. Routine changes use focused checks and still-applicable evidence;
+full startup audits and fresh host trials run only when their changes require them.
+Do not restart the first-install procedure just to update an older installation.
+Active-project discovery defaults to daily notification; recorded project-scoped
+“always update director pattern” authorizes the same safe update protocol. Reuse
+the existing hook and preserve local
 context, adaptations, identities, role index and definitions, model mapping, identity
 roster, canonical state, and unfinished work. Missing
 baselines require comparison to the prior pinned upstream revision or explicit

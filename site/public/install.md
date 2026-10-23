@@ -15,14 +15,16 @@ route first; only an unassigned project conversation defaults Director. Missing,
 conflicting, or incomplete delegated assignments clarify with the assigner; they
 never fall back to Director.
 
-Installation and upgrades audit the entire loaded startup instruction chain for
+First installation audits the entire loaded startup instruction chain for
 size and misplaced responsibilities. Preserve shared project authority and exact
 specialist rules, moving those rules into maintained definitions/contracts and
 registering them in the same reachable index. Do not invent an abstract of the
 pattern in AGENTS.md or merely append a hook to an enormous startup file. New
 recurring responsibilities follow that same standalone-file and index discipline.
 The package's [startup procedure](https://github.com/bladnman/director_pattern/blob/main/pattern/references/STARTUP.md)
-provides integration and fresh-host verification steps.
+provides integration and fresh-host verification steps. Updates select the audit
+and trial scope from affected changes under the update protocol below; routine
+changes reuse still-applicable startup evidence.
 
 ## Install request
 
@@ -121,18 +123,38 @@ Update the Director Pattern in this project from https://director.metal-sole.com
 ```
 
 This public address is the guide's front door; GitHub remains the update source.
-Follow the installed update protocol, or the current package's INSTALL guide
-if the older installation has none. The canonical protocol is
-[UPDATES](https://github.com/bladnman/director_pattern/blob/main/pattern/references/UPDATES.md).
-Published GitHub main is upstream truth; pin one exact reviewed SHA. Normal
-startup never silently updates. Back up managed files and wiring; compare the
-installed baseline, local current files, and incoming revision; preserve local
-adaptations and project state, including the project's role index and
-definitions, model mapping, and identity roster. Check compatibility and verify
-before recording the new revision. Do not migrate trackers, switch modes, or
-replace project identity as a side effect. Refer to the protocol for missing
-baselines/conflicts. Audit and repair the whole loaded startup chain during the
-upgrade, preserving the canonical index pointer and project-owned definitions.
+Resolve published GitHub main to one exact reviewed SHA and use that revision's
+[UPDATES protocol](https://github.com/bladnman/director_pattern/blob/main/pattern/references/UPDATES.md),
+even if installed guidance requires an audit on every upgrade or has no protocol.
+Read installed guidance for local adaptations; preserve project-owned rules and
+host restrictions, resolving conflicts with the accountable owner. The current
+INSTALL guide routes existing installations to updates, not through first setup.
+While the project is active, only its checked Director initiates a metadata check
+at most once per rolling 24 hours. Failed attempts also consume the window; workers
+and inactive projects do not start checks. Default to this simple message:
+**A new Director Pattern is available. Say “update director pattern” to install it.**
+Say **“always update director pattern”** to record project-scoped automatic updates;
+notify/off preferences remain durable. Automatic mode follows the same safe update
+protocol and stops at unresolved conflicts or migration boundaries. No checking
+model, scheduler, or new software is installed.
+
+Back up files to be changed and verify their bytes. Compare installed baseline,
+local current files, and incoming revision, including prior upstream and persistent
+adaptations. Preserve project state, role index and definitions, model mapping,
+and identity roster. Select checks from the upstream delta and local drift:
+routine prose changes need focused file/link and preservation checks; helper-only
+changes need compatibility and relevant disposable fixtures. Reuse still-applicable
+evidence for unchanged startup. Full startup audits apply to structural startup,
+role-routing, or inherited-instruction changes, or detected defects requiring them;
+fresh host trials cover only affected behaviors. Missing baselines require safe
+reconstruction/review, not automatic startup trials. Carry forward unrelated prior
+verification gaps honestly. Newly required blocked checks leave the affected update
+incomplete, and partial adoption retains the old accepted revision.
+
+Verify before recording the new revision and report scope, checks, reused evidence,
+and limits compactly. An already-current result does not accept unreviewed local
+drift. Do not migrate trackers, switch modes, or replace project identity as a side
+effect. Preserve the canonical-index pointer and project-owned definitions.
 Reviewed reversible adoption may replace a predecessor's startup role default
 while keeping its authorized tracker workflow and records; data migration remains
 a separate decision. Leave one active startup default.
