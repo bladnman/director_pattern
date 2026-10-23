@@ -46,13 +46,32 @@ or explicit update to an exact reviewed commit rather than silently updating at 
 
 ## Optional global skill
 
-On request, copy just [skill/director-pattern/SKILL.md](skill/director-pattern/SKILL.md)
-to the host's per-user skill directory. For Codex, use
-`$CODEX_HOME/skills/director-pattern/SKILL.md` when `CODEX_HOME` is set, otherwise
-`~/.codex/skills/director-pattern/SKILL.md`; for other hosts, use their user-level
-skill directory. Preserve an existing skill before replacement.
-Do not install a project-local skill by default. This tiny optional pointer routes
-lifecycle requests to the current canonical guide; installing it does not install
-the pattern in any project. On a request to remove the global skill, remove only
-its `director-pattern/SKILL.md` and its directory if empty, preserving other skills
-and all project installations.
+This optional lifecycle pointer requires explicit user invocation. Ordinary task
+relevance must not select or run it. On request, copy the complete selected host
+skill below to its per-user `director-pattern/` skill directory, preserving an
+existing copy before replacement. Do not install a project-local skill by default.
+
+| Host | Canonical source and required native control | Per-user destination | Explicit invocation |
+|---|---|---|---|
+| Codex | [skill/director-pattern/](skill/director-pattern/SKILL.md), including [agents/openai.yaml](skill/director-pattern/agents/openai.yaml) with `policy.allow_implicit_invocation: false` | `$CODEX_HOME/skills/director-pattern/` when set, otherwise `~/.codex/skills/director-pattern/` | `$director-pattern` |
+| Claude Code | [skill/claude-code/director-pattern/](skill/claude-code/director-pattern/SKILL.md), with `disable-model-invocation: true` and `user-invocable: true` in `SKILL.md` | `$CLAUDE_CONFIG_DIR/skills/director-pattern/` when set, otherwise `~/.claude/skills/director-pattern/` | `/director-pattern` |
+
+A clear user request to use the Director Pattern skill also meets its invocation
+gate. Use the host command above or direct the agent to the selected skill file
+for a reliable loading route; a bare name may not load a skill hidden from model
+context. Native controls are required: description wording alone does not disable
+automatic selection. Preserve these controls during every global-skill update; do
+not copy
+only Codex's `SKILL.md` and omit its policy file. For another host, establish its
+supported explicit-only policy before installing this optional skill.
+
+The pointer routes the requested operation to the current canonical guide;
+installing or invoking it does not install the pattern in any project. Adopted
+project startup hooks remain a separate instruction route. Already running chats
+may retain previously loaded instructions; these file changes do not establish a
+fresh-session behavior check.
+
+On a request to remove the global skill, remove only the selected host's managed
+files: `SKILL.md` and, for Codex, `agents/openai.yaml`. Remove managed `agents/` and
+`director-pattern/` directories only if empty. Preserve unrelated files, other
+skills, and every project installation.

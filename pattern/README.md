@@ -104,9 +104,13 @@ conversations before claiming their instructions or roles have changed.
 
 ## Optional global skill
 
-A separate optional skill routes lifecycle requests to this guide. For its
-installation or removal, see the repository's
+A separate optional skill routes explicitly requested lifecycle operations to this
+guide. It requires explicit user invocation: `$director-pattern` in Codex,
+`/director-pattern` in Claude Code, or a user direction to its skill file. Ordinary
+task relevance must not select or run it. For the complete host-specific payload,
+required native invocation controls, updates, and removal, see the repository's
 [global skill guidance](https://github.com/bladnman/director_pattern/blob/main/README.md#optional-global-skill).
-Removing that global skill removes discovery through the skill; it does not remove
-any project's pattern installation. Project removal likewise leaves the global
-skill installed unless its removal is requested too.
+Preserve those controls on updates. Global skill invocation and an adopted
+project's startup hook are separate instruction routes. Removing the global skill
+does not remove any project's pattern installation. Project removal likewise
+leaves the global skill installed unless its removal is requested too.

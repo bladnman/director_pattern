@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated October 21, 2026. This repository authors a
+Living design rationale · updated October 22, 2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -480,6 +480,36 @@ structure and boundaries, not fresh-session discovery, target adoption, or remov
 **Revisit:** Real lifecycle requests misroute, pointer copies accumulate protocol,
 or discovery is mistaken for project authority.
 
+**Superseded in part, October 22:** The optional global skill is now explicitly
+invoked only. Ordinary task relevance, including generic install/update/remove,
+delegation, or project work, must not select or run it. The October 18 entry route
+and project boundaries remain; automatic discovery is superseded.
+**Why/tradeoff:** A globally available pointer could activate an operating method
+when the user only asked for ordinary work. A clear request to use the skill, an
+explicit command, or direction to its skill file keeps this lifecycle route
+available without that ambient trigger.
+Description wording alone cannot enforce selection policy.
+**Decided and implemented:** The [Codex source](../skill/director-pattern/SKILL.md)
+ships [agents/openai.yaml](../skill/director-pattern/agents/openai.yaml) with
+`policy.allow_implicit_invocation: false`; the separate
+[Claude Code source](../skill/claude-code/director-pattern/SKILL.md) sets
+`disable-model-invocation: true` and `user-invocable: true`. Host-specific sources
+avoid relying on undocumented cross-host frontmatter support. The
+[distribution guide](../README.md#optional-global-skill) requires the complete
+selected host skill and preservation of its native controls during updates.
+Other hosts need a supported explicit-only policy before installation. Invocation
+of a global skill remains distinct from the startup hook of an adopted project.
+**Regression cases:** “Fix this bug and update its tests” or “install this package”
+must not load the global Director Pattern skill based on relevance. An explicit
+`$director-pattern` in Codex, `/director-pattern` in Claude Code, or user direction
+to the skill file still reaches the canonical lifecycle guide. An update must not
+lose Codex's policy file or Claude Code's invocation flags. Removing only the global
+skill leaves project startup wiring and installations intact.
+**Verification limit:** Frontmatter/policy parsing, source-to-installed byte checks,
+skill validation, and package/link checks establish metadata and distribution
+structure only. No live fresh-session selection or explicit-invocation trial is
+claimed; running chats can retain earlier loaded instructions.
+
 ## R14 — Commit the installation with the project
 
 **Problem:** The installed `.director/` holds the method contracts next to project
@@ -641,3 +671,12 @@ pointers. Public documentation must stand on its own.
   `.director/.gitignore` keeps only the lock, write scratch, and backups local;
   setup warns once on a public remote; CLI event IDs must be unique across machines.
   Status: decided and implemented; unit tests pass, no real installation observed.
+
+## Decision history — October 22, 2026
+
+- Superseded automatic global skill discovery with explicit user invocation (R13).
+  Codex and Claude Code receive their supported native invocation controls in
+  separate complete host skill sources; updates must preserve those controls.
+- Kept optional global invocation, adopted project startup hooks, installation,
+  and removal distinct. Metadata/configuration checks do not prove fresh-session
+  behavior or change instructions already loaded in a running chat.
