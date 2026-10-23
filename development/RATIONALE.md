@@ -402,6 +402,13 @@ the one serialized roster; a preferred glyph in use triggers another suitable
 choice. A resumed assignment and a late return retain their original marker/name,
 preventing confusion with a new actor. Exhaustion never borrows a reserved symbol.
 
+**Clarified, October 23:** The existing identity-preservation rule explicitly
+includes the assigned emoji and bold name in all parent, Director, and manager
+summaries and SitReps, as well as actor updates and returns. A summary that keeps
+only the name drops required formatting; [IDENTITIES](../pattern/IDENTITIES.md)
+now says so directly. This is a wording clarification, not a new allocation rule
+or a verified live-behavior claim.
+
 **Status and verification boundary:** Decided and implemented in IDENTITIES and
 [IDENTITY_POOL](../pattern/IDENTITY_POOL.txt), with references/examples aligned in
 [DIRECTION](../pattern/DIRECTION.md), [ASSIGNMENT](../pattern/ASSIGNMENT.md), and

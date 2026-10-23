@@ -4,7 +4,8 @@ First candidate. Identity is not status, model tier, role, or authority.
 
 The assigner supplies a short, memorable, Capitalized name and a unique marker.
 Bold the name in human-facing output, for example 🦫 **Cutter** —. The actor prefixes
-progress and returns with that identity; parent summaries preserve it. Keep the
+progress and returns with that identity. All parent, Director, and manager summaries,
+including SitReps, retain the assigned emoji and **bold name** as well. Keep the
 identity stable across a resumed assignment even when its runtime attempt changes.
 This is a text convention, not a
 claim that the host can set native chat icons.
