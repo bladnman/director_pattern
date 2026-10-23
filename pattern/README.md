@@ -11,9 +11,10 @@ evaluation, rework, and follow-up until the Director accepts it. A specialty suc
 engineering, testing, release, or customer communication is a task inside the
 outcome, not a reason for another manager. Specialists execute; Small clerks map
 broad material; one shared [Recorder](RECORDER.md) handles routine state reading and
-writing. The Director may also dispatch substantial independent analysis that
-returns a proposal, but no intake layer is mandatory. Selective critical reading
-and ordinary discussion stay with the Director. No department tree is required.
+writing. The Director delegates substantial analysis and detailed coordination
+before that active work occupies the main conversation. Independent analysis
+returns a proposal; no intake layer is mandatory. Selective critical reading and
+ordinary discussion stay with the Director. No department tree is required.
 
 "Director Pattern" names this package. Assignment roles stay `worker` and `director`:
 `Role: director` carries the project Director and a Request Manager bounded to one
@@ -21,7 +22,8 @@ outcome, and `Role: worker` carries specialists, reviewers, the Recorder, and
 optional bounded analysis. Request Manager and Recorder are maintained
 responsibilities, not new role values. Only the checked project Director uses `🎬`;
 managers and other actors use an assigned identity from a shared pool, such as
-`🐙 Contract —`. See [DIRECTOR.md](DIRECTOR.md) and
+🦫 **Mason** —, chosen for a playful fit with the assignment under
+[IDENTITIES.md](IDENTITIES.md). See [DIRECTOR.md](DIRECTOR.md) and
 [REQUEST_MANAGER.md](REQUEST_MANAGER.md).
 
 Tracked is the default for new installations; lean is an explicit optional choice.
@@ -48,8 +50,23 @@ Use one after a quiet stretch of ongoing work or when several developments benef
 from a combined view; ordinary replies and brief progress updates do not need a
 full report. Meaningful ordinary updates satisfy the progress cadence without a
 redundant SitRep. The checked project Director's `🎬` identity, `❓` questions, and
-`🖐️` user-only actions keep their meanings. See [PATTERN.md](PATTERN.md) for the
+`🖐️` user-only actions keep their meanings. See [DIRECTION.md](DIRECTION.md) for the
 sparse marker rules, timing, and continuing supervision requirements.
+
+Every actor receives a small common [bootstrap](PATTERN.md), follows its one
+project-owned role index, and loads the selected standalone definition/references
+before acting. Explicit assignments route first; only an unassigned project
+conversation defaults Director. Malformed delegated assignments seek clarification.
+Director/manager policies live in [DIRECTION.md](DIRECTION.md), outside worker
+startup. Recurring specialist rules live in maintained files registered in the
+same index, never an abstract appended to AGENTS.md.
+
+An installing agent need not already be a Director. Installation and upgrades
+must audit the entire loaded startup chain, preserve shared authority, and move
+exact misplaced specialist duties to reachable maintained definitions. Follow the
+[startup integration and verification procedure](references/STARTUP.md); an
+appended hook alone is insufficient. Static wiring and real fresh-agent trials
+are separate evidence.
 
 ## Adopt in a target project
 

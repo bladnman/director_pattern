@@ -6,9 +6,11 @@ normal project startup checks its installed setup and never silently fetches or
 replaces it. This is a bounded installation operation, not a daemon or a new state
 engine. Existing project and host permissions still apply.
 
-The director owns scope, compatibility decisions, and acceptance. An explicitly
-assigned worker performs the update; a Small recorder handles routine inspection,
-backups, and receipts. Every delegated assignment names worker/director role,
+The current accountable owner retains scope, compatibility decisions, and
+acceptance. The authorized installation agent need not already be a Director;
+follow actual host/assignment rules. In an adopted Director installation, an
+explicit worker performs the update and the shared Recorder handles routine
+state/receipts. Every delegated assignment names worker/director role,
 outcome, scope, and authority. Unavailable capabilities remain visible.
 
 ## Pin and inspect the incoming revision
@@ -74,8 +76,12 @@ Policy adoption does not reassign work. Existing open director-owned requests ke
 their owner, handles, and obligations until an explicit acknowledged assignment or
 handoff changes responsibility. Do not bulk-rewrite owners, spawn managers, or
 create a role index full of placeholder entries merely because the package changed.
-Keep one loaded startup hook and merge its role/privacy rules without erasing
-specialized project instructions. A template update changes only generic seeds;
+Run the entire [startup audit and integration](STARTUP.md), not just a hook
+replacement. Preserve exact specialized instructions at maintained destinations
+and register them in the same canonical index before removing global copies.
+Keep one small loaded hook and bootstrap with the existing canonical-index pointer;
+no stale abstract, duplicate role table, or competing role default stays active.
+This includes upgrades from earlier oversized AGENTS or equivalent files. A template update changes only generic seeds;
 never copy a configured store, shared identity, runtime state, or a completed setup
 receipt into a seed. Generated projects perform their own first-use initialization.
 
@@ -87,7 +93,9 @@ new project identity to make an update pass. A Producer Pattern installation is 
 separate predecessor package, not an earlier revision of this one: its `.producer/`
 store uses the `request-bundles` format with `producer` fields, and this helper
 refuses it before reading or writing. Moving from it is an explicit migration
-decision, never an update; do not edit its config or records to make it open. Lean and existing trackers retain their
+decision, never an update; do not edit its config or records to make it open.
+Reviewed reversible startup-policy adoption can replace its old role default
+without migrating that store; preserve predecessor records and shared authority. Lean and existing trackers retain their
 applicable workflow and do not acquire a bundled backend as an update side effect.
 
 ## Validate and record the result
@@ -99,7 +107,11 @@ Recorder route, roster location, and the version-control check in
 [STATE](../STATE.md#version-control). Verify a template remains generic and generated identities are separate.
 Use read-only validation of actual state where supported; use disposable fixtures
 for necessary helper behavior checks, never dummy requests in the real backlog.
-Do not claim a cold-session behavioral trial unless one actually ran.
+Use [STARTUP’s concrete fresh host trials](STARTUP.md#static-checks-then-fresh-host-trials),
+including assigned role loading, missing/conflicting roles, newly indexed roles,
+and removal of specialized duties from oversized startup chains. Do not claim a
+cold-session behavioral trial unless one actually ran. Record pending trials
+separately from successful static wiring/fixture checks.
 
 Only after all required checks succeed, write the update receipt under
 `.director/receipts/`: source

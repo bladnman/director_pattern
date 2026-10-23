@@ -1,5 +1,7 @@
 # Project orientation
 
+Startup audit: [loaded chain, misplaced duties moved with exact preservation map, remaining gaps; STARTUP procedure]
+Fresh host trials: [per-trial evidence or pending; distinct from static wiring]
 Candidate installation status: [prepared / installed / fresh-session trial completed]
 Candidate source/version: [published repository URL + exact reviewed commit SHA; label unpublished candidates]
 Setup/update receipt: [committed path under .director/receipts/; selected managed-file SHA-256 baselines, startup wiring, adaptations, verification]
@@ -16,7 +18,7 @@ Required human acceptance/publication gates: [actual policy; unknown if unresolv
 
 ## Roles, guardrails, and routes
 
-Canonical role index: [actual project-owned index path; generic entries from ROLES.md plus maintained project roles]
+Canonical role index: [actual project-owned index path; same locator as PATTERN; real entries linking standalone definitions]
 Project-wide applicable guardrails: [paths that apply to every actor]
 Unmapped or conflicting roles: [known gaps that stop affected staffing until resolved]
 Recorder definition and route: [indexed Recorder entry; direct manager→Recorder only if supported, otherwise manager→assigner→Recorder]
@@ -86,9 +88,10 @@ and runs its own init.
 
 ## Working references
 
-Read [PATTERN.md](PATTERN.md), [MODELS.md](MODELS.md), and [STATE.md](STATE.md),
-with [DIRECTOR.md](DIRECTOR.md) or [REQUEST_MANAGER.md](REQUEST_MANAGER.md) for the
-resolved responsibility.
+Every actor starts with [PATTERN.md](PATTERN.md) and its canonical index, then
+loads the selected standalone definition and required references. Directors read
+[DIRECTION.md](DIRECTION.md), [MODELS.md](MODELS.md), and [STATE.md](STATE.md)
+with [DIRECTOR.md](DIRECTOR.md) or [REQUEST_MANAGER.md](REQUEST_MANAGER.md).
 Existing owners and active assignments: [canonical pointers; verify actual handles]
 Local adaptations and installation history: [changes, backup paths, setup receipt]
 Open decisions and next validation: [target-specific unresolved choices; relevant fresh-session trial]

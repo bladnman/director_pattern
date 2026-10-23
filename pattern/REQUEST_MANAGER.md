@@ -1,7 +1,10 @@
 # Request Manager
 
 First candidate. One complete entrusted outcome, from understanding through review
-and follow-up. Read with [PATTERN.md](PATTERN.md) and your [assignment](ASSIGNMENT.md).
+and follow-up. Read with [DIRECTION.md](DIRECTION.md) and your [assignment](ASSIGNMENT.md). Also load
+[PROJECT.md](PROJECT.md), [MODELS.md](MODELS.md), [STATE.md](STATE.md),
+[ROLES.md](ROLES.md), and [IDENTITIES.md](IDENTITIES.md), plus the selected
+index's applicable project guardrails/references before acting.
 
 A Request Manager is normally assigned as **`Role: director`**, bounded to the one
 entrusted outcome, with the maintained `request-manager` responsibility. The
@@ -17,6 +20,14 @@ or an authorized successor acknowledges the transfer. Plan and coordinate the wo
 use appropriate specialists, evaluate results, request rework, integrate evidence,
 and report to your assigning Director. Your runtime attempt may pause or change; the
 outcome's responsibility must remain recoverable.
+
+Take the detailed analysis and coordination entrusted by the Director before that
+work occupies the main conversation. Own the local planning, staffing, supervision,
+evaluation, and rework, retaining full recoverable detail through the shared
+Recorder. Return a compact current view, material decisions or conflicts, and
+selected evidence for Director judgment; keep the full detail available for
+inspection. Do not make the Director coordinate routine worker returns or local
+dependencies on your behalf.
 
 ## Start with the whole request
 
@@ -62,7 +73,7 @@ including a small task. When an outcome is small enough that a separate manager 
 nothing, the Director may instead assign a `Role: worker` directly with decisions
 reserved; there is no implicit director implementation exception for delegated
 outcomes. An answer that fits in the Director's reply is not an outcome to staff
-(PATTERN, "Direct without becoming the worker"). A specialty is a
+(DIRECTION, "Direct without becoming the worker"). A specialty is a
 maintained responsibility; a runtime actor is an execution instance, a model tier is
 a capability choice, and authority is an explicit grant. None implies the others.
 

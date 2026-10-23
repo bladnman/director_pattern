@@ -77,7 +77,11 @@ without claiming activity. That heading belongs to periodic report blocks, while
 the checked project Director retains its `🎬` response prefix; managers and other
 actors use assigned identities. The page names the adoption prerequisites (role
 index, model/effort mapping, recorder route, identity roster) and that an update
-leaves those project-owned mappings in place.
+leaves those project-owned mappings in place. The agent guide explains the small
+common bootstrap and one canonical index, standalone role definitions, whole-chain
+startup audit for install and upgrade, and separate fresh-host verification. An
+installer need not already be a Director; it must not invent a pattern abstract in
+globally loaded startup files.
 The site makes no adoption, performance, customer, or behavioral guarantees.
 
 ## Local verification

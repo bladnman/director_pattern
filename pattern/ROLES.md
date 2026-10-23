@@ -2,7 +2,7 @@
 
 First candidate. Mandatory before staffing, at every permitted depth.
 
-Use one canonical project role index, located in PROJECT, to discover maintained
+Use one canonical project role index, linked by the shared bootstrap and recorded in PROJECT, to discover maintained
 responsibilities. The index can link generic pattern roles and organization or
 project-specific roles across several projects. Generic Director and Request Manager
 instructions stay reusable; the mapping selects applicable local knowledge rather
@@ -37,36 +37,26 @@ resolution. Do not quietly infer a generic fallback. Explicit resolution may sup
 missing definition, select the applicable layer, or authorize a bounded temporary
 role; retain that decision. Unaffected work can proceed.
 
-## Generic pattern entries
+## Maintain standalone definitions and one index
 
-These definitions ship with this package. A project index points to its installed
-copies under `.director/` and adds its own maintained roles.
+The canonical project-owned index is the bootstrap's single discovery route;
+PROJECT records the same locator. Neither the startup hook nor this guide keeps
+another live role table. Package definitions available for registration are
+[Director](DIRECTOR.md), [Request Manager](REQUEST_MANAGER.md),
+[Recorder](RECORDER.md), and optional [bounded analysis](ANALYSIS.md).
+Register real applicable entries during installation, with the fields above.
+Shared [worker boundaries](WORKER.md) are a contract, not a fallback specialist.
 
-| Role ID | Assignment role | Select when | Definition and required references |
-|---|---|---|---|
-| `director` | director (project conversation default) | Own the conversation, independent outcomes, and whole-project coordination and acceptance. | [DIRECTOR.md](DIRECTOR.md), project bootstrap, index, shared rules, and mapping. |
-| `request-manager` | director, bounded to one outcome | Own one complete entrusted outcome through review and follow-up. | [REQUEST_MANAGER.md](REQUEST_MANAGER.md), project index, and selected applicable rules. |
-| `recorder` | worker | Read and write routine shared durable state and identity reservations under supplied decisions. | [RECORDER.md](RECORDER.md), [STATE.md](STATE.md), canonical state location/route, and [IDENTITIES.md](IDENTITIES.md). |
-| `bounded-analysis` (optional) | worker | Prepare a substantial source or decision analysis for the Director without owning execution. | [Definition below](#optional-bounded-analysis), project-wide guardrails, and selected domain references. Prefer a matching maintained project analysis role. |
-
-All staffing also requires [MODELS.md](MODELS.md) with the project's host mapping and
-[ASSIGNMENT.md](ASSIGNMENT.md). These generic entries supply no project's specialist
-rules.
-
-## Optional bounded analysis
-
-Read the Director's bounded question or source, relevant owner/source revisions,
-exact addenda, project-wide guardrails, and selected domain role/runbook references
-before action. Acknowledge the package. Gather evidence and propose coherent
-outcomes, routes, or choices; make uncertainty and examined or incorporated source
-revisions explicit. Receive known-source corrections at supported boundaries and
-include them in the eventual proposal. Return to the Director for judgment.
-
-Do not independently create Request Managers, execute side-effecting work, expand
-authority, or answer a competing user conversation. Preserve a resume point and
-relevant evidence through the configured Recorder route. This optional
-responsibility can use a short-lived actor; it is not a mandatory intake layer or
-permission to bypass a more applicable maintained project role.
+When work becomes recurring, create or revise a standalone maintained definition
+with its responsibility, applicability, `worker`/`director` assignment role,
+authority boundary, required references, and maintainer. Move exact existing
+specialist instructions into that owning file or referenced contract; distill
+shared project authority only when its meaning is preserved. Update the same
+canonical index before staffing, check the bootstrap reaches it and its definition
+and references exist, then require the actor's acknowledgment. Renames and
+retirement also update callers and index entries. Do not append recurring role
+duties or an abstract of the pattern to globally loaded startup instructions.
+An unindexed file or illustrative entry is not a discoverable maintained role.
 
 ## Illustrative project entries — examples only
 

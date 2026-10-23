@@ -69,7 +69,7 @@ test('the public front door exposes an agent guide that proceeds to canonical Gi
 test('the four sparse markers and exact periodic report label agree with the source contract', async () => {
   const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
   const guide = await readFile(new URL('../public/install.md', import.meta.url), 'utf8');
-  const contract = await readFile(new URL('../../pattern/PATTERN.md', import.meta.url), 'utf8');
+  const contract = await readFile(new URL('../../pattern/DIRECTION.md', import.meta.url), 'utf8');
   assert.deepEqual([...html.matchAll(/<dt>([^<]+)<\/dt>/g)].map(match => match[1]), ['❓', '🖐️', '🎬', '📋']);
   assert.match(html, /<h4 class="sitrep-heading">📋 SitRep<\/h4>/);
   for (const document of [html, guide, contract]) {
@@ -86,7 +86,7 @@ test('the public narrative names the Director and one-manager-per-outcome respon
   const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
   const guide = await readFile(new URL('../public/install.md', import.meta.url), 'utf8');
   const llms = await readFile(new URL('../public/llms.txt', import.meta.url), 'utf8');
-  const contract = await readFile(new URL('../../pattern/PATTERN.md', import.meta.url), 'utf8');
+  const contract = await readFile(new URL('../../pattern/DIRECTION.md', import.meta.url), 'utf8');
   for (const document of [html, guide, llms]) assert.match(document, /Request\s+Manager/);
   assert.match(contract, /Request Manager/);
   assert.match(contract, /A specialty[^.]*is a task within the outcome, not a reason for\s+another manager/);

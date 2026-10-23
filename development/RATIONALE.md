@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated October 22, 2026. This repository authors a
+Living design rationale · updated October 23, 2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -58,7 +58,7 @@ engineering reports success. The cost is one coordinating layer per outcome.
 **Superseded alternative:** A mandatory shared intake agent ahead of the Director,
 with a one-pass limit, was proposed and dropped: it added a second user entrypoint
 and a forced hand-off for every message. The Director may instead explicitly
-dispatch [bounded analysis](../pattern/ROLES.md#optional-bounded-analysis) that
+dispatch [bounded analysis](../pattern/ANALYSIS.md) that
 returns a proposal; that is a judgment, not a layer.
 **Implemented:** [DIRECTOR.md](../pattern/DIRECTOR.md),
 [REQUEST_MANAGER.md](../pattern/REQUEST_MANAGER.md), [PATTERN.md](../pattern/PATTERN.md),
@@ -143,6 +143,48 @@ longer, and the Director must be smart enough to see when it can just answer.
 [DIRECTOR.md](../pattern/DIRECTOR.md), [REQUEST_MANAGER.md](../pattern/REQUEST_MANAGER.md),
 [STATE.md](../pattern/STATE.md), [PROJECT.md](../pattern/PROJECT.md), and the
 [INSTALL.md](../pattern/INSTALL.md) hook; not yet verified in a fresh installed session.
+
+**Refined, October 23:** The main project Director answers promptly and establishes
+enough intent and need to choose a useful next step, then delegates substantial
+analysis **and coordination before doing that active work in the main conversation**.
+A bounded child director, normally the Request Manager, owns detailed planning,
+staffing, supervision, evaluation, and rework. Substantial independent analysis can
+use a worker with the optional bounded-analysis responsibility or a matching
+maintained role. This makes the earlier attention-protection purpose operational;
+it supersedes treating analysis delegation as merely optional when the main
+Director is already occupied with substantial analysis or coordination. The
+October 22 direct-in-reply exception remains: a useful answer that fits in the
+reply needs no compulsory staffing or intake layer.
+
+**Why/tradeoff:** Avoiding implementation alone leaves a Director free to spend an
+extended turn doing the manager's analysis and coordination, delaying the user's
+next conversation. Keeping detail is valuable; actively doing that work in the
+main conversation is the problem. Managers and the shared Recorder retain full
+recoverable detail, while the Director keeps a compact view, access to the detail,
+selected critical evidence, cross-outcome judgment, authority, and user acceptance.
+The cost is an explicit boundary decision before substantial work, with actual
+host capacity and scheduling limits disclosed rather than disguised as availability.
+No arbitrary response-time SLA, simultaneous-inference promise, new role value,
+or mandatory intake actor is introduced.
+
+**Concrete regression:** A user adds an identity-design request while another
+outcome is active. The Director acknowledges and determines the needed result,
+entrusts detailed design analysis and coordination, and can address a later status
+or intent correction without first finishing that analysis itself. The existing
+owner receives relevant steering and retains full detail. A short request to
+reshape supplied text still gets its answer directly in that reply. A selected
+critical-evidence review remains Director judgment, rather than wholesale local
+supervision returning to the main conversation.
+
+**Status and verification boundary:** Decided and implemented in
+[DIRECTION](../pattern/DIRECTION.md#direct-without-becoming-the-worker),
+[DIRECTOR](../pattern/DIRECTOR.md), [REQUEST_MANAGER](../pattern/REQUEST_MANAGER.md),
+and [STATE](../pattern/STATE.md). Package/link checks establish structural
+consistency only. Prompt replies, effective delegation, steering incorporation,
+and recoverable full detail still need the actual host observations in the
+[manual scenarios](DESIGN_NOTES.md#refinement-scenarios--october-23-2026).
+Revisit if substantial work still occupies the main conversation or delegation
+adds friction to answers that fit directly in a reply.
 
 ## R3 — Retain commitments by default, preserve original intent
 
@@ -322,13 +364,53 @@ closes nothing. Exit accounting applies before claiming completion or ending
 supervision. If a final reply actually ends the host's supervisory turn, outstanding
 work is checkpointed and the continuation limit or acknowledged handoff is stated,
 without promising that children stay live; see the
-[exit rules](../pattern/PATTERN.md#account-for-the-outcome-before-exiting).
+[exit rules](../pattern/DIRECTION.md#account-for-the-outcome-before-exiting).
 **Regression cases:** A resumed manager and parent summaries keep its marker; no
 manager prefixes a reply with `🎬`. Two reservations serialized through the shared
 Recorder never receive one marker. A status question mid-outcome is answered while
 the bug-to-customer-follow-up outcome stays open. **Verification limit:** Allocation
 is instructional and serialized by one Recorder route; no helper command or
 machine-enforced reservation exists. A package check covers only the static pool.
+
+**Refined, October 23:** [IDENTITIES](../pattern/IDENTITIES.md) now owns the
+canonical choice policy: a short, memorable, Capitalized name, bold in human-facing
+output, and a character that naturally suggests the assignment. Soft overlapping
+affinities can draw on animals, flora, tools, or buildings; they do not encode a
+fixed role, model tier, status, or authority. A beaver can suggest building or
+editing, while a tree or flower can suit design. These are illustrative choices,
+not a mandatory allocation table. The static pool expands compactly without
+separate category pools.
+
+**Why/tradeoff:** A purely sequential glyph can be distinctive yet feel unrelated
+to the work. Semantic fit makes actors more memorable and adds character without
+requiring a taxonomy for every possible assignment. Fit guides selection first;
+availability and rotation resolve suitable options through the same active/recent
+roster and **one cursor**. When preferred choices are unavailable, broaden to a
+sensible fit, then use a distinct additional glyph or unique text reservation if
+needed. Names and equivalent rendered marker variants cannot collide among active
+or still-reporting actors. Reserved `🎬`, `📋`, `❓`, and `🖐️` variants keep their
+existing attention meanings. Resumed identities stay stable even when another
+character would now appear more apt, and project-owned pool customizations survive
+updates. No runtime service, new record schema, or machine-enforced allocator is
+introduced.
+
+**Regression cases:** A video editor can be 🦫 **Cutter** or 🦀 **Cutter**, but two
+live actors cannot share that name. A designer can be 🌳 **Willow** without all
+designers becoming plants. Reading/email, notifications, and cleanup each admit a
+natural choice without a new category or cursor. Two simultaneous reservations use
+the one serialized roster; a preferred glyph in use triggers another suitable
+choice. A resumed assignment and a late return retain their original marker/name,
+preventing confusion with a new actor. Exhaustion never borrows a reserved symbol.
+
+**Status and verification boundary:** Decided and implemented in IDENTITIES and
+[IDENTITY_POOL](../pattern/IDENTITY_POOL.txt), with references/examples aligned in
+[DIRECTION](../pattern/DIRECTION.md), [ASSIGNMENT](../pattern/ASSIGNMENT.md), and
+the [package guide](../pattern/README.md). Static package checks establish pool
+uniqueness, reserved-symbol exclusion, and payload/link closure. The
+[manual scenarios](DESIGN_NOTES.md#refinement-scenarios--october-23-2026) still await
+behavioral observations of fit, reservation, collision handling, and resume. Revisit
+if selections feel forced, categories harden into authority signals, or rotation
+and late-report protection diverge across owners.
 
 ## R10 — Assign roles explicitly; preserve project ownership across entry routes
 
@@ -377,6 +459,69 @@ supplied and acknowledged before any release step; no generic engineer substitut
 for a matching maintained role; a missing index stops only the affected staffing; an
 explicit worker labeled "manager" gains no director powers.
 
+**Refined and superseded in part, October 23:** Installation and upgrade establish
+one small common [PATTERN bootstrap](../pattern/PATTERN.md), whose locally adapted
+pointer reaches one project-owned canonical role index. Explicit assignment role
+and maintained responsibility select standalone definitions/references before
+action. Only an unassigned project conversation defaults Director; malformed
+bounded assignments clarify, never default. Director/manager policies formerly
+in the common PATTERN move to [DIRECTION.md](../pattern/DIRECTION.md), loaded by
+[DIRECTOR](../pattern/DIRECTOR.md) and [REQUEST_MANAGER](../pattern/REQUEST_MANAGER.md).
+Worker boundaries and optional analysis have their own files. This supersedes
+having every worker read the full Director-heavy contract or the hook's abstract.
+The October 22 fast-answer decision in R2 remains intact.
+
+**Reported evidence versus hypothesis:** An adoption report described an installer
+appending its own abstract to already enormous startup instructions, with poor
+role separation. That report does not establish the other host's exact loaded
+context or prove a universal cause. Inspection of this candidate did establish
+that its hook required every actor to load Director-heavy PATTERN, and that an
+existing role-index requirement alone did not require standalone definitions or
+an audit of inherited globally loaded duties. The hypothesis is that explicit
+installation ethos and a real common/selected-role split prevent that recurrence.
+One fresh assigned Codex trial below now supports the selected-role loading route;
+broader host behavior and prevention of recurrence remain unproven.
+
+**Decided and implemented:** [INSTALL](../pattern/INSTALL.md),
+[UPDATES](../pattern/references/UPDATES.md), and the self-contained
+[STARTUP procedure](../pattern/references/STARTUP.md) audit the entire loaded
+startup chain, preserve shared authority and exact specialist instructions at
+maintained destinations, and leave a single active default and index. An installing
+agent need not already be a Director. Existing entries pointing only to startup
+sections are repaired in the same index, not discarded. New or revised recurring
+roles need standalone definitions, index registration, and checked reachability
+before staffing under [ROLES](../pattern/ROLES.md#maintain-standalone-definitions-and-one-index).
+The index is generated project-owned context, excluded from upstream payload;
+its bootstrap pointer survives updates as an adaptation. No runtime/schema change
+or arbitrary word-count gate is introduced.
+
+**Regression cases and verification boundary:** A fresh assigned reader, writer,
+reviewer, or tester receives the common bootstrap and selected maintained definition
+before acting; an incomplete delegated assignment cannot become Director. A newly
+registered role is discoverable through the same index. An upgrade of oversized
+startup instructions removes relocated specialist duties from common loading while
+preserving their exact rules and shared authority. Package fixtures check manifest
+boundaries, selected-file reachability, and common/Director separation; they do not
+prove the host loaded those files or that an actor obeyed them. STARTUP specifies
+separate real-host trials and requires unrun trials to remain pending. Revisit if
+observed reads or actions still bypass role definitions or the audit loses a rule.
+
+**Verified, October 23 (static/fixture scope):** 38 development tests, including the
+common/selected-role and generated-index package regressions, and 8 site tests
+passed. The site build retained its 10-file public allowlist; a headless 390px
+check showed no horizontal overflow. These checks do not establish fresh-session
+role selection or real host read order.
+
+**Verified, October 23 (one fresh assigned Codex trial):** A fresh explicitly
+assigned test worker received the host-supplied AGENTS hook, then explicitly read
+installed PATTERN, followed its canonical role index to the standalone selected
+definition and required references, and acknowledged those before its first review
+action. This is observed assigned-role startup behavior; PATTERN was read through
+the hook, not automatically injected by the host. The trial does not establish
+unassigned/default startup, malformed-assignment handling, discovery of a newly
+indexed role, another host's behavior, or any future session's compliance. Those
+trials remain pending; the result does not turn static checks into behavioral proof.
+
 ## R11 — Update from a pinned public source without replacing project state
 
 **Accepted decision, October 17:** Published GitHub `main` is the upstream source of
@@ -423,6 +568,15 @@ as needless scope for a new package with no installations.
 `.director/receipts/` rather than kept private, so an update from any checkout can
 compare baselines; only pre-update backups stay local. See
 [R14](#r14--commit-the-installation-with-the-project).
+
+**Extended, October 23:** Startup cleanup is part of updates as well as first
+installation. Preserve the actual canonical-index pointer, project definitions,
+and instruction preservation map through the three-way comparison. A reviewed,
+reversible predecessor-policy adoption can replace its old startup default while
+leaving its records and authorized tracker workflow intact. That instruction
+integration is distinct from migrating its store, which still needs its own
+authorization and compatibility work. Never leave two competing active defaults.
+See [STARTUP](../pattern/references/STARTUP.md).
 
 ## R12 — Give people a readable front door without another contract layer
 
@@ -680,3 +834,19 @@ pointers. Public documentation must stand on its own.
 - Kept optional global invocation, adopted project startup hooks, installation,
   and removal distinct. Metadata/configuration checks do not prove fresh-session
   behavior or change instructions already loaded in a running chat.
+
+## Decision history — October 23, 2026
+
+- Refined responsiveness (R2): the main Director delegates substantial analysis and
+  detailed coordination before doing that active work in the main conversation.
+  Bounded outcome owners retain full recoverable detail; compact Director context
+  does not mean losing that detail. Direct-in-reply answers, critical judgment,
+  existing authority, and actual host limits remain intact.
+- Refined identity choice (R9): short Capitalized names are bold in human-facing
+  output; playful semantic fit guides choices through one shared roster and cursor.
+  Soft overlapping affinities add no fixed role taxonomy, separate pools, runtime,
+  or schema. Collision, resume, late-return, reserved-symbol, and customization
+  protections remain explicit.
+- Status: decided and implemented in owning contracts, with package checks scoped
+  to static structure. Actual responsiveness, delegation, identity choice, and
+  reservation behavior await the listed manual observations.

@@ -116,3 +116,28 @@ create, and init all refused the store before reading records, with its bytes
 unchanged; `test_init_and_open_refuse_a_predecessor_store_without_writing` keeps
 that. No real store was touched, and no alias or migration is implemented. See
 [R11](RATIONALE.md#r11--update-from-a-pinned-public-source-without-replacing-project-state).
+
+## Refinement scenarios — October 23, 2026
+
+These scenarios cover the [attention boundary](RATIONALE.md#r2--protect-judgment-and-conversation-from-executionbookkeeping)
+and [identity affinity](RATIONALE.md#r9--make-attention-and-active-supervision-visible-without-decoration)
+refinements. **All behavioral observations below remain pending.** Package checks
+can verify static pool and payload structure; written contracts and dispatch
+records do not prove responsive conversation or natural identity selection.
+
+| Scenario | Required actual behavioral observation | Status |
+|---|---|---|
+| Substantial analysis during another outcome | Director promptly acknowledges intent and delegates before doing extended analysis in the main conversation; a later correction is addressed and reaches the same owner. | Pending |
+| Detailed outcome coordination | Bounded director owns local planning, staffing, supervision, evaluation, and rework; Director gets a compact view and critical evidence, with full detail still recoverable. | Pending |
+| Short answer and critical judgment | Reshaping supplied text fits directly in a reply without staffing; selected critical-evidence review stays with the Director. | Pending |
+| Host limits | Actual scheduling, capacity, or blocking-tool limits are disclosed; no report claims simultaneous inference or unsupported continued liveness. | Pending |
+| Natural overlapping identity fit | Builder/editor, design, reading/email, notification, and cleanup assignments receive short Capitalized names with bold human-facing prefixes and sensible characters; generalized work needs no fixed category. | Pending |
+| Shared rotation and collision | Two owners reserve through one active/recent roster and cursor; unavailable preferred markers or names lead to another suitable choice, with rendered variants and reserved symbols excluded. | Pending |
+| Resume, late return, and exhaustion | Resumed actor keeps its identity, late reports cannot collide with a replacement, and exhausted candidates use a unique permitted fallback through the same reservation route. | Pending |
+| Project-owned pool update | Scoped update preserves the project's customized pool, current roster/cursor, and active identities. | Pending |
+
+**Executed static checks, October 23:** The focused package command
+`PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest development.tests.test_package -v`
+passed all 8 tests. Pool uniqueness/reserved-marker checks and manifest/link closure
+passed; `git diff --check` passed. No new prose-matching tests were added. These
+checks do not establish any of the behavioral observations above.

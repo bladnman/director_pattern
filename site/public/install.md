@@ -7,6 +7,23 @@ and follow its
 [INSTALL](https://github.com/bladnman/director_pattern/blob/main/pattern/INSTALL.md)
 when the user requests adoption. Merely reading this guide is not an adoption request.
 
+An installing agent need not already be a Director. Establish the method's
+separation of responsibilities: every fresh actor receives a small shared
+bootstrap, follows one project-owned role index, and reads its selected standalone
+definition and references before action. Explicit assigned role and responsibility
+route first; only an unassigned project conversation defaults Director. Missing,
+conflicting, or incomplete delegated assignments clarify with the assigner; they
+never fall back to Director.
+
+Installation and upgrades audit the entire loaded startup instruction chain for
+size and misplaced responsibilities. Preserve shared project authority and exact
+specialist rules, moving those rules into maintained definitions/contracts and
+registering them in the same reachable index. Do not invent an abstract of the
+pattern in AGENTS.md or merely append a hook to an enormous startup file. New
+recurring responsibilities follow that same standalone-file and index discipline.
+The package's [startup procedure](https://github.com/bladnman/director_pattern/blob/main/pattern/references/STARTUP.md)
+provides integration and fresh-host verification steps.
+
 ## Install request
 
 The visitor copies this into the agent already working in the target project:
@@ -56,7 +73,14 @@ visible.
 Verify the Director Pattern installation in this project. Check the loaded startup wiring, required files, configured mode, role index, Recorder route, and pinned source revision. Report any gaps and distinguish setup from current worker activity.
 ```
 
-The website cannot inspect the visitor's project. Resolve the assignment role
+The website cannot inspect the visitor's project. Distinguish static wiring and
+disposable fixtures from real fresh-host trials. Verify unassigned Director
+startup, assigned reader/writer/reviewer/test definition loading before action,
+missing/conflicting role clarification, discovery of a newly indexed role, and
+upgraded startup files without relocated duties or competing defaults. Record
+observed reads/acknowledgments and action sequence; label unrun trials pending.
+
+For the separate Director identity check, resolve the assignment role
 first. Only the project Director requests the current-conversation setup check:
 a Small recorder checks actual wiring, required files, project mode/state, and
 whether PROJECT names the role index, model mapping, recorder route, and identity
@@ -87,7 +111,7 @@ updates already satisfy the cadence without a redundant report. Allow no more
 than five minutes of silence during supervision, respecting stricter host timing
 with concise updates. Overviews keep active, waiting, returned, and pending-evaluation
 work visible with current evidence and next proof while supervision continues.
-Stored status does not prove execution. Follow the installed PATTERN's full cadence
+Stored status does not prove execution. Follow the installed DIRECTION contract's full cadence
 and exit rules.
 
 ## Update on an explicit request
@@ -107,6 +131,10 @@ adaptations and project state, including the project's role index and
 definitions, model mapping, and identity roster. Check compatibility and verify
 before recording the new revision. Do not migrate trackers, switch modes, or
 replace project identity as a side effect. Refer to the protocol for missing
-baselines/conflicts.
+baselines/conflicts. Audit and repair the whole loaded startup chain during the
+upgrade, preserving the canonical index pointer and project-owned definitions.
+Reviewed reversible adoption may replace a predecessor's startup role default
+while keeping its authorized tracker workflow and records; data migration remains
+a separate decision. Leave one active startup default.
 
 The public contracts and package control when this summary differs from them.

@@ -3,7 +3,11 @@
 On an adoption request, perform reversible local setup without another routine
 confirmation. Reading alone is not adoption. Preserve existing authority, edits,
 canonical trackers, and unfinished work. No publication, request migration, app
-launch, scheduler, or executable installer is part of this setup.
+launch, scheduler, or executable installer is part of this setup. The installing
+agent need not already be a Director; follow its actual assignment and host rules.
+Install the separation of responsibilities, not a homemade summary in AGENTS.md.
+Use [STARTUP.md](references/STARTUP.md) to audit the entire loaded instruction
+chain and preserve specialized rules in reachable standalone definitions.
 
 ## Select and copy only the payload
 
@@ -15,8 +19,9 @@ the repository or package directory. README, INSTALL, and manifest are guidance,
 not payload. A temporary staging clone is optional transport only.
 
 1. Inspect the target's actual startup instruction entrypoint and referenced rules.
-   Identify root, existing owners/tracker, and real delegation, model, effort,
-   context, observation, and return capabilities. A tier label proves no selection.
+   Follow STARTUP’s whole-chain audit, including oversized inherited startup
+   files and misplaced role duties. Identify root, existing owners/tracker, and
+   real delegation, model, effort, context, observation, and return capabilities. A tier label proves no selection.
    Find the project's existing maintained role definitions, runbooks, and
    project-wide guardrails, and whether managers can reach a recorder directly.
    The installation is committed with the project by default: contracts, filled
@@ -35,17 +40,20 @@ not payload. A temporary staging clone is optional transport only.
    own init.
 2. Resolve published GitHub `main` to one exact commit SHA and inspect the selected
    revision before copying; retain its URL/SHA as the installation source. A local
-   unpublished candidate must be labeled as such. Have an installation worker copy
-   the selected manifest files. Fill installed PROJECT context from actual facts,
-   leaving unknowns visible. The director decides mode/mappings; the worker records
-   them. Tracked is default; lean optional.
+   unpublished candidate must be labeled as such. An authorized installation agent
+   copies the selected manifest files. Fill installed PROJECT context from actual facts,
+   leaving unknowns visible. The adoption request and current host/assignment
+   establish setup authority;
+   apply default tracked mode and observed mappings within that authority, leaving
+   ungranted policy decisions to the accountable owner. Tracked is default; lean optional.
    An existing canonical tracker uses the contract without creating a second store.
    Map PROJECT's role index, project-wide guardrails, model/host mapping, Recorder
    route and state policy, and identity roster location. Reuse existing maintained
-   definitions; seed or link a local role index (the generic ROLES entries plus
-   actual project roles) only when none exists. Never present illustrative entries
-   as real roles. The roster lives in current activity, never in a seed.
-3. For a new bundled tracked store, have the recorder run
+   definitions; generate a project-owned role index only when none exists,
+   registering package definitions and actual project roles under STARTUP. Fill
+   PATTERN’s canonical-index locator and record that same path in PROJECT. Never
+   present illustrative entries as real roles. The roster lives in current activity, never in a seed.
+3. For a new bundled tracked store, use an authorized setup actor to run
    `python3 <target>/.director/tools/requests.py init`. It creates/preserves config
    schema 1 and initializes request-store schema 2 with a stable project ID.
    Record the actual init receipt in PROJECT; do not hand-invent identity or
@@ -56,31 +64,22 @@ not payload. A temporary staging clone is optional transport only.
    Preserve existing config keys. Switching tracked to lean first requires
    reconciling commitments, live assignments, and pending evaluation; preserve the
    ledger and recovery pointers before a deliberate change. Mode cancels no work.
-4. Add one small marked hook to the actual loaded instruction entrypoint, adapting
-   relative paths to its location. Preserve the rest of that file:
+4. Complete the [startup audit and integration](references/STARTUP.md), then use
+   one small marked hook in the actual loaded entrypoint, adapting the path:
 
    ```markdown
    <!-- director-pattern:start -->
-   Read `.director/PATTERN.md` and resolve your assignment role first. New project
-   conversations default to their project Director regardless of who opened them;
-   explicit assignments override that default. Bounded delegated assignments must
-   name Role: worker/director, responsibility, scope, and authority. Clarify missing
-   delegated roles with the assigner; ancestry or inherited history grants neither.
-   Directors also read PROJECT.md, MODELS.md, and STATE.md inside `.director/`: the
-   project Director reads DIRECTOR.md, a Request Manager reads REQUEST_MANAGER.md,
-   and anyone staffing work follows ROLES.md, ASSIGNMENT.md, and IDENTITIES.md.
-   Workers/reviewers load their assignment and its supplied role references;
-   recorders load RECORDER.md, STATE, and tracked references when applicable.
-   Director-only authority stays with directors. Before the project Director uses
-   the 🎬 identity, have a Small recorder check this conversation's installed
-   wiring, required files, and project configuration/mode; the Director judges the
-   receipt under PATTERN's startup check; the check runs in the background when
-   the Director first staffs work and never delays an answer. The Director first
-   works out what is being asked; when the answer fits in its reply, it answers
-   itself, with no workers, capture, or records. Request Managers and other roles
-   use their assigned identity, never the badge.
+   Before role-specific action, read `.director/PATTERN.md` and follow its
+   canonical role index to your selected definition and required references.
    <!-- director-pattern:end -->
    ```
+
+   Reuse an existing hook on upgrades. Preserve common project authority; move
+   exact specialized instructions to maintained definitions/contracts and register
+   them before removing their globally loaded copies. A tiny appended block alone
+   does not repair an oversized startup chain. No duplicate role table belongs in
+   the hook. Preserve a predecessor’s records and remove competing startup defaults
+   through reviewed reversible integration, separately from any store migration.
 
 For every mode, record the source URL/SHA, selected managed-file paths and SHA-256
 baselines, startup wiring, adaptations, and verification in a setup receipt under
@@ -91,7 +90,8 @@ receipt into a template.
 
 ## Verify without polluting the backlog
 
-Verify that the host actually loads the entrypoint and referenced role/context
+Run [STARTUP’s static checks and fresh host trials](references/STARTUP.md#static-checks-then-fresh-host-trials).
+Verify that the host actually loads the entrypoint and selected role/context
 files. Check canonical state, requested versus actual model controls, and truthful
 behavior when delegation/persistence is unavailable. Confirm the role index and its
 listed definitions resolve, the Recorder route is one the host actually supports,
@@ -105,8 +105,8 @@ decision persistence; honestly retain its lack of a complete-ledger promise.
 **Only for a new bundled tracked store**, perform the helper checks below. It
 needs Python 3.10+ on macOS/Linux for `fcntl` advisory locks. Missing dependencies
 or failed checks leave that tracked setup incomplete; report the limitation.
-Have the recorder run `validate` on its actual store without modifying it; an
-empty store is valid. Separately, have a worker/recorder test the helper lifecycle
+Have an authorized setup actor run `validate` on its actual store without modifying
+it; an empty store is valid. Separately, have an authorized setup actor test the helper lifecycle
 in a newly created disposable directory, never by adding dummy actual requests:
 
 1. Copy the selected package helper to `<fixture>/tools/requests.py` and run its
@@ -132,10 +132,14 @@ in a newly created disposable directory, never by adding dummy actual requests:
    preserves exact raw text, expected history/revisions, and successful validation. Remove only the disposable fixture afterward. No external test suite
    or maintainer document is required for this check.
 
-Obtain a recorder setup receipt with the actual startup wiring, required files,
+Obtain a factual setup receipt with the actual startup wiring, required files,
 project configuration/mode, and canonical state checked. Align PROJECT's startup
-fields with that evidence. Resolve each conversation's assignment role first. For
-a director conversation, the recorder checks the current facts before the director
+fields with that evidence. The installing agent can prepare this receipt within
+its adoption authority; use existing authorized recording/staffing capabilities
+where available. No Director title or newly spawned Recorder is required to
+perform setup. After adoption, the installed role-specific staffing/state rules
+apply, including the separate Director identity check below. Resolve each
+conversation's assignment role first. For the project Director conversation, the recorder checks the current facts before the director
 judges whether to show `🎬`; refresh after relevant changes. Other roles omit the
 badge without this check. Installation never overrides an explicit worker assignment.
 Missing wiring/files, unknown mode, or an unavailable recorder leave

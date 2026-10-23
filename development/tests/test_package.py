@@ -83,8 +83,45 @@ class PackageBoundaryTests(unittest.TestCase):
         hook = re.search(r"<!-- director-pattern:start -->(.*?)<!-- director-pattern:end -->", install, re.S)
         assert hook is not None, "INSTALL must carry the marked startup hook"
         named = set(re.findall(r"\b[A-Z_]+\.md\b", hook.group(1)))
-        self.assertTrue({"PATTERN.md", "DIRECTOR.md", "REQUEST_MANAGER.md", "ROLES.md"} <= named, named)
+        self.assertEqual(named, {"PATTERN.md"}, "The common hook routes through the bootstrap, not selected role duties")
         self.assertLessEqual(named, set(manifest["base_files"]), "Startup hook names only installed files")
+
+    def test_common_bootstrap_does_not_load_director_policies(self):
+        # Structural contract boundary; does not measure size or imitate role behavior.
+        common = set(markdown_links(PATTERN / "PATTERN.md"))
+        self.assertIn("WORKER.md", common)
+        self.assertTrue(common.isdisjoint({"DIRECTION.md", "DIRECTOR.md", "REQUEST_MANAGER.md", "STATE.md", "MODELS.md"}))
+        for definition in ("DIRECTOR.md", "REQUEST_MANAGER.md"):
+            self.assertIn("DIRECTION.md", set(markdown_links(PATTERN / definition)))
+        self.assertNotIn("DIRECTION.md", set(markdown_links(PATTERN / "WORKER.md")))
+
+    def test_project_owned_index_and_selected_definitions_are_reachable_in_isolated_payload(self):
+        # Installation fixture: target context is generated, never upstream payload.
+        # This proves file/link reachability only, not any agent's read sequence.
+        manifest = self.manifest(PATTERN)
+        self.assertNotIn("ROLE_INDEX.md", manifest["base_files"] + manifest["tracked_files"])
+        with tempfile.TemporaryDirectory() as temporary:
+            installed = Path(temporary) / ".director"
+            for name in manifest["base_files"]:
+                target = installed / name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(PATTERN / name, target)
+            index = installed / "ROLE_INDEX.md"
+            definitions = ["DIRECTOR.md", "REQUEST_MANAGER.md", "RECORDER.md", "ANALYSIS.md"]
+            index.write_text("# Fixture index\n" + "\n".join(f"[Fixture entry]({name})" for name in definitions), encoding="utf-8")
+            bootstrap = installed / "PATTERN.md"
+            bootstrap.write_text(bootstrap.read_text().replace(
+                "<installation fills the single project-owned index locator>",
+                "[Fixture canonical index](ROLE_INDEX.md)"), encoding="utf-8")
+            self.assertIn("ROLE_INDEX.md", set(markdown_links(bootstrap)))
+            self.assertEqual(set(markdown_links(index)), set(definitions))
+            # A recurring responsibility is a separate maintained file registered
+            # in that same index, rather than another live role table in startup.
+            (installed / "roles").mkdir()
+            (installed / "roles/reader.md").write_text("# Fixture reader\nRead [worker boundaries](../WORKER.md).\n", encoding="utf-8")
+            index.write_text(index.read_text() + "\n[Fixture reader](roles/reader.md)\n", encoding="utf-8")
+            self.assertIn("roles/reader.md", set(markdown_links(index)))
+            self.check_links(installed)
 
     def test_identity_pool_is_static_unique_and_skips_reserved_markers(self):
         manifest = self.manifest(PATTERN)

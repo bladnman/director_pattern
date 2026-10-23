@@ -21,13 +21,15 @@ Keep two depths of state. The Director's working commitments stay compact: each
 unfinished outcome or thought, its owner, current question or approach, next
 decision, and resume point. Each Request Manager's outcome record carries the full
 source and obligations, approach and decisions, assignments and handles, evidence,
-gates and review, and next actions. Durable owner identity and a replaceable
-execution attempt are different things. The shared identity roster and cursor
+gates and review, and next actions. Full recoverable detail stays available to the
+Director; a compact view is an attention boundary, not permission to discard it.
+The manager owns active detailed coordination. Durable owner identity and a
+replaceable execution attempt are different things. The shared identity roster and cursor
 ([IDENTITIES.md](IDENTITIES.md)) live in current activity, serialized through the
 same Recorder route. Not every passing thought needs a durable write.
 
 For the project Director's conversation, the recorder checks installed wiring,
-required files, and project mode/configuration under the [identity check](PATTERN.md#check-installation-before-using-director-identity).
+required files, and project mode/configuration under the [identity check](DIRECTION.md#check-installation-before-using-director-identity).
 It returns factual evidence through the existing setup receipt/PROJECT context;
 the Director resolves its role and judges whether the `🎬` identity is warranted.
 Lean and existing trackers need no bundled backend for this check. If evidence or

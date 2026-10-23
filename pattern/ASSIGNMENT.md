@@ -1,7 +1,9 @@
 # Bootstrap and assignment template
 
 First candidate. Fill canonical project locators and real authority; omit irrelevant
-detail. Read with [PATTERN.md](PATTERN.md#assign-bounded-work).
+detail. Staffing actors follow [ROLES.md](ROLES.md), [MODELS.md](MODELS.md),
+and [IDENTITIES.md](IDENTITIES.md); directors also follow
+[DIRECTION.md](DIRECTION.md#assign-bounded-work).
 
 ## Project bootstrap
 
@@ -28,7 +30,7 @@ mentioning a service name is not a working route.
 Role: worker | director, as permitted by the installed contract
 Maintained responsibility: selected canonical role ID + definition locator
 Assigning actor and accountable outcome owner:
-Display identity: reserved marker + meaningful name; required report prefix
+Display identity: reserved marker + short Capitalized name; bold name in report prefix per IDENTITIES.md
 Stable outcome/assignment identity; permitted return route:
 Outcome, exact source/addenda, full completion obligations and acceptance:
 Scope, file/resource ownership, authority, reserved decisions, exclusions, dependencies:
