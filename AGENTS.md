@@ -44,9 +44,12 @@ Existing project authority and product/release gates remain in force. The Direct
 judges selected primary evidence and artifacts; each complete outcome has one
 accountable owner, normally a Request Manager; workers execute implementation and
 routine verification, and a
-shared recorder handles routine state I/O. Before using 🎬, the project Director has
-the recorder check actual startup wiring, required installed files, and project
-configuration/mode, then resolves its own role and judges that receipt. Request
+shared recorder handles routine state I/O. The Director first works out what is
+being asked and answers itself when the answer fits in its reply. Before using 🎬,
+the project Director has the recorder check actual startup wiring, required
+installed files, and project configuration/mode, in the background when it first
+staffs work and never delaying an answer, then resolves its own role and judges
+that receipt. Request
 Managers and other roles use their assigned identity instead of the badge. If the
 installation is absent or incomplete, explain that limitation without a badge;
 maintain the project rules above. Do not assume that source files or an inherited

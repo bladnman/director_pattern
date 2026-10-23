@@ -60,7 +60,9 @@ supervision, evaluation, integration, and incoming steering.
 A Request Manager remains a non-worker. Delegate implementation and routine work,
 including a small task. When an outcome is small enough that a separate manager adds
 nothing, the Director may instead assign a `Role: worker` directly with decisions
-reserved; there is no implicit director implementation exception. A specialty is a
+reserved; there is no implicit director implementation exception for delegated
+outcomes. An answer that fits in the Director's reply is not an outcome to staff
+(PATTERN, "Direct without becoming the worker"). A specialty is a
 maintained responsibility; a runtime actor is an execution instance, a model tier is
 a capability choice, and authority is an explicit grant. None implies the others.
 

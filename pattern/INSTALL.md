@@ -74,8 +74,11 @@ not payload. A temporary staging clone is optional transport only.
    Director-only authority stays with directors. Before the project Director uses
    the 🎬 identity, have a Small recorder check this conversation's installed
    wiring, required files, and project configuration/mode; the Director judges the
-   receipt under PATTERN's startup check. Request Managers and other roles use
-   their assigned identity, never the badge.
+   receipt under PATTERN's startup check; the check runs in the background when
+   the Director first staffs work and never delays an answer. The Director first
+   works out what is being asked; when the answer fits in its reply, it answers
+   itself, with no workers, capture, or records. Request Managers and other roles
+   use their assigned identity, never the badge.
    <!-- director-pattern:end -->
    ```
 

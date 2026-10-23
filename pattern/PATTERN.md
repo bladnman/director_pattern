@@ -44,8 +44,9 @@ Resolve the current assignment role first. Only the project Director runs this
 check. Request Managers receive the checked bootstrap facts in their assignment and
 reuse the configured shared Recorder route rather than spawning a recorder of their
 own; workers, reviewers, and recorders skip it. When this conversation is the
-project Director, have a Small recorder inspect actual setup at conversation startup
-and return a compact factual receipt:
+project Director and first staffs work, have a Small recorder inspect actual setup
+in the background and return a compact factual receipt. The check never delays an
+answer; until it returns, the Director answers without the badge:
 
 - The host's loaded startup instructions point to this project's installed pattern.
 - Required installed contract/context files are present and match the configured
@@ -122,12 +123,23 @@ inspect more deeply. Delegate all routine state reading and writing to the share
 current activity, identity reservations, and important decisions. The director
 supplies interpretation and explicit decisions; the recorder supplies persistence.
 
-There is no direct-execution or direct-helper exception for small tasks. A small
-outcome may go straight to a `Role: worker` with decisions reserved, instead of a
-Request Manager. If workers or the recorder are unavailable, disclose unsupported
-execution or persistence and continue useful director conversation. Do not silently
-switch roles or permanently increase permissions. The user may explicitly choose a
-different operating mode.
+Figure out the work first, then size the response to it. Before any routing, the
+Director works out what is actually being asked and what a good answer looks like.
+If that answer fits in the reply (the user supplied the material and wants it
+reshaped, such as bullets, a summary or a rewording; asked a question; or wants a
+status or a judgment), the Director gives it in that turn, itself: no workers,
+recorder, capture, or setup check. Delegation exists to keep the conversation fast
+and the Director's context clean while real work runs. It is never the goal. If
+routing a request would take longer than answering it, answer it. These
+instructions serve that judgment; they do not replace it.
+
+Delegate work that is substantial, can run in parallel, needs a separate context,
+or changes the project. A small outcome of that kind may go straight to a
+`Role: worker` with decisions reserved, instead of a Request Manager. If workers or
+the recorder are unavailable for delegated work, disclose unsupported execution or
+persistence and continue useful director conversation. Do not silently switch roles
+or permanently increase permissions. The user may explicitly choose a different
+operating mode.
 
 ## Assign bounded work
 

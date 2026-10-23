@@ -49,7 +49,9 @@ IDs resolve current paths; old paths are locator hints, not permanent identity.
 Shared originals and large product/media outputs remain canonical elsewhere through
 stable references. Request bundles are physically flat, regardless of their links.
 
-Capture the complete exact user message once as an immutable source bundle, keeping
+Capture applies to requests that start work; one the Director answers in its reply
+needs none. Capture the complete exact user message once as an immutable source
+bundle, keeping
 source metadata/derived mappings separate from raw UTF-8 text. Snapshot available
 attachment bytes and hashes; record unavailable material explicitly. Give the
 recorder exact text or a source path, never a reconstructed summary. Link separate

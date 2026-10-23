@@ -118,6 +118,32 @@ not recorded as a selection; a manager on a host without direct agent messaging
 reaches the shared Recorder through its assigner instead of starting its own; a small
 task goes to a worker rather than to a manager editing files.
 
+**Superseded in part, October 22:** "Strictly non-worker" no longer means every
+request is routed. The Director first works out what is being asked and sizes the
+response to it. An answer that fits in the reply (reshaping material the user
+supplied, a question, a status, a judgment) is given directly in that turn, with no
+workers, recorder, capture, or setup check. The absolute "no direct-execution or
+direct-helper exception for small tasks" is removed; the non-worker boundary still
+governs work that is substantial, parallel, needs a separate context, or changes the
+project. The startup setup check now runs in the background when the Director first
+staffs work and never delays an answer, and capture applies to requests that start
+work.
+**Why/tradeoff:** Delegation exists to keep the conversation fast and the Director's
+context clean while real work runs; it is never the goal. Hosts tell models to
+follow instruction files exactly, so an absolute rule with no stated purpose
+outranked the model's own reading of the request. Rules now state their purpose so
+the Director can reason from it. The cost is a judgment call at the boundary, which
+the Director is there to make.
+**Regression case:** A user pasted a director prompt and asked for it back as a few
+bullets to read on camera. The Director staffed a writer and a recorder and ran the
+startup check: two agents and several minutes for an answer that fit in one reply.
+The user's correction: the pattern's goal is not to make everything take ten times
+longer, and the Director must be smart enough to see when it can just answer.
+**Status:** decided and implemented in [PATTERN.md](../pattern/PATTERN.md),
+[DIRECTOR.md](../pattern/DIRECTOR.md), [REQUEST_MANAGER.md](../pattern/REQUEST_MANAGER.md),
+[STATE.md](../pattern/STATE.md), [PROJECT.md](../pattern/PROJECT.md), and the
+[INSTALL.md](../pattern/INSTALL.md) hook; not yet verified in a fresh installed session.
+
 ## R3 — Retain commitments by default, preserve original intent
 
 **Problem:** Short/creative work can still carry commitments, corrections, and

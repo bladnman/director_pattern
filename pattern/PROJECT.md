@@ -41,7 +41,8 @@ Current-conversation identity result: [checked project Director + tracked/lean, 
 Resolve the assignment role first; only the project Director runs this check.
 Request Managers receive its facts in their bootstrap. Use a Small recorder for
 routine inspection, then the Director judges the receipt before using `🎬`; refresh
-when role or setup changes. The setup receipt may be compact and
+when role or setup changes. The check runs in the background when the Director
+first staffs work and never delays an answer. The setup receipt may be compact and
 conversation-local; this is not a new registry or a requirement to rewrite PROJECT
 on every reply. Lean needs no bundled helper/config; an existing tracker stays
 canonical. Checked setup is not a successful behavioral trial or proof that any

@@ -61,6 +61,8 @@ first. Only the project Director requests the current-conversation setup check:
 a Small recorder checks actual wiring, required files, project mode/state, and
 whether PROJECT names the role index, model mapping, recorder route, and identity
 roster location; the Director judges that receipt and its own resolved role.
+The check runs in the background when the Director first staffs work and never
+delays an answer.
 Request Managers receive the checked facts in their assignment, and workers,
 reviewers, and recorders omit the badge without launching this Director-only check.
 Only a checked project Director uses `🎬 Director Pattern · tracked` or
