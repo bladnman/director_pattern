@@ -1,6 +1,6 @@
 # Install the Director Pattern
 
-**First candidate · October 21, 2026.** This subtree is a self-contained package
+**[v1.0.0](https://github.com/bladnman/director_pattern/releases/tag/v1.0.0) · October 23, 2026.** This subtree is a self-contained package
 for agents installing the method in a target project. It is not a proven adoption.
 
 Give one project a **Director** who stays in the conversation, keeps its unfinished

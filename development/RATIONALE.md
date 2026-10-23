@@ -971,3 +971,9 @@ pointers. Public documentation must stand on its own.
   checks and project-specific adaptations. Current pinned update guidance selects
   scope even for older installations; performed checks, reused evidence, and
   unresolved prior gaps remain distinct.
+- Named the first release **v1.0.0** using an annotated Git tag and GitHub release.
+  Public front doors show the readable version; the pinned commit and package-tree
+  comparison in R11 remain authoritative for update discovery. No version registry
+  or schema change is introduced. Regression case: a newer main commit with an
+  unchanged package tree still produces no update notice, regardless of tags.
+  Release naming does not establish pending fresh-host or automatic-update trials.

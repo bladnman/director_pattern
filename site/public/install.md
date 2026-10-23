@@ -1,5 +1,9 @@
 # Director Pattern: for an agent
 
+**[v1.0.0](https://github.com/bladnman/director_pattern/releases/tag/v1.0.0) · October 23, 2026.**
+The release names a published source revision; installation and update checks still
+pin exact commits and compare the package tree under the canonical update protocol.
+
 This site explains the method. The authoritative installation package is published
 at https://github.com/bladnman/director_pattern/tree/main/pattern . Read its
 [README](https://github.com/bladnman/director_pattern/blob/main/pattern/README.md)
