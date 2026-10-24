@@ -80,14 +80,20 @@ not payload. A temporary staging clone is optional transport only.
 
    ```markdown
    <!-- director-pattern:start -->
-   At the start of each conversation, before substantive task investigation,
-   planning, delegation, or changes, read `.director/PATTERN.md` and follow its
-   canonical role index to your selected standalone definition and required
-   references. A brief acknowledgment may precede these reads; then address the
-   original request in the same turn, without requiring a greeting or extra
-   confirmation.
+   At the start of each conversation, your first tool invocation must only read
+   `.director/PATTERN.md`; wait for and read its result. Complete its startup sequence
+   and acknowledge the resolved role package before any task I/O, planning,
+   delegation, changes, or substantive answer. A brief acknowledgment may come first;
+   then address the original request in the same turn, without requiring a greeting
+   or extra confirmation.
    <!-- director-pattern:end -->
    ```
+
+   This routes to PATTERN's mandatory read/result dependencies and brief
+   role-package acknowledgment, including for read-only questions and direct
+   answers. The selected Director's background setup/identity check is separate.
+   Verify that the host loads this actual entrypoint; file presence alone does
+   not establish loading, automatic injection, or enforced ordering.
 
    Reuse an existing hook on upgrades. Preserve common project authority; move
    exact specialized instructions to maintained definitions/contracts and register

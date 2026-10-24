@@ -56,7 +56,12 @@ sparse marker rules, timing, and continuing supervision requirements.
 
 Every actor receives a small common [bootstrap](PATTERN.md), follows its one
 project-owned role index, and loads the selected standalone definition/references
-before acting. Explicit assignments route first; only an unassigned project
+before acting. The first tool invocation reads only the bootstrap; returned
+results establish each later startup dependency before any task I/O or substantive
+answer. A brief completed-package acknowledgment precedes task work. This
+instruction route is not automatic injection or host enforcement. Direct answers
+still follow role loading; the Director's setup/identity check stays background.
+Explicit assignments route first; only an unassigned project
 conversation defaults Director. Malformed delegated assignments seek clarification.
 Director/manager policies live in [DIRECTION.md](DIRECTION.md), outside worker
 startup. Recurring specialist rules live in maintained files registered in the

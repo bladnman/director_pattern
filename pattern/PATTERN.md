@@ -2,9 +2,43 @@
 
 Canonical role index: <installation fills the single project-owned index locator>
 
+## Complete startup before task work
+
+This is an instruction-guided loading sequence, not automatic file injection or
+host enforcement. At each conversation start, including a plain question with no
+role specified, complete these dependencies before task work:
+
+1. Your first tool invocation must only read this PATTERN file. Wait for its
+   result and read it before issuing another invocation. Do not include task
+   files, searches, commands, or other reads in that invocation or tool group.
+2. In a later startup-only invocation, read the canonical role index above. Wait
+   for and read its result to resolve your assignment and applicable guardrails.
+3. Read the selected standalone definition(s). Read their results to discover
+   required references; then load those references and applicable project-wide
+   guardrails, including further mandatory references they require. Workers also
+   load WORKER below. Known independent startup reads may be batched once their
+   need is established; dependent discovery requires a returned, read result.
+4. After the last required result has returned and been read, send a brief
+   startup-completion acknowledgment in assistant text before your first task
+   tool invocation or substantive answer. Identify the resolved assignment role,
+   maintained responsibility, loaded definition(s) and required references, and
+   any gaps; honor any acknowledgment required by those references. An earlier
+   role label or promise to load them is not this completion acknowledgment.
+   Then address the original request in the same turn, without requiring a
+   greeting or extra confirmation.
+
+Until this package is loaded and acknowledged, do no task I/O (including read-only
+inspection), substantive task investigation, planning, delegation, changes, or
+substantive answer. A brief acknowledgment of the request may precede startup.
+Do not batch or parallelize startup with task work: ordered reads in one shell
+command, parallel calls in one assistant tool group, or a role self-label without
+reading its package do not satisfy the dependency barrier. Even an answer that
+fits directly in a reply must follow role loading; background setup and identity
+checks are separate duties governed by the selected role.
+
 ## Resolve the assignment role
 
-Before role-specific action, read that index and applicable project-wide guardrails.
+Use the index and applicable project-wide guardrails loaded through that sequence.
 Use the explicit assignment's `Role: worker` or `Role: director` and maintained
 responsibility ID to select its standalone definition and required references.
 Read and acknowledge those before acting; supplied locators must agree with the

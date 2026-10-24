@@ -204,3 +204,151 @@ not load DIRECTION. The 8 site tests passed under the bundled Node runtime, and
 `git diff --check` passed. No files were added, so the manifest is unchanged. No
 prose-matching tests were added. These checks do not establish any of the
 behavioral observations above.
+
+## Startup dependency trials — October 24, 2026
+
+These are actual bounded fresh CLI observations of the
+[R10 refinement](RATIONALE.md#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes),
+separate from package tests and the earlier assigned Codex trial. Six disposable
+folders each held the actual manifest-selected base payload, generated canonical
+role index, lean PROJECT context, and one factual TASK.md. The selected real
+DIRECTOR definition and its mandatory reference chain were retained, rather than
+replaced by a successful role stub. Every session used the same neutral task with
+no role hints and a native CLAUDE.md import of its own AGENTS.md startup hook.
+
+Claude Code 2.1.289 reported `claude-sonnet-5-5`. Low, medium, and high were requested
+through accepted effort flags; the trace did not independently expose an effective
+effort value. Available tools were restricted to Read, which still permits same
+assistant-generation parallel reads. No shell, writes, MCP services, skills,
+subagents, or setup/Recorder services were exposed. Each fresh run had a $1
+API-cost ceiling and 150-second wall timeout; none timed out or needed a retry.
+CLI cost reports used list-price modeling, not confirmed account charges.
+
+| Session | Required read/result barrier | Post-load completion acknowledgment/canary | Direct factual answer |
+|---|---|---|---|
+| Baseline, low | Failed: PATTERN and TASK shared the first assistant group; answer before index; further Director references skipped. | Failed before task inspection. | Correct value, premature. |
+| Initial candidate, low | Passed: all eleven required results before separate TASK group. | Failed: early role/loading text only. | Correct after reads. |
+| Baseline, medium | Failed with the same mixed first group and skipped-reference exception. | Failed before task inspection. | Correct value, premature. |
+| Final frozen candidate, medium | Passed. | Failed. | Correct after reads. |
+| Final frozen candidate, low | Passed. | Failed. | Correct after reads. |
+| Final frozen candidate, high | Passed. | Failed. | Correct after reads. |
+
+The adaptive six-run allocation omitted baseline-high after the two baseline
+reproductions, using the last slot to observe final wording at all three requested
+efforts. The initial candidate's acknowledgment gap prompted an explicit post-result
+acknowledgment instruction and the DIRECTION preload/setup clarification before
+freezing the final operational wording. That refinement still did not produce the
+completion acknowledgment in these trials. No later operational wording was
+silently attributed to the observed successes.
+
+The exact mandatory startup set was PATTERN, ROLE_INDEX, DIRECTOR, DIRECTION,
+PROJECT, MODELS, STATE, ROLES, ASSIGNMENT, IDENTITIES, and the indexed project
+GUARDRAILS reference. The first three establish the selection route; DIRECTOR
+requires the next seven package references; the index requires GUARDRAILS.
+Further links used only for staffing, setup, updates, or recording were conditional
+and those operations were not part of this direct question. Copying the complete
+base payload and actually reading this selected chain are distinct observations.
+Every returned Read result was checked against its complete fixture file; none
+was truncated or returned an error.
+
+Evaluation tracked assistant message/group IDs, tool IDs, and successful returned
+results, with manual inspection of every tool/text stream. A baseline PATTERN
+result streamed between two calls bearing the same assistant message ID; treating
+that event order as a new dependency-consumption turn would incorrectly pass it.
+All candidate traces had separate PATTERN, index, definition/guardrail, reference,
+and TASK groups. The fixture canary supplemented read evidence and is not a new
+production token requirement. Early self-description is distinct from post-load
+acknowledgment, and neither substitutes for observed required reads.
+
+These observations support the changed read ordering for one controlled host/model
+and task. They do not establish full acknowledgment compliance, general reliability,
+Bash batching behavior, another host/model, malformed assignments, downstream
+installation behavior, or a fresh installed Codex default-role session. The
+[STARTUP procedure](../pattern/references/STARTUP.md#verify-the-startup-dependency-barrier)
+keeps those limits and future checks explicit. Raw traces and exact fixture source
+material remain private; no internal-source pointers are public dependencies.
+
+**Initial focused static verification, before integration review:**
+`PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests -p test_package.py -v`
+passed all 10 package tests, including two new hook/owning-contract regression
+checks; `git diff --check` passed. These tests establish static package and
+instruction consistency only. No helper/schema/runtime or manifest change was
+needed, and no site, global skill, downstream installation, commit, or publication
+was performed by this change.
+
+## Startup mechanism comparison — October 24, 2026
+
+This separate exploration addresses why a first-file read might fail to propagate
+along the role/reference chain. It used eighteen fresh sessions: the original
+five variants at requested low/medium/high effort, followed by three ordinary-
+imperative sessions to distinguish a link from an instruction to read. The
+mandatory chain was PATTERN → ROLE_INDEX → DIRECTOR → LEAF, followed by TASK.
+The flattened control placed the same substantive selected-role instructions in
+PATTERN. These were tiny controlled fixtures, not additional actual-package or
+downstream-installation trials.
+
+Every variant required a PATTERN-only first tool group and a returned-result wait.
+The neutral task carried no role hints or output-prefix instruction. Each cell
+below is one observation; the table does not estimate reliability.
+
+| Variant | Downstream prerequisite mechanism | Low / medium / high observations | Leaf output rule | Read groups per run |
+|---|---|---|---|---|
+| A | Advisory links only. | All incomplete before TASK. | Absent. | 2 |
+| A2, later refinement | A plus ordinary untimed read-next imperatives at every hop. | All incomplete before TASK. | Absent. | 2 |
+| B | Explicit per-hop read, wait/read result, and before-task barriers. | All completed chain before TASK. | Present. | 5 |
+| C | Global transitive completion rule in initial AGENTS hook; downstream bytes identical to A. | All completed chain before TASK. | Present. | 5 |
+| D | Initial global rule plus the same per-hop instructions as B. | All completed chain before TASK. | Present. | 5 |
+| E | Same global hook as C/D; selected role and required leaf content inline in PATTERN. | All completed inline package before TASK. | Present. | 2 |
+
+A-low/high emitted index and TASK reads in one assistant generation after the
+strict first-file read; A-medium omitted even the index. A2-low/medium likewise
+combined index and TASK in one generation and omitted definition/leaf. A2-high
+explicitly treated the ordinary next-file instruction as outside the user's
+request and skipped it. B/C/D instead consumed successive returned results
+through the leaf before a separate TASK generation. E received the same
+substantive selected-role content in the initial PATTERN result.
+
+A→B changed both an advisory link into an imperative and added timing/barrier
+rules, so that original contrast could not isolate urgency. The later A2 cells
+changed only the ordinary read-next imperatives relative to A. A2→B supports an
+explicit prerequisite in this fixture, but does not separate before-task wording,
+returned-result waiting, and tool-group rules. A→C held advisory downstream bytes
+constant while adding the global rule to the initially loaded AGENTS hook. Its
+placement in another file was not tested. D did not demonstrate an advantage over
+B or C in this sample.
+
+All eighteen sessions used Claude Code 2.1.289, reported `claude-sonnet-5-5`, and
+accepted requested low/medium/high effort flags without an independently exposed
+effective-effort value. Only Read was available; same-generation parallel reads
+remained possible. Native CLAUDE imports of fixture AGENTS were configured, and a
+built-in AGENTS capability was also present, so the host preload path was not
+isolated. No actual shell, write, delegation, MCP, retry, timeout, or budget-cap
+event occurred. The executing worker reviewed all eighteen complete tool streams;
+the evaluator checked all 67 Read calls against complete fixture bytes, numbered
+displays, and line extents, with no truncation or error. Selected traces were also
+independently reviewed during integration. CLI usage was reported at list prices,
+not verified account charges.
+
+There are 24 new sessions across the two studies: six actual manifest-package
+sessions and eighteen minimal mechanism sessions. Their different required-file
+sets, prompts' task values, and acknowledgment/output rules must not be pooled as
+one causal sample. A simple final-answer prefix was taken up in every successful
+minimal condition. It does not establish a post-load completion acknowledgment;
+that requirement remained absent in the full-package candidate observations.
+Neither successful reads nor a prefix prove all instructions were understood.
+
+**Architecture and verification status:** The role-separated production candidate
+remains unchanged. The successful chained mechanisms and the separate full-package
+read-order observations do not require flattening production. E removed three
+Read groups in this tiny fixture; it is not a full-package performance benchmark
+or a test of loading all roles. Alternate hosts/models, shell-capable tools,
+branching/conflicting instructions, repeated reliability samples, and other global-
+rule placements remain untested. Public reasoning is distilled here and in
+[R10](RATIONALE.md#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes);
+raw traces and exact sources remain private.
+
+During integration review, the cross-file startup-hook parity test was retained;
+literal authored-phrase assertions and a heading-order test were removed. Those
+checks mirrored wording rather than independently establishing behavior. The
+final package suite contains nine structural tests; actual trial results remain
+separate evidence.

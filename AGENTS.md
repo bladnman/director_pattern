@@ -26,11 +26,12 @@ Preserve other authors' edits and assigned ownership. Public authoring guidance,
 rationale, and tests remain outside the installable `pattern/`.
 
 <!-- director-pattern:start -->
-When a local `.director/` installation exists, at the start of each conversation,
-before substantive task investigation, planning, delegation, or changes, read
-`.director/PATTERN.md` and follow its canonical role index to the selected
-standalone definition and required references. A brief acknowledgment may precede
-these reads; then address the original request in the same turn, without requiring
-a greeting or extra confirmation. If absent or incomplete, explain the limitation
-and maintain the repository rules above.
+When a local `.director/` installation exists:
+At the start of each conversation, your first tool invocation must only read
+`.director/PATTERN.md`; wait for and read its result. Complete its startup sequence
+and acknowledge the resolved role package before any task I/O, planning,
+delegation, changes, or substantive answer. A brief acknowledgment may come first;
+then address the original request in the same turn, without requiring a greeting
+or extra confirmation.
+If absent or incomplete, explain the limitation and maintain the repository rules above.
 <!-- director-pattern:end -->

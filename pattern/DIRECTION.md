@@ -6,8 +6,10 @@ in [PATTERN.md](PATTERN.md). This file does not assign a role.
 
 ## Check installation before using director identity
 
-Resolve the current assignment role first. Only the project Director runs this
-check. Request Managers receive the checked bootstrap facts in their assignment and
+Complete [PATTERN's startup sequence](PATTERN.md#complete-startup-before-task-work)
+first, including role-package loading and acknowledgment. That prerequisite applies
+to every conversation and direct answer; it is separate from this background setup
+and identity check. Only the project Director runs this check. Request Managers receive the checked bootstrap facts in their assignment and
 reuse the configured shared Recorder route rather than spawning a recorder of their
 own; workers, reviewers, and recorders skip it. When this conversation is the
 project Director and first staffs work, have a Small recorder inspect actual setup
@@ -105,10 +107,12 @@ supplies interpretation and explicit decisions; the recorder supplies persistenc
 Figure out the work first, then size the response to it. Before any routing, the
 Director forms enough understanding of the ask and a good result to choose the next
 step. Do not finish substantial analysis or a detailed plan before delegating it.
-If that answer fits in the reply (the user supplied the material and wants it
+After completing PATTERN's role-loading and acknowledgment prerequisite, if that
+answer fits in the reply (the user supplied the material and wants it
 reshaped, such as bullets, a summary or a rewording; asked a question; or wants a
 status or a judgment), the Director gives it in that turn, itself: no workers,
-recorder, capture, or setup check. Delegation exists to keep the conversation fast
+recorder, capture, or setup check. This direct-answer exception never skips startup
+role definitions or required references. Delegation exists to keep the conversation fast
 and the Director's context clean while real work runs. It is never the goal. If
 routing a request would take longer than answering it, answer it. These
 instructions serve that judgment; they do not replace it.

@@ -95,6 +95,20 @@ class PackageBoundaryTests(unittest.TestCase):
             self.assertIn("DIRECTION.md", set(markdown_links(PATTERN / definition)))
         self.assertNotIn("DIRECTION.md", set(markdown_links(PATTERN / "WORKER.md")))
 
+    def test_repository_and_installation_hooks_share_the_same_startup_barrier(self):
+        # Static entrypoint parity only: no assertion here proves a host obeys it.
+        marker = r"<!-- director-pattern:start -->(.*?)<!-- director-pattern:end -->"
+        install = (PATTERN / "INSTALL.md").read_text(encoding="utf-8")
+        authoring = (PATTERN.parent / "AGENTS.md").read_text(encoding="utf-8")
+        install_hook = re.search(marker, install, re.S)
+        authoring_hook = re.search(marker, authoring, re.S)
+        self.assertIsNotNone(install_hook)
+        self.assertIsNotNone(authoring_hook)
+        normalize = lambda value: " ".join(value.split())
+        common = normalize(install_hook.group(1))
+        # The source repository alone adds its optional-local-installation guard.
+        self.assertIn(common, normalize(authoring_hook.group(1)))
+
     def test_project_owned_index_and_selected_definitions_are_reachable_in_isolated_payload(self):
         # Installation fixture: target context is generated, never upstream payload.
         # This proves file/link reachability only, not any agent's read sequence.

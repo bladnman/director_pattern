@@ -60,12 +60,67 @@ Do not invent an abstract of the method in AGENTS.md.
    no stale abstract, repeated role table, or competing default remains active.
    Record loaded paths, moved sections, index pointer, remaining gaps, and hashes.
 
+The hook must be in an entrypoint the host actually loads. A file named AGENTS.md
+is not proof of that route: use the host's supported instruction entrypoint or
+native import when needed, and verify it in the target configuration. The hook
+asks the actor to read PATTERN; it does not automatically inject that file or
+enforce ordering. Keep role policy in PATTERN and the indexed definitions.
+
 A predecessor adoption may replace its old startup role-default instruction as
 part of reviewed reversible instruction integration. Preserve shared authority
 and predecessor records, and leave one active default. This instruction change
 neither authorizes a `.producer/` store migration nor makes that store compatible
 with the Director helper. If it stays canonical, map its existing authorized
 workflow as an existing tracker; otherwise obtain a separate migration decision.
+
+## Verify the startup dependency barrier
+
+[PATTERN](../PATTERN.md#complete-startup-before-task-work) owns the mandatory
+sequence: first tool invocation reads only PATTERN; its returned result precedes
+the canonical-index invocation; the index result precedes selected definitions;
+definition results establish further mandatory references. Complete those reads
+and send one brief role-package acknowledgment before task I/O or a substantive
+answer. Independent startup references may share an invocation once discovered.
+No read-only or direct-answer exception bypasses this sequence. The selected
+Director's setup/identity check remains background work and never becomes a
+prerequisite for the answer after role loading.
+
+For an affected startup change, use a harmless plain task with no role hints in a
+fresh disposable project/session. Preserve baseline and candidate bytes and use
+the same actual host entry route, task, exposed tools, model, and effort where
+supported. A faithful fixture retains the selected real definition and its
+required reference chain, a project-owned canonical index, and minimal real
+project context. A short fabricated role stub establishes only that stub's behavior.
+Declare the exact required-file set before evaluating the trace. A required
+project reference may contain an unpredictable acknowledgment canary absent from
+the task prompt; that supplements observed reads rather than replacing them.
+
+Inspect the complete tool stream and distinguish these observations:
+
+- **Read/result barrier:** PATTERN is alone in the first invocation/tool group;
+  each dependent stage starts only after its prerequisite result was returned
+  and available for the actor to read. Every required file's successful result
+  precedes the first task invocation/tool group and substantive answer.
+- **Completion acknowledgment:** after the final required result, the actor
+  briefly identifies its resolved role, responsibility, loaded package, and gaps
+  before task I/O. A canary can expose a skipped reference or acknowledgment;
+  an earlier role self-label or promise to load the rest is insufficient.
+- **Direct response:** after startup, a factual answer that fits in the reply
+  proceeds without forced staffing, capture, or setup services.
+
+Concrete failures include `cat PATTERN.md TASK.md` in one shell invocation,
+ordered `cat` commands in the same shell invocation, parallel PATTERN/task Reads
+in one assistant message, or a last required reference and task Read in one group.
+Textual command order, or a result streamed between calls from the same assistant
+generation, cannot show that the later call used that result. Track individual
+tool IDs/results and assistant-message or equivalent invocation/group IDs. Inspect
+shell command contents and parallel wrappers when exposed. If the host cannot
+expose the relevant boundary, report that limit rather than infer a pass.
+
+Keep primary read ordering and secondary acknowledgment results separate. One
+session at an effort is an observation, not a compliance rate or universal host
+guarantee. State tool restrictions, requested versus exposed effective settings,
+adaptations between trials, unrun cases, and any post-trial wording changes.
 
 ## Static checks, then fresh host trials
 

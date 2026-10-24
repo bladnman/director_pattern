@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated October 23, 2026. This repository authors a
+Living design rationale · updated October 24, 2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -548,6 +548,109 @@ multistep task and no hello; role loading still precedes work on that task.
 **Status:** Instruction clarification implemented; behavior has not been freshly
 verified, and the hook supplies no host-enforced loading guarantee.
 
+**Refined, October 24 — returned-result startup dependencies:** A reported Claude
+Code plain-question test read task files in the same step as PATTERN at low,
+medium, and high effort, resolving Director only afterward. The October 23
+conversation-start clarification above changed the hook, but left PATTERN's
+"before role-specific action" wording unchanged and had no fresh behavior trial.
+That earlier assigned Codex observation still supports only its stated assigned
+route; it does not establish the unassigned default or Claude behavior.
+
+**Decided and implemented:** The [small hook](../pattern/INSTALL.md) now requires
+the first invocation to read only PATTERN and wait for its result.
+[PATTERN](../pattern/PATTERN.md#complete-startup-before-task-work) owns the remaining
+dependencies: canonical-index result, selected-definition results, all required
+references/guardrails, then a brief completed-package acknowledgment before task
+I/O or a substantive answer. Known independent startup references may batch after
+discovery; task work may not share their invocation or assistant tool group.
+Read-only inspection and direct answers have no role-loading exception.
+[DIRECTION](../pattern/DIRECTION.md#check-installation-before-using-director-identity)
+keeps background setup/identity checks separate, preserving R2's direct-answer
+purpose after role loading. This is an instruction-guided route, not automatic
+file injection, a runtime, or host enforcement. Malformed delegated assignments
+still clarify without falling into the Director default.
+
+**Why/tradeoff:** "Before" did not specify the tool boundary. A model can emit
+PATTERN and task reads in one generation, even when the host streams a PATTERN
+result between their executions; the task call then cannot reflect that result.
+Explicit dependencies cost several short startup turns and the actual selected
+reference context. They avoid pretending that a file's presence or a role label
+means its instructions were loaded. Keep the hook a pointer and load only selected
+responsibilities; do not regain speed by skipping mandatory references.
+
+**Concrete regression and observed evidence:** A fresh unassigned question asks
+for a value in TASK.md through the host's real startup entrypoint. Both observed
+baseline low/medium Claude sessions read PATTERN and TASK in the first assistant
+group, answered before index loading, and later skipped required Director
+references by treating a direct-answer rule as an exception. An initial candidate
+at low effort and the final frozen candidate at low/medium/high instead returned
+all eleven required startup-file results before a separate TASK read, then
+answered directly. These six bounded sessions copied the actual manifest base
+payload and real Director/reference chain with generated project context; they
+used Read-only tools, the same native instruction-import route, and one neutral
+task. The allocation was adaptive: baseline-high was omitted after reproduction
+to test the final candidate at all three requested efforts.
+
+**Verification limit and remaining gap:** Primary read ordering passed in those
+four candidate observations. None produced the required post-load completion
+acknowledgment or fixture canary before task inspection; early role/loading text
+is not that acknowledgment. Thus full startup compliance is not verified. The
+canary was a fixture diagnostic, not a production token policy. Effective model
+was reported by the CLI; efforts were requested through accepted flags, with no
+independent effective-effort field exposed. This is one controlled host/model
+sample with restricted tools, not a general reliability result, shell-batching
+trial, downstream installation, or fresh Codex test. The
+[validation notes](DESIGN_NOTES.md#startup-dependency-trials--october-24-2026) and
+[STARTUP procedure](../pattern/references/STARTUP.md#verify-the-startup-dependency-barrier)
+retain separate read-order and acknowledgment checks. Revisit if real task reads
+still cross a startup dependency or the acknowledgment remains unreliable; do not
+report a later wording change as behavior already tested.
+
+**Later October 24 — testing the loading mechanism:** A separate eighteen-session
+exploration compared a tiny four-file selected-role chain with a flattened copy
+of the same substantive selected-role instructions. Every condition required the
+first invocation to read only PATTERN. Advisory links alone failed to finish the
+chain before task inspection at all three requested efforts. Three additional
+sessions with an ordinary, untimed instruction to read the next file at every
+hop also failed. One treated the next-file instruction as unrelated to the user's
+task and skipped it. The first-file requirement therefore did not automatically
+make downstream references prerequisites in these observations.
+
+Explicit per-hop read/result/before-task barriers, one global transitive
+completion rule in the initial AGENTS hook with advisory downstream links, and
+their combination each completed the chain in the low/medium/high observations.
+The global rule's location was the initially loaded hook; moving it elsewhere was
+not tested. Ordinary imperatives were added after recognizing that links alone
+were not a fair comparison with an instruction to read. This refinement supports
+the value of an explicit prerequisite, while not isolating the separate effects
+of before-task wording, returned-result waits, and tool-group separation.
+
+The flattened selected-role control also passed and used two Read groups rather
+than the successful chains' five. This is a small routing comparison, not a
+production-package cost or latency benchmark. It supplies no need to flatten all
+roles or load irrelevant policies. **Architecture decision:** retain the existing
+common bootstrap, canonical index, and selected standalone definitions, with the
+explicit dependency barrier already implemented in
+[PATTERN](../pattern/PATTERN.md#complete-startup-before-task-work). That candidate
+also passed the separate actual-package eleven-file read sequence at all three
+requested efforts. No production rewrite or further operational wording change
+followed from the mechanism study.
+
+**Evidence boundary:** These are eighteen exploratory observations, one per
+condition/effort cell, separate from the six actual-package sessions above.
+All successful minimal conditions also used a simple output-prefix rule found
+only in the loaded leaf or its inline copy. That output uptake does not establish
+general instruction compliance or resolve the actual-package completion-
+acknowledgment gap. Native instruction imports were configured, and a built-in
+AGENTS capability was also present; the preload path was not isolated. All runs
+used the same reported Claude model and Read-only surface, with requested rather
+than independently exposed effective effort. No shell batching, another model or
+host, repeated reliability sample, or alternative global-rule location was
+tested. See the separate
+[mechanism validation](DESIGN_NOTES.md#startup-mechanism-comparison--october-24-2026).
+Revisit on an observed downstream loading failure; retain result/group evidence
+rather than interpreting higher effort, a link, or a role self-label as proof.
+
 ## R11 — Update from a pinned public source without replacing project state
 
 **Accepted decision, October 17:** Published GitHub `main` is the upstream source of
@@ -1059,3 +1162,18 @@ pointers. Public documentation must stand on its own.
   batch at milestones; setup reports a project without version control. Extends the
   October 19 proportionality rule with named tiers. Status: implemented in contracts,
   awaiting owner review and release naming; package checks only, behavior unobserved.
+
+
+## Decision history — October 24, 2026
+
+- Added explicit returned-result startup dependencies from the host-loaded hook
+  through PATTERN, canonical index, selected definitions, and mandatory references
+  before task I/O or direct answers (R10). Background setup/identity checks stay
+  separate. Controlled fresh Claude observations support read ordering for the
+  candidate; the required completion acknowledgment remains an observed gap.
+- Retained role-selected loading after eighteen separate mechanism observations:
+  initial global or per-hop prerequisites completed the small chain, while links
+  and ordinary untimed read instructions did not. Flattening reduced Read groups
+  in the tiny selected-role control, without establishing a need to flatten the
+  production package. Observed behavior and limits are recorded separately from
+  the six actual-package sessions; operational wording remains unchanged.
