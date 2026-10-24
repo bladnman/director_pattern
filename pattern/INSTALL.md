@@ -80,8 +80,12 @@ not payload. A temporary staging clone is optional transport only.
 
    ```markdown
    <!-- director-pattern:start -->
-   Before role-specific action, read `.director/PATTERN.md` and follow its
-   canonical role index to your selected definition and required references.
+   At the start of each conversation, before substantive task investigation,
+   planning, delegation, or changes, read `.director/PATTERN.md` and follow its
+   canonical role index to your selected standalone definition and required
+   references. A brief acknowledgment may precede these reads; then address the
+   original request in the same turn, without requiring a greeting or extra
+   confirmation.
    <!-- director-pattern:end -->
    ```
 

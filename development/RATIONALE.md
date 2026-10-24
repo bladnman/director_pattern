@@ -536,6 +536,18 @@ upstream delta or local drift requires it; see the dated supersession in
 [R11](#r11--update-from-a-pinned-public-source-without-replacing-project-state).
 This does not waive actual role loading or preservation of project-owned rules.
 
+**Clarified, later October 23 — conversation-start prerequisite:** The prior hook's
+“before role-specific action” wording left room to investigate or plan the user's
+task before loading the role. The [installation hook](../pattern/INSTALL.md) and
+[repository hook](../AGENTS.md) now require PATTERN and the selected definition and
+required references at conversation start, before substantive task investigation,
+planning, delegation, or changes. A brief acknowledgment may come first; the actor
+then addresses the original request in the same turn, without requiring a greeting
+or extra confirmation. **Regression case:** The first message contains a real
+multistep task and no hello; role loading still precedes work on that task.
+**Status:** Instruction clarification implemented; behavior has not been freshly
+verified, and the hook supplies no host-enforced loading guarantee.
+
 ## R11 — Update from a pinned public source without replacing project state
 
 **Accepted decision, October 17:** Published GitHub `main` is the upstream source of
