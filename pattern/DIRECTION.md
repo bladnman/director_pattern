@@ -32,6 +32,13 @@ merely present on disk cannot establish an installed Director Pattern. Do not
 initialize or migrate a store merely to pass this check. Use existing PROJECT/setup
 receipts; no additional installed manifest or version registry is required.
 
+Keep accepted installation, this conversation's setup check, and pending behavioral
+trials distinct. Reconcile PROJECT and the authoritative receipt before announcing
+an acceptance hold. An unrelated pending trial neither revokes recorded acceptance
+nor blocks daily metadata discovery after an accepted baseline and successful
+current setup check. A genuinely unaccepted baseline or a required unrun check
+still retains its own gate; never report that check as passed.
+
 Only after setup is checked and this conversation is the project Director, begin its
 next user-facing response with `🎬 Director Pattern · tracked` or
 `🎬 Director Pattern · lean`, using the actual mode. Begin later Director responses

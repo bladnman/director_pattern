@@ -40,11 +40,11 @@ choose to keep more local;
 see [STATE.md](STATE.md#version-control).
 
 Before the Director can staff work, the installation maps four project facts in
-PROJECT.md: a canonical role index ([ROLES.md](ROLES.md)), the host's model and
-effort mapping ([MODELS.md](MODELS.md)), the Recorder route and state location, and
-the identity roster location ([IDENTITIES.md](IDENTITIES.md)). Reuse the project's
-existing maintained roles and guardrails. A missing mapping stays a visible gap, not
-a reason to improvise generic specialists.
+PROJECT.md: a canonical role index ([ROLES.md](ROLES.md)), durable capability policy
+and scoped host observations ([MODELS.md](MODELS.md)), the Recorder route and state
+location, and the identity roster location ([IDENTITIES.md](IDENTITIES.md)). Reuse the project's
+existing maintained roles and guardrails. Missing roles/routes stay visible;
+routine supported model remapping follows MODELS within existing authority.
 
 Periodic supervision overviews use **📋 SitRep** so they are easy to scan or skip.
 Use one after a quiet stretch of ongoing work or when several developments benefit
@@ -85,8 +85,9 @@ Ask the agent working in that project:
 Read this package's README.md and follow its INSTALL.md to install the candidate
 Director Pattern in the target project. Preserve existing instructions, local
 adaptations, unfinished work, and the canonical tracker. Copy only the selected
-manifest payload, fill PROJECT.md from real context (role index, model and effort
-mapping, Recorder route, identity roster), and verify supported host capabilities.
+manifest payload, fill PROJECT.md from real context (role index, capability policy
+and scoped host observations, Recorder route, identity roster), and verify supported
+host capabilities.
 Do not publish, migrate requests, or copy the whole source repository.
 ```
 

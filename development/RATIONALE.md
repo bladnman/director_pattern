@@ -186,6 +186,37 @@ and recoverable full detail still need the actual host observations in the
 Revisit if substantial work still occupies the main conversation or delegation
 adds friction to answers that fit directly in a reply.
 
+**Refined and superseded in part, later October 23 — portable staffing policy:**
+The October 21 per-assignment selection decision stands. This supersedes the
+instruction to map concrete tier selections centrally into PROJECT during
+installation, and PROJECT's role-to-model table: those invited a prior host's
+selections to become permanent defaults. Durable capability/effort needs and valid
+user/project preferences belong in PROJECT; host controls and constraints are
+observations scoped by host/time. Concrete requested and effective settings belong
+in dispatch evidence, with unknowns explicit. Reusable guidance prescribes no
+vendor/model IDs, fixed catalog, price claim, or newest-model choice.
+
+**Why/tradeoff:** A project can move from Host A to Host B, or encounter changed
+model generations/options on the same host, without a new user policy decision.
+At the next relevant staffing, every staffing actor resolves model and effort
+from exposed current controls and chooses a context mode supporting them. Supported
+remapping is agent-owned maintenance within existing authority, not a user-facing
+gap or repeated confirmation. This adds a bounded refresh when needed, not routine
+catalog sweeps, comparative jobs, or external research. Unsupported controls,
+unknown effective settings, and genuine consequential choices remain visible;
+host/user restrictions and spending authority are unchanged.
+
+**Concrete regressions:** A Host A receipt does not prescribe Host B's identifier;
+a changed option prompts supported remapping instead of a frozen role default;
+a clerk does not silently inherit its parent's strongest model/effort; an
+unsupported override is recorded with a suitable allowed route or a real blocker,
+never invented settings. See [MODELS](../pattern/MODELS.md#projecthost-mapping),
+[PROJECT](../pattern/PROJECT.md#capability-policy-and-host-observations), and the
+[manual cases](DESIGN_NOTES.md#portable-staffing-and-acceptance-scenarios--october-23-2026).
+**Status:** Decided and implemented in guidance/templates; behavioral effects
+remain unverified. Revisit if stale observations still become assignment policy
+or refreshing supported controls still creates avoidable user work.
+
 ## R3 — Retain commitments by default, preserve original intent
 
 **Problem:** Short/creative work can still carry commitments, corrections, and
@@ -808,6 +839,26 @@ are recorded in [DESIGN_NOTES](DESIGN_NOTES.md#daily-update-discovery--october-2
 They establish helper behavior, not fresh-agent adoption, automatic real-tree
 updates, publication, or a host-independent scheduler.
 
+**Clarified, later October 23 — acceptance and pending trials:** An accepted
+installation, the current conversation's setup check, and a pending behavioral
+trial are separate facts. This clarifies the daily-discovery prerequisite without
+changing update authorization or weakening first-install/affected-update checks.
+Before announcing an acceptance hold, reconcile PROJECT and its authoritative
+receipt. An unrelated pending trial cannot invent a new gate or block daily
+metadata discovery after an accepted baseline and successful current setup check.
+A genuinely unaccepted baseline, or a check required for the claimed adoption,
+retains its actual gate and is never reported as passed.
+**Why/regression:** A stale message says adoption awaits acceptance while PROJECT
+and the source receipt record acceptance; only an unrelated fresh-conversation
+trial remains pending. Reconciliation preserves the accepted baseline, performs
+eligible discovery, and reports the trial's narrow uncertainty. See
+[DIRECTION](../pattern/DIRECTION.md#check-installation-before-using-director-identity)
+and [UPDATES](../pattern/references/UPDATES.md#daily-discovery-and-project-preference).
+**Status:** Clarification implemented in guidance; the corresponding
+[manual scenario](DESIGN_NOTES.md#portable-staffing-and-acceptance-scenarios--october-23-2026)
+is unverified. Revisit if genuine acceptance/check gates are skipped or unrelated
+trial gaps still cause false holds.
+
 ## R12 — Give people a readable front door without another contract layer
 
 **Accepted direction, October 17:** A public site at `director.metal-sole.com`
@@ -1129,6 +1180,13 @@ pointers. Public documentation must stand on its own.
 
 ## Decision history — October 23, 2026
 
+- Separated durable capability policy from host/time-scoped observations (R2),
+  superseding PROJECT's role-to-model table and installation-time concrete mapping
+  as a future default. All staffing actors refresh current supported selections at
+  relevant use; routine remapping stays within existing authority. Clarified that
+  recorded installation acceptance, current setup, and unrelated pending trials
+  have separate effects on daily discovery (R11). Guidance is implemented;
+  behavioral verification remains pending.
 - Refined responsiveness (R2): the main Director delegates substantial analysis and
   detailed coordination before doing that active work in the main conversation.
   Bounded outcome owners retain full recoverable detail; compact Director context

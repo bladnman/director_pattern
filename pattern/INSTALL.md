@@ -58,7 +58,8 @@ not payload. A temporary staging clone is optional transport only.
    apply default tracked mode and observed mappings within that authority, leaving
    ungranted policy decisions to the accountable owner. Tracked is default; lean optional.
    An existing canonical tracker uses the contract without creating a second store.
-   Map PROJECT's role index, project-wide guardrails, model/host mapping, Recorder
+   Map PROJECT's role index, project-wide guardrails, durable capability policy and
+   scoped host observations under [MODELS](MODELS.md#projecthost-mapping), Recorder
    route and state policy, and identity roster location. Reuse existing maintained
    definitions; generate a project-owned role index only when none exists,
    registering package definitions and actual project roles under STARTUP. Fill

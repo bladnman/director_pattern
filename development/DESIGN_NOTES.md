@@ -205,6 +205,28 @@ not load DIRECTION. The 8 site tests passed under the bundled Node runtime, and
 prose-matching tests were added. These checks do not establish any of the
 behavioral observations above.
 
+## Portable staffing and acceptance scenarios — October 23, 2026
+
+These cases cover the [portable staffing refinement](RATIONALE.md#r2--protect-judgment-and-conversation-from-executionbookkeeping)
+and [acceptance clarification](RATIONALE.md#r11--update-from-a-pinned-public-source-without-replacing-project-state).
+**All behavioral observations below remain pending.** Written guidance and
+package checks do not establish effective model settings or agent behavior.
+
+| Scenario | Required actual behavioral observation | Status |
+|---|---|---|
+| Host A to Host B | A prior concrete selection stays scoped evidence; staffing uses current exposed controls and durable capability needs, records host/time, and performs routine supported remapping without a new user decision. | Pending |
+| Future model/options change | Changed options or an unavailable saved selection trigger a bounded refresh at relevant staffing; no frozen catalog, guessed identifier, newest-model rule, exhaustive probe, or external research is introduced. | Pending |
+| Inherited parent effort | A staffing actor, including a worker or descendant, chooses model and effort for the job in a context mode supporting those controls; strongest parent settings are not silently inherited by omission. Unknown effective settings stay explicit. | Pending |
+| Unsupported override | The actor respects host/user limits, records requested versus supported/unknown settings, and uses an allowed suitable route or escalates a real consequential limitation; prompt text or a handle does not verify an effective override or create spending permission. | Pending |
+| Accepted baseline with unrelated pending trial | PROJECT and authoritative receipt reconcile a stale acceptance message; after successful current setup, eligible daily discovery proceeds while the unrelated trial remains pending. A real unaccepted baseline or required unrun check retains its own gate, and update authorization is unchanged. | Pending |
+
+**Executed static checks, October 23:**
+`PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests -p test_package.py -v`
+passed all 8 package-boundary tests. `git diff --check` passed; a narrow scan of
+reusable `pattern/` Markdown found no concrete model IDs. No runtime, helper,
+schema, installation, or behavioral trial changed or ran. These checks establish
+package/link consistency only; the scenarios above remain unverified.
+
 ## Startup dependency trials — October 24, 2026
 
 These are actual bounded fresh CLI observations of the

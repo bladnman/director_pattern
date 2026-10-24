@@ -1,9 +1,12 @@
 # Capability, effort, and actual selection
 
-First candidate. Directors and Request Managers **read this policy before selecting
-staff**, and choose capability, effort, and a [verification tier](#verification-tiers)
-per assignment. Capability tiers describe needed capability, not vendor names,
-prices, guaranteed controls, or model aliases.
+First candidate. Every staffing actor, workers and descendants included, **reads
+this policy before selecting staff**, and chooses capability, effort, and a
+[verification tier](#verification-tiers) per assignment. Capability tiers describe
+needed capability, not vendor names,
+prices, guaranteed controls, or model aliases. Reusable contracts, templates, and
+examples state capability and reasoning needs; they prescribe no vendor/model IDs,
+fixed catalog, price claims, or newest-model default.
 
 Pick capability and effort for the reasoning required, the uncertainty and
 consequence of error, the available context and tools, and the need for independent
@@ -28,25 +31,42 @@ not automatically the weakest available model.
 
 ## Project/host mapping
 
-During installation, map these tiers to the host's actually exposed models and
-effort settings in PROJECT.md, with constraints on selection, inheritance, and
-context, and the shared capacity/budget. Maintain that mapping centrally when the
-host changes; generic roles do not embed vendor names or assumed prices.
+This policy is the project instruction to choose model and effort where the host
+allows project-directed selection; it cannot override a stricter host restriction.
 
-For each assignment retain requested tier/model/effort and the **actual
-tool-selected** model/effort, or mark either unknown. Preserve selection receipts
-and constraints such as unavailable effort levels, inherited-only full-history forks,
-or unsupported overrides. Passing "Small" or "high effort" in a prompt does not
-select it. Check actual tool controls and receipts; do not report a selection the
-tool did not make, or infer costs from tier names.
+PROJECT keeps durable capability/effort policy and existing valid user/project
+preferences separate from host observations. Scope observed controls, inheritance,
+context, and capacity constraints by host and observation time. A previously
+selected concrete model is evidence/cache for that assignment and host, never a
+permanent role default or global model policy.
 
-Avoid inheriting a director's model and full history into a clerk or recorder when
-the host supports explicit model selection and short assignment context. Supply only
-the exact source or path, mechanical operation, permitted writes, and return format.
-If the desired selection is unsupported, choose an allowed suitable alternative and
-record it, or return a consequential limitation to the assigner; never describe an
-inherited model as Small without evidence. Actual supported controls and user or
-project instructions take precedence over generic preferences.
+At relevant staffing, resolve concrete model identifiers **and** effort from the
+current host's actually exposed controls, within existing authority. Refresh the
+observed mapping when the host differs, exposed options change, or a saved selection
+is unavailable. This is bounded setup maintenance, not an every-turn catalog,
+exhaustive probe, model-comparison job, or external product-research task. If controls
+do not expose availability, retain that uncertainty and use a supported suitable
+route; do not invent identifiers.
+
+Choose a context mode that supports the intended controls. Do not silently inherit
+the strongest parent model/effort by omission. When supported and authorized, select
+both for each job; short explicit context is preferable for a clerk or Recorder's
+bounded work. Inherited-only forks and unsupported overrides are constraints, not
+evidence of the requested selection. Host/user restrictions prevail; this policy
+creates no spending permission.
+
+Keep concrete requested and tool-selected model/effort in per-dispatch evidence,
+with host, observation time, context mode, receipt, and material limits; mark unknown
+effective settings explicitly. A prompt label, dispatch handle, or requested override
+alone does not independently verify effective settings. If selection is unsupported,
+choose an allowed suitable alternative and record it, or return a consequential
+limitation to the assigner. Never describe an inherited model as Small without
+evidence or infer costs from tier names.
+
+Routine supported remapping is agent-owned maintenance within existing authority;
+it needs no repeated confirmation or user-facing "gap." Escalate a real unresolved
+choice or limitation affecting authorization, cost, reliability, or ability to
+proceed. Keep genuine blockers and unknown effective settings visible.
 
 ## Parallelism and accountability
 

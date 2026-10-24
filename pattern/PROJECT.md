@@ -2,7 +2,8 @@
 
 Startup audit: [loaded chain, misplaced duties moved with exact preservation map, remaining gaps; STARTUP procedure]
 Fresh host trials: [per-trial evidence or pending; distinct from static wiring]
-Candidate installation status: [prepared / installed / fresh-session trial completed]
+Candidate installation state: [prepared / installed]
+Installation acceptance: [owner; decision; authoritative receipt; distinct from Fresh host trials above]
 Candidate source/version: [published repository URL + exact reviewed commit SHA; label unpublished candidates]
 Setup/update receipt: [committed path under .director/receipts/; selected managed-file SHA-256 baselines, startup wiring, adaptations, verification scope/reason, performed checks, reused evidence and limits]
 Version control: [committed by default; paths the project chose to keep local in .director/.gitignore; public-remote warning given on date / not needed / no Git: parallelism and recovery limitation reported, in-place init recommended]
@@ -50,8 +51,14 @@ on every reply. Lean needs no bundled helper/config; an existing tracker stays
 canonical. Checked setup is not a successful behavioral trial or proof that any
 worker is alive.
 
-## Host capability mapping
+## Capability policy and host observations
 
+Durable capability/effort policy: [per-role/task reasoning and reliability needs;
+existing valid user/project preferences; no permanent role→model table]
+Resolve current selections and refresh observations under [MODELS](MODELS.md#projecthost-mapping).
+Concrete selections belong in dispatch evidence, not future assignment defaults.
+
+Observed host and time: [host identity; observation time; scope and uncertainty]
 Host and execution mechanisms: [actual available tools; restrictions]
 Status/observation and permitted return routes: [actual tools; limits]
 Recorder availability and exact-source transfer: [mechanism; known limits]
@@ -59,21 +66,15 @@ Context isolation: [short explicit context supported / unsupported / unknown]
 Shared budget/capacity and reserved review capacity: [actual limits or unknown]
 Continuation after a final reply: [what the host keeps running or resumes; limits]
 
-| Assignment | Requested tier/effort | Actual model/effort selected | Evidence or limitation |
-|---|---|---|---|
-| Project Director | Max / high | [actual or unknown] | [selection/receipt] |
-| Request Manager | Large; Max for consequential ambiguity | [actual or unknown] | [selection/receipt] |
-| Recorder/clerk | Small / minimum | [actual or unknown] | [selection/receipt] |
-| Implementation | Medium; Large for complexity | [actual or unknown] | [selection/receipt] |
-| Reviewer | Large; Max for consequential ambiguity | [actual or unknown] | [selection/receipt] |
-| Bounded analysis | As the question requires; up to Max | [actual or unknown] | [selection/receipt] |
+Model/effort/context controls and inheritance constraints: [actually exposed
+controls; supported selection route; limitations or unknowns]
+Per-dispatch selection evidence: [canonical record/receipt location; requested and
+effective model/effort, context mode, host/time, unknowns and differences]
 
-A prompt tier name is not a model selection. Retain actual per-assignment choices
-and differences from the request. If delegation or persistence is unsupported,
-disclose it and continue director conversation; no silent execution-role switch.
-These rows describe the host where they were observed. A conversation on another
-machine or a cloud host treats them as last observed and rechecks before relying
-on them.
+Observations are scoped evidence/cache. Refresh them at relevant staffing under
+MODELS; a different host or changed option is routine maintenance when a supported
+suitable route exists. Unsupported delegation or persistence remains a disclosed
+limitation, with no silent execution-role switch.
 
 ## Source updates
 

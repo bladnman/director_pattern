@@ -10,6 +10,13 @@ installation, dependency, or wakeup. Existing project and host permissions still
 
 ## Daily discovery and project preference
 
+Use the authoritative receipt and PROJECT to reconcile acceptance, separately from
+the current-conversation setup check and pending behavioral trials under
+[DIRECTION](../DIRECTION.md#check-installation-before-using-director-identity).
+An accepted baseline with a successful current setup check permits daily discovery
+despite an unrelated pending trial. A real unaccepted baseline or required unrun
+check keeps its applicable gate; discovery grants no update authorization.
+
 The absent `update-policy.json` means **notify**. With a package change available,
 say exactly: **A new Director Pattern is available. Say “update director pattern”
 to install it.** Emit it once for that daily result; do not repeat cached notices
