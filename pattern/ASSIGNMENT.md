@@ -10,16 +10,21 @@ and [IDENTITIES.md](IDENTITIES.md); directors also follow
 ```text
 Project/domain and installed operating contract:
 Canonical role index, project-wide applicable guardrails, selected specialist references:
-Shared model/effort policy and actual host mapping/selection limits:
-Recorder indexed role, actual permitted request/return route, canonical state location/policy:
+Durable capability/effort, budget, and authority policy locators:
+Recorder indexed role, routing policy, canonical state location/policy:
   Direct only if supported; otherwise manager -> assigner -> shared Recorder
 Identity roster, shared cursor, optional pool, reservation/return route:
-Host execution/delegation/messaging limits and shared capacity/budget:
+Relevant current execution/delegation/messaging controls, capacity and limits:
 Authorization and acceptance/release/send gates:
 ```
 
-The project Director reads these from PROJECT at startup, and supplies them with
-every manager assignment. The Recorder's own bootstrap includes its selected indexed
+The project Director reads durable project policy and locators from PROJECT and
+resolves current host controls at the relevant use, then supplies the applicable
+facts with every manager assignment. Runtime names, handles, model selections,
+capacity, permissions, context, and return-route observations belong in the actual
+assignment/receipt/activity evidence, never in PROJECT or another loaded environment
+cache. Observation is not authority; preserve host/user restrictions and unknowns.
+The Recorder's own bootstrap includes its selected indexed
 definition, supplied-decision boundary, state location/format, cooperating-writer
 route, receipt requirements, and identity policy. Bootstrap is required wiring;
 mentioning a service name is not a working route.
@@ -35,7 +40,7 @@ Stable outcome/assignment identity; permitted return route:
 Outcome, exact source/addenda, full completion obligations and acceptance:
 Scope, file/resource ownership, authority, reserved decisions, exclusions, dependencies:
 Required selected role definitions + shared guardrails/runbooks/learnings:
-Required model/effort policy + host mapping; requested capability/effort:
+Required model/effort policy; requested capability/effort; current supported controls:
 Actual selection/known limits: record from tool receipt after dispatch
 Shared capacity/budget; subagent limits (allowed by default; any prohibition states its reason):
 Parallel plan: parts that could run in parallel or suit a subagent, or none:

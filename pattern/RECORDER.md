@@ -5,7 +5,7 @@ not a new decision maker. Read with [STATE.md](STATE.md).
 
 The project's canonical role index ([ROLES.md](ROLES.md)) includes the Recorder
 definition, its selection cues, state location/policy, and permitted route.
-Bootstrap supplies that index, the model/effort policy and host mapping, the actual
+Bootstrap supplies that index, the durable model/effort policy and relevant current host controls, the actual
 Recorder route and location, and any receipt requirements. A manager must not
 discover the Recorder only after important state has been lost.
 

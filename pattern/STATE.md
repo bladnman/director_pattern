@@ -36,7 +36,8 @@ receipts with actual handles. One request can still cover a whole dispatch wave.
 
 For the project Director's conversation, the recorder checks installed wiring,
 required files, and project mode/configuration under the [identity check](DIRECTION.md#check-installation-before-using-director-identity).
-It returns factual evidence through the existing setup receipt/PROJECT context;
+It returns factual evidence in the conversation or existing setup receipt, using
+PROJECT's canonical locators rather than adding current setup fields there;
 the Director resolves its role and judges whether the `🎬` identity is warranted.
 Lean and existing trackers need no bundled backend for this check. If evidence or
 the recorder is unavailable, report that limitation without claiming verification.

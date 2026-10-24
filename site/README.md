@@ -76,8 +76,11 @@ example explains the four sparse markers and the **📋 SitRep** report heading
 without claiming activity. That heading belongs to periodic report blocks, while
 the checked project Director retains its `🎬` response prefix; managers and other
 actors use assigned identities. The page names the adoption prerequisites (role
-index, model/effort mapping, recorder route, identity roster) and that an update
-leaves those project-owned mappings in place. The agent guide explains the small
+index, durable capability/authority policy, Recorder routing policy, identity
+roster locator). PROJECT holds enduring context; runtime controls are resolved at
+use, and observations stay in assignment/receipt/activity evidence outside startup.
+Updates preserve project policy and historical evidence without carrying old host
+mappings forward as configuration. The agent guide explains the small
 common bootstrap and one canonical index, standalone role definitions, whole-chain
 startup audit for first install, incremental updates with checks selected from
 affected changes, and separate fresh-host verification. Updates pin and review the
@@ -89,6 +92,11 @@ it must not invent a pattern abstract in globally loaded startup files.
 The site makes no adoption, performance, customer, or behavioral guarantees.
 
 ## Local verification
+
+October 24, 2026, enduring-context copy: all 8 site tests and the ten-file build
+passed. The obsolete host-mapping phrase assertion was removed while role/identity
+and asset-boundary checks remain. This semantic copy change has no layout or style
+changes; rendered QA and fresh-host behavior were not tested. No deployment ran.
 
 October 23, 2026, incremental-update copy: all 8 site tests and the 10-file build
 passed using the bundled Node runtime. These are static/Worker/asset checks;

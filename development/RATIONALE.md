@@ -211,11 +211,54 @@ a changed option prompts supported remapping instead of a frozen role default;
 a clerk does not silently inherit its parent's strongest model/effort; an
 unsupported override is recorded with a suitable allowed route or a real blocker,
 never invented settings. See [MODELS](../pattern/MODELS.md#projecthost-mapping),
-[PROJECT](../pattern/PROJECT.md#capability-policy-and-host-observations), and the
+[PROJECT](../pattern/PROJECT.md#durable-capability-and-authority-policy), and the
 [manual cases](DESIGN_NOTES.md#portable-staffing-and-acceptance-scenarios--october-23-2026).
 **Status:** Decided and implemented in guidance/templates; behavioral effects
 remain unverified. Revisit if stale observations still become assignment policy
 or refreshing supported controls still creates avoidable user work.
+
+**Superseded in part, October 24 — PROJECT is enduring project context:**
+The October 23 scoped-observation/cache approach did not go far enough. Its
+PROJECT template still invited host/time, tools, slots, permissions, context,
+inheritance, return routes, and conversation setup results. Dating such a snapshot
+could still bias a future actor. PROJECT now holds enduring context, authority,
+maintained responsibilities, and canonical policy/state/evidence locators. It has
+no environment-observation category, concrete model/provider/version table, current
+agent/team roster, or continually filled setup fields. No replacement automatically
+loaded environment definition or cache is introduced. The per-assignment selection
+and current-control requirements stand.
+
+**Why/tradeoff:** One project can move among coding systems, teammates, and model
+generations over months. A prior observed four-slot host must not constrain a host
+that now reports 21, and replacing four with 21 would repeat the defect. Resolve
+relevant capabilities from the actual host when needed, with uncertainty explicit
+and no exhaustive catalog sweep. Retain recovery-relevant observations with the
+actual assignment, receipt, or activity evidence; observations never grant
+permissions or become operating authority. This keeps useful history while taking
+away a tempting startup shortcut.
+
+**Preserved boundaries:** Durable user-authorized budget and authority constraints,
+stable project responsibility IDs, and actual product requirements remain binding
+and distinct from runtime observations. A retained host-adapter locator is
+conditional on applicability and current capability validation. Installation source,
+revision, baselines, setup/acceptance results, and verification history live in the
+authoritative receipt; PROJECT points there. Upgrade preservation keeps exact old
+material in verified backups/history and relevant recovery evidence outside
+startup, rather than deleting history or silently promoting it back into policy.
+Unclear authority must be resolved before weakening a purported restriction.
+
+**Concrete regressions and status:** Four slots on an old host versus 21 on the
+current host, and changed models/agents months later, require current discovery;
+an explicit budget ceiling, release gate, or maintained role requirement survives.
+Decided and implemented in the [PROJECT template](../pattern/PROJECT.md),
+[MODELS](../pattern/MODELS.md#projecthost-mapping), [assignment bootstrap](../pattern/ASSIGNMENT.md),
+[setup](../pattern/INSTALL.md), and [update preservation](../pattern/references/UPDATES.md#compare-before-replacing),
+with their direct callers and public copy aligned. Static package/link checks and
+manual contract review are separate from actual cross-host behavior; the
+[regression scenarios](DESIGN_NOTES.md#enduring-project-context-scenarios--october-24-2026)
+remain pending. No runtime/schema change is needed. Revisit if another loaded
+context file becomes an environment cache or preserved evidence is treated as
+current configuration.
 
 ## R3 — Retain commitments by default, preserve original intent
 

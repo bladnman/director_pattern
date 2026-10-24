@@ -20,7 +20,7 @@ Supply each child an explicit worker/director role, indexed responsibility and
 references, scope, ownership, verification tier, evidence, and return route.
 Supervise, evaluate, and integrate its return; report descendant handles and
 unresolved work to your assigner. Delegation never escalates your role.
-Before staffing, load [ROLES.md](ROLES.md), [MODELS.md](MODELS.md) with the actual host mapping, [IDENTITIES.md](IDENTITIES.md), and
+Before staffing, load [ROLES.md](ROLES.md), [MODELS.md](MODELS.md), resolving current host controls at relevant staffing, [IDENTITIES.md](IDENTITIES.md), and
 [ASSIGNMENT.md](ASSIGNMENT.md); follow their discovery, capability, reservation,
 and bounded-assignment requirements. If a route or capability is unavailable,
 report that limitation;

@@ -62,10 +62,13 @@ role values. A new project conversation defaults to its Director; explicit
 assignments determine bounded roles and authority. Inherited history does not
 grant a role. Follow current package contracts for the full rules.
 
-Adoption also maps what staffing needs, in the project's PROJECT context: a
-canonical role index (reuse existing maintained roles and guardrails), the host's
-model and effort mapping, the recorder route and state location, and the identity
-roster location. A missing mapping stays a visible gap; do not invent generic
+PROJECT records enduring context and canonical locators: the role index (reuse
+maintained roles and guardrails), capability/authority policy, Recorder routing
+policy and state location, and the identity roster location. Resolve current host
+controls when used. Model/version IDs, current agents or teams, capacity, tools,
+permissions, and setup observations belong in assignment/receipt/activity evidence,
+not PROJECT or another loaded environment cache. A missing applicable definition
+stays a visible gap; do not invent generic
 specialists to fill it.
 
 Tracked is the default; lean is an explicit option. Existing trackers remain
@@ -89,10 +92,12 @@ observed reads/acknowledgments and action sequence; label unrun trials pending.
 For the separate Director identity check, resolve the assignment role
 first. Only the project Director requests the current-conversation setup check:
 a Small recorder checks actual wiring, required files, project mode/state, and
-whether PROJECT names the role index, model mapping, recorder route, and identity
-roster location; the Director judges that receipt and its own resolved role.
+whether PROJECT names the role index, enduring capability/authority policy,
+Recorder routing policy, and identity roster location; the Director judges that
+receipt and its own resolved role.
 The check runs in the background when the Director first staffs work and never
-delays an answer.
+delays an answer. Its results stay in the conversation or receipt, not PROJECT;
+installation provenance and acceptance live in PROJECT's authoritative receipt.
 Request Managers receive the checked facts in their assignment, and workers,
 reviewers, and recorders omit the badge without launching this Director-only check.
 Only a checked project Director uses `🎬 Director Pattern · tracked` or
@@ -144,8 +149,11 @@ model, scheduler, or new software is installed.
 
 Back up files to be changed and verify their bytes. Compare installed baseline,
 local current files, and incoming revision, including prior upstream and persistent
-adaptations. Preserve project state, role index and definitions, model mapping,
-and identity roster. Select checks from the upstream delta and local drift:
+adaptations. Preserve project state, role index and definitions, enduring
+capability/authority policy, and identity roster. Preserve old environment mappings
+as history/evidence outside startup; do not promote observations into future rules.
+Retained host adapters remain conditional and require current capability checks.
+Select checks from the upstream delta and local drift:
 routine prose changes need focused file/link and preservation checks; helper-only
 changes need compatibility and relevant disposable fixtures. Reuse still-applicable
 evidence for unchanged startup. Full startup audits apply to structural startup,

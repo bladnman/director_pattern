@@ -43,8 +43,8 @@ not payload. A temporary staging clone is optional transport only.
    whether it is public. If it is public, or its visibility cannot be checked,
    warn the user once: `sources/` keeps their exact messages and attachments, and
    pushed history stays readable after a later deletion. Record the warning in
-   PROJECT so later conversations and machines do not repeat it. Keeping more
-   local is the project's choice, never a setup default; see
+   the setup receipt, reachable from PROJECT, so later conversations and machines
+   do not repeat it. Keeping more local is the project's choice, never a setup default; see
    [STATE](STATE.md#version-control). A template repository commits only the
    contracts and a placeholder PROJECT, never initialized config, requests,
    sources, activity, or a completed receipt; each generated project runs its
@@ -52,23 +52,30 @@ not payload. A temporary staging clone is optional transport only.
 2. Resolve published GitHub `main` to one exact commit SHA and inspect the selected
    revision before copying; retain its URL/SHA as the installation source. A local
    unpublished candidate must be labeled as such. An authorized installation agent
-   copies the selected manifest files. Fill installed PROJECT context from actual facts,
-   leaving unknowns visible. The adoption request and current host/assignment
+   copies the selected manifest files. Fill installed PROJECT with enduring project
+   context and canonical locators;
+   keep setup results and environment observations in the receipt, with unknowns
+   visible there. Do not seed PROJECT with model/version IDs, agent/team names,
+   slot counts, tool/permission/context/return-route observations, or dated caches.
+   The adoption request and current host/assignment
    establish setup authority;
-   apply default tracked mode and observed mappings within that authority, leaving
+   apply default tracked mode and durable policy within that authority, leaving
    ungranted policy decisions to the accountable owner. Tracked is default; lean optional.
    An existing canonical tracker uses the contract without creating a second store.
-   Map PROJECT's role index, project-wide guardrails, durable capability policy and
-   scoped host observations under [MODELS](MODELS.md#projecthost-mapping), Recorder
-   route and state policy, and identity roster location. Reuse existing maintained
-   definitions; generate a project-owned role index only when none exists,
+   Map PROJECT's role index, project-wide guardrails, durable capability/authority
+   policy under [MODELS](MODELS.md#projecthost-mapping), Recorder responsibility and
+   conditional routing policy, canonical state, and identity roster location.
+   Validate relevant current capabilities without making a loaded environment
+   definition. Any host-specific adapter locator stays conditional and is validated
+   at its relevant use. Reuse existing maintained definitions; generate a project-owned role index only when none exists,
    registering package definitions and actual project roles under STARTUP. Fill
    PATTERN’s canonical-index locator and record that same path in PROJECT. Never
    present illustrative entries as real roles. The roster lives in current activity, never in a seed.
 3. For a new bundled tracked store, use an authorized setup actor to run
    `python3 <target>/.director/tools/requests.py init`. It creates/preserves config
    schema 1 and initializes request-store schema 2 with a stable project ID.
-   Record the actual init receipt in PROJECT; do not hand-invent identity or
+   Keep the actual init evidence in the setup receipt and its locator in PROJECT;
+   do not hand-invent identity or
    convert legacy stores. Config is generated setup, not an extra copied file.
    Commit it: its project ID is the root of every request and source ID, so a
    clone that ran its own init would no longer match the committed records.
@@ -165,8 +172,9 @@ in a newly created disposable directory, never by adding dummy actual requests:
    or maintainer document is required for this check.
 
 Obtain a factual setup receipt with the actual startup wiring, required files,
-project configuration/mode, and canonical state checked. Align PROJECT's startup
-fields with that evidence. The installing agent can prepare this receipt within
+project configuration/mode, and canonical state checked. PROJECT points to that
+authoritative evidence; it has no continually filled startup or conversation fields.
+The installing agent can prepare this receipt within
 its adoption authority; use existing authorized recording/staffing capabilities
 where available. No Director title or newly spawned Recorder is required to
 perform setup. After adoption, the installed role-specific staffing/state rules
@@ -195,8 +203,10 @@ Do not restart the first-install procedure just to update an older installation.
 Active-project discovery defaults to daily notification; recorded project-scoped
 “always update director pattern” authorizes the same safe update protocol. Reuse
 the existing hook and preserve local
-context, adaptations, identities, role index and definitions, model mapping, identity
-roster, canonical state, and unfinished work. Missing
+enduring context and policy, adaptations, role index and definitions, identity
+roster, canonical state, and unfinished work. Preserve historical environment
+mappings as evidence outside startup under UPDATES, not as future configuration.
+Missing
 baselines require comparison to the prior pinned upstream revision or explicit
 review, never blind replacement. Record a new source revision only after checks
 succeed; no tracker migration is an update side effect.

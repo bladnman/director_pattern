@@ -10,7 +10,7 @@ installation, dependency, or wakeup. Existing project and host permissions still
 
 ## Daily discovery and project preference
 
-Use the authoritative receipt and PROJECT to reconcile acceptance, separately from
+Use PROJECT's authoritative receipt pointer to reconcile acceptance, separately from
 the current-conversation setup check and pending behavioral trials under
 [DIRECTION](../DIRECTION.md#check-installation-before-using-director-identity).
 An accepted baseline with a successful current setup check permits daily discovery
@@ -183,14 +183,28 @@ upstream revision and inspect local differences, or require explicit review. Unk
 provenance is a review requirement, never evidence that replacement is safe. Missing
 baselines alone do not require a full startup audit or fresh-agent trial.
 
-Preserve project context/overlays, host mappings, custom adapters, additions to
-`.director/.gitignore`, state mode, stable
-project/request IDs, source bundles and attachments, request history, activity,
-decisions, and actual handles. Also preserve the project-owned role index, its role
-definitions and overrides, project-wide guardrails, model/host mapping, and the
-identity roster, cursor, and current activity. These are project-owned, not
-upstream payload; an initialized roster or cursor never overwrites current state.
-A project's replacement identity pool is an adaptation, merged like any other.
+Preserve enduring project context/overlays, authorized budget/authority policy,
+conditional custom adapters, additions to `.director/.gitignore`, state mode,
+stable project/request IDs, sources and attachments, request history, activity,
+decisions, and actual handles. Preserve the project-owned role index, definitions,
+applicable overrides and guardrails, identity roster/cursor, and current activity.
+These are project-owned; an initialized roster or cursor never overwrites current
+state. A replacement identity pool is an adaptation, merged like any other.
+
+Preservation does not promote old environment mappings into current authority.
+When PROJECT or another loaded instruction contains model/provider/version IDs,
+agent/team rosters, slot counts, tool/permission/context/inheritance/return-route
+observations, or setup results, preserve the original in verified backup/history
+and recovery-relevant evidence in the actual receipt/activity record. Remove that
+observational category from PROJECT and the loaded operating instructions, rather
+than changing the number, dating it, or moving it to a new loaded environment
+cache. Keep durable user-authorized constraints, stable responsibility IDs, product
+requirements, and canonical locators; do not weaken permission or spending policy.
+If a purported restriction's authority is unclear, resolve its provenance with the
+owner before weakening it. Record the cleanup and preserved evidence locator in
+the update receipt. Retained host-specific adapters must have explicit applicability
+and current capability validation before use; historical mappings do not configure
+the next host. Resolve runtime controls at their relevant use under [MODELS](../MODELS.md#projecthost-mapping).
 
 Policy adoption does not reassign work. Existing open director-owned requests keep
 their owner, handles, and obligations until an explicit acknowledged assignment or

@@ -95,7 +95,6 @@ test('the public narrative names the Director and one-manager-per-outcome respon
   assert.match(guide, /maintained responsibilities, not new\s+role values/);
   assert.match(guide, /Managers and other actors use an assigned identity[^.]*never\s+the badge/);
   assert.match(html, /Managers and other actors use an assigned name[^.]*never the badge/);
-  assert.match(guide, /role index[\s\S]*model and effort mapping[\s\S]*recorder route[\s\S]*identity\s+roster/);
   assert.match(html, /<p class="status-limit">[^<]*project Director role[^<]*managers or workers[^<]*<\/p>/);
 });
 

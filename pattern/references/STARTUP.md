@@ -20,7 +20,11 @@ Do not invent an abstract of the method in AGENTS.md.
    transitively required instructions, including parent/global files and existing
    AGENTS, CLAUDE, or equivalent files. Record what is actually loaded versus
    merely present. Review the whole startup chain for size, duplicated policy,
-   competing defaults, and specialized duties applied to everyone. Merely adding
+   competing defaults, specialized duties applied to everyone, and historical
+   environment observations being loaded as instructions. Keep PROJECT to enduring
+   context, authority, responsibilities, and canonical locators. Preserve setup and
+   runtime evidence in receipts/history outside startup; do not replace a host cache
+   with another automatically loaded environment definition. Merely adding
    a small hook to an enormous file does not complete this audit. There is no
    arbitrary word limit: judge what every actor needs before role selection.
 2. Keep applicable project authority, safety, collaboration, and release/send

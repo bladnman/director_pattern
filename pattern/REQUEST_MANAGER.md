@@ -32,7 +32,7 @@ dependencies on your behalf.
 ## Start with the whole request
 
 Read and acknowledge the assignment, exact source and addenda, project role index,
-applicable shared rules, [model policy](MODELS.md) and host mapping,
+applicable shared rules, [model policy](MODELS.md) and relevant current host controls,
 [Recorder](RECORDER.md) route and state policy, and your [identity](IDENTITIES.md).
 Return missing or conflicting required context to the assigner. Do not begin
 affected work under an improvised generic role; unaffected work can continue within

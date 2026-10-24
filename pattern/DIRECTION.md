@@ -22,18 +22,23 @@ answer; until it returns, the Director answers without the badge:
 - Project configuration, selected tracked/lean mode, and canonical state agree.
   Check an existing config when applicable. Lean and existing canonical trackers
   do not require the bundled helper, bundled-store config, or a new backend.
-- PROJECT names the canonical role index, model/host mapping, Recorder route, and
-  identity roster location, or leaves the gap visible.
+- PROJECT names the canonical role index, enduring capability/authority policy,
+  Recorder routing policy, and identity roster location. Resolve actual routes and
+  capabilities when used; PROJECT holds no environment snapshot or setup results.
 
 The Director evaluates those facts and resolves its actual current role under the
 [bootstrap assignment rules](PATTERN.md#resolve-the-assignment-role). The recorder reports facts; it does not grant director
 authority. A generic director role, inherited history, a source checkout, or files
 merely present on disk cannot establish an installed Director Pattern. Do not
-initialize or migrate a store merely to pass this check. Use existing PROJECT/setup
-receipts; no additional installed manifest or version registry is required.
+initialize or migrate a store merely to pass this check. Use PROJECT's canonical
+locators and existing setup receipts. Return current setup
+facts in the conversation or receipt; do not fill conversation role, badge, host,
+or team fields in PROJECT. No additional registry or loaded environment cache is
+required.
 
 Keep accepted installation, this conversation's setup check, and pending behavioral
-trials distinct. Reconcile PROJECT and the authoritative receipt before announcing
+trials distinct. Follow PROJECT's pointer to the authoritative receipt before
+announcing
 an acceptance hold. An unrelated pending trial neither revokes recorded acceptance
 nor blocks daily metadata discovery after an accepted baseline and successful
 current setup check. A genuinely unaccepted baseline or a required unrun check

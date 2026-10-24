@@ -12,9 +12,12 @@ the project Director and a Request Manager bounded to one outcome both carry
 not new role values. A specialty such as engineering, testing, or release is a task
 inside an outcome, not a reason for another manager. The Director can optionally
 dispatch substantial independent analysis that returns a proposal. Before staffing,
-an installation maps a project role index, the host's model and effort options, a
-Recorder route, and an identity roster; it adds no runtime and guarantees no live
-agents. An update leaves those project-owned mappings in place.
+an installation records enduring context, the canonical role index, capability and
+authority policy, Recorder routing policy, and the identity roster locator. Runtime
+controls are resolved when used; model/team/host observations stay in assignment or
+receipt evidence, outside PROJECT and startup instructions. It adds no runtime or
+live-agent guarantee. Updates preserve project policy and historical evidence
+without treating past environment mappings as current configuration.
 
 **New here? [Start with the website](https://director.metal-sole.com/)** for the
 overview and copyable requests to install, check, or update it through your

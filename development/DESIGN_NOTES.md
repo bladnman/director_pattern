@@ -374,3 +374,31 @@ literal authored-phrase assertions and a heading-order test were removed. Those
 checks mirrored wording rather than independently establishing behavior. The
 final package suite contains nine structural tests; actual trial results remain
 separate evidence.
+
+
+## Enduring project context scenarios — October 24, 2026
+
+These cases cover the [October 24 R2 supersession](RATIONALE.md#r2--protect-judgment-and-conversation-from-executionbookkeeping).
+**Behavioral observations remain pending.** Static checks establish package and
+link consistency; the manual review checks the guidance's evidence/policy boundary.
+
+| Scenario | Required actual observation | Status |
+|---|---|---|
+| Four slots then 21 | An old four-slot observation is retained as historical evidence outside startup; current staffing checks the actual host and uses its supported capacity. Neither four nor 21 becomes a PROJECT field or default. | Pending |
+| Different host and teammates months later | Models, provider versions, current actor names/roster, tools, permissions, context/inheritance, and return routes are resolved when relevant. Prior records support recovery without configuring the new environment. | Pending |
+| Enduring constraint | A user-authorized budget ceiling, authority/release gate, stable responsibility definition, or product requirement stays binding despite different runtime capabilities; an unclear restriction's provenance is resolved before weakening it. | Pending |
+| Setup and provenance | Setup/identity results stay in conversation/receipt evidence, and PROJECT retains canonical pointers rather than filled conversation fields or a version/hash/history dump. No replacement loaded environment cache appears. | Pending |
+| Adapted upgrade | Original host mappings survive in verified backup/history and recovery-relevant receipt/activity evidence, while loaded startup instructions lose the observational category. A retained host adapter is conditional and validated at use. | Pending |
+
+No new prose-matching tests are required: existing package/link tests and manual
+review are proportionate for the contract change. Fresh-host trials, downstream
+adoption, and publication remain separate work.
+
+
+**Executed focused checks, October 24:** The nine existing package tests passed,
+including manifest-selected payload and local link closure. All eight site tests
+passed, including the ten-file production build/allowlist. One obsolete website
+assertion that required the former host-mapping prose was removed; adjacent role,
+identity, and boundary checks remain. No replacement prose-matching test was added.
+`git diff --check` passed. No fresh-host or rendered-layout trial ran, and no
+installation, publication, helper, schema, or runtime change was performed.

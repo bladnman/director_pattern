@@ -34,16 +34,24 @@ not automatically the weakest available model.
 This policy is the project instruction to choose model and effort where the host
 allows project-directed selection; it cannot override a stricter host restriction.
 
-PROJECT keeps durable capability/effort policy and existing valid user/project
-preferences separate from host observations. Scope observed controls, inheritance,
-context, and capacity constraints by host and observation time. A previously
-selected concrete model is evidence/cache for that assignment and host, never a
-permanent role default or global model policy.
+PROJECT contains enduring capability/reliability needs, user-authorized budget and
+authority constraints, and canonical policy locators. It contains no observed host
+configuration, concrete model/provider/version IDs, current agent/team roster,
+capacity, permission, context/inheritance, messaging, or continuation observations,
+even as a dated cache. Stable project responsibility IDs and actual product
+requirements remain separate from runtime observations. Do not move this material
+to another automatically loaded environment definition or cache.
+
+Where recovery needs an observation, retain it with its actual assignment, receipt,
+or activity evidence, scoped by host/time and uncertainty. A prior observation or
+selection never governs the next host or assignment and grants no authority.
 
 At relevant staffing, resolve concrete model identifiers **and** effort from the
-current host's actually exposed controls, within existing authority. Refresh the
-observed mapping when the host differs, exposed options change, or a saved selection
-is unavailable. This is bounded setup maintenance, not an every-turn catalog,
+current host's actually exposed controls, within existing authority. Resolve other
+relevant execution, capacity, permission, context, and return-route capabilities
+when they are used; a saved observation cannot substitute for current support.
+A retained host-specific adapter locator is conditional on its applicability and
+current capability validation. This is bounded discovery, not an every-turn catalog,
 exhaustive probe, model-comparison job, or external product-research task. If controls
 do not expose availability, retain that uncertainty and use a supported suitable
 route; do not invent identifiers.
@@ -63,7 +71,7 @@ choose an allowed suitable alternative and record it, or return a consequential
 limitation to the assigner. Never describe an inherited model as Small without
 evidence or infer costs from tier names.
 
-Routine supported remapping is agent-owned maintenance within existing authority;
+Routine supported selection is agent-owned within existing authority;
 it needs no repeated confirmation or user-facing "gap." Escalate a real unresolved
 choice or limitation affecting authorization, cost, reliability, or ability to
 proceed. Keep genuine blockers and unknown effective settings visible.

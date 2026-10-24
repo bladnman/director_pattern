@@ -96,7 +96,7 @@ one-pass limit.
 ## Staff with the organization's knowledge
 
 Before staffing, follow [ROLES.md](ROLES.md) against the canonical project role
-index, and [MODELS.md](MODELS.md) with the project's host mapping. Managers receive
+index, and [MODELS.md](MODELS.md), resolving current host controls at relevant staffing. Managers receive
 those same required references. If you directly staff specialist work, the same
 discovery and acknowledgment requirements apply to you. Do not create generic roles
 that bypass a matching maintained role's guardrails.

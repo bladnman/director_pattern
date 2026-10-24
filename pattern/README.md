@@ -40,9 +40,12 @@ choose to keep more local;
 see [STATE.md](STATE.md#version-control).
 
 Before the Director can staff work, the installation maps four project facts in
-PROJECT.md: a canonical role index ([ROLES.md](ROLES.md)), durable capability policy
-and scoped host observations ([MODELS.md](MODELS.md)), the Recorder route and state
-location, and the identity roster location ([IDENTITIES.md](IDENTITIES.md)). Reuse the project's
+PROJECT.md: a canonical role index ([ROLES.md](ROLES.md)), durable capability and
+authority policy ([MODELS.md](MODELS.md)), the Recorder responsibility/routing policy
+and state location, and the identity roster location ([IDENTITIES.md](IDENTITIES.md)).
+PROJECT holds enduring context and canonical locators, never a host/model/team
+snapshot; current runtime controls are resolved when used and recovery evidence
+stays in assignments, receipts, or activity. Reuse the project's
 existing maintained roles and guardrails. Missing roles/routes stay visible;
 routine supported model remapping follows MODELS within existing authority.
 
@@ -85,9 +88,10 @@ Ask the agent working in that project:
 Read this package's README.md and follow its INSTALL.md to install the candidate
 Director Pattern in the target project. Preserve existing instructions, local
 adaptations, unfinished work, and the canonical tracker. Copy only the selected
-manifest payload, fill PROJECT.md from real context (role index, capability policy
-and scoped host observations, Recorder route, identity roster), and verify supported
-host capabilities.
+manifest payload, fill PROJECT.md with enduring context and canonical policy/state
+locators (role index, capability/authority policy, Recorder routing policy, identity
+roster location), and verify relevant current host capabilities. Keep environment
+observations and setup results in receipts, not PROJECT or another loaded cache.
 Do not publish, migrate requests, or copy the whole source repository.
 ```
 
@@ -116,8 +120,9 @@ Read installed guidance for local adaptations; preserve project-owned rules,
 adaptations, and state. Routine changes use focused checks and still-applicable
 evidence. Full startup audits and fresh-agent trials are triggered by affected
 structure, behavior, or defects; only required checks gate the new revision. The
-project's role index and definitions, model mapping, and identity roster belong to
-the project; an update does not replace them. An update request is distinct from
+project's role index and definitions, durable capability/authority policy, and
+identity roster belong to the project; an update preserves them. Historical host
+mappings remain evidence outside startup, not future configuration. An update request is distinct from
 reading the repository. While a project is active, only its checked Director
 arranges a tiny metadata check at most once per 24 hours, including failures.
 Default to: **A new Director Pattern is available. Say “update director pattern”
