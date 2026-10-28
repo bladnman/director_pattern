@@ -1200,6 +1200,89 @@ establish universal future compatibility or fresh-session compliance.
 **Revisit:** frequent interface changes, unavoidable engine edits for local policy,
 or project-owned callers require repeated reconstruction after compatible updates.
 
+## R17 — Keep delegated work supervised and recover the user’s whole request
+
+**Decided October 27:** The parent retains the user’s request and completion
+obligations while work is delegated. Stable project/request references connect
+owners’ requirements, progress, returned records, and evidence. Existing trackers
+stay canonical; small assignments do not each need a new request folder.
+
+**Problem and supported cause:** Existing contracts already required observation,
+evaluation, rework, and exit accounting. Their external-owner exit did not
+explicitly distinguish an independently accountable project from a subordinate
+director. Recovery was described as an operation without making reconciliation a
+normal duty at an active project conversation. Those are visible wording gaps.
+Reports that users had to ask a Director to continue do not establish whether
+workers were running, blocked, or misclassified in those incidents; that causal
+explanation remains a hypothesis because those execution traces were not inspected.
+
+A separate local observation showed a narrower execution failure: sending a
+request to an idle, completed actor did not start a new turn. Actual status
+inspection and the host’s supported continuation operation resumed the same owner.
+A queued or delivered message is therefore not sufficient evidence of execution.
+The durable correction states that distinction without prescribing host-specific
+tools or treating silence as a blocker.
+
+**Why and tradeoff:** Delegation protects the Director’s attention only if it
+continues to observe and evaluate the entrusted work. A subordinate director does
+not become an external ownership transfer by receiving a director role. The
+existing genuine external-handoff exception remains for independently owned
+projects with actual acknowledgment. This refines the earlier R5/R9 exit language;
+it does not promise a daemon, wakeup, uninterrupted inference, or continuation
+after the host ends a run. Explicit pauses, real blockers, interruptions, and
+reserved authority retain their existing effects.
+
+**Cadence refinement, October 27:** This supersedes the October 19/23 reading that
+any ordinary progress update can indefinitely replace a consolidated overview.
+While delegated work is outstanding, an overview about every five minutes, or the
+user/project interval, accounts for all held streams and owners, including quiet
+work and returns awaiting evaluation, with next actions. Ordinary progress can
+satisfy that duty only when it provides equivalent coverage. Stricter host progress
+updates remain concise; they do not each require another full report.
+
+**Superseded later October 27 — proactively labeled reports:** The same
+conversation exposed the remaining gap: the owning Director had sent progress
+updates but no proactively labeled situation report before the user asked. That
+observed output failure is distinct from hypotheses about the earlier reported
+incidents. It also shows why equivalent ordinary coverage is insufficient for the
+user’s explicit expectation of a recognizable report.
+
+The later decision requires a proactively labeled **📋 SitRep** while delegated
+work is outstanding, about every five minutes or at the user/project interval.
+Ordinary progress and status questions neither replace nor reset it. The first
+interval starts at actual dispatch; resumed work whose report is overdue or has
+unknown timing receives a prompt report. Stricter host progress updates stay
+concise and separate. This supersedes the immediately preceding equivalent-update
+exception while retaining the earlier reasoning as history. Host interruption
+still limits execution; no file supplies a daemon or wakeup.
+
+**Implemented ownership:** [DIRECTION](../pattern/engine/DIRECTION.md#recover-and-supervise-held-work)
+owns the supervision/recovery loop and exit distinction.
+[STATE](../pattern/engine/STATE.md#parent-commitment-and-requirement-traceability)
+owns parent references and evidence retention;
+[ASSIGNMENT](../pattern/engine/ASSIGNMENT.md) carries those references into bounded
+work. Role definitions point to those contracts rather than repeat the policy.
+The scope is entrusted unfinished work within existing authority, not automatic
+execution of casual conversation or every queued idea.
+
+**Concrete regressions:** A parent keeps observing a running worker and a bounded
+child director after answering a status question; an incomplete submission returns
+to its same owner for rework. A later active conversation inspects saved handles,
+returns, and artifacts before resuming authorized work, instead of blindly
+restarting stale tasks or calling them stuck. Child returns preserve parent and
+local record IDs, observed status/time, and evidence locators. A genuine external
+owner’s acknowledged transfer keeps the source commitment waiting without
+requiring the source to supervise that owner’s descendants. Explicit discussion-only
+requests remain conversational.
+
+**Verification boundary:** The instruction changes and public explanation are
+implemented. Deterministic fixture results and actual bounded runtime observations
+are recorded separately in [validation notes](DESIGN_NOTES.md#active-supervision-recovery-and-traceability--october-27-2026).
+No test of prose or stored status alone proves active supervision.
+**Revisit:** child director assignments still become accidental exit routes,
+restart reconciliation duplicates work, or traceability starts forcing a second
+tracker or a new record per tiny task.
+
 ## Maintain this explanation
 
 At a material design choice, update the relevant topic rather than append every

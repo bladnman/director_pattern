@@ -486,3 +486,63 @@ in each stencil, with verified backups and unchanged custom-neighbor hashes;
 the follow-up check reported no changes. This is scoped candidate-file adoption,
 separate from adoption into this repository's live installation, behavioral
 verification, or publication.
+
+
+## Active supervision, recovery, and traceability — October 27, 2026
+
+[R17](RATIONALE.md#r17--keep-delegated-work-supervised-and-recover-the-users-whole-request)
+clarifies the existing supervision and exit contract rather than adding a runtime.
+The canonical loop belongs to [DIRECTION](../pattern/engine/DIRECTION.md#recover-and-supervise-held-work);
+[STATE](../pattern/engine/STATE.md#parent-commitment-and-requirement-traceability)
+retains the parent request and owner evidence; ASSIGNMENT transmits stable parent
+and return references.
+
+**Evidence boundary:** The originating reports of apparently stalled Directors
+remain user reports. Their execution traces were not inspected, so neither actual
+worker liveness nor the exact cause of those responses is established. A separate
+local observation did establish that a queued message to a completed actor did
+not resume it: status inspection followed by the supported continuation operation
+started that same owner. This supports checking execution rather than treating
+message delivery as dispatch or silence as blockage. Host-specific operations and
+exact traces remain private evidence.
+
+**Later cadence correction:** The owning conversation itself lacked a proactively
+labeled report before the user asked, despite progress updates. The final wording
+therefore removes ordinary-update substitution and makes the labeled report due
+from actual dispatch, with prompt reporting on overdue or unknown resume timing.
+A child’s report does not establish that the user received a report from the owning
+Director. The finite runtime observations below did not run long enough to verify
+the five-minute proactive cadence; that remains an explicit behavioral limit.
+
+**Executed checks:** All 55 development tests passed, including two disposable
+schema-backed traceability/lifecycle cases. All eight site tests and the ten-file
+public build passed. The site’s three-width browser checks (1440, 390, 320) covered
+no horizontal overflow, three exact copy actions by keyboard, denied-clipboard
+selection, anchor navigation, reduced motion, no page errors, and access with
+JavaScript disabled. Nineteen local Worker HTTP checks covered HTML/Markdown
+negotiation, HEAD, public asset bytes, and missing/private-path 404s. These site
+checks exercised the uncommitted release assets, not the earlier published commit.
+
+A fresh bounded Request Manager supervised a real worker. An actual status query
+while that child was running received an evidence-based running response without
+claiming an accepted return. The first returned artifact intentionally omitted a
+required digest. The manager rejected it, resumed the same child for rework, then
+parsed and checked the corrected return. An independent check confirmed its count,
+sum, exact digest, and parent references. All actors in that finite loop returned
+with no unattended descendants. This is observed execution and evaluation, not a
+prose-only answer about what a Director should do.
+
+A separate fresh recovery reader compared a dated running snapshot with actual
+completed-host evidence and independently parsed the final artifact against its
+input. It confirmed the required count, sum, digest, and parent references, and
+correctly concluded that no restart or remaining manager evaluation was needed.
+All trial descendants returned and were evaluated. This establishes a bounded,
+prompted recovery observation; it does not demonstrate restoration after a host
+interruption or spontaneous startup recovery on an unrelated session.
+
+**Limits:** The missing-field fault was deliberately controlled. The finite trial
+does not establish unbiased production reliability, a five-minute report cadence,
+continuation through host interruption, unassigned Director auto-discovery, or
+universal future-host compliance. Explicit pause and genuine external transfer
+remain scenario controls, not actual handoffs observed in this trial. The package
+installs no scheduling or liveness service.

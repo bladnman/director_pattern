@@ -37,6 +37,8 @@ Maintained responsibility: selected canonical role ID + definition locator
 Assigning actor and accountable outcome owner:
 Display identity: reserved marker + short Capitalized name; bold name in report prefix per IDENTITIES.md
 Stable outcome/assignment identity; permitted return route:
+Parent project ID + request ID, locator/return route, assigned requirement references:
+Owner acknowledgment and return references: own record/assignment ID + locator; requirement status/evidence/time:
 Outcome, exact source/addenda, full completion obligations and acceptance:
 Chosen deliverable and required review evidence (artifact, rendered alternatives, working behavior, or text):
 Scope, file/resource ownership, authority, reserved decisions, exclusions, dependencies:
@@ -53,6 +55,8 @@ Return missing/conflicting applicable definitions; no silent generic fallback.
 Use this same reference-loading/identity/authority rule for any descendants.
 ```
 
+Carry parent and return references under [STATE's traceability contract](STATE.md#parent-commitment-and-requirement-traceability)
+without creating a separate tracker for each small assignment.
 Every assignment fills the parallel-plan and verification-tier lines; see the
 [parallelization check](DIRECTION.md#assign-bounded-work) and
 [verification tiers](MODELS.md#verification-tiers). Parallel actors share the

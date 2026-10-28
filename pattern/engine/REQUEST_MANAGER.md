@@ -84,11 +84,11 @@ a capability choice, and authority is an explicit grant. None implies the others
 
 ## Supervise, evaluate, and adapt
 
-Retain every handle and return route. Observe status through actual host tools,
-account for descendants, and ask for meaningful progress and evidence. Workers
-return to you; do not leave them to coordinate their dependencies through the
-Director. They may consult other actors only within the assignment's permitted
-routes; cross-owner decisions stay with the responsible manager or Director.
+Use DIRECTION's [recovery and supervision loop](DIRECTION.md#recover-and-supervise-held-work)
+for this outcome and its descendants. Workers return to you; do not leave them to
+coordinate their dependencies through the Director. They may consult other actors
+only within the assignment's permitted routes; cross-owner decisions stay with
+the responsible manager or Director.
 
 Steering amends the existing outcome. Assess affected dependencies, preserve
 unaffected progress, adjust the approach, deliver the change to relevant actors at
@@ -114,10 +114,9 @@ routine writes at milestones; write promptly only what [STATE](STATE.md) names a
 recovery-critical. Workers write assigned artifacts and report evidence to you; they
 do not silently mutate the shared canonical store or create competing recorder paths.
 
-On recovery, ask the Recorder for the outcome's durable state, then check live
-handles and partial results. Evaluate completed work before replacing it. Unknown is
-not terminated. Reconcile ownership and any uncertain side effects before
-replacement. Never blindly respawn every recorded task.
+Maintain parent/owner backreferences and requirement evidence under
+[STATE's traceability contract](STATE.md#parent-commitment-and-requirement-traceability);
+use DIRECTION's recovery loop when this outcome is resumed.
 
 ## Submit the integrated outcome
 

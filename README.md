@@ -1,6 +1,6 @@
 # Director Pattern
 
-**[v1.0.0](https://github.com/bladnman/director_pattern/releases/tag/v1.0.0) · October 23, 2026.** The project Director stays in conversation,
+**[v1.1.0](https://github.com/bladnman/director_pattern/releases/tag/v1.1.0) · October 27, 2026.** The project Director stays in conversation,
 keeps its unfinished commitments, and accepts each outcome. Each complete outcome has
 one accountable owner, normally a Request Manager; specialists execute; a shared
 recorder preserves state.

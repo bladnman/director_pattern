@@ -1,6 +1,6 @@
 # Director Pattern: for an agent
 
-**[v1.0.0](https://github.com/bladnman/director_pattern/releases/tag/v1.0.0) · October 23, 2026.**
+**[v1.1.0](https://github.com/bladnman/director_pattern/releases/tag/v1.1.0) · October 27, 2026.**
 The release names a published source revision; installation and update checks still
 pin exact commits and compare the package tree under the canonical update protocol.
 
@@ -114,16 +114,21 @@ heading **📋 SitRep**. Reserve that heading for report blocks so the user can 
 them; do not attach it to every progress sentence. A checked Director keeps its
 required `🎬` response prefix before the report block.
 
-Use a periodic overview after several minutes of otherwise quiet managed work or
-when several developments or workstreams benefit from one combined report.
-Ordinary replies, worker returns, and status changes do not automatically need a
-full SitRep. Communicate meaningful changes promptly; meaningful ordinary progress
-updates already satisfy the cadence without a redundant report. Allow no more
-than five minutes of silence during supervision, respecting stricter host timing
-with concise updates. Overviews keep active, waiting, returned, and pending-evaluation
-work visible with current evidence and next proof while supervision continues.
-Stored status does not prove execution. Follow the installed DIRECTION contract's full cadence
-and exit rules.
+While delegated work is outstanding, proactively provide a labeled **📋 SitRep**
+about every five minutes or at the user/project interval. Cover all held streams,
+including quiet work, actual blockers, and returns awaiting evaluation, with
+owners and next actions. Start the first interval at actual dispatch. On resume,
+report promptly if the report is overdue or its timing is unknown. Ordinary
+progress, status questions, and replies neither substitute for nor reset this
+report. Respect stricter host progress timing with concise updates; it does not
+require a full SitRep at each host interval.
+Stored status does not prove execution. Each active project conversation reconciles
+unfinished commitments with actual agents, returns, and artifacts, then resumes
+authorized work without blindly restarting it. A subordinate director remains
+under supervision; delegating to it is not an external ownership transfer. Parent
+project/request references connect owners’ requirements, observed status, and
+returned evidence. Follow the installed DIRECTION and STATE contracts for the
+full supervision, recovery, traceability, and exit rules.
 
 ## Update on an explicit request
 

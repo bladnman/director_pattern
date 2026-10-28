@@ -39,6 +39,9 @@ update protocol, never a blind overwrite or migration. Files do not schedule wor
 
 ## Preserve unfinished commitments
 
+Use DIRECTION's [recovery and supervision loop](DIRECTION.md#recover-and-supervise-held-work)
+at active conversation entry and throughout held execution.
+
 Maintain a compact working list: outcome/commitment, accountable owner, current
 approach or unresolved question, last observed state, next action or decision, and
 your resume point. Include unfinished thought as well as dispatched work. An

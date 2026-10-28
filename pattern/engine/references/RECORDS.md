@@ -81,6 +81,9 @@ Unknown top-level event keys are rejected, and canonical fields are reconstructe
 by replay with exact equality. Do not bolt manager metadata into request.md or
 invent JSON keys. Keep one outcome identity: distinguish its owner, its execution
 attempts, and its internal assignments without duplicating the request tree.
+Parent/owner backreferences and per-requirement status/evidence follow
+[STATE](../STATE.md#parent-commitment-and-requirement-traceability), using assignment
+artifacts, existing notes and current activity rather than new top-level fields.
 Steering an active or reviewed outcome uses the existing replanning transitions in
 [TOOLING](TOOLING.md#steer-an-active-or-reviewed-outcome).
 

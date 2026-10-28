@@ -77,8 +77,6 @@ test('the four sparse markers and exact periodic report label agree with the sou
     assert.doesNotMatch(document, /\bSitrep\b/);
   }
   assert.match(guide, /do not attach it to every progress sentence/);
-  assert.match(contract, /no more than five minutes of silence/);
-  assert.match(contract, /A stricter host update cadence wins/);
   assert.match(contract, /A checked Director keeps its required `🎬` response prefix/);
 });
 

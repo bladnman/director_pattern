@@ -147,7 +147,8 @@ or inviting judgment can still require an artifact or changed behavior; a sensib
 written answer cannot replace it. Choosing a faster reply must not shrink the
 intended deliverable. This exception never skips startup definitions or references.
 Delegation keeps the conversation fast and the Director's context clean while
-real work runs; it is never the goal.
+real work runs; it is never the goal. This reply-only exception does not suspend
+[recovery or supervision of held work](#recover-and-supervise-held-work).
 
 Delegate work that is substantial, can run in parallel, needs a separate context,
 or changes the project, including substantial analysis and coordination even when
@@ -238,25 +239,69 @@ and receipt through the recorder. Batch other routine writes at milestones under
 Maintain a compact current activity/recovery pointer in either state mode. A saved status or existing chat is not proof that
 execution is alive.
 
-Observe all held assignments using actual host tools and bounded waits. Do useful
-director work between observations; remain available for user questions and
-steering. A status question does not cancel ongoing work. Steering reaches the
-existing outcome owner; preserve unaffected progress and acknowledge what was
-incorporated. Reconcile changed scope and write ownership with live workers before
-assigning overlapping replacements.
+### Recover and supervise held work
 
-Use **📋 SitRep** for a periodic overview of ongoing managed work when helpful:
-after several minutes of otherwise quiet work, or when several developments or
-workstreams benefit from one combined report. Do not add a full SitRep by default
-to every director reply, worker return, or status change. Answer ordinary
-discussion and direct questions in prose; use prompt brief progress updates for
-meaningful changes in results, failures, retries, blockers, or evaluation.
+At the start of each active project conversation, after role loading, reconcile
+unfinished commitments through the shared Recorder: original request and addenda,
+owners, requirements, actual handles, last observations, partial artifacts,
+pending evaluation, and next actions. A bounded manager recovers its assigned
+outcome; the project Director recovers its held project commitments. A discussion
+or status reply need not wait for reconciliation to finish; it does not close the
+held work. Recovery does not authorize unrelated queued work or restarting a paused
+outcome. Continue authorized unfinished work without waiting for the user to say
+"keep working," respecting real blockers and reserved decisions.
 
-While supervising, allow no more than five minutes of silence. Meaningful ordinary
-updates that already communicate progress satisfy this cadence; do not append a
-redundant SitRep. A stricter host update cadence wins and calls for concise updates,
-not a full report at every interval. Combine related developments into one overview
-when useful.
+While any owned assignment or descendant is executing or awaiting evaluation,
+keep the supervisory turn active using this loop:
+
+1. Observe real handles and returns with the host's supported status tools. A
+   delivered or queued message is not executing work. Check the recipient's actual
+   state and use its supported continuation/start route when needed; do not wait
+   indefinitely on an inactive recipient or dispatch a duplicate owner.
+2. Reconcile observations with partial outputs and the requirement/status evidence
+   in [STATE](STATE.md#parent-commitment-and-requirement-traceability). Resume the
+   existing owner when possible. Before replacing an uncertain attempt, settle
+   ownership and possible writes; never blindly respawn saved tasks.
+3. If work is running, do useful director work or use a bounded host wait, then
+   observe again. Answer status and steering promptly without ending supervision.
+   If a return arrived, evaluate it against the complete request and actual
+   artifacts, send concrete rework to the same owner for gaps, and observe the
+   resumed execution. A submission is not acceptance.
+4. Update recoverable status at meaningful changes and continue until the
+   integrated outcome is accepted or an actual [exit condition](#account-for-the-outcome-before-exiting)
+   applies. A plan, acknowledgment, status reply, or intermediate SitRep cannot
+   replace this loop.
+
+Classify status from observed evidence: running work is active; a submitted result
+awaits review; an unmet external/user condition is blocked with its owner and next
+action. Silence, elapsed time, an old activity row, or a temporarily idle actor is
+not proof that work is stuck or blocked. When observation is unavailable, retain
+unknown liveness and the next permitted check rather than inventing a failure.
+Use the canonical tracker's states without inventing new lifecycle values.
+
+Steering reaches the existing outcome owner; preserve unaffected progress and
+acknowledge what was incorporated. Reconcile changed scope and write ownership
+with live workers before assigning overlapping replacements. This loop uses actual
+host capabilities; it cannot keep a model alive after interruption, create a
+wake-up, or grant new authority.
+
+While delegated work is outstanding, proactively give a consolidated report
+labeled **📋 SitRep** about every five minutes, or at the project/user's agreed
+interval, without waiting to be asked. Cover all held streams, including quiet or
+stalled work and returned work awaiting evaluation, with owners and the director's
+next action. The first report is due from actual dispatch; each labeled SitRep
+starts the next interval. On resume or after interruption, reconcile the last
+labeled report time and give one immediately if due or unknown, rather than wait
+a fresh full interval. Keep this due time in the compact recovery state.
+
+Ordinary progress updates and answers to status questions are separate; neither
+resets the SitRep due time, even when informative. An already labeled consolidated
+SitRep satisfies the overview and needs no duplicate. Answer discussion and direct
+questions promptly, and report meaningful changes between overviews. A stricter
+host progress cadence calls for concise updates, not a full SitRep at every host
+interval. Do not add a full block to every reply, return, or status change. This
+is an active-turn duty within the host interruption/continuation limits above,
+not a daemon or a promised wake-up after the host stops.
 
 In a SitRep, account for active, waiting, newly finished, and pending-evaluation
 work without letting a quiet workstream disappear. Name owners by their identity
@@ -313,14 +358,20 @@ contributions; do not forward worker reports as the whole outcome.
 Answering the user is not claiming completion. A conversational or status reply can
 continue while supervision and obligations remain open; it closes nothing. Before
 claiming completion or ending supervision, account for every required worker,
-descendant, return, and evaluation currently held by this director. Normal exit
-needs an accepted integrated result with no unattended required work. Other exits
-require one of these real conditions:
+descendant, return, and evaluation currently held by this director. Delegating to
+a worker or subordinate director does not transfer this supervision duty. Do not
+send a final response that ends the host's turn while owned descendants are
+executing or awaiting evaluation merely because they can work independently.
+Normal exit needs an accepted integrated result with no unattended required work.
+Other exits require one of these real conditions:
 
 - The user stops, pauses, or releases the director; reconcile workers and disclose state.
 - A successor acknowledges supervision with handles, intent, outputs, and pending evaluation.
-- A real external owner acknowledges supervision of an agreed deliverable. Retain
-  the source commitment/acceptance as waiting and account for all other held work;
+- A genuinely independent external owner acknowledges an explicit transfer of
+  supervision for an agreed deliverable through an authorized route. A subordinate
+  worker or director carrying part of this request is not such a transfer, even
+  when it owns local planning or a separate record. Retain the source
+  commitment/acceptance as waiting and account for all other held work;
   the source need not remain online or manage the receiver's descendants. Source
   acceptance authority stays local and resumes on return or the next authorized
   session, without a promised wakeup. Proposed or merely sent work does not qualify.

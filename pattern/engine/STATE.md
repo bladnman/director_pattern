@@ -43,6 +43,33 @@ Lean and existing trackers need no bundled backend for this check. If evidence o
 the recorder is unavailable, report that limitation without claiming verification.
 The receipt is setup evidence, not behavioral acceptance or worker liveness.
 
+## Parent commitment and requirement traceability
+
+Retain the user's original actionable request, exact source/addenda, complete
+scope, and acceptance in its owning record until the whole authorized commitment
+is accepted or explicitly changed/canceled. Delegating parts never replaces that
+parent commitment with child completion reports. Independently finishable outcomes
+can retain their own records; an aggregate requested result still needs its
+whole-scope commitment. Do not manufacture an executing umbrella for unrelated
+outcomes merely because they share a message.
+
+Pass the stable parent project ID + request ID, assigned requirements, and a
+locator/return route with each delegation. Each owner acknowledges that reference
+and keeps its assigned requirements, current disposition, evidence or blocker,
+last observation time, and next action in its existing outcome/assignment record.
+On return or meaningful change, send its own record/assignment identity and current
+locator back to the parent, with requirement-level status and evidence. Preserve
+backreferences when records move or attempts resume. Links grant neither access nor
+permission; supply accessible context through an authorized route when needed.
+
+The parent reconciles those returns against the original requirements, including
+integration, evaluation, and release/follow-up gates. Keep recorded lifecycle and
+observed execution distinct: use the evidence-based status and recovery loop in
+[DIRECTION](DIRECTION.md#recover-and-supervise-held-work). In either state mode,
+use the existing tracker and shared activity/notes rather than create a duplicate
+tracker or a request folder for every tiny specialist task. These are information
+requirements, not new schema fields or automatic dependency semantics.
+
 ## Bundled tracked store
 
 For a new store, initialize the bundled request-folder format through the helper.

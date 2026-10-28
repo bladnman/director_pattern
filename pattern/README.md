@@ -8,7 +8,7 @@ existing project seeds are preserved. A flat installation needs the boundary's
 one-time reviewed layout integration before this fast replacement route applies.
 
 
-**[v1.0.0](https://github.com/bladnman/director_pattern/releases/tag/v1.0.0) · October 23, 2026.** This subtree is a self-contained package
+**[v1.1.0](https://github.com/bladnman/director_pattern/releases/tag/v1.1.0) · October 27, 2026.** This subtree is a self-contained package
 for agents installing the method in a target project. It is not a proven adoption.
 
 Give one project a **Director** who stays in the conversation, keeps its unfinished
@@ -58,10 +58,10 @@ existing maintained roles and guardrails. Missing roles/routes stay visible;
 routine supported model remapping follows MODELS within existing authority.
 
 Periodic supervision overviews use **📋 SitRep** so they are easy to scan or skip.
-Use one after a quiet stretch of ongoing work or when several developments benefit
-from a combined view; ordinary replies and brief progress updates do not need a
-full report. Meaningful ordinary updates satisfy the progress cadence without a
-redundant SitRep. The checked project Director's `🎬` identity, `❓` questions, and
+While delegated work is outstanding, proactively give a labeled **📋 SitRep**
+about every five minutes or at the user/project interval, covering all held
+streams, owners, and next actions. Ordinary progress does not replace or reset
+that report; stricter host updates remain concise. The checked project Director's `🎬` identity, `❓` questions, and
 `🖐️` user-only actions keep their meanings. See [DIRECTION.md](engine/DIRECTION.md) for the
 sparse marker rules, timing, and continuing supervision requirements.
 
