@@ -25,7 +25,7 @@ specialist rules, moving those rules into maintained definitions/contracts and
 registering them in the same reachable index. Do not invent an abstract of the
 pattern in AGENTS.md or merely append a hook to an enormous startup file. New
 recurring responsibilities follow that same standalone-file and index discipline.
-The package's [startup procedure](https://github.com/bladnman/director_pattern/blob/main/pattern/references/STARTUP.md)
+The package's [startup procedure](https://github.com/bladnman/director_pattern/blob/main/pattern/engine/references/STARTUP.md)
 provides integration and fresh-host verification steps. Updates select the audit
 and trial scope from affected changes under the update protocol below; routine
 changes reuse still-applicable startup evidence.
@@ -133,7 +133,7 @@ Update the Director Pattern in this project from https://director.metal-sole.com
 
 This public address is the guide's front door; GitHub remains the update source.
 Resolve published GitHub main to one exact reviewed SHA and use that revision's
-[UPDATES protocol](https://github.com/bladnman/director_pattern/blob/main/pattern/references/UPDATES.md),
+[UPDATES protocol](https://github.com/bladnman/director_pattern/blob/main/pattern/engine/references/UPDATES.md),
 even if installed guidance requires an audit on every upgrade or has no protocol.
 Read installed guidance for local adaptations; preserve project-owned rules and
 host restrictions, resolving conflicts with the accountable owner. The current

@@ -286,7 +286,7 @@ These observations support the changed read ordering for one controlled host/mod
 and task. They do not establish full acknowledgment compliance, general reliability,
 Bash batching behavior, another host/model, malformed assignments, downstream
 installation behavior, or a fresh installed Codex default-role session. The
-[STARTUP procedure](../pattern/references/STARTUP.md#verify-the-startup-dependency-barrier)
+[STARTUP procedure](../pattern/engine/references/STARTUP.md#verify-the-startup-dependency-barrier)
 keeps those limits and future checks explicit. Raw traces and exact fixture source
 material remain private; no internal-source pointers are public dependencies.
 
@@ -402,3 +402,87 @@ assertion that required the former host-mapping prose was removed; adjacent role
 identity, and boundary checks remain. No replacement prose-matching test was added.
 `git diff --check` passed. No fresh-host or rendered-layout trial ran, and no
 installation, publication, helper, schema, or runtime change was performed.
+
+
+## Engine/project boundary — October 25, 2026
+
+The [R16 boundary decision](RATIONALE.md#r16--separate-replaceable-engine-from-project-owned-integration)
+introduces a physical `engine/` subtree, a project-owned startup bridge, explicit
+manifest ownership/interface version, and stable helper launchers. Request-store,
+configuration, policy, and receipt schemas remain unchanged.
+
+Focused package verification passed 11 tests. New disposable fixtures replace the
+engine while custom roles, required local policy, identity pool and existing state
+remain byte-identical; both stable and direct engine CLI paths use the actual
+`.director/` root, and update discovery resolves the accepted receipt from the
+project root. Package/link closure and manifest partition checks pass. These are
+static/CLI fixture checks; no publication, maintainer live-installation adoption,
+or universal compatibility claim follows. Fresh startup trials and scoped stencil
+rollout evidence will be recorded after execution, with unrun routes explicit.
+
+**Integrated verification, October 25:** All 53 development tests and all 8 site
+tests passed (61 total); the site kept its ten-file public allowlist. Modified
+public-document links and `git diff --check` passed. Plain Python launcher use
+also left no bytecode cache in the replaceable engine.
+
+Three bounded fresh harness-routed sessions exercised the actual candidate
+bridge/engine/index and maintained definitions. The explicit generic Director
+route completed all required returned reads and acknowledgment before task I/O;
+a truncated reference batch was recovered by full rereads. The first custom
+worker route preserved tracker/privacy but missed its selected project profile,
+so full package compliance failed. The project index then made that applicable
+profile explicit and selected a maintained specialist wrapper referencing the
+unchanged domain rules. One authorized fresh retry returned every required file
+completely, then acknowledged the package before reading the task. Primary tool
+streams, not self-descriptions alone, support these observations. Requested and
+exposed selections were retained; independently effective runtime settings were
+not available.
+
+The three authorized local stencils were integrated with verified external
+backups and candidate source hashes. Managed engine bytes match the local source,
+no initialized Director state/receipt/update policy was seeded, independent
+copied-project initialization produced distinct IDs, custom domain documents,
+tracker, private-state rules and identity pool survived, and a second actual sync
+was a no-op. An injected unknown engine edit was refused in a disposable fixture.
+The domain stencil received no bundled request backend. Exact moved-instruction
+and path-repair mappings remain in private external rollout evidence.
+
+These checks cover explicit harness-selected routes, static preservation and
+helper interfaces. They do not establish native host auto-discovery, an unassigned
+default route, universal future compatibility, publication, human creative
+acceptance, or adoption into this repository's existing live installation. The
+original failed worker observation remains part of the evidence; the retry does
+not erase it. The engine layout and stencil rollout are a local candidate until
+separately published and accepted.
+
+## Deliverable-first scenarios — October 27, 2026
+
+The [R2 refinement](RATIONALE.md#r2--protect-judgment-and-conversation-from-executionbookkeeping)
+chooses the intended deliverable before applying the direct-answer exception.
+The reusable [scenario matrix and rubric](fixtures/deliverable-first/README.md)
+cover the reported nested-board search failure through a generic regression,
+clear direction, unresolved design, explicit consultation, casual observation,
+status/proposal-only completion, and publication gates. Review requires evidence
+of the chosen deliverable:
+rendered alternatives or observed working behavior for visual/interaction work,
+with authority limits and existing commitments preserved.
+
+**Verification boundary:** The originating failure is user-reported; the affected
+installation and execution trace were not inspected. The broad former
+question/judgment exception and missing deliverable gate are visible in the
+inspected source, but their causal role in that response remains a hypothesis.
+Scenario review and package/link checks establish documentation consistency only.
+No fresh-host behavioral trial has run for this refinement; successful actual
+intent inference, delegation, rendered delivery, and discussion-only handling
+remain pending.
+
+**Executed focused checks:** All 11 package tests passed. Scenario JSON parsed,
+five fixture-local links resolved, seed JavaScript syntax and `git diff --check`
+passed, and expected outcomes were reviewed against the final contract. These
+checks do not establish rendered interaction or agent behavior.
+
+The authorized three-stencil sync changed only the four approved engine files
+in each stencil, with verified backups and unchanged custom-neighbor hashes;
+the follow-up check reported no changes. This is scoped candidate-file adoption,
+separate from adoption into this repository's live installation, behavioral
+verification, or publication.

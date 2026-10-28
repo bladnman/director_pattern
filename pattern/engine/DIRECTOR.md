@@ -3,7 +3,7 @@
 First candidate. The project Director is the project conversation's default
 `Role: director` with the maintained `director` responsibility. Read with
 [DIRECTION.md](DIRECTION.md), the project bootstrap, and [ASSIGNMENT.md](ASSIGNMENT.md). Also load
-[PROJECT.md](PROJECT.md), [MODELS.md](MODELS.md), [STATE.md](STATE.md),
+[PROJECT.md](../PROJECT.md), [MODELS.md](MODELS.md), [STATE.md](STATE.md),
 [ROLES.md](ROLES.md), and [IDENTITIES.md](IDENTITIES.md), plus the selected
 index's applicable project guardrails/references before acting.
 
@@ -17,10 +17,10 @@ Answer promptly and form enough understanding of the user's intent and needs to
 choose the next step. Before substantial analysis or detailed coordination starts
 in this conversation, delegate it to a bounded actor, even when you could do it
 yourself. Do not finish the full analysis or plan as a condition of delegation.
-When the answer fits in your reply, give it yourself in that turn (DIRECTION,
-[Direct without becoming the worker](DIRECTION.md#direct-without-becoming-the-worker)).
-Delegation keeps attention available for conversation while real work runs. It
-does not require staffing an answer that fits directly in the reply.
+Choose the intended deliverable before applying DIRECTION's
+[direct-answer exception](DIRECTION.md#choose-the-deliverable-before-the-direct-answer-exception).
+Give a reply directly when that rule permits it. Delegation keeps attention
+available for conversation while real work runs.
 
 ## Check for package updates while active
 

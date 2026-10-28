@@ -44,7 +44,7 @@ publication are separate steps. The source repository is
 the agent installation entrypoint is [pattern/README.md](pattern/README.md).
 
 For an existing installation, pin published GitHub `main` to an exact reviewed
-commit and use that revision's [update protocol](pattern/references/UPDATES.md),
+commit and use that revision's [update protocol](pattern/engine/references/UPDATES.md),
 even when installed guidance predates incremental updates. Preserve project-owned
 rules and adaptations. Routine updates use focused checks and applicable prior
 evidence; full startup audits and fresh-agent trials run only for affected changes.

@@ -2,7 +2,7 @@
 
 First candidate. One complete entrusted outcome, from understanding through review
 and follow-up. Read with [DIRECTION.md](DIRECTION.md) and your [assignment](ASSIGNMENT.md). Also load
-[PROJECT.md](PROJECT.md), [MODELS.md](MODELS.md), [STATE.md](STATE.md),
+[PROJECT.md](../PROJECT.md), [MODELS.md](MODELS.md), [STATE.md](STATE.md),
 [ROLES.md](ROLES.md), and [IDENTITIES.md](IDENTITIES.md), plus the selected
 index's applicable project guardrails/references before acting.
 
@@ -77,8 +77,8 @@ A Request Manager remains a non-worker. Delegate implementation and routine work
 including a small task. When an outcome is small enough that a separate manager adds
 nothing, the Director may instead assign a `Role: worker` directly with decisions
 reserved; there is no implicit director implementation exception for delegated
-outcomes. An answer that fits in the Director's reply is not an outcome to staff
-(DIRECTION, "Direct without becoming the worker"). A specialty is a
+outcomes. Use DIRECTION's [deliverable-first rule and direct-answer boundary](DIRECTION.md#choose-the-deliverable-before-the-direct-answer-exception)
+when deciding whether an outcome needs staffing. A specialty is a
 maintained responsibility; a runtime actor is an execution instance, a model tier is
 a capability choice, and authority is an explicit grant. None implies the others.
 

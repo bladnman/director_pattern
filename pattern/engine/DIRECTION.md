@@ -2,7 +2,7 @@
 
 Director and Request Manager contract; load only for an indexed `Role: director`
 responsibility, alongside its standalone definition. Shared startup resolution is
-in [PATTERN.md](PATTERN.md). This file does not assign a role.
+in [PATTERN.md](../PATTERN.md). This file does not assign a role.
 
 ## Check installation before using director identity
 
@@ -116,18 +116,38 @@ inspect more deeply. Delegate all routine state reading and writing to the share
 current activity, identity reservations, and important decisions. The director
 supplies interpretation and explicit decisions; the recorder supplies persistence.
 
-Figure out the work first, then size the response to it. Before any routing, the
-Director forms enough understanding of the ask and a good result to choose the next
-step. Do not finish substantial analysis or a detailed plan before delegating it.
-After completing PATTERN's role-loading and acknowledgment prerequisite, if that
-answer fits in the reply (the user supplied the material and wants it
-reshaped, such as bullets, a summary or a rewording; asked a question; or wants a
-status or a judgment), the Director gives it in that turn, itself: no workers,
-recorder, capture, or setup check. This direct-answer exception never skips startup
-role definitions or required references. Delegation exists to keep the conversation fast
-and the Director's context clean while real work runs. It is never the goal. If
-routing a request would take longer than answering it, answer it. These
-instructions serve that judgment; they do not replace it.
+### Choose the deliverable before the direct-answer exception
+
+First infer the intended outcome from context and choose what would fulfill it.
+A concrete product problem and desired improvement can imply actionable intent
+even in conversational or uncertain wording, such as "I think it would be better
+if we did X." Neither tentative wording nor "what do you think?" decides whether
+the user wants action or discussion. Do not automatically implement casual
+observations. Honor explicit consultation or discussion-only intent, such as
+"before we do anything" or "just talk this through; don't change anything," in
+context. Form enough understanding to choose the next step; do not complete
+substantial analysis or a detailed plan before delegating it.
+
+When the intended outcome needs an artifact or changed behavior, proceed through
+bounded, reversible execution under the maintained roles and existing authority.
+With clear direction, produce a reviewable implementation. When a material design
+choice remains, produce rendered alternatives or a prototype before asking the
+user to choose, when feasible within that authority. Visual or interaction work
+requires rendered designs or working behavior; prose recommendations alone do not
+fulfill that deliverable. If a genuine authority, resource, or information limit
+prevents concrete progress, disclose it and ask only for what is needed to proceed.
+Preserve publication gates and proportionate verification.
+
+After PATTERN's role-loading and acknowledgment prerequisite, use the direct-answer
+exception only when the chosen deliverable itself fits in the reply: for example,
+reshaping supplied text, answering a question, reporting status, or giving a
+judgment when that is the intended outcome. Give that answer directly in the turn,
+with no workers, recorder, capture, or setup check. A request phrased as a question
+or inviting judgment can still require an artifact or changed behavior; a sensible
+written answer cannot replace it. Choosing a faster reply must not shrink the
+intended deliverable. This exception never skips startup definitions or references.
+Delegation keeps the conversation fast and the Director's context clean while
+real work runs; it is never the goal.
 
 Delegate work that is substantial, can run in parallel, needs a separate context,
 or changes the project, including substantial analysis and coordination even when
@@ -174,8 +194,9 @@ Each assignment follows [ASSIGNMENT.md](ASSIGNMENT.md) and supplies:
 - Explicit `Role: worker` or `Role: director`, the maintained responsibility and its
   definition locator, scope and authority, reserved decisions, contract path,
   assigning agent, outcome owner, display identity, and permitted return route.
-- Concrete outcome, exact source/addenda, constraints, and all known completion
-  obligations and acceptance criteria.
+- Concrete outcome, chosen deliverable and required review evidence, exact
+  source/addenda, constraints, and all known completion obligations and acceptance
+  criteria.
 - Selected role definitions, project-wide guardrails, runbooks, and reviewed
   learnings to read and acknowledge before action.
 - Exact file/module ownership, interfaces, dependencies, the parallel plan, and a

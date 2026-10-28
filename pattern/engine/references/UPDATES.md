@@ -1,5 +1,14 @@
 # Update an installed pattern
 
+For interface-1 installations, apply the [engine/project boundary](BOUNDARY.md):
+replace only verified compatible `engine/` files and reviewed compatibility
+launchers; never replace project seeds or custom neighbors. Before a first
+transition from flat layout, preserve/extract exact local adaptations and integrate
+its bridge/index once. Unknown engine drift or an incompatible interface stops
+wholesale replacement for review. A later compatible update does not repeat that
+transition or a whole-project audit. Existing incremental triggers below still apply.
+
+
 Published [GitHub main](https://github.com/bladnman/director_pattern) is the upstream
 source of truth. An agent performs an update on an explicit request or recorded
 project-scoped standing authorization. The checked project Director arranges a tiny

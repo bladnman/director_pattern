@@ -88,12 +88,14 @@ class PackageBoundaryTests(unittest.TestCase):
 
     def test_common_bootstrap_does_not_load_director_policies(self):
         # Structural contract boundary; does not measure size or imitate role behavior.
-        common = set(markdown_links(PATTERN / "PATTERN.md"))
+        bridge = set(markdown_links(PATTERN / "PATTERN.md"))
+        self.assertIn("engine/PATTERN.md", bridge)
+        common = set(markdown_links(PATTERN / "engine/PATTERN.md"))
         self.assertIn("WORKER.md", common)
         self.assertTrue(common.isdisjoint({"DIRECTION.md", "DIRECTOR.md", "REQUEST_MANAGER.md", "STATE.md", "MODELS.md"}))
         for definition in ("DIRECTOR.md", "REQUEST_MANAGER.md"):
-            self.assertIn("DIRECTION.md", set(markdown_links(PATTERN / definition)))
-        self.assertNotIn("DIRECTION.md", set(markdown_links(PATTERN / "WORKER.md")))
+            self.assertIn("DIRECTION.md", set(markdown_links(PATTERN / "engine" / definition)))
+        self.assertNotIn("DIRECTION.md", set(markdown_links(PATTERN / "engine/WORKER.md")))
 
     def test_repository_and_installation_hooks_share_the_same_startup_barrier(self):
         # Static entrypoint parity only: no assertion here proves a host obeys it.
@@ -121,7 +123,7 @@ class PackageBoundaryTests(unittest.TestCase):
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(PATTERN / name, target)
             index = installed / "ROLE_INDEX.md"
-            definitions = ["DIRECTOR.md", "REQUEST_MANAGER.md", "RECORDER.md", "ANALYSIS.md"]
+            definitions = ["engine/DIRECTOR.md", "engine/REQUEST_MANAGER.md", "engine/RECORDER.md", "engine/ANALYSIS.md"]
             index.write_text("# Fixture index\n" + "\n".join(f"[Fixture entry]({name})" for name in definitions), encoding="utf-8")
             bootstrap = installed / "PATTERN.md"
             bootstrap.write_text(bootstrap.read_text().replace(
@@ -132,10 +134,66 @@ class PackageBoundaryTests(unittest.TestCase):
             # A recurring responsibility is a separate maintained file registered
             # in that same index, rather than another live role table in startup.
             (installed / "roles").mkdir()
-            (installed / "roles/reader.md").write_text("# Fixture reader\nRead [worker boundaries](../WORKER.md).\n", encoding="utf-8")
+            (installed / "roles/reader.md").write_text("# Fixture reader\nRead [worker boundaries](../engine/WORKER.md).\n", encoding="utf-8")
             index.write_text(index.read_text() + "\n[Fixture reader](roles/reader.md)\n", encoding="utf-8")
             self.assertIn("roles/reader.md", set(markdown_links(index)))
             self.check_links(installed)
+
+    def test_manifest_partitions_replaceable_engine_from_project_owned_seeds(self):
+        manifest = self.manifest(PATTERN)
+        self.assertEqual(manifest["engine_api_version"], 1)
+        owned = [set(manifest[key]) for key in ("engine_files", "project_seed_files", "entrypoint_files")]
+        self.assertEqual(set.union(*owned), set(manifest["base_files"] + manifest["tracked_files"]))
+        for i, paths in enumerate(owned):
+            for other in owned[i + 1:]:
+                self.assertFalse(paths & other)
+        self.assertTrue(all(p.startswith("engine/") for p in owned[0]))
+        self.assertTrue(all(not p.startswith("engine/") for p in owned[1] | owned[2]))
+        self.assertLessEqual({"PATTERN.md", "PROJECT.md", ".gitignore", "IDENTITY_POOL.txt"}, owned[1])
+        self.assertFalse(any(p.startswith(("requests/", "sources/", "receipts/")) or p == "config.json" for p in set.union(*owned)))
+
+    def test_engine_replacement_preserves_custom_project_and_both_helper_roots(self):
+        # Actual CLI roots, state continuity, and custom reference reachability;
+        # this is not a claim about an agent reading the files.
+        manifest = self.manifest(PATTERN)
+        with tempfile.TemporaryDirectory() as temporary:
+            project = Path(temporary)
+            root = project / ".director"
+            for name in manifest["base_files"] + manifest["tracked_files"]:
+                (root / name).parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(PATTERN / name, root / name)
+            (root / "roles").mkdir()
+            (root / "roles/custom.md").write_text("# Fixture specialist\nRead [worker](../engine/WORKER.md) and [policy](../policy.md).\n")
+            (root / "policy.md").write_text("Fixture authority: no external release.\n")
+            (root / "ROLE_INDEX.md").write_text("# Fixture index\n[Specialist](roles/custom.md)\n")
+            (root / "PATTERN.md").write_text((root / "PATTERN.md").read_text().replace(
+                "<installation fills the single project-owned index locator>", "[Roles](ROLE_INDEX.md)"))
+            (root / "IDENTITY_POOL.txt").write_text("custom-project-pool\n")
+            launcher = [sys.executable, str(root / "tools/requests.py")]
+            direct = [sys.executable, str(root / "engine/tools/requests.py")]
+            first = json.loads(subprocess.run(launcher + ["init"], capture_output=True, text=True, check=True).stdout)
+            before = {str(p.relative_to(root)): p.read_bytes() for p in root.rglob("*") if p.is_file() and not p.is_relative_to(root / "engine")}
+            shutil.rmtree(root / "engine")
+            shutil.copytree(PATTERN / "engine", root / "engine")
+            after = {str(p.relative_to(root)): p.read_bytes() for p in root.rglob("*") if p.is_file() and not p.is_relative_to(root / "engine")}
+            self.assertEqual(before, after)
+            again = json.loads(subprocess.run(direct + ["init"], capture_output=True, text=True, check=True).stdout)
+            self.assertEqual(first, again)
+            subprocess.run(direct + ["validate"], capture_output=True, check=True)
+            self.assertFalse((root / "engine/config.json").exists())
+            self.check_links(root)
+            for script in (root / "tools/update_check.py", root / "engine/tools/update_check.py"):
+                subprocess.run([sys.executable, str(script), "set-policy", "off", "--authorization", "fixture"], capture_output=True, check=True)
+                self.assertEqual(json.loads((root / "update-policy.json").read_text())["mode"], "off")
+                self.assertFalse((root / "engine/update-policy.json").exists())
+            (root / "receipts").mkdir()
+            (root / "receipts/source.json").write_text(json.dumps({"source": {"url": "https://github.com/bladnman/director_pattern", "sha": "a" * 40, "published": True}}))
+            # Read the real receipt through the implementation using project-root-relative paths.
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("fixture_update", root / "engine/tools/update_check.py")
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            self.assertEqual(module.installed_source(root, ".director/receipts/source.json"), ("a" * 40, None))
 
     def test_identity_pool_is_static_unique_and_skips_reserved_markers(self):
         manifest = self.manifest(PATTERN)

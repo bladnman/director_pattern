@@ -1,5 +1,13 @@
 # Install the candidate
 
+The [ownership boundary](engine/references/BOUNDARY.md) separates replaceable
+`engine/` from project-owned context, roles, policy, adapters, identity pool, and
+state. The manifest partitions engine files, create-once project seeds, and thin
+compatibility launchers. An update replaces only a compatible verified engine;
+existing project seeds are preserved. A flat installation needs the boundary's
+one-time reviewed layout integration before this fast replacement route applies.
+
+
 On an adoption request, perform reversible local setup without another routine
 confirmation. Reading alone is not adoption. Preserve existing authority, edits,
 canonical trackers, and unfinished work. No publication, request migration, app
@@ -10,7 +18,7 @@ and the pinned current update protocol; the first-install audit and trials below
 are not an update fallback.
 
 Install the separation of responsibilities, not a homemade summary in AGENTS.md.
-Use [STARTUP.md](references/STARTUP.md) to audit the entire loaded instruction
+Use [STARTUP.md](engine/references/STARTUP.md) to audit the entire loaded instruction
 chain and preserve specialized rules in reachable standalone definitions.
 
 ## Select and copy only the payload
@@ -45,7 +53,7 @@ not payload. A temporary staging clone is optional transport only.
    pushed history stays readable after a later deletion. Record the warning in
    the setup receipt, reachable from PROJECT, so later conversations and machines
    do not repeat it. Keeping more local is the project's choice, never a setup default; see
-   [STATE](STATE.md#version-control). A template repository commits only the
+   [STATE](engine/STATE.md#version-control). A template repository commits only the
    contracts and a placeholder PROJECT, never initialized config, requests,
    sources, activity, or a completed receipt; each generated project runs its
    own init.
@@ -63,13 +71,14 @@ not payload. A temporary staging clone is optional transport only.
    ungranted policy decisions to the accountable owner. Tracked is default; lean optional.
    An existing canonical tracker uses the contract without creating a second store.
    Map PROJECT's role index, project-wide guardrails, durable capability/authority
-   policy under [MODELS](MODELS.md#projecthost-mapping), Recorder responsibility and
+   policy under [MODELS](engine/MODELS.md#projecthost-mapping), Recorder responsibility and
    conditional routing policy, canonical state, and identity roster location.
    Validate relevant current capabilities without making a loaded environment
    definition. Any host-specific adapter locator stays conditional and is validated
    at its relevant use. Reuse existing maintained definitions; generate a project-owned role index only when none exists,
    registering package definitions and actual project roles under STARTUP. Fill
-   PATTERN’s canonical-index locator and record that same path in PROJECT. Never
+   the project-owned PATTERN bridge’s canonical-index locator and record that
+   same path in PROJECT; engine/PATTERN.md remains byte-identical generic payload. Never
    present illustrative entries as real roles. The roster lives in current activity, never in a seed.
 3. For a new bundled tracked store, use an authorized setup actor to run
    `python3 <target>/.director/tools/requests.py init`. It creates/preserves config
@@ -83,7 +92,7 @@ not payload. A temporary staging clone is optional transport only.
    Preserve existing config keys. Switching tracked to lean first requires
    reconciling commitments, live assignments, and pending evaluation; preserve the
    ledger and recovery pointers before a deliberate change. Mode cancels no work.
-4. Complete the [startup audit and integration](references/STARTUP.md), then use
+4. Complete the [startup audit and integration](engine/references/STARTUP.md), then use
    one small marked hook in the actual loaded entrypoint, adapting the path:
 
    ```markdown
@@ -113,7 +122,7 @@ not payload. A temporary staging clone is optional transport only.
 For every mode, keep the daily discovery default **notify** unless the user has
 explicitly chosen another mode. Record the exact accepted receipt pointer in
 PROJECT's Source updates section. Only the checked project Director arranges
-active-project checks under [UPDATES](references/UPDATES.md#daily-discovery-and-project-preference);
+active-project checks under [UPDATES](engine/references/UPDATES.md#daily-discovery-and-project-preference);
 the shared bootstrap and worker startup do not run them. `update-policy.json` is
 project-owned generated configuration, preserved on upgrades and absent from seeds.
 The base helper uses an already available Python standard library; do not install
@@ -128,13 +137,13 @@ receipt into a template.
 
 ## Verify without polluting the backlog
 
-Run [STARTUP’s static checks and fresh host trials](references/STARTUP.md#static-checks-then-fresh-host-trials).
+Run [STARTUP’s static checks and fresh host trials](engine/references/STARTUP.md#static-checks-then-fresh-host-trials).
 Verify that the host actually loads the entrypoint and selected role/context
 files. Check canonical state, requested versus actual model controls, and truthful
 behavior when delegation/persistence is unavailable. Confirm the role index and its
 listed definitions resolve, the Recorder route is one the host actually supports,
 and the identity roster location is recorded; record unmapped roles as gaps. In a
-Git repository, run the `git check-ignore` check in [STATE](STATE.md#version-control)
+Git repository, run the `git check-ignore` check in [STATE](engine/STATE.md#version-control)
 and report a parent or global rule that ignores `.director/`; without version
 control, record the limitation and recommendation from step 1. For an existing
 tracker, verify its actual mapped workflow and persistence receipts without installing a
@@ -148,23 +157,24 @@ Have an authorized setup actor run `validate` on its actual store without modify
 it; an empty store is valid. Separately, have an authorized setup actor test the helper lifecycle
 in a newly created disposable directory, never by adding dummy actual requests:
 
-1. Copy the selected package helper to `<fixture>/tools/requests.py` and run its
+1. Copy the selected manifest payload into `<fixture>/.director/`, including
+   its engine implementation and compatibility launcher, then run the launcher’s
    `init` command. Write a tiny UTF-8 `<fixture>/raw.txt` artificial request. The
    fixture must be separate from the actual project and have its own project ID.
 2. Save the four literal minimal-lifecycle plan, dispatch, submit, and accept JSON
-   examples from [TOOLING.md](references/TOOLING.md) as separate event files in the fixture.
+   examples from [TOOLING.md](engine/references/TOOLING.md) as separate event files in the fixture.
    Its dispatch handle is synthetic fixture input, not an actual execution claim.
 3. Substitute the fixture path and returned ID, then run:
 
    ```sh
-   python3 <fixture>/tools/requests.py init
-   python3 <fixture>/tools/requests.py create --raw-file <fixture>/raw.txt --title "Fixture only" --event-id "$(python3 <fixture>/tools/requests.py event-id create)"
-   python3 <fixture>/tools/requests.py apply <returned-ID> --event-file <fixture>/plan.json --expect-revision 1
-   python3 <fixture>/tools/requests.py apply <returned-ID> --event-file <fixture>/dispatch.json --expect-revision 2
-   python3 <fixture>/tools/requests.py apply <returned-ID> --event-file <fixture>/submit.json --expect-revision 3
-   python3 <fixture>/tools/requests.py apply <returned-ID> --event-file <fixture>/accept.json --expect-revision 4
-   python3 <fixture>/tools/requests.py show <returned-ID>
-   python3 <fixture>/tools/requests.py validate
+   python3 <fixture>/.director/tools/requests.py init
+   python3 <fixture>/.director/tools/requests.py create --raw-file <fixture>/raw.txt --title "Fixture only" --event-id "$(python3 <fixture>/.director/tools/requests.py event-id create)"
+   python3 <fixture>/.director/tools/requests.py apply <returned-ID> --event-file <fixture>/plan.json --expect-revision 1
+   python3 <fixture>/.director/tools/requests.py apply <returned-ID> --event-file <fixture>/dispatch.json --expect-revision 2
+   python3 <fixture>/.director/tools/requests.py apply <returned-ID> --event-file <fixture>/submit.json --expect-revision 3
+   python3 <fixture>/.director/tools/requests.py apply <returned-ID> --event-file <fixture>/accept.json --expect-revision 4
+   python3 <fixture>/.director/tools/requests.py show <returned-ID>
+   python3 <fixture>/.director/tools/requests.py validate
    ```
 
 4. Confirm done under archive/<REQ-ID>/request.md, the linked immutable source
@@ -193,7 +203,7 @@ start workers, and the identity marker does not claim live supervision.
 
 For an existing installation, resolve published GitHub `main` to an exact reviewed
 SHA on an explicit or standing-authorized update, then use that revision's
-[update protocol](references/UPDATES.md), even if the installed version has no
+[update protocol](engine/references/UPDATES.md), even if the installed version has no
 protocol or requires a full audit on every upgrade. Read installed guidance for
 local adaptations and preserve project-owned rules and host restrictions; resolve
 any conflict with the accountable owner. Select checks from the upstream delta and

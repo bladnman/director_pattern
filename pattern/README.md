@@ -1,5 +1,13 @@
 # Install the Director Pattern
 
+The [ownership boundary](engine/references/BOUNDARY.md) separates replaceable
+`engine/` from project-owned context, roles, policy, adapters, identity pool, and
+state. The manifest partitions engine files, create-once project seeds, and thin
+compatibility launchers. An update replaces only a compatible verified engine;
+existing project seeds are preserved. A flat installation needs the boundary's
+one-time reviewed layout integration before this fast replacement route applies.
+
+
 **[v1.0.0](https://github.com/bladnman/director_pattern/releases/tag/v1.0.0) · October 23, 2026.** This subtree is a self-contained package
 for agents installing the method in a target project. It is not a proven adoption.
 
@@ -10,7 +18,7 @@ who owns its understanding, all completion obligations, planning, specialist tas
 evaluation, rework, and follow-up until the Director accepts it. A specialty such as
 engineering, testing, release, or customer communication is a task inside the
 outcome, not a reason for another manager. Specialists execute; Small clerks map
-broad material; one shared [Recorder](RECORDER.md) handles routine state reading and
+broad material; one shared [Recorder](engine/RECORDER.md) handles routine state reading and
 writing. The Director delegates substantial analysis and detailed coordination
 before that active work occupies the main conversation. Independent analysis
 returns a proposal; no intake layer is mandatory. Selective critical reading and
@@ -23,8 +31,8 @@ optional bounded analysis. Request Manager and Recorder are maintained
 responsibilities, not new role values. Only the checked project Director uses `🎬`;
 managers and other actors use an assigned identity from a shared pool, such as
 🦫 **Mason** —, chosen for a playful fit with the assignment under
-[IDENTITIES.md](IDENTITIES.md). See [DIRECTOR.md](DIRECTOR.md) and
-[REQUEST_MANAGER.md](REQUEST_MANAGER.md).
+[IDENTITIES.md](engine/IDENTITIES.md). See [DIRECTOR.md](engine/DIRECTOR.md) and
+[REQUEST_MANAGER.md](engine/REQUEST_MANAGER.md).
 
 Tracked is the default for new installations; lean is an explicit optional choice.
 Keep an existing tracker canonical. New bundled stores use request folders with
@@ -37,12 +45,12 @@ and exact user sources, so work continues from another machine or a cloud
 checkout. Its own `.gitignore` keeps only the helper lock, in-progress write
 scratch, pre-update backups, and daily update-check cache local. A project may
 choose to keep more local;
-see [STATE.md](STATE.md#version-control).
+see [STATE.md](engine/STATE.md#version-control).
 
 Before the Director can staff work, the installation maps four project facts in
-PROJECT.md: a canonical role index ([ROLES.md](ROLES.md)), durable capability and
-authority policy ([MODELS.md](MODELS.md)), the Recorder responsibility/routing policy
-and state location, and the identity roster location ([IDENTITIES.md](IDENTITIES.md)).
+PROJECT.md: a canonical role index ([ROLES.md](engine/ROLES.md)), durable capability and
+authority policy ([MODELS.md](engine/MODELS.md)), the Recorder responsibility/routing policy
+and state location, and the identity roster location ([IDENTITIES.md](engine/IDENTITIES.md)).
 PROJECT holds enduring context and canonical locators, never a host/model/team
 snapshot; current runtime controls are resolved when used and recovery evidence
 stays in assignments, receipts, or activity. Reuse the project's
@@ -54,7 +62,7 @@ Use one after a quiet stretch of ongoing work or when several developments benef
 from a combined view; ordinary replies and brief progress updates do not need a
 full report. Meaningful ordinary updates satisfy the progress cadence without a
 redundant SitRep. The checked project Director's `🎬` identity, `❓` questions, and
-`🖐️` user-only actions keep their meanings. See [DIRECTION.md](DIRECTION.md) for the
+`🖐️` user-only actions keep their meanings. See [DIRECTION.md](engine/DIRECTION.md) for the
 sparse marker rules, timing, and continuing supervision requirements.
 
 Every actor receives a small common [bootstrap](PATTERN.md), follows its one
@@ -66,16 +74,16 @@ instruction route is not automatic injection or host enforcement. Direct answers
 still follow role loading; the Director's setup/identity check stays background.
 Explicit assignments route first; only an unassigned project
 conversation defaults Director. Malformed delegated assignments seek clarification.
-Director/manager policies live in [DIRECTION.md](DIRECTION.md), outside worker
+Director/manager policies live in [DIRECTION.md](engine/DIRECTION.md), outside worker
 startup. Recurring specialist rules live in maintained files registered in the
 same index, never an abstract appended to AGENTS.md.
 
 An installing agent need not already be a Director. First installation audits the
 entire loaded startup chain, preserves shared authority, and moves exact misplaced
 specialist duties to reachable maintained definitions. Follow the
-[startup integration and verification procedure](references/STARTUP.md); an
+[startup integration and verification procedure](engine/references/STARTUP.md); an
 appended hook alone is insufficient. Updates use the
-[incremental procedure](references/UPDATES.md#select-the-smallest-sufficient-verification):
+[incremental procedure](engine/references/UPDATES.md#select-the-smallest-sufficient-verification):
 a full startup audit or fresh-agent trial is required only by affected structure,
 behavior, or detected defects. Static wiring and real fresh-agent trials remain
 separate evidence.
@@ -106,15 +114,15 @@ README, INSTALL, and manifest guide the operation; they are not installed payloa
 No maintainer rationale, user-source history, tests, private archive, repository
 metadata, or authoring instructions belong in the target installation.
 
-Read [PATTERN.md](PATTERN.md), [ROLES.md](ROLES.md), [MODELS.md](MODELS.md),
-[STATE.md](STATE.md), and the fillable [PROJECT.md](PROJECT.md) as needed for setup.
+Read [PATTERN.md](PATTERN.md), [ROLES.md](engine/ROLES.md), [MODELS.md](engine/MODELS.md),
+[STATE.md](engine/STATE.md), and the fillable [PROJECT.md](PROJECT.md) as needed for setup.
 The package depends on no files outside this subtree. Reading alone is not adoption; an adoption request
 authorizes the reversible setup. Host restrictions and existing authority remain.
 
 ## Update an existing installation
 
 Ask the project agent to resolve published GitHub `main` to an exact reviewed
-commit and use that revision's [update protocol](references/UPDATES.md), including
+commit and use that revision's [update protocol](engine/references/UPDATES.md), including
 when installed guidance requires an audit on every update or has no protocol.
 Read installed guidance for local adaptations; preserve project-owned rules,
 adaptations, and state. Routine changes use focused checks and still-applicable
@@ -130,7 +138,7 @@ to install it.** The user can say **“always update director pattern”** to sa
 project-scoped automatic updates; notify/off remain durable choices. Automatic
 mode follows the same safe backup, merge, compatibility and verification protocol.
 No scheduler, checking model, dependency installation, or inactive-project wakeup
-is added. See the [daily check contract](references/UPDATES.md#daily-discovery-and-project-preference).
+is added. See the [daily check contract](engine/references/UPDATES.md#daily-discovery-and-project-preference).
 
 ## Remove a project installation
 

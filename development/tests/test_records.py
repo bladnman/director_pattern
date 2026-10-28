@@ -128,6 +128,9 @@ class RecorderTests(unittest.TestCase):
         (root / "config.json").write_text(json.dumps({"schema_version": 1, "record_mode": "tracked"}))
         script = root / "tools/requests.py"
         script.write_bytes((TOOLS / "requests.py").read_bytes())
+        implementation = root / "engine/tools/requests.py"
+        implementation.parent.mkdir(parents=True)
+        implementation.write_bytes((TOOLS.parent / "engine/tools/requests.py").read_bytes())
         raw = Path(self.temp.name) / "exact.txt"
         raw.write_bytes(b"  Director layout\r\n")
         cmd = [sys.executable, str(script)]

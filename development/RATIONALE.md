@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated October 24, 2026. This repository authors a
+Living design rationale · updated October 27, 2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -13,11 +13,11 @@ package is not thereby approved. The request-folder/link implementation is now
 authorized separately; implementation and verification still need their own evidence.
 
 The operational contracts are [PATTERN.md](../pattern/PATTERN.md),
-[MODELS.md](../pattern/MODELS.md), and [STATE.md](../pattern/STATE.md), with the
-responsibility contracts [DIRECTOR.md](../pattern/DIRECTOR.md),
-[REQUEST_MANAGER.md](../pattern/REQUEST_MANAGER.md), [ROLES.md](../pattern/ROLES.md),
-[RECORDER.md](../pattern/RECORDER.md), [IDENTITIES.md](../pattern/IDENTITIES.md), and
-[ASSIGNMENT.md](../pattern/ASSIGNMENT.md). This public rationale distills design
+[MODELS.md](../pattern/engine/MODELS.md), and [STATE.md](../pattern/engine/STATE.md), with the
+responsibility contracts [DIRECTOR.md](../pattern/engine/DIRECTOR.md),
+[REQUEST_MANAGER.md](../pattern/engine/REQUEST_MANAGER.md), [ROLES.md](../pattern/engine/ROLES.md),
+[RECORDER.md](../pattern/engine/RECORDER.md), [IDENTITIES.md](../pattern/engine/IDENTITIES.md), and
+[ASSIGNMENT.md](../pattern/engine/ASSIGNMENT.md). This public rationale distills design
 decisions, alternatives, and regression cases. Source conversations and internal
 references remain private. Public contracts must be understandable without access
 to those materials or provider memory.
@@ -58,13 +58,13 @@ engineering reports success. The cost is one coordinating layer per outcome.
 **Superseded alternative:** A mandatory shared intake agent ahead of the Director,
 with a one-pass limit, was proposed and dropped: it added a second user entrypoint
 and a forced hand-off for every message. The Director may instead explicitly
-dispatch [bounded analysis](../pattern/ANALYSIS.md) that
+dispatch [bounded analysis](../pattern/engine/ANALYSIS.md) that
 returns a proposal; that is a judgment, not a layer.
-**Implemented:** [DIRECTOR.md](../pattern/DIRECTOR.md),
-[REQUEST_MANAGER.md](../pattern/REQUEST_MANAGER.md), [PATTERN.md](../pattern/PATTERN.md),
-and owner-relative state depth in [STATE.md](../pattern/STATE.md) and
-[RECORDER.md](../pattern/RECORDER.md). The helper is unchanged;
-[RECORDS.md](../pattern/references/RECORDS.md#outcome-ownership-in-the-record) maps
+**Implemented:** [DIRECTOR.md](../pattern/engine/DIRECTOR.md),
+[REQUEST_MANAGER.md](../pattern/engine/REQUEST_MANAGER.md), [PATTERN.md](../pattern/PATTERN.md),
+and owner-relative state depth in [STATE.md](../pattern/engine/STATE.md) and
+[RECORDER.md](../pattern/engine/RECORDER.md). The helper is unchanged;
+[RECORDS.md](../pattern/engine/references/RECORDS.md#outcome-ownership-in-the-record) maps
 owner, obligations, dispatch, notes, submission, and Director acceptance onto it.
 **Regression cases:** "Investigate this bug, fix it, add tests, release it, verify
 production, and thank the customer" is one outcome whose manager lists all five
@@ -74,7 +74,7 @@ independent B arrives, and C steers A: B gets its own owner when appropriate, C
 reaches A's existing manager without a Manager C, a status reply cancels nothing,
 and A keeps unaffected results and acknowledges what it incorporated. Tracked
 steering of an active or reviewed outcome uses
-[legal replanning](../pattern/references/TOOLING.md#steer-an-active-or-reviewed-outcome)
+[legal replanning](../pattern/engine/references/TOOLING.md#steer-an-active-or-reviewed-outcome)
 to the same owner and observed handle. **Verification limit:** Fixtures cover the
 record mapping only; no live manager behavior has been observed
 ([scenarios](DESIGN_NOTES.md#request-manager-scenarios--october-21-2026)).
@@ -90,7 +90,7 @@ Small clerks map broad material; a Small recorder performs routine state I/O.
 support; unavailable capability must be disclosed, not hidden by a silent role switch.
 **Consequence:** Capability tiers describe reliability/reasoning needs, not brands,
 cost guarantees, or selections made by a prompt label. Host model/effort mappings
-must be actual or unknown. See [MODELS.md](../pattern/MODELS.md) and [PATTERN.md](../pattern/PATTERN.md).
+must be actual or unknown. See [MODELS.md](../pattern/engine/MODELS.md) and [PATTERN.md](../pattern/PATTERN.md).
 **Revisit:** observed host limits or workload evidence justify a consciously chosen
 operating-mode change; they do not create a permanent direct-execution exception.
 
@@ -100,12 +100,12 @@ a small task. A small outcome may go directly to a `Role: worker` with decisions
 reserved; no implicit director implementation exception is added. The fixed model
 defaults are superseded: "Default director: Max," which children could inherit,
 becomes a per-assignment policy. Directors and managers read
-[MODELS.md](../pattern/MODELS.md) before staffing and choose capability and effort
+[MODELS.md](../pattern/engine/MODELS.md) before staffing and choose capability and effort
 for each assignment's reasoning need and consequence. The project Director is
 typically Max; most managers are Large, and none is Max merely because its parent
 is. Neither blanket strongest inheritance nor blanket cheapest selection is policy;
 actual tool-selected values, or explicit unknowns, are retained. The Small recorder
-becomes one coordinated, indexed [Recorder](../pattern/RECORDER.md) route: direct
+becomes one coordinated, indexed [Recorder](../pattern/engine/RECORDER.md) route: direct
 from a manager only where the host supports it, otherwise through the assigner.
 Workers report to their manager and never write canonical state independently.
 **Why/tradeoff:** Inherited strongest models spend judgment capacity where none is
@@ -140,8 +140,8 @@ startup check: two agents and several minutes for an answer that fit in one repl
 The user's correction: the pattern's goal is not to make everything take ten times
 longer, and the Director must be smart enough to see when it can just answer.
 **Status:** decided and implemented in [PATTERN.md](../pattern/PATTERN.md),
-[DIRECTOR.md](../pattern/DIRECTOR.md), [REQUEST_MANAGER.md](../pattern/REQUEST_MANAGER.md),
-[STATE.md](../pattern/STATE.md), [PROJECT.md](../pattern/PROJECT.md), and the
+[DIRECTOR.md](../pattern/engine/DIRECTOR.md), [REQUEST_MANAGER.md](../pattern/engine/REQUEST_MANAGER.md),
+[STATE.md](../pattern/engine/STATE.md), [PROJECT.md](../pattern/PROJECT.md), and the
 [INSTALL.md](../pattern/INSTALL.md) hook; not yet verified in a fresh installed session.
 
 **Refined, October 23:** The main project Director answers promptly and establishes
@@ -177,9 +177,9 @@ critical-evidence review remains Director judgment, rather than wholesale local
 supervision returning to the main conversation.
 
 **Status and verification boundary:** Decided and implemented in
-[DIRECTION](../pattern/DIRECTION.md#direct-without-becoming-the-worker),
-[DIRECTOR](../pattern/DIRECTOR.md), [REQUEST_MANAGER](../pattern/REQUEST_MANAGER.md),
-and [STATE](../pattern/STATE.md). Package/link checks establish structural
+[DIRECTION](../pattern/engine/DIRECTION.md#direct-without-becoming-the-worker),
+[DIRECTOR](../pattern/engine/DIRECTOR.md), [REQUEST_MANAGER](../pattern/engine/REQUEST_MANAGER.md),
+and [STATE](../pattern/engine/STATE.md). Package/link checks establish structural
 consistency only. Prompt replies, effective delegation, steering incorporation,
 and recoverable full detail still need the actual host observations in the
 [manual scenarios](DESIGN_NOTES.md#refinement-scenarios--october-23-2026).
@@ -210,7 +210,7 @@ host/user restrictions and spending authority are unchanged.
 a changed option prompts supported remapping instead of a frozen role default;
 a clerk does not silently inherit its parent's strongest model/effort; an
 unsupported override is recorded with a suitable allowed route or a real blocker,
-never invented settings. See [MODELS](../pattern/MODELS.md#projecthost-mapping),
+never invented settings. See [MODELS](../pattern/engine/MODELS.md#projecthost-mapping),
 [PROJECT](../pattern/PROJECT.md#durable-capability-and-authority-policy), and the
 [manual cases](DESIGN_NOTES.md#portable-staffing-and-acceptance-scenarios--october-23-2026).
 **Status:** Decided and implemented in guidance/templates; behavioral effects
@@ -251,14 +251,53 @@ Unclear authority must be resolved before weakening a purported restriction.
 current host, and changed models/agents months later, require current discovery;
 an explicit budget ceiling, release gate, or maintained role requirement survives.
 Decided and implemented in the [PROJECT template](../pattern/PROJECT.md),
-[MODELS](../pattern/MODELS.md#projecthost-mapping), [assignment bootstrap](../pattern/ASSIGNMENT.md),
-[setup](../pattern/INSTALL.md), and [update preservation](../pattern/references/UPDATES.md#compare-before-replacing),
+[MODELS](../pattern/engine/MODELS.md#projecthost-mapping), [assignment bootstrap](../pattern/engine/ASSIGNMENT.md),
+[setup](../pattern/INSTALL.md), and [update preservation](../pattern/engine/references/UPDATES.md#compare-before-replacing),
 with their direct callers and public copy aligned. Static package/link checks and
 manual contract review are separate from actual cross-host behavior; the
 [regression scenarios](DESIGN_NOTES.md#enduring-project-context-scenarios--october-24-2026)
 remain pending. No runtime/schema change is needed. Revisit if another loaded
 context file becomes an environment cache or preserved evidence is treated as
 current configuration.
+
+**Refined and superseded in part, October 27 — choose the intended deliverable first:**
+The October 22/23 fast-answer purpose stands. The direct-answer exception applies
+after choosing what would fulfill the user's intended outcome; a shorter reply
+must not shrink that result. Concrete product problems and desired improvements
+can imply actionable intent in tentative conversation. Context decides: neither
+uncertain wording nor a request for judgment forces discussion or action. Explicit
+consultation remains conversational, and casual observations do not automatically
+start implementation.
+
+When the outcome requires an artifact or changed behavior, delegate bounded,
+reversible execution through the maintained roles and existing authority. Clear
+direction leads to a reviewable implementation; a material unresolved design
+choice calls for rendered alternatives or a prototype before asking for a choice,
+when feasible within that authority. Visual/interaction work needs rendered
+designs or working behavior. A recommendation, acknowledgment, or status reply
+does not complete the underlying work. Genuine limits, publication gates, and
+proportionate verification remain binding.
+
+**Why/evidence:** A reported nested-board navigation/search problem ended with a
+written recommendation and no investigation, rendered alternatives, or prototype.
+The inspected direct-answer wording broadly listed questions and judgments and
+omitted an intended-deliverable gate. Treating that gap as the cause of the
+reported response remains a hypothesis: the affected installation and execution
+trace were not inspected. The tradeoff is contextual judgment at intake rather
+than a keyword classifier or automatic implementation of every observation.
+
+**Decided and implemented:** [DIRECTION](../pattern/engine/DIRECTION.md#choose-the-deliverable-before-the-direct-answer-exception)
+owns the rule; [DIRECTOR](../pattern/engine/DIRECTOR.md) and
+[REQUEST_MANAGER](../pattern/engine/REQUEST_MANAGER.md) point there;
+[ASSIGNMENT](../pattern/engine/ASSIGNMENT.md) carries the chosen deliverable and
+required review evidence. Exact source evidence is stored privately, separate
+from public guidance. The [regression cases](fixtures/deliverable-first/README.md)
+cover nested-board search, clear implementation, unresolved design, explicit
+discussion, casual observation, completion, and publication gates. Static checks
+and case review are recorded in [validation notes](DESIGN_NOTES.md#deliverable-first-scenarios--october-27-2026);
+fresh-host behavior remains unverified. **Revisit:** intended artifacts still
+become prose-only recommendations, or consultation and casual observations begin
+triggering unwanted execution.
 
 ## R3 — Retain commitments by default, preserve original intent
 
@@ -273,7 +312,7 @@ and tiny steering from disappearing. Whole exact user messages remain separate
 from interpreted titles, scope, acceptance, and decisions; attachments matter too.
 **Consequence:** Independent outcomes are independently visible, with sources and
 history intact. Status is not liveness, completion is not release, and files do not
-wake agents. See [STATE.md](../pattern/STATE.md). **Revisit:** evidence that a bounded exploration
+wake agents. See [STATE.md](../pattern/engine/STATE.md). **Revisit:** evidence that a bounded exploration
 needs a different retention promise; do not silently cancel work when changing mode.
 
 ## R4 — Relationships must support several orientations
@@ -402,7 +441,7 @@ continues. Reports cover held work and current action/next proof, using actual
 observations.
 They remain intermediate commentary; existing handoff, blockage, and interruption
 boundaries still apply. A Small recorder returns setup facts under
-[STATE.md](../pattern/STATE.md); the director resolves its actual role. The existing
+[STATE.md](../pattern/engine/STATE.md); the director resolves its actual role. The existing
 [PROJECT](../pattern/PROJECT.md) and [installation](../pattern/INSTALL.md) receipts
 supply the context without a new state engine or runtime requirement for lean or
 an existing tracker. The cadence refinement is implemented in the contract and
@@ -431,14 +470,14 @@ from one Recorder-maintained roster and rotation cursor: reserved before dispatc
 bound to the actual handle, kept through resume and pending reports, and released
 only when no late return can collide. `🎬`, `📋`, `❓`, `🖐️`, and equivalent variants
 are never allocated; exhaustion uses another glyph or a unique text label. A marker
-grants no role or authority. See [IDENTITIES.md](../pattern/IDENTITIES.md).
+grants no role or authority. See [IDENTITIES.md](../pattern/engine/IDENTITIES.md).
 **Refinement, October 21:** Answering the user is not claiming completion. A
 conversational or status reply can continue while obligations stay open, and it
 closes nothing. Exit accounting applies before claiming completion or ending
 supervision. If a final reply actually ends the host's supervisory turn, outstanding
 work is checkpointed and the continuation limit or acknowledged handoff is stated,
 without promising that children stay live; see the
-[exit rules](../pattern/DIRECTION.md#account-for-the-outcome-before-exiting).
+[exit rules](../pattern/engine/DIRECTION.md#account-for-the-outcome-before-exiting).
 **Regression cases:** A resumed manager and parent summaries keep its marker; no
 manager prefixes a reply with `🎬`. Two reservations serialized through the shared
 Recorder never receive one marker. A status question mid-outcome is answered while
@@ -446,7 +485,7 @@ the bug-to-customer-follow-up outcome stays open. **Verification limit:** Alloca
 is instructional and serialized by one Recorder route; no helper command or
 machine-enforced reservation exists. A package check covers only the static pool.
 
-**Refined, October 23:** [IDENTITIES](../pattern/IDENTITIES.md) now owns the
+**Refined, October 23:** [IDENTITIES](../pattern/engine/IDENTITIES.md) now owns the
 canonical choice policy: a short, memorable, Capitalized name, bold in human-facing
 output, and a character that naturally suggests the assignment. Soft overlapping
 affinities can draw on animals, flora, tools, or buildings; they do not encode a
@@ -479,13 +518,13 @@ preventing confusion with a new actor. Exhaustion never borrows a reserved symbo
 **Clarified, October 23:** The existing identity-preservation rule explicitly
 includes the assigned emoji and bold name in all parent, Director, and manager
 summaries and SitReps, as well as actor updates and returns. A summary that keeps
-only the name drops required formatting; [IDENTITIES](../pattern/IDENTITIES.md)
+only the name drops required formatting; [IDENTITIES](../pattern/engine/IDENTITIES.md)
 now says so directly. This is a wording clarification, not a new allocation rule
 or a verified live-behavior claim.
 
 **Status and verification boundary:** Decided and implemented in IDENTITIES and
 [IDENTITY_POOL](../pattern/IDENTITY_POOL.txt), with references/examples aligned in
-[DIRECTION](../pattern/DIRECTION.md), [ASSIGNMENT](../pattern/ASSIGNMENT.md), and
+[DIRECTION](../pattern/engine/DIRECTION.md), [ASSIGNMENT](../pattern/engine/ASSIGNMENT.md), and
 the [package guide](../pattern/README.md). Static package checks establish pool
 uniqueness, reserved-symbol exclusion, and payload/link closure. The
 [manual scenarios](DESIGN_NOTES.md#refinement-scenarios--october-23-2026) still await
@@ -531,8 +570,8 @@ prior learning. Tuning belongs in the maintained index and references, not in a
 rewritten generic manager per domain; the cost is adoption mapping before affected
 staffing. Two role values avoid inventing a host or store enum; the fork's rename
 changed one value's spelling, not the set.
-**Implemented:** [ROLES.md](../pattern/ROLES.md), [ASSIGNMENT.md](../pattern/ASSIGNMENT.md),
-[role resolution](../pattern/PATTERN.md#resolve-the-assignment-role), and the
+**Implemented:** [ROLES.md](../pattern/engine/ROLES.md), [ASSIGNMENT.md](../pattern/engine/ASSIGNMENT.md),
+[role resolution](../pattern/engine/PATTERN.md#resolve-the-assignment-role), and the
 role-index mapping in [PROJECT.md](../pattern/PROJECT.md) and
 [INSTALL.md](../pattern/INSTALL.md). Specialist entries in ROLES are illustrative.
 **Regression cases:** A maintained release role with a material "must not" guard is
@@ -546,8 +585,8 @@ pointer reaches one project-owned canonical role index. Explicit assignment role
 and maintained responsibility select standalone definitions/references before
 action. Only an unassigned project conversation defaults Director; malformed
 bounded assignments clarify, never default. Director/manager policies formerly
-in the common PATTERN move to [DIRECTION.md](../pattern/DIRECTION.md), loaded by
-[DIRECTOR](../pattern/DIRECTOR.md) and [REQUEST_MANAGER](../pattern/REQUEST_MANAGER.md).
+in the common PATTERN move to [DIRECTION.md](../pattern/engine/DIRECTION.md), loaded by
+[DIRECTOR](../pattern/engine/DIRECTOR.md) and [REQUEST_MANAGER](../pattern/engine/REQUEST_MANAGER.md).
 Worker boundaries and optional analysis have their own files. This supersedes
 having every worker read the full Director-heavy contract or the hook's abstract.
 The October 22 fast-answer decision in R2 remains intact.
@@ -564,14 +603,14 @@ One fresh assigned Codex trial below now supports the selected-role loading rout
 broader host behavior and prevention of recurrence remain unproven.
 
 **Decided and implemented:** [INSTALL](../pattern/INSTALL.md),
-[UPDATES](../pattern/references/UPDATES.md), and the self-contained
-[STARTUP procedure](../pattern/references/STARTUP.md) audit the entire loaded
+[UPDATES](../pattern/engine/references/UPDATES.md), and the self-contained
+[STARTUP procedure](../pattern/engine/references/STARTUP.md) audit the entire loaded
 startup chain, preserve shared authority and exact specialist instructions at
 maintained destinations, and leave a single active default and index. An installing
 agent need not already be a Director. Existing entries pointing only to startup
 sections are repaired in the same index, not discarded. New or revised recurring
 roles need standalone definitions, index registration, and checked reachability
-before staffing under [ROLES](../pattern/ROLES.md#maintain-standalone-definitions-and-one-index).
+before staffing under [ROLES](../pattern/engine/ROLES.md#maintain-standalone-definitions-and-one-index).
 The index is generated project-owned context, excluded from upstream payload;
 its bootstrap pointer survives updates as an adaptation. No runtime/schema change
 or arbitrary word-count gate is introduced.
@@ -632,13 +671,13 @@ route; it does not establish the unassigned default or Claude behavior.
 
 **Decided and implemented:** The [small hook](../pattern/INSTALL.md) now requires
 the first invocation to read only PATTERN and wait for its result.
-[PATTERN](../pattern/PATTERN.md#complete-startup-before-task-work) owns the remaining
+[PATTERN](../pattern/engine/PATTERN.md#complete-startup-before-task-work) owns the remaining
 dependencies: canonical-index result, selected-definition results, all required
 references/guardrails, then a brief completed-package acknowledgment before task
 I/O or a substantive answer. Known independent startup references may batch after
 discovery; task work may not share their invocation or assistant tool group.
 Read-only inspection and direct answers have no role-loading exception.
-[DIRECTION](../pattern/DIRECTION.md#check-installation-before-using-director-identity)
+[DIRECTION](../pattern/engine/DIRECTION.md#check-installation-before-using-director-identity)
 keeps background setup/identity checks separate, preserving R2's direct-answer
 purpose after role loading. This is an instruction-guided route, not automatic
 file injection, a runtime, or host enforcement. Malformed delegated assignments
@@ -675,7 +714,7 @@ independent effective-effort field exposed. This is one controlled host/model
 sample with restricted tools, not a general reliability result, shell-batching
 trial, downstream installation, or fresh Codex test. The
 [validation notes](DESIGN_NOTES.md#startup-dependency-trials--october-24-2026) and
-[STARTUP procedure](../pattern/references/STARTUP.md#verify-the-startup-dependency-barrier)
+[STARTUP procedure](../pattern/engine/references/STARTUP.md#verify-the-startup-dependency-barrier)
 retain separate read-order and acknowledgment checks. Revisit if real task reads
 still cross a startup dependency or the acknowledgment remains unreliable; do not
 report a later wording change as behavior already tested.
@@ -705,7 +744,7 @@ production-package cost or latency benchmark. It supplies no need to flatten all
 roles or load irrelevant policies. **Architecture decision:** retain the existing
 common bootstrap, canonical index, and selected standalone definitions, with the
 explicit dependency barrier already implemented in
-[PATTERN](../pattern/PATTERN.md#complete-startup-before-task-work). That candidate
+[PATTERN](../pattern/engine/PATTERN.md#complete-startup-before-task-work). That candidate
 also passed the separate actual-package eleven-file read sequence at all three
 requested efforts. No production rewrite or further operational wording change
 followed from the mechanism study.
@@ -738,7 +777,7 @@ project context and adapters that upstream must not overwrite. Schema compatibil
 is checked; migration requires its own decision. Baselines describe installed bytes,
 not proof of behavior. Partial failures must remain visible rather than claim a new
 accepted revision.
-**Implemented:** The base manifest includes [UPDATES.md](../pattern/references/UPDATES.md);
+**Implemented:** The base manifest includes [UPDATES.md](../pattern/engine/references/UPDATES.md);
 [INSTALL.md](../pattern/INSTALL.md) and [PROJECT.md](../pattern/PROJECT.md) route setup
 and updates through private receipts.
 **Regression cases:** An adapted existing-tracker installation merges upstream role
@@ -756,7 +795,7 @@ private identity roster, cursor, and current activity. The new contracts are bas
 payload, so lean installs stay self-contained; a live roster is never packaged.
 Policy adoption reassigns nothing: open director-owned requests keep owner, handles,
 and obligations until an acknowledged handoff, and an update spawns no managers and
-seeds no placeholder roles. See [UPDATES.md](../pattern/references/UPDATES.md).
+seeds no placeholder roles. See [UPDATES.md](../pattern/engine/references/UPDATES.md).
 **Decided, October 21:** The rename changed the accept event field and stored
 acceptance, so a predecessor store is a different format, not an older revision.
 Sharing config 1/store 2 and the `request-bundles` name let this helper open such a
@@ -779,17 +818,17 @@ reversible predecessor-policy adoption can replace its old startup default while
 leaving its records and authorized tracker workflow intact. That instruction
 integration is distinct from migrating its store, which still needs its own
 authorization and compatibility work. Never leave two competing active defaults.
-See [STARTUP](../pattern/references/STARTUP.md).
+See [STARTUP](../pattern/engine/references/STARTUP.md).
 
 **Decided and implemented; superseded in part, later October 23:** Routine updates
 are incremental. This supersedes the unconditional whole-chain startup audit and
 fresh-host trial matrix added earlier today to every upgrade in R10/R11. First
 installation retains the full procedure. An update reviews the relevant upstream
 delta and local drift, then selects the smallest sufficient checks under
-[UPDATES](../pattern/references/UPDATES.md#select-the-smallest-sufficient-verification).
+[UPDATES](../pattern/engine/references/UPDATES.md#select-the-smallest-sufficient-verification).
 Structural changes to startup, role routing/defaults, or inherited instruction
 placement, and detected defects requiring integration, trigger the whole-chain
-[STARTUP](../pattern/references/STARTUP.md) audit. Fresh-host tests cover affected
+[STARTUP](../pattern/engine/references/STARTUP.md) audit. Fresh-host tests cover affected
 role/runtime behavior with the relevant subset of trials. A helper-only delta
 requires compatibility and affected fixture checks, not fresh startup trials.
 
@@ -844,8 +883,8 @@ pattern” choice supplies project-scoped standing authorization. It does not gr
 migration, dependency installation, publication, or destructive overwrite authority.
 The safe baseline/current/incoming comparison, backups, compatibility checks,
 project ownership, and accepted-receipt boundary remain in force for automatic
-updates. [UPDATES](../pattern/references/UPDATES.md#daily-discovery-and-project-preference),
-[DIRECTOR](../pattern/DIRECTOR.md), and [PROJECT](../pattern/PROJECT.md) carry this
+updates. [UPDATES](../pattern/engine/references/UPDATES.md#daily-discovery-and-project-preference),
+[DIRECTOR](../pattern/engine/DIRECTOR.md), and [PROJECT](../pattern/PROJECT.md) carry this
 extension. Global skills retain their native explicit-only invocation controls.
 
 **Why/tradeoff:** A deterministic helper makes a version comparison without a
@@ -895,8 +934,8 @@ retains its actual gate and is never reported as passed.
 and the source receipt record acceptance; only an unrelated fresh-conversation
 trial remains pending. Reconciliation preserves the accepted baseline, performs
 eligible discovery, and reports the trial's narrow uncertainty. See
-[DIRECTION](../pattern/DIRECTION.md#check-installation-before-using-director-identity)
-and [UPDATES](../pattern/references/UPDATES.md#daily-discovery-and-project-preference).
+[DIRECTION](../pattern/engine/DIRECTION.md#check-installation-before-using-director-identity)
+and [UPDATES](../pattern/engine/references/UPDATES.md#daily-discovery-and-project-preference).
 **Status:** Clarification implemented in guidance; the corresponding
 [manual scenario](DESIGN_NOTES.md#portable-staffing-and-acceptance-scenarios--october-23-2026)
 is unverified. Revisit if genuine acceptance/check gates are skipped or unrelated
@@ -925,7 +964,7 @@ browser checks are not evidence of public availability or successful adoption.
 **Regression cases:** The install button copies an agent request, not an executable
 installer. The browser cannot declare the visitor's project installed. A displayed
 director marker describes a checked setup/role, not running workers. Updates preserve
-adaptations and private state under [UPDATES.md](../pattern/references/UPDATES.md).
+adaptations and private state under [UPDATES.md](../pattern/engine/references/UPDATES.md).
 The public build excludes project state, private sources, and maintainer archives.
 A domain-based request must reach the GitHub installation steps without sending
 the agent or user around a loop of copying the same website request again.
@@ -1024,14 +1063,14 @@ Git tracks dot folders, and the problem was mixing shared and private files with
 explicit ignore contract.
 **Implemented:** [.gitignore](../pattern/.gitignore) as base payload; the
 committed default, keep-more-local rules, and `git check-ignore` check in
-[STATE.md](../pattern/STATE.md#version-control), which installed files can reach;
+[STATE.md](../pattern/engine/STATE.md#version-control), which installed files can reach;
 the setup step and public-remote warning in [INSTALL.md](../pattern/INSTALL.md); local
 backups, committed receipts, and existing ignored installations left alone in
-[UPDATES.md](../pattern/references/UPDATES.md); a version-control field in
+[UPDATES.md](../pattern/engine/references/UPDATES.md); a version-control field in
 [PROJECT.md](../pattern/PROJECT.md); the one-writer rule in
-[RECORDS.md](../pattern/references/RECORDS.md#persistence-and-interruption-recovery);
+[RECORDS.md](../pattern/engine/references/RECORDS.md#persistence-and-interruption-recovery);
 and the helper's `event-id` command and CLI check in
-[TOOLING.md](../pattern/references/TOOLING.md). This source repository still
+[TOOLING.md](../pattern/engine/references/TOOLING.md). This source repository still
 ignores its own `/.director/`: the repository is public, and a local installation
 here would hold the maintainer's exact conversations, which stay private. That is
 the deliberate local choice this decision allows, not the default.
@@ -1070,7 +1109,7 @@ of its own assignment and keeps small or coupled work itself. The aim is
 permission, not splitting every task. Every actor works in the
 project's one working tree under Git; parallelism comes from file and resource
 ownership, not separate worktrees or checkouts. Every assignment names a
-[verification tier](../pattern/MODELS.md#verification-tiers): smoke for exploration
+[verification tier](../pattern/engine/MODELS.md#verification-tiers): smoke for exploration
 and mockups, focused for production changes in progress, full for production code
 at integration, acceptance, or release. Routine state writes batch at milestones;
 scope-setting capture, owner decisions and approvals, and dispatch receipts are
@@ -1100,10 +1139,10 @@ the manager dispatches the four phases together, each brief carries a parallel p
 and a tier (smoke for the mockups), records batch at the dispatch wave and at each
 evaluated return, and setup has already reported the missing Git.
 **Status and verification boundary:** Implemented at the owner's request in
-[WORKER](../pattern/WORKER.md), [ASSIGNMENT](../pattern/ASSIGNMENT.md),
-[DIRECTION](../pattern/DIRECTION.md#assign-bounded-work),
-[REQUEST_MANAGER](../pattern/REQUEST_MANAGER.md), [MODELS](../pattern/MODELS.md),
-[STATE](../pattern/STATE.md), [RECORDER](../pattern/RECORDER.md),
+[WORKER](../pattern/engine/WORKER.md), [ASSIGNMENT](../pattern/engine/ASSIGNMENT.md),
+[DIRECTION](../pattern/engine/DIRECTION.md#assign-bounded-work),
+[REQUEST_MANAGER](../pattern/engine/REQUEST_MANAGER.md), [MODELS](../pattern/engine/MODELS.md),
+[STATE](../pattern/engine/STATE.md), [RECORDER](../pattern/engine/RECORDER.md),
 [INSTALL](../pattern/INSTALL.md), and [PROJECT](../pattern/PROJECT.md); awaiting the
 owner's review of the wording. Package checks establish structure only; the
 [manual scenarios](DESIGN_NOTES.md#parallel-default-scenarios--october-23-2026)
@@ -1111,6 +1150,55 @@ remain unobserved.
 **Revisit:** parallel actors in one tree collide often enough to cost more than
 serial work, smoke-tier work ships defects a focused check would have caught, or
 batched records lose state that recovery needed.
+
+## R16 — Separate replaceable engine from project-owned integration
+
+**Decided October 25:** Install upstream contracts and helper implementations in
+`.director/engine/`, separately from project-owned context, roles, policy,
+adapters, identity pool/roster, tracker/config/state, sources and receipts.
+A small project-owned PATTERN bridge supplies the canonical index locator and
+points to the generic engine bootstrap; that engine loads the selected role
+through the existing index. Manifest ownership lists and startup interface 1 make
+the few coupling points explicit. Stable root helper launchers retain the prior
+CLI/API and pass the actual store root; direct engine invocation uses that same
+root. No store/config schema or predecessor compatibility changes.
+
+**Problem and why:** The previous flat payload mixed generic files with adapted
+PROJECT/bootstrap and project-owned roles/state. A heavily customized project or
+domain stencil could not safely replace a directory: whole-folder replacement
+lost its context, while comparing every neighboring file made a small update a
+project reconstruction. Role preservation prose was necessary but did not create
+an independently replaceable engine. The cost now is one explicit bridge read and
+a reviewed one-time layout integration. This supersedes treating the whole flat
+`.director/` directory as managed payload; it preserves R10's selected-role loading,
+R11's incremental checks, and enduring policy rather than runtime caches.
+
+**Affected contracts:** The [boundary](../pattern/engine/references/BOUNDARY.md),
+[manifest](../pattern/manifest.json), [bridge](../pattern/PATTERN.md),
+[engine startup](../pattern/engine/PATTERN.md), [setup](../pattern/INSTALL.md),
+[startup integration](../pattern/engine/references/STARTUP.md), and
+[updates](../pattern/engine/references/UPDATES.md). Interface compatibility and
+engine baselines gate directory replacement. Unknown local engine edits require
+reviewed extraction into project-owned definitions/adapters before replacement;
+no blind deletion or mandatory repeated whole-project audit is introduced.
+
+**Concrete regression:** A domain project has many specialist roles in its own
+index, a custom identity pool, a release prohibition in local policy, and an
+existing tracker. Replacing a compatible verified engine leaves those bytes and
+store identity unchanged; the next selected role still reaches that policy.
+Both stable and direct-engine helper entrypoints operate on `.director/`, never
+create a parallel store under `engine/`, and still refuse predecessor stores.
+A reusable stencil has no initialized state; copied projects initialize distinct
+identities. An incompatible engine interface or unknown drift stops replacement.
+
+**Status and verification boundary:** Implemented as a local candidate; not
+published or adopted into this maintainer repository's live installation. Focused
+package fixtures pass ownership, link closure, custom-neighbor preservation and
+helper-root/receipt resolution checks. Explicit harness-selected startup trials and authorized stencil rollout are
+recorded separately in [validation notes](DESIGN_NOTES.md); static checks do not
+establish universal future compatibility or fresh-session compliance.
+**Revisit:** frequent interface changes, unavoidable engine edits for local policy,
+or project-owned callers require repeated reconstruction after compatible updates.
 
 ## Maintain this explanation
 

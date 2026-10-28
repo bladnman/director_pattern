@@ -8,8 +8,9 @@ neither supplied evidence nor remote status. Use one canonical store.
 
 ## Initialize and capture
 
-Installed at `.director/tools/requests.py`, the helper derives its store root from
-its grandparent. The historical `--team ROOT` option overrides that root and must
+The stable `.director/tools/requests.py` launcher explicitly passes `.director/`
+as the store root to `engine/tools/requests.py`. Direct engine invocation derives
+the same root, never `engine/`. The historical `--team ROOT` option overrides that root and must
 precede the subcommand; it creates no team. Commands below use an illustrative
 `/project/.director`; substitute the actual root. Files containing text use UTF-8.
 

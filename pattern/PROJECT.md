@@ -7,7 +7,7 @@ not a description of the environment that happened to perform setup.
 Do not put observed model/provider/version IDs, current agent names or team rosters,
 slot limits, tool availability, permissions, context/inheritance behavior, return
 routes, or continuation observations here, even with a date or “cache” disclaimer.
-Resolve current capabilities at the relevant use under [MODELS](MODELS.md#projecthost-mapping).
+Resolve current capabilities at the relevant use under [MODELS](engine/MODELS.md#projecthost-mapping).
 Keep recovery-relevant observations in the actual assignment, receipt, or activity
 evidence; they never become operating authority. Do not create another automatically
 loaded environment definition or cache. Durable user-authorized budget and authority
@@ -25,6 +25,15 @@ Important decisions: [canonical decision document]
 Required human acceptance/publication gates: [actual enduring policy; unresolved decisions via canonical pointer]
 Version-control policy: [project choices; .director/.gitignore locator; warning/decision evidence in receipt]
 Installation and verification evidence: [authoritative receipt locator; acceptance, source revision, baselines, startup audit, trials, adaptations, and gaps live there]
+
+## Engine and project ownership
+
+The [interface-1 boundary](engine/references/BOUNDARY.md) keeps `engine/`
+replaceable. This PROJECT, the PATTERN bridge, canonical index, actual roles,
+policy/adapters, identity pool/roster, configuration and state are project-owned.
+Local constraints belong in required project references, never edited generic
+engine contracts. Compatible updates preserve these neighbors and replace only
+verified engine bytes and reviewed tool launchers.
 
 ## Roles, guardrails, and routes
 
@@ -52,13 +61,13 @@ Per-dispatch evidence location: [canonical assignment/receipt/activity locator]
 
 Choose actual model, effort, context, and execution controls when needed from the
 current host's exposed capabilities, within existing authority. Setup and each
-conversation's role/identity check produce evidence under [DIRECTION](DIRECTION.md#check-installation-before-using-director-identity),
+conversation's role/identity check produce evidence under [DIRECTION](engine/DIRECTION.md#check-installation-before-using-director-identity),
 not fields to keep filling in this file. Unknown or unavailable capabilities stay
 visible without becoming permanent project restrictions.
 
 ## Source updates
 
-Use [UPDATES.md](references/UPDATES.md) for requested or standing-authorized updates
+Use [UPDATES.md](engine/references/UPDATES.md) for requested or standing-authorized updates
 from published GitHub `main`. The checked project Director arranges at most one
 metadata check per 24 hours while active; absent policy defaults to notify.
 Update preference: [notify by default / automatic only on explicit “always update director pattern” / off; update-policy.json and user-source reference]
@@ -71,13 +80,13 @@ log dump here. Keep the machine-local daily check cache ignored. Automatic mode
 uses the same backup/comparison/compatibility protocol and never bypasses conflicts.
 Preserve enduring project policy, maintained definitions, canonical state and
 history. Historical environment observations stay outside startup as evidence,
-under the [update procedure](references/UPDATES.md#compare-before-replacing).
+under the [update procedure](engine/references/UPDATES.md#compare-before-replacing).
 A template seed carries no completed receipt or initialized identity.
 
 ## Working references
 
 Every actor starts with [PATTERN.md](PATTERN.md) and its canonical index, then
 loads the selected standalone definition and required references. Directors read
-[DIRECTION.md](DIRECTION.md), [MODELS.md](MODELS.md), and [STATE.md](STATE.md)
-with [DIRECTOR.md](DIRECTOR.md) or [REQUEST_MANAGER.md](REQUEST_MANAGER.md).
+[DIRECTION.md](engine/DIRECTION.md), [MODELS.md](engine/MODELS.md), and [STATE.md](engine/STATE.md)
+with [DIRECTOR.md](engine/DIRECTOR.md) or [REQUEST_MANAGER.md](engine/REQUEST_MANAGER.md).
 Open decisions and validation: [canonical pointer; evidence is separate from policy]

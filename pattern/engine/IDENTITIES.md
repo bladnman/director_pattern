@@ -15,7 +15,7 @@ badge under [DIRECTION.md](DIRECTION.md). Request Managers and other bounded act
 including child directors, use their assigned identity instead. A marker never
 grants role or authority.
 
-The optional package pool is [IDENTITY_POOL.txt](IDENTITY_POOL.txt). It is a
+The optional package pool is [IDENTITY_POOL.txt](../IDENTITY_POOL.txt). It is a
 candidate list, **not a live roster**. An adopting project may replace it or use
 distinct text labels. Never allocate these reserved symbols, including equivalent
 rendered variants: `🎬`, `📋`, `❓`, `🖐️`. Their existing meanings stay intact.

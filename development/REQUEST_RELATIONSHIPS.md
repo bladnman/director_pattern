@@ -137,8 +137,8 @@ This design authorizes no foreign messages, new chats, or background monitoring.
 
 ## Implementation and remaining limits
 
-The [bundled record contract](../pattern/references/RECORDS.md) and
-[CLI reference](../pattern/references/TOOLING.md) define the implemented schema/API.
+The [bundled record contract](../pattern/engine/references/RECORDS.md) and
+[CLI reference](../pattern/engine/references/TOOLING.md) define the implemented schema/API.
 Request folders move with their assets/evidence; immutable source bundles preserve
 shared originals. Typed links separate group/decomposition/information from required
 dependencies. Local required targets must exist and be done; required cycles fail.

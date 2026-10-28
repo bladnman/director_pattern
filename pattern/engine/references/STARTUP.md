@@ -53,9 +53,10 @@ Do not invent an abstract of the method in AGENTS.md.
    and IDENTITIES; workers load WORKER plus their selected definition/references.
    A role may compose existing references without duplicating them. Do not seed
    illustrative specialists as real definitions.
-4. Fill PATTERN's canonical-index locator with the one real path (a relative
+4. Fill the project-owned PATTERN bridge's canonical-index locator with the one real path (a relative
    Markdown link is suitable); record the same path in PROJECT. This pointer is a
-   local adaptation preserved across updates. Keep one live role table in that
+   project-owned integration point preserved across engine updates; keep the
+   engine bootstrap generic. See [BOUNDARY](BOUNDARY.md). Keep one live role table in that
    index; the hook and bootstrap route there instead of copying it. Verify each
    selected definition and required reference exists and agrees with its entry.
 5. Replace the old identifiable pattern startup block with INSTALL's small hook.
@@ -80,7 +81,8 @@ workflow as an existing tracker; otherwise obtain a separate migration decision.
 ## Verify the startup dependency barrier
 
 [PATTERN](../PATTERN.md#complete-startup-before-task-work) owns the mandatory
-sequence: first tool invocation reads only PATTERN; its returned result precedes
+sequence: first tool invocation reads only the project-owned PATTERN bridge; its returned
+result precedes an engine/PATTERN-only invocation, whose returned result precedes
 the canonical-index invocation; the index result precedes selected definitions;
 definition results establish further mandatory references. Complete those reads
 and send one brief role-package acknowledgment before task I/O or a substantive
@@ -101,8 +103,8 @@ the task prompt; that supplements observed reads rather than replacing them.
 
 Inspect the complete tool stream and distinguish these observations:
 
-- **Read/result barrier:** PATTERN is alone in the first invocation/tool group;
-  each dependent stage starts only after its prerequisite result was returned
+- **Read/result barrier:** the project bridge is alone in the first invocation/tool group,
+  engine/PATTERN is alone in the second; each dependent stage starts only after its prerequisite result was returned
   and available for the actor to read. Every required file's successful result
   precedes the first task invocation/tool group and substantive answer.
 - **Completion acknowledgment:** after the final required result, the actor

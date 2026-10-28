@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nested board regression seed</title>
+<style>
+  body { margin: 2rem auto; max-width: 58rem; padding: 0 1rem; font: 18px system-ui; color: #20252c; background: #f5f3ef; }
+  nav, header { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  button, input { font: inherit; padding: .5rem; }
+  input { width: min(26rem, 90%); }
+  main { margin-top: 1rem; display: grid; gap: 1rem; }
+  article { padding: 1rem; border: 1px solid #a5aaa9; background: white; }
+  h2 { font-size: 1.2rem; }
+</style>
+<header><h1>Board notebook</h1><span>Disposable regression seed</span></header>
+<nav id="navigation" aria-label="Board navigation"></nav>
+<h2 id="board-title"></h2>
+<label>Search <input id="query" type="search" placeholder="Find a card"></label>
+<main id="canvas" aria-live="polite"></main>
+<script>
+// Intentionally limited baseline: search filters only cards on the current board.
+// This synthetic fixture contains no Tinka code, customer data, or network calls.
+const boards = [
+  { id: 'project', title: 'Project', parent: null, cards: [
+    { id: 'brief', title: 'Project brief', text: 'Collect delivery notes and review artifacts.' }
+  ] },
+  { id: 'research', title: 'Research', parent: 'project', cards: [
+    { id: 'interviews', title: 'Interview notes', text: 'Readers need to locate artifacts across boards.' }
+  ] },
+  { id: 'archive', title: 'Archive', parent: 'research', cards: [
+    { id: 'prototype', title: 'Navigation prototype', text: 'A review artifact filed on a nested board.' }
+  ] },
+  { id: 'delivery', title: 'Delivery', parent: 'project', cards: [
+    { id: 'checklist', title: 'Release checklist', text: 'Publication requires a separate human decision.' }
+  ] }
+];
+let current = 'project';
+const navigation = document.querySelector('#navigation');
+const canvas = document.querySelector('#canvas');
+const query = document.querySelector('#query');
+function openBoard(id) {
+  current = id;
+  query.value = '';
+  render();
+}
+function boardButton(board, prefix) {
+  const button = document.createElement('button');
+  button.textContent = prefix + board.title;
+  button.onclick = () => openBoard(board.id);
+  return button;
+}
+function render() {
+  const board = boards.find(item => item.id === current);
+  document.querySelector('#board-title').textContent = board.title;
+  navigation.replaceChildren();
+  if (board.parent) navigation.append(boardButton(boards.find(item => item.id === board.parent), 'Back to '));
+  for (const child of boards.filter(item => item.parent === current)) navigation.append(boardButton(child, 'Open '));
+  canvas.replaceChildren();
+  for (const card of board.cards.filter(item => (item.title + ' ' + item.text).toLowerCase().includes(query.value.toLowerCase()))) {
+    const article = document.createElement('article');
+    article.id = card.id;
+    const title = document.createElement('h2');
+    title.textContent = card.title;
+    const text = document.createElement('p');
+    text.textContent = card.text;
+    article.append(title, text);
+    canvas.append(article);
+  }
+}
+query.addEventListener('input', render);
+render();
+</script>
+</html>

@@ -38,6 +38,7 @@ Assigning actor and accountable outcome owner:
 Display identity: reserved marker + short Capitalized name; bold name in report prefix per IDENTITIES.md
 Stable outcome/assignment identity; permitted return route:
 Outcome, exact source/addenda, full completion obligations and acceptance:
+Chosen deliverable and required review evidence (artifact, rendered alternatives, working behavior, or text):
 Scope, file/resource ownership, authority, reserved decisions, exclusions, dependencies:
 Required selected role definitions + shared guardrails/runbooks/learnings:
 Required model/effort policy; requested capability/effort; current supported controls:

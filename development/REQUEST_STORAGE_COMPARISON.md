@@ -3,8 +3,8 @@
 Design decision · October 16, 2026. The candidate uses one folder per actionable
 request, with separately preserved exact user-source bundles. This comparison
 explains the general alternatives and the reasons for that choice. The current
-[record contract](../pattern/references/RECORDS.md) and
-[CLI reference](../pattern/references/TOOLING.md) define actual behavior.
+[record contract](../pattern/engine/references/RECORDS.md) and
+[CLI reference](../pattern/engine/references/TOOLING.md) define actual behavior.
 
 ## Alternatives
 

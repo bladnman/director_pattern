@@ -1,6 +1,6 @@
 # Shared worker boundaries
 
-Read the shared [bootstrap](PATTERN.md), selected indexed standalone definition,
+Read the shared [bootstrap](../PATTERN.md), selected indexed standalone definition,
 required references, and bounded assignment before action. Acknowledge the package
 and report gaps to the assigner. Execute only assigned scope and authority;
 return reserved decisions and evidence through the permitted route. Preserve
