@@ -22,12 +22,17 @@ role specified, complete these dependencies before task work:
    guardrails, including further mandatory references they require. Workers also
    load WORKER below. Known independent startup reads may be batched once their
    need is established; dependent discovery requires a returned, read result.
+   A failed, missing, or truncated result is not a complete read: recover and read
+   every missing portion before claiming that reference or package was loaded.
+   If it cannot be recovered, disclose the specific gap and stop affected action.
 4. After the last required result has returned and been read, send a brief
    startup-completion acknowledgment in assistant text before your first task
    tool invocation or substantive answer. Identify the resolved assignment role,
    maintained responsibility, loaded definition(s) and required references, and
    any gaps; honor any acknowledgment required by those references. An earlier
    role label or promise to load them is not this completion acknowledgment.
+   This acknowledgment reports what was read; it does not establish that the host
+   permits delegation, that a Recorder is available, or that setup was checked.
    Then address the original request in the same turn, without requiring a
    greeting or extra confirmation.
 

@@ -105,7 +105,8 @@ Inspect the complete tool stream and distinguish these observations:
 
 - **Read/result barrier:** the project bridge is alone in the first invocation/tool group,
   engine/PATTERN is alone in the second; each dependent stage starts only after its prerequisite result was returned
-  and available for the actor to read. Every required file's successful result
+  and available for the actor to read. A failed or truncated result must be
+  recovered and read fully; an unrecoverable gap stops affected action. Every required file's successful result
   precedes the first task invocation/tool group and substantive answer.
 - **Completion acknowledgment:** after the final required result, the actor
   briefly identifies its resolved role, responsibility, loaded package, and gaps
@@ -153,6 +154,9 @@ retain observed file reads/acknowledgments and first role-specific actions:
 | Missing role, unknown responsibility, conflicting definition, or incomplete delegated assignment | Stops affected action and seeks clarification through a permitted route, without becoming Director or inventing a generic specialist. |
 | Newly registered recurring role | Discovers the new standalone definition through the same canonical index and reads its references before action. |
 | Upgrade from oversized startup instructions | Common startup excludes relocated specialist duties and stale pattern defaults; the selected responsibility still reaches every preserved instruction at its maintained destination. |
+| Delegation restriction and unavailable route | For an outcome requiring delegation, the selected Director resolves current host permission and actual route; a prohibition, uncertainty, or failure is described accurately, and affected implementation or Recorder work is not silently taken over. A direct-answer-only request remains direct. |
+| Incomplete startup result | A deliberately truncated required reference is reread in full before a completed-package acknowledgment and task action; an unrecoverable failure is disclosed without claiming the package loaded. |
+| Updated existing hook | The existing loaded entrypoint receives the applicable hook change once, preserving custom instructions and surrounding bytes; required affected startup trials are recorded separately. |
 
 Record each trial separately with host/session, startup route, assignment,
 observed reads or acknowledgment, first action, result, and limits. An unread

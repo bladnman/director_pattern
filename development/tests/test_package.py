@@ -111,6 +111,30 @@ class PackageBoundaryTests(unittest.TestCase):
         # The source repository alone adds its optional-local-installation guard.
         self.assertIn(common, normalize(authoring_hook.group(1)))
 
+    def test_loaded_hook_explicitly_requests_director_delegation_with_host_precedence(self):
+        # Guards the host-loaded entrypoint itself; it cannot prove host permission.
+        install = (PATTERN / "INSTALL.md").read_text(encoding="utf-8")
+        hook = re.search(r"<!-- director-pattern:start -->(.*?)<!-- director-pattern:end -->", install, re.S)
+        self.assertIsNotNone(hook)
+        text = " ".join(hook.group(1).split())
+        self.assertRegex(text, r"selected Director role.*delegate substantial analysis and project changes.*bounded subagents")
+        self.assertIn("higher-priority host instructions", text)
+
+    def test_startup_incomplete_reads_cannot_be_acknowledged_as_loaded(self):
+        # Instruction-path check only; a fresh-agent trial must observe behavior.
+        text = " ".join((PATTERN / "engine/PATTERN.md").read_text(encoding="utf-8").split())
+        self.assertRegex(text, r"failed, missing, or truncated result.*recover and read every missing portion before claiming")
+        self.assertRegex(text, r"cannot be recovered, disclose the specific gap and stop affected action")
+        self.assertRegex(text, r"acknowledgment reports what was read.*does not establish.*permits delegation")
+
+    def test_updates_integrate_changed_hook_without_replacing_local_rules(self):
+        # Hook is project-owned, outside the engine replacement; static contract only.
+        update = " ".join((PATTERN / "engine/references/UPDATES.md").read_text(encoding="utf-8").split())
+        self.assertRegex(update, r"incoming startup hook changes.*existing host-loaded entrypoint")
+        self.assertRegex(update, r"Back up and verify the startup file.*compare.*prior and incoming hook")
+        self.assertRegex(update, r"Preserve all unrelated bytes and project-specific instructions.*Do not append a duplicate hook")
+        self.assertRegex(update, r"ambiguous, retain the original and report the incomplete integration")
+
     def test_project_owned_index_and_selected_definitions_are_reachable_in_isolated_payload(self):
         # Installation fixture: target context is generated, never upstream payload.
         # This proves file/link reachability only, not any agent's read sequence.

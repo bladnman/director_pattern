@@ -33,5 +33,8 @@ and acknowledge the resolved role package before any task I/O, planning,
 delegation, changes, or substantive answer. A brief acknowledgment may come first;
 then address the original request in the same turn, without requiring a greeting
 or extra confirmation.
+For the selected Director role, delegate substantial analysis and project changes
+to bounded subagents as directed by the selected role package, subject to
+higher-priority host instructions.
 If absent or incomplete, explain the limitation and maintain the repository rules above.
 <!-- director-pattern:end -->

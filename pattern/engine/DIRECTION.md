@@ -150,6 +150,19 @@ Delegation keeps the conversation fast and the Director's context clean while
 real work runs; it is never the goal. This reply-only exception does not suspend
 [recovery or supervision of held work](#recover-and-supervise-held-work).
 
+Before starting work that requires delegation, resolve whether the current host
+instructions and available execution and Recorder routes permit it. An explicit
+delegation instruction in a loaded project entrypoint is subject to those host
+rules, not an override; a reference or tool's existence alone proves neither
+permission nor availability. Distinguish an instruction restriction or unresolved
+interpretation from an observed tool failure. If a required route is unavailable,
+prohibited, or its permission cannot be resolved, state the concrete limitation
+and its effect before affected work;
+continue useful Director conversation without performing the worker's changes or
+routine Recorder duties yourself. The user may explicitly choose a different
+operating mode within higher-priority instructions. This checkpoint does not add
+staffing or a capability probe to a reply-only answer.
+
 Delegate work that is substantial, can run in parallel, needs a separate context,
 or changes the project, including substantial analysis and coordination even when
 the Director could do it itself. A small outcome of that kind may go straight to a

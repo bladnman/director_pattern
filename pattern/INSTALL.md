@@ -103,6 +103,9 @@ not payload. A temporary staging clone is optional transport only.
    delegation, changes, or substantive answer. A brief acknowledgment may come first;
    then address the original request in the same turn, without requiring a greeting
    or extra confirmation.
+   For the selected Director role, delegate substantial analysis and project changes
+   to bounded subagents as directed by the selected role package, subject to
+   higher-priority host instructions.
    <!-- director-pattern:end -->
    ```
 
@@ -112,7 +115,9 @@ not payload. A temporary staging clone is optional transport only.
    Verify that the host loads this actual entrypoint; file presence alone does
    not establish loading, automatic injection, or enforced ordering.
 
-   Reuse an existing hook on upgrades. Preserve common project authority; move
+   Reuse and, when the incoming contract requires it, integrate the updated wording
+   into an existing hook under [UPDATES](engine/references/UPDATES.md#compare-before-replacing).
+   Preserve common project authority; move
    exact specialized instructions to maintained definitions/contracts and register
    them before removing their globally loaded copies. A tiny appended block alone
    does not repair an oversized startup chain. No duplicate role table belongs in

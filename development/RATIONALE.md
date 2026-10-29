@@ -764,6 +764,49 @@ tested. See the separate
 Revisit on an observed downstream loading failure; retain result/group evidence
 rather than interpreting higher effort, a link, or a role self-label as proof.
 
+**Refined, October 29 — explicit delegation bridge and truthful startup evidence:**
+An agent reported interpreting a host rule narrowly because the installed
+`AGENTS.md` hook required loading the pattern but did not itself request
+delegation. It then performed implementation rather than following the existing
+unavailable-worker fallback, and acknowledged a package after a truncated batch.
+The report supports what the agent said it did; it does not prove the host actually
+prohibited a launch or that every such host interprets referenced instructions
+the same way. The missing explicit bridge wording and existing fallback are
+directly inspectable; whether the bridge changes host behavior is a hypothesis.
+
+The [installation hook](../pattern/INSTALL.md) now explicitly asks the selected
+Director to delegate substantial analysis and project changes to bounded
+subagents within higher-priority host rules. This small role-conditional request
+does not add a role table or impose delegation on a worker or reply-only answer.
+[DIRECTION](../pattern/engine/DIRECTION.md#choose-the-deliverable-before-the-direct-answer-exception)
+requires a capability/authority checkpoint before affected delegated work and an
+accurate disclosure when a required route is prohibited, uncertain, or unavailable;
+it retains the no-silent-role-switch boundary. The selected package acknowledgment
+reports reads, not operational capability or setup verification. The shared
+[startup bootstrap](../pattern/engine/PATTERN.md#complete-startup-before-task-work)
+requires incomplete reads to be recovered before a completed-package claim, or a
+specific gap and stop if recovery fails. The update contract now explicitly merges
+affected hook changes into existing project-owned entrypoints with backup and
+adaptation preservation; engine replacement alone cannot perform that merge.
+
+**Regression cases:** A host permits delegation only when the user's or an
+applicable `AGENTS.md` instruction explicitly asks: the selected Director can
+evaluate the new loaded hook against that actual rule before staffing. An actual
+prohibition remains binding and is disclosed without implementation by the
+Director. A truncated required reference is fully reread before the completion
+acknowledgment; an unrecoverable read stops affected work. A direct-answer-only
+request remains direct, and an assigned worker keeps its own role. An update
+preserves customized text inside and outside the hook and never silently appends a
+second hook. See [STARTUP's affected trials](../pattern/engine/references/STARTUP.md#static-checks-then-fresh-host-trials).
+
+**Status and limits:** The change is implemented as a local candidate; exact source
+evidence is retained privately. Static contract and package checks do not establish
+that a host permits delegation, that an agent honors the new instructions, or that
+an existing installation was updated. Fresh affected-host trials and downstream
+adoption remain separate; preserve failed or unrun observations rather than
+describing them as passing. Revisit if the loaded bridge still fails a real host's
+delegation boundary or if the checkpoint delays ordinary direct answers.
+
 ## R11 — Update from a pinned public source without replacing project state
 
 **Accepted decision, October 17:** Published GitHub `main` is the upstream source of

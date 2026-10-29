@@ -231,6 +231,17 @@ A template update changes only generic seeds;
 never copy a configured store, shared identity, runtime state, or a completed setup
 receipt into a seed. Generated projects perform their own first-use initialization.
 
+When the incoming startup hook changes, integrate its applicable change into the
+existing host-loaded entrypoint as a reviewed project-owned adaptation; replacing
+the engine alone cannot update that hook. Back up and verify the startup file,
+compare its identifiable marked block and local adaptations with the prior and
+incoming hook, and merge only the needed change. Preserve all unrelated bytes and
+project-specific instructions, including customizations inside the block. Do not
+append a duplicate hook. If the block or applicable authority is ambiguous, retain
+the original and report the incomplete integration for review. Verify the actual
+loaded route and select affected startup checks below; record the resulting hook
+and backup in the receipt rather than treating engine replacement as adoption.
+
 Inspect helper/config/store schema compatibility before replacing a bundled helper.
 An incompatible or uncertain schema blocks that part of the update; preserve the
 old helper and state, report the boundary, and obtain a separate migration decision.

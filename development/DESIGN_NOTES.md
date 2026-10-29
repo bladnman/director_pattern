@@ -546,3 +546,21 @@ continuation through host interruption, unassigned Director auto-discovery, or
 universal future-host compliance. Explicit pause and genuine external transfer
 remain scenario controls, not actual handoffs observed in this trial. The package
 installs no scheduling or liveness service.
+
+## Delegation bridge and startup evidence — October 29, 2026
+
+The candidate's [R10 refinement](RATIONALE.md#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes)
+adds an explicit role-conditional delegation request to the host-loaded hook,
+incomplete-read handling, a host/route checkpoint, and existing-hook integration.
+Three focused static tests check the affected instruction paths, alongside the
+existing hook parity and package-preservation checks. The full development suite
+passed 58 tests; `git diff --check` passed. These checks do not prove agent or host
+behavior; the affected fresh-session cases in STARTUP remain unrun.
+
+After source review, the three authorized local My Work stencils received the four
+changed engine files and their single marked AGENTS hook through the reviewed sync
+helper. Full preimages were backed up and verified; independent comparison found all
+other file hashes and hook-surrounding bytes unchanged. Each stencil remains
+uninitialized, the helper's follow-up check was a no-op, and sync evidence labels
+the source a local unpublished candidate. This does not update already-generated
+projects or establish published adoption, behavioral acceptance, or release.
