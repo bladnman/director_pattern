@@ -1,15 +1,15 @@
 # Direction and supervision
 
-Director and Request Manager contract; load only for an indexed `Role: director`
-responsibility, alongside its standalone definition. Shared startup resolution is
-in [PATTERN.md](../PATTERN.md). This file does not assign a role.
+Action protocol for indexed director responsibilities. Load before substantial
+analysis/coordination, delegation, supervision/recovery, evaluation or exit under
+[PATTERN](PATTERN.md#required-capability-protocols). The selected standalone
+definition supplies conversational startup; this file does not assign a role.
 
 ## Check installation before using director identity
 
 Complete [PATTERN's startup sequence](PATTERN.md#complete-startup-before-task-work)
-first, including role-package loading and acknowledgment. That prerequisite applies
-to every conversation and direct answer; it is separate from this background setup
-and identity check. Only the project Director runs this check. Request Managers receive the checked bootstrap facts in their assignment and
+first, including the conversational package and acknowledgment. Operational protocols
+load at their triggers; this background setup/identity check is not startup. Only the project Director runs this check. Request Managers receive the checked bootstrap facts in their assignment and
 reuse the configured shared Recorder route rather than spawning a recorder of their
 own; workers, reviewers, and recorders skip it. When this conversation is the
 project Director and first staffs work, have a Small recorder inspect actual setup
@@ -82,100 +82,41 @@ labels the situation-report block within that reply.
 
 ## Direct without becoming the worker
 
-The project Director answers promptly, works out the user's intent and needs,
-discusses, decides, routes, evaluates, sends concrete rework, and accepts each
-entrusted outcome. It owns the conversation and cross-outcome judgment throughout,
-keeps a compact list of unfinished commitments, and answers ordinary discussion
-directly without an agent for every sentence. Before undertaking substantial
-analysis or detailed coordination in the main conversation, delegate that active
-work to a bounded actor. A child director, normally the Request Manager, owns
-detailed outcome planning, staffing, supervision, evaluation, and rework; independent
-analysis may use a worker with the optional bounded-analysis responsibility or a
-matching maintained role. There is no mandatory intake layer or new role value.
-See [DIRECTOR.md](DIRECTOR.md).
+[DIRECTOR](DIRECTOR.md) and [REQUEST_MANAGER](REQUEST_MANAGER.md) define their
+startup responsibilities and non-worker boundaries. Before substantial analysis or
+coordination, delegate it instead of finishing the plan in the main conversation.
+Keep full recoverable detail with the outcome owner and shared Recorder; the
+Director retains a compact current view, access to detail, and selected critical
+evidence. Route local dependencies and worker returns through their manager.
 
-A Request Manager owns one complete outcome: understanding, all completion
-obligations, planning, specialist tasks, evaluation, rework, Director review, and
-required follow-up. A specialty is a task within the outcome, not a reason for
-another manager. See [REQUEST_MANAGER.md](REQUEST_MANAGER.md).
-
-Keep full recoverable detail with the outcome owner and shared Recorder. The
-Director retains access to that detail, a compact current view, and selected
-critical evidence for judgment. Retaining detail is useful; actively doing the
-manager's substantial analysis or coordination in the main conversation consumes
-the attention this boundary protects. Route ordinary worker returns and local
-dependencies through the manager, and bring cross-outcome conflicts, reserved
-decisions, and integrated submissions to the Director.
-
-Both director responsibilities can inspect selected primary sources and actual
-artifacts when critical evaluation requires them. Workers implement, research, run
-verification, and mutate files. Delegate routine broad reading to a small clerk who
-returns a map and exact relevant excerpts with paths; the director chooses what to
-inspect more deeply. Delegate all routine state reading and writing to the shared
-[Recorder](RECORDER.md) under [STATE.md](STATE.md), including recovery lookups,
-current activity, identity reservations, and important decisions. The director
-supplies interpretation and explicit decisions; the recorder supplies persistence.
+Both director responsibilities may critically inspect selected primary sources and
+actual artifacts. Workers implement, research, run verification and mutate files.
+Use a Small clerk for broad reading, returning a map and exact relevant excerpts;
+the director chooses deeper inspection. Routine shared state reading/writing,
+recovery lookups and identity reservations use the shared [Recorder](RECORDER.md)
+under [STATE](STATE.md); the owner supplies judgment, the Recorder persistence.
 
 ### Choose the deliverable before the direct-answer exception
 
-First infer the intended outcome from context and choose what would fulfill it.
-A concrete product problem and desired improvement can imply actionable intent
-even in conversational or uncertain wording, such as "I think it would be better
-if we did X." Neither tentative wording nor "what do you think?" decides whether
-the user wants action or discussion. Do not automatically implement casual
-observations. Honor explicit consultation or discussion-only intent, such as
-"before we do anything" or "just talk this through; don't change anything," in
-context. Form enough understanding to choose the next step; do not complete
-substantial analysis or a detailed plan before delegating it.
+Choose what fulfills the user's intended outcome before taking the direct-answer
+exception in the selected definition. Tentative wording does not decide whether
+action is intended; honor explicit consultation. A requested artifact or changed
+behavior needs bounded execution, with rendered alternatives/prototype for an
+unresolved visual choice and rendered/working evidence for interaction work.
+A prose recommendation cannot replace it. Preserve authority and publication gates.
+The reply-only exception never bypasses startup or held-work supervision; discussion
+need not wait for state reconciliation, Recorder activation or setup checks.
 
-When the intended outcome needs an artifact or changed behavior, proceed through
-bounded, reversible execution under the maintained roles and existing authority.
-With clear direction, produce a reviewable implementation. When a material design
-choice remains, produce rendered alternatives or a prototype before asking the
-user to choose, when feasible within that authority. Visual or interaction work
-requires rendered designs or working behavior; prose recommendations alone do not
-fulfill that deliverable. If a genuine authority, resource, or information limit
-prevents concrete progress, disclose it and ask only for what is needed to proceed.
-Preserve publication gates and proportionate verification.
-
-After PATTERN's role-loading and acknowledgment prerequisite, use the direct-answer
-exception only when the chosen deliverable itself fits in the reply: for example,
-reshaping supplied text, answering a question, reporting status, or giving a
-judgment when that is the intended outcome. Give that answer directly in the turn,
-with no workers, recorder, capture, or setup check. A request phrased as a question
-or inviting judgment can still require an artifact or changed behavior; a sensible
-written answer cannot replace it. Choosing a faster reply must not shrink the
-intended deliverable. This exception never skips startup definitions or references.
-Delegation keeps the conversation fast and the Director's context clean while
-real work runs; it is never the goal. This reply-only exception does not suspend
-[recovery or supervision of held work](#recover-and-supervise-held-work).
-
-Before starting work that requires delegation, resolve whether the current host
-instructions and available execution and Recorder routes permit it. An explicit
-delegation instruction in a loaded project entrypoint is subject to those host
-rules, not an override; a reference or tool's existence alone proves neither
-permission nor availability. Distinguish an instruction restriction or unresolved
-interpretation from an observed tool failure. If a required route is unavailable,
-prohibited, or its permission cannot be resolved, state the concrete limitation
-and its effect before affected work;
-continue useful Director conversation without performing the worker's changes or
-routine Recorder duties yourself. The user may explicitly choose a different
-operating mode within higher-priority instructions. This checkpoint does not add
-staffing or a capability probe to a reply-only answer.
-
-Delegate work that is substantial, can run in parallel, needs a separate context,
-or changes the project, including substantial analysis and coordination even when
-the Director could do it itself. A small outcome of that kind may go straight to a
-`Role: worker` with decisions reserved, instead of a Request Manager; if managing
-that worker becomes substantial, entrust coordination to a bounded director.
-Prompt acknowledgment and a useful next step precede extended active work. This is
-an attention and delegation policy, not a response-time SLA or a promise of
-simultaneous inference or replies during a blocking host tool call. Use supported
-bounded waits and safe attention shifts. If workers or the recorder are unavailable
-for delegated work, disclose unsupported execution or
-persistence and continue useful director conversation. Do not silently switch roles
-or permanently increase permissions. The user may explicitly choose a different
-operating mode.
+Before starting delegated work, resolve actual host permission and execution and
+Recorder routes. A loaded delegation request or tool's existence proves neither
+permission nor availability. Distinguish instruction restrictions or uncertainty
+from observed failures. Disclose the concrete limitation and its effect before
+affected work, and continue useful director conversation without silently doing
+worker changes or routine Recorder duties yourself. A user may explicitly choose
+another operating mode within higher-priority restrictions. Reply-only answers
+need no staffing or capability probe. This is an attention policy, not a response-
+time SLA or a promise of simultaneous inference or replies during a blocking call.
+Use supported bounded waits and safe attention shifts.
 
 ## Assign bounded work
 
@@ -185,6 +126,11 @@ to that owner. Use the simplest useful work graph. Actively seek independent
 parallel work; serialize coupled writes, real dependencies, and exclusive
 resources. Reserve capacity for evaluation and integration. Reuse relevant workers
 within their authorized scope.
+Keep one accountable whole-outcome owner through usable delivery. Specialist
+stewardship of a role, artifact or subsystem adds applicable knowledge and real
+constraints; it does not itself force another manager, ownership handoff or
+approval. Small work may use the directly assigned worker path with owner
+evaluation and reserved decisions intact.
 
 Run a parallelization check before each dispatch: list the independent streams and
 dispatch them together. Serial dispatch needs a named dependency or exclusive
@@ -197,7 +143,7 @@ Each assignment carries a parallel plan, so its receiver knows which parts could
 use subagents.
 
 Before staffing, discover applicable maintained roles in the canonical project role
-index and load project-wide guardrails and selected references under
+index and load project-wide guardrails and the selected role's selection/authority package under
 [ROLES.md](ROLES.md). Choose capability and effort per assignment under
 [MODELS.md](MODELS.md). Reserve a name and marker under [IDENTITIES.md](IDENTITIES.md).
 Missing or conflicting applicable definitions return for resolution; there is no
@@ -211,8 +157,9 @@ Each assignment follows [ASSIGNMENT.md](ASSIGNMENT.md) and supplies:
 - Concrete outcome, chosen deliverable and required review evidence, exact
   source/addenda, constraints, and all known completion obligations and acceptance
   criteria.
-- Selected role definitions, project-wide guardrails, runbooks, and reviewed
-  learnings to read and acknowledge before action.
+- Selected role definitions, project-wide guardrails, and the complete executor
+  startup/task/action reference map with triggers under ROLES; one sufficient
+  startup acknowledgment, then complete task/action reads before use.
 - Exact file/module ownership, interfaces, dependencies, the parallel plan, and a
   [verification tier](MODELS.md#verification-tiers) with its smallest sufficient
   checks; workers do not add their own extra layers.
@@ -249,6 +196,12 @@ Obtain the capture receipt required by STATE before dispatch in tracked mode.
 After real dispatch, retain the host handle, actual model/effort, identity binding,
 and receipt through the recorder. Batch other routine writes at milestones under
 [STATE](STATE.md); a recorder call after every step costs more than it protects.
+Use one reservation request for a known dispatch wave, then one factual receipt
+update for its returned handles and settings. Combine acknowledgments, observations
+and evaluation updates when their checkpoint is shared; keep per-item identity,
+success/failure and uncertainty visible. Do not wait for an unrelated slow stream
+before persisting facts needed for recovery or authority. Reuse unchanged loaded
+protocols and selection packages instead of rereading them at each dispatch.
 Maintain a compact current activity/recovery pointer in either state mode. A saved status or existing chat is not proof that
 execution is alive.
 
@@ -399,6 +352,13 @@ cannot keep a model alive or wake it later. State host limitations before
 asynchronous dispatch; choose a supported supervision or acknowledged handoff path.
 
 ## Improve within evidence
+
+At meaningful outcome closure, review the touched role/reference path under
+[ROLES](ROLES.md#improve-the-systems-knowledge): refresh current selection cues,
+artifact pointers and accepted facts; preserve stale runtime assertions as dated
+evidence outside live instructions. Fold authorized upkeep into the existing
+outcome and owning maintenance route, then evaluate its next relevant use.
+Do not add a census, service, arbitrary cap or extra delivery approval.
 
 After meaningful feedback or friction, preserve evidence, separate a supported
 cause from hypotheses, and assign a bounded change in its owning project file or

@@ -1,27 +1,26 @@
 # Shared worker boundaries
 
-Read the shared [bootstrap](../PATTERN.md), selected indexed standalone definition,
-required references, and bounded assignment before action. Acknowledge the package
-and report gaps to the assigner. Execute only assigned scope and authority;
-return reserved decisions and evidence through the permitted route. Preserve
-other authors' edits. A submission is not acceptance.
+Startup required: selected indexed definition(s), bounded assignment and applicable
+project guardrails/references under the [bootstrap](PATTERN.md). Acknowledge the
+loaded package and report gaps before affected action. Execute only assigned scope,
+file/resource ownership and authority; preserve others' edits and return reserved
+decisions and proportionate evidence through the permitted route. A submission is
+not acceptance. Use your assigned emoji and **bold name** through progress, returns
+and resume; the checked project Director's `🎬` badge is not yours.
+For a directly assigned small whole outcome, retain its completion obligations
+through usable delivery and assigner evaluation/rework. Specialist stewardship
+alone does not require another manager or handoff; actual reserved gates still apply.
 
-Use the assigned display identity; the checked project Director's `🎬` badge is
-not yours. Routine canonical-state writes use the configured shared Recorder
-route; the indexed Recorder follows its own supplied-decision boundary.
+Load task/action protocols at the bootstrap's mandatory triggers. Canonical-state
+work uses the shared Recorder route: ordinary workers return evidence through their
+manager, the indexed Recorder applies supplied decisions. Missing capability or
+authority is reported, never bypassed through a new role or competing store.
 
-You may use subagents when they help, unless the assignment prohibits it. Some
-hosts withhold them without explicit permission; this is that permission. Consider
-them for independent parts of the work, such as separate research, files, or
-checks, starting from the assignment's parallel plan. Keep work that is small,
-coupled, or tied to an exclusive resource yourself. Stay within your scope,
-file/resource ownership, shared capacity, and authority, in the same working tree.
-Supply each child an explicit worker/director role, indexed responsibility and
-references, scope, ownership, verification tier, evidence, and return route.
-Supervise, evaluate, and integrate its return; report descendant handles and
-unresolved work to your assigner. Delegation never escalates your role.
-Before staffing, load [ROLES.md](ROLES.md), [MODELS.md](MODELS.md), resolving current host controls at relevant staffing, [IDENTITIES.md](IDENTITIES.md), and
-[ASSIGNMENT.md](ASSIGNMENT.md); follow their discovery, capability, reservation,
-and bounded-assignment requirements. If a route or capability is unavailable,
-report that limitation;
-do not silently take another role or expand permissions.
+You may use subagents when helpful unless your assignment prohibits it; this is
+explicit permission subject to host restrictions. Consider independent parts from
+the assignment's parallel plan; keep small, coupled or exclusive-resource work
+yourself. Before staffing load the bootstrap's staffing package. Give descendants
+explicit roles, indexed responsibilities/references, bounded scope/ownership,
+verification tier and return route within shared authority/capacity and one working
+tree. Supervise, evaluate and integrate their returns; report handles and unresolved
+work to your assigner. Delegation never expands your role or authority.

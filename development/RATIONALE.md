@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated October 27, 2026. This repository authors a
+Living design rationale · updated October 30, 2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -298,6 +298,21 @@ and case review are recorded in [validation notes](DESIGN_NOTES.md#deliverable-f
 fresh-host behavior remains unverified. **Revisit:** intended artifacts still
 become prose-only recommendations, or consultation and casual observations begin
 triggering unwanted execution.
+
+**Clarified, October 30 — stewardship does not add an outcome owner:** Useful
+specialist responsibilities remain selectable knowledge. Their existence alone
+does not require another manager, approval or handoff for a small coupled task.
+A small assignment may use a matching worker directly, with evaluation and rework
+retained by its accountable owner. Consequential work spanning implementation,
+verification and delivery still needs one owner for that complete result, rather
+than an owner per specialty. [DIRECTOR](../pattern/engine/DIRECTOR.md),
+[REQUEST_MANAGER](../pattern/engine/REQUEST_MANAGER.md) and
+[DIRECTION](../pattern/engine/DIRECTION.md#assign-bounded-work) preserve existing
+review, release and user authority. The regression is a tiny source-map report
+that can finish through one maintained clerk, compared with an engine/UI/package
+outcome that needs coordinated specialties through usable delivery. Actual bounded
+observations and their limits are recorded in
+[validation notes](DESIGN_NOTES.md#role-knowledge-and-actual-host-trials--october-30-2026).
 
 ## R3 — Retain commitments by default, preserve original intent
 
@@ -807,6 +822,96 @@ adoption remain separate; preserve failed or unrun observations rather than
 describing them as passing. Revisit if the loaded bridge still fails a real host's
 delegation boundary or if the checkpoint delays ordinary direct answers.
 
+**Refined and superseded in part, October 30 — conversational startup and
+mandatory progressive loading:** The October 24 returned-result barrier remains
+for the actual startup package, with interface 1 and role resolution preserved.
+It no longer makes every generic Director operational protocol a prerequisite for
+a simple reply. The [bootstrap](../pattern/engine/PATTERN.md) now owns the small
+conversational package and explicit capability triggers. Selected
+[Director](../pattern/engine/DIRECTOR.md),
+[Request Manager](../pattern/engine/REQUEST_MANAGER.md) and
+[worker](../pattern/engine/WORKER.md) definitions retain role/authority, intended
+deliverable, non-worker/delegation boundaries and commitment ownership. Task
+references load before affected inspection/execution. Staffing, state, identity,
+setup, updates and other protocols load completely before their action, once per
+retained context. Deferred means mandatory at the trigger, never optional.
+
+Project authority and shared gates remain in startup. Unqualified requirements
+load transitively with their requiring document: at startup when it is startup-
+required, or before the requiring deferred action. Engine replacement cannot
+silently rephase project definitions or an older PROJECT reference chain. Reviewed
+integration must preserve exact requirements, applicability, locators and triggers;
+[STARTUP](../pattern/engine/references/STARTUP.md) and
+[UPDATES](../pattern/engine/references/UPDATES.md) record that boundary. The public
+maintainer guide now selects the rationale overview, owning decisions and relevant
+validation sections rather than making unrelated dated history a universal read;
+history remains intact and discoverable. Existing explicit full-file role
+requirements still apply until separately reviewed.
+
+**Why/tradeoff:** Unconditionally reading the staffing/state/supervision chain
+makes reply-only discussion pay for actions it never takes. A reported startup
+truncation also involved a wrapper aggregate, not missing source files. Increasing
+each inner tool's output allowance does not bound the outer response. Required
+reads now bound each model-visible result, including wrappers, with extents/ranges
+in the read and contiguous chunks for unknown/oversized text. Inspect results and
+recover omissions before a loaded claim; no separate verification round trip is
+needed after each successful read. This remains instruction-guided and cannot
+prove understanding or detect every possible host omission.
+
+**Concrete regressions:** A plain factual question loads role and authority, then
+answers without Recorder activation, hash checks or metadata discovery. A later
+staffing action first loads model/role/identity/assignment/state protocols and the
+matching local guards. A nested mandatory prohibition cannot vanish behind a
+deferred runbook. Outer-wrapper truncation or a missing middle chunk prevents a
+completed-package claim until recovered. Discussion remains prompt while held
+commitments continue through the existing recovery/supervision loop; deferred
+loading creates neither an exit exception nor a silent worker role switch.
+
+**Status and limits:** Authorized direction, implemented source candidate.
+[Review and measurements](STARTUP_LOADING.md) separate shared bytes/tokens/read
+stages from project references and preserve the obligation map. Generic Director
+startup text shrinks substantially; worker discovery/safe-read text grows modestly
+without an extra dependency stage. These are file/token inventories, not measured
+latency. Static/fixture checks and their scope are recorded in
+[validation notes](DESIGN_NOTES.md#progressive-loading--october-30-2026).
+Fresh-host behavior, the current live installation and downstream adoption remain
+separate and unverified for this change. Revisit if before-use loading skips a
+project guard, deferred protocols are treated as optional, repeated checks recreate
+startup overhead, or actual timing fails to improve.
+
+**Refined later October 30 — separate selection from execution knowledge:**
+[ROLES](../pattern/engine/ROLES.md#selection-knowledge-and-execution-knowledge)
+requires the staffer to read the selected standalone definition and its complete
+selection/authority package: applicability, ownership, scope, guards, reserved
+decisions, route and exact reference/trigger map. The executor loads its full
+startup and affected manuals before their triggers. A staffer need not perform
+the executor's startup or eagerly read unrelated craft manuals just to assign it.
+An ambiguous reference that may hide a selection or authority constraint must
+still be read or resolved before staffing; old explicit staffer requirements and
+unqualified actor dependencies remain binding until reviewed separation.
+
+**Why/tradeoff:** Having every ancestor read every executor manual duplicates
+specialist context. Deferring hidden guards would instead weaken assignment
+safety. A complete selector exposes the decisions the staffer must make while
+preserving the executor's full knowledge. The concrete regression is a maintained
+role whose route prohibition lives in a nested reference: that prohibition must
+reach selection even when its task manual is deferred. Existing project phases
+require an exact preservation map before integration; a generic engine update
+cannot silently rewrite them.
+
+**Observed correction, later October 30:** A fresh assigned Director safely
+answered a reply-only question but first read the full direction protocol. Its
+later explanation identified the capability table's general “exit” trigger as
+inviting an interpretation that every final answer needs exit accounting. That
+explanation is self-report; the extra read itself is visible in the actual trace.
+The [bootstrap](../pattern/engine/PATTERN.md#required-capability-protocols) and
+[Director](../pattern/engine/DIRECTOR.md#keep-commitments-through-acceptance) now
+clarify that a reply-only answer with no held commitments is not a claim of outcome
+completion or an end to held-execution supervision. Actual held work retains its
+recovery, supervision and exit duties. The original extra-read observation remains
+separate from the fresh affected retry; neither successful startup nor this narrow
+correction establishes universal host compliance.
+
 ## R11 — Update from a pinned public source without replacing project state
 
 **Accepted decision, October 17:** Published GitHub `main` is the upstream source of
@@ -1194,6 +1299,21 @@ remain unobserved.
 serial work, smoke-tier work ships defects a focused check would have caught, or
 batched records lose state that recovery needed.
 
+**Refined, October 30 — batch dependent phases without losing receipts:**
+[STATE](../pattern/engine/STATE.md), [RECORDER](../pattern/engine/RECORDER.md),
+[IDENTITIES](../pattern/engine/IDENTITIES.md), and
+[DIRECTION](../pattern/engine/DIRECTION.md#assign-bounded-work) combine known
+capture/setup/reservation requests when timing and authority permit, then batch
+actual dispatch bindings and received acknowledgments at the shared checkpoint.
+Each item retains its own success or gap. Scope-setting capture still returns
+before dependent dispatch, reservation before identity use, and real handles
+before execution claims. This removes repeated round trips without substituting
+one successful stream's receipt for another. No state schema or new service is
+introduced. The regression is a wave with one confirmed dispatch and one failed
+attempt: a batched response must retain that difference and cannot claim both live.
+Actual host routing and absence of false saved-state claims remain behavioral
+checks, separate from fixture/schema guarantees.
+
 ## R16 — Separate replaceable engine from project-owned integration
 
 **Decided October 25:** Install upstream contracts and helper implementations in
@@ -1325,6 +1445,21 @@ No test of prose or stored status alone proves active supervision.
 **Revisit:** child director assignments still become accidental exit routes,
 restart reconciliation duplicates work, or traceability starts forcing a second
 tracker or a new record per tiny task.
+
+**Refined, October 30 — close the touched knowledge path:** At meaningful
+closure the accountable owner reviews the affected selector, canonical artifact
+pointers and accepted facts under
+[ROLES](../pattern/engine/ROLES.md#improve-the-systems-knowledge). Correct supported
+stale claims through the existing owning maintainer/worker route; preserve dated
+exploration, superseded reasons and exact history. Runtime observations belong in
+scoped evidence, not present-tense operating defaults. Evaluate the correction at
+its next relevant use. An unresolved proposal is retained without inventing a new
+approval gate for delivery. This is local upkeep, not a role census, recurring
+service or arbitrary size limit. The regression is a completed canonical guide
+whose selector still says the guide may not exist, or a shipped feature still
+listed as pending: refresh the current pointer/status while retaining its earlier
+history and unrun acceptance gates. Static edits can establish preservation and
+reachability; the next actual selected use must establish uptake.
 
 ## Maintain this explanation
 

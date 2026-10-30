@@ -9,7 +9,7 @@ and [IDENTITIES.md](IDENTITIES.md); directors also follow
 
 ```text
 Project/domain and installed operating contract:
-Canonical role index, project-wide applicable guardrails, selected specialist references:
+Canonical role index, selected definition/selection guards, executor reference/trigger map:
 Durable capability/effort, budget, and authority policy locators:
 Recorder indexed role, routing policy, canonical state location/policy:
   Direct only if supported; otherwise manager -> assigner -> shared Recorder
@@ -42,7 +42,9 @@ Owner acknowledgment and return references: own record/assignment ID + locator; 
 Outcome, exact source/addenda, full completion obligations and acceptance:
 Chosen deliverable and required review evidence (artifact, rendered alternatives, working behavior, or text):
 Scope, file/resource ownership, authority, reserved decisions, exclusions, dependencies:
-Required selected role definitions + shared guardrails/runbooks/learnings:
+Selection/authority package used by assigner; startup-required definitions + project authority/shared guardrails:
+Task-required references + explicit affected-work trigger:
+Action-required protocols + explicit before-use trigger:
 Required model/effort policy; requested capability/effort; current supported controls:
 Actual selection/known limits: record from tool receipt after dispatch
 Shared capacity/budget; subagent limits (allowed by default; any prohibition states its reason):
@@ -50,9 +52,9 @@ Parallel plan: parts that could run in parallel or suit a subagent, or none:
 Recorder route/state policy; what evidence/status/decisions to return:
 Verification tier (MODELS.md) and its checks; review/rework/closure conditions:
 You are not alone in the workspace. Preserve others' edits and adapt to them.
-Before action, read and acknowledge the supplied role and required references.
+Complete startup and give one sufficient package acknowledgment; completely load task/action references before their stated trigger and report material gaps.
 Return missing/conflicting applicable definitions; no silent generic fallback.
-Use this same reference-loading/identity/authority rule for any descendants.
+Apply the same loading, identity and authority rules to descendants; unphased requirements load with their requiring document, transitively.
 ```
 
 Carry parent and return references under [STATE's traceability contract](STATE.md#parent-commitment-and-requirement-traceability)
@@ -69,6 +71,9 @@ gaps before acting; the manager records that acknowledgment through the shared
 Recorder when it is actually received. After dispatch, bind the actual handle and
 model/effort evidence; never fill those with a guess. Routine artifact writes stay in
 the assigned scope; shared canonical-state writes use the configured Recorder route.
+An acknowledgment or receipt can cover several known items in one batch. Reuse
+unchanged loaded protocols in retained context; do not make each dispatch or
+deferred manual repeat startup. This never waives an explicit project requirement.
 
 An assignment transfers only its explicit bounded authority. A marker, model tier,
 inherited conversation, role name, or permission to create descendants cannot

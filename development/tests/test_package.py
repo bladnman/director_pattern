@@ -90,7 +90,9 @@ class PackageBoundaryTests(unittest.TestCase):
         # Structural contract boundary; does not measure size or imitate role behavior.
         bridge = set(markdown_links(PATTERN / "PATTERN.md"))
         self.assertIn("engine/PATTERN.md", bridge)
-        common = set(markdown_links(PATTERN / "engine/PATTERN.md"))
+        bootstrap = (PATTERN / "engine/PATTERN.md").read_text()
+        startup = bootstrap.split("## Required capability protocols")[0]
+        common = {m.group(1) or m.group(2) for m in LINK.finditer(startup)}
         self.assertIn("WORKER.md", common)
         self.assertTrue(common.isdisjoint({"DIRECTION.md", "DIRECTOR.md", "REQUEST_MANAGER.md", "STATE.md", "MODELS.md"}))
         for definition in ("DIRECTOR.md", "REQUEST_MANAGER.md"):
@@ -125,7 +127,7 @@ class PackageBoundaryTests(unittest.TestCase):
         text = " ".join((PATTERN / "engine/PATTERN.md").read_text(encoding="utf-8").split())
         self.assertRegex(text, r"failed, missing, or truncated result.*recover and read every missing portion before claiming")
         self.assertRegex(text, r"cannot be recovered, disclose the specific gap and stop affected action")
-        self.assertRegex(text, r"acknowledgment reports what was read.*does not establish.*permits delegation")
+        self.assertRegex(text, r"acknowledgment reports reads, not permission to delegate.*Recorder availability.*checked setup")
 
     def test_updates_integrate_changed_hook_without_replacing_local_rules(self):
         # Hook is project-owned, outside the engine replacement; static contract only.

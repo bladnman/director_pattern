@@ -9,9 +9,13 @@ For target-project installation, follow [pattern/README.md](pattern/README.md);
 copy only the payload selected by its manifest. Reading maintainer rationale is
 not an installation prerequisite. Never copy this AGENTS.md into the target.
 
-Before changing this design, read [README.md](README.md),
-[development/RATIONALE.md](development/RATIONALE.md), and relevant linked contracts
-or design documents. Read selected exact sources when needed, not every archive.
+Before changing this design, read [README.md](README.md), the overview and owning
+decisions in [development/RATIONALE.md](development/RATIONALE.md), and affected
+contracts/design documents. Read the rationale's maintenance section when editing
+it and relevant validation sections of development/DESIGN_NOTES.md when claiming
+checks. Follow dated supersessions for the affected decision; full unrelated
+history is discoverable reference, not a universal read requirement. Read selected
+exact sources when needed, not every archive.
 Keep the living rationale coherent at formative decisions: preserve dated changes
 and superseded reasoning, link affected contracts and a concrete regression case,
 and distinguish stored, decided, implemented, and verified. Label hypotheses/open choices.

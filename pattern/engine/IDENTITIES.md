@@ -46,6 +46,10 @@ serializing requests within one task. Do not copy the list into local histories 
 rotate independently. Managers request reservations through the permitted
 [Recorder](RECORDER.md) route: directly only where supported, otherwise through
 their assigner. This is coordinated responsibility, not a new identity service.
+Reserve several known assignments in one request and bind a dispatch wave's
+returned handles in one update when practical. Serialize allocation against the
+same roster/cursor and return each reservation before its dispatch; batching
+never relaxes collision, authority or late-return protection.
 
 1. Identify suitable candidates for the assignment, then ask the Recorder to reserve
    an available marker and name before dispatch. Skip reserved symbols and any marker

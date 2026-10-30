@@ -271,6 +271,20 @@ receipt; no separate plan, schema, or test matrix is required. Use these trigger
 | Missing baseline or uncertain provenance | Reconstruct from the prior pinned upstream revision and review local differences, or obtain explicit review before replacement; expand startup/behavior checks only if those findings trigger them. |
 | Already-current installation | Confirm the pinned revision and inspect local drift and preservation. Report no upstream change; do not rewrite files or rerun startup/role trials without a relevant finding. |
 
+Changing required-reference phases or capability triggers is a startup/behavior
+change: audit every reachable affected path, preserve project-owned unphased
+requirements, and run the relevant progressive-loading and incomplete-result trials.
+Interface 1 remains compatible with existing bridges and indexes; replacing the
+engine does not shorten custom definitions' required-reference chains. A reviewed
+local rephase must preserve exact authority, applicability, transitive dependencies
+and before-use triggers, with old/new mapping in the receipt. Retain prior
+acceptance until newly required checks pass.
+Separating staffer selection knowledge from executor manuals likewise records the
+responsible actor and timing under ROLES. Keep every assignment-affecting guard in
+the selection package; unresolved authority cannot hide in a deferred manual.
+Existing unqualified actor and explicit staffer requirements survive engine
+replacement until that reviewed mapping is integrated and checked.
+
 A tiny prose change that affects a routing rule is a behavior change regardless of
 its size. Conversely, unchanged startup instructions need no fresh audit merely
 because another file changed. Reuse evidence only where its checked files, local

@@ -110,8 +110,18 @@ not payload. A temporary staging clone is optional transport only.
    ```
 
    This routes to PATTERN's mandatory read/result dependencies and brief
-   role-package acknowledgment, including for read-only questions and direct
-   answers. The selected Director's background setup/identity check is separate.
+   conversational-package acknowledgment, including for direct answers. Map required
+   references explicitly: authority/shared gates at startup, task references before
+   affected work, and operational protocols before their capability trigger.
+   Unphased project requirements remain startup-required. Preserve transitive
+   dependencies; reviewed rephasing records the exact old/new instruction, locator
+   and trigger under STARTUP. Separate staffer selection/authority knowledge from
+   executor manuals under ROLES, recording which actor needs each instruction;
+   preserve all assignment-affecting guards and existing unqualified requirements
+   until that reviewed integration. The selected Director's background setup/identity
+   check, Recorder activation and metadata discovery remain separate from answers.
+   Size the actual selected package, including custom refs; bound model-visible
+   results and wrapper aggregates, and chunk oversized files with same-read coverage.
    Verify that the host loads this actual entrypoint; file presence alone does
    not establish loading, automatic injection, or enforced ordering.
 

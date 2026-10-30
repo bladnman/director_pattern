@@ -23,6 +23,8 @@ writing. The Director delegates substantial analysis and detailed coordination
 before that active work occupies the main conversation. Independent analysis
 returns a proposal; no intake layer is mandatory. Selective critical reading and
 ordinary discussion stay with the Director. No department tree is required.
+Keep one whole-outcome owner through usable delivery. A small outcome can go
+directly to a bounded worker; specialist stewardship alone adds no manager or approval.
 
 "Director Pattern" names this package. Assignment roles stay `worker` and `director`:
 `Role: director` carries the project Director and a Request Manager bounded to one
@@ -65,18 +67,32 @@ that report; stricter host updates remain concise. The checked project Director'
 `🖐️` user-only actions keep their meanings. See [DIRECTION.md](engine/DIRECTION.md) for the
 sparse marker rules, timing, and continuing supervision requirements.
 
-Every actor receives a small common [bootstrap](PATTERN.md), follows its one
-project-owned role index, and loads the selected standalone definition/references
-before acting. The first tool invocation reads only the bootstrap; returned
-results establish each later startup dependency before any task I/O or substantive
-answer. A brief completed-package acknowledgment precedes task work. This
-instruction route is not automatic injection or host enforcement. Direct answers
-still follow role loading; the Director's setup/identity check stays background.
-Explicit assignments route first; only an unassigned project
-conversation defaults Director. Malformed delegated assignments seek clarification.
-Director/manager policies live in [DIRECTION.md](engine/DIRECTION.md), outside worker
-startup. Recurring specialist rules live in maintained files registered in the
-same index, never an abstract appended to AGENTS.md.
+Every actor follows the small [bootstrap](PATTERN.md), one canonical project-owned
+index, selected standalone definitions and applicable authority before task work.
+Startup acknowledgment reports complete reads, not operational verification.
+Understand intended work next; task references load before affected work, and the
+bootstrap's explicit capability map makes staffing, persistence, identity, setup,
+updates and other action protocols mandatory before use. Already loaded unchanged
+protocols need no repeated ritual. Unqualified references required by startup still
+load at startup; nested requirements load with their requiring document; a local customization can cost more than the generic package.
+Bound each returned response, including outer wrapper aggregates, and chunk large
+files with coverage in the read itself. No separate verification call follows every
+read. This instruction route cannot guarantee host compliance or understanding.
+Staffers load the selected role's selection/authority package and exact reference
+triggers; executors load their full manuals before affected work. Keep ambiguous
+guards and older unqualified requirements until reviewed separation. Use one
+sufficient startup acknowledgment and batch coordinated reservations/receipts at
+shared checkpoints, retaining exact capture, authority and collision protection.
+At meaningful closure, refresh touched selectors, artifact pointers and accepted
+facts; preserve stale runtime assertions as dated evidence outside live instructions
+and evaluate corrections at their next relevant use. No separate service is added.
+
+Explicit assignments route first; only an unassigned conversation defaults Director.
+Malformed delegated assignments seek clarification. Reply-only answers remain
+prompt after conversational startup; Recorder activation, hash/setup checks and
+metadata discovery do not gate them. Discussion does not cancel held commitments.
+Recurring specialist duties stay in maintained definitions through the same index,
+never an abstract appended to AGENTS.md.
 
 An installing agent need not already be a Director. First installation audits the
 entire loaded startup chain, preserves shared authority, and moves exact misplaced

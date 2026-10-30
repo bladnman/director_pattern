@@ -564,3 +564,103 @@ other file hashes and hook-surrounding bytes unchanged. Each stencil remains
 uninitialized, the helper's follow-up check was a no-op, and sync evidence labels
 the source a local unpublished candidate. This does not update already-generated
 projects or establish published adoption, behavioral acceptance, or release.
+
+
+## Progressive loading — October 30, 2026
+
+The [R10 refinement](RATIONALE.md#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes)
+separates the conversational package from explicit mandatory task/action triggers.
+The [review and obligation map](STARTUP_LOADING.md) records preserved authority,
+transitive requirements, complete-read handling, operational triggers and local
+customization limits. Source maintainer guidance selects relevant rationale and
+validation sections while preserving dated history.
+
+**Executed verification:** All **64 development tests** passed in 6.001 seconds.
+Six new static/fixture regressions cover independent capability destinations,
+full reachable manifest-reference paths, conversational versus staffing sets,
+engine replacement preserving nested project guards/task/release references,
+read-evidence loss/recovery, and actual-byte inventory. The read fixture rejects
+inner elision, outer aggregate truncation, a missing chunk and a failed read, then
+accepts full recovery; individually small packets do not imply a bounded aggregate.
+This checks the evaluation fixture rather than an installed reader or agent.
+Existing engine/root/state preservation and hook/host-precedence checks also pass.
+
+The explicit inventory compares source `28e7bb9` with the candidate using actual
+file bytes and optional existing cl100k tokenization. The generic Director startup
+set is 73,825 → 13,241 bytes and 14,304 → 2,551 proxy tokens, with five → four
+discovery stages. The bounded analysis worker is 8,445 → 10,480 bytes and 1,626 →
+2,034 proxy tokens, with four stages unchanged: additional common safe-read and
+capability-discovery text is an explicit tradeoff. Project fixture/context costs
+are separate and identical across versions. These are declared required-file sets
+and static token/response inventories, not elapsed latency or actual model usage.
+
+**Earlier October 30 status (superseded for the bounded assigned routes below):**
+Fresh-host conversational/action loading, repeated-use behavior,
+acknowledgment compliance, incomplete-read recovery and customized authority trials
+remain pending under [STARTUP](../pattern/engine/references/STARTUP.md). No external
+CLI agent, live engine/role/receipt update, commit, push, release or
+publication was performed. Existing project-owned unphased definitions and older
+PROJECT Working references can preserve the larger startup chain until separately
+reviewed; source-only changes do not make the current live installation leaner.
+
+
+**Scoped stencil alignment after source review:** The authorized brain/code/vids
+stencils each received the 11 changed engine files. Full preimages were backed up
+and verified before replacement. Independent comparison found every selected engine
+file equal to candidate source and all other 18/17/82 stencil files unchanged;
+project-owned roles/context/index, unphased requirements and hooks were preserved.
+No state/config/request/source/activity/receipt was initialized. The repeat sync
+check reported no changes and external evidence identifies the source as an
+unpublished local candidate. This is file alignment, not a fresh-host trial,
+publication, generated-project update, or a claim that preserved custom startup
+requirements became smaller.
+
+
+## Role knowledge and actual-host trials — October 30, 2026
+
+The later [R10 refinement](RATIONALE.md#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes)
+separates staffer selection/authority knowledge from executor manuals, while
+[ROLES](../pattern/engine/ROLES.md) preserves ambiguous guards and old unqualified
+requirements until reviewed integration. Whole-outcome ownership, small direct
+worker assignments, batched item-specific receipts and touched-knowledge upkeep
+retain their existing authority and private-state boundaries.
+
+Six fresh explicitly assigned Codex subagents, including one repair retry and one
+actual nested worker, exercised real maintained definitions. The required sets,
+triggers, task stimuli and fault mechanism were declared before their dispatch.
+Primary session/tool IDs, timestamps, complete visible results and first actions
+were inspected; exact source-text and contiguous-range checks supplement judgment.
+The same concrete model/high effort was requested through supported fresh-context
+controls; independently effective settings were unavailable.
+
+| Observation | Result and limit |
+|---|---|
+| Older installed engine, arithmetic reply | Ordered startup and completion acknowledgment passed after actual outer-wrapper truncation was fully recovered. Fourteen unique instruction files, seven top-level tool calls before the correct answer. |
+| First candidate, identical reply | Startup/read safety passed, but it unnecessarily loaded DIRECTION: nine unique files, six calls. Its later explanation identified interpreting every final answer as an exit; self-report is separate from the observed read. |
+| Two-file trigger clarification, fresh identical retry | Eight complete startup files, five separate top-level calls, acknowledgment, then correct answer; no DIRECTION, state, setup or metadata read before the reply. The tiny final answer omitted its assigned identity prefix, a separate reporting miss retained without a cosmetic retry. |
+| Same retry actor, two later lookups | Actual lookup and nested filter text returned before dataset inspection; the nested privacy guard was retained from startup. Correct public-only count/total and maximum. The second lookup reread data, reused unchanged protocols and added no startup ceremony. |
+| Integrated Input Manager roles, small artifact | Actual Director selected the maintained Clerk, which completed startup before writing a private eight-capability report. The parent read/evaluated it and observed the child completed. One owner retained usable delivery; no extra manager or false saved-state claim. |
+| Same Input owner, consequential routing discussion | Twelve actual maintained definitions informed one proposed Request Manager through engine/UI/verification/package work. RT, synthetic/live, private-tracker, credential/install and publication gates remained explicit. This tested routing judgment only; no product execution was authorized or observed. |
+| Integrated Agent Runway reviewer, incomplete transport | The sole permitted reader returned shared guards lines 1–3 of 122 with an explicit truncation error. Actual 4–70 and 71–122 results completed before startup acknowledgment and task input. All seven startup and four task sources were covered. The reviewer found the three planted setup/helper/evidence-boundary defects without operational actions. |
+
+The Input report remains unchanged as evidence of the first candidate it actually
+read. A later authorized two-file engine clarification makes its old direction
+row different from the current table; that does not retroactively change the
+observed source or turn the report into current-source proof. Runway used the
+clarified candidate. Its forced sole-reader surface establishes constrained
+incomplete-result recovery, not unrestricted natural-transport reliability.
+
+All trial descendants returned and were evaluated. No product, canonical tracker,
+provider, app, installation, Git or publication operations ran in these trials.
+Private instrumentation wrote only its declared local fault marker; trial artifacts
+stayed private. These small samples establish the stated assigned-route behavior,
+not native unassigned user-chat discovery, general reliability, startup latency,
+independently effective settings, five-minute cadence, host-interruption recovery
+or consequential release execution. Original misses remain evidence.
+
+**Integrated source verification:** All **64 development tests** passed in
+5.734 seconds after the clarified source and public notes. The existing suite covers package
+isolation, reference reachability, independent action targets, nested project guard
+preservation and helper/state interfaces. Static/fixture results remain distinct
+from the actual-agent observations above; no wording-only or arbitrary-size test
+was added to manufacture behavioral confidence.

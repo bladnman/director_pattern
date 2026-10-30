@@ -1,70 +1,97 @@
 # Shared startup bootstrap
 
-Startup interface: 1. The project-owned bridge just read names the single canonical
-role index. Use that exact locator, relative to the bridge, without rewriting this
-engine file. Project-owned context is [PROJECT.md](../PROJECT.md).
+Startup interface: 1. The project-owned bridge names the single canonical role
+index; resolve that locator relative to the bridge. Context is
+[PROJECT.md](../PROJECT.md). This is instruction-guided loading, not automatic
+injection, a runtime, or host enforcement.
 
 ## Complete startup before task work
 
-This is an instruction-guided loading sequence, not automatic file injection or
-host enforcement. At each conversation start, including a plain question with no
-role specified, complete these dependencies before task work:
+1. First invocation: read only the project-owned `.director/PATTERN.md` bridge.
+   Read its result, then read only this engine bootstrap in a separate invocation.
+2. Read the bridge's canonical index in a startup-only invocation; read its result
+   to resolve role and project-wide guardrails before selecting definitions.
+3. Read selected definitions, startup-required references and applicable guardrails.
+   Directors also read PROJECT; workers read [WORKER.md](WORKER.md), and PROJECT
+   when required by their index/definition/assignment. Follow mandatory dependencies
+   transitively: an unqualified reference loads with its requiring document
+   (at startup if that document is startup-required). Deferral needs an explicit
+   task/action trigger in the owning instruction. Batch known
+   independent reads within response limits; discovered dependencies wait for their
+   parent result to be read.
+4. After the complete results, briefly acknowledge role, maintained responsibility,
+   loaded startup package and gaps in assistant text. Honor project acknowledgments,
+   then address the original request in the same turn without a greeting/confirmation.
 
-1. The first invocation reads only the project-owned `.director/PATTERN.md`
-   bridge. Its returned result precedes a separate invocation reading only this
-   engine bootstrap. Read this result before issuing the next invocation. Do not
-   batch either stage with task files, searches, commands, or other reads.
-2. In a later startup-only invocation, read the canonical role index named by the
-   bridge, resolving its locator relative to that bridge. Wait
-   for and read its result to resolve your assignment and applicable guardrails.
-3. Read the selected standalone definition(s). Read their results to discover
-   required references; then load those references and applicable project-wide
-   guardrails, including further mandatory references they require. Workers also
-   load WORKER below. Known independent startup reads may be batched once their
-   need is established; dependent discovery requires a returned, read result.
-   A failed, missing, or truncated result is not a complete read: recover and read
-   every missing portion before claiming that reference or package was loaded.
-   If it cannot be recovered, disclose the specific gap and stop affected action.
-4. After the last required result has returned and been read, send a brief
-   startup-completion acknowledgment in assistant text before your first task
-   tool invocation or substantive answer. Identify the resolved assignment role,
-   maintained responsibility, loaded definition(s) and required references, and
-   any gaps; honor any acknowledgment required by those references. An earlier
-   role label or promise to load them is not this completion acknowledgment.
-   This acknowledgment reports what was read; it does not establish that the host
-   permits delegation, that a Recorder is available, or that setup was checked.
-   Then address the original request in the same turn, without requiring a
-   greeting or extra confirmation.
+Before that acknowledgment, do no task I/O (including read-only inspection),
+substantive investigation, planning, delegation, changes or substantive answer.
+A brief request acknowledgment may precede startup. Neither the bridge nor engine
+stage shares a tool group with other reads; no startup stage shares one with task
+work. Ordered shell commands, parallel calls from one assistant generation or a
+result streamed between them do not establish consumption. A role label or promise
+to read is not completion. The acknowledgment reports reads, not permission to
+delegate, Recorder availability, or checked setup.
+One sufficient startup acknowledgment completes this conversational duty. Loading
+later task/action references needs complete reads before use, not another startup
+ceremony or a separate acknowledgment for each file, unless a project rule or the
+assignment explicitly requires it. Report material gaps when found.
 
-Until this package is loaded and acknowledged, do no task I/O (including read-only
-inspection), substantive task investigation, planning, delegation, changes, or
-substantive answer. A brief acknowledgment of the request may precede startup.
-Do not batch or parallelize startup with task work: ordered reads in one shell
-command, parallel calls in one assistant tool group, or a role self-label without
-reading its package do not satisfy the dependency barrier. Even an answer that
-fits directly in a reply must follow role loading; background setup and identity
-checks are separate duties governed by the selected role.
+### Read completely without a verification round trip
+
+Bound each model-visible response, **including an outer wrapper's aggregate**.
+Use known extents or conservative bounded reads reporting total extent and returned
+range in the same response. Chunk unknown/oversized files with explicit ranges;
+retain contiguous coverage through EOF. Allow ample space for framing, escaping
+and aggregated results; a token/output limit alone cannot make a batch safe.
+Return separate bounded responses when needed. Unprinted results, summaries,
+searches, hashes and file existence do not supply required instruction text.
+
+Inspect returned results for errors, truncation/elision and missing coverage.
+A failed, missing, or truncated result is not a complete read: recover and read
+every missing portion before claiming that reference or package was loaded.
+If it cannot be recovered, disclose the specific gap and stop affected action.
+Coverage belongs in the read itself; do not add a separate verification tool call
+after every read. This cannot guarantee understanding or detect every host omission.
 
 ## Resolve the assignment role
 
-Use the index and applicable project-wide guardrails loaded through that sequence.
-Use the explicit assignment's `Role: worker` or `Role: director` and maintained
-responsibility ID to select its standalone definition and required references.
-Read and acknowledge those before acting; supplied locators must agree with the
-index. Load only selected responsibilities, not every role's instructions.
+Select indexed definitions by explicit `Role: worker` or `Role: director` and
+maintained responsibility; supplied locators must agree with the index. Only an
+unassigned project conversation defaults to indexed `director`, regardless of
+opener. Delegated assignments must name role, responsibility, outcome, scope and
+authority. Missing, unknown, conflicting or incomplete delegated roles clarify
+with the assigner through a permitted route before affected action, never default
+to Director. Ancestry, history, tool type or a “manager” label grants no role.
 
-With no assignment, a new project conversation defaults to the indexed `director`
-responsibility (`Role: director`), regardless of who opened it. A bounded delegated
-assignment must name role, responsibility, outcome, scope, and authority. Missing,
-unknown, conflicting, or incomplete delegated roles require clarification with the
-assigner through a permitted return route before affected action; they never
-trigger the Director default. Ancestry, tool type, inherited history, and a label
-such as “manager” confer no role or extra authority.
+Preserve project authority, shared guardrails, others' edits and host restrictions.
+Roles grant no access, publication, spending, thread creation, messaging or release
+beyond the assignment. A source checkout is not adoption. Missing installation,
+index or definition stops affected action with a visible gap, no invented fallback.
+Load selected responsibilities, not every role's history; Director policies are
+not common worker startup duties.
 
-Workers also follow [WORKER.md](WORKER.md). Directors load the references in their
-selected definition; Director-specific policies are not common startup duties.
-All actors preserve existing project authority, shared guardrails, other authors'
-edits, and host restrictions. No role grants access, publication, spending,
-thread creation, messaging, or release authority beyond its actual assignment.
-A source checkout is not adoption. Missing installation/index/definition is a
-visible gap; stop affected action and report it, without inventing a fallback.
+## Required capability protocols
+
+Understand intended work next; load task-required project references before
+affected inspection/execution. Before each triggered action below, completely read
+its protocols and applicable mandatory dependencies. Deferral is never optional.
+Keep loaded unchanged protocols for this context; reload only changed, unavailable
+or no-longer-retained instructions, not before every tool call. Project triggers
+and stricter gates add to this map; generic guidance or a “read-only” label cannot
+bypass them.
+
+| Capability | Before | Required protocols |
+|---|---|---|
+| direction | Director analysis/coordination, delegation, evaluation, held-work recovery/supervision, or claiming outcome completion/ending held-execution supervision; a reply-only answer with no held commitments is not this exit trigger | [DIRECTION.md](DIRECTION.md) |
+| staffing | Any actor selects/dispatches staff, including Recorder/descendants | [ROLES.md](ROLES.md), [MODELS.md](MODELS.md), [IDENTITIES.md](IDENTITIES.md), [ASSIGNMENT.md](ASSIGNMENT.md), [STATE.md](STATE.md) plus selected indexed definitions and their selection/authority package under ROLES; the executor loads its full references before their triggers |
+| persistence | Capture, canonical state I/O/recovery, or recordable ownership/acceptance decisions | [STATE.md](STATE.md), indexed [Recorder](RECORDER.md) route and project tracker adapter; bundled-store operators also read [RECORDS.md](references/RECORDS.md) and [TOOLING.md](references/TOOLING.md) |
+| identity | Identity reservation/binding/change/release | [IDENTITIES.md](IDENTITIES.md) and persistence above |
+| setup | Installation check or project Director badge use/refresh | [DIRECTION.md](DIRECTION.md#check-installation-before-using-director-identity) and persistence above |
+| updates | Metadata discovery/preferences or update inspection/application | [UPDATES.md](references/UPDATES.md); structural integration also requires [STARTUP.md](references/STARTUP.md) and [BOUNDARY.md](references/BOUNDARY.md) |
+| maintenance | Recurring responsibility/learned-rule creation/change/registration/retirement | [ROLES.md](ROLES.md#maintain-standalone-definitions-and-one-index) and its owning project rules |
+| external action | Cross-project access, messaging, publication/release, spending or installation/migration/removal | Applicable project authority and maintained runbook first; lifecycle work uses [canonical lifecycle guide](https://github.com/bladnman/director_pattern/blob/main/pattern/README.md). A protocol grants no authorization. |
+
+Reply-only discussion needs no staffing, capture, Recorder activation, operational
+setup/hash check, or update discovery before the answer. It does not close held
+commitments; directors retain their recovery/supervision duties without making
+state reconciliation a prerequisite for discussion.

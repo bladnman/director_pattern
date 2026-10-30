@@ -24,12 +24,14 @@ The explicit coupling points are:
 - The host's one marked hook reads project-owned `.director/PATTERN.md` first.
   That small bridge names the one canonical role index, relative to the bridge,
   and points to `engine/PATTERN.md`. Its returned result precedes the engine read;
-  the engine result precedes the index read. There is no circular bridge reread.
+  the engine result precedes the index read. Role resolution from that result
+  precedes selected startup definitions and required PROJECT.
+  There is no circular bridge reread.
 - The canonical project index selects generic definitions under `engine/` and
   project-owned standalone definitions wherever the project maintains them.
   Its project-wide guardrails and selected references carry local policy and
-  overrides. Generic Director definitions load project-owned `PROJECT.md` one
-  level above the engine. PROJECT records the same index locator as the bridge.
+  overrides. Directors load project-owned `PROJECT.md` one level above the engine;
+  workers load it when required by their index, definition or assignment. PROJECT records the same index locator as the bridge.
 - Generic MODELS policy stays in the engine. User-authorized capability, budget,
   authority, and specialist constraints are project-owned required references,
   reached through PROJECT/index/definitions. An engine update cannot weaken them.
@@ -41,6 +43,12 @@ The explicit coupling points are:
   its existing meaning. Python Store APIs still require their explicit root.
   No state/cache/config is written under `engine/`. Existing trackers need no
   bundled request helper or store.
+
+Progressive protocol loading retains interface 1: the same bridge, canonical-index
+locator, selected definitions and project authority remain reachable. Existing
+unphased project requirements remain startup-required; engine replacement cannot
+reclassify them. A reviewed project integration may explicitly phase task/action
+references while preserving exact applicability and mandatory triggers.
 
 Interface 1 does not change the request/config schemas, store format, policy or
 receipt schema, role values, authority, or predecessor-store refusal. A future

@@ -1,7 +1,11 @@
 # Recorder
 
 First candidate. An indexed `Role: worker` responsibility for shared persistence;
-not a new decision maker. Read with [STATE.md](STATE.md).
+not a new decision maker. Startup follows [PATTERN](PATTERN.md) and
+[WORKER](WORKER.md), including project authority and the bounded assignment. Before
+state operations load [STATE.md](STATE.md), the canonical tracker adapter, and any
+applicable bundled-store protocols in PATTERN's capability map. Identity operations
+also require IDENTITIES; role links below are discovery, not a new startup chain.
 
 The project's canonical role index ([ROLES.md](ROLES.md)) includes the Recorder
 definition, its selection cues, state location/policy, and permitted route.
@@ -29,6 +33,11 @@ Callers batch routine updates at milestones under [STATE](STATE.md); apply a bat
 as one request and return one receipt that accounts for each item. No
 daemon, database, or event bus is required. Do not invent a second local ledger to
 bypass an unavailable route.
+Known reservations may share a request with capture or setup, and a dispatch
+wave's actual bindings, acknowledgments and receipt updates may share its next
+request. Preserve phase dependencies and prompt recovery/authority writes under
+STATE. Report each item's applied, failed or unknown result; batching is not
+permission to infer a missing acknowledgment or handle.
 
 Apply supplied decisions, preserve exact source and addenda, read back relevant
 state, and return a clear receipt or uncertainty. Scope, priority, acceptance,

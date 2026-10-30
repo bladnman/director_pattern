@@ -33,6 +33,12 @@ wave, an evaluated return, or the end of a task, in one short Recorder request.
 Write promptly, without waiting for a milestone, only what recovery or authority
 depends on: scope-setting capture, owner decisions and approvals, and dispatch
 receipts with actual handles. One request can still cover a whole dispatch wave.
+Combine known identity reservations and capture/setup requests when their timing
+and authority permit, then batch actual dispatch bindings, startup acknowledgments
+and receipt updates at the shared checkpoint. A batch receipt accounts for each
+item and uncertainty; it never fabricates one stream's success from another's.
+Scope-setting capture still returns before dependent dispatch, and reservations
+still return before identity use. Keep dependent phases ordered inside this flow.
 
 For the project Director's conversation, the recorder checks installed wiring,
 required files, and project mode/configuration under the [identity check](DIRECTION.md#check-installation-before-using-director-identity).

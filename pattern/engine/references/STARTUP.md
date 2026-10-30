@@ -48,11 +48,23 @@ Do not invent an abstract of the method in AGENTS.md.
    role, references, authority constraints, and maintainer under
    [ROLES.md](../ROLES.md). Add actual project specialist entries and moved
    instructions; optional `bounded-analysis` selects `ANALYSIS.md`. Resolve
-   locators relative to the index. Definitions include required shared contracts:
-   director definitions load DIRECTION, PROJECT, MODELS, STATE, ROLES, ASSIGNMENT,
-   and IDENTITIES; workers load WORKER plus their selected definition/references.
-   A role may compose existing references without duplicating them. Do not seed
-   illustrative specialists as real definitions.
+   locators relative to the index. Selected standalone definitions and applicable
+   authority/guardrails are
+   startup-required; directors also load PROJECT, workers WORKER (and PROJECT
+   when their index/definition/assignment requires it). The bootstrap's explicit
+   capability map requires operational protocols before their action. Preserve
+   every project-owned mandatory reference: unphased requirements remain startup-
+   required. Rephasing needs reviewed old requirement → new locator + exact trigger
+   mapping, including transitive dependencies; a shorter generic definition cannot
+   waive local requirements. Unqualified nested requirements load with their
+   requiring document at its phase. Compose references without duplicating them;
+   never seed illustrative specialists as real definitions.
+   Distinguish the staffer's selection/authority package from the executor's
+   manuals under ROLES: keep role, scope, applicability, route and all assignment-
+   affecting guards visible to the staffer, with exact executor reference triggers.
+   An ambiguous guard stays required before staffing until resolved. Reviewed
+   separation records which actor needs each instruction and when; it does not
+   silently waive old actor or explicit staffer read requirements.
 4. Fill the project-owned PATTERN bridge's canonical-index locator with the one real path (a relative
    Markdown link is suitable); record the same path in PROJECT. This pointer is a
    project-owned integration point preserved across engine updates; keep the
@@ -81,15 +93,30 @@ workflow as an existing tracker; otherwise obtain a separate migration decision.
 ## Verify the startup dependency barrier
 
 [PATTERN](../PATTERN.md#complete-startup-before-task-work) owns the mandatory
-sequence: first tool invocation reads only the project-owned PATTERN bridge; its returned
-result precedes an engine/PATTERN-only invocation, whose returned result precedes
-the canonical-index invocation; the index result precedes selected definitions;
-definition results establish further mandatory references. Complete those reads
-and send one brief role-package acknowledgment before task I/O or a substantive
-answer. Independent startup references may share an invocation once discovered.
-No read-only or direct-answer exception bypasses this sequence. The selected
-Director's setup/identity check remains background work and never becomes a
-prerequisite for the answer after role loading.
+sequence: bridge-only first invocation, then engine-bootstrap-only invocation;
+a returned/read bootstrap precedes the index; its result resolves role before
+selected definitions and required PROJECT (directors, or explicitly required workers),
+startup-required references and shared guardrails. Newly discovered dependencies
+wait for their parent result; known independent reads can batch within the same
+response budget. Complete and acknowledge the conversational package before task
+I/O or substantive answers. Task references load before affected work; action
+protocols load before their explicit capability triggers, once per retained context.
+No read-only label or direct-answer rule bypasses applicable requirements.
+
+The selected Director's operational setup/hash check, Recorder activation, daily
+metadata discovery and recovery reconciliation do not gate a reply-only answer.
+Discussion does not close held commitments or suspend supervision. Audit actual
+custom definitions and required refs before promising a smaller startup: their
+unqualified obligations still apply even if they dominate the generic package.
+
+Declare a bounded-read plan for each model-visible result, including any outer
+wrapper aggregate. Use same-response extents/ranges and contiguous chunks through
+EOF for unknown or oversized files, allowing for framing/escaping. Inspect those
+results directly; no separate verification invocation is required after each read.
+A reported truncation, missing range or unread payload prevents a completed-package
+claim. A byte count, hash, printed summary, or successful file open cannot stand in
+for the complete instruction text. Coverage bookkeeping is not proof of uptake or
+a universal detection guarantee.
 
 For an affected startup change, use a harmless plain task with no role hints in a
 fresh disposable project/session. Preserve baseline and candidate bytes and use
@@ -104,10 +131,13 @@ the task prompt; that supplements observed reads rather than replacing them.
 Inspect the complete tool stream and distinguish these observations:
 
 - **Read/result barrier:** the project bridge is alone in the first invocation/tool group,
-  engine/PATTERN is alone in the second; each dependent stage starts only after its prerequisite result was returned
+  engine/PATTERN is alone in the second; the index result precedes selected
+  definitions and required PROJECT. Each dependent stage starts only after its
+  prerequisite result was returned
   and available for the actor to read. A failed or truncated result must be
-  recovered and read fully; an unrecoverable gap stops affected action. Every required file's successful result
-  precedes the first task invocation/tool group and substantive answer.
+  recovered and read fully; an unrecoverable gap stops affected action. Every startup-required file's complete result
+  precedes the first task invocation/tool group and substantive answer. Task/action
+  requirements precede their declared trigger, including transitive local guards.
 - **Completion acknowledgment:** after the final required result, the actor
   briefly identifies its resolved role, responsibility, loaded package, and gaps
   before task I/O. A canary can expose a skipped reference or acknowledgment;
@@ -155,7 +185,10 @@ retain observed file reads/acknowledgments and first role-specific actions:
 | Newly registered recurring role | Discovers the new standalone definition through the same canonical index and reads its references before action. |
 | Upgrade from oversized startup instructions | Common startup excludes relocated specialist duties and stale pattern defaults; the selected responsibility still reaches every preserved instruction at its maintained destination. |
 | Delegation restriction and unavailable route | For an outcome requiring delegation, the selected Director resolves current host permission and actual route; a prohibition, uncertainty, or failure is described accurately, and affected implementation or Recorder work is not silently taken over. A direct-answer-only request remains direct. |
-| Incomplete startup result | A deliberately truncated required reference is reread in full before a completed-package acknowledgment and task action; an unrecoverable failure is disclosed without claiming the package loaded. |
+| Bounded/incomplete result | Unknown/oversized required files use contiguous bounded chunks with extents in the same results. Exercise inner-tool and outer-wrapper truncation, a missing chunk and a failed read: all missing portions are recovered before claiming that package loaded; unrecoverable gaps stop affected action. No verification ritual follows every successful read. |
+| Progressive task/action loading | A direct reply loads the real conversational package and applicable authority without staffing/state/update protocols. Before an actual triggered action, the actor loads its complete protocol and project-specific dependencies, including nested mandatory guards; a second use in retained context does not reread unchanged instructions. |
+| Selection versus execution | A staffer loads the selected definition, applicability/authority/route guards and exact reference triggers without eagerly reading clearly separated craft manuals. Its actor still completely loads startup and affected task/action references; an ambiguous hidden authority guard stops affected staffing, and legacy unqualified requirements remain until reviewed separation. One sufficient startup acknowledgment is not repeated for each later manual. |
+| Customized required references | An unphased local authority/profile/runbook still loads in startup. A reviewed phase change preserves its exact constraint and nested references at the declared trigger; engine replacement never silently rephases it. |
 | Updated existing hook | The existing loaded entrypoint receives the applicable hook change once, preserving custom instructions and surrounding bytes; required affected startup trials are recorded separately. |
 
 Record each trial separately with host/session, startup route, assignment,

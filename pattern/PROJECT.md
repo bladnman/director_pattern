@@ -85,8 +85,13 @@ A template seed carries no completed receipt or initialized identity.
 
 ## Working references
 
-Every actor starts with [PATTERN.md](PATTERN.md) and its canonical index, then
-loads the selected standalone definition and required references. Directors read
-[DIRECTION.md](engine/DIRECTION.md), [MODELS.md](engine/MODELS.md), and [STATE.md](engine/STATE.md)
-with [DIRECTOR.md](engine/DIRECTOR.md) or [REQUEST_MANAGER.md](engine/REQUEST_MANAGER.md).
+Every actor completes [PATTERN.md](PATTERN.md) through the canonical index, selected
+standalone definition and startup-required references. Its capability map requires
+operational protocols before their action. Project references must explicitly
+label a later task/action trigger to defer a startup requirement; unqualified
+references load with their requiring document, transitively at the same phase. Keep applicable authority and shared gates in startup.
+Staffers load the selected definition and selection/authority guards under ROLES;
+executors load their complete startup/task/action references at the mapped phases.
+Keep touched selectors, artifact pointers and accepted facts current at meaningful
+outcome closure; retain historical runtime evidence outside live instructions.
 Open decisions and validation: [canonical pointer; evidence is separate from policy]
