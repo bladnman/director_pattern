@@ -1,5 +1,6 @@
 """Check package isolation and declared payload links, not agent installation behavior."""
 import json
+import ast
 import os
 from pathlib import Path, PurePosixPath
 import re
@@ -102,19 +103,50 @@ class PackageBoundaryTests(unittest.TestCase):
             self.assertIn("DIRECTION.md", set(markdown_links(PATTERN / "engine" / definition)))
         self.assertNotIn("DIRECTION.md", set(markdown_links(PATTERN / "engine/WORKER.md")))
 
-    def test_repository_and_installation_hooks_share_the_same_startup_barrier(self):
-        # Static entrypoint parity only: no assertion here proves a host obeys it.
-        marker = r"<!-- director-pattern:start -->(.*?)<!-- director-pattern:end -->"
-        install = (PATTERN / "INSTALL-v1.md").read_text(encoding="utf-8")
+    def test_source_hook_reaches_flat_package_or_preserves_absent_private_installation(self):
+        # Filesystem/reference wiring for both public-clone states, not model behavior.
         authoring = (PATTERN.parent / "AGENTS.md").read_text(encoding="utf-8")
-        install_hook = re.search(marker, install, re.S)
-        authoring_hook = re.search(marker, authoring, re.S)
-        self.assertIsNotNone(install_hook)
-        self.assertIsNotNone(authoring_hook)
+        marker = r"<!-- director-starter:2 -->(.*?)<!-- /director-starter:2 -->"
+        hook = re.search(marker, authoring, re.S)
+        self.assertIsNotNone(hook)
+        branches = re.fullmatch(r"\s*When `([^`]+)` exists in this checkout:\n(.*?)\nOtherwise:\n(.*?)\s*", hook.group(1), re.S)
+        self.assertIsNotNone(branches)
+        locator, present, absent = branches.groups()
+        # Keep the actual starter's role/delegation instructions in the guarded branch.
+        tree = ast.parse((PATTERN / "starter/install.py").read_text())
+        bridge = next(ast.literal_eval(node.value) for node in tree.body
+                      if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == "BRIDGE" for t in node.targets))
+        installed_hook = re.search(marker, bridge, re.S)
+        self.assertIsNotNone(installed_hook)
         normalize = lambda value: " ".join(value.split())
-        common = normalize(install_hook.group(1))
-        # The source repository alone adds its optional-local-installation guard.
-        self.assertIn(common, normalize(authoring_hook.group(1)))
+        self.assertEqual(normalize(present), normalize(installed_hook.group(1)))
+        manifest = json.loads((PATTERN / "starter/manifest.json").read_text())
+        for adopted in (False, True):
+            with self.subTest(adopted=adopted), tempfile.TemporaryDirectory() as temporary:
+                checkout = Path(temporary)
+                (checkout / "AGENTS.md").write_text(authoring)
+                if adopted:
+                    for name in manifest["payload"]:
+                        target = checkout / ".director" / name
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copy2(PATTERN / "starter/payload" / name, target)
+                selected = present if (checkout / locator).is_file() else absent
+                reads = re.findall(r"Read\s+`([^`]+)`", selected)
+                if adopted:
+                    self.assertEqual(reads, [locator])
+                    self.assertTrue(all((checkout / path).is_file() for path in reads))
+                    # Reach real selected foundations without a hidden v1 engine/index.
+                    for name in ("START.md", "DIRECTOR.md", "WORKER.md"):
+                        document = checkout / ".director" / name
+                        for link in markdown_links(document):
+                            self.assertTrue((document.parent / link).exists(), link)
+                    self.assertFalse((checkout / ".director/engine").exists())
+                else:
+                    self.assertEqual(reads, [])
+                    self.assertFalse((checkout / ".director").exists())
+                    self.assertIn("repository maintainer rules above", selected)
+                    self.assertIn("assigns no Director role", selected)
+                    self.assertIn("# Maintaining this repository", authoring.split("<!-- director-starter:2 -->", 1)[0])
 
     def test_loaded_hook_explicitly_requests_director_delegation_with_host_precedence(self):
         # Guards the host-loaded entrypoint itself; it cannot prove host permission.

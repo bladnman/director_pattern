@@ -29,16 +29,22 @@ raw conversations, internal provenance, or links requiring private access.
 Preserve other authors' edits and assigned ownership. Public authoring guidance,
 rationale, and tests remain outside the installable `pattern/`.
 
-<!-- director-pattern:start -->
-When a local `.director/` installation exists:
-At the start of each conversation, your first tool invocation must only read
-`.director/PATTERN.md`; wait for and read its result. Complete its startup sequence
-and acknowledge the resolved role package before any task I/O, planning,
-delegation, changes, or substantive answer. A brief acknowledgment may come first;
-then address the original request in the same turn, without requiring a greeting
-or extra confirmation.
-For the selected Director role, delegate substantial analysis and project changes
-to bounded subagents as directed by the selected role package, subject to
-higher-priority host instructions.
-If absent or incomplete, explain the limitation and maintain the repository rules above.
-<!-- director-pattern:end -->
+<!-- director-starter:2 -->
+When `.director/START.md` exists in this checkout:
+  Read `.director/START.md` and the exact selected role package completely before
+  task work; preserve this project's and host's authority. Use an explicit bounded
+  worker assignment when supplied; otherwise serve as the project Director.
+  Delegate useful substantial execution/coordination to bounded subagents when
+  permitted. No mandatory manager, Recorder, learning or setup actor is required.
+  Load selected task instructions before action; recover incomplete reads.
+
+Otherwise:
+  This public source checkout has no adopted local Director installation. Follow
+  the repository maintainer rules above and the actual host/explicit assignment.
+  Do not create or install a private role/state package merely to satisfy a hook;
+  a source checkout alone assigns no Director role.
+<!-- /director-starter:2 -->
+
+## Tinka
+
+Read [TINKA.md](TINKA.md) before working with this project's Tinka boards. It identifies the boards and explains how to restore the pinned app on a new machine without a skill.

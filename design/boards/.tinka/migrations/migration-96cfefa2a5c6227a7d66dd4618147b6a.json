@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "dryRun": false,
+  "boards": [],
+  "skipped": [],
+  "errors": [],
+  "identityMap": {
+    "boards": {},
+    "items": {},
+    "placements": {}
+  },
+  "sourceFilesUnchanged": true,
+  "resourcesMoved": false,
+  "id": "migration-96cfefa2a5c6227a7d66dd4618147b6a",
+  "createdAt": "2026-10-31T17:57:07.081Z",
+  "revision": 1,
+  "backups": {}
+}

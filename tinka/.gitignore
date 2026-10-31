@@ -1,0 +1,6 @@
+/app/
+/local/
+/.app.backup-*/
+/.app.stage-*/
+/.app.operation-lock/
+/.app.operation-lock.recovery/

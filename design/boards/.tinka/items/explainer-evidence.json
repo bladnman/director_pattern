@@ -1,0 +1,31 @@
+{
+  "id": "explainer-evidence",
+  "title": "Evidence",
+  "description": "Public explanatory reference, source 8db49cb.",
+  "build": {
+    "state": "ready",
+    "message": "Offscreen render/navigation/narrow checks passed; root visual review accepted"
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-10-31T17:57:45.965Z",
+  "updatedAt": "2026-10-31T18:06:00.480Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "content": {
+    "kind": "html",
+    "resource": {
+      "rootId": "explainer",
+      "path": "evidence.html"
+    }
+  },
+  "preview": {
+    "resource": {
+      "rootId": "explainer",
+      "path": "assets/evidence.svg"
+    }
+  }
+}

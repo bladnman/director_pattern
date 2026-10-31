@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 2,
+  "id": "director-pattern-explainer",
+  "ownerItemId": "item-d2d232c3-287d-40fb-8a66-3759a0d56f35",
+  "title": "How the Director Pattern grows",
+  "description": "",
+  "createdAt": "2026-10-31T17:57:07.187Z",
+  "updatedAt": "2026-10-31T17:57:45.965Z",
+  "placements": [
+    {
+      "x": 40,
+      "y": 40,
+      "width": 400,
+      "height": 300,
+      "z": 0,
+      "presentation": {
+        "mode": "card"
+      },
+      "id": "placement-4659734e-0d2e-4636-91ce-2e5731b52750",
+      "itemId": "explainer-overview"
+    },
+    {
+      "x": 480,
+      "y": 40,
+      "width": 400,
+      "height": 300,
+      "z": 1,
+      "presentation": {
+        "mode": "card"
+      },
+      "id": "placement-7a758910-71ba-4eed-a24d-4bde293b4f37",
+      "itemId": "explainer-moving-parts"
+    },
+    {
+      "x": 920,
+      "y": 40,
+      "width": 400,
+      "height": 300,
+      "z": 2,
+      "presentation": {
+        "mode": "card"
+      },
+      "id": "placement-0c63e66c-b579-4275-8891-a9db4d4f4662",
+      "itemId": "explainer-growth"
+    },
+    {
+      "x": 40,
+      "y": 390,
+      "width": 400,
+      "height": 300,
+      "z": 3,
+      "presentation": {
+        "mode": "card"
+      },
+      "id": "placement-288204b4-66fb-4e4a-838e-64181d672568",
+      "itemId": "explainer-ownership"
+    },
+    {
+      "x": 480,
+      "y": 390,
+      "width": 400,
+      "height": 300,
+      "z": 4,
+      "presentation": {
+        "mode": "card"
+      },
+      "id": "placement-8da27b06-7230-4dd0-b69e-23d5bc3634ac",
+      "itemId": "explainer-learning"
+    },
+    {
+      "x": 920,
+      "y": 390,
+      "width": 400,
+      "height": 300,
+      "z": 5,
+      "presentation": {
+        "mode": "card"
+      },
+      "id": "placement-e947142a-98c1-4e50-b62f-2fcfe7f09c23",
+      "itemId": "explainer-examples"
+    },
+    {
+      "x": 40,
+      "y": 740,
+      "width": 400,
+      "height": 300,
+      "z": 6,
+      "presentation": {
+        "mode": "card"
+      },
+      "id": "placement-a8185f0d-a25c-419a-a368-346d86e6069e",
+      "itemId": "explainer-evidence"
+    }
+  ],
+  "reviewOrder": [
+    "placement-4659734e-0d2e-4636-91ce-2e5731b52750",
+    "placement-7a758910-71ba-4eed-a24d-4bde293b4f37",
+    "placement-0c63e66c-b579-4275-8891-a9db4d4f4662",
+    "placement-288204b4-66fb-4e4a-838e-64181d672568",
+    "placement-8da27b06-7230-4dd0-b69e-23d5bc3634ac",
+    "placement-e947142a-98c1-4e50-b62f-2fcfe7f09c23",
+    "placement-a8185f0d-a25c-419a-a368-346d86e6069e"
+  ],
+  "rounds": [],
+  "decorations": []
+}

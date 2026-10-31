@@ -1,0 +1,20 @@
+{
+  "title": "How the Director Pattern grows",
+  "description": "",
+  "schemaVersion": 2,
+  "id": "item-d2d232c3-287d-40fb-8a66-3759a0d56f35",
+  "createdAt": "2026-10-31T17:57:07.187Z",
+  "updatedAt": "2026-10-31T17:57:07.187Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "ready",
+    "message": "",
+    "updatedAt": 0
+  },
+  "childBoardId": "director-pattern-explainer"
+}

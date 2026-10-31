@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 2,
+  "id": "workspace-c1f46a1d-27b8-4521-a775-b8c0ffc96cc5",
+  "revision": 31,
+  "createdAt": "2026-10-31T17:57:07.080Z",
+  "updatedAt": "2026-10-31T18:06:00.480Z",
+  "resourceRoots": {
+    "legacy": {
+      "path": ".."
+    },
+    "explainer": {
+      "path": "../director-pattern-explainer"
+    }
+  },
+  "homeBoardIds": [
+    "director-pattern-explainer"
+  ],
+  "recentOperations": [
+    {
+      "operationId": "explainer-root-20261031",
+      "fingerprint": "a89978023af273e15fa6be7474750b98bdef6adb65e0ace2280a05d783d279f5",
+      "response": {
+        "revision": 3,
+        "result": {
+          "workspaceId": "workspace-c1f46a1d-27b8-4521-a775-b8c0ffc96cc5"
+        }
+      }
+    },
+    {
+      "operationId": "explainer-reserve-overview",
+      "fingerprint": "1b9dc9aac2162b0eb3d27094ed82f1b7e891c11d02cee855efba0dbd3a9e7ce1",
+      "response": {
+        "revision": 4,
+        "result": {
+          "itemId": "explainer-overview",
+          "boardId": "director-pattern-explainer",
+          "placementIds": [
+            "placement-4659734e-0d2e-4636-91ce-2e5731b52750"
+          ]
+        }
+      }
+    },
+    {
+      "operationId": "explainer-reserve-moving-parts",
+      "fingerprint": "2c000a70241e9ccf131326c6ecac4deac187dbda8398866070e88c55bb8f851a",
+      "response": {
+        "revision": 5,
+        "result": {
+          "itemId": "explainer-moving-parts",
+          "boardId": "director-pattern-explainer",
+          "placementIds": [
+            "placement-7a758910-71ba-4eed-a24d-4bde293b4f37"
+          ]
+        }
+      }
+    },
+    {
+      "operationId": "explainer-reserve-growth",
+      "fingerprint": "f8df79f62aa513dc4db967d0f4eceaaaa90b8a24dd3bf7322c1fcc6eb119eb90",
+      "response": {
+        "revision": 6,
+        "result": {
+          "itemId": "explainer-growth",
+          "boardId": "director-pattern-explainer",
+          "placementIds": [
+            "placement-0c63e66c-b579-4275-8891-a9db4d4f4662"
+          ]
+        }
+      }
+    },
+    {
+      "operationId": "explainer-reserve-ownership",
+      "fingerprint": "20bd79a740ba362a752d6a4bb24e7becc2a87f65610f3cd797c7f71e41775c98",
+      "response": {
+        "revision": 7,
+        "result": {
+          "itemId": "explainer-ownership",
+          "boardId": "director-pattern-explainer",
+          "placementIds": [
+            "placement-288204b4-66fb-4e4a-838e-64181d672568"
+          ]
+        }
+      }
+    },
+    {
+      "operationId": "explainer-reserve-learning",
+      "fingerprint": "cf8822f846f78da0389d802526774acba0a34cb0787d69793a407bc68df9549d",
+      "response": {
+        "revision": 8,
+        "result": {
+          "itemId": "explainer-learning",
+          "boardId": "director-pattern-explainer",
+          "placementIds": [
+            "placement-8da27b06-7230-4dd0-b69e-23d5bc3634ac"
+          ]
+        }
+      }
+    },
+    {
+      "operationId": "explainer-reserve-examples",
+      "fingerprint": "ecf7e4af74bf41f2716f9fc6828ddaeed2e88bbc93084464e633719b565fbf5b",
+      "response": {
+        "revision": 9,
+        "result": {
+          "itemId": "explainer-examples",
+          "boardId": "director-pattern-explainer",
+          "placementIds": [
+            "placement-e947142a-98c1-4e50-b62f-2fcfe7f09c23"
+          ]
+        }
+      }
+    },
+    {
+      "operationId": "explainer-reserve-evidence",
+      "fingerprint": "1416bdcda6a52d78054e6a626cc807cad861e2b9cf0c776518cc8024e7615963",
+      "response": {
+        "revision": 10,
+        "result": {
+          "itemId": "explainer-evidence",
+          "boardId": "director-pattern-explainer",
+          "placementIds": [
+            "placement-a8185f0d-a25c-419a-a368-346d86e6069e"
+          ]
+        }
+      }
+    }
+  ]
+}
