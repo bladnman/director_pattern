@@ -1,182 +1,30 @@
-# Install the Director Pattern
+# Director Pattern packages
 
-The [ownership boundary](engine/references/BOUNDARY.md) separates replaceable
-`engine/` from project-owned context, roles, policy, adapters, identity pool, and
-state. The manifest partitions engine files, create-once project seeds, and thin
-compatibility launchers. An update replaces only a compatible verified engine;
-existing project seeds are preserved. A flat installation needs the boundary's
-one-time reviewed layout integration before this fast replacement route applies.
+**New projects: [flat starter 2](starter/README.md).** This source candidate uses one
+Director foundation and bounded workers, with a small install and explicit bounded
+learning review. It is a new format, not an automatic v1 upgrade or a published
+release claim. Ordinary notes/assets may already exist; conflicting startup or
+tracker installations require reviewed integration.
 
-
-**[v1.1.0](https://github.com/bladnman/director_pattern/releases/tag/v1.1.0) · October 27, 2026.** This subtree is a self-contained package
-for agents installing the method in a target project. It is not a proven adoption.
-
-Give one project a **Director** who stays in the conversation, keeps its unfinished
-commitments, sets cross-outcome scope and priority, and accepts each outcome. The
-Director entrusts every independently finishable outcome to one **Request Manager**,
-who owns its understanding, all completion obligations, planning, specialist tasks,
-evaluation, rework, and follow-up until the Director accepts it. A specialty such as
-engineering, testing, release, or customer communication is a task inside the
-outcome, not a reason for another manager. Specialists execute; Small clerks map
-broad material; one shared [Recorder](engine/RECORDER.md) handles routine state reading and
-writing. The Director delegates substantial analysis and detailed coordination
-before that active work occupies the main conversation. Independent analysis
-returns a proposal; no intake layer is mandatory. Selective critical reading and
-ordinary discussion stay with the Director. No department tree is required.
-Keep one whole-outcome owner through usable delivery. A small outcome can go
-directly to a bounded worker; specialist stewardship alone adds no manager or approval.
-
-"Director Pattern" names this package. Assignment roles stay `worker` and `director`:
-`Role: director` carries the project Director and a Request Manager bounded to one
-outcome, and `Role: worker` carries specialists, reviewers, the Recorder, and
-optional bounded analysis. Request Manager and Recorder are maintained
-responsibilities, not new role values. Only the checked project Director uses `🎬`;
-managers and other actors use an assigned identity from a shared pool, such as
-🦫 **Mason** —, chosen for a playful fit with the assignment under
-[IDENTITIES.md](engine/IDENTITIES.md). See [DIRECTOR.md](engine/DIRECTOR.md) and
-[REQUEST_MANAGER.md](engine/REQUEST_MANAGER.md).
-
-Tracked is the default for new installations; lean is an explicit optional choice.
-Keep an existing tracker canonical. New bundled stores use request folders with
-shared immutable user sources and typed relationship/ownership records. Files
-preserve continuity, not agent liveness or an automatic wakeup. No service,
-scheduler, runtime, or new chat is installed.
-
-The installed `.director/` is committed with the project, including its requests
-and exact user sources, so work continues from another machine or a cloud
-checkout. Its own `.gitignore` keeps only the helper lock, in-progress write
-scratch, pre-update backups, and daily update-check cache local. A project may
-choose to keep more local;
-see [STATE.md](engine/STATE.md#version-control).
-
-Before the Director can staff work, the installation maps four project facts in
-PROJECT.md: a canonical role index ([ROLES.md](engine/ROLES.md)), durable capability and
-authority policy ([MODELS.md](engine/MODELS.md)), the Recorder responsibility/routing policy
-and state location, and the identity roster location ([IDENTITIES.md](engine/IDENTITIES.md)).
-PROJECT holds enduring context and canonical locators, never a host/model/team
-snapshot; current runtime controls are resolved when used and recovery evidence
-stays in assignments, receipts, or activity. Reuse the project's
-existing maintained roles and guardrails. Missing roles/routes stay visible;
-routine supported model remapping follows MODELS within existing authority.
-
-Periodic supervision overviews use **📋 SitRep** so they are easy to scan or skip.
-While delegated work is outstanding, proactively give a labeled **📋 SitRep**
-about every five minutes or at the user/project interval, covering all held
-streams, owners, and next actions. Ordinary progress does not replace or reset
-that report; stricter host updates remain concise. The checked project Director's `🎬` identity, `❓` questions, and
-`🖐️` user-only actions keep their meanings. See [DIRECTION.md](engine/DIRECTION.md) for the
-sparse marker rules, timing, and continuing supervision requirements.
-
-Every actor follows the small [bootstrap](PATTERN.md), one canonical project-owned
-index, selected standalone definitions and applicable authority before task work.
-Startup acknowledgment reports complete reads, not operational verification.
-Understand intended work next; task references load before affected work, and the
-bootstrap's explicit capability map makes staffing, persistence, identity, setup,
-updates and other action protocols mandatory before use. Already loaded unchanged
-protocols need no repeated ritual. Unqualified references required by startup still
-load at startup; nested requirements load with their requiring document; a local customization can cost more than the generic package.
-Bound each returned response, including outer wrapper aggregates, and chunk large
-files with coverage in the read itself. No separate verification call follows every
-read. This instruction route cannot guarantee host compliance or understanding.
-Staffers load the selected role's selection/authority package and exact reference
-triggers; executors load their full manuals before affected work. Keep ambiguous
-guards and older unqualified requirements until reviewed separation. Use one
-sufficient startup acknowledgment and batch coordinated reservations/receipts at
-shared checkpoints, retaining exact capture, authority and collision protection.
-At meaningful closure, refresh touched selectors, artifact pointers and accepted
-facts; preserve stale runtime assertions as dated evidence outside live instructions
-and evaluate corrections at their next relevant use. No separate service is added.
-
-Explicit assignments route first; only an unassigned conversation defaults Director.
-Malformed delegated assignments seek clarification. Reply-only answers remain
-prompt after conversational startup; Recorder activation, hash/setup checks and
-metadata discovery do not gate them. Discussion does not cancel held commitments.
-Recurring specialist duties stay in maintained definitions through the same index,
-never an abstract appended to AGENTS.md.
-
-An installing agent need not already be a Director. First installation audits the
-entire loaded startup chain, preserves shared authority, and moves exact misplaced
-specialist duties to reachable maintained definitions. Follow the
-[startup integration and verification procedure](engine/references/STARTUP.md); an
-appended hook alone is insufficient. Updates use the
-[incremental procedure](engine/references/UPDATES.md#select-the-smallest-sufficient-verification):
-a full startup audit or fresh-agent trial is required only by affected structure,
-behavior, or detected defects. Static wiring and real fresh-agent trials remain
-separate evidence.
-
-## Adopt in a target project
-
-Ask the agent working in that project:
-
-```text
-Read this package's README.md and follow its INSTALL.md to install the candidate
-Director Pattern in the target project. Preserve existing instructions, local
-adaptations, unfinished work, and the canonical tracker. Copy only the selected
-manifest payload, fill PROJECT.md with enduring context and canonical policy/state
-locators (role index, capability/authority policy, Recorder routing policy, identity
-roster location), and verify relevant current host capabilities. Keep environment
-observations and setup results in receipts, not PROJECT or another loaded cache.
-Do not publish, migrate requests, or copy the whole source repository.
+```sh
+python3 pattern/starter/install.py plan --target /path/to/project
+python3 pattern/starter/install.py install --target /path/to/project
 ```
 
-Use this [package entrypoint](https://github.com/bladnman/director_pattern/blob/main/pattern/README.md)
-when pointing an agent at the published repository. A staging clone is optional
-transport, not a request to adopt everything in the checkout.
+Only the starter manifest is selected for that operation. Its source guides and
+installer are not startup payload. Its portable role guidance and POSIX local
+helper have separate limits; see its guide for exact runtime prerequisites,
+reversal, privacy, pending review and actual-host verification boundaries.
 
-Follow [INSTALL.md](INSTALL.md). [manifest.json](manifest.json) is the authoritative
-copy list: base files are always payload; tracked files are added only for a new
-bundled tracked store. Preserve their relative paths under the target `.director/`.
-README, INSTALL, and manifest guide the operation; they are not installed payload.
-No maintainer rationale, user-source history, tests, private archive, repository
-metadata, or authoring instructions belong in the target installation.
+**Existing v1 projects: [legacy v1 guide](README-v1.md), [installation guide](INSTALL-v1.md)
+and [compatible update protocol](engine/references/UPDATES.md).** The existing
+[manifest](manifest.json), engine, launchers and project seed layout remain the
+legacy interface-1 package. Published v1.1.0 and current source candidate starter 2
+are distinct. Read actual installed policy, preserve project-owned rules, requests,
+trackers and identities, and use pinned source/baseline comparison for compatible
+v1 updates. Do not copy starter 2 over an existing v1 installation or mature stencil.
+A new format requires an explicit reviewed migration; none is implemented here.
 
-Read [PATTERN.md](PATTERN.md), [ROLES.md](engine/ROLES.md), [MODELS.md](engine/MODELS.md),
-[STATE.md](engine/STATE.md), and the fillable [PROJECT.md](PROJECT.md) as needed for setup.
-The package depends on no files outside this subtree. Reading alone is not adoption; an adoption request
-authorizes the reversible setup. Host restrictions and existing authority remain.
-
-## Update an existing installation
-
-Ask the project agent to resolve published GitHub `main` to an exact reviewed
-commit and use that revision's [update protocol](engine/references/UPDATES.md), including
-when installed guidance requires an audit on every update or has no protocol.
-Read installed guidance for local adaptations; preserve project-owned rules,
-adaptations, and state. Routine changes use focused checks and still-applicable
-evidence. Full startup audits and fresh-agent trials are triggered by affected
-structure, behavior, or defects; only required checks gate the new revision. The
-project's role index and definitions, durable capability/authority policy, and
-identity roster belong to the project; an update preserves them. Historical host
-mappings remain evidence outside startup, not future configuration. An update request is distinct from
-reading the repository. While a project is active, only its checked Director
-arranges a tiny metadata check at most once per 24 hours, including failures.
-Default to: **A new Director Pattern is available. Say “update director pattern”
-to install it.** The user can say **“always update director pattern”** to save
-project-scoped automatic updates; notify/off remain durable choices. Automatic
-mode follows the same safe backup, merge, compatibility and verification protocol.
-No scheduler, checking model, dependency installation, or inactive-project wakeup
-is added. See the [daily check contract](engine/references/UPDATES.md#daily-discovery-and-project-preference).
-
-## Remove a project installation
-
-On an explicit removal request, identify unfinished requests, actual execution
-handles, pending evaluation, and decisions with the recorder, then reconcile their
-ownership and recovery pointers. Disable only the identifiable Director startup
-hook, preserving unrelated instructions. Retain owned `.director/` state, context,
-requests, and backups in place or archive them securely at an agreed reachable
-location; do not delete state unless separately requested. Leave shared canonical
-trackers untouched. Remove unused contract files only after preserving those records.
-Removing files does not stop live agents or change their roles; refresh affected
-conversations before claiming their instructions or roles have changed.
-
-## Optional global skill
-
-A separate optional skill routes explicitly requested lifecycle operations to this
-guide. It requires explicit user invocation: `$director-pattern` in Codex,
-`/director-pattern` in Claude Code, or a user direction to its skill file. Ordinary
-task relevance must not select or run it. For the complete host-specific payload,
-required native invocation controls, updates, and removal, see the repository's
-[global skill guidance](https://github.com/bladnman/director_pattern/blob/main/README.md#optional-global-skill).
-Preserve those controls on updates. Global skill invocation and an adopted
-project's startup hook are separate instruction routes. Removing the global skill
-does not remove any project's pattern installation. Project removal likewise
-leaves the global skill installed unless its removal is requested too.
+Use [INSTALL.md](INSTALL.md) to select the appropriate lifecycle route. No repository
+history, tests, private conversations or authoring instructions belong in either
+runtime payload. No source guide itself confers installation or release authority.

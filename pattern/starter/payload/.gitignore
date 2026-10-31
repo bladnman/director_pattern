@@ -1,0 +1,6 @@
+state.json
+sources/
+.lock
+.write-*
+install.json
+__pycache__/

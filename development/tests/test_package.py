@@ -76,10 +76,13 @@ class PackageBoundaryTests(unittest.TestCase):
 
     def test_every_contract_and_hooked_file_is_base_payload(self):
         manifest = self.manifest(PATTERN)
-        guidance = {"README.md", "INSTALL.md"}
-        contracts = {p.relative_to(PATTERN).as_posix() for p in PATTERN.rglob("*.md")} - guidance
+        guidance = {"README.md", "INSTALL.md", "README-v1.md", "INSTALL-v1.md"}
+        # The flat starter has its own manifest and install boundary; it is not
+        # silently added to the existing engine package.
+        contracts = {p.relative_to(PATTERN).as_posix() for p in PATTERN.rglob("*.md")
+                     if not p.is_relative_to(PATTERN / "starter")} - guidance
         self.assertLessEqual(contracts, set(manifest["base_files"]), "Lean installs must be self-contained")
-        install = (PATTERN / "INSTALL.md").read_text(encoding="utf-8")
+        install = (PATTERN / "INSTALL-v1.md").read_text(encoding="utf-8")
         hook = re.search(r"<!-- director-pattern:start -->(.*?)<!-- director-pattern:end -->", install, re.S)
         assert hook is not None, "INSTALL must carry the marked startup hook"
         named = set(re.findall(r"\b[A-Z_]+\.md\b", hook.group(1)))
@@ -102,7 +105,7 @@ class PackageBoundaryTests(unittest.TestCase):
     def test_repository_and_installation_hooks_share_the_same_startup_barrier(self):
         # Static entrypoint parity only: no assertion here proves a host obeys it.
         marker = r"<!-- director-pattern:start -->(.*?)<!-- director-pattern:end -->"
-        install = (PATTERN / "INSTALL.md").read_text(encoding="utf-8")
+        install = (PATTERN / "INSTALL-v1.md").read_text(encoding="utf-8")
         authoring = (PATTERN.parent / "AGENTS.md").read_text(encoding="utf-8")
         install_hook = re.search(marker, install, re.S)
         authoring_hook = re.search(marker, authoring, re.S)
@@ -115,7 +118,7 @@ class PackageBoundaryTests(unittest.TestCase):
 
     def test_loaded_hook_explicitly_requests_director_delegation_with_host_precedence(self):
         # Guards the host-loaded entrypoint itself; it cannot prove host permission.
-        install = (PATTERN / "INSTALL.md").read_text(encoding="utf-8")
+        install = (PATTERN / "INSTALL-v1.md").read_text(encoding="utf-8")
         hook = re.search(r"<!-- director-pattern:start -->(.*?)<!-- director-pattern:end -->", install, re.S)
         self.assertIsNotNone(hook)
         text = " ".join(hook.group(1).split())

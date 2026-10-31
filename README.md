@@ -1,57 +1,56 @@
 # Director Pattern
 
-**[v1.1.0](https://github.com/bladnman/director_pattern/releases/tag/v1.1.0) · October 27, 2026.** The project Director stays in conversation,
-keeps its unfinished commitments, and accepts each outcome. Each complete outcome has
-one accountable owner, normally a Request Manager; specialists execute; a shared
-recorder preserves state.
-Tracked is default; lean is optional.
+A Project Director stays in conversation, retains the whole outcome, assigns
+bounded execution to workers, and evaluates the result through usable delivery.
+Start flat. Add another Director when sustained coordination warrants it; develop
+a department when recurring ownership and maintained knowledge earn their place.
+The same base role can compose scoped and domain knowledge without duplicating an
+organization at installation.
 
-"Director Pattern" names the package. Assignment roles stay `worker` and `director`:
-the project Director and a Request Manager bounded to one outcome both carry
-`Role: director`, and Request Manager and Recorder are maintained responsibilities,
-not new role values. A specialty such as engineering, testing, or release is a task
-inside an outcome, not a reason for another manager. The Director can optionally
-dispatch substantial independent analysis that returns a proposal. Before staffing,
-an installation records enduring context, the canonical role index, capability and
-authority policy, Recorder routing policy, and the identity roster locator. Runtime
-controls are resolved when used; model/team/host observations stay in assignment or
-receipt evidence, outside PROJECT and startup instructions. It adds no runtime or
-live-agent guarantee. Updates preserve project policy and historical evidence
-without treating past environment mappings as current configuration.
+**Current source candidate:** the [flat starter](pattern/starter/README.md) is the
+new-install entrypoint for a project without conflicting startup or tracker.
+It has no mandatory second Director,
+Recorder, Architect, identity pool or setup-check actor. The Director performs
+validated recording operations and supervises workers. Durable corrections feed a
+separate bounded learning review; the Director does not reread all history at
+startup or remember lessons without recorded evidence and later matching use.
+[See the concrete growth and learning walkthrough](development/FLAT_STARTER.md).
 
-**New here? [Start with the website](https://director.metal-sole.com/)** for the
-overview and copyable requests to install, check, or update it through your
-project's existing agent. Website source and hosting notes live in [site/](site/).
+**Published release:** [v1.1.0](https://github.com/bladnman/director_pattern/releases/tag/v1.1.0),
+October 27, 2026, uses the earlier Request Manager/shared Recorder design. The flat
+starter is an unpublished source candidate. This checkout, the website, the live
+local installation and existing projects can therefore describe different revisions;
+source changes do not update them automatically.
 
-**For an agent:** [read the website's guide](https://director.metal-sole.com/install.md)
-to continue to the canonical GitHub installation or update protocol.
+**Installing or updating:** begin with [pattern/README.md](pattern/README.md).
+It separates the fresh-project path from the explicit preservation path for
+existing projects with startup instructions or trackers. Ordinary notes and assets
+are preserved on the fresh path. Preserve canonical trackers, local authority, adaptations,
+unfinished work and exact sources; an existing installation is never silently
+migrated to the starter. Copy only the selected manifest payload, not this entire
+checkout or its maintainer instructions.
 
-**Here to install? Start with [pattern/README.md](pattern/README.md).** That subtree
-stands alone. Install only its manifest-listed payload into the target project's
-`.director/`; the rest of this repository is not part of the installation.
-A temporary clone may transport files, but copying the checkout is not adoption.
+**Using the published method:** [the website](https://director.metal-sole.com/) has
+the public overview and lifecycle requests; its [agent guide](https://director.metal-sole.com/install.md)
+routes to canonical published installation/update guidance. Website source and
+hosting notes live in [site/](site/). Publication is separate from this candidate.
 
-**Here to develop the pattern? Read [development/RATIONALE.md](development/RATIONALE.md)**
-for the reasons, tradeoffs, and open decisions, then follow this
-repository's [authoring guidance](AGENTS.md). Maintainer material is not required
-for installation. Local adoption is separate: when configured, the optional local
-startup hook activates an installation. A source checkout alone does not install
-the pattern or confer director authority.
+**Maintaining the method:** read the overview, owning decisions and applicable
+dated supersessions in [development/RATIONALE.md](development/RATIONALE.md), then
+follow [AGENTS.md](AGENTS.md). [Development validation notes](development/DESIGN_NOTES.md)
+distinguish source/fixture checks from actual agent observations and remaining
+adoption gates. These documents and tests are not installation payload. A source
+checkout alone does not install the pattern or confer Director authority.
 
-Candidate authorship, target installation, fresh-session verification, and public
-publication are separate steps. The source repository is
-[bladnman/director_pattern](https://github.com/bladnman/director_pattern);
-the agent installation entrypoint is [pattern/README.md](pattern/README.md).
+Assignment roles remain `worker` and `director`. A scoped coordinating Director,
+reviewer or domain specialist is a maintained responsibility, not a new role value,
+permission grant or promise of a live agent. Independent testing and existing
+approval boundaries remain explicit as knowledge packages compose. No daemon,
+scheduler, background wakeup or offline learning service is implied.
 
-For an existing installation, pin published GitHub `main` to an exact reviewed
-commit and use that revision's [update protocol](pattern/engine/references/UPDATES.md),
-even when installed guidance predates incremental updates. Preserve project-owned
-rules and adaptations. Routine updates use focused checks and applicable prior
-evidence; full startup audits and fresh-agent trials run only for affected changes.
-While active, only the checked project Director arranges a tiny metadata check
-at most once per rolling 24 hours and defaults to a short notification. Say
-“always update director pattern” to enable project-scoped automatic updates through
-the same safe update protocol. No scheduler or new software is installed.
+The source repository is [bladnman/director_pattern](https://github.com/bladnman/director_pattern).
+Candidate authorship, target installation, fresh-session verification, user
+acceptance and public publication are separate steps.
 
 ## Optional global skill
 

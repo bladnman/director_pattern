@@ -12,7 +12,7 @@ while its implementation remains open. Tracked-by-default is accepted; the entir
 package is not thereby approved. The request-folder/link implementation is now
 authorized separately; implementation and verification still need their own evidence.
 
-The operational contracts are [PATTERN.md](../pattern/PATTERN.md),
+The v1 compatibility contracts are [PATTERN.md](../pattern/PATTERN.md),
 [MODELS.md](../pattern/engine/MODELS.md), and [STATE.md](../pattern/engine/STATE.md), with the
 responsibility contracts [DIRECTOR.md](../pattern/engine/DIRECTOR.md),
 [REQUEST_MANAGER.md](../pattern/engine/REQUEST_MANAGER.md), [ROLES.md](../pattern/engine/ROLES.md),
@@ -27,7 +27,16 @@ Pattern and now read in this fork's renamed vocabulary. That is a terminology ch
 only; their reasoning and dates are unchanged. Later dated additions record what the
 [October 21 design](#decision-history--october-21-2026) actually superseded.
 
+The latest [flat-starter decision](#r18--start-flat-and-make-learning-an-explicit-bounded-loop)
+supersedes the earlier normal Request Manager/Recorder route for new starter
+installations. Earlier dated decisions remain below as history; existing
+installations retain their authority until explicitly integrated.
+
 ## R1 — One accountable conversation, without a forced organization
+
+**Latest supersession, October 30:** [R18](#r18--start-flat-and-make-learning-an-explicit-bounded-loop)
+restores the flat default for new starter installations; the earlier manager route
+below remains the history and v1 compatibility design.
 
 **Problem:** Delegation can leave the user assembling worker reports, or turn a
 simple project into departments and hierarchy before those solve any real problem.
@@ -80,6 +89,10 @@ record mapping only; no live manager behavior has been observed
 ([scenarios](DESIGN_NOTES.md#request-manager-scenarios--october-21-2026)).
 
 ## R2 — Protect judgment and conversation from execution/bookkeeping
+
+**Latest supersession, October 30:** [R18](#r18--start-flat-and-make-learning-an-explicit-bounded-loop)
+removes mandatory Manager/Recorder actors from the starter while retaining bounded
+execution, explicit authority and complete-outcome evaluation.
 
 **Problem:** A director doing every small implementation or state update can drift
 back into being the worker, consuming its attention and strongest model capacity.
@@ -1460,6 +1473,132 @@ whose selector still says the guide may not exist, or a shipped feature still
 listed as pending: refresh the current pointer/status while retaining its earlier
 history and unrun acceptance gates. Static edits can establish preservation and
 reachability; the next actual selected use must establish uptake.
+
+## R18 — Start flat and make learning an explicit bounded loop
+
+**Decided October 30, 2026:** A new starter has one Project Director that stays in
+conversation and retains the complete outcome, with bounded workers for execution
+and independent review. An additional Director is a choice for sustained detailed
+coordination, using the same base role with scoped/domain overlays. It is not the
+normal wrapper around each outcome. This supersedes R1's October 21 default Request
+Manager route and R2's October 23 mandatory child-coordination route for the starter.
+Complete-outcome ownership, delegated substantial execution, supervision, authority
+and acceptance boundaries remain. Specialist stewardship alone never creates
+another owner.
+
+The active Director owns validated supported recording operations. The starter
+requires no separate Recorder, Manager, Architect, identity pool or setup-check
+actor. This supersedes the mandatory Recorder/identity staffing prerequisites of
+R2/R10 for that new path; it does not permit concurrent arbitrary writers or turn
+workers into canonical-state owners. Existing installations and custom trackers
+use a separate explicit preservation/integration path. They are not silently
+migrated or flattened. Replaceable engine/project-owned integration remains an
+ownership boundary, independent of the project's organizational shape (R16).
+
+**Why and tradeoff:** The earlier design required coordinating and bookkeeping
+actors before a particular outcome had demonstrated that need. Reducing actors and compulsory setup can reduce
+that overhead, but file counts do not measure startup latency, model usage or
+installation duration. A reported slow installation motivates investigation;
+it is not a measured causal explanation. Small startup and a narrow fresh-folder
+entrypoint must coexist with preservation of existing authority, adaptations,
+unfinished work, original sources and independent testing.
+
+**Observed tradeoff:** The bounded v3 trial demonstrated utility with substantial
+overhead: 59 slide-phase calls versus seven for a plain worker, or 37 versus six
+when clear harness waits are excluded. A narrow two-instruction-file v4 retry
+batches meaningful persistence checkpoints, supplies exact paths and uses supported
+message waits; it observed 30 calls, or 26 excluding waits. Guidance and harness
+changed together, so the result is not a clean causal comparison or an economic
+win over plain execution. [Validation notes](DESIGN_NOTES.md#narrow-efficiency-retry--frozen-v4)
+retain token accounting, cached-input limits, startup misses and the unchanged
+helper/API/installer boundary. The value of richer recovery and scoped learning
+must be weighed against that remaining overhead.
+
+Departments follow recurring responsibility and coordination needs observed in
+real work. A narrow published entrypoint exposes applicability, input, result and
+authority; internal organization can evolve behind it. Shared base roles and domain
+knowledge compose rather than duplicate a generic Director for every specialty.
+No full department service catalog is required at installation. A task count
+alone does not create a layer. Accepted craft knowledge, a maintained named role
+and a department caller header are distinct project-owned knowledge paths. An
+authorized maintainer implements new routing and adds a project-owned startup
+pointer to the header without editing the managed foundation. Accepting a structure
+proposal supplies neither that implementation nor automatic discovery of arbitrary
+files. Composition must not collapse independent verification, explicit approval
+or other authority gates.
+
+**Learning correction:** The Director does not automatically remember every past
+assignment, result and correction. Repeated problems cannot be reliably noticed
+from context that was never loaded. Reading all project history at each startup
+would instead make conversation pay an ever-growing cost. R17's touched-knowledge
+upkeep remains useful, but is not evidence that historical pattern detection
+happens for free.
+
+Use durable, scoped incident/correction evidence and a compact current summary
+of commitments, pending review and knowledge selectors. The Director applies an explicit user instruction immediately within its
+scope, and retains the relevant evidence; `accept-rule` durably records an already
+explicit rule without review or a count threshold. During active supported execution
+the default owner initiates a bounded independent reviewer at meaningful closure
+when three incidents are pending and capacity exists. That count batches spend;
+a direct review request can bypass it. An explicit-request installation policy is
+also available. That reviewer
+reads only queued evidence after a retained successful-review cursor, identifies
+supported patterns and uncertainty, and returns proposals. The accountable owner
+evaluates them before accepted rules reach the owning maintained knowledge.
+Startup reads compact commitments and a knowledge count/pointer, not the
+historical evidence queue or all accepted lesson text. Task-time paginated scope
+discovery exposes canonical task/audience/path selectors before matching; guessed
+category names must not silently miss retained lessons. Discovery includes
+overlapping path scopes, while execution selects for actual affected files;
+discovery never broadens a rule. This is scoped lookup,
+not a semantic history-search engine. The matching task then loads its complete
+applicable accepted rules, and its result must be checked;
+storage, acceptance and actual uptake are separate claims. Incremental batches do
+not guarantee global or cross-batch trend detection: an issue split across already
+reviewed batches may need targeted historical investigation. Durable evidence is
+not a reviewer's retained memory. Three pending incidents need not share a cause;
+this scoped loop is not comprehensive self-healing.
+
+Review initiation is an active Director duty, not an implied daemon or scheduler.
+If the host cannot run the review now, it remains pending for the next active
+opportunity. Bounded review preserves a retryable cursor and unfinished evidence;
+failed/interrupted review must not consume unseen corrections. Reviewer work has
+model, time and context costs, which must be measured when available and otherwise
+reported as unknown. Bounded returned context does not imply constant storage cost:
+the starter helper reads its state file internally, so its I/O grows with the store.
+An optional Architect may own recurring review when justified; one is not required
+merely to install the starter. Periodic off-session review
+requires separately configured actual host execution, authorized scheduling and a
+return/evaluation route; the starter does not implement that service. Three
+corrections are evidence to evaluate, never an automatic department-creation
+threshold or universal policy.
+
+**Concrete regressions:** A fresh slides request creates one accountable Director
+and a bounded author, without mandatory Manager/Recorder/Architect staffing. A
+midstream request to keep participant instructions concise reaches the current
+owner and survives recovery. A subsequent Director reads its compact scope and
+pending review summary rather than every prior deck. A separate bounded reviewer
+can propose a course-slide rule from retained incidents; interruption leaves the
+unreviewed tail available. An owner rejects an overbroad rule but accepts a narrow
+supported one. A later matching slide assignment loads that lesson; an unrelated
+technical report does not inherit it. Temporary multi-artifact coordination can
+justify another Director, and recurring coordination can justify a department
+without changing independent testing or publication authority. An existing project
+with a custom tracker and local release policy preserves both until reviewed
+integration, even though the fresh-folder starter is smaller.
+
+**Contracts and status:** The [package entrypoint](../pattern/README.md) owns the
+new-install versus existing-project routes. The [starter foundation](../pattern/starter/payload/DIRECTOR.md),
+[learning contract](../pattern/starter/payload/LEARNING.md), and
+[validated state helper](../pattern/starter/payload/state.py) own the new path.
+The [plain-language guide](FLAT_STARTER.md) explains the progression. This is an
+implemented unpublished source candidate. Observed behavior, inventories, timing
+limits and remaining gates are separated in
+[validation notes](DESIGN_NOTES.md#flat-starter-and-bounded-learning--october-30-2026). This decision does not publish a
+release, update the current live installation or adopt another project. Revisit if
+compact recovery omits accepted scope, review fails to resume without lost evidence,
+new lessons never reach matching work, coordination still monopolizes conversation,
+or the smaller entrypoint weakens preservation or authority.
 
 ## Maintain this explanation
 

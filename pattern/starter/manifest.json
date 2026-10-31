@@ -1,0 +1,6 @@
+{
+  "format": "director-flat-starter",
+  "starter_version": 2,
+  "state_schema": 1,
+  "payload": ["START.md", "DIRECTOR.md", "WORKER.md", "LEARNING.md", "API.md", "state.py", ".gitignore"]
+}

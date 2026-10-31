@@ -664,3 +664,175 @@ isolation, reference reachability, independent action targets, nested project gu
 preservation and helper/state interfaces. Static/fixture results remain distinct
 from the actual-agent observations above; no wording-only or arbitrary-size test
 was added to manufacture behavioral confidence.
+
+
+## Flat starter and bounded learning — October 30, 2026
+
+The [R18 decision](RATIONALE.md#r18--start-flat-and-make-learning-an-explicit-bounded-loop)
+is implemented as a separate [starter 2 format](../pattern/starter/README.md).
+The legacy interface-1 engine and manifest remain a compatibility path. No live
+installation, mature stencil or existing tracker was converted by this work.
+The [plain-language walkthrough](FLAT_STARTER.md) distinguishes intended usage,
+mechanical operations and actual actor behavior.
+
+### Mechanical walkthrough and helper checks
+
+The exact two shell blocks under the guide's "Reproduce the candidate" heading
+were executed unchanged in one shell against the frozen-v3 candidate after a byte
+comparison. They planned/installed a disposable project, captured exact request
+and correction sources, accepted an already explicit scoped user rule, discovered
+its canonical selector and queried a matching and an unrelated task. Exit status
+was 0, stderr empty, and the final output was:
+
+```json
+{"task":"course-slides","matching_rules":1}
+{"task":"technical-report","matching_rules":0}
+```
+
+The whole mechanical script took **0.848369 seconds** in that local run. It runs no
+model, slide author, independent reviewer or scheduler. This is executable helper
+and documentation evidence, not an AI installation/adoption duration or lesson
+uptake measurement. The script remains reproducible from the public guide.
+
+The v3 integrated run passed **84 development tests in 8.029 seconds**: 20 starter
+and 64 legacy tests. Before integration, 19 focused tests passed against the prior
+candidate; the new path-overlap regression also passed separately. Review
+found two source issues and retained their earlier snapshots: external-file capture
+replay needed to fingerprint the actual pinned source/attachment bytes, and canonical
+selector discovery needed overlapping ancestor/descendant path scopes. The latter
+changes discovery only; actual `select` still uses the affected file path and exact
+task/audience scope. A guessed empty exact-string match cannot prove absence of an
+applicable rule. Two initial test-expectation errors were corrected with the original
+failed logs retained; these were not observed source defects. Three initial legacy
+guide-target assertions were updated for the new router/preserved-v1 guide split;
+their failed logs were retained. That repair changed tests, not legacy engine bytes.
+
+The final frozen-v3 inventory separates three sets:
+
+| Set | Files | Bytes |
+|---|---:|---:|
+| Manifest payload | 7 | 50,616 |
+| Planned managed files, including generated bridge and initial state | 9 | 51,539 |
+| Actual created files, including the technical installation receipt | 10 | 52,873 |
+
+Two final-v3 executable installs took **0.059292 seconds** and **0.072148 seconds**
+in their disposable fixtures. Declared foundation sets including the generated
+bridge total **6,292 bytes for Director** and **4,190 bytes for worker**. These are
+static required-file inventories and local program timings, not actual cold host
+startup, model usage or an AI adoption duration. Earlier frozen-v1 installs and
+inventories remain historical evidence rather than final-v3 measurements. Ordinary
+meeting-note preservation was exercised; no live project was overwritten.
+
+### Actual bounded actor observations
+
+| Exercise | Observed result and boundary |
+|---|---|
+| Plain worker baseline and flat Director → worker slide outcome | Both produced six HTML slides and incorporated midstream steering. Independent real Chrome rendering/navigation checks found six slides, changed closing/audience text, preserved facts, unchanged unaffected slide text and no JavaScript errors. This is an HTML-slide outcome, not native presentation software or a published artifact. |
+| Compact owner replacement | A fresh assigned Director recovered current obligations and pointers, rather than loading full history. Actual owner/handle recovery remained separate from stored status. |
+| Due learning review | With three incidents pending, the active owner actually dispatched a bounded reviewer without an initial instruction to run that review. The reviewer consumed the three-incident batch, durably saved output/proposals, and the owner accepted an exact scoped lesson. Review execution occurred through actual host work, not a file-triggered service. |
+| Later fresh-worker lesson uptake | The worker discovered nested customer scopes from a broader directory, selected one accepted customer rule and zero training rules before writing, and produced three-section client/training artifacts. Independent visible-content checks passed; customer-specific text did not leak into the training artifact. This demonstrates the observed exact scoped route, not unrestricted semantic search. |
+| Existing mature-project knowledge | A project-owned `AGENTS.md` task-time pointer reached `departments/experience/HEADER.md` and maintained ART, ENGINEERING and INDEPENDENT_TEST definitions. The same implementation worker made a narrow accent restoration; a separate test actor ran nine checks, followed by owner integration. Managed starter payload bytes stayed unchanged. This tested a chosen maintained layout, not automatic department creation. |
+
+The parent evaluator additionally inspected a rendered first slide and found it
+readable without visible clipping, and read the independent slide results. That
+bounded visual judgment is not a full human presentation review.
+
+Seven fresh explicitly assigned subjects exercised these routes, with existing
+actors reused for continuations. **Startup was not a blanket pass.** The initial
+candidate Director guessed two missing paths before using the API. Replacement
+and later-use actors first read the source repository's bridge despite their
+fixture assignments; the reviewer also attempted a missing fixture PATTERN before
+completing the flat reads. These deviations remain in the evidence. Ambient source
+instructions/current directory were present; attributing the mistakes specifically
+to that contamination is an inference, not an isolated causal result or native
+cold-start proof.
+
+The first review took about 39 seconds and ended before mature product-worker
+dispatch, so that cell did not demonstrate actual overlap with product execution.
+A separately authorized controlled probe reused the same owner, reviewer and
+implementation worker. After the reviewer had read an actual batch, it was held
+unfinished. The owner produced, byte-checked and accepted a foreground artifact;
+an independent check confirmed the exact artifact bytes while one review remained
+pending and its completion marker was absent. Only then was the reviewer released
+and the original batch saved after the intervening foreground writes. This proves
+the observed separation of in-flight work. The artificial hold proves neither
+simultaneous inference nor a natural response-time guarantee.
+
+All seven v3 fresh subjects and reused continuations returned and were evaluated.
+The original baseline slide phase used seven top-level calls and one actor; the
+original flat slide phase used 39 Director plus 20 worker calls, or 59 calls and
+two actors. The exact original slide-phase recorded token totals were 270,599 for
+baseline and 2,475,895 for flat, including cached input. The flat total ends before
+the implementation worker's mature-project continuation; later mature and overlap
+work is excluded. Of 59 flat calls, 22 were clear harness waits/polls; excluding
+those still leaves 37 calls versus six for baseline after its one wait. Utility
+passed, but substantial state/read/coordination overhead remained and the economic
+goal did not pass. These are not normalized per-review costs or dollar charges.
+
+### Narrow efficiency retry — frozen v4
+
+The v3 observations above remain intact. The authorized v4 retry changes only the
+Director and worker instruction files: milestone-batched state updates, exact
+supplied source/package paths, bundled result/check returns, and supported bounded
+event/message waits instead of marker-file polling. Routine per-step acknowledgment/
+progress exchanges are removed while source capture, revision, authority, independent
+review and supervision requirements remain. The helper, API and installer are
+unchanged; their prior 84-test evidence is reused. Targeted reference checks passed.
+
+Two fresh assigned subjects completed the same six-slide task and actual mid-work
+steering. Independent real Chrome Right/Left navigation, content/source comparison,
+rendering and JavaScript-error checks passed: six slides, no external assets,
+changed audience/closing, preserved facts and three unaffected slide texts. Both
+subjects returned and were evaluated, bringing the full experiment to nine fresh
+subjects. The first attempted missing PATTERN reads remain in both traces. The
+Director also recorded an incorrect midnight timestamp, then explicitly corrected
+it from the actual clock with revision history retained. No artifact regression
+was observed.
+
+| Slide phase | Actors | Top-level calls | Calls excluding clear harness waits | Recorded aggregate tokens |
+|---|---:|---:|---:|---:|
+| Plain baseline | 1 | 7 | 6 | 270,599 |
+| Flat v3 | 2 | 59 | 37 | 2,475,895 |
+| Flat v4 retry | 2 | 30 | 26 | 1,242,879 |
+
+V4 comprises 19 Director and 11 worker calls: seven input/API/discovery groups,
+five state groups, seven artifact build/evaluation calls, six dispatch/messages,
+four supported mailbox waits and one clock call. Two waits were ordinary completion
+waits and two supported the controlled steering handshake; there were no marker
+polls or sleeps. State writes fell from seven to five, omitting acknowledgment and
+draft-progress writes. V4 tokens comprise 1,231,274 input (including 1,180,800 cached)
+and 11,605 output. Cached input is included in the aggregate, not charged at an
+assumed fresh-input price.
+
+This observed retry used fewer calls/tokens than v3, while remaining materially
+above the plain baseline. The guidance, exact-path handoff and harness changed
+together; it is not a clean causal A/B experiment or an economic win over plain
+execution. Dollar cost remains unknown. The owner must judge whether durable
+recovery, delegated ownership and scoped learning justify the observed overhead.
+
+The v4 fixture contains seven payload files (**51,524 bytes**), nine planned managed
+files including generated bridge/state (**52,447 bytes**), and ten actually created
+files including receipt (**53,771 bytes**). Its executable install took **0.061461
+seconds**. Declared foundation sets with generated bridge are **6,896 Director
+bytes** and **4,494 worker bytes**. These retain the same static-inventory/local-program
+limits as v3; they are not native cold-start or AI adoption timings. No further trial
+or blanket startup-compliance claim follows from the retry.
+
+### Limits that remain separate
+
+These are explicitly assigned actor routes and small disposable fixtures. They do
+not establish native unassigned-chat discovery, general reliability, consequential
+release execution, periodic supervision cadence, offline learning or a daemon.
+The default initiator operates only during active supported execution; an actual
+periodic Architect needs separately authorized host scheduling and execution.
+Incremental review does not guarantee global or cross-batch trend detection. A
+recurring issue split across already-reviewed batches can require a targeted
+historical investigation; durable past evidence is not automatically retained
+reviewer context. Three pending incidents need not concern the same correction.
+The observed scoped learning loop is not comprehensive self-healing.
+Role instructions and helper data do not authenticate caller permissions. Current
+runtime execution checks are on macOS; the helper requires POSIX `fcntl`, with
+Windows locking unimplemented. Bounded model-facing reads do not make internal
+state parsing constant-cost. Model tokens/cost and independently effective settings
+must remain unknown unless actual evidence supplies them; local file bytes and
+helper wall time are not substitutes.
