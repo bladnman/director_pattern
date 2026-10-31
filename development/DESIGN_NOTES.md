@@ -840,7 +840,7 @@ helper wall time are not substitutes.
 
 ## Behavior-preservation correction — October 31, 2026
 
-**Candidate, actor/purpose evaluation pending.** The [design-obligation matrix](BEHAVIOR_PARITY.md)
+**Scoped source and target gates accepted; remaining limits retained.** The [design-obligation matrix](BEHAVIOR_PARITY.md)
 accounts for the documented reasons, not simply the availability of old files.
 Earlier 84-test/assigned-slide/learning evidence above remains historical starter2
 utility evidence and did not catch record-parity losses. Reproduced source cases:
@@ -952,18 +952,19 @@ No blind91-test rerun occurred; unchanged tests retain their stated earlier scop
 Sage's independent wording review found START now preserves aggregate/outer-wrapper
 bounds, in-read extents/ranges, contiguous EOF, recovery/stop, non-text substitutes
 and no per-read verification ritual. It is static preservation, not a new faulted
-host trial. WORKER's authorized-descendant route still lacks DIRECTOR's explicit
-pre-staff OPERATIONS link unless supplied by the actual project/assignment. That
-remaining reachability is partial and held for review, not an observed actor failure
-or another unreviewed core patch.
+host trial. At validation-v3, WORKER's authorized-descendant route lacked DIRECTOR's
+explicit pre-staff OPERATIONS link unless supplied by the actual project/assignment.
+That reachability was partial and held for review at that checkpoint, not an
+observed actor failure. Validation-v4's repair and release evidence follow below.
 
-Remaining acceptance claims stay open: native cold startup, elapsed five-minute
+At that checkpoint, acceptance claims remained open: native cold startup, elapsed five-minute
 cadence, adaptive effective selection, actual available/notify and pinned safe-update
 application, paid-review initiation on this new backend, and organic department
 need/implementation. The [seven-case matrix](BEHAVIOR_PARITY.md) separates those
 obligations from the useful observed flat execution/learning behavior. The evaluated
-correction is unpublished/unpropagated and held for the owner's discussion; the
-scoped repair pass is not approval of a complete replacement.
+correction was then unpublished/unpropagated and held for the owner's discussion.
+The subsequent scoped release and publication checkpoint below supersedes that
+status without turning a repair pass into a universal replacement guarantee.
 
 No broad cost win, daemon, real human identity, uninterrupted execution, native
 unassigned cold startup, arbitrary semantic-history search or automatic migration
@@ -1019,3 +1020,24 @@ not universal native startup, adaptive-cost optimality, actual foreign/human pro
 continuous background execution, autonomous updates or organic growth. Source
 publication, release tags/site hosting and each target's accepted installation
 remain separate facts.
+
+
+### Final documentation-only closure checkpoint
+
+The owner accepted all four bounded publication/integration gates and independently
+verified normal remote pushes: source `b237023cfb2f23fadb70d5d4ec7d7ce063bd8b43`,
+Agentic Runway `9139612`, Understudy `0861794`, and My Work/templates `53cb4fa`.
+Compatible adapters' typed-proposal guards were included in their accepted checks;
+existing canonical backends, data, roles and privacy/approval policy remain distinct
+from replaceable instructions. Source-local actual installed_source and real metadata
+resolved the published source/pattern tree as current; native validation remained at 33.
+
+This closure changes documentation only. The accepted source payload stays pinned
+to `b237023cfb2f23fadb70d5d4ec7d7ce063bd8b43`, pattern tree
+`f013825b404cf9efb3bdfe9506c25e490ac59d4e`, with exact v4 manifest
+`d08f339be0094cac7fd0b81a4057bfaa6aed255cac5a318e5e7229696e68b124`.
+No new tests or code changes are implied by a later documentation commit; the full run of 92 tests
+ and actual scoped fixtures above retain their exact coverage. The strict timing
+miss, inherited-context/native-startup limits, unknown effective-model/cost optimum,
+manual-update scope and organic-growth limits remain unaltered. No tag or site
+deployment was part of this source/installation closure.

@@ -27,7 +27,7 @@ The guide now explains the starter 3 correction candidate: established canonical
 request bundles, typed learning notes and restored operational duties. Earlier
 trial evidence stays dated and separate.
 
-The evidence page includes a rendered [seven-case overview](design/boards/director-pattern-explainer/evidence.html#case-overview) and a separate [source-readiness checklist](design/boards/director-pattern-explainer/evidence.html#release-readiness). The forensic findings stay version-bound history; later confidence/target/publication gates are recorded separately. Scoped source confidence gates are accepted. Verified source publication and the selected targets' published-baseline acceptance remain pending; no release tag or perfect-parity claim follows.
+The evidence page includes a rendered [seven-case overview](design/boards/director-pattern-explainer/evidence.html#case-overview) and a separate [source-readiness checklist](design/boards/director-pattern-explainer/evidence.html#release-readiness). The forensic findings stay version-bound history; later confidence/target/publication gates are recorded separately. The bounded source patch and selected published baselines are accepted. Core source `b237023cfb2f23fadb70d5d4ec7d7ce063bd8b43` and all three selected target commits were normally pushed and remote-verified; the readiness page records those exact commits. Starter 3 is a published source candidate, not a new formal release tag or a perfect-parity claim.
 
 The [design-obligation parity matrix](development/BEHAVIOR_PARITY.md) and
 [validation notes](development/DESIGN_NOTES.md#behavior-preservation-correction--october31-2026)

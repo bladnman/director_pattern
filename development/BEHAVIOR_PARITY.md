@@ -1,6 +1,6 @@
 # Preserving the design obligations in the flat foundation
 
-Correction review · October31,2026 · **validated source candidate, with declared limits**.
+Correction review · October31,2026 · **scoped source and target gates accepted, with declared limits**.
 Flat orchestration removes compulsory actors, not the reasons the previous design
 existed. Reusing code proves neither good assignments nor actual host behavior.
 This matrix accounts for every legacy manifest capability and its documented
@@ -195,3 +195,29 @@ limit. No rerun was used to improve the score. Inherited-context limitations, na
 cold startup, effective model optimality, automatic public-update adoption and
 organic growth limits remain explicit. No release tag or site deployment follows
 from publishing this source.
+
+
+### Publication and installation closure
+
+The accountable owner accepted the bounded source and three compatible-project
+integration gates after independent checks. Normal pushes were verified at these
+revisions; no release tag or site deployment was created:
+
+| Scope | Verified revision |
+|---|---|
+| Director Pattern source and source-local published payload | `b237023cfb2f23fadb70d5d4ec7d7ce063bd8b43` |
+| Agentic Runway integration | `9139612` |
+| Understudy integration | `0861794` |
+| My Work and template integration | `53cb4fa` |
+
+Compatible canonical-note adapters retained the typed knowledge/routing/structure
+separation. Existing project records, native trackers, roles, private choices and
+approval boundaries were preserved and checked separately from publication.
+The accepted pattern tree is `f013825b404cf9efb3bdfe9506c25e490ac59d4e`; the reviewed
+v4 payload manifest remains `d08f339be0094cac7fd0b81a4057bfaa6aed255cac5a318e5e7229696e68b124`.
+A documentation-only repository revision does not change that accepted payload pin.
+
+This closes the scoped implementation/publication gates, not every possible host
+or project behavior. The strict SitRep timing miss and all inherited-context,
+native-startup, autonomous-update, effective-model/cost and organic-growth limits
+above remain. Historical first-refactor findings and failed snapshots are unchanged.
