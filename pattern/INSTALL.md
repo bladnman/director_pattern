@@ -1,7 +1,7 @@
 # Select a Director Pattern installation
 
 For a **new project**, including one with ordinary meeting notes/assets but no
-conflicting startup/tracker, follow [starter 2](starter/README.md). Its stdlib
+conflicting startup/tracker, follow [starter 3](starter/README.md). Its stdlib
 installer plans, measures, installs and safely rolls back the separately manifested
 flat starter. It performs no network/dependency-manager operation. Current local
 helper requires POSIX `fcntl`; unsupported hosts fail with guidance.

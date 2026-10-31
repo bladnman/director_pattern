@@ -1,128 +1,82 @@
-# Starter 2 local API — action reference
+# Runtime API — canonical request bundles, starter 3
 
-Use `python3 .director/state.py ACTION --data-file FILE` or `--data-file -` for JSON
-stdin. `python3 .director/state.py help` prints this reference without reading state.
-No dependency install, shell wrapper, Recorder or role catalog is needed.
-Success prints JSON; failure prints `error` and exits 2. Mutations require a unique
-`op_id` and current global `expected_revision`. Retry the identical payload after
-an uncertain outcome: the same op returns its saved receipt; changed payload with
-that op conflicts. Capture pins source/attachment bytes once and includes their
-digests in retry identity: changed external file bytes conflict even with the same
-JSON paths, and the bytes fingerprinted are the bytes persisted. Read `status` if another operation won, then deliberately replan.
-There is one nonblocking local writer lock; `store busy` is retryable. Roles/owners
-are supplied facts from trusted callers, not authenticated permissions.
+Load this action guide before relevant state I/O, not at empty startup. One canonical
+store, no Recorder prerequisite. The owner supplies decisions; helpers validate
+structure, revisions and recorded evidence, not caller permissions, human identity,
+real execution or truth. Existing trackers keep their actual verified adapter.
+Never initialize another store or migrate one merely to use these commands.
 
-All read actions accept `limit` (default 5), `max_bytes` (default 12000), `offset`
-and optional `at_revision` from the prior page. Complete all relevant pages using
-`next_offset`; `omitted` never claims an unread page was loaded. Too-small budgets
-fail visibly instead of truncating an instruction. `review-batch` starts at the
-review cursor and forbids nonzero offsets: save one contiguous batch, then fetch
-the next. Readonly calls do not advance revisions/cursors. Internal store parsing
-is proportional to state-file size; no model-history loading is implied.
+The fresh installation has config schema 1, request-store schema 2 and exact format
+`director-request-bundles`. The default backend is the established
+bundle backend plus the reviewed stale-lock/configuration fence. The earlier experimental starter 2 single-JSON format is unsupported
+and incompatible; preserve it for separate explicit recovery, never overwrite it.
 
-`proposals {}` pages undecided proposals with full claim/scope/basis and review IDs;
-`proposal_id` selects one, `include_decided:true` includes retained decisions.
-`reviews {}` pages saved summary/reviewer/spend/batch/proposal IDs; `review_id` selects
-one. `incidents {"review_id":"V-returned-id"}` pages its exact supporting evidence,
-including already-reviewed incidents. `deferrals {}` pages saved deferral reasons.
-These task/recovery queries let a fresh owner discover durable outputs without
-reading state.json or loading full history.
+## Current views and exact operations
 
-`selectors {}` pages only current knowledge IDs and exact task/path/audience scopes,
-never claims/history; optional `path` discovers overlapping ancestor OR descendant
-paths by segments (`.` means projectwide discovery). Siblings do not overlap.
-Use it at task time when canonical vocabulary is not retained or supplied. Map
-natural requests (for example presentations) to relevant existing tags (for example
-customer-deck), then `select` those exact tags and pass them to workers. A guessed
-exact-string miss is not proof that no semantically applicable rule exists. After
-discovery query `select` for actual affected file(s); discovery does not broaden a
-rule's execution applicability.
-
-`status {}` returns bounded current unfinished requests and counts, review policy,
-pending and due. `pending {}` returns bounded incident identities/scopes, not their
-full history. `request {"request_id":"deck"}` explicitly pages that request's
-history for task/recovery work. Neither startup nor simple discussion needs it.
-`select {"task":"customer-deck","path":"slides/demo","audience":"customer"}`
-returns only current accepted knowledge matching all three dimensions, with exact
-scope/provenance. `*` is an explicitly approved wildcard; path prefixes match
-segments. Training does not match customer-deck/customer unless explicitly scoped.
-
-Create a request and preserve exact UTF-8 source (no newline rewriting):
-
-```json
-{"op_id":"capture-1","expected_revision":0,"text":"Make the customer deck.\n","request":{"id":"deck","summary":"Customer deck","scope":{"tasks":["customer-deck"],"paths":["slides"],"audiences":["customer"]},"acceptance":"Owner evaluates usable slides","owner":"Director"}}
+```sh
+python3 .director/requests.py --help
+python3 .director/requests.py status --limit 5 --max-bytes 12000
+python3 .director/requests.py current REQ-... --max-bytes 12000
 ```
 
-`capture` accepts exactly `text` OR `source_file` (UTF-8 bytes), optional
-`attachments:[{"path":"...","name":"..."}]`, and either a new `request` above or
-`request_id` + `expected_request_revision` to add immutable steering. Receipt gives
-`source_id`, request/global revisions. Attachments are copied and hashed. Capture validates all fields/revisions before file writes. It
-creates durable source files before committing state: an interrupted valid attempt
-can leave an unreferenced immutable source directory; an identical retry reuses it.
-It never silently rewrites referenced sources. Retain orphan evidence for inspection.
+`status` pages open id/title/state/revision/owner; `current` omits historical events.
+Both return snapshot/total/next_offset/scan disclosure; continue with `--offset`
+and the same `--at-snapshot`. A changed snapshot rejects; restart the page set.
+An item too large for the bound fails visibly; raise within 32000 bytes or use the
+selected full record through the deferred tool route. These are bounded returned
+views, not constant disk work: source integrity and full histories validate inside.
+Actual handles, latest steering, unresolved gates and source words must be read for
+the selected task, not inferred from an open-count summary. State is not liveness.
 
-Update with source/revision awareness (`changes` is optional for observations):
+[TOOLING.md](TOOLING.md) is the complete CLI/event schema; [RECORDS.md](RECORDS.md)
+owns seven-state lifecycle, sources, typed relationships, handoffs and recovery.
+Use exact sources before interpretation and retain immutable UTF-8/attachment bytes.
+One source can serve independent outcomes. Capture each addendum before dependent
+work; reconcile the same actual worker, requeue/revise/reopen as required, amend,
+replan the full scope/human gate, then bind the same actually observed handle.
+An accepted outcome cannot silently absorb new work and remain done. Initial and
+revised plans/owners/acceptance remain in replayable history.
 
-```json
-{"op_id":"observe-1","expected_revision":1,"request_id":"deck","expected_request_revision":1,"source_id":"S-from-capture","changes":{"handles":["actual-host-handle"],"next_action":"Evaluate return"},"observation":{"handle":"actual-host-handle","status":"returned","observed_at":"2026-10-30T12:00:00Z","evidence":"slides/demo rendered"}}
-```
+Generate each operation's fresh UUID event ID once, reuse it only for identical
+retry, and use returned expected request revisions. Unknown outcomes, changed
+payload reuse, stale writes, corrupted original sources and unfinished transaction
+intent fail visibly. Inspect actual receipt/revision and explicit `recover` before
+retrying uncertain writes; never raw-move folders or hand-merge record JSON.
+Original assets/evidence attachments relocate with the bundle and keep hashes.
 
-`update`, `observe`, `evaluate` share this shape. Changes allow scope, acceptance,
-owner, status (`active`, `review`, `blocked`, `accepted`, `canceled`), next_action,
-handles and pending_approvals. `evaluation` may add a bounded judgment string.
-Each operation retains its source/changes/evaluation in request history and bumps
-the request revision. An observation needs all four shown fields. Actual receipt
-data is not liveness or authenticated proof; the caller owns evaluation/approval.
-Setting `status:accepted` requires the `evaluate` action, a nonempty evaluation
-and no unresolved pending_approvals; ordinary update cannot bypass these checks.
+Only review can become done, after actual submit/evaluation and required human,
+local dependency and acknowledged external-result gates. A canceled dependency is
+not success; grouping/shared source is not a blocking dependency. The helper checks
+declared human evidence, not who said it. User approval cannot be forged by filling
+a field. Required independent testing and actual release authority still apply.
 
-Attach a meaningful `incident` object to the ordinary observation/evaluation above,
-or call `incident` with `{op_id,expected_revision,incident:...}`:
+## Parent and requirement traceability
 
-```json
-{"source_id":"S-from-capture","request_id":"deck","request_revision":1,"scope":{"tasks":["customer-deck"],"paths":["slides"],"audiences":["customer"]},"evidence":"Customer review found dense slides","correction":"Consider sparse participant-facing slides","hypothesis":true}
-```
+Before decomposition retain a compact requirement trace in the existing assignment
+artifact/request note: source project/request IDs (or exact source for a new local
+outcome), stable requirement IDs, each obligation/acceptance condition, current
+owner, actual handle/observation, evidence or unresolved reason, and return route.
+Each delegated assignment and return carries the relevant parent project/request
+and requirement IDs plus its own local IDs. Update this touched trace at meaningful
+steering/evaluation checkpoints so restart can reconstruct obligation → owner →
+result/evidence and remaining approval, without loading all historical text.
 
-Incident records are immutable, sequenced, capped at 6000 encoded bytes; evidence/
-correction strings at 2000 each. Link larger evidence rather than loading it all.
-Sources must belong to the request; recorded request revisions must exist.
-Receipts expose review_pending/count/due and the policy. Default threshold three
-is a spend-batching policy, not a rule detector. At meaningful closure the owner
-dispatches at most one bounded existing worker if due and capacity permits.
-`review-defer {op_id,expected_revision,owner,reason}` records real inability without
-consuming evidence. `explicit_review:true` on status/pending bypasses the count gate
-for a direct request; no incidents still means no review. Nothing schedules a run.
+Use the canonical record's owner/acceptance, actual dispatch receipt, notes and
+artifact locators; no new top-level schema or mirrored task tree. Shared source or
+parent/grouping links do not impose required-success edges. Record a real required
+dependency only when acceptance needs it; detect cycles. An external handoff needs
+actual acknowledgment and return evidence, while the source keeps its own final
+acceptance/unfinished commitment. A sent message never proves transfer or liveness.
 
-`review-batch {}` returns bounded incident text and `batch:{cursor,ids,digest}`.
-Give that exact batch to a bounded reviewer (WORKER + LEARNING), not full history.
-Save its actual output and separately observed overhead:
+## Learning and operations
 
-```json
-{"op_id":"review-1","expected_revision":4,"batch":{"cursor":0,"ids":[1,2,3],"digest":"exact returned digest"},"review":{"summary":"Three customer-slide incidents support a scoped proposal","reviewer":"actual-host-handle-or-unknown","spend":{"seconds":"unknown","tokens":"unknown","cost":"unknown"},"proposals":[{"kind":"knowledge","claim":"Keep customer deck slides sparse","scope":{"tasks":["customer-deck"],"paths":["slides"],"audiences":["customer"]},"basis":[1,2,3],"hypothesis":false}]}}
-```
+[LEARNING.md](LEARNING.md) specifies bounded typed canonical notes and real review
+initiation/recovery. [OPERATIONS.md](OPERATIONS.md) separates role/display identity,
+installation evidence, staffing/effort/verification and role upkeep.
+[UPDATES.md](UPDATES.md) restores active-session daily discovery, project preferences
+and actual pinned safe updates. These action documents add no startup actors.
 
-`review-save` durably stores output/proposals and advances the cursor in the SAME
-atomic commit. A no-proposal output still needs a reason in summary. Batch mismatch,
-skipped evidence or stale cursor fails without advancement. Later incidents stay
-pending. Limits: at most 100 incidents per selected batch, 20 proposals, 32000 bytes
-review output. Defaults are smaller. Output retention is not implementation.
-
-`decide {op_id,expected_revision,proposal_id,decision:"accept"|"reject"|"retire",owner,reason}`
-retains an explicit owner decision. Accept copies the proposal's exact scope; no
-claim/scope override is accepted. Hypotheses cannot become rules. Accepted routing/
-structure proposals require separate authorized implementation and create no role.
-Retire applies to current accepted proposal knowledge and retains its prior history.
-
-For an already explicit user instruction, apply it now within authority. Durable
-selection needs no reviewer or threshold:
-`accept-rule {op_id,expected_revision,request_id,expected_request_revision,source_id,claim,scope,owner,reason}`.
-The source/revision and explicit supplied-decision reason remain provenance. This
-path trusts the caller; it does not prove a user spoke or grant permissions.
-`retire-knowledge {op_id,expected_revision,knowledge_id,request_id,expected_request_revision,source_id,owner,reason}`
-retires either an explicit K-* rule or proposal-backed knowledge with a retained
-source-aware decision. Supersede by retiring the old rule and accepting the new
-explicit scoped rule/proposal; query matches exclude retired entries. Revisions
-make concurrent changes fail visibly; old rules and decisions remain evidence.
-
-Mutating receipts expose prepare_seconds (precommit, excluding atomic write) and state_bytes; these are local helper
-overhead, not model cost. Review workers report their actual spend or unknowns.
+The bundled backend differs from legacy only by post-lock inode/configuration fences:
+a waiter opened before rollback/reinstall must reject before touching the new store.
+The same inode fence protects init. Reopen the current store after such rejection;
+never retry through an old loaded instance. These checks add no schema or migration.

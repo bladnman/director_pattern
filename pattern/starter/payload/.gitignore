@@ -1,6 +1,12 @@
-state.json
-sources/
-.lock
-.write-*
-install.json
+# Durable configuration, sources, requests, roles and receipts are Git-eligible.
+# Preserve project opt-outs; only machine-local scratch/backups stay local by default.
+.requests.lock
+.request-txn
+.request-stage-*
+.request-complete-*
+.learning-notes.lock
+.update-check.json
+.update-check.lock
+.update-check-*.tmp
+backups/
 __pycache__/

@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated October 30, 2026. This repository authors a
+Living design rationale · updated October31,2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -400,6 +400,22 @@ revise the bounded implementation, not the accepted independent-outcome requirem
 
 ## R7 — Keep the reasons durable, current, and revisable
 
+**October31 maintainer guard:** Before accepting a refactor, replacement default/
+onboarding route or recommended alternative package, read each affected
+owning decision from the prior recommended path, even if its files remain unchanged.
+Account for transitively unreachable behavior/triggers and document each purpose/
+failure prevented, the actual active
+instruction/runtime route, and a concrete regression oracle. Preserve the mechanism,
+verify a replacement, or explicitly review a dated supersession/tradeoff; unknown
+or omitted obligations block acceptance. Independent review examines this
+[design-obligation disposition](BEHAVIOR_PARITY.md), not merely source diffs or a
+green test total. This follows the observed failure to carry forward documented
+update/continuity/record obligations during the first flat implementation. It adds
+no universal startup read for target actors; the maintainer loads it at the actual
+refactor trigger. Do not invent a historical reason that the owning source never
+stated. The matrix's dated review-accounting separates observable coverage loss
+from the process interpretation explaining why a new recommended path escaped it. Preserve failed work and dated corrections as evidence.
+
 **Requirement:** Preserve the reasons behind formative decisions so future work
 can evaluate a change without repeatedly rediscovering earlier tradeoffs.
 **Current practice:** This is the canonical public explanation of WHY; contracts
@@ -430,6 +446,10 @@ installation payload. Raw conversations and internal references remain private.
 copying of authoring material, or unintended publication of private evidence.
 
 ## R9 — Make attention and active supervision visible without decoration
+
+**October31 starter correction:** R18 restores checked identity, sparse attention
+markers and periodic labeled SitReps; a direct owner check replaces the compulsory
+setup actor without changing the 🎬 operational-check meaning. Earlier checked-badge reasoning remains below.
 
 **Problem:** A real question or user-only action can disappear among progress
 updates. A polished update can also hide that supervision has stopped. A director
@@ -927,6 +947,10 @@ correction establishes universal host compliance.
 
 ## R11 — Update from a pinned public source without replacing project state
 
+**October31 starter correction:** These preservation/discovery obligations apply to
+the flat foundation too, through its deferred UPDATES guide and reused deterministic
+checker. Fewer compulsory actors do not waive active-session checks or preferences.
+
 **Accepted decision, October 17:** Published GitHub `main` is the upstream source of
 truth. Explicit agent-driven updates resolve one exact reviewed SHA, back up managed
 files and startup wiring, and compare installed baseline/current/incoming bytes.
@@ -1189,6 +1213,11 @@ structure only. No live fresh-session selection or explicit-invocation trial is
 claimed; running chats can retain earlier loaded instructions.
 
 ## R14 — Commit the installation with the project
+
+**October31 restoration:** Starter2 changed the fresh default to ignored durable
+state without superseding this continuity decision. Starter3 restores Git-eligible
+config/requests/sources/receipts and once-only public/unknown-remote awareness;
+existing privacy opt-outs remain untouched. No automatic commit/push is implied.
 
 **Problem:** The installed `.director/` holds the method contracts next to project
 context, the request ledger, exact user sources, and receipts. The install guide
@@ -1476,6 +1505,53 @@ reachability; the next actual selected use must establish uptake.
 
 ## R18 — Start flat and make learning an explicit bounded loop
 
+**Correction, October31 — preserve the reasons as well as fewer actors:** The first
+starter2 implementation incorrectly treated record mechanics and operational duties
+as replaceable overhead. Reproduced regressions erased original owner/acceptance
+on update, retained accepted state after new work and missed corruption of earlier
+source. Its five-state JSON store omitted established dependency/handoff/local-file
+and journal semantics. This was not an authorized change to R3–R6/R14/R17.
+Starter3 restores the established request-bundle backend behind flat roles, plus
+direct validated owner I/O and canonical-note learning; experimental2 remains
+unsupported history with no automatic migration. More deferred code on disk is an
+acceptable cost for preserving request-local custody, exact source/UUID identities,
+seven-state folder lifecycle and recoverable evidence. Code bytes are not startup
+model reads. New actor instructions must actually trigger meaningful decomposition,
+full acceptance/owner/human gates, legal steering and parent/requirement tracing;
+identical backend bytes alone do not establish those results.
+
+Restore R9/R17 visible identity and labeled periodic reports, R10/R15 current
+capability/effort/verification and role discovery/upkeep, R11 real active-session
+24h failure-throttled discovery/preferences/pinned safe update, and R14 Git-eligible
+durable state with once-only public/unknown-remote awareness. Preserve every
+existing project's explicit privacy choice; eligibility is not a commit/push.
+No pool, mandatory Recorder/manager/setup actor or startup catalog returns.
+**Preserved checked-marker meaning:** 🎬 is used only after the Project Director
+evaluates a light direct current-conversation installation/role check. Before that
+it acknowledges the unverified role without a badge. A role-only marker was
+considered, not accepted as the default. No mandatory checker/Recorder returns;
+unknown native-host behavior/effective settings remain distinct. Sparse question/
+user-action meaning remains.
+Touched current guide/role upkeep is independent of the learning review threshold.
+
+A later intent-by-intent review also caught a regression in the first corrected
+canonical-note layer: removing proposal types let accepted routing/structure text
+enter task knowledge. The earlier prototype distinguished those kinds, but its
+specific exclusion test was lost during test migration. The repaired layer requires
+typed proposals, selects only accepted knowledge/explicit rules, preserves unknown
+legacy notes as unclassified history, and reports structural implementation as
+pending work rather than completed knowledge. Retirement clears current work flags
+without rewriting the original decision. A large green test count had not proved
+this untested obligation; independent purpose-case review supplied the missing oracle.
+
+The [design-obligation matrix](BEHAVIOR_PARITY.md) maps documented original reasons,
+flat routes, intentional differences, regression oracles and remaining limits for
+the whole legacy manifest. This is implemented correction work under evaluation,
+not full parity or adoption proved by CLI tests. Exact sources, failed experiments
+and earlier reasoning remain; [validation](DESIGN_NOTES.md#behavior-preservation-correction--october-31-2026)
+separates code fixtures, assigned actor traces and unproved native cold behavior.
+
+
 **Decided October 30, 2026:** A new starter has one Project Director that stays in
 conversation and retains the complete outcome, with bounded workers for execution
 and independent review. An additional Director is a choice for sustained detailed
@@ -1590,9 +1666,10 @@ integration, even though the fresh-folder starter is smaller.
 **Contracts and status:** The [package entrypoint](../pattern/README.md) owns the
 new-install versus existing-project routes. The [starter foundation](../pattern/starter/payload/DIRECTOR.md),
 [learning contract](../pattern/starter/payload/LEARNING.md), and
-[validated state helper](../pattern/starter/payload/state.py) own the new path.
+[current request-bundle backend](../pattern/starter/payload/request_store.py) own the new path.
 The [plain-language guide](FLAT_STARTER.md) explains the progression. This is an
-implemented unpublished source candidate. Observed behavior, inventories, timing
+implemented unreleased source candidate. Publishing its source on main is separate
+from a release tag or target adoption. Observed behavior, inventories, timing
 limits and remaining gates are separated in
 [validation notes](DESIGN_NOTES.md#flat-starter-and-bounded-learning--october-30-2026). This decision does not publish a
 release, update the current live installation or adopt another project. Revisit if

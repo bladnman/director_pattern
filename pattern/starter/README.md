@@ -1,113 +1,125 @@
-# Flat Director starter 2 — new projects
+# Flat Director starter 3 — preserved records, fewer compulsory actors
 
-This candidate starts with one Director foundation and bounded workers. There is
-no default manager, Recorder, identity pool, setup actor or review actor. It is a
-separate format from the legacy v1 engine (the full repository keeps `pattern/README-v1.md`); installing it never
-overwrites or migrates that engine, its tracker, project policy or mature stencils.
-This subtree is self-contained for transport; none of its source guides is startup.
+One Project Director stays in conversation, delegates useful bounded work and
+retains whole delivery. No mandatory manager, Recorder, identity-pool, setup-check
+or learning actor. Flat orchestration does not remove exact source/record/lifecycle,
+verification, update, supervision or project-authority obligations.
 
-Use Python 3.10+ on a POSIX host with standard-library `fcntl` (macOS/Linux).
-The current checks run on macOS; Windows locking is not implemented and unsupported
-hosts receive an actionable error. Role instructions remain host-neutral. No network, dependency manager,
-service or scheduler is used:
+**Starter 3 is the current source correction candidate**, not a release tag or an
+installation in other projects. It restores the established request-bundle backend
+rather than extend the flawed experimental starter-2 state.json format. Read the
+[unsupported-2 notice](unsupported-v2.md) before recovering such an installation.
+Earlier v3/v4 *trial snapshots* tested starter 2; their names are not starter version3
+or proof of this correction. Existing mature trackers remain canonical and need
+reviewed instruction/adapter integration, not a fresh installer or second ledger.
+The [design-obligation matrix](https://github.com/bladnman/director_pattern/blob/main/development/BEHAVIOR_PARITY.md) explains the
+old reasons, revised routes, evidence and remaining verification limits.
 
-```sh
-python3 pattern/starter/install.py plan --target /path/to/new-project
-python3 pattern/starter/install.py install --target /path/to/new-project
-```
+## Install beside ordinary notes and assets
 
-The project may already have ordinary meeting notes/assets; these are preserved.
-Existing `.director`, `.producer`, `.team`, `.program`, `requests`, AGENTS or CLAUDE
-startup need reviewed integration and cause a no-write refusal. This is deliberate
-preservation, not automatic migration. Existing unrelated files are never copied
-into the payload. Identical reinstall is a no-op preserving state and optional
-role files; changed instructions/package cause a visible refusal, not overwrite.
-
-The manifest selects seven static files under `.director/`: START, DIRECTOR,
-WORKER, LEARNING, deferred API, the stdlib state helper and privacy ignore rules.
-Installer adds a thin explicit-delegation AGENTS bridge, empty state and a technical
-install receipt. Plan reports exact per-file hashes/bytes and Director/worker
-startup bytes. The initial project identity is deterministically derived from the
-installation root; copied installed state retains that identity, so a new project
-uses a fresh install rather than cloning initialized state. Runtime sources/state/
-receipt stay ignored by default; decide privacy before publishing exact inputs.
-
-Rollback only removes unchanged owned installation bytes:
+Python3.10+ on POSIX with stdlib `fcntl` (macOS/Linux); current executed checks are
+macOS. Windows runtime/locking is unsupported and refuses with an actionable error.
+No package manager, network, service, daemon or scheduler is installed. Source and
+installer guides are not startup; only the selected manifest payload is installed.
 
 ```sh
-python3 pattern/starter/install.py rollback --receipt /path/to/new-project/.director/install.json
+python3 pattern/starter/install.py plan --target /path/to/project
+python3 pattern/starter/install.py install --target /path/to/project
 ```
 
-It preserves ordinary notes/assets and refuses after changed state, instructions or
-new files in the managed area. Preserve/reconcile those before any removal. It
-does not stop actors or refresh already running chats. This is a reversible file
-operation, not a host-enforced sandbox, adoption guarantee or background runtime.
+Ordinary files survive. Existing `.director`, `.producer`, `.program`, `.team`,
+`requests`, AGENTS or CLAUDE conflict causes a no-write refusal. Repeat identical
+install is a no-op preserving records, optional roles and policy; changed package
+or local instruction drift refuses. No starter-2/legacy-store migration is supplied.
+The installer stages/verifies all selected bytes, creates config schema1/store2
+`director-request-bundles`, validates its empty state and writes `.director/install.json`.
+That exact technical receipt records managed hashes/source evidence and unrun native
+startup/acceptance separately. A fresh UUID project identity is allocated once at actual install, independently of
+the target path. A deterministic plan leaves it unallocated (config hash null).
+Cloning/moving initialized work preserves its identity; never copy it as a template
+for a different project. UUID event IDs support distinct cross-machine operations.
 
-## Ordinary use
+The manifest includes flat foundations, deferred operational/record/learning guides,
+the established backend, thin CLI, canonical-note learning and daily discovery.
+Code on disk is not startup model context. `plan` reports exact per-file, total and
+Director/worker foundation bytes. Existing privacy choices are preserved. Fresh
+config/request records/exact sources/receipts are Git-eligible by default so a clone
+can recover the same work. The owner warns once for a public/unknown remote and
+records actual delivery; exact pushed messages remain readable after deletion.
+Existing privacy opt-outs/parent ignore rules remain unchanged; Git eligibility
+is not an automatic commit or push.
 
-The bridge asks for START and the exact selected role package in complete bounded
-reads, without a bridge/index/engine dependency ceremony. An unassigned conversation
-loads the small Director foundation; assigned workers load only their package and
-applicable guards. New task instructions and matching accepted knowledge load
-before action, with unchanged retained instructions reused. Discussion stays direct.
-Existing independent review, release, spending and access gates remain binding.
-
-An explicitly assigned Director uses the same foundation plus a bounded overlay
-only when meaningful outcome coordination needs it. Role/department knowledge is
-project-defined; instruction composition never merges required independent actors.
-The owner retains whole delivery, steering, evaluation and pending approvals.
-Direct narrow validated state operations are Director duties. An existing tracker
-remains canonical; the helper is not a second-ledger or migration license.
-
-Discover the deferred exact runtime JSON API without reading implementation:
+Local Git provenance records full checkout/published-base SHA, pattern-tree identity
+and dirty/candidate delta separately when the canonical origin/main evidence exists.
+This is offline evidence, not a latest-network check or adoption. A transported
+package may supply `--source-receipt FILE` with `source` (canonical url/fullsha,
+publication evidence) and `payload_sha256` for every exact manifest payload name;
+all hashes must match. Caller attestation is not authentication. Unknown provenance
+stays explicit and the active owner resolves/reviews it under UPDATES before safe
+replacement; a copied folder is not silently called published/accepted.
 
 ```sh
-python3 .director/state.py --help
-python3 .director/state.py help
-python3 .director/state.py status --data-file /path/to/query.json
+python3 pattern/starter/install.py rollback --receipt /path/to/project/.director/install.json
 ```
 
-Empty stdin or `{}` is a default compact query. Mutations carry unique `op_id`,
-expected global revision and, for request changes, expected request revision.
-They preserve exact UTF-8 source/addenda and attachment hashes, current obligations,
-owners/handles/dated observations, evaluations and approval gates. Original sources
-and history remain separate from compact status. Helpers validate supplied data,
-not whether the caller is authorized or its observations true.
+Rollback takes the native writer lock and removes only unchanged owned bytes. It
+preserves ordinary files and refuses new records/roles/cache/policy, changed config,
+active writer or instruction drift. It stops no actor and refreshes no existing chat.
+Preserve/reconcile changed work before a separately reviewed removal.
 
-## Learning has a queue, an initiator and a cost
+## Use and maintenance
 
-Default installed policy: outcome owner initiates one bounded review at meaningful
-closure when three incidents are pending and permitted worker capacity exists.
-Ordinary observe/evaluate receipts expose `review_pending`, count and `review_due`.
-The number only batches spend; it proves no rule and creates no department. Options:
-`--review-initiator user --review-when explicit` leaves review for direct requests;
-`--review-min-incidents N` changes the initial spend gate. Reinstall does not silently
-change an existing policy. A direct review request can override the count gate.
+The small bridge loads START and the exact selected Director/Worker package fully;
+selected project guards and task/action instructions remain binding before action.
+The marker `director-starter:2` is the retained bridge interface, not a state version.
+Only a current-conversation operationally checked Project Director shows 🎬;
+before that, acknowledge the role/unverified limit without a badge. The direct
+owner check has no mandatory checker/Recorder and proves no native-host behavior.
+Actors have fitting **emoji Name** labels plus actual handles, without identityfiles.
+While delegated work is held, proactive **📋 SitRep** runs about five minutes from
+actual dispatch, independently of short host progress updates; no offline wakeup.
 
-Capture meaningful incidents inline with ordinary results, preserving scope/source/
-revision and hypotheses. When due, the initiator actually dispatches one bounded
-existing worker with WORKER + LEARNING and a `review-batch` (default five incidents,
-12000 bytes). Product work may continue independently on supported tools. If that
-route/capacity is absent, `review-defer` records the real reason and evidence stays
-pending. No actor is needed for an empty/simple task or a batch with no incidents.
-Scheduled/offline review requires explicit authorization and a real host scheduler;
-nothing here installs one or promises automatic wakeup.
+The Director chooses current capability/effort/verification for risk, preserves
+specialist discovery/authority and independent testing, records exact originals and
+addenda before dependent work, plans every finishable obligation and supervises
+actual handles through evaluation/rework. Parent/requirement/evidence traces stay
+compact and recoverable. Canonical source/history and local assets survive folder
+moves/recovery. State does not prove liveness, human approval or true evidence.
 
-`review-save` commits durable output/proposals and cursor together. Crashes/replay,
-stale revisions, skipped/changed batch evidence and competing decisions fail
-visibly or return an idempotent saved result. The existing owner evaluates; `decide`
-accepts the exact proposed scope. Only accepted knowledge appears in matching task/
-path/audience `select` results, with provenance. Routing/structural proposals need
-separate authorized implementation. Hypotheses are not rules. Full history and
-pending evidence never become user startup.
+```sh
+python3 .director/requests.py status --limit 5 --max-bytes 12000
+python3 .director/requests.py current REQ-... --max-bytes 12000
+python3 .director/requests.py --help
+```
 
-An already explicit user rule applies now within scope; `accept-rule` records it
-with its exact source and owner decision, without waiting for incidents/reviewer.
-Retire or supersede any current rule with a source-aware `retire-knowledge`, keeping
-old decisions/evidence. No automatic authority growth occurs.
+Read deferred [API](payload/API.md), [TOOLING](payload/TOOLING.md) and
+[RECORDS](payload/RECORDS.md) before state actions. Bounded current views omit history
+but validate underlying original sources internally; follow snapshot continuations.
+The direct backend API is unchanged; the thin launcher supplies its actual root.
+No human/OS authentication or cross-host atomicity is claimed.
 
-Review workers report actual spend/settings or unknowns separately. The helper
-reports local state bytes and precommit preparation time (excluding atomic write); it parses this small state file
-internally, so I/O cost grows with it. No model cost, latency or learning-success
-claim follows from bytes or a cursor. Actual-agent trials establish only their
-observed route; host compliance and caller permission are not enforced by roles.
+[LEARNING](payload/LEARNING.md) uses typed canonical notes, not another store. At
+meaningful evaluation, three pending incidents make one bounded review due under
+the default owner/closure policy; actual dispatch or durable real deferral required.
+Review output+proposals save atomically before explicit incident IDs are consumed.
+The owner evaluates scoped decisions and next matching work loads accepted knowledge.
+Explicit source-backed user rules apply immediately without threshold/review. No
+incident/review count creates authority or a department. Existing project policy
+wins; install flags `--review-initiator`, `--review-when`, `--review-min-incidents`
+set only the initial receipt's policy. Touched current role/runbook/artifact upkeep
+is a separate closure duty even when no learning review is due.
+
+[OPERATIONS](payload/OPERATIONS.md) owns actual installation checks and staffing.
+[UPDATES](payload/UPDATES.md) restores rolling24h active-session metadata discovery
+including failures; notify(default), explicit automatic, and off choices; exact
+published pins, backups, baseline/current/incoming adaptation comparison, schema/
+privacy preservation, rollback and receipt. The deterministic helper only checks
+metadata/saves preferences; automatic application is actual scoped owner/worker work,
+not unattended code execution. Missing transport/capability stays visibly pending.
+A file check or CLI fixture is not fresh-host compliance, periodic cadence, human
+acceptance, release, or proof the method is universally cheaper.
+
+Starter3's executable installer provisions tracked mode only. An explicit lean
+choice remains available through the preserved legacy guide/real existing-tracker
+route, with its actual smaller retention promise and no automatic new store. Do
+not call this installer lean-compatible or drop open commitments to change mode.

@@ -20,10 +20,22 @@ For the full-page guide, append `/resources/explainer/overview.html` to the prin
 URL's origin. Start at [overview.html](design/boards/director-pattern-explainer/overview.html)
 when serving the resource folder independently. All diagrams and styles are local.
 
-The reference is grounded in public Director Pattern source `8db49cb`; its evidence
-page distinguishes observed assigned-agent behavior, remaining overhead, startup
-deviations and unproved native cold startup. Project-specific conversion receipts
-and private conversations are not part of this public board.
+The reference was first authored for starter 2 at public source `8db49cb`.
+**October 31, 2026 correction:** confirmed plan/history, terminal-steering and
+earlier-source-integrity defects required replacing that prototype's record helper.
+The guide now explains the starter 3 correction candidate: established canonical
+request bundles, typed learning notes and restored operational duties. Earlier
+trial evidence stays dated and separate.
+
+The evidence page includes a rendered [seven-case overview](design/boards/director-pattern-explainer/evidence.html#case-overview) and a separate [source-readiness checklist](design/boards/director-pattern-explainer/evidence.html#release-readiness). The forensic findings stay version-bound history; later confidence/target/publication gates are recorded separately. Scoped source confidence gates are accepted. Verified source publication and the selected targets' published-baseline acceptance remain pending; no release tag or perfect-parity claim follows.
+
+The [design-obligation parity matrix](development/BEHAVIOR_PARITY.md) and
+[validation notes](development/DESIGN_NOTES.md#behavior-preservation-correction--october31-2026)
+separate current source contracts, backend tests, actual actor observations and
+remaining adoption limits. Candidate evaluation is not perfect parity or native
+cold-start proof. Existing mature trackers, adaptations and privacy choices remain
+authoritative; no silent starter-2 data migration is supplied. Private conversion
+receipts and conversations are not part of this public board.
 
 This project pins Tinka **0.6.1** and includes its public ZIP/checksum in
 `tinka/packages/` for offline restoration. The ZIP SHA-256 is

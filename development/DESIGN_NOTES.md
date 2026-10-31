@@ -836,3 +836,186 @@ Windows locking unimplemented. Bounded model-facing reads do not make internal
 state parsing constant-cost. Model tokens/cost and independently effective settings
 must remain unknown unless actual evidence supplies them; local file bytes and
 helper wall time are not substitutes.
+
+
+## Behavior-preservation correction — October 31, 2026
+
+**Candidate, actor/purpose evaluation pending.** The [design-obligation matrix](BEHAVIOR_PARITY.md)
+accounts for the documented reasons, not simply the availability of old files.
+Earlier 84-test/assigned-slide/learning evidence above remains historical starter2
+utility evidence and did not catch record-parity losses. Reproduced source cases:
+initial owner/acceptance disappears after update, a new accepted-request addendum
+stays accepted/invisible as unfinished work, and a corrupt earlier original is not
+validated on reads/evaluation when a later source is good. The old single-JSON
+backend is unsupported; existing fixtures/history are preserved without migration.
+
+Starter3 installs established request_store.py and update_check.py,
+a thin root-bound requests CLI with bounded current views, and the reviewed
+canonical-note layer with explicit flat-layout defaults. Restored contract paths
+cover identities/SitRep, capability/effort/verification, role upkeep, traceability,
+privacy/clone continuity, daily preferences and exact pinned three-way updates.
+🎬 retains its operational-check meaning; an unverified role acknowledgment
+displays no badge. Native-host/effective-settings proof remains distinct.
+
+The immutable starter3 validation-v1 package contains18files/189681bytes, including
+14 selected static payload files. Its manifest SHA256 is
+`65991df71e736ebf1e39fd5feb8988230b80dcbd97fae9425a2b2c014711ac22`.
+The default installation's managed bytes total163396; the declared Director
+foundation+bridge is10227bytes and worker5476bytes. Deferred operation/task guides
+add context at their actual trigger. These are file inventories, not model usage,
+startup latency or an efficiency win. Native default startup remains unproved.
+
+Independent fixed oracles passed17distinct cases over19executions: the first run
+had15passes and two test-harness defects (a helper argument collision and incomplete
+fake tree metadata); both affected cases passed after harness repair. Original logs
+remain, no product repair was required by those runs, and all18 frozen/live files
+matched before/after. Checks used actual installed requests CLI for retained initial
+plan/current scope, terminal reopening, corrupt earlier originals, required human
+proof, cycles/dependencies, acknowledged external handoff, assets and journal/CAS
+recovery. Further cases exercised clone continuation, UUID separation, an old opened
+lock waiter after rollback/reinstall, public/unknown/private awareness and explicit
+privacy opt-outs, and installed daily helper with controlled clock/fetch failures.
+Human/remote evidence in these fixtures was synthetic, not authenticated execution.
+
+The full remaining development suite passed74tests in12.222seconds; the unchanged
+17-case independent module was deliberately reused rather than rerun. Thus91distinct
+current cases are covered, **not a single91-case run**. A source author's earlier
+10 focused installer/note checks overlap the74 and are not additional cases.
+The reused backend differs from the old implementation only in seven post-lock
+inode/configuration-fence lines; the old engine remains unchanged. The daily helper
+is exact old code with explicit root binding. Canonical-note adapter changes are
+flat-layout defaults and compact read serialization for the declared byte budget.
+
+Independent static design review found and required fresh UUID identity and the
+stale-writer fence before this freeze, then returned no further material issue in
+its assigned scope. Selected downstream instruction review separately found
+receipt-schema, discovery/caller-alias and backend-specific concurrency wiring needs;
+source code does not propagate those local repairs by itself.
+
+### Subsequent independent intent cases and actual assigned actors
+
+A three-baseline R6 scenario compared old741769b, first flat8db49cb and corrected
+validation-v1 with the same synthetic source/attachment, four outcomes, local assets,
+steering/reopen, uncertain-write/retry and cold CLI restart. Old/correction met all
+seven finite obligations. First flat met exact bytes and stale/conflicting retry,
+partially met shared identity/local custody/interruption/waiting representation,
+and failed retained initial plan/acceptance history. Native single-file atomic
+replay and external-output references were credited; a moving folder itself was
+not the oracle. This is mechanical intent evidence, not power-loss/remote proof.
+
+The owner accepted an actual assigned Cedar/Rowan record/artifact trace on65991:
+one source with CRLF/binary originals, independently finishable checklist and email,
+meaningful owners/acceptance/human gates and requirement backreferences. A later
+actual correction captured a new source, legally reopened/replanned the accepted
+checklist and resumed the same worker, then evaluated/reaccepted it. The independent
+email's artifact, owner and approval/destination gate stayed unchanged. Fresh
+Ember/Fern recovered old state, selected an existing scoped owner rule without the
+new brief repeating it, and delivered a separate three-step Cyra checklist. Root
+and an independent reviewer inspected preservation, current records and artifacts;
+real supervisory acknowledgment was separately observed. The whole completed fixture
+was byte-preserved privately after the actors returned.
+
+These observations are on validation-v1's explicit-rule/record routes. One combined
+instruction read truncated and was recovered; an imprecise dispatch time, bad query
+keys and a too-broad print were corrected and retained. They do not demonstrate the
+later inferred-proposal repair, native unassigned startup, actual host crash/live
+foreign handoff, adaptive effective model controls, an economic win or five-minute
+periodic cadence. The email is an intentionally blocked synthetic test outcome,
+not a real outstanding send obligation.
+
+### Later typed-proposal and bounded-read repair
+
+Case4 then reproduced an accepted structure-text proposal entering knowledge on
+65991 despite the prior scoped green tests. The old structure-exclusion oracle had
+been lost during test migration; empty-proposal and explicit-rule cases did not
+cover it. That failed frozen fixture remains intact.
+
+Validation-v2 manifest `a002b6f904b33b98c7b4c6df5b691eb956465c62f626c6c676d91f0fddab5b25`
+changed only START, LEARNING and canonical_learning.py. New nested proposals require
+knowledge/routing/structure kinds, only knowledge/rule enters selectors, and older
+untyped note bytes remain preserved/quarantined with visible classification need.
+A new focused installed case passed3.341seconds, then strengthened exact-old-wire/
+replay coverage passed3.499seconds. These repeat the same case, not new case counts.
+
+Independent review next caught a retired routing proposal still reporting current
+implementation work. Validation-v3 changes only that one condition; historical
+acceptance remains historical. The strengthened focused case passed4.319seconds
+for both routing and structure retirement, typed knowledge/exact scope, cross-request
+review, legacy quarantine/unchanged bytes/replays and no structural selection.
+All18 source/snapshot files matched afterward; independent static review cleared
+the one-line delta. The final manifest is
+`89473cc966e4e4ab24a9107e09c7762931feb26c4456c4dfaa7ec9e691f8393f`:
+18files/193244bytes,14static payload files/166232bytes; declared Director foundation+
+bridge10711bytes and worker5960bytes. These are inventories, not runtime/cost savings.
+No blind91-test rerun occurred; unchanged tests retain their stated earlier scope.
+
+Sage's independent wording review found START now preserves aggregate/outer-wrapper
+bounds, in-read extents/ranges, contiguous EOF, recovery/stop, non-text substitutes
+and no per-read verification ritual. It is static preservation, not a new faulted
+host trial. WORKER's authorized-descendant route still lacks DIRECTOR's explicit
+pre-staff OPERATIONS link unless supplied by the actual project/assignment. That
+remaining reachability is partial and held for review, not an observed actor failure
+or another unreviewed core patch.
+
+Remaining acceptance claims stay open: native cold startup, elapsed five-minute
+cadence, adaptive effective selection, actual available/notify and pinned safe-update
+application, paid-review initiation on this new backend, and organic department
+need/implementation. The [seven-case matrix](BEHAVIOR_PARITY.md) separates those
+obligations from the useful observed flat execution/learning behavior. The evaluated
+correction is unpublished/unpropagated and held for the owner's discussion; the
+scoped repair pass is not approval of a complete replacement.
+
+No broad cost win, daemon, real human identity, uninterrupted execution, native
+unassigned cold startup, arbitrary semantic-history search or automatic migration
+is claimed. Existing project domain/privacy/release gates stay authoritative.
+
+
+### Explicit release gate — current source candidate
+
+Validation-v4 manifest SHA256
+`d08f339be0094cac7fd0b81a4057bfaa6aed255cac5a318e5e7229696e68b124`
+changes only WORKER from validation-v3: an explicit pre-descendant OPERATIONS and
+selected selection/authority-guard read. Independent static review cleared it.
+The full current development suite then ran once: **92tests passed in33.458seconds**.
+This is a new full run, not a sum of earlier scoped totals; no code changed afterward.
+
+A separate actual three-actor probe observed the worker's complete OPERATIONS/guard
+coverage before descendant dispatch, real returns/evaluation, preserved payload and
+source, and a flat small follow-up. The sustained-coordination comparison observed
+owner discussion of a bounded pilot; it did not demonstrate unprompted creation
+of a department. The strict SitRep oracle **missed by5.778seconds early**, using the
+predeclared outer-receipt clock (264.222seconds vs270lower bound). The emitted-call
+clock was273.666seconds. Both observations remain; the latter does not turn the
+strict miss into a pass. Owner/independent release evaluation accepted approximate
+proactive cadence with that non-safety precision limit. Actual held work lasted
+354.237seconds; a completion reminder and inherited child-context limits remain.
+
+The safe-update fixture used a real local Git transport, immutable base/incoming
+candidate commits and main advanced after the pin. Actual three-way merge retained
+both incoming staffing guidance and an installed persistent local guard even though
+current equaled its adapted baseline. Ten protected files, two nonempty canonical
+outcomes, shared exact CRLF/binary input, asset, role and custom bootstrap were
+unchanged and validated. Actual conflict output refused mutation; owned rollback
+restored prior adapted bytes/pointer. Already-current inspection stopped without
+reset. Independent reviewers rehashed the exact staged18files and protected maps.
+These local commits were test candidates, never called published upstream. Against
+actual known published e99 source/tree, the real metadata route returned current;
+repeats and automatic/off preference changes respected the same24h attempt window.
+No downloaded source was executed, live canonical store migrated, or autonomous
+public update claimed.
+
+The source's reversible local TEST integration separately preserved319existing
+protected files, modes, native engine/tools, role aliases and explicit private
+ignore choice; native validation returned33valid records. A first private verifier
+checked its future candidate-receipt link before creating that receipt. That harness
+stop was preserved; finalizing the receipt and rechecking66links resolved it without
+canonical changes. The source uses adapted current guides and the same native
+backend, not a fresh installer overwrite. Independent integration review verified
+15installed hashes and all319protected preimages. Final newly published SHA/tree
+normalization remains an after-push operation; prior acceptance stays historical.
+
+Release approval is scoped to these explicit gates and declared limitations. It is
+not universal native startup, adaptive-cost optimality, actual foreign/human proof,
+continuous background execution, autonomous updates or organic growth. Source
+publication, release tags/site hosting and each target's accepted installation
+remain separate facts.

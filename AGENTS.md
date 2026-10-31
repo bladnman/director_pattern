@@ -16,6 +16,17 @@ it and relevant validation sections of development/DESIGN_NOTES.md when claiming
 checks. Follow dated supersessions for the affected decision; full unrelated
 history is discoverable reference, not a universal read requirement. Read selected
 exact sources when needed, not every archive.
+Before accepting a refactor, default/onboarding-route replacement or recommended
+alternative package, record the affected design-intent disposition against the
+previous recommended path (even when its files remain unchanged): read
+its owning rationale decision and documented purpose/failure prevented; preserve
+the mechanism, demonstrate a tested replacement, or explicitly review a dated
+supersession and tradeoff. Name the actual active instruction/runtime route and
+concrete regression oracle, including transitively unreachable behavior/triggers,
+obtain independent review, and keep unknown or omitted
+obligations acceptance-blocking. Use the existing rationale and
+[design-obligation matrix](development/BEHAVIOR_PARITY.md) at affected maintenance;
+this adds no universal target-project startup file or assumed substitute intent.
 Keep the living rationale coherent at formative decisions: preserve dated changes
 and superseded reasoning, link affected contracts and a concrete regression case,
 and distinguish stored, decided, implemented, and verified. Label hypotheses/open choices.

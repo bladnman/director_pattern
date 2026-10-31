@@ -14,11 +14,16 @@ Recorder, Architect, identity pool or setup-check actor. The Director performs
 validated recording operations and supervises workers. Durable corrections feed a
 separate bounded learning review; the Director does not reread all history at
 startup or remember lessons without recorded evidence and later matching use.
-[See the concrete growth and learning walkthrough](development/FLAT_STARTER.md).
+The corrected starter3 restores the established request-bundle backend;
+[the design-obligation matrix](development/BEHAVIOR_PARITY.md) distinguishes old
+reasons, new routes, executed checks and remaining proof. The earlier
+[starter2 walkthrough](development/FLAT_STARTER.md) remains historical evidence,
+including its now-unsupported record helper defects.
 
 **Published release:** [v1.1.0](https://github.com/bladnman/director_pattern/releases/tag/v1.1.0),
 October 27, 2026, uses the earlier Request Manager/shared Recorder design. The flat
-starter is an unpublished source candidate. This checkout, the website, the live
+starter is an unreleased source candidate. Publication on `main` is separate from
+a release tag and from installed-project adoption. This checkout, the website, the live
 local installation and existing projects can therefore describe different revisions;
 source changes do not update them automatically.
 

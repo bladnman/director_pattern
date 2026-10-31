@@ -1,3 +1,11 @@
+> **October31 correction:** This is historical starter2 evidence, not the current
+> installation walkthrough. Its single-JSON record helper is unsupported after
+> lifecycle/history/source-integrity regressions were reproduced. Do not run its
+> state.py commands for new work. Use [starter3](../pattern/starter/README.md) and
+> the [design-obligation review](BEHAVIOR_PARITY.md); existing stores are preserved
+> without automatic migration. Trial snapshots named v3/v4 below are starter2
+> experiment revisions, not the corrected starter3 package.
+
 # Start flat, grow when the work needs it
 
 This guide explains the local source candidate. It is not a claim that the published

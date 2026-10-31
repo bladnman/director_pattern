@@ -1,6 +1,6 @@
 # Director Pattern packages
 
-**New projects: [flat starter 2](starter/README.md).** This source candidate uses one
+**New projects: [flat starter 3](starter/README.md).** This source candidate uses one
 Director foundation and bounded workers, with a small install and explicit bounded
 learning review. It is a new format, not an automatic v1 upgrade or a published
 release claim. Ordinary notes/assets may already exist; conflicting startup or
@@ -19,10 +19,10 @@ reversal, privacy, pending review and actual-host verification boundaries.
 **Existing v1 projects: [legacy v1 guide](README-v1.md), [installation guide](INSTALL-v1.md)
 and [compatible update protocol](engine/references/UPDATES.md).** The existing
 [manifest](manifest.json), engine, launchers and project seed layout remain the
-legacy interface-1 package. Published v1.1.0 and current source candidate starter 2
+legacy interface-1 package. Published v1.1.0 and current source candidate starter 3
 are distinct. Read actual installed policy, preserve project-owned rules, requests,
 trackers and identities, and use pinned source/baseline comparison for compatible
-v1 updates. Do not copy starter 2 over an existing v1 installation or mature stencil.
+v1 updates. Do not copy starter 3 over an existing v1 installation or mature stencil.
 A new format requires an explicit reviewed migration; none is implemented here.
 
 Use [INSTALL.md](INSTALL.md) to select the appropriate lifecycle route. No repository
