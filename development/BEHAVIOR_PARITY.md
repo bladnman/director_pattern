@@ -243,5 +243,21 @@ disposition preserves the first-reply exception's precise scope and later reuse.
 
 Focused helper checks and actual native CLI failure/worker/same-session-recovery
 observations are in the [new validation](DESIGN_NOTES.md#first-reply-startup-check--october-31-2026).
-This is a targeted first-reply correction, not a retroactive universal native-start
-pass or a replacement for exact capture, human acceptance and later tracker gates.
+Follow-through now includes fresh unhinted greetings in eight external configured
+projects: seven on Codex CLI and two on Claude Code, with one on both. The source
+installation separately has an existing-conversation technical check and three
+fresh fixture cases, not a ninth fresh project greeting. Independent review checked
+actual returned instruction reads before the local checker and first checked badge.
+
+One cross-host attempt grouped the required instruction print and checker in a
+single invocation. Complete text arriving afterward did not satisfy the ordering
+obligation; that observation remains partial. A reviewed project-local clarification
+required the returned result before dependent action, and a fresh retry passed.
+This preserved the original read-before-action intent without changing or relaxing
+the runtime source contract. The outer greeting trigger failure and this distinct
+order-boundary miss remain in the validation account alongside successful cases.
+
+This is bounded installed-CLI evidence, not universal or persistent native-desktop
+activation, a timing/cost comparison, manual-learning uptake or a replacement for
+exact capture, human acceptance and later tracker gates. Unconfigured template
+provenance remains insufficient for setup; no greeting initializes a store.

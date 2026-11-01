@@ -626,6 +626,25 @@ Actual CLI timings/commands are recorded in the focused validation, not estimate
 as universal startup speed. All other action references retain their progressive
 before-use triggers and authority.
 
+**October 31 — returned reads and installed-host validation:** The outer host
+hook is part of the behavior: a greeting must reach the selected package, not
+merely find correct files on disk. The read barrier is equally material. Printing
+required instructions and executing the dependent checker in one tool invocation
+does not let the actor consume the returned instructions before acting. One actual
+cross-host trial did exactly that; complete text later in its result did not turn
+it into a pass. A reviewed project-local clarification made the returned-result
+barrier explicit, and a meaningful fresh retry observed it before the checker and
+first badge. This clarified the existing complete-read-before-action obligation;
+it did not relax the source contract or expand the check into ledger operations.
+
+The [validation record](DESIGN_NOTES.md#first-reply-startup-check--october-31-2026)
+now distinguishes eight external configured-project greeting observations across
+two CLI hosts from the source installation's existing-conversation technical check
+and fresh fixture failure/worker/recovery cases. These observations support this
+bounded entry route, not universal desktop activation, identical host behavior,
+comparative startup cost or automatic learning. Failed observations remain evidence
+rather than being replaced by the successful retry.
+
 **Accepted decision, October 17:** A new project conversation defaults to that
 project's director regardless of who opened it. Explicit user/assigner roles
 supersede the default. Every bounded delegated assignment names worker/director

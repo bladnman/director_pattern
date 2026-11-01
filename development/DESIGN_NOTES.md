@@ -1087,9 +1087,47 @@ known route files and config header, reading 34,293 bytes in the successful fixt
 These are CLI wall times and emitted command/result observations, not model-only
 latency, a dollar estimate or proof of the original desktop chat surface.
 
-Independent reviewers inspect the primary command/response order, not only final
-actor reports. Actual configured-project neutral greetings on Codex/Claude are a
-separate installed-target check; broader hosts/native defaults remain unproved
-unless directly observed. The source's mature local integration uses its exact
-candidate receipt/config/known project ID and selected PROJECT/CAPABILITY guards;
-no real source data, native backend or prior accepted receipt is migrated.
+**Installed-project follow-through:** Eight external configured projects were
+subsequently exercised with fresh, unhinted ordinary greetings through their actual
+installed hooks. Seven projects used Codex CLI and two used Claude Code, with one
+project exercised on both. An ordinary identity prompt was also exercised; prompts
+did not assign a Director role or request a badge/check. Independent review used
+emitted commands and returned results to establish selected package reads, the
+bounded local check and checked marker before the first substantive reply. These
+were actual installed CLI sessions, not proof that the original desktop chat
+surface or every host activates the same route.
+
+One initial Claude Code trial printed the operational instructions and ran the
+checker in the same tool invocation. Although the required text was returned
+completely (apart from a terminal newline), it had not returned to the actor before
+the dependent action. That 20.192-second observation was retained as **partial**,
+not accepted as read-before-check evidence. A reviewed project-local clarification
+explicitly required the returned-result barrier. A fresh retry with the same
+ordinary greeting, tools/settings, normal hooks and default model returned START
+and project authority, then the complete Director/installation instructions, before
+a separate checker invocation and its evidence result; the first reply then used
+🎬. The retry took 16.098 seconds and passed independent order review. This was a
+meaningful instruction clarification and retry, not a source-contract relaxation.
+Existing permission settings were unchanged; observed commands were read-only,
+which does not establish an operating-system sandbox guarantee.
+
+The source installation was the ninth rollout target, but it did **not** supply a
+ninth fresh unassigned project greeting. It separately received a direct bounded
+technical check in an existing conversation, plus the three native fixture turns
+above. Its actual published receipt/config/project identity and selected guards
+matched after publication; the existing canonical backend, identities, sources and
+prior receipts were preserved. Legitimate concurrent bookkeeping is distinct from
+the installation's zero canonical write scope. Generic unconfigured templates
+still require real applicable setup provenance; transport metadata is not a badge
+pass and no tracker is initialized merely for a greeting.
+
+The nine focused source checks and earlier failed observations remain unchanged.
+Host defaults, tools and harness settings differed across projects; timings are
+individual wall-time observations, not causal host comparisons, model-only latency
+or financial/economy claims. The observed routes do not establish persistent native
+desktop activation, every project's manual-backend behavior, effective settings,
+full ledger integrity, live supervision, autonomous updates or learning uptake.
+Learning/manual procedures remain action-time contracts; these greeting checks did
+not exercise them. No runtime payload, installer or manifest change was needed for
+this documentation closure; installed runtime provenance remains the published
+first-reply correction at `04dd95d`.
