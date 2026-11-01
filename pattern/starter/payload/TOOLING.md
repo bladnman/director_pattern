@@ -153,7 +153,7 @@ in-place amendment is not supported. Steer through the existing legal flow:
 3. Apply `requeue` for an active request or `revise` for a review request. These
    are replanning transitions, not host process stop/restart commands.
 4. While queued, apply `amend` with the new source_id, then `plan` the **same
-   outcome owner owner** with the full revised acceptance obligations and human_gate.
+   outcome owner** with the full revised acceptance obligations and human_gate.
 5. Apply `dispatch` binding the **same actually observed outcome owner handle**. This
    records existing execution; it does not spawn another outcome owner or worker.
 

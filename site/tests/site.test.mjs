@@ -58,8 +58,8 @@ test('the public front door exposes an agent guide that proceeds to canonical Gi
   const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
   const guide = await readFile(new URL('../public/install.md', import.meta.url), 'utf8');
   assert.match(html, /<nav[^>]*>[\s\S]*href="\/install\.md">For an agent<\/a>[\s\S]*<\/nav>/);
-  assert.match(guide, /canonical GitHub installation protocol linked above/);
-  assert.match(guide, /Do not send the user back\nto this website to repeat the same request/);
+  assert.match(guide, /canonical GitHub installation\s+protocol linked above/);
+  assert.match(guide, /Do not send the user back to this website to repeat the same\s+request/);
   assert.ok(guide.includes('https://github.com/bladnman/director_pattern/blob/main/pattern/INSTALL.md'));
   assert.ok(guide.includes('https://github.com/bladnman/director_pattern/blob/main/pattern/engine/references/UPDATES.md'));
   assert.match(guide, /exact reviewed commit/);
@@ -76,24 +76,40 @@ test('the four sparse markers and exact periodic report label agree with the sou
     assert.ok(document.includes('📋 SitRep'));
     assert.doesNotMatch(document, /\bSitrep\b/);
   }
-  assert.match(guide, /do not attach it to every progress sentence/);
+  assert.match(guide, /SitRep\*\* duties follow the selected canonical contracts/);
   assert.match(contract, /A checked Director keeps its required `🎬` response prefix/);
 });
 
-test('the public narrative names the Director and one-manager-per-outcome responsibilities without new role values or badges', async () => {
+test('legacy human narrative retains its contract while agent discovery selects the actual package', async () => {
   const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
   const guide = await readFile(new URL('../public/install.md', import.meta.url), 'utf8');
   const llms = await readFile(new URL('../public/llms.txt', import.meta.url), 'utf8');
   const contract = await readFile(new URL('../../pattern/engine/DIRECTION.md', import.meta.url), 'utf8');
-  for (const document of [html, guide, llms]) assert.match(document, /Request\s+Manager/);
+  assert.match(html, /Request\s+Manager/);
   assert.match(contract, /Request Manager/);
-  assert.match(contract, /A specialty[^.]*is a task within the outcome, not a reason for\s+another manager/);
-  assert.match(guide, /a specialty is a task within the outcome, not a reason for\s+another manager/);
-  assert.match(guide, /only `worker` and\s+`director`/);
-  assert.match(guide, /maintained responsibilities, not new\s+role values/);
-  assert.match(guide, /Managers and other actors use an assigned identity[^.]*never\s+the badge/);
+  assert.match(contract, /Keep one accountable whole-outcome owner through usable delivery/);
+  assert.match(contract, /Specialist\s+stewardship[^.]*does not itself force another manager/);
+  assert.match(guide, /unreleased flat-starter source candidate/);
+  assert.match(guide, /selected legacy v1 installation/);
+  assert.match(guide, /Do not add another package's manager, Recorder, roster or backend requirements/);
+  assert.match(guide, /mark inapplicable checks as such rather than creating roles or reporting missing\s+prerequisites/);
+  assert.doesNotMatch(guide, /entrusts each complete outcome\s+to one Request Manager|a Small recorder checks actual wiring/);
+  assert.match(llms, /Select the actual package/);
+  assert.doesNotMatch(llms, /One Request\s+Manager owns each/);
   assert.match(html, /Managers and other actors use an assigned name[^.]*never the badge/);
   assert.match(html, /<p class="status-limit">[^<]*project Director role[^<]*managers or workers[^<]*<\/p>/);
+});
+
+test('agent installation and update pointers resolve to actual canonical package files', async () => {
+  for (const name of ['install.md', 'llms.txt']) {
+    const document = await readFile(new URL(`../public/${name}`, import.meta.url), 'utf8');
+    const paths = [...document.matchAll(/https:\/\/github\.com\/bladnman\/director_pattern\/blob\/main\/([^\s)#]+)/g)].map(match => match[1]);
+    assert.ok(paths.includes('pattern/INSTALL.md'), name);
+    for (const path of paths) assert.ok((await readFile(new URL(`../../${path}`, import.meta.url))).length > 0, path);
+    assert.doesNotMatch(document, /pattern\/references\/UPDATES\.md/);
+  }
+  const guide = await readFile(new URL('../public/install.md', import.meta.url), 'utf8');
+  for (const path of ['pattern/starter/manifest.json', 'pattern/manifest.json', 'pattern/starter/payload/UPDATES.md', 'pattern/engine/references/UPDATES.md']) assert.ok(guide.includes(path), path);
 });
 
 test('production output contains only reviewed public assets, not installation/private state', async () => {

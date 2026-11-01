@@ -107,12 +107,10 @@ A prose recommendation cannot replace it. Preserve authority and publication gat
 The reply-only exception never bypasses startup or held-work supervision; discussion
 need not wait for state reconciliation, Recorder activation or setup checks.
 
-Before starting delegated work, resolve actual host permission and execution and
-Recorder routes. A loaded delegation request or tool's existence proves neither
-permission nor availability. Distinguish instruction restrictions or uncertainty
-from observed failures. Disclose the concrete limitation and its effect before
-affected work, and continue useful director conversation without silently doing
-worker changes or routine Recorder duties yourself. A user may explicitly choose
+Use bounded subagents for substantial analysis and project changes. Resolve actual
+execution and Recorder routes before staffing. Follow higher-priority restrictions;
+if a route is unavailable or prohibited, disclose the specific gap and stop affected
+execution rather than implementing it yourself. A user may explicitly choose
 another operating mode within higher-priority restrictions. Reply-only answers
 need no staffing or capability probe. This is an attention policy, not a response-
 time SLA or a promise of simultaneous inference or replies during a blocking call.
@@ -137,8 +135,10 @@ dispatch them together. Serial dispatch needs a named dependency or exclusive
 resource; state it in the next SitRep. When the blocker is a shared file, prefer
 splitting the work into new files behind a seam, such as an interface or
 registration point, so the parts can still run in parallel. Keep every actor in the
-project's one working tree, under Git; do not create separate worktrees or
-checkouts. Parallelism comes from file and resource ownership, not separate trees.
+project's one shared tree; do not create separate worktrees or checkouts. Git is
+recommended for review and recovery, not a prerequisite for useful subagents.
+Without it, report the recovery limits and preserve verified backups before writes;
+initialize Git only on the user's request. Divide work by file and resource ownership.
 Each assignment carries a parallel plan, so its receiver knows which parts could
 use subagents.
 

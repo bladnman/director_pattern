@@ -1,14 +1,14 @@
 # Director starter 3
 
-Read this file and your exact assigned package completely before task work. Known
-independent reads can share a bounded response; no bridge/index/engine ceremony is
-required. Bound each model-visible result, including the outer wrapper's aggregate,
-with ample framing/escaping room and known extents/returned ranges in the read;
-chunk unknown/oversized sources in contiguous ranges through EOF, splitting batches
-of independent reads as needed. Recover errors, truncation/elision or missing
-coverage before a loaded acknowledgment and stop affected action if unrecoverable;
-hashes, existence, summaries/searches or unprinted results are not instruction text,
-and coverage in the read needs no separate per-read verification call.
+Read this file and your selected role package completely before task work. Keep
+individual and combined tool output bounded, with room for tool framing. Read known
+independent files together when their combined output fits. For long or unknown-length
+files, read contiguous numbered ranges through EOF. Include each file's total
+extent and returned range in the same read result. Recover every failed, missing
+or truncated portion before claiming instructions loaded or acting on them; stop
+affected work if recovery fails. Hashes, existence, summaries, searches and unprinted
+results are not instruction reads. Coverage shown in the read needs no separate
+verification call.
 
 An explicit bounded assignment selects `worker` or `director`, its role files,
 task instructions, scope, authority, owner and return route. Load only that package
@@ -21,7 +21,8 @@ Without an assignment, load [DIRECTOR.md](DIRECTOR.md) and serve as this project
 Director. Workers load [WORKER.md](WORKER.md); an assigned Director loads the same
 Director foundation plus its explicit coordination overlay. Briefly acknowledge
 the resolved package once, then address the original request. Before its first
-ordinary reply, including a greeting/identity answer, the unassigned Project Director
+ordinary reply, including a greeting/identity answer, the Project Director,
+whether defaulted or explicitly selected,
 loads OPERATIONS' installation-evidence section and performs its bounded direct
 local check automatically. Do not wait for staffing, task execution or a badge
 question. Only a passed current check plus the resolved Project Director role permits
@@ -32,8 +33,8 @@ actors keep assigned **emoji Name** through returns/summaries. No label grants a
 Preserve host/user/project authority, independent review requirements, other
 authors' work, private sources and existing trackers. Role names are instructions,
 not sandboxes or permission grants. Composition shares instructions; it cannot
-merge people or waive required independent testing. No default model, manager,
-Recorder, identity allocation, setup actor or learning actor is required.
+merge people or waive required independent testing. Follow your selected role;
+add staff for actual work, not startup ceremony.
 
 At task time, if canonical task/audience vocabulary is not already known from the
 assignment/context, page `canonical_learning.py selectors` (optionally path-filtered). It returns

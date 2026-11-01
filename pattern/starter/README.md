@@ -6,11 +6,9 @@ or learning actor. Flat orchestration does not remove exact source/record/lifecy
 verification, update, supervision or project-authority obligations.
 
 **Starter 3 is the current source correction candidate**, not a release tag or an
-installation in other projects. It restores the established request-bundle backend
-rather than extend the flawed experimental starter-2 state.json format. Read the
-[unsupported-2 notice](unsupported-v2.md) before recovering such an installation.
-Earlier v3/v4 *trial snapshots* tested starter 2; their names are not starter version3
-or proof of this correction. Existing mature trackers remain canonical and need
+installation in other projects. Its `director-request-bundles` backend is incompatible
+with starter-2 state.json; read the [unsupported-2 recovery notice](unsupported-v2.md)
+before recovering that format. Existing mature trackers remain canonical and need
 reviewed instruction/adapter integration, not a fresh installer or second ledger.
 The [design-obligation matrix](https://github.com/bladnman/director_pattern/blob/main/development/BEHAVIOR_PARITY.md) explains the
 old reasons, revised routes, evidence and remaining verification limits.
@@ -76,15 +74,13 @@ permits 🎬; missing facts give a specific gap and normal answer without a badg
 Workers and scoped child Directors skip this check. It reads no tracker history,
 uses no network/checker actor, writes no startup checkpoint and initializes no store.
 A later badge question performs the currently possible check, not just an explanation.
+This local check does not prove native-host behavior or broader acceptance.
 Mature projects bind the exact receipt/config/selected guards under OPERATIONS;
 lean/manual routes use their authoritative known contract, not invented JSON state.
 
 The small bridge loads START and the exact selected Director/Worker package fully;
 selected project guards and task/action instructions remain binding before action.
 The marker `director-starter:2` is the retained bridge interface, not a state version.
-Only a current-conversation operationally checked Project Director shows 🎬;
-before that, acknowledge the role/unverified limit without a badge. The direct
-owner check has no mandatory checker/Recorder and proves no native-host behavior.
 Actors have fitting **emoji Name** labels plus actual handles, without identityfiles.
 While delegated work is held, proactive **📋 SitRep** runs about five minutes from
 actual dispatch, independently of short host progress updates; no offline wakeup.
@@ -130,6 +126,6 @@ A file check or CLI fixture is not fresh-host compliance, periodic cadence, huma
 acceptance, release, or proof the method is universally cheaper.
 
 Starter3's executable installer provisions tracked mode only. An explicit lean
-choice remains available through the preserved legacy guide/real existing-tracker
+choice remains available through the [legacy v1 guide](../INSTALL-v1.md#select-and-copy-only-the-payload)/real existing-tracker
 route, with its actual smaller retention promise and no automatic new store. Do
 not call this installer lean-compatible or drop open commitments to change mode.

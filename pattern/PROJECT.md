@@ -28,12 +28,13 @@ Installation and verification evidence: [authoritative receipt locator; acceptan
 
 ## Engine and project ownership
 
-The [interface-1 boundary](engine/references/BOUNDARY.md) keeps `engine/`
-replaceable. This PROJECT, the PATTERN bridge, canonical index, actual roles,
+Keep `engine/` replaceable. This PROJECT, the PATTERN bridge, canonical index, actual roles,
 policy/adapters, identity pool/roster, configuration and state are project-owned.
 Local constraints belong in required project references, never edited generic
 engine contracts. Compatible updates preserve these neighbors and replace only
 verified engine bytes and reviewed tool launchers.
+Before installation, layout changes or engine updates, read the complete
+[interface-1 boundary](engine/references/BOUNDARY.md).
 
 ## Roles, guardrails, and routes
 

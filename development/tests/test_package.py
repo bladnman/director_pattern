@@ -154,8 +154,109 @@ class PackageBoundaryTests(unittest.TestCase):
         hook = re.search(r"<!-- director-pattern:start -->(.*?)<!-- director-pattern:end -->", install, re.S)
         self.assertIsNotNone(hook)
         text = " ".join(hook.group(1).split())
-        self.assertRegex(text, r"selected Director role.*delegate substantial analysis and project changes.*bounded subagents")
-        self.assertIn("higher-priority host instructions", text)
+        self.assertIn("Directors, use subagents for substantial analysis and project changes", text)
+        self.assertIn("Assign bounded work, stay available to the user, and evaluate the results", text)
+        self.assertIn("Preserve project/host authority", text)
+
+    def test_flat_installed_route_requests_subagents_without_repeated_user_permission(self):
+        # Exercise the hook actually emitted by the recommended installer, not
+        # merely the retained legacy guide. This is instruction wiring, not uptake.
+        tree = ast.parse((PATTERN / "starter/install.py").read_text())
+        bridge = next(ast.literal_eval(node.value) for node in tree.body
+                      if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == "BRIDGE" for t in node.targets))
+        text = " ".join(bridge.split())
+        self.assertIn("Directors, use subagents for substantial analysis and project changes", text)
+        self.assertIn("Assign bounded work, stay available to the user, and evaluate the results", text)
+        self.assertIn("Preserve project/host authority", text)
+        self.assertNotIn("when permitted", text)
+        self.assertNotIn("no mandatory", text)
+        self.assertIn("Workers, delegate useful independent subsets within your assigned scope", text)
+
+    def test_flat_roles_preserve_delegation_fallback_and_bounded_worker_default(self):
+        director = " ".join((PATTERN / "starter/payload/DIRECTOR.md").read_text().split())
+        worker = " ".join((PATTERN / "starter/payload/WORKER.md").read_text().split())
+        self.assertIn("Use bounded subagents for substantial investigative work and project changes", director)
+        self.assertIn("Answer discussion and make critical acceptance judgments directly", director)
+        self.assertIn("If subagents are unavailable or prohibited, report the specific gap and stop affected execution; do not implement it yourself", director)
+        self.assertIn("Answer discussion directly", director)
+        self.assertIn("Narrow validated state operations are ordinary Director duties", director)
+        self.assertIn("Delegate useful independent subsets within your authorized assignment unless its explicit limits prohibit them", worker)
+        self.assertNotIn("only when authorized by the assignment", worker)
+
+    def test_flat_root_check_and_final_acceptance_match_the_flat_roles(self):
+        start = " ".join((PATTERN / "starter/payload/START.md").read_text().split())
+        records = " ".join((PATTERN / "starter/payload/RECORDS.md").read_text().split())
+        self.assertIn("the Project Director, whether defaulted or explicitly selected", start)
+        self.assertIn("Explicit workers and scoped child Directors do not run this Project Director check", start)
+        self.assertIn("The Project Director evaluates the complete submission and makes the final acceptance decision", records)
+        self.assertIn("A worker or scoped child Director cannot self-accept for the Project Director", records)
+        self.assertIn("Required human gates and independent verification still apply", records)
+        self.assertNotIn("outcome owner does not close its own outcome", records)
+        self.assertIn("Preserve an existing roster/cursor when project policy requires it; do not create one for the flat starter", records)
+
+    def test_flat_complete_reads_keep_combined_bounds_and_recovery(self):
+        start = " ".join((PATTERN / "starter/payload/START.md").read_text().split())
+        self.assertIn("individual and combined tool output bounded", start)
+        self.assertIn("read contiguous numbered ranges through EOF", start)
+        self.assertIn("total extent and returned range in the same read result", start)
+        self.assertIn("Recover every failed, missing or truncated portion", start)
+        self.assertIn("stop affected work if recovery fails", start)
+        self.assertIn("summaries, searches and unprinted results are not instruction reads", start)
+        self.assertIn("Coverage shown in the read needs no separate verification call", start)
+
+    def test_flat_action_clarifications_retain_the_fail_closed_routes(self):
+        read = lambda name: " ".join((PATTERN / "starter/payload" / name).read_text().split())
+        updates, learning, api, operations = map(read, ("UPDATES.md", "LEARNING.md", "API.md", "OPERATIONS.md"))
+        self.assertIn("answer greeting-only requests without network", updates)
+        self.assertIn("supported background route or the next active project-work step", updates)
+        self.assertIn("at most once per rolling 24 hours", updates)
+        self.assertIn("Always supply `--root /project/.director` before the command", updates)
+        self.assertIn("subject to its existing daily window", updates)
+        self.assertIn("Do not reinstall, reset the cache or promote acceptance", updates)
+        self.assertIn("Never select them as knowledge, even if previously accepted", learning)
+        self.assertIn("Do not infer a type from wording or edit old notes", learning)
+        self.assertIn("never retry through an old loaded instance", api)
+        self.assertIn("This also applies to init", api)
+        self.assertIn("The bundled helper accepts config schema 1", api)
+        self.assertIn("Existing trackers use their own verified adapter", api)
+        self.assertIn("Do not use this option to bypass required configuration, initialize a backend or certify an unconfigured template", operations)
+
+    def test_v1_and_explicit_lean_keep_the_selected_package_route(self):
+        legacy = (PATTERN / "README-v1.md").read_text()
+        starter = (PATTERN / "starter/README.md").read_text()
+        self.assertIn("Read this package's README-v1.md and follow INSTALL-v1.md", legacy)
+        self.assertIn("Director Pattern from manifest.json", legacy)
+        self.assertIn("[INSTALL-v1.md](INSTALL-v1.md)", legacy)
+        self.assertIn("pattern/README-v1.md", legacy)
+        self.assertIn("[legacy v1 guide](../INSTALL-v1.md#select-and-copy-only-the-payload)", starter)
+        self.assertIn("executable installer provisions tracked mode only", starter)
+        self.assertEqual(self.manifest(PATTERN)["engine_api_version"], 1)
+
+    def test_legacy_boundary_is_phased_and_transition_names_the_actual_layout(self):
+        project = " ".join((PATTERN / "PROJECT.md").read_text().split())
+        self.assertIn("Before installation, layout changes or engine updates, read the complete [interface-1 boundary]", project)
+        self.assertIn("configuration and state are project-owned", project)
+        for name in ("README-v1.md", "INSTALL-v1.md", "engine/references/UPDATES.md", "engine/references/BOUNDARY.md"):
+            with self.subTest(name=name):
+                text = " ".join((PATTERN / name).read_text().split())
+                self.assertIn("legacy pre-engine v1 layout", text)
+                self.assertIn("starter 2/3", text)
+                self.assertIn("incompatible store", text)
+                self.assertNotIn("A flat installation needs", text)
+
+    def test_supported_v1_uses_subagents_without_requiring_git_initialization(self):
+        director = " ".join((PATTERN / "engine/DIRECTOR.md").read_text().split())
+        direction = " ".join((PATTERN / "engine/DIRECTION.md").read_text().split())
+        install = " ".join((PATTERN / "INSTALL-v1.md").read_text().split())
+        self.assertIn("Use the available subagent route for substantial analysis and project changes", director)
+        self.assertIn("Use bounded subagents for substantial analysis and project changes", direction)
+        self.assertNotIn("loaded request or available tool alone proves neither permission", director)
+        self.assertNotIn("loaded delegation request or tool's existence proves neither permission", direction)
+        self.assertIn("Git is recommended for review and recovery, not a prerequisite for useful subagents", direction)
+        self.assertIn("preserve verified backups before writes", direction)
+        self.assertIn("initialize Git only on the user's request", direction)
+        self.assertIn("do not create separate worktrees or checkouts", direction)
+        self.assertIn("Useful subagents may still work in the same project tree with bounded file ownership", install)
 
     def test_startup_incomplete_reads_cannot_be_acknowledged_as_loaded(self):
         # Instruction-path check only; a fresh-agent trial must observe behavior.

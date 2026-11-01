@@ -95,14 +95,12 @@ proposal/decision fields are `proposal_kind`, `classification_required` and
 `implementation_required`. Acceptance cannot expand authority, create a department
 or implement a file change.
 
-Stored older proposals lacking a nested kind remain byte-for-byte history, returned
-as `proposal_kind:unclassified`, `classification_required:true`. They remain visible
-for owner classification even if an older decision accepted them, but never reach
-knowledge selection; a new acceptance requires an explicit supported kind. Legacy
-identical replay is preserved. This helper does not migrate/edit old notes or infer
-their type from wording; classification support or a new explicitly typed evidence
-review needs a separate scoped owner disposition. Until resolved, retain the visible
-classification gap rather than inventing a knowledge rule or completed change.
+Keep proposals without a nested kind unchanged and visible as
+`proposal_kind:unclassified`, `classification_required:true`. Never select them as
+knowledge, even if previously accepted; new acceptance requires a supported kind.
+Do not infer a type from wording or edit old notes. Preserve identical replay.
+Classification support or a new typed review needs a separate scoped owner decision;
+until then, retain the classification gap rather than inventing a rule or completed change.
 An explicit user rule applies now; record `rule` for its already authorized durable
 scope without waiting for review. On later matching work load all applicable
 accepted entries and their provenance before acting, then check actual uptake.

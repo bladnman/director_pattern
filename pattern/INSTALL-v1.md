@@ -4,8 +4,9 @@ The [ownership boundary](engine/references/BOUNDARY.md) separates replaceable
 `engine/` from project-owned context, roles, policy, adapters, identity pool, and
 state. The manifest partitions engine files, create-once project seeds, and thin
 compatibility launchers. An update replaces only a compatible verified engine;
-existing project seeds are preserved. A flat installation needs the boundary's
-one-time reviewed layout integration before this fast replacement route applies.
+existing project seeds are preserved. A legacy pre-engine v1 layout needs the
+boundary's one-time reviewed integration before this fast replacement route applies.
+That procedure does not apply to starter 2/3 or migrate an incompatible store.
 
 
 On an adoption request, perform reversible local setup without another routine
@@ -41,10 +42,10 @@ not payload. A temporary staging clone is optional transport only.
    machine or a cloud checkout continues the same work. The payload's
    `.director/.gitignore` keeps only the helper lock, in-progress write scratch,
    pre-update backups, and daily update-check cache local. If the project is not
-   under version control, report that as a parallelism and recovery limitation:
-   parallel actors share one working tree that cannot be reviewed or rolled back
-   by change, and the installation cannot continue elsewhere. Recommend
-   initializing Git in place in the existing root, with no new checkout, and with
+   under version control, report the review, rollback and cross-machine recovery
+   limits. Useful subagents may still work in the same project tree with bounded
+   file ownership; preserve verified backups before writes. Recommend initializing
+   Git in place in the existing root, with no new checkout, and with
    the payload `.director/.gitignore` and the project's own ignore rules for
    private material in place before the first commit; initialize only at the
    user's request. Otherwise, check whether the repository has a remote and
@@ -103,9 +104,9 @@ not payload. A temporary staging clone is optional transport only.
    delegation, changes, or substantive answer. A brief acknowledgment may come first;
    then address the original request in the same turn, without requiring a greeting
    or extra confirmation.
-   For the selected Director role, delegate substantial analysis and project changes
-   to bounded subagents as directed by the selected role package, subject to
-   higher-priority host instructions.
+   Directors, use subagents for substantial analysis and project changes. Assign bounded
+   work, stay available to the user, and evaluate the results. Workers, delegate useful
+   independent subsets within your assigned scope. Preserve project/host authority.
    <!-- director-pattern:end -->
    ```
 

@@ -3,10 +3,11 @@
 For interface-1 installations, apply the [engine/project boundary](BOUNDARY.md):
 replace only verified compatible `engine/` files and reviewed compatibility
 launchers; never replace project seeds or custom neighbors. Before a first
-transition from flat layout, preserve/extract exact local adaptations and integrate
+transition from a legacy pre-engine v1 layout, preserve/extract exact local adaptations and integrate
 its bridge/index once. Unknown engine drift or an incompatible interface stops
 wholesale replacement for review. A later compatible update does not repeat that
-transition or a whole-project audit. Existing incremental triggers below still apply.
+transition or a whole-project audit. This procedure does not apply to starter 2/3
+or migrate an incompatible store. Existing incremental triggers below still apply.
 
 
 Published [GitHub main](https://github.com/bladnman/director_pattern) is the upstream

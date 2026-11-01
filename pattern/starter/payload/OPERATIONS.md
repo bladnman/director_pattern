@@ -46,8 +46,8 @@ Lean/custom backends need no generic JSON store. An explicitly already-read
 project declaration can instead bind `--backend-contract <maintained-project-path>`;
 that contract's bytes must have a known baseline and the actor must resolve its
 actual route/constraints. Unknown backend or absent required provenance is still
-a gap. Do not select this option to bypass missing required config, invent video
-JSON, initialize a tracker or certify an unconfigured template. Add any actual
+a gap. Do not use this option to bypass required configuration, initialize a
+backend or certify an unconfigured template. Add any actual
 selected backend/authority files as bounded `--guard` paths when required.
 
 The command returns `status:evidence_matched`, never a complete installation-pass

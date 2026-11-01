@@ -9,12 +9,17 @@ change is not permission to migrate an older canonical store.
 Published [GitHub main](https://github.com/bladnman/director_pattern) is the upstream
 source of truth. An agent performs an update on an explicit request or recorded
 project-scoped standing authorization. The project Director arranges a tiny
-metadata check at its first/next active project interaction, at most once per rolling
+metadata check at its first/next active project-work opportunity, at most once per rolling
 24 hours, and defaults to notifying the user. No worker, optional outcome Director, bootstrap,
 or global skill starts these checks. This adds no daemon, scheduler, runtime
 installation, dependency, or wakeup. Existing project and host permissions still apply.
 
 ## Daily discovery and project preference
+
+Keep the first-reply check local and answer greeting-only requests without network.
+Arrange due discovery through a supported background route or the next active
+project-work step. Until it actually runs, retain the due check in context and at
+the next ordinary checkpoint; do not invent execution or a new greeting write.
 
 Use the project's authoritative receipt pointer (fresh default `.director/install.json`) to reconcile acceptance, separately from
 the current-conversation installation check and pending behavioral trials under
@@ -57,9 +62,7 @@ python3 /project/.director/update_check.py --root /project/.director check --rec
 python3 /project/.director/update_check.py --root /project/.director set-policy automatic --authorization 'sources/<user-source>/input.txt: explicit always-update request'
 ```
 
-The reused metadata helper retains its legacy default-root calculation. Always
-supply `--root /project/.director` before the command; never use that legacy default
-from this flat layout. The helper is otherwise byte-identical. For notify/off use the same
+Always supply `--root /project/.director` before the command. For notify/off use the same
 `set-policy` command and the actual source of that choice. The generated project-scoped `update-policy.json` has schema 1, `mode` (`notify`, `automatic`, or `off`),
 `authorization` (user-source reference), and `changed_at` (UTC Unix seconds).
 Preserve unknown project fields; reject an unknown schema or malformed policy
@@ -125,11 +128,11 @@ appropriate explicit decision. Do not repeatedly attempt the failed update on
 every turn; the daily discovery reservation already limits retries. Never run
 incoming downloaded helper code as an unattended installer.
 
-The current accountable owner retains scope, compatibility decisions, and
-acceptance. The authorized installation agent need not already be a Director;
-follow actual host/assignment rules. The Director may do bounded validated records/receipts directly and entrust
-substantial update execution to an explicit bounded worker. No Recorder is required. Every delegated assignment names worker/director role,
-outcome, scope, and authority. Unavailable capabilities remain visible.
+The current accountable owner retains scope, compatibility decisions and acceptance.
+The authorized installation agent follows its actual host/assignment rules; it need
+not already be a Director. The Director handles bounded validated records/receipts
+and delegates substantial update execution to a bounded worker. Each assignment
+names role, outcome, scope and authority. Report unavailable capabilities.
 
 ## Pin and inspect the incoming revision
 
@@ -334,10 +337,12 @@ verified receipt with exact payload hashes. Never label unknown/unpublished inpu
 as accepted publication. The exact published base and adapted/candidate payload
 are separate, even if their trees later become equal.
 
-If no known published base exists, the owner resolves the canonical upstream pin at
-the next permitted active check, compares the installed payload/provenance to that
-exact revision, and records the reviewed published baseline separately from local
-deltas; do not reinstall or promote acceptance to satisfy the checker. If transport
+If no known published base exists, retain the provenance gap. At the next authorized
+update or active project-work opportunity, resolve an exact canonical upstream pin,
+compare installed payload/provenance to that revision, and record the reviewed
+published baseline through the normal recording route, separately from local deltas.
+Then run discovery subject to its existing daily window. Do not reinstall, reset
+the cache or promote acceptance to satisfy the checker. If transport
 or comparison is unavailable, retain a visible pending provenance/check gap with
 the actual failure and next opportunity. Do not retry each turn or hide a permanent
 no-check state. Explicit notify/automatic/off preferences remain honored, including

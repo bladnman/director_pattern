@@ -25,8 +25,8 @@ capture them without another actor. Use direct state operations only if assigned
 and permitted by the canonical tracker policy. Do not independently change scope,
 approval or shared ownership. Required independent testing stays independent.
 
-Use descendants only when authorized by the assignment and host and useful for
-independent work. Before selecting any descendant, completely load
+Delegate useful independent subsets within your authorized assignment unless its
+explicit limits prohibit them. Before selecting any descendant, completely load
 [OPERATIONS](OPERATIONS.md#staffing-and-maintained-roles) and the selected project
 role's selection/authority guards; resolve missing/conflicting guards before
 dispatch and require the executor's full task references before affected action.

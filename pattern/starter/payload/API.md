@@ -6,10 +6,9 @@ structure, revisions and recorded evidence, not caller permissions, human identi
 real execution or truth. Existing trackers keep their actual verified adapter.
 Never initialize another store or migrate one merely to use these commands.
 
-The fresh installation has config schema 1, request-store schema 2 and exact format
-`director-request-bundles`. The default backend is the established
-bundle backend plus the reviewed stale-lock/configuration fence. The earlier experimental starter 2 single-JSON format is unsupported
-and incompatible; preserve it for separate explicit recovery, never overwrite it.
+The bundled helper accepts config schema 1, request-store schema 2 and exact format
+`director-request-bundles`. It rejects other formats without writing; preserve them
+for separately authorized recovery. Existing trackers use their own verified adapter.
 
 ## Current views and exact operations
 
@@ -76,7 +75,5 @@ installation evidence, staffing/effort/verification and role upkeep.
 [UPDATES.md](UPDATES.md) restores active-session daily discovery, project preferences
 and actual pinned safe updates. These action documents add no startup actors.
 
-The bundled backend differs from legacy only by post-lock inode/configuration fences:
-a waiter opened before rollback/reinstall must reject before touching the new store.
-The same inode fence protects init. Reopen the current store after such rejection;
-never retry through an old loaded instance. These checks add no schema or migration.
+After a store-replacement or configuration-fence rejection, reopen the current
+store; never retry through an old loaded instance. This also applies to init.

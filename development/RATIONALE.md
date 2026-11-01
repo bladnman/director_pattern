@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated October31,2026. This repository authors a
+Living design rationale · updated November1,2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -430,6 +430,14 @@ or shows that guidance is unreachable or no longer improves behavior.
 
 ## R8 — Separate the installed method from its workshop
 
+**November 1 route correction:** Supported v1 adoption examples now name
+README-v1/INSTALL-v1 and their manifest explicitly; an explicit lean choice links
+to that route. The current starter remains tracked-only. Reusing renamed generic
+guide links had sent a deliberate v1/lean choice back to the starter selector.
+The oracle follows the literal consumer link/prompt and preserves the selected
+package; no new installer mode or store migration is introduced. Trial-label history
+stays in development records rather than the current consumer guide.
+
 **Requirement:** Install only the method. Public development documentation and
 tests support maintenance but are not target-project installation payload.
 **Chosen layout:** Keep one repository to prevent rationale and method drifting,
@@ -446,6 +454,13 @@ installation payload. Raw conversations and internal references remain private.
 copying of authoring material, or unintended publication of private evidence.
 
 ## R9 — Make attention and active supervision visible without decoration
+
+**November 1 scope clarification:** The first-reply check belongs to the actual
+Project Director, whether defaulted or explicitly selected. An assignment is not
+an exemption for that role. Workers and scoped child Directors still skip it;
+complete selected reads, known guard/backend evidence, checked-only 🎬 and a normal
+same-turn answer on failure remain. The concrete oracle exercises all four role
+selections, not just an unassigned greeting.
 
 **October 31, 2026 — automatic first-reply check:** A later ordinary native greeting
 exposed an active-route gap after the earlier scoped release: the host hook said
@@ -918,6 +933,36 @@ adoption remain separate; preserve failed or unrun observations rather than
 describing them as passing. Revisit if the loaded bridge still fails a real host's
 delegation boundary or if the checkpoint delays ordinary direct answers.
 
+**Refined, November 1 — apply the exception already granted:** An installed
+Director again described an applicable host rule as requiring a separate user
+delegation request. On correction it acknowledged that its loaded AGENTS.md already
+qualified under the rule's explicit project-instruction exception. This supports a
+misclassification of the exception, not a finding that permission was absent or a
+particular model cannot delegate. Earlier greeting checks did not exercise this
+decision or actual worker execution.
+
+The [flat installer's loaded hook](../pattern/starter/install.py) and legacy
+[hook](../pattern/INSTALL-v1.md) now simply say: use subagents for substantial
+analysis and project changes, assign bounded work, stay available and evaluate
+results. This is the explicit project request. "When permitted," optional-actor
+lists and host-rule interpretation prose do not belong beside it: they obscure the
+action and make each executor solve the original debugging problem again. That
+reasoning stays here. The [Director foundation](../pattern/starter/payload/DIRECTOR.md)
+briefly requires a specific gap and stop, rather than self-implementation, if the
+actual tool is unavailable or delegation prohibited. Existing host authority holds;
+no project directive overrides a true user-only prohibition or creates a tool.
+
+**Preserved intent and regression oracle:** R2's protected conversation requires an
+actual bounded worker invocation and evaluated return on a project-change request
+that does not separately ask for delegation. R10's authority boundary requires a
+real user-only prohibition or unavailable tool to produce a specific limitation,
+without Director implementation; merely seeing the word "only" before an applicable
+exception is insufficient. R1/R18 discussion stays direct, with no compulsory
+second Director or specialist. Static route checks cover the recommended emitted
+hook, both role foundations and source-hook parity. Actual affected-model execution
+and independent review remain separate acceptance gates; successful source wording
+or an actor's promise to delegate is not evidence of launch or return evaluation.
+
 **Refined and superseded in part, October 30 — conversational startup and
 mandatory progressive loading:** The October 24 returned-result barrier remains
 for the actual startup package, with interface 1 and role resolution preserved.
@@ -1009,6 +1054,20 @@ separate from the fresh affected retry; neither successful startup nor this narr
 correction establishes universal host compliance.
 
 ## R11 — Update from a pinned public source without replacing project state
+
+**November 1 narrow timing refinement:** Keep greeting-only first replies local;
+arrange due metadata discovery through a supported background route or the next
+active project-work step. Until observed, it remains due in context and at an
+ordinary checkpoint, not a new greeting write or invented actor. Preserve rolling
+24-hour failure throttling and notify/automatic/off. Unknown publication requires
+an exact upstream pin and reviewed installed comparison through the authorized
+update/normal recording route; do not reset a cache or promote acceptance to pass.
+This narrowly supersedes discovery at the first active interaction when it is only
+a greeting and the host has no supported background route: discovery waits for the
+next active project-work step. The tradeoff favors a bounded prompt reply over
+immediate refresh; the check remains due, not silently waived. The oracle is a
+greeting with no network followed by observed due discovery on the next work step,
+plus unchanged failure throttle and preference behavior.
 
 **October31 starter correction:** These preservation/discovery obligations apply to
 the flat foundation too, through its deferred UPDATES guide and reused deterministic
@@ -1191,6 +1250,18 @@ trial gaps still cause false holds.
 
 ## R12 — Give people a readable front door without another contract layer
 
+**November 1 agent-guide correction:** The website's agent guide linked current
+`main` while repeating mandatory v1 manager/Recorder/roster and badge procedures.
+Those instructions conflicted with the newly selected flat source candidate.
+The guide now selects the actual package/manifest, preserves the three copyable
+requests and points to the applicable canonical protocols instead of restating
+their runtime organization. Verification treats inapplicable fields as inapplicable,
+not missing prerequisites. `llms.txt` uses a valid selector link. Published v1.1.0,
+unreleased source, installation and deployment remain distinct. The oracle resolves
+all canonical agent links to real files and keeps selected-package scope, exact
+requests, preservation and public-build boundaries. Source changes are not website
+deployment; the existing human narrative is unchanged.
+
 **Accepted direction, October 17:** A public site at `director.metal-sole.com`
 explains the director/worker/recorder division and gives visitors copyable requests
 for their existing project agent to install, check, or explicitly update the pattern.
@@ -1344,6 +1415,29 @@ in shared state become common, or teams need per-person ledgers.
 
 ## R15 — Allow subagents at every level, with named checks and batched records
 
+**November 1 narrow supersession — Git is recovery support, not agent permission:**
+The October 23 "under Git" condition could prohibit even useful read-only subagents
+in a legitimately non-Git project. The owner now explicitly permits useful bounded
+delegation there. Keep all actors in one shared project tree with file/resource
+ownership, report the review/rollback/cross-machine limits and preserve verified
+backups before writes. Git is recommended; initialize it only at the user's request,
+never create a worktree/checkout to satisfy the pattern. This trades Git's change
+history for explicitly limited local recovery, not for overlapping uncontrolled
+writes. The concrete oracle delegates a useful disposable implementation outside
+Git, evaluates its artifact, preserves owned preimages and creates no Git repository.
+An unavailable tool or actual higher-priority prohibition remains a separate gap.
+
+**November 1 flat-route correction:** The starter WORKER's "only when authorized by
+the assignment" wording had reintroduced an opt-in interpretation after R15 made
+bounded descendants the useful-work default. Its loaded AGENTS.md now explicitly
+requests useful independent worker subsets, and [WORKER](../pattern/starter/payload/WORKER.md)
+requests them unless the assignment's explicit limits prohibit it.
+Existing scope, shared capacity, selection guards, supervision and return evaluation
+remain. This is not a demand to split small/coupled work or permission to exceed a
+parent's scope; a genuine higher-priority restriction still controls. The oracle is
+an actual assigned worker using a useful bounded child without a second permission
+request, plus a scope/prohibition negative case, not a count of mentioned agents.
+
 **Problem:** Only directors were told to work in parallel. DIRECTION and MODELS said
 to seek independent work, but WORKER said to delegate only when explicitly
 permitted, and the assignment template offered a neutral "descendants permitted or
@@ -1420,6 +1514,17 @@ Actual host routing and absence of false saved-state claims remain behavioral
 checks, separate from fixture/schema guarantees.
 
 ## R16 — Separate replaceable engine from project-owned integration
+
+**November 1 route and phase clarification:** "Flat layout" in this decision meant
+the legacy pre-engine v1 layout, not starter 2/3. The supported transition and its
+callers now name that format and exclude incompatible stores. PROJECT retains the
+ownership rule at startup while requiring the full BOUNDARY manual before
+installation, layout work or engine updates. Other unqualified/transitive authority
+guards remain mandatory. The oracle resolves a known pre-engine v1 installation to
+that reviewed transition, leaves starter 3 on its own route, and stops unknown
+formats before changes. A greeting need not load layout procedures; a later engine
+replacement must load them before edits. Existing backup/interface/state protections
+are preserved, not summarized away.
 
 **Decided October 25:** Install upstream contracts and helper implementations in
 `.director/engine/`, separately from project-owned context, roles, policy,
@@ -1567,6 +1672,29 @@ history and unrun acceptance gates. Static edits can establish preservation and
 reachability; the next actual selected use must establish uptake.
 
 ## R18 — Start flat and make learning an explicit bounded loop
+
+**November 1 delegation clarification:** Flat removes compulsory coordination and
+specialist layers, not workers for substantial analysis or project changes. The
+host-loaded request is now a direct action instruction. Optional named actor choices
+remain in the detailed foundation; they no longer dilute the startup hook. Direct
+discussion and narrow validated recording stay with the owner. No new startup
+file, manager, permission ritual or permanent actor is introduced. See R10/R15 and
+the [affected-purpose disposition](BEHAVIOR_PARITY.md#delegation-exception-correction--november-1-2026).
+
+**November 1 instruction audit:** The live record guide still said the outcome owner
+could not accept its own outcome, contradicting one Project Director owning and
+accepting a flat worker result. It now states that the Project Director evaluates
+the whole submission and accepts; workers/scoped child Directors cannot self-accept
+for it. Required independent verification and human gates remain. Notes keep actual
+identities/handles and any project-required roster, without creating a flat roster.
+The action guides now state current guards directly: no backend initialization to
+pass a check, exact updater root, re-open after stale-instance rejection (including
+init), and untyped-note quarantine. Their code, schemas and wire/lifecycle order are
+unchanged. Runtime implementation anecdotes are removed; the reasons remain here.
+The shorter startup text retains complete selected reads, individual/aggregate
+output bounds, contiguous EOF coverage, recovery/stop and no hash-as-read claim.
+Knowledge matching and transitive action-reference phases were deliberately not
+loosened: an unknown scope or guessed miss cannot justify skipping required rules.
 
 **October 31 first-reply refinement:** Removing a setup actor did not make the
 Project Director's operational check optional. R9/R10 now require a concrete bounded

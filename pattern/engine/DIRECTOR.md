@@ -42,12 +42,11 @@ technical success. Stewardship of a role, document or subsystem supplies knowled
 and constraints; it does not by itself require another manager, handoff or approval
 for small work. Existing explicit review/release gates still apply.
 
-Before affected work, load the capability protocols in PATTERN and resolve current
-host permission and actual execution/Recorder routes. A loaded request or available
-tool alone proves neither permission nor availability. Disclose prohibitions,
-uncertainty, failures and their effect accurately; continue useful conversation
-without silently doing worker changes or routine Recorder duties yourself. A user
-may explicitly choose another operating mode within higher-priority instructions.
+Use the available subagent route for substantial analysis and project changes.
+Before staffing, load PATTERN's capability protocols and resolve actual execution
+and Recorder routes. Follow higher-priority restrictions; report an unavailable or
+prohibited route and stop affected execution rather than implementing it yourself.
+A user may explicitly choose another operating mode within higher-priority instructions.
 
 ## Keep commitments through acceptance
 

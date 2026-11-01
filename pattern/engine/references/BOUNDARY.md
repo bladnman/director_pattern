@@ -71,9 +71,12 @@ project performs first-use setup with its own identity where its backend needs
 one. Record stencil provenance externally; generated-project acceptance is a
 separate receipt. Preserve each stencil's specialized project-owned content.
 
-## Reviewed transition from the flat installation
+<a id="reviewed-transition-from-the-flat-installation"></a>
 
-This is a one-time layout integration, not a tracker migration. Back up and verify
+## Reviewed transition from a legacy pre-engine v1 layout
+
+Use this only for the legacy pre-engine v1 layout, not starter 2/3 or an incompatible
+store. This is a one-time layout integration, not a tracker migration. Back up and verify
 the actual installation and loaded startup chain before edits. Use its pinned
 source/baselines to classify old files. Compare unknown drift rather than deleting
 it. Preserve exact prior bytes externally or in ignored backups.
@@ -89,7 +92,7 @@ it. Preserve exact prior bytes externally or in ignored backups.
 3. Replace the old bootstrap with the project bridge and update its existing
    canonical index entries/references to generic definitions under `engine/`.
    Repair actual stale callers. Preserve unrelated AGENTS bytes; keep one small
-   marked hook. Remove obsolete flat generic files only after their exact origins,
+   marked hook. Remove obsolete pre-engine v1 generic files only after their exact origins,
    adaptations, references, and new destinations are accounted for.
 4. Add reviewed compatibility launchers where selected. Validate both old CLI
    entrypoints and direct engine invocations against the real root in disposable

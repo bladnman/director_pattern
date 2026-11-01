@@ -14,6 +14,34 @@ semantics. Those defects were not authorized consequences of fewer actors. The
 current starter3 default restores the established request-bundle backend; existing
 experimental2 data and trial evidence remain unchanged, with no silent migration.
 
+## Delegation exception correction — November 1, 2026
+
+The prior recommended flat route already requested useful delegation, but its
+"when permitted" wording and opt-in WORKER sentence left a failed interpretation
+unresolved. An installed actor subsequently acknowledged that its loaded AGENTS.md
+already satisfied the host's exception; it had wrongly required another user request.
+This is distinct from an actual higher-priority prohibition or missing capability.
+
+| Owning purpose | Current disposition and active route | Concrete acceptance oracle |
+|---|---|---|
+| R2/R15: keep substantial execution in bounded workers while the owner remains available. | Preserve the mechanism: emitted AGENTS hook positively requests subagents, DIRECTOR requires substantial analysis/project changes to use them, WORKER uses useful independent subsets within scope. No new actor layer. | A fresh affected-model project-change request without a delegation hint actually launches a bounded worker and evaluates its returned evidence; an applicable project-instruction exception is not rewritten as user-only permission. |
+| R10: obey actual host authority and report unavailable routes without silently changing roles. | Preserve: the loaded hook directly requests subagents; the foundation retains a short specific blocked-route/stop boundary. Debugging/host-exception explanations stay in maintainer rationale. | A real user-only prohibition or unavailable tool produces a truthful gap and no substantial Director implementation. A tool listed on disk alone is insufficient. |
+| R1/R18: keep ordinary conversation direct and avoid compulsory organization. | Preserve: direct discussion, critical judgment and narrow validated recording remain Director duties; optional specialized actors stay in the detailed foundation rather than the delegation hook. No new startup file or manager. | An ordinary discussion answer stays direct; a project change does not get implemented by the Director merely because no department exists. |
+| R1/R18: one accountable flat owner can accept a worker result without inventing a manager. | Correct RECORDS' contradictory no-owner-acceptance sentence: Project Director evaluates and accepts the whole submission; workers/scoped children submit. Human and required independent gates remain. | One Project Director + worker reaches review→acceptance; a pending human gate still blocks; a child cannot self-grant project acceptance. |
+| R9/R10: checked Project Director identity and complete reads must not depend on implicit role selection. | Clarify hook/START for default and explicitly selected Project Directors; worker/scoped-child exemption stays. Shorter START retains individual/aggregate output bounds, contiguous EOF reads, recovery/stop and no hash-as-read substitution. | Default/explicit root check, worker/child skip; truncated combined output is recovered completely before dependent work. |
+| R9/R17/R18: recognize live actors without mandatory roster bookkeeping. | RECORDS keeps assignment identities, actual handles and project-required existing roster; it does not create a flat roster/cursor. | Stable worker name/handle without roster allocation; an existing required roster remains intact. |
+| R11: discovery is real, throttled and independent of the greeting's local check. | Keep due discovery for supported background execution or the next active project-work step; retain 24-hour failure window/policies, exact updater root and reviewed-pin recovery for unknown provenance. | Greeting has no network; an observed due check respects the window; unknown provenance cannot be promoted or fixed by resetting cache. |
+| R6/R7/R18: short action instructions must retain compatibility/recovery guards. | Remove migration/implementation anecdotes while retaining incompatible-format refusal, reopen-after-stale-instance rejection including init, and untyped-note quarantine/replay. Knowledge query matching and wire/protocol phases remain unchanged. | Existing store/fence, unclassified-note and daily-discovery fixtures remain applicable; no backend/state/schema/wire change. A guessed selector miss still grants no exemption. |
+| R8/R10/R16: explicit package selection must survive renamed guides and distinct formats. | V1 adoption/lean links explicitly select README-v1/INSTALL-v1/manifest; legacy pre-engine transition excludes starter 2/3. PROJECT keeps ownership at startup and phases the complete boundary manual before layout/install/update action. | Literal v1/lean links retain their package; starter 3 stays on its own route; unknown formats stop. Required boundary text is read before later engine changes. |
+| R15: shared ownership and recoverability should support useful delegation, not require implicit Git setup. | Dated narrow supersession removes Git as a delegation prerequisite; retain one shared tree, bounded file/resource ownership, verified pre-write backups and truthful recovery limits. | A useful disposable non-Git implementation uses actual subagents and evaluated output without Git init/worktrees; recovery limitations stay explicit. |
+| R8/R12: the agent front door must reach the selected canonical method without imposing another package's organization. | Replace duplicated v1 instructions with actual package/manifest/protocol selection, preserve exact install/verify/update requests and correct the dead discovery link. Release/source/deployment claims remain separate. | All canonical agent pointers resolve to real files; copied requests stay exact; selected flat work does not acquire compulsory v1 roles; public build remains allowlisted/private-state-free. |
+
+The [validation record](DESIGN_NOTES.md#delegation-exception-correction--november-1-2026)
+separates source-route checks, actual emitted tool calls/returned results, and
+independent review. Static wording checks and earlier greeting/badge passes do not
+establish this worker-execution behavior. No change to request custody, native
+backends, status folders, update discovery or learning protocols is implied.
+
 ## Why each mechanism existed, and the new route
 
 | Obligation and original reason | Flat route / deliberate difference | Evidence and remaining proof |

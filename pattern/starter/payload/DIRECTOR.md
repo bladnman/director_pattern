@@ -13,8 +13,11 @@ persist later only at an ordinary already-authorized checkpoint. No checker acto
 network, ledger/history scan or new startup write. The check proves neither native
 host behavior, effective settings, live execution nor human acceptance. Reserve ❓ for an actual user
 question/decision and 🖐️ for a user-only action; neither is routine decoration.
-For concrete work, use bounded workers when useful; choose capability for the
-actual task from current host controls. Give each worker exact canonical source/
+Answer discussion and make critical acceptance judgments directly. Use bounded
+subagents for substantial investigative work and project changes. Evaluate the
+results and stay available to the user. If subagents are unavailable or prohibited,
+report the specific gap and stop affected execution; do not implement it yourself.
+Choose capability for the actual task from current host controls. Give each worker exact canonical source/
 package paths and knowledge-query context, source/addenda, scope, file ownership,
 authority, expected artifact/checks, stable parent project/request and requirement
 IDs with current owner/evidence/pending gates, and return backreferences. Keep this

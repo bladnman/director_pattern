@@ -1131,3 +1131,90 @@ Learning/manual procedures remain action-time contracts; these greeting checks d
 not exercise them. No runtime payload, installer or manifest change was needed for
 this documentation closure; installed runtime provenance remains the published
 first-reply correction at `04dd95d`.
+
+## Delegation exception correction — November 1, 2026
+
+The reported installed refusal was followed by the same actor's acknowledgment
+that its loaded AGENTS.md already met the actual host exception. That observation
+does not establish an absent tool, a genuine user-only prohibition or a model-wide
+inability. The recommended flat hook is now an unqualified positive delegation
+request with bounded assignment and return evaluation. Its short production rule
+contains neither the old qualifier nor host-exception debugging prose. The Director
+has a separate short unavailable/prohibited-route stop boundary; the Worker keeps
+useful descendants within assigned scope. The legacy hook has the same directive,
+with its existing staffing/state route unchanged.
+
+At the initial minimal delegation checkpoint, all 16 package-boundary/source-route
+tests passed in 2.319 seconds; `git diff --check` passed. They inspect the actual
+recommended installer's emitted hook, source-hook parity and both selected roles,
+and check the direct request,
+worker scope and no-silent-implementation fallback while
+retaining direct discussion/narrow recording. These are instruction-route checks,
+not proof that a model dispatched. The acceptance oracle requires an actual fresh
+affected-model work request without an added delegation hint, a real bounded worker
+handle, returned artifact/checks and owner evaluation. Genuine prohibition/tool-gap
+and direct-discussion cases stay distinct. At authoring, those actor trials and
+independent review remain pending; do not relabel earlier greeting checks as them.
+
+A subsequent bounded instruction audit found a contradictory final-owner acceptance
+sentence, an unnecessary implicit-role qualifier on the root check and a surviving
+default roster reference. These were clarified without changing state code/schema,
+human/independent gates or wire/lifecycle order. Direct discussion/judgment now sits
+beside the execution delegation rule. Startup read wording was shortened while
+retaining combined-output bounds, EOF coverage and recovery before action. Action
+guides keep exact updater root, stale-instance rejection recovery and legacy-note
+quarantine without debugging chronology. Daily discovery is arranged independently
+of the greeting through a supported route/next project-work opportunity, with its
+existing failure window and provenance review. Knowledge matching and transitive
+action-reference requirements were intentionally not relaxed. Final source checks
+and affected native-role observations must use this later candidate explicitly;
+earlier frozen trials remain separate evidence.
+
+The supported-v1/lifecycle audit separately repaired literal v1/lean guide routes,
+qualified the pre-engine layout transition and phased its full boundary manual
+before layout/install/update work while retaining startup ownership. Positive
+legacy delegation rules replace the negative permission-search caveats. A dated R15
+owner decision permits useful delegation without Git while retaining shared-tree
+ownership, verified pre-write backups, honest recovery limits and user-only Git
+initialization. Consumer-only duplicated badge/experimental trial chronology was
+removed without changing runtime triggers. Targeted source route/guard tests and
+independent review apply; a real disposable non-Git actor observation remains a
+separate acceptance oracle. These edits change no helper or store schema.
+
+After the final role-scoped hook and audit corrections, all 22 package/source-route
+tests passed in 1.024 seconds and `git diff --check` passed. An earlier frozen
+candidate also passed 36 package, starter-store/learning and startup-checker tests
+in 10.366 seconds; later changes affected instruction specificity and consumer
+routes, not helper code. Neither count establishes native delegation or acceptance.
+
+Three clean native Codex CLI cases subsequently ran in temporary folders outside
+the source checkout's instruction hierarchy, configured for `gpt-6.1-terra` with
+`xhigh` reasoning. Actual tool traces showed: the root Director dispatched three
+bounded workers; an assigned worker dispatched one useful child; and a substantive
+implementation request dispatched two workers before their code changes, returned
+eight passing tests and received parent evaluation without parent code writes.
+These observations used the following near-final snapshot, not the later final
+role-addressed hook or restored extent/adapter wording:
+
+| Instruction source | SHA-256 |
+|---|---|
+| Installer/hook | `98093b706a5a694231608d3ef11622ce2b58143b5d67318f97b2f0be673e0d1c` |
+| START | `fbbc5220248baf564ff10019822a9049266fa3eebe83053ae4e3222389ff7c8a` |
+| DIRECTOR | `4635687d67fdfe6de6ffe0a48b9ac748e154479f066c6404841f7dcc94ef6c7f` |
+| WORKER | `e68bd41968c4b20b84dac064dc9342aaf3b13e65a1ed22b2c7f80e25ef84b9e8` |
+
+Earlier fixtures inside the source checkout inherited its ancestor AGENTS.md and
+were confounded. They remain evidence, but are not a valid old-control comparison
+or clean isolated trial. The actual desktop failure and these finite successful
+cases do not establish deterministic model improvement, universal compliance or
+an effective-cost comparison. Final installed-target Terra and two Claude Code
+observations remain separate pending gates; publication of this source candidate
+does not accept every target installation.
+
+The source-only public agent front door now selects the actual package and resolves
+its manifest/update links instead of imposing v1 staffing on the flat candidate.
+All nine site contract tests passed, including actual canonical-path resolution,
+the three unchanged copied requests and the ten-file public/private build boundary.
+An initial run exposed a stale inherited exact-phrase assertion for the legacy
+specialty rule; the replacement checks its current whole-owner/no-forced-manager
+meaning. No HTML/style/runtime-helper change, rendered-site QA or deployment ran.

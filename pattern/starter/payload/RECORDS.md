@@ -73,9 +73,9 @@ models, identities, or outcome owner phases. Map them onto existing validated fi
 | `owner` set by `plan` | Stable accountable outcome owner identity for the whole outcome, not each specialty or transient attempt. |
 | `acceptance` list | All known completion obligations and criteria, including release verification and follow-up. The evolving detailed approach belongs in outcome owner artifacts/activity. |
 | `dispatch` and `execution_receipt` | The outcome owner's actual execution handle and host receipt. Extra receipt keys carry selected role/reference package, requested and actual model/effort, and identity; acknowledgment only when actually received. |
-| `note` events and current activity | Specialist assignments and handles, read acknowledgments, evaluations and rework, partial results, observed status, obligations/resume pointers, and the identity roster/cursor. |
-| `submit` → review | Integrated outcome owner submission to the Director. Worker-level evaluation does not submit the whole outcome; outcome owner responsibility persists while its attempt waits. |
-| `accept` event `director`; stored `director_acceptance.director` | The project Director's final decision and identity. A outcome owner does not close its own outcome; Director rework stays with the same outcome owner and outcome. |
+| `note` events and current activity | Assignment identities and actual handles, read acknowledgments, evaluations and rework, partial results, observed status and obligations/resume pointers. Preserve an existing roster/cursor when project policy requires it; do not create one for the flat starter. |
+| `submit` → review | Integrated worker or scoped child Director submission for Project Director evaluation. The accountable owner retains the whole outcome while a submission waits. |
+| `accept` event `director`; stored `director_acceptance.director` | The Project Director evaluates the complete submission and makes the final acceptance decision. A worker or scoped child Director cannot self-accept for the Project Director. Required human gates and independent verification still apply; rework stays with the same outcome owner and outcome. |
 
 Unknown top-level event keys are rejected, and canonical fields are reconstructed
 by replay with exact equality. Do not bolt outcome owner metadata into request.md or

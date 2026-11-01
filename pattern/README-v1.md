@@ -4,8 +4,9 @@ The [ownership boundary](engine/references/BOUNDARY.md) separates replaceable
 `engine/` from project-owned context, roles, policy, adapters, identity pool, and
 state. The manifest partitions engine files, create-once project seeds, and thin
 compatibility launchers. An update replaces only a compatible verified engine;
-existing project seeds are preserved. A flat installation needs the boundary's
-one-time reviewed layout integration before this fast replacement route applies.
+existing project seeds are preserved. A legacy pre-engine v1 layout needs the
+boundary's one-time reviewed integration before this fast replacement route applies.
+That procedure does not apply to starter 2/3 or migrate an incompatible store.
 
 
 **[v1.1.0](https://github.com/bladnman/director_pattern/releases/tag/v1.1.0) · October 27, 2026.** This subtree is a self-contained package
@@ -109,8 +110,8 @@ separate evidence.
 Ask the agent working in that project:
 
 ```text
-Read this package's README.md and follow its INSTALL.md to install the candidate
-Director Pattern in the target project. Preserve existing instructions, local
+Read this package's README-v1.md and follow INSTALL-v1.md to install the legacy v1
+Director Pattern from manifest.json in the target project. Preserve existing instructions, local
 adaptations, unfinished work, and the canonical tracker. Copy only the selected
 manifest payload, fill PROJECT.md with enduring context and canonical policy/state
 locators (role index, capability/authority policy, Recorder routing policy, identity
@@ -119,14 +120,14 @@ observations and setup results in receipts, not PROJECT or another loaded cache.
 Do not publish, migrate requests, or copy the whole source repository.
 ```
 
-Use this [package entrypoint](https://github.com/bladnman/director_pattern/blob/main/pattern/README.md)
+Use this [v1 package entrypoint](https://github.com/bladnman/director_pattern/blob/main/pattern/README-v1.md)
 when pointing an agent at the published repository. A staging clone is optional
 transport, not a request to adopt everything in the checkout.
 
-Follow [INSTALL.md](INSTALL.md). [manifest.json](manifest.json) is the authoritative
+Follow [INSTALL-v1.md](INSTALL-v1.md). [manifest.json](manifest.json) is the authoritative
 copy list: base files are always payload; tracked files are added only for a new
 bundled tracked store. Preserve their relative paths under the target `.director/`.
-README, INSTALL, and manifest guide the operation; they are not installed payload.
+README-v1, INSTALL-v1, and manifest guide the operation; they are not installed payload.
 No maintainer rationale, user-source history, tests, private archive, repository
 metadata, or authoring instructions belong in the target installation.
 

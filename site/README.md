@@ -93,6 +93,16 @@ The site makes no adoption, performance, customer, or behavioral guarantees.
 
 ## Local verification
 
+November 1, 2026, source-only agent-guide correction: installation/update discovery
+now selects the actual package and manifest instead of imposing legacy-v1 staffing
+on the flat candidate. The three copied requests remain unchanged; verification
+checks only applicable installed requirements. `llms.txt` uses the canonical
+selector rather than a missing update path. Runtime role/badge/protocol details
+stay in the selected package. The human page and assets are unchanged; these source
+edits do not deploy or update the live website.
+All nine site contract tests passed, including the ten-file build and actual
+canonical guide-link resolution. No rendered-site check or deployment ran.
+
 October 24, 2026, enduring-context copy: all 8 site tests and the ten-file build
 passed. The obsolete host-mapping phrase assertion was removed while role/identity
 and asset-boundary checks remain. This semantic copy change has no layout or style
