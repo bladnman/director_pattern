@@ -2,28 +2,64 @@
 
 ## Installation evidence
 
-🎬 identifies the checked Project Director, not workers or a scoped child Director.
-Before using it in this conversation, at the first staffing/active operation and
-after relevant installation changes, the owner directly checks the
-actual complete START/selected role/project guards and role authority, selected
-payload presence/links, canonical store/config and exact authoritative installation
-receipt/baseline. Resolve relevant current host capability controls and retain
-unknowns honestly. Use deterministic file hashes and validated compact state/
-config inspection, not a checking model or loading every helper into model context. Inspect
-local drift against its managed hashes, preserve adaptations, and record actual
-checks, role, source pin, gaps and date in the existing receipt/notes. No setup
-actor, model catalog or whole-history read is needed. Reuse unchanged checks within
-the conversation; changed startup/role behavior needs its affected checks.
-Record/evaluate the actual direct check once in the ordinary receipt/checkpoint,
-with date/role, selected route, drift, capability unknowns and next action. Then
-🎬 means this operational check passed; if a required check is incomplete or fails,
-retain the unverified limitation and no badge. Do not withhold ordinary discussion
-while arranging a permitted check. Say what was checked and what remains unrun. File integrity, host-loaded
-startup, native fresh behavior, live supervision, human acceptance and publication
-are separate claims. A technical install receipt is not automatic acceptance.
-The fresh install's exact receipt is `.director/install.json`; a mature project's
-explicit pointer wins. Never choose a receipt by newest filename/time. Unknown
-provenance is a visible review condition, never evidence for blind replacement.
+🎬 identifies the operationally checked Project Director, never an assigned worker
+or scoped child Director. Before the first ordinary reply in every conversation,
+including a greeting/identity answer, the Project Director proactively does this
+small check; it does not wait for staffing or user prompting. A later badge/identity
+question retries the currently possible check if missing/stale, rather than merely
+explaining that setup is incomplete. A blocked check gives its actual specific gap
+and an ordinary answer without 🎬, not a question or a heavy setup ritual.
+
+First completely load the selected startup instructions/guards and resolve actual
+role/authority. Then run the concrete local command (fresh installation):
+
+```sh
+python3 .director/startup_check.py
+```
+
+It reads only the exact `.director/install.json` provenance, known baselines for
+AGENTS/START/DIRECTOR/OPERATIONS, this checker and explicit selected guards, plus a bounded
+config header. It imports no tracker, scans no requests/sources/history, makes no
+network request and writes nothing. Read-only technical config/receipt/hash
+inspection is distinct from canonical request/source/history I/O; it does not
+activate TOOLING/RECORDS, learning or a new persistence step. Those protocols remain
+mandatory before their actual operations. Hold this check's output in active
+context; record it later only at an ordinary authorized checkpoint. Reuse unchanged
+current-conversation facts; relevant changed startup bytes require recheck.
+
+A mature project supplies its exact reviewed command, for example:
+
+```sh
+python3 .director/startup_check.py --root .director --receipt .director/SOURCE.json --config .producer/config.json --guard .director/PROJECT.md --guard .director/CAPABILITY_POLICY.md
+```
+
+Receipt `managed`, `managed_files` or `installed_files` baselines may be maps of
+project-relative paths to SHA256 (or `{sha256:...}`), or a managed_files list of
+`{path,installed_sha256}`. Every selected guard needs a known baseline, not mere
+existence; never select a receipt by filename recency. The source needs canonical
+URL/full SHA and truthful published boolean; an unpublished verified candidate can
+be checked without being promoted to published. Missing/unsafe/symlink/oversized/
+unknown evidence blocks the check. Generated template transport provenance is not
+a configured installation receipt.
+
+Lean/custom backends need no generic JSON store. An explicitly already-read
+project declaration can instead bind `--backend-contract <maintained-project-path>`;
+that contract's bytes must have a known baseline and the actor must resolve its
+actual route/constraints. Unknown backend or absent required provenance is still
+a gap. Do not select this option to bypass missing required config, invent video
+JSON, initialize a tracker or certify an unconfigured template. Add any actual
+selected backend/authority files as bounded `--guard` paths when required.
+
+The command returns `status:evidence_matched`, never a complete installation-pass
+or role grant. Before the badge, the actor confirms all three: complete actual
+startup reads/resolved Project Director role; every selected shared/role guard in
+the command; and this project's authoritative backend/config or explicit contract.
+An unrelated receipt-listed file is not a backend declaration, and an omitted role
+guard is not checked merely because the command matched other bytes. Missing or
+ambiguous authority/backend prevents the badge. Hashes do not prove consumed instruction text, caller
+permissions, full ledger integrity, effective model, native host behavior, liveness
+or acceptance. 🎬 claims only that current role plus this local operational check.
+Do not wait for those broader unproved claims before an otherwise valid badge.
 
 ## Staffing and maintained roles
 

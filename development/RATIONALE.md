@@ -447,6 +447,37 @@ copying of authoring material, or unintended publication of private evidence.
 
 ## R9 — Make attention and active supervision visible without decoration
 
+**October 31, 2026 — automatic first-reply check:** A later ordinary native greeting
+exposed an active-route gap after the earlier scoped release: the host hook said
+before task work, START only conditioned the badge, DIRECTOR permitted unchecked
+discussion, and OPERATIONS waited for staffing/active work. An identity follow-up
+loaded the role but treated the check as optional; a badge question read more prose
+without performing the described check. This is an observed trigger/execution gap,
+not evidence of stale files, a deliberate policy choice or a model-level cause.
+
+The Project Director now loads its package even for the first greeting and directly
+runs one concrete bounded read-only local evidence check before the first ordinary
+reply. A badge question retries currently available evidence rather than only
+explaining omission. The helper checks exact receipt/source, selected route/guard
+hashes and applicable config header or explicit lean/custom contract; it returns
+evidence, not role authority or complete installation approval. The actor must
+confirm complete selected reads, role/shared authority and actual backend binding.
+If a required fact is unavailable, answer normally with the specific gap and no
+badge. Workers and scoped child Directors skip this Project Director check.
+
+No checker actor, network, tracker import, request/source/history read, store init
+or startup write is added. Keep the evidence in active context; persist later at
+an ordinary authorized checkpoint. This minimal technical inspection does not
+activate full tracker manuals or weaken their later capture/mutation/recovery gates.
+Correct lean/manual backends need no generic JSON store; transport-only template
+provenance does not become a configured setup receipt. Relevant changed files are
+[hook/installer](../pattern/starter/install.py), [START](../pattern/starter/payload/START.md),
+[DIRECTOR](../pattern/starter/payload/DIRECTOR.md),
+[OPERATIONS](../pattern/starter/payload/OPERATIONS.md) and
+[startup_check.py](../pattern/starter/payload/startup_check.py).
+The focused [validation](DESIGN_NOTES.md#first-reply-startup-check--october-31-2026)
+separates observed native CLI turns from desktop/other-host guarantees.
+
 **October31 starter correction:** R18 restores checked identity, sparse attention
 markers and periodic labeled SitReps; a direct owner check replaces the compulsory
 setup actor without changing the 🎬 operational-check meaning. Earlier checked-badge reasoning remains below.
@@ -581,6 +612,19 @@ if selections feel forced, categories harden into authority signals, or rotation
 and late-report protection diverge across owners.
 
 ## R10 — Assign roles explicitly; preserve project ownership across entry routes
+
+**October 31, 2026 — partial supersession for the first Project Director reply:**
+The earlier plain-factual-question regression below excluded hash checks before an
+answer. R9's new first-reply rule deliberately supersedes only that exclusion for
+the Project Director's first ordinary reply, including hello/identity. One bounded
+local route/receipt/applicable-config check is now required; later unchanged replies
+reuse it. Assigned workers and child Directors still skip it, and discussion does
+not activate Recorder, request/history, learning or metadata-network protocols.
+The tradeoff is finite first-reply I/O for a meaningful automatic checked identity;
+it is not permission to pull every manual or validate all history before greeting.
+Actual CLI timings/commands are recorded in the focused validation, not estimated
+as universal startup speed. All other action references retain their progressive
+before-use triggers and authority.
 
 **Accepted decision, October 17:** A new project conversation defaults to that
 project's director regardless of who opened it. Explicit user/assigner roles
@@ -1504,6 +1548,15 @@ history and unrun acceptance gates. Static edits can establish preservation and
 reachability; the next actual selected use must establish uptake.
 
 ## R18 — Start flat and make learning an explicit bounded loop
+
+**October 31 first-reply refinement:** Removing a setup actor did not make the
+Project Director's operational check optional. R9/R10 now require a concrete bounded
+local check automatically before the first ordinary response, including greetings,
+and actual retry on a missing-badge question. The flat/default role and exact worker
+packages remain; workers/child Directors bypass this check. Technical evidence
+stays in context without backend/history operations or a new startup receipt write.
+This targeted correction does not claim native startup on every host, full ledger
+validation, permission authentication or broader behavior from a badge.
 
 **Correction, October31 — preserve the reasons as well as fewer actors:** The first
 starter2 implementation incorrectly treated record mechanics and operational duties

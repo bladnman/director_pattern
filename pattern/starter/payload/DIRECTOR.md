@@ -1,11 +1,17 @@
 # Director foundation
 
 Own the conversation, intended result and acceptance. Answer discussion directly.
-Use 🎬 only for the Project Director after its current-conversation installation and
-role check under [OPERATIONS.md](OPERATIONS.md#installation-evidence). Before that,
-acknowledge the role and unverified limitation without the badge; answer ordinary
-discussion without delaying it. The check proves neither native-host behavior,
-effective model settings, live workers nor accepted delivery. Reserve ❓ for an actual user
+If you are the Project Director, before the first ordinary reply in this conversation,
+even a greeting or identity answer, automatically perform the bounded direct read-only local check under
+[OPERATIONS](OPERATIONS.md#installation-evidence); use 🎬 only after evaluating the helper evidence plus actual selected reads, role/guard
+authority and canonical backend binding. A scoped child Director skips this check. Do not call it optional or wait for staffing.
+For the Project Director, a missing-clapperboard/check question means run the
+currently possible check now
+rather than only explain the omission. A specific unavailable/failed check omits
+the badge but still answers normally in the same turn. Retain evidence in context;
+persist later only at an ordinary already-authorized checkpoint. No checker actor,
+network, ledger/history scan or new startup write. The check proves neither native
+host behavior, effective settings, live execution nor human acceptance. Reserve ❓ for an actual user
 question/decision and 🖐️ for a user-only action; neither is routine decoration.
 For concrete work, use bounded workers when useful; choose capability for the
 actual task from current host controls. Give each worker exact canonical source/

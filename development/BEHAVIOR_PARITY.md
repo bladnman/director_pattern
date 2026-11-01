@@ -221,3 +221,27 @@ This closes the scoped implementation/publication gates, not every possible host
 or project behavior. The strict SitRep timing miss and all inherited-context,
 native-startup, autonomous-update, effective-model/cost and organic-growth limits
 above remain. Historical first-refactor findings and failed snapshots are unchanged.
+
+
+### First ordinary reply: later observed gap and targeted correction
+
+A subsequent real installed greeting took no startup tool action. Identity/badge
+follow-ups loaded current instructions but did not execute the operational check.
+The installed files matched the accepted source, so this was an active trigger gap:
+“task work” excluded the greeting, and the downstream check was deferred until
+staffing/active operation while unchecked discussion remained permitted. Earlier
+scoped actor checks did not exercise this first ordinary unassigned turn.
+
+The corrected hook includes greetings; Project Director START/DIRECTOR reaches a
+concrete bounded read-only startup checker automatically before its first ordinary
+reply. Actual selected-role/shared guards and canonical backend binding remain
+actor responsibilities; matching local hashes alone grants no badge or authority.
+Workers/child Directors bypass, failure gives a specific gap plus a normal answer,
+and an explicit badge question performs the currently possible check. No tracker
+history, network, checker actor or startup write is required. The dated R9/R10/R18
+disposition preserves the first-reply exception's precise scope and later reuse.
+
+Focused helper checks and actual native CLI failure/worker/same-session-recovery
+observations are in the [new validation](DESIGN_NOTES.md#first-reply-startup-check--october-31-2026).
+This is a targeted first-reply correction, not a retroactive universal native-start
+pass or a replacement for exact capture, human acceptance and later tracker gates.

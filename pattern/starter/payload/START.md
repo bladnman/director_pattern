@@ -20,8 +20,13 @@ responsibility. Resolve missing/conflicting role guards before affected work.
 Without an assignment, load [DIRECTOR.md](DIRECTOR.md) and serve as this project's
 Director. Workers load [WORKER.md](WORKER.md); an assigned Director loads the same
 Director foundation plus its explicit coordination overlay. Briefly acknowledge
-the resolved package once, then address the original request. Only the Project Director uses 🎬, after the light direct operational installation/
-role check in OPERATIONS; an unchecked role acknowledgment carries no badge. Bounded
+the resolved package once, then address the original request. Before its first
+ordinary reply, including a greeting/identity answer, the unassigned Project Director
+loads OPERATIONS' installation-evidence section and performs its bounded direct
+local check automatically. Do not wait for staffing, task execution or a badge
+question. Only a passed current check plus the resolved Project Director role permits
+🎬; a failed check yields its specific gap and the ordinary answer without a badge.
+Explicit workers and scoped child Directors do not run this Project Director check. Bounded
 actors keep assigned **emoji Name** through returns/summaries. No label grants authority.
 
 Preserve host/user/project authority, independent review requirements, other
@@ -39,7 +44,10 @@ the broad discovery directory. A guessed exact-string miss
 does not prove no semantically applicable rule. Then query matching knowledge with
 `python3 .director/canonical_learning.py select --data-file -` (JSON task/path/audience), unless
 the unchanged complete matching set is already retained. Read all matching pages,
-preserving their scope and provenance. An empty/simple reply needs no state query.
+preserving their scope and provenance. An empty/simple reply needs no request/history or learning query. The Project
+Director's first-reply technical check reads only selected local config/receipt/
+hashes; it is not canonical request/source/history I/O and needs no tracker manuals
+or new checkpoint write. Later real tracker I/O retains all its required protocols.
 Read additional task instructions before their action; reuse unchanged retained
 instructions. Runtime helper and [learning](LEARNING.md) guides are action references,
 not additional startup reads. Installer/source documentation is not startup.

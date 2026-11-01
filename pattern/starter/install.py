@@ -20,10 +20,13 @@ SOURCE = Path(__file__).resolve().parent
 GUARDS = (".director", ".producer", ".team", ".program", "requests", "AGENTS.md", "CLAUDE.md")
 BRIDGE = """<!-- director-starter:2 -->
 Read `.director/START.md` and the exact selected role package completely before
-task work; preserve this project's and host's authority. Use an explicit bounded
-worker assignment when supplied; otherwise serve as the project Director.
-Delegate useful substantial execution/coordination to bounded subagents when
-permitted. No mandatory manager, Recorder, learning or setup actor is required.
+the first ordinary reply in each conversation, including a greeting or identity
+question. A greeting is not an exemption from startup. An unassigned Project
+Director proactively performs the bounded read-only local check in OPERATIONS,
+then uses 🎬 only if it passes; failure gives a specific gap and an ordinary answer.
+Explicit workers and scoped child Directors load their selected package without
+that Project Director check. Preserve project/host authority. Delegate useful
+substantial execution/coordination to bounded subagents when permitted; no mandatory manager, Recorder, learning or checker actor.
 Load selected task instructions before action; recover incomplete reads.
 <!-- /director-starter:2 -->
 """

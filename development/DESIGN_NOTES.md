@@ -1041,3 +1041,55 @@ No new tests or code changes are implied by a later documentation commit; the fu
 miss, inherited-context/native-startup limits, unknown effective-model/cost optimum,
 manual-update scope and organic-growth limits remain unaltered. No tag or site
 deployment was part of this source/installation closure.
+
+
+## First-reply startup check — October 31, 2026
+
+The later installed ordinary-greeting trace exposed behavior outside the earlier
+scoped acceptance: no startup tools on greeting, then role prose without an actual
+check, then an explanation of incomplete badge setup. Current published files were
+present. Source inspection found the host hook limited startup to task work and
+OPERATIONS deferred check until staffing/active work, while DIRECTOR permitted
+unchecked discussion. The correction makes the first ordinary Project Director
+reply and explicit missing-badge recovery reach a concrete local checker; it does
+not add another actor or backend operation.
+
+The helper reads only bounded exact source/receipt, selected route/guard hashes and
+an applicable config header or declared lean/manual contract. It validates known
+config/store schema, format and identity where applicable, rejects malformed source,
+unsafe/symlink/oversized/nonfinite evidence, and returns `evidence_matched` plus actor
+confirmations, not a complete installation-pass or role grant. Output is capped;
+no tracker import/history/network/write occurs. Missing real setup provenance is a
+gap; a template transport manifest cannot fabricate configured state. Lean/custom
+routes do not acquire a generic JSON requirement.
+
+Nine focused checks passed in 2.769 seconds: seven helper boundary/read-only/schema/
+provenance/manual cases and two hook/package checks. No full 92-suite, update or
+five-minute workflow rerun was used for this targeted patch.
+
+Three actual native Codex CLI turns used installed fresh fixtures and the host's
+AGENTS route. Model selection was the user's configured default, no override;
+effective model settings remain unverified. The initial failure used the ordinary
+prompt “tell me who you are”, with no Director/badge hint. It loaded START and the
+complete Director/OPERATIONS text, executed the checker, reported the missing source
+URL without 🎬 and still answered normally (17.578 seconds wall time). An explicitly
+assigned arithmetic worker loaded START/WORKER only, answered 4, and performed no
+Director check or badge use (11.398 seconds). Its name was not bolded; that separate
+presentation miss is retained rather than counted as a badge failure.
+
+The harness restored the original valid receipt, then resumed that exact native
+session with only a missing-clapperboard question. The actor actually reran the
+checker, evaluated role/config evidence and used 🎬 (13.266 seconds). It made two
+additional bounded local config/receipt reads; no history/network/tracker operation
+was observed. All fixture files were byte-identical before/after each actor turn;
+only the harness restored the receipt between turns. Helper evidence covered five
+known route files and config header, reading 34,293 bytes in the successful fixture.
+These are CLI wall times and emitted command/result observations, not model-only
+latency, a dollar estimate or proof of the original desktop chat surface.
+
+Independent reviewers inspect the primary command/response order, not only final
+actor reports. Actual configured-project neutral greetings on Codex/Claude are a
+separate installed-target check; broader hosts/native defaults remain unproved
+unless directly observed. The source's mature local integration uses its exact
+candidate receipt/config/known project ID and selected PROJECT/CAPABILITY guards;
+no real source data, native backend or prior accepted receipt is migrated.

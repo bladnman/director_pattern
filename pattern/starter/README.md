@@ -69,6 +69,16 @@ Preserve/reconcile changed work before a separately reviewed removal.
 
 ## Use and maintenance
 
+Before the Project Director's first ordinary reply, including hello/identity, the
+host hook loads its selected package and runs `python3 .director/startup_check.py`.
+This bounded read-only evidence plus the actor's actual role/guard/backend evaluation
+permits 🎬; missing facts give a specific gap and normal answer without a badge.
+Workers and scoped child Directors skip this check. It reads no tracker history,
+uses no network/checker actor, writes no startup checkpoint and initializes no store.
+A later badge question performs the currently possible check, not just an explanation.
+Mature projects bind the exact receipt/config/selected guards under OPERATIONS;
+lean/manual routes use their authoritative known contract, not invented JSON state.
+
 The small bridge loads START and the exact selected Director/Worker package fully;
 selected project guards and task/action instructions remain binding before action.
 The marker `director-starter:2` is the retained bridge interface, not a state version.
