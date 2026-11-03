@@ -9,6 +9,13 @@ For target-project installation, follow [pattern/README.md](pattern/README.md);
 copy only the payload selected by its manifest. Reading maintainer rationale is
 not an installation prerequisite. Never copy this AGENTS.md into the target.
 
+Design for present and future environments whose capabilities are not known in
+advance. Describe the capability and reasoning needed; resolve available tools and
+controls in the receiving environment when used. Never use concrete model names or
+model aliases as defaults, capability or size equivalents, comparisons, or exemplars
+in enduring instructions or examples. Keep actual selections in dated execution
+evidence, separate from reusable guidance.
+
 Before changing this design, read [README.md](README.md), the overview and owning
 decisions in [development/RATIONALE.md](development/RATIONALE.md), and affected
 contracts/design documents. Read the rationale's maintenance section when editing

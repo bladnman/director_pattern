@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated November2,2026. This repository authors a
+Living design rationale · updated November3,2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -247,6 +247,17 @@ never invented settings. See [MODELS](../pattern/engine/MODELS.md#projecthost-ma
 **Status:** Decided and implemented in guidance/templates; behavioral effects
 remain unverified. Revisit if stale observations still become assignment policy
 or refreshing supported controls still creates avoidable user work.
+
+**Clarified, November 3 — author for unknown future environments:** The repository's
+[maintainer instructions](../AGENTS.md) apply the portability policy to examples and
+comparisons too: no concrete model name or alias stands for capability or size.
+A future reader cannot recover that meaning from an obsolete catalog. Describe the
+required reasoning and capability, resolve current controls at use, and retain
+actual selections only as dated execution evidence. The regression is guidance
+that uses a retired model as its capability exemplar: a new environment must be
+able to choose from the stated task needs without interpreting that old name.
+This clarification is implemented in maintainer guidance outside the installation
+payload; it changes no runtime route and establishes no fresh-host behavior.
 
 **Superseded in part, October 24 — PROJECT is enduring project context:**
 The October 23 scoped-observation/cache approach did not go far enough. Its
