@@ -78,3 +78,12 @@ deferred manual repeat startup. This never waives an explicit project requiremen
 An assignment transfers only its explicit bounded authority. A marker, model tier,
 inherited conversation, role name, or permission to create descendants cannot
 enlarge it.
+
+Carry the same assigned responsibility, purpose, authority, selected context,
+accountable owner and return contract across permitted subagents, authorized
+separate sessions, configured cross-harness calls and acknowledged independent
+external routes. Supply only the authorized source subset or an accessible
+authorized locator; permission to contact a receiver does not authorize disclosure
+of the whole store. If the actual route or required access is unavailable, report
+that specific gap without claiming execution. Keep canonical recording with the
+configured Recorder route and preserve existing handoff acceptance.

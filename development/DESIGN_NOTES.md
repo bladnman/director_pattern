@@ -1218,3 +1218,187 @@ the three unchanged copied requests and the ten-file public/private build bounda
 An initial run exposed a stale inherited exact-phrase assertion for the legacy
 specialty rule; the replacement checks its current whole-owner/no-forced-manager
 meaning. No HTML/style/runtime-helper change, rendered-site QA or deployment ran.
+
+### Later installed review failure and ordered-work candidate
+
+After source `0a5c1b0` was published, an actual installed Claude Code review request
+read DIRECTOR and OPERATIONS but performed the review itself with no subagent call.
+Observed Bash denials were not subagent launch attempts or subagent denials. This
+negative observation is retained; successful earlier Terra cases do not make it
+pass. Classification as direct discussion/acceptance is a hypothesis, not an
+established internal cause or a model-wide diagnosis.
+
+The next unpublished candidate names project investigations/reviews/changes in the
+hook and requires delegation before detailed work. DIRECTOR says scope, dispatch,
+then evaluate, while preserving ordinary discussion, simple lookups and acceptance
+judgments directly. The broad distant reply-only sentence is removed; the legacy
+hook mirrors the directive and its Director clarifies that a review reported in a
+reply still delegates. No helper, state, schema or new role/reference is added.
+All 22 focused source-route tests passed in 1.881 seconds; diff checking passed.
+These tests do not prove execution. An affected fresh same-request installed retry
+and independent review remain required before publication or target acceptance.
+
+Subsequent native Terra and Claude cases using the ordered-work candidate did
+dispatch actual children. Their predeclared complete-package checks still failed:
+the parent omitted required staffing/maintained-role reads, or the brief prevented
+the child from loading START and applicable knowledge before work. These are
+**dispatch passes and package/guard failures**, not accepted end-to-end outcomes.
+One earlier Claude case also exceeded the SitRep interval without a report while
+the harness limited lifecycle tools; no new instruction's causal effect or repaired
+periodic cadence is inferred from that observation.
+
+The next candidate places the existing OPERATIONS staffing/role/guard step before
+dispatch, requires exact worker startup/task instructions and applicable accepted
+knowledge or access to retrieve it, and keeps those reads within scope. WORKER
+returns a scope conflict before affected work. The old later staffing pointer is
+moved, and all capability/effort/tier/source/identity/requirement/ownership fields
+remain. All 22 focused source-route tests passed in 1.073 seconds; diff checking
+passed. No helper, adapter, role catalog or state change is introduced. A fresh
+predeclared end-to-end package case with genuinely available required read/query
+and lifecycle tools, plus independent review, remains required before acceptance.
+Old failed/partial primaries and their narrower harness limits remain preserved.
+
+A later case again read START and issued a helper command without loading its
+Director/project guard package or dispatching a child. Another parent selected its
+staffing route but queried knowledge before the required native state/wire
+instructions had returned; the child also lacked accessible pinned source material.
+These remained failures of the predeclared integration oracle. Missing source/tool
+access in a harness is not repaired by waiving the original verification purpose.
+
+The next candidate makes the default role explicit in the adopted host hook and
+distinguishes role assignment from an ordinary user task in START. It states the
+existing return-and-read-before-dependent-action barrier and required canonical
+I/O reads before knowledge selectors. Combined bounds, same-read extent/range,
+EOF/recovery and all native wire/transitive guards remain. Director and Worker
+staffing/package bodies retain their previous candidate hashes. Focused tests check
+these instruction routes only; the last targeted native integration cases must
+actually follow them with required read/query/lifecycle tools and pinned source
+material accessible. Earlier narrower settings and failures remain separately
+labeled, not an unchanged-settings causal comparison or a successful final package.
+
+An actual shared-file integration review found AGENTS/CLAUDE routers that pointed
+to shared instructions without carrying their own explicit delegation request.
+Both update guides now require the role default and bounded-subagent request in
+the actual host entrypoint too. The existing hook-merge regression covers both
+guides and retains adaptation/backup/no-duplicate/ambiguous-integration guards.
+Literal inspection of affected target entrypoints remains separate from source
+guidance tests and native actor behavior. The frozen START/Director/Worker bodies
+are unchanged by this updater-action clarification; no new controller, adapter,
+host profile, helper or default execution mechanism is published by it.
+
+
+## Portable reconciliation and composed project guidance — November 2, 2026
+
+R9/R11 distinguish managed startup integrity from composed current project guidance.
+R17/R18 preserve the adopted parent outcome when scoped children finish, a milestone
+is accepted or a parent record is falsely terminal. The
+[affected-purpose disposition](BEHAVIOR_PARITY.md#portable-reconciliation-and-composed-project-guidance--november-2-2026)
+includes unchanged transitive authority, storage, discovery, privacy and learning
+triggers. This work changes no canonical backend, request/source identity, lifecycle
+or schema, and introduces no host enforcement framework.
+
+### Composed project instruction check
+
+The source checker now requires matching known baselines for managed
+START/DIRECTOR/OPERATIONS/checker, while safely reading current AGENTS and selected
+project-owned guards. It reports their historical snapshots as unchanged, changed or
+not recorded. Malformed/conflicting baselines remain errors. One supported ordered
+marked hook outside Markdown code examples must reference the selected START route.
+The marked source defaults to AGENTS; explicit project-relative `--hook-source`
+supports a selected shared instruction file. Outer AGENTS is always read, plus the
+exact selected marked source and explicit actual host/shared/role guards. No
+automatic search selects a passing file. The helper checks selected structure;
+OPERATIONS separately requires the actor to read and evaluate the actual import
+chain and all current instructions and resolve actual authority conflicts, including
+ones outside an intact hook. No changed snapshot is silently promoted into a receipt.
+
+The independent checker worker reported **19 CLI tests passing**, with syntax and
+diff checks passing. They exercise composed-guidance drift, strict managed evidence,
+marked-route recognition and failure boundaries. This is deterministic source/CLI
+evidence reported to the owner, not a new installed-project or native-model trial.
+The later shared-hook compatibility extension passed **23 focused CLI cases** in
+7.495 seconds, reported by the checker worker; this supersedes the 19-case source
+scope above without adding repeated runs into a total. The additional cases exercise
+an explicit shared marked source, required outer AGENTS and safe selection/refusal
+boundaries. There is no semantic compatibility or host-import proof from a selected
+file's structure. An independent final reviewer also passed the 23 checker cases in 8.069 seconds
+and the 15 continuation cases in 16.103 seconds after reviewing the selected shared
+hook and transport clauses. These are repeated confirmation of the same distinct
+cases, not additional cases. Combined source review and actual adoption remain separate.
+
+The concise transport clarification in flat DIRECTOR and legacy ASSIGNMENT preserves
+the same responsibility, purpose, authority, context, owner and return contract across
+permitted routes. It requires an authorized source subset/usable locator and a real
+route/access observation. Legacy Recorder and actual handoff gates remain. These
+source clauses do not establish four host integrations or authorize a new transport.
+
+### Adopted outcome continuation
+
+The source candidate implements `continuation REQ_ID [REQ_ID ...]` over the
+existing validated backend and a versioned ordinary-note checkpoint. Explicit caller
+request IDs include terminal records. The view must expose actual sources, latest
+checkpoint/event metadata and honest missing/stale/contradictory facts without
+mutating lifecycle or certifying semantic completeness. It reuses `--team`,
+`--offset`, `--limit`, `--max-bytes` and `--at-snapshot`; paging retains the same
+ordered request-ID binding. The exact API is documented in
+[API](../pattern/starter/payload/API.md#recover-the-adopted-outcome).
+
+`DIRECTOR_CONTINUATION_V1 ` prefixes strict JSON in an ordinary native note with
+schema, request ID, ordered source IDs, outcome, obligations, next action and wait.
+A complete obligation needs declared evidence; unfinished obligations need a next
+action or wait. Action and wait may coexist for independent work under a partial
+hold. The latest note in the continuation family wins even when invalid or
+unsupported. Unknown requests/absent notes are explicit gaps. Source-list differences,
+later non-note events and terminal records with unfinished obligations are exposed;
+ordinary later notes alone do not mark a checkpoint stale. No gap-free result proves
+semantic completion, true evidence, actual execution or authority.
+
+The author reported AST/help/diff checks passing and the existing bounded
+current/status snapshot/wire/no-history fixture passing **1/1**. Independent focused
+continuation fixtures then passed **15 distinct cases** in 15.457 seconds through
+disposable installed CLI stores, using
+[test_continuation_view.py](tests/test_continuation_view.py). Independent source
+review first found uncaught deeply nested malformed JSON; the repair returns an
+explicit invalid gap with null validated data and no older-note fallback. The final
+15-case run includes that regression. Repeated runs are not added to the distinct
+case count, and no author check is reported as independent acceptance.
+
+Predetermined meaningful oracles:
+
+- A done parent with completed children and remaining authorized obligations is
+  retrieved by explicit ID; no open-only scan silently drops its binding.
+- A useful accepted partial result remains accepted while remaining parent work
+  and its next action/wait stay visible. The owner compares the whole adopted result
+  with exact current sources and actually continues before voluntary yield.
+- Held experiments do not block independent authorized research/synthesis. Explicit
+  pause, real required user/external wait, correct bounded child return and sufficient
+  completed bounded work remain truthful exits.
+- A changed source frontier, newer malformed/unsupported checkpoint or absent note
+  produces an explicit gap. Old useful evidence may remain visible but cannot silently
+  become a current clean checkpoint.
+- Bounds/snapshot changes, corrupted source or unfinished native journal retain
+  honest refusal/recovery behavior. The inspection command writes no files and keeps
+  existing current/status/mutation routes compatible.
+
+A deterministic view can expose only recorded facts. It cannot infer user obligations
+omitted by the writer, authenticate next-action declarations or cause a model to act.
+Instruction-route tests do not prove actual delegation, continuation, complete context
+consumption, five-minute SitRep cadence or compaction recovery. No new live model
+experiments, Stop hook, native profile, scheduler, global skill, publication or broad
+downstream adoption were performed for this documentation checkpoint. Those claims
+remain separate, and the old failed/partial observations remain preserved.
+
+### Retained context-delivery qualification
+
+Automatic project instruction admission, later manual tool reads and model behavior
+remain distinct. A model-free inventory at an affected route change should retain
+actual selected override/root-to-working-directory chain, raw file bytes and required
+entry boundary, with cap provenance labeled effective/known, default-only or unknown.
+It should retain required query/access controls and actual returned-read coverage.
+A known oversized chain can then fail its specific admission claim. A small disk
+inventory alone cannot prove the effective Desktop cap, received context, consumption
+or compaction restoration. Complete-read prose cannot cure an omitted startup pointer
+or a denied operation. Individual and aggregate result bounds, contiguous read ranges
+and recovery-before-action remain the portable manual-read route. Actual automatic
+host admission and behavioral uptake remain pending qualification; this repair adds
+no universal startup report, host configuration increase or delivery guarantee.

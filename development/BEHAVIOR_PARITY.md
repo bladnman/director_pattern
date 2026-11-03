@@ -14,7 +14,76 @@ semantics. Those defects were not authorized consequences of fewer actors. The
 current starter3 default restores the established request-bundle backend; existing
 experimental2 data and trial evidence remain unchanged, with no silent migration.
 
+## Portable reconciliation and composed project guidance — November 2, 2026
+
+The prior recommended route already supplied role selection, executor loading,
+validated records and supervised return evaluation. This repair preserves them and
+addresses two narrower gaps: treating a composed project file as immutable managed
+payload, and recovering an unfinished parent after all children finish or its record
+is falsely terminal. The original purposes remain the acceptance unit.
+
+| Owning purpose and failure prevented | Disposition and active route | Concrete oracle and claim boundary |
+|---|---|---|
+| R9/R10/R16: a meaningful checked identity must distinguish installed method integrity from evolving project authority. | Strict hashes remain for managed START/DIRECTOR/OPERATIONS/checker. Current AGENTS/selected project guards are read safely and historical drift disclosed; one supported marked route must reach selected START. The explicit project-relative `--hook-source` defaults to AGENTS; outer AGENTS and actual selected host/shared guards remain required, with no automatic search. OPERATIONS requires complete current actor authority/compatibility evaluation. | Appended unrelated build guidance reports changed snapshot without false managed-integrity failure. Managed tampering, malformed/misdirected hook and unsafe paths still fail. An intact hook with conflicting surrounding authority still prevents the actor's badge. Structure/hash tests do not prove consumption or semantic compatibility. |
+| R11: preservation must survive an update even when current equals an old snapshot or legitimate project guidance has changed. | The R9 distinction does not waive UPDATES' pinned baseline/current/incoming and prior-upstream adaptation review, backups, actual backend/authority or affected route gates. | Preserve legitimate project guidance and selected hook through update; unknown managed drift or incompatible routing remains unresolved. Never rewrite a receipt to silence project drift. |
+| R2/R17/R18: whole delivery must survive worker/milestone completion and status answers. | DIRECTOR/DIRECTION retain adopted obligations and next action/wait at meaningful source/return reconciliation. The implemented bounded continuation view/checkpoint uses the existing native store, including explicitly selected terminal IDs. | Completed children + falsely done parent + recorded remaining authorized work must remain recoverable and cause actual continuation before voluntary yield. Status reply, launch count or done flag alone fails. Pause, genuine wait, correct child return and sufficient bounded completion remain legal. Fifteen independent installed-CLI cases verify recorded-data behavior below; actual-host uptake remains unqualified. |
+| R3–R6/R17: exact intent, accepted partials and native recovery must survive a new compact view. | API's existing capture/source, requirement trace, legal lifecycle, native I/O prerequisites and sole canonical backend remain; ordinary checkpoint notes add no schema or mutation authority. | Source-frontier mismatch/newer malformed checkpoint/missing note/pending transaction yields its actual gap; terminal inclusion never auto-reopens, accepts or declares intent complete. Corrupted sources retain native refusal. |
+| R10/R15/R18: atomic maintained responsibilities need a small caller interface and complete executor instructions across authorized transports. | Keep ROLES/ASSIGNMENT and flat OPERATIONS' existing selection/authority versus task-manual split. Concise flat DIRECTOR and legacy ASSIGNMENT additions make transport-independent responsibility, authorized source subset/access and actual return explicit. Existing canonical recording/handoff authority remains; no four executed integrations are claimed. Explicit role/scope/access/return apply independently of ancestry. | A nested route restriction still reaches selection; the caller avoids unrelated craft manuals; a separate-session worker stays bounded. Unsupported cross-harness access is a transport gap, not simulated dispatch. No new mandatory registry/resolver/actor. |
+
+Transitive obligations remain on the active route: host hook → START → exact
+DIRECTOR/WORKER and project authority; OPERATIONS before staffing; actual canonical
+I/O protocols before state/knowledge queries; DIRECTOR/DIRECTION recovery and labeled
+SitReps for held execution; UPDATES for due active-session discovery and safe changes;
+LEARNING for bounded review/deferral and matching uptake. Existing source/relationship/
+revision/journal semantics, explicit lean/v1 choice, privacy opt-outs, stable caller
+aliases, managed/project ownership and independent/human gates remain. No new
+universal startup history scan, global skill, Stop guard, scheduler, migration or
+host-liveness guarantee replaces them. Unknown affected obligations remain acceptance
+blocking; unrelated unrun host claims do not become new deterministic source gates.
+
+The [owning rationale](RATIONALE.md#r17--keep-delegated-work-supervised-and-recover-the-users-whole-request)
+and [validation record](DESIGN_NOTES.md#portable-reconciliation-and-composed-project-guidance--november-2-2026)
+separate accepted repair direction, implemented code, focused checks and unqualified
+native behavior. Independent review must compare source intent with claimed closure,
+including a terminal parent; it cannot accept only current open-count fields.
+
+Context-delivery qualification remains separately open. For the actual affected route,
+retain automatic discovery/override chain, raw bytes/required entry boundary and cap
+provenance as known, default-only or unknown, plus required query/access controls and
+actual returned read coverage. A disk inventory can flag a known oversized chain;
+it does not establish effective Desktop admission or consumption. Existing bounded
+progressive reads and aggregate-output/truncation recovery remain mandatory. The
+continuation/checker repair supplies no native injection or compaction guarantee.
+
 ## Delegation exception correction — November 1, 2026
+
+**Later execution-order correction, under evaluation:** A fresh installed review
+loaded the intended role/operational route and still did the work without a child
+call. The candidate now requires bounded dispatch before detailed investigation,
+review or changes; scoping, ordinary discussion/simple lookups and acceptance stay
+direct. This preserves R2's protected attention and R10's role boundary. A real
+child must execute and return before parent acceptance; after-the-fact staffing is
+not the oracle. Internal misclassification remains a hypothesis, not a proved cause.
+The earlier failed observation remains negative evidence even if a retry passes.
+Follow-up actual dispatches did not satisfy the full package oracle: required
+staffing/role reads and child startup/knowledge access were incomplete. The next
+candidate moves the existing staffing step before dispatch, supplies required
+instructions/knowledge or retrieval access, and returns read-scope conflicts before
+affected worker action. The complete guarded sequence, not a launch count, is the
+acceptance unit; restrictive earlier harnesses remain distinct from normal host
+capability and from the newly clarified instruction route.
+The subsequent bootstrap clarification distinguishes a role assignment from an
+ordinary task, states the default role in the actual adopted hook, and explicitly
+orders returned instruction reads before dependent commands and canonical I/O
+instructions before knowledge selectors. This preserves R10's selected-role route
+and R6's native wire/record guards; it adds no read-only exemption. Actual final
+integration cases must observe those steps, with required source material genuinely
+accessible; a changed harness is not an unchanged-settings causal comparison.
+For shared instruction files, the update route also requires the explicit role
+default/delegation request in the actual AGENTS/CLAUDE entrypoint. Literal target
+entrypoint inspection is the oracle; preserving only a referenced request is not
+equivalent under a host rule that names AGENTS.md. Detailed role/authority files
+remain canonical and target-specific adaptations remain preserved.
 
 The prior recommended flat route already requested useful delegation, but its
 "when permitted" wording and opt-in WORKER sentence left a failed interpretation

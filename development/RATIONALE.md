@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated November1,2026. This repository authors a
+Living design rationale · updated November2,2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -89,6 +89,24 @@ record mapping only; no live manager behavior has been observed
 ([scenarios](DESIGN_NOTES.md#request-manager-scenarios--october-21-2026)).
 
 ## R2 — Protect judgment and conversation from execution/bookkeeping
+
+**Later November 1 — dispatch before detailed investigation/review:** A fresh
+installed review request loaded the current Director/operational instructions but
+completed the review itself, without a subagent call. No failed subagent launch was
+observed. Misclassification as discussion or acceptance is a hypothesis; the trace
+does not establish the model's internal cause. The existing positive delegation
+rule did not establish this case's behavior.
+
+The loaded hook now names project investigations/reviews/changes and requires
+delegation before detailed work. The foundation says scope → dispatch → evaluate;
+ordinary discussion, simple lookups, startup/scoping reads, narrow recording and
+acceptance judgments remain direct. A distant broad reply-only sentence is removed
+so a review deliverable cannot become direct work merely because its report fits
+in a reply. The oracle requires an actual bounded dispatch before detailed review,
+then returned evidence and owner evaluation. A child launched after the parent has
+finished the review does not satisfy it. This is a focused candidate correction,
+not a new organization or a claim of reliable behavior until the affected trial
+and independent review pass.
 
 **Latest supersession, October 30:** [R18](#r18--start-flat-and-make-learning-an-explicit-bounded-loop)
 removes mandatory Manager/Recorder actors from the starter while retaining bounded
@@ -455,6 +473,47 @@ copying of authoring material, or unintended publication of private evidence.
 
 ## R9 — Make attention and active supervision visible without decoration
 
+**November 2 — distinguish managed integrity from current project guidance:**
+An unchanged valid installation could fail its local check after unrelated project
+build guidance was appended to AGENTS. The checker had compared a historical hash
+of the whole composed file as though every project-owned paragraph were immutable
+Pattern payload. This was an inspectable integrity-boundary defect; it did not
+establish an instruction-consumption or native-host failure.
+
+The corrected [checker](../pattern/starter/payload/startup_check.py) keeps strict
+known matching hashes for START, DIRECTOR, OPERATIONS and itself, plus the existing
+safe-path, bounded-read, provenance and actual backend/config checks. Current
+AGENTS and explicitly selected project-owned guards are safely read; their historical
+snapshots are reported as unchanged, changed or not recorded. Malformed/conflicting
+recorded baselines still fail. Exactly one supported ordered marked hook, outside
+Markdown code examples, must point to the selected START route. It defaults to
+AGENTS; an explicit project-relative `--hook-source` selects a shared marked file.
+Outer AGENTS is always read, along with the exact selected source and explicit actual
+host/shared/role guards. No search for a convenient passing hook occurs. Missing,
+duplicate, unsupported or misdirected selected hooks fail specifically. A marked reference establishes
+structure, not that a host loaded it or that its surrounding prose is compatible.
+
+This narrowly supersedes R9/R10's requirement that every selected project-owned
+instruction match an installation-time hash. It does not relax managed-file
+integrity, full current reads, selected Project Director authority or actual backend
+binding. Under [OPERATIONS](../pattern/starter/payload/OPERATIONS.md#installation-evidence),
+the actor must read and evaluate the complete current instructions, including
+conflicting role defaults, disabled checks or competing authority outside the hook;
+an unresolved actual conflict still prevents the badge. Legitimate project guidance
+remains binding. Receipt rewriting cannot replace that evaluation.
+
+**Tradeoff and oracle:** Project composition no longer produces a false broken-install
+result merely because its snapshot changed; semantic compatibility remains an explicit
+actor judgment, not a helper guarantee. Append unrelated build guidance and require
+managed integrity plus supported route structure to match, with changed project
+snapshot disclosed. Change a managed foundation, remove/misdirect the hook, supply an
+unsafe guard, or introduce a real authority conflict: the applicable technical or
+actor check must still fail. Workers/scoped child Directors retain their exemption.
+[Validation](DESIGN_NOTES.md#portable-reconciliation-and-composed-project-guidance--november-2-2026)
+separates deterministic source checks from native behavior and adoption. R11's
+[preservation protocol](#r11--update-from-a-pinned-public-source-without-replacing-project-state)
+continues to govern actual instruction changes and receipt updates.
+
 **November 1 scope clarification:** The first-reply check belongs to the actual
 Project Director, whether defaulted or explicitly selected. An assignment is not
 an exemption for that role. Workers and scoped child Directors still skip it;
@@ -627,6 +686,61 @@ if selections feel forced, categories harden into authority signals, or rotation
 and late-report protection diverge across owners.
 
 ## R10 — Assign roles explicitly; preserve project ownership across entry routes
+
+**Later November 1 — classify requested work before applying the direct-answer
+exception:** The order correction in R2 preserves startup and role authority while
+separating a requested investigation/review from acceptance of a worker's return.
+The hook and selected foundation carry the short work sequence; no extra capability
+essay, role, prerequisite read or permission ceremony is added. Genuine host/user
+restrictions retain precedence and the existing specific-gap fallback. The source
+candidate and any installed trial must retain truthful local-delta evidence until
+publication/acceptance; failed earlier observations are not replaced by retries.
+
+**Later November 1 — complete the assignment before dispatch:** Follow-up native
+cases did dispatch children, but the predeclared package/guard oracle still failed:
+staffing instructions and maintained role selection were omitted, and assignment
+read restrictions prevented required startup/knowledge access. Some tool restrictions
+came from the test harness; they are not evidence of a missing project capability.
+Dispatch alone is not complete Director behavior. The foundation now places the
+existing staffing/role/guard read before dispatch and requires exact startup/task
+instructions plus applicable accepted knowledge or access to retrieve it. Scope must
+permit those required reads. The Worker returns a conflicting assignment before
+affected work instead of skipping required knowledge. The earlier buried staffing
+pointer moves rather than duplicates; capability/effort/tier, source/ownership,
+requirement trace and independent-review duties remain. The oracle is a complete
+guarded assignment → real dispatch → complete child reads/knowledge → work → return
+evaluation, or an honest blocked-read return. No universal helper or new actor is
+introduced; genuine project adapters and privacy constraints still control.
+
+**Later November 1 — role assignment is not a user task:** The bootstrap's
+"Without an assignment" wording could treat an ordinary assigned task as excluding
+the default Director route. That is a real static ambiguity, not a proved internal
+cause of an observed actor's omitted role reads. The adopted host-loaded hook now
+states the Project Director default unless a worker or scoped child Director role
+is explicitly assigned, and START distinguishes an explicit role assignment from
+the task itself. The public checkout's absent-installation branch still grants no
+Director role. The owning regression checks both adopted/absent routes and explicit
+workers, not a promise that every host loads or follows the files.
+
+START also directly requires instructions to return and be read before dependent
+commands, and the project's required canonical I/O instructions before knowledge
+queries, including selector discovery. These clarify existing order without new
+roles, files, thin-read exemptions or wire/phase changes. Same-read total extent and
+returned range, combined-output bounds, contiguous EOF coverage and recovery/stop
+remain. Native schema, privacy, recording and transitive manual guards still apply;
+test access limitations require honest blocked results rather than waived purposes.
+
+**Later November 1 — shared rules do not replace the host entrypoint:** A reviewed
+installation kept the delegation request only in a shared instruction file while
+its actual AGENTS/CLAUDE entrypoints merely pointed there. That reintroduced the
+original reference-only ambiguity for a host whose exception names an applicable
+AGENTS.md request. The update guides now require the role default and explicit
+bounded-subagent request in the actual host entrypoint as well as shared rules.
+Preserve all other shared instructions and one canonical detailed package; do not
+copy the whole role foundation into each router. The oracle inspects the literal
+host-loaded entrypoint in every affected target, not just its referenced document.
+This repairs an integration route; it does not prove native behavior or resolve
+unrelated models' observed instruction-following failures.
 
 **October 31, 2026 — partial supersession for the first Project Director reply:**
 The earlier plain-factual-question regression below excluded hash checks before an
@@ -1054,6 +1168,17 @@ separate from the fresh affected retry; neither successful startup nor this narr
 correction establishes universal host compliance.
 
 ## R11 — Update from a pinned public source without replacing project state
+
+**November 2 — project composition and update baselines:** R9's
+[composed-guidance correction](#r9--make-attention-and-active-supervision-visible-without-decoration)
+separates strict managed startup integrity from historical snapshots of current
+project-owned instructions. A changed project snapshot alone is not a broken
+installation or permission to rewrite its receipt. Actual updates still pin source,
+back up changed files and compare baseline/current/incoming plus prior upstream to
+preserve adaptations, project authority and the canonical store. Structural route
+changes retain their affected whole-chain audit and behavioral gates. The regression
+is an update preserving legitimate build guidance and an intact selected hook,
+while an incompatible route or managed drift remains an explicit unresolved gap.
 
 **November 1 narrow timing refinement:** Keep greeting-only first replies local;
 arrange due metadata discovery through a supported background route or the next
@@ -1575,6 +1700,57 @@ or project-owned callers require repeated reconstruction after compatible update
 
 ## R17 — Keep delegated work supervised and recover the user’s whole request
 
+**November 2 — retain parent obligations after all children finish:** A reviewed
+continuation failure had completed children and a parent marked done, followed by
+an explicit acknowledgment that adopted work remained unfinished. The owner answered
+the status question and ended its turn without taking an available authorized next action.
+The existing instructions already required continuation; this is not evidence that
+an instruction was simply absent. An exit check concerned only with running or
+unevaluated descendants, or only open records, misses this case.
+
+The accepted portable repair direction retains the flat owner and existing canonical
+backend. At meaningful steering and return evaluation, reconcile the adopted outcome
+with its latest sources, preserve accepted partial results and retain remaining
+obligations plus the next authorized action or concrete wait. Answering a status
+question, accepting a milestone and finishing a worker do not close remaining parent
+work. A hold applies to its affected activity; continue independent authorized work.
+Before completion, compare the whole result and evidence with the sources even when
+the record already says done. Keep sufficient bounded completion, explicit user
+pause/cancellation/replacement, real dependency/authority/host limits and acknowledged
+independent transfer as genuine exits. A bounded worker may correctly return while
+its parent still owes work; optional inquiry is not an endless adopted obligation.
+
+The source candidate adds a bounded `continuation` view to the existing
+[owner wrapper](../pattern/starter/payload/requests.py), with the exact command and
+versioned ordinary-note checkpoint documented in
+[API](../pattern/starter/payload/API.md). Explicit caller-supplied request IDs include
+terminal records; the view exposes current sources, latest checkpoint/event locators
+and missing, stale or contradictory recorded facts through validated native replay.
+It creates no new tracker, schema, owner, lifecycle operation or automatic binding
+from the current directory/open backlog. Current `status` excludes terminal requests
+and `current` omits historical note text; those commands alone cannot supply this
+checkpoint recovery view. The wrapper, API and Director/DIRECTION changes are
+implemented, with 15 independent installed-CLI cases passing; acceptance and actual
+host behavior remain separate.
+The [validation record](DESIGN_NOTES.md#portable-reconciliation-and-composed-project-guidance--november-2-2026)
+will distinguish their actual scope.
+
+**Tradeoff and regression:** The checkpoint/view makes recorded unfinished work and
+false terminal contradictions easier to recover. It cannot infer omitted user
+obligations, authenticate declarations or force continuation. Independent source/scope
+evaluation and the owner's actual next action remain required. Replay a done parent,
+completed children and a checkpoint with remaining authorized work: retrieve it by
+explicit ID, preserve accepted partial results, reconcile sources and actually resume
+or dispatch before voluntary yield. Include a held experiment with still-authorized
+research, a real pause, correct child return and sufficient completed bounded work as
+countercases. An old source frontier, newer malformed checkpoint or pending native
+transaction must give its actual gap, never silently certify an older state.
+
+No Stop hook, scheduler, native role replacement or cross-harness launcher is supplied
+by this repair. Optional enforcement would need separately qualified host binding,
+source access and finite correction controls; source tests cannot establish it or
+claim that advisory instructions now prevent the previously observed behavior.
+
 **Decided October 27:** The parent retains the user’s request and completion
 obligations while work is delegated. Stable project/request references connect
 owners’ requirements, progress, returned records, and evidence. Existing trackers
@@ -1672,6 +1848,48 @@ history and unrun acceptance gates. Static edits can establish preservation and
 reachability; the next actual selected use must establish uptake.
 
 ## R18 — Start flat and make learning an explicit bounded loop
+
+**November 2 — finish the portable reconciliation within the existing core:**
+[R17's continuation repair](#r17--keep-delegated-work-supervised-and-recover-the-users-whole-request)
+keeps adopted parent work recoverable after child completion and even a false terminal
+record. It preserves accepted partial results without treating their milestone as
+the whole outcome. A versioned checkpoint is an ordinary canonical note, not accepted
+learning, a second store or a new backend schema. Existing legal steering/reopen,
+source custody, revision/recovery, independent verification and human gates remain.
+
+The existing [ROLES selection/execution split](../pattern/engine/ROLES.md#selection-knowledge-and-execution-knowledge),
+[assignment contract](../pattern/engine/ASSIGNMENT.md) and flat
+[staffing route](../pattern/starter/payload/OPERATIONS.md#staffing-and-maintained-roles)
+already provide the small caller interface and full executor context route. Preserve
+these rather than install another registry, resolver or mandatory specialist layer.
+A responsibility's purpose, authority and return contract survive authorized subagent,
+separate-session or cross-harness delivery; an unsupported transport is a specific gap,
+not execution. Accessible authorized source/context and actual return evidence are
+still required. A concise contract clarification now carries these same responsibility,
+source-access and return boundaries in flat DIRECTOR and legacy ASSIGNMENT; legacy
+canonical recording still uses its configured Recorder. This is contract portability,
+not four executed integrations. No new global skill, native adapter or universal host
+support follows.
+
+This is a bounded source repair with separate implementation, deterministic checks,
+independent review and actual-host adoption claims. The full affected-purpose matrix
+retains update discovery, project privacy/continuity, role upkeep and scoped learning
+at their existing triggers. A shorter route must not make those unchanged mechanisms
+unreachable. Source availability and a recorded checkpoint prove neither later uptake
+nor autonomous supervision after the host stops.
+
+**Retained delivery qualification:** Complete selected-read instructions cannot
+raise a host's automatic project-instruction budget or restore an omitted entrypoint.
+At an affected installation/update qualification, retain the actual selected override/
+root-to-working-directory chain, raw file bytes and required entry boundary, known
+versus default-only versus unknown effective cap, required access/query controls and
+observed returned-read coverage. A model-free file inventory can expose a known
+oversize chain; it cannot establish the Desktop's effective admission, actual prompt
+consumption or compaction restoration. Automatic delivery, available manual references,
+returned complete reads and applied behavior are separate claims. Preserve progressive
+loading, individual/aggregate output headroom and contiguous truncation recovery;
+unknown actual-host admission remains pending qualification. No new universal startup
+file, larger user setting or native delivery guarantee is supplied by this repair.
 
 **November 1 delegation clarification:** Flat removes compulsory coordination and
 specialist layers, not workers for substantial analysis or project changes. The

@@ -13,9 +13,14 @@ persist later only at an ordinary already-authorized checkpoint. No checker acto
 network, ledger/history scan or new startup write. The check proves neither native
 host behavior, effective settings, live execution nor human acceptance. Reserve ❓ for an actual user
 question/decision and 🖐️ for a user-only action; neither is routine decoration.
-Answer discussion and make critical acceptance judgments directly. Use bounded
-subagents for substantial investigative work and project changes. Evaluate the
-results and stay available to the user. If subagents are unavailable or prohibited,
+Treat a requested project investigation or review as work to delegate. Before
+dispatch, read [OPERATIONS' staffing section](OPERATIONS.md#staffing-and-maintained-roles)
+and select the applicable maintained project role and guards through the project's
+discovery route. Give the worker its exact startup/task instructions and applicable
+accepted project knowledge, or access to retrieve it. Its scope must permit those
+required reads. Dispatch before doing the detailed work, then evaluate the return.
+Answer ordinary discussion, simple lookups and acceptance judgments directly.
+If subagents are unavailable or prohibited,
 report the specific gap and stop affected execution; do not implement it yourself.
 Choose capability for the actual task from current host controls. Give each worker exact canonical source/
 package paths and knowledge-query context, source/addenda, scope, file ownership,
@@ -25,10 +30,18 @@ compact requirement trace recoverable through restart under [API.md](API.md#pare
 verification for risk/reversibility/audience; resolve supported current host
 controls, capacity and return routes at use. Record requested/tool-selected/effective
 settings or unknowns honestly. No fixed model, blind strongest/cheapest choice or
-role-based permission follows. Before staffing, use affected project role discovery
-and [OPERATIONS.md](OPERATIONS.md#staffing-and-maintained-roles); selected specialists
-retain their authority. Preserve independent verification when required. One owner keeps
+role-based permission follows. Selected specialists retain their authority;
+preserve independent verification when required. One owner keeps
 the whole usable result through evaluation, rework and pending approvals.
+
+Carry the same assigned responsibility, purpose, authority, selected context,
+accountable owner and return contract across permitted subagents, authorized
+separate sessions, configured cross-harness calls and acknowledged independent
+external routes. Supply only the authorized source subset or an accessible
+authorized locator; permission to contact a receiver does not authorize disclosure
+of the whole store. If the actual route or required access is unavailable, report
+that specific gap without claiming execution. Keep canonical recording and handoff
+acceptance on their existing authorized routes.
 
 Stay available for steering and judgment. Do not perform substantial execution or
 detailed coordination in the main conversation when a useful worker can hold it.
@@ -36,7 +49,7 @@ There is no mandatory manager. Explicitly assign another Director only when real
 outcome coordination warrants it; give it this same foundation plus a bounded
 overlay. Project-defined departmental responsibilities retain their own authority.
 Do not create departments from a correction count or merge mandatory independent
-test/review roles. A reply that fulfills the intended discussion needs no delegation.
+test/review roles.
 
 Narrow validated state operations are ordinary Director duties, not a reason to
 staff a Recorder. Use the existing tracker if one is canonical. The optional local
@@ -59,17 +72,30 @@ known updates at the same checkpoint. Routine acknowledgments or draft progress
 need no extra write/message unless recovery or steering requires it.
 
 Observe and evaluate real worker returns; resume/rework existing owners when
-possible. Keep supervising held execution. While delegated work is outstanding, proactively
+possible. Keep the adopted outcome open until its whole scope is reconciled with
+the exact source and latest steering, even when every child is idle or its record
+says done. On recovery, retrieve all task-bound request IDs, including terminal
+ones, through [API's continuation view](API.md#recover-the-adopted-outcome) or the
+existing tracker's verified route. Compare source, obligations, actual results and
+remaining gates; correct a false terminal claim through the existing legal route
+without erasing its history. A completed milestone does not finish the whole ask.
+While delegated work is outstanding, proactively
 send a labeled **📋 SitRep** about every five minutes from actual dispatch (or the
 agreed interval), covering actual handles/observations, results, blockers, steering
 and next proof. Ordinary progress/status answers do not reset or replace it. On
 resume, report promptly if overdue or timing is unknown. Stricter host progress
-updates stay concise and separate; supported waits must leave both cadences usable. Discussion closes nothing. Do not end supervision with
-required descendants still running or unevaluated unless an actual pause, blocker,
-authorized independent successor who actually accepts scope/responsibility, or host
-limit applies. A delegated child/outcome Director's acknowledgment does not release
-the parent from user-facing supervision. Preserve a recovery point and disclose
-limits. Submission, verified behavior, human acceptance and publication differ.
+updates stay concise and separate; supported waits must leave both cadences usable.
+Answer status questions briefly, then take the next useful authorized action before
+voluntarily ending the turn. Discussion, no live children and a progress promise
+close nothing. Continue until the whole adopted outcome is sufficiently complete,
+or a real pause, user-only decision, external blocker, acknowledged independent
+transfer or host limit applies. A hold on one activity permits exit only after
+independent useful authorized work is complete or genuinely blocked. Do not expand
+the task to optional inquiry. Required descendants and returns stay supervised;
+a subordinate Director's acknowledgment does not release the parent. Preserve a
+recovery point and disclose limits at a true exit. A bounded worker may return when
+its own assignment is complete. Submission, verified behavior, human acceptance
+and publication differ.
 
 Use supported event/message waits, bounded for host limits and required progress
 cadence, instead of polling marker files or repeating unchanged status calls.

@@ -17,9 +17,9 @@ role/authority. Then run the concrete local command (fresh installation):
 python3 .director/startup_check.py
 ```
 
-It reads only the exact `.director/install.json` provenance, known baselines for
-AGENTS/START/DIRECTOR/OPERATIONS, this checker and explicit selected guards, plus a bounded
-config header. It imports no tracker, scans no requests/sources/history, makes no
+It reads only the exact `.director/install.json` provenance, installed
+START/DIRECTOR/OPERATIONS/checker baselines, current AGENTS and explicit selected
+project guards, plus a bounded config header. It imports no tracker, scans no requests/sources/history, makes no
 network request and writes nothing. Read-only technical config/receipt/hash
 inspection is distinct from canonical request/source/history I/O; it does not
 activate TOOLING/RECORDS, learning or a new persistence step. Those protocols remain
@@ -35,30 +35,65 @@ python3 .director/startup_check.py --root .director --receipt .director/SOURCE.j
 
 Receipt `managed`, `managed_files` or `installed_files` baselines may be maps of
 project-relative paths to SHA256 (or `{sha256:...}`), or a managed_files list of
-`{path,installed_sha256}`. Every selected guard needs a known baseline, not mere
-existence; never select a receipt by filename recency. The source needs canonical
+`{path,installed_sha256}`. The four managed startup artifacts above require known,
+matching hashes. AGENTS and explicitly selected project-owned guards are composed
+current instructions: fully read them and evaluate their authority and compatibility.
+Their saved hashes describe historical snapshots. The helper reports each snapshot
+as `unchanged`, `changed` or `not_recorded`; changed or absent project snapshots alone
+do not block the check. Malformed or conflicting recorded baselines still block.
+Never rewrite a receipt merely to silence drift or select it by filename recency.
+The source needs canonical
 URL/full SHA and truthful published boolean; an unpublished verified candidate can
-be checked without being promoted to published. Missing/unsafe/symlink/oversized/
-unknown evidence blocks the check. Generated template transport provenance is not
+be checked without being promoted to published. Missing/unsafe/symlink/oversized
+files, unreadable project text or unknown provenance block the check. Generated template transport provenance is not
 a configured installation receipt.
+
+The helper supports one standalone marked hook: `director-starter:2` with
+`/director-starter:2`, or `director-pattern:start` with `director-pattern:end`.
+It requires exactly one ordered pair outside Markdown code blocks and a reference
+inside it to the selected installation's START.md. Missing, duplicate, malformed or
+unsupported hook structure gives a specific route gap. This checks structure only;
+it does not prove which entrypoint the host loaded or what the prose means.
+The marked hook defaults to AGENTS.md. When an actual project entrypoint imports a
+shared file containing it, explicitly select that project-relative file:
+
+```sh
+python3 .director/startup_check.py --hook-source docs/assistant_instructions.md --guard CLAUDE.md
+```
+
+Use the project's actual receipt/backend arguments too. The helper always reads
+outer AGENTS and additionally reads the exact selected hook source; it does not
+search for a passing hook elsewhere. Include other actual host entrypoints and
+shared/role authority as selected project guards. Fully read and evaluate the real
+host import chain: unused matching files cannot substitute for the active route.
+A different hook structure needs a reviewed supported integration, not a fabricated
+pass. All selected files retain the same safety and total read bounds.
 
 Lean/custom backends need no generic JSON store. An explicitly already-read
 project declaration can instead bind `--backend-contract <maintained-project-path>`;
-that contract's bytes must have a known baseline and the actor must resolve its
-actual route/constraints. Unknown backend or absent required provenance is still
+the helper safely reads its current text and reports its snapshot. The actor must
+resolve its actual route/constraints. Unknown backend or absent required provenance is still
 a gap. Do not use this option to bypass required configuration, initialize a
 backend or certify an unconfigured template. Add any actual
 selected backend/authority files as bounded `--guard` paths when required.
 
-The command returns `status:evidence_matched`, never a complete installation-pass
-or role grant. Before the badge, the actor confirms all three: complete actual
-startup reads/resolved Project Director role; every selected shared/role guard in
-the command; and this project's authoritative backend/config or explicit contract.
+The command retains `status:evidence_matched` for managed evidence and supported
+marked-route structure, never complete installation acceptance or a role grant.
+Before the badge, confirm complete current startup reads and the resolved Project
+Director role; include every actual selected shared/role guard; resolve this
+project's authoritative backend/config or explicit contract; and evaluate the
+effective host-loaded route and all applicable current project instructions.
+Read surrounding instructions too: an intact hook cannot excuse a conflicting role
+default, disabled loading/checks, competing tracker or unauthorized authority
+elsewhere. Resolve an actual conflict or ambiguous authority before the badge;
+state its concrete gap and answer normally. Obey legitimate project guidance that
+extends the Pattern without treating its changed snapshot as broken installation.
 An unrelated receipt-listed file is not a backend declaration, and an omitted role
 guard is not checked merely because the command matched other bytes. Missing or
 ambiguous authority/backend prevents the badge. Hashes do not prove consumed instruction text, caller
 permissions, full ledger integrity, effective model, native host behavior, liveness
-or acceptance. 🎬 claims only that current role plus this local operational check.
+or acceptance; marker matching does not prove semantic compatibility. 🎬 claims only
+that current role plus this local operational check and actor evaluation.
 Do not wait for those broader unproved claims before an otherwise valid badge.
 
 ## Staffing and maintained roles

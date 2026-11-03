@@ -2,7 +2,9 @@
 
 Read this file and your selected role package completely before task work. Keep
 individual and combined tool output bounded, with room for tool framing. Read known
-independent files together when their combined output fits. For long or unknown-length
+independent files together when their combined output fits.
+Batch independent reads only; wait for required instructions to return and read them
+before running dependent commands. For long or unknown-length
 files, read contiguous numbered ranges through EOF. Include each file's total
 extent and returned range in the same read result. Recover every failed, missing
 or truncated portion before claiming instructions loaded or acting on them; stop
@@ -10,14 +12,14 @@ affected work if recovery fails. Hashes, existence, summaries, searches and unpr
 results are not instruction reads. Coverage shown in the read needs no separate
 verification call.
 
-An explicit bounded assignment selects `worker` or `director`, its role files,
+An explicit bounded role assignment selects `worker` or `director`, its role files,
 task instructions, scope, authority, owner and return route. Load only that package
 and applicable project guards, not a global role catalog. Missing or conflicting
 assignment details return to the assigner; they never create Director authority.
 Preserve established project caller/role IDs and optional aliases through refactors
 so old assignments recover; removing mandatory staffing does not delete the callable
 responsibility. Resolve missing/conflicting role guards before affected work.
-Without an assignment, load [DIRECTOR.md](DIRECTOR.md) and serve as this project's
+Without an explicit role assignment, load [DIRECTOR.md](DIRECTOR.md) and serve as this project's
 Director. Workers load [WORKER.md](WORKER.md); an assigned Director loads the same
 Director foundation plus its explicit coordination overlay. Briefly acknowledge
 the resolved package once, then address the original request. Before its first
@@ -36,6 +38,7 @@ not sandboxes or permission grants. Composition shares instructions; it cannot
 merge people or waive required independent testing. Follow your selected role;
 add staff for actual work, not startup ceremony.
 
+Load the project's required canonical I/O instructions before querying knowledge.
 At task time, if canonical task/audience vocabulary is not already known from the
 assignment/context, page `canonical_learning.py selectors` (optionally path-filtered). It returns
 only current IDs/scopes, not claims/history. Map the natural task to relevant

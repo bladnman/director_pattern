@@ -67,7 +67,7 @@ def json_object(path, limit, total):
     return value
 
 
-def baseline(receipt, selected):
+def baseline(receipt, selected, required=True):
     matches = []
     for name in ('managed', 'managed_files', 'installed_files'):
         values = receipt.get(name)
@@ -83,13 +83,54 @@ def baseline(receipt, selected):
                 need(isinstance(item, dict), 'invalid baseline entry')
                 if item.get('path') == selected:
                     matches.append(item.get('installed_sha256', item.get('sha256')))
+    if not matches and not required:
+        return None
     need(matches and all(isinstance(h, str) and re.fullmatch('[0-9a-f]{64}', h) for h in matches),
          'missing/invalid baseline for ' + selected)
     need(len(set(matches)) == 1, 'conflicting baselines for ' + selected)
     return matches[0]
 
 
-def check(root, receipt_name=None, config_name=None, backend_contract=None, guards=(), expect_project_id=None):
+def instruction_lines(text):
+    """Exclude Markdown code examples from structural hook evidence, not from actor reads."""
+    lines = []
+    fence = None
+    for line in text.splitlines():
+        if fence:
+            if re.fullmatch(r' {0,3}' + re.escape(fence[0]) + '{' + str(fence[1]) + r',}[ \t]*', line):
+                fence = None
+            lines.append('')
+            continue
+        opening = re.match(r' {0,3}(`{3,}|~{3,})', line)
+        if opening:
+            fence = (opening[1][0], len(opening[1]))
+            lines.append('')
+        else:
+            lines.append('' if line.startswith(('    ', '\t')) else line)
+    return lines
+
+
+def startup_hook(text, target, source='AGENTS.md'):
+    """Recognize one supported marked route; prose authority remains an actor judgment."""
+    lines = instruction_lines(text)
+    markers = []
+    for number, line in enumerate(lines):
+        comment = re.fullmatch(r' {0,3}<!--[ \t]*(.*?)[ \t]*-->[ \t]*', line)
+        if comment and comment[1].startswith(('director-starter', '/director-starter', 'director-pattern', '/director-pattern')):
+            markers.append((number, comment[1]))
+    supported = {('director-starter:2', '/director-starter:2'),
+                 ('director-pattern:start', 'director-pattern:end')}
+    need(len(markers) == 2 and tuple(label for _, label in markers) in supported,
+         'missing, ambiguous or unsupported marked startup hook: ' + source)
+    body = '\n'.join(lines[markers[0][0] + 1:markers[1][0]])
+    need(re.search(r'(?<![\w/.-])(?:\./)?' + re.escape(target) + r'(?![\w/.-])', body),
+         'marked startup hook does not reference selected route: ' + target)
+    return {'path': source, 'marker': markers[0][1], 'target': target,
+            'scope': 'marked route structure only'}
+
+
+def check(root, receipt_name=None, config_name=None, backend_contract=None, guards=(), expect_project_id=None,
+          hook_source='AGENTS.md'):
     root = absolute(root)
     for part in (root, *root.parents):
         need(not part.is_symlink(), 'symlink in installation root')
@@ -107,23 +148,37 @@ def check(root, receipt_name=None, config_name=None, backend_contract=None, guar
     need(isinstance(source.get('sha'), str) and re.fullmatch('[0-9a-f]{40}', source['sha']),
          'missing/invalid installation source pin')
     need(type(source.get('published')) is bool, 'missing installation source publication status')
-    route = ['AGENTS.md', str(root / 'START.md'), str(root / 'DIRECTOR.md'), str(root / 'OPERATIONS.md'), str(root / 'startup_check.py'), *guards]
+    managed = [str(root / name) for name in ('START.md', 'DIRECTOR.md', 'OPERATIONS.md', 'startup_check.py')]
+    managed_paths = {safe(project, value).relative_to(project).as_posix() for value in managed}
+    need(not Path(hook_source).is_absolute(), 'hook source must be project-relative')
+    hook_relative = safe(project, hook_source).relative_to(project).as_posix()
+    route = ['AGENTS.md', *managed, *guards, hook_source]
     if backend_contract:
         route.append(backend_contract)
-    need(len(route) <= 20, 'too many selected startup guards')
-    checked = []
+    selected = {}
     for value in route:
         path = safe(project, value)
-        relative = path.relative_to(project).as_posix()
-        if relative in checked:
-            continue
-        expected = baseline(receipt, relative)
-        need(hashlib.sha256(read(path, MAX_FILE, total)).hexdigest() == expected,
-             'startup baseline mismatch: ' + relative)
+        selected.setdefault(path.relative_to(project).as_posix(), path)
+    need(len(selected) <= 20, 'too many selected startup guards')
+    checked = []
+    snapshots = []
+    hook = None
+    for relative, path in selected.items():
+        expected = baseline(receipt, relative, required=relative in managed_paths)
+        data = read(path, MAX_FILE, total)
+        digest = hashlib.sha256(data).hexdigest()
+        if relative in managed_paths:
+            need(digest == expected, 'startup baseline mismatch: ' + relative)
+        else:
+            text = data.decode('utf-8')
+            snapshots.append({'path': relative, 'snapshot': 'not_recorded' if expected is None else
+                              'unchanged' if digest == expected else 'changed'})
+        if relative == hook_relative:
+            hook = startup_hook(data.decode('utf-8'), (root / 'START.md').relative_to(project).as_posix(), relative)
         checked.append(relative)
     if backend_contract:
         backend = {'kind': 'project-declared contract', 'path': safe(project, backend_contract).relative_to(project).as_posix(),
-                   'scope': 'known contract bytes only; actor must resolve its actual lean/custom route; no JSON store assumed'}
+                   'scope': 'current project contract read; actor must resolve its actual lean/custom route; no JSON store assumed'}
     else:
         config_path = safe(project, config_name or str(root / 'config.json'))
         config = json_object(config_path, 64_000, total)
@@ -140,14 +195,17 @@ def check(root, receipt_name=None, config_name=None, backend_contract=None, guar
                 need(store['project_id'] == expected, 'configured project identity differs from selected project')
         backend = {'kind': 'configuration header', 'path': config_path.relative_to(project).as_posix(),
                    'schema_version': config['schema_version'], 'record_mode': config['record_mode']}
-    return {'status': 'evidence_matched', 'scope': 'bounded local operational evidence only; actor evaluation still required',
+    return {'status': 'evidence_matched', 'scope': 'managed evidence and marked route structure checked; current project instruction evaluation still required',
             'source_sha': source['sha'], 'source_published': source['published'],
             'source_local_delta': source.get('local_delta', 'not recorded'),
             'receipt': receipt_path.relative_to(project).as_posix(), 'checked_paths': checked,
-            'actor_must_confirm': ['resolved Project Director role and complete startup reads', 'all actual selected role/shared guards included', 'authoritative canonical backend and config/contract binding'],
+            'startup_hook': hook, 'project_instruction_snapshots': snapshots,
+            'actor_must_confirm': ['resolved Project Director role and complete startup reads', 'all actual selected role/shared guards included', 'authoritative canonical backend and config/contract binding',
+                                  'effective host-loaded route and complete current project instructions, including conflicts outside the hook'],
             'backend': backend, 'bytes_read': total[0],
             'not_proved': ['instruction consumption or role authority', 'ledger/history integrity',
-                           'native host behavior or effective model', 'human acceptance or live execution']}
+                           'native host behavior or effective model', 'human acceptance or live execution',
+                           'semantic compatibility of project instructions']}
 
 
 def main():
@@ -156,12 +214,14 @@ def main():
     parser.add_argument('--receipt', help='Exact project-root-relative installation receipt; no newest-file selection')
     group = parser.add_mutually_exclusive_group()
     group.add_argument('--config', help='Actual project-root-relative JSON config header, including external canonical trackers')
-    group.add_argument('--backend-contract', help='Explicit already-read lean/custom backend contract with a known receipt hash; no store initialization')
-    parser.add_argument('--guard', action='append', default=[], help='Additional already-read startup guard with a known receipt hash')
+    group.add_argument('--backend-contract', help='Explicit already-read project-owned lean/custom backend contract; no store initialization')
+    parser.add_argument('--guard', action='append', default=[], help='Additional already-read project-owned startup guard; current authority requires actor evaluation')
+    parser.add_argument('--hook-source', default='AGENTS.md', help='Explicit project-relative file containing the supported marked hook; outer AGENTS is always read, actual host import requires actor evaluation')
     parser.add_argument('--expect-project-id', help='Stable actual project identity from the already-read project authority, when known')
     args = parser.parse_args()
     try:
-        result = check(args.root, args.receipt, args.config, args.backend_contract, args.guard, args.expect_project_id)
+        result = check(args.root, args.receipt, args.config, args.backend_contract, args.guard, args.expect_project_id,
+                       args.hook_source)
         code = 0
     except (ValueError, OSError, TypeError, KeyError, UnicodeError, RecursionError) as error:
         result = {'status': 'blocked', 'scope': 'bounded local operational evidence only', 'gap': str(error)[:600]}

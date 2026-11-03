@@ -98,15 +98,18 @@ not payload. A temporary staging clone is optional transport only.
 
    ```markdown
    <!-- director-pattern:start -->
+   Default to Project Director unless explicitly assigned a worker or scoped child
+   Director role.
    At the start of each conversation, your first tool invocation must only read
    `.director/PATTERN.md`; wait for and read its result. Complete its startup sequence
    and acknowledge the resolved role package before any task I/O, planning,
    delegation, changes, or substantive answer. A brief acknowledgment may come first;
    then address the original request in the same turn, without requiring a greeting
    or extra confirmation.
-   Directors, use subagents for substantial analysis and project changes. Assign bounded
-   work, stay available to the user, and evaluate the results. Workers, delegate useful
-   independent subsets within your assigned scope. Preserve project/host authority.
+   Directors, delegate project investigations, reviews and changes to bounded subagents
+   before doing the detailed work. Scope assignments, stay available to the user, and
+   evaluate the returned results. Workers, delegate useful independent subsets within
+   your assigned scope. Preserve project/host authority.
    <!-- director-pattern:end -->
    ```
 

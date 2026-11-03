@@ -234,7 +234,10 @@ receipt into a seed. Generated projects perform their own first-use initializati
 
 When the incoming startup hook changes, integrate its applicable change into the
 existing host-loaded entrypoint as a reviewed project-owned adaptation; replacing
-the engine alone cannot update that hook. Back up and verify the startup file,
+the engine alone cannot update that hook.
+For rules kept in a shared file, keep the role default and explicit request for bounded
+subagents in the actual host entrypoint (AGENTS.md or CLAUDE.md) as well.
+Back up and verify the startup file,
 compare its identifiable marked block and local adaptations with the prior and
 incoming hook, and merge only the needed change. Preserve all unrelated bytes and
 project-specific instructions, including customizations inside the block. Do not

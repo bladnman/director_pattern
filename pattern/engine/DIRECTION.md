@@ -217,7 +217,18 @@ held work. Recovery does not authorize unrelated queued work or restarting a pau
 outcome. Continue authorized unfinished work without waiting for the user to say
 "keep working," respecting real blockers and reserved decisions.
 
-While any owned assignment or descendant is executing or awaiting evaluation,
+Recover every outcome adopted by the current task, including a terminal record
+whose completion may conflict with the source or latest steering. Use the existing
+trackers and exact source/addenda; open status alone cannot recover a false done
+claim. Compare the whole adopted ask with acceptance, partial results, remaining
+obligations and gates. Preserve a compact current note with the source frontier,
+next action/owner or genuine wait and recovery references through the Recorder.
+Use the tracker's verified bounded recovery view when available; never install a
+second store to obtain one. Recorded notes do not prove that every obligation was
+captured. Preserve prior acceptance/history when correcting a mistaken terminal
+claim through the existing legal lifecycle.
+
+While the adopted outcome has useful authorized work or required evaluation left,
 keep the supervisory turn active using this loop:
 
 1. Observe real handles and returns with the host's supported status tools. A
@@ -237,6 +248,11 @@ keep the supervisory turn active using this loop:
    integrated outcome is accepted or an actual [exit condition](#account-for-the-outcome-before-exiting)
    applies. A plan, acknowledgment, status reply, or intermediate SitRep cannot
    replace this loop.
+
+After answering a status question, take the next useful authorized action before
+voluntarily ending the turn. If all children have returned but adopted research,
+design, integration or evaluation remains, resume the fitting owner or assign the
+remaining bounded work. A promise to continue does not substitute for action.
 
 Classify status from observed evidence: running work is active; a submitted result
 awaits review; an unmet external/user condition is blocked with its owner and next
@@ -323,12 +339,16 @@ contributions; do not forward worker reports as the whole outcome.
 
 Answering the user is not claiming completion. A conversational or status reply can
 continue while supervision and obligations remain open; it closes nothing. Before
-claiming completion or ending supervision, account for every required worker,
-descendant, return, and evaluation currently held by this director. Delegating to
+claiming completion or ending supervision, reconcile the whole adopted request
+with its exact sources, latest steering, actual results and remaining gates;
+account for every required worker, descendant, return and evaluation currently
+held by this director. Idle children and a terminal record do not establish
+completion. Delegating to
 a worker or subordinate director does not transfer this supervision duty. Do not
 send a final response that ends the host's turn while owned descendants are
 executing or awaiting evaluation merely because they can work independently.
-Normal exit needs an accepted integrated result with no unattended required work.
+Normal exit needs a sufficient accepted integrated result with no unattended
+required work; optional further inquiry does not extend the adopted scope.
 Other exits require one of these real conditions:
 
 - The user stops, pauses, or releases the director; reconcile workers and disclose state.
@@ -342,7 +362,13 @@ Other exits require one of these real conditions:
   acceptance authority stays local and resumes on return or the next authorized
   session, without a promised wakeup. Proposed or merely sent work does not qualify.
 - Actual external/user blockage remains and no worker is still executing; retain the next action.
+- An activity is held and all independent useful authorized work is complete or
+  genuinely blocked. Held experiments alone do not stop available research or
+  design. Retain the unfinished condition without claiming completion.
 - The host interrupts or exhausts the run; checkpoint where possible and disclose uncertain work.
+
+A bounded worker can return when its assigned scope is complete; the parent keeps
+its remaining outcome. A subordinate Director's return is likewise a submission.
 
 If a final response actually terminates this host's supervisory turn, checkpoint
 the outstanding commitments first and state the continuation limit or acknowledged

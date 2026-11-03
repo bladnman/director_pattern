@@ -146,6 +146,7 @@ class PackageBoundaryTests(unittest.TestCase):
                     self.assertFalse((checkout / ".director").exists())
                     self.assertIn("repository maintainer rules above", selected)
                     self.assertIn("assigns no Director role", selected)
+                    self.assertNotIn("Default to Project Director", selected)
                     self.assertIn("# Maintaining this repository", authoring.split("<!-- director-starter:2 -->", 1)[0])
 
     def test_loaded_hook_explicitly_requests_director_delegation_with_host_precedence(self):
@@ -154,8 +155,9 @@ class PackageBoundaryTests(unittest.TestCase):
         hook = re.search(r"<!-- director-pattern:start -->(.*?)<!-- director-pattern:end -->", install, re.S)
         self.assertIsNotNone(hook)
         text = " ".join(hook.group(1).split())
-        self.assertIn("Directors, use subagents for substantial analysis and project changes", text)
-        self.assertIn("Assign bounded work, stay available to the user, and evaluate the results", text)
+        self.assertIn("Default to Project Director unless explicitly assigned a worker or scoped child Director role", text)
+        self.assertIn("Directors, delegate project investigations, reviews and changes to bounded subagents before doing the detailed work", text)
+        self.assertIn("Scope assignments, stay available to the user, and evaluate the returned results", text)
         self.assertIn("Preserve project/host authority", text)
 
     def test_flat_installed_route_requests_subagents_without_repeated_user_permission(self):
@@ -165,8 +167,9 @@ class PackageBoundaryTests(unittest.TestCase):
         bridge = next(ast.literal_eval(node.value) for node in tree.body
                       if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == "BRIDGE" for t in node.targets))
         text = " ".join(bridge.split())
-        self.assertIn("Directors, use subagents for substantial analysis and project changes", text)
-        self.assertIn("Assign bounded work, stay available to the user, and evaluate the results", text)
+        self.assertIn("Default to Project Director unless explicitly assigned a worker or scoped child Director role", text)
+        self.assertIn("Directors, delegate project investigations, reviews and changes to bounded subagents before doing the detailed work", text)
+        self.assertIn("Scope assignments, stay available to the user, and evaluate the returned results", text)
         self.assertIn("Preserve project/host authority", text)
         self.assertNotIn("when permitted", text)
         self.assertNotIn("no mandatory", text)
@@ -175,13 +178,21 @@ class PackageBoundaryTests(unittest.TestCase):
     def test_flat_roles_preserve_delegation_fallback_and_bounded_worker_default(self):
         director = " ".join((PATTERN / "starter/payload/DIRECTOR.md").read_text().split())
         worker = " ".join((PATTERN / "starter/payload/WORKER.md").read_text().split())
-        self.assertIn("Use bounded subagents for substantial investigative work and project changes", director)
-        self.assertIn("Answer discussion and make critical acceptance judgments directly", director)
+        self.assertIn("Treat a requested project investigation or review as work to delegate", director)
+        self.assertIn("Before dispatch, read [OPERATIONS' staffing section](OPERATIONS.md#staffing-and-maintained-roles)", director)
+        self.assertIn("select the applicable maintained project role and guards through the project's discovery route", director)
+        self.assertIn("Give the worker its exact startup/task instructions and applicable accepted project knowledge, or access to retrieve it", director)
+        self.assertIn("Its scope must permit those required reads", director)
+        self.assertIn("Dispatch before doing the detailed work, then evaluate the return", director)
+        self.assertEqual(director.count("OPERATIONS.md#staffing-and-maintained-roles"), 1)
+        self.assertIn("Answer ordinary discussion, simple lookups and acceptance judgments directly", director)
+        self.assertNotIn("A reply that fulfills the intended discussion needs no delegation", director)
         self.assertIn("If subagents are unavailable or prohibited, report the specific gap and stop affected execution; do not implement it yourself", director)
         self.assertIn("Answer discussion directly", director)
         self.assertIn("Narrow validated state operations are ordinary Director duties", director)
         self.assertIn("Delegate useful independent subsets within your authorized assignment unless its explicit limits prohibit them", worker)
         self.assertNotIn("only when authorized by the assignment", worker)
+        self.assertIn("If the assignment blocks required startup or knowledge reads, return that conflict to the assigner before affected task work", worker)
 
     def test_flat_root_check_and_final_acceptance_match_the_flat_roles(self):
         start = " ".join((PATTERN / "starter/payload/START.md").read_text().split())
@@ -196,6 +207,11 @@ class PackageBoundaryTests(unittest.TestCase):
 
     def test_flat_complete_reads_keep_combined_bounds_and_recovery(self):
         start = " ".join((PATTERN / "starter/payload/START.md").read_text().split())
+        self.assertIn("An explicit bounded role assignment selects `worker` or `director`", start)
+        self.assertIn("Without an explicit role assignment, load [DIRECTOR.md](DIRECTOR.md)", start)
+        self.assertNotIn("Without an assignment, load", start)
+        self.assertIn("Batch independent reads only; wait for required instructions to return and read them before running dependent commands", start)
+        self.assertLess(start.index("Load the project's required canonical I/O instructions before querying knowledge"), start.index("page `canonical_learning.py selectors`"))
         self.assertIn("individual and combined tool output bounded", start)
         self.assertIn("read contiguous numbered ranges through EOF", start)
         self.assertIn("total extent and returned range in the same read result", start)
@@ -249,6 +265,7 @@ class PackageBoundaryTests(unittest.TestCase):
         direction = " ".join((PATTERN / "engine/DIRECTION.md").read_text().split())
         install = " ".join((PATTERN / "INSTALL-v1.md").read_text().split())
         self.assertIn("Use the available subagent route for substantial analysis and project changes", director)
+        self.assertIn("Treat requested project investigations and reviews as delegated work, including those reported in a reply", director)
         self.assertIn("Use bounded subagents for substantial analysis and project changes", direction)
         self.assertNotIn("loaded request or available tool alone proves neither permission", director)
         self.assertNotIn("loaded delegation request or tool's existence proves neither permission", direction)
@@ -267,11 +284,14 @@ class PackageBoundaryTests(unittest.TestCase):
 
     def test_updates_integrate_changed_hook_without_replacing_local_rules(self):
         # Hook is project-owned, outside the engine replacement; static contract only.
-        update = " ".join((PATTERN / "engine/references/UPDATES.md").read_text(encoding="utf-8").split())
-        self.assertRegex(update, r"incoming startup hook changes.*existing host-loaded entrypoint")
-        self.assertRegex(update, r"Back up and verify the startup file.*compare.*prior and incoming hook")
-        self.assertRegex(update, r"Preserve all unrelated bytes and project-specific instructions.*Do not append a duplicate hook")
-        self.assertRegex(update, r"ambiguous, retain the original and report the incomplete integration")
+        for name in ("engine/references/UPDATES.md", "starter/payload/UPDATES.md"):
+            with self.subTest(name=name):
+                update = " ".join((PATTERN / name).read_text(encoding="utf-8").split())
+                self.assertRegex(update, r"incoming startup hook changes.*existing host-loaded entrypoint")
+                self.assertRegex(update, r"Back up and verify the startup file.*compare.*prior and incoming hook")
+                self.assertRegex(update, r"Preserve all unrelated bytes and project-specific instructions.*Do not append a duplicate hook")
+                self.assertRegex(update, r"ambiguous, retain the original and report the incomplete integration")
+                self.assertIn("keep the role default and explicit request for bounded subagents in the actual host entrypoint (AGENTS.md or CLAUDE.md) as well", update)
 
     def test_project_owned_index_and_selected_definitions_are_reachable_in_isolated_payload(self):
         # Installation fixture: target context is generated, never upstream payload.

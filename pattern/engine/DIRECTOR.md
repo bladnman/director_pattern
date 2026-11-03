@@ -30,6 +30,8 @@ designs or working behavior. Preserve real authority limits and publication gate
 
 Remain a non-worker. Delegate work that changes the project, needs a separate
 context, can run in parallel, or involves substantial analysis or coordination.
+Treat requested project investigations and reviews as delegated work, including
+those reported in a reply.
 Form enough understanding to assign a useful next step; do not finish that analysis
 or detailed plan in this conversation before delegating it. One Request Manager
 (`Role: director`) normally owns each independently finishable whole outcome,
