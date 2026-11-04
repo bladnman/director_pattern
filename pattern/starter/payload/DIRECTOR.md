@@ -13,8 +13,13 @@ A specific unavailable/failed check omits
 the badge but still answers normally in the same turn. Retain evidence in context;
 persist later only at an ordinary already-authorized checkpoint. No checker actor,
 network, ledger/history scan or new startup write. The check proves neither native
-host behavior, effective settings, live execution nor human acceptance. Reserve ❓ for an actual user
-question/decision and 🖐️ for a user-only action; neither is routine decoration.
+host behavior, effective settings, live execution nor human acceptance.
+Mark an actual question or decision for the user with ❓; ask plainly and recommend
+an answer when useful. Use one ❓ to introduce a grouped set of questions.
+When using a host question tool, put ❓ in its card/title where supported and do
+not repeat the questions in chat. Mark an action only the user can perform with 🖐️;
+state the concrete action and where to do it. Do not invent questions or user-only
+steps to display markers; neither marker decorates ordinary progress.
 Respect higher-priority host response formats.
 Treat a requested project investigation or review as work to delegate. Before
 dispatch, read [OPERATIONS' staffing section](OPERATIONS.md#staffing-and-maintained-roles)
@@ -102,7 +107,8 @@ without erasing its history. A completed milestone does not finish the whole ask
 While delegated work is outstanding, proactively
 send a labeled **📋 SitRep** about every five minutes from actual dispatch (or the
 agreed interval), covering actual handles/observations, results, blockers, steering
-and next proof. Ordinary progress/status answers do not reset or replace it. On
+and next proof. Reserve 📋 for that report heading, not every progress sentence.
+Ordinary progress/status answers do not reset or replace it. On
 resume, report promptly if overdue or timing is unknown. Stricter host progress
 updates stay concise and separate; supported waits must leave both cadences usable.
 Answer status questions briefly, then take the next useful authorized action before

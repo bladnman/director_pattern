@@ -1499,3 +1499,73 @@ action after a status interruption, failed-check recovery, role countercases,
 compaction or cadence. Those behavioral scenarios remain defined and unrun here.
 Independent source/evidence review and accountable-owner acceptance remain separate
 from these observations.
+
+## Bounded context and Stop prototype — November 4, 2026
+
+This delta restores positive R9 attention instructions, adds an optional model-free
+context calculator and develops an unactivated Stop prototype outside manifests.
+The existing terminal-inclusive continuation API/backend stays unchanged; recovery
+API expansion and packet/native-role frameworks are deferred. The
+[intent matrix](BEHAVIOR_PARITY.md#bounded-context-and-stop-prototype--november-4-2026)
+and R9/R17/R18 record the reasons and actual routes.
+
+### Required focused evidence
+
+The manifest destination `.director/context_check.py` requires caller `--root`, `--spec` and
+`--max-output-bytes`. Check total versus required-boundary fit: exact-cap/overflow,
+early boundary fitting with total over, later cut/omitted pointer, multibyte bytes,
+unknown/default/effective provenance, no asserted boundary, unsafe/missing/changing
+inputs and deterministic bounded body-free JSON. Unknown ignores any numeric cap,
+default is conditional and effective is caller-declared; even full declared fit
+must retain `actual_admission:unqualified`. Aggregate fit covers only positive
+assertions, with asserted/unasserted counts; null/zero asserts no required coverage.
+Preserve startup-checker compatibility
+and installation boundaries without adding an automatic startup call.
+
+The Stop prototype needs explicit session/root-owner/task/source-frontier binding
+and a trusted snapshot command over the existing canonical route. Conformance must
+send terminal/all-complete facts plus unfinished attempted final to an injected
+evaluator and show one supported corrective block. Full pause, correct child,
+sufficient completion and experiment hold with independent work are controls.
+One snapshot, optional evaluation and correction total are allowed; an allow/error
+also consumes the inspection allocation rather than monitoring later progress.
+Repeated Stops/new turn IDs/source or checkpoint edits/final rewrites/process
+restart must not reset allowance. Missing/corrupt established state, null text,
+stale/source errors, invalid verdict, timeout and exhaustion must fail open. Check
+process/output bounds, privacy diagnostics and no canonical lifecycle/source writes.
+Injected evaluator decisions prove protocol/control only, not semantic quality.
+
+Positive marker source review checks the reachable ❓/🖐️ instructions and grouped/
+tool-card handling while preserving ordinary progress, checked 🎬 and heading-only
+📋 SitRep. Prose matches are not observed uptake; actual questions and user-only
+actions with negative controls need a separate observation.
+
+### Current evidence and remaining gates
+
+The context author's `python3 -B -m unittest development.tests.test_context_check`
+final run passed **19 cases in 2.435 seconds**.
+The author's existing `development.tests.test_flat_starter` and
+`development.tests.test_startup_check` suites passed **33 cases in 13.153 seconds**.
+Independent review replayed the same **19 cases in 2.054 seconds** and separately
+checked small-cap/multibyte arithmetic, unknown provenance, cap overflow and asserted
+versus unasserted coverage. These are deterministic calculator results, not native
+admission evidence; reruns are not additional distinct cases.
+
+The Stop author's `python3 -B -m unittest development.tests.test_stop_guard -v`
+run passed **32 cases in 6.146 seconds**. Independent recheck passed the same
+**32 cases in 5.887 seconds**, plus discriminating complete/partial-hold and persisted
+control-state cases. These verify injected-command protocol and finite controls,
+not actual bridge fidelity, evaluator quality or native prevention; reruns add no
+distinct cases. Independent source review also confirmed the restored R9 marker
+semantics; observed uptake remains unrun.
+Earlier continuation and badge/judgment observations retain their original scope
+and cannot substitute for these checks.
+
+Actual host discovery/counting, effective admission, received text, consumption
+and compaction remain unqualified. Stop delivery, trusted binding, real backend
+snapshot bridge, evaluator quality, correction followed by authorized action,
+interruption and genuine-user versus synthetic-prompt handling also remain
+unqualified. No new marker-uptake trial ran. The live-model/native experiment hold
+continues; publication would not activate the prototype. Source publication, target
+installation, template updates and behavioral acceptance require separate evidence.
+No future published pin is invented; prior failed/partial observations remain intact.

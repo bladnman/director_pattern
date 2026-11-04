@@ -98,6 +98,32 @@ or acceptance; marker matching does not prove semantic compatibility. 🎬 claim
 that current role plus this local operational check and actor evaluation.
 Do not wait for those broader unproved claims before an otherwise valid badge.
 
+## Optional context-budget preflight
+
+At installation, update or a changed host instruction route, use the optional
+read-only calculator when a byte-budget check is useful:
+
+```sh
+python3 .director/context_check.py --root /path/to/project --spec /path/to/selected-chain.json --max-output-bytes 12000
+```
+
+Supply a schema-1 spec with `chain` (ordered unique project-relative paths and
+`required_through_bytes` boundaries), `cap` (`bytes` and `provenance`), and `evidence`
+(the actual host-route/cap evidence locator). Resolve the host's real discovery,
+overrides and counted inputs first; the helper does not discover the chain.
+Use provenance `effective`, `default` or `unknown`: effective is caller-declared
+evidence, default gives only a conditional prediction, and unknown ignores any
+numeric cap. A boundary is a raw-byte prefix length, or null when none is asserted.
+The report counts/hashes the selected raw files without printing their bodies.
+Inspect both total fit and required-boundary fit; a later required pointer can be
+cut or omitted even when an earlier one fits. Aggregate boundary fit covers only
+positive caller assertions; null/zero boundaries establish no required coverage.
+Missing/unsafe inputs fail visibly.
+Every report keeps `actual_admission:unqualified`; it proves neither received text,
+consumption nor compaction restoration. This action reference adds no first-reply
+check, new configuration registry or host-setting change. Preserve the existing
+complete-read and truncation-recovery duties.
+
 ## Staffing and maintained roles
 
 At affected use follow the project's actual canonical role/task discovery pointer;

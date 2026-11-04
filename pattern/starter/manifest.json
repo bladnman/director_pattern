@@ -18,6 +18,7 @@
     "canonical_learning.py",
     "update_check.py",
     ".gitignore",
-    "startup_check.py"
+    "startup_check.py",
+    "context_check.py"
   ]
 }

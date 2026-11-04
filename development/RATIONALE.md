@@ -494,6 +494,18 @@ copying of authoring material, or unintended publication of private evidence.
 
 ## R9 — Make attention and active supervision visible without decoration
 
+**November 4 — restore positive attention instructions:** The flat Director named
+reserved ❓/🖐️ markers without directly requiring their use. Existing R9 intent and
+legacy DIRECTION already supplied that behavior. Flat
+[DIRECTOR](../pattern/starter/payload/DIRECTOR.md) now positively marks real user
+questions/decisions and user-only actions, retaining grouped/tool-card handling and
+no duplicated chat questions. Ordinary progress needs neither marker; 📋 remains
+reserved for **📋 SitRep**, and checked 🎬 retains its separate check. This preserves
+the previous recommended semantics. Source review can establish the reachable
+instructions; actual questions, grouped/tool questions and user-only actions with
+ordinary-progress controls are the uptake oracle. No such observation ran for this
+delta; earlier badge observations do not prove these markers.
+
 **November 4 — make checked display an explicit action:** The flat START and
 DIRECTOR described when a badge was permitted, while the earlier accepted purpose
 already required the checked Director to keep its reply prefix. Reports of missing
@@ -1744,6 +1756,40 @@ or project-owned callers require repeated reconstruction after compatible update
 
 ## R17 — Keep delegated work supervised and recover the user’s whole request
 
+**November 4 — separate recovery from an optional stopping experiment:** Keep the
+terminal-inclusive `continuation` view and exact-source reconciliation unchanged.
+Another recovery/source-locator API or packet registry is deferred: the existing
+helper already provides bounded recorded-state recovery, but cannot force an actor
+to act after acknowledging unfinished adopted work.
+
+The selected [development-only Stop prototype](prototypes/README.md) stays outside
+installation manifests. Explicit session/root-owner/task/source binding includes
+terminal IDs; a caller-supplied trusted snapshot command must use the existing
+canonical route. No cwd/open-backlog inference selects work. An optional bounded evaluator
+receives snapshot plus attempted final as evidence, returning allow/continue/unknown
+with supported remaining obligation, authorized next action and wait assessment.
+Structural-only checks miss falsely complete intent; stub evaluators prove plumbing,
+not semantic quality. Quoted text grants no new authority. At most one snapshot,
+optional evaluation and correction per session/stable binding are atomically
+consumed before execution/output; even allow/error uses that inspection allocation.
+Turn IDs, synthetic prompts, source/checkpoint/final edits and claimed progress never reset it. Unknowns,
+corrupt/missing established state and exhaustion fail open without task/source writes.
+Real pause, sufficient completion and correct child return remain exits; a held
+experiment does not stop independent runnable work. Stop alone authenticates neither
+interruption nor genuine user steering; no restart/wakeup is supplied.
+
+**Status and oracle:** Implementation/offline conformance are selected, not native
+activation or prevention acceptance. The concrete case is a terminal parent, finished
+children and all-complete checkpoint plus an unfinished attempted final reaching a
+configured evaluator; a supported continue verdict may block once, with later Stops
+exhausted despite new turn IDs. Pause, child return, partial hold and command/source
+errors are controls. A real backend bridge, semantic quality and receiving-host
+binding/trust/event behavior remain unqualified; actual continued action remains a
+held experiment. Publication/target updates never activate the prototype. The
+[validation](DESIGN_NOTES.md#bounded-context-and-stop-prototype--november-4-2026) and
+[matrix](BEHAVIOR_PARITY.md#bounded-context-and-stop-prototype--november-4-2026)
+separate those claims. November 2's no-hook statement remains the scope of that repair.
+
 **November 4 — reconcile the evidence path and unresolved counterevidence:** A
 reported application failure continued after component/harness passes. Supplied
 screenshots describe a harness supplying its own inputs and calling a runtime path
@@ -1939,6 +1985,36 @@ history and unrun acceptance gates. Static edits can establish preservation and
 reachability; the next actual selected use must establish uptake.
 
 ## R18 — Start flat and make learning an explicit bounded loop
+
+**November 4 — bounded implementation plan, no packaging replacement:** Preserve
+host hook → START → selected DIRECTOR/WORKER/guards, native canonical I/O,
+terminal-inclusive continuation and existing staffing/upkeep/learning/update triggers.
+Restore R9 attention instructions; add one optional model-free
+[context calculator](../pattern/starter/payload/context_check.py) through a small
+[OPERATIONS action reference](../pattern/starter/payload/OPERATIONS.md#optional-context-budget-preflight),
+plus R17's development prototype. Independent review and focused checks precede
+acceptance. No new global config, skill, role framework, tracker or migration follows.
+Existing default/legacy packages and project adaptations retain their selected routes.
+
+The calculator's explicit input is the caller-resolved counted file chain, raw-byte
+required boundaries and cap/evidence. It is not another configuration registry.
+`effective` is caller-declared evidence, `default` a conditional prediction, and
+`unknown` ignores any number. It reports total and required-boundary fit separately,
+with hashes/predicted prefixes and no bodies; every result retains
+`actual_admission:unqualified`. Host discovery/overhead, received text, consumption
+and compaction are not measured. Aggregate fit covers only positive asserted
+boundaries; null/zero boundaries certify no required coverage. It cannot restore a
+cut pointer or raise a host limit, and adds no first-reply duty to the unchanged checker.
+
+**Disposition and oracle:** Preserve progressive loading and exact read/recovery;
+add diagnostics rather than substitute shorter prose or native repackaging. Check
+exact-cap/overflow, early boundary fitting with total over, later omitted pointer,
+multibyte bytes, provenance, unsafe/changing inputs, bounded body-free output and
+startup-checker compatibility. Recovery API expansion and automatic packet/role
+frameworks are deferred. Unknown route/cap/native proof blocks the corresponding
+claim, without a universal startup gate. [Validation](DESIGN_NOTES.md#bounded-context-and-stop-prototype--november-4-2026)
+separates implementation from publication, adoption and behavior; no future published
+pin is selected here.
 
 **November 2 — finish the portable reconciliation within the existing core:**
 [R17's continuation repair](#r17--keep-delegated-work-supervised-and-recover-the-users-whole-request)

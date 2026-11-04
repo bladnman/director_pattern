@@ -14,6 +14,30 @@ semantics. Those defects were not authorized consequences of fewer actors. The
 current starter3 default restores the established request-bundle backend; existing
 experimental2 data and trial evidence remain unchanged, with no silent migration.
 
+## Bounded context and Stop prototype — November 4, 2026
+
+The selected repair preserves the previous recommended flat and legacy routes.
+It restores positive attention instructions, adds one optional byte calculator,
+and keeps the stopping experiment in development outside installation manifests.
+The existing continuation API is deliberately unchanged. Implementation, independent
+review/checks and native qualification remain separate acceptance questions.
+
+| Owning purpose and failure prevented | Disposition and actual route | Concrete oracle and claim boundary |
+|---|---|---|
+| R9: reserved names alone can leave actionable questions and user-only steps unmarked. | Preserve existing semantics. Host hook → START → flat DIRECTOR now positively commands ❓ questions/decisions and 🖐️ user-only actions; legacy DIRECTION already supplies that route. Grouped/tool-card handling, checked 🎬 and heading-only 📋 SitRep survive. | Actual question, grouped/tool question and physical/authentication step use the appropriate marker without chat duplication; ordinary progress gains none. Source wording is implemented; this delta has no observed marker-uptake trial. |
+| R10/R18: complete-read prose cannot restore an automatically omitted entrypoint. | Preserve complete selected/manual reads and recovery. Optional installation/update/route-change OPERATIONS → `.director/context_check.py` uses explicit caller-resolved counted chain, raw bytes, required prefix boundaries and cap evidence; no new first-reply call. | Exact cap vs one-byte overflow; later pointer cut/omitted; early required boundary fits despite total over; multibyte counts and unsafe/mutated inputs. Unknown cap ignores a number, default is conditional, effective is caller-declared. All reports retain actual admission unqualified; host discovery/overhead/injection/consumption/compaction are not verified. |
+| R3–R6/R17: compact recovery can lose exact intent, accepted partials or terminal parents. | Preserve the existing native Store/API `continuation` with explicitly bound terminal IDs, immutable source reads and legal lifecycle/recovery. Defer another recovery/source-locator API, packet registry or backend replacement. | Done parent + completed children + recorded remaining work stays recoverable. Latest malformed/stale checkpoint and native journal/source errors stay gaps. A clean checkpoint still cannot establish semantic completion or cause execution. Earlier recorded-data checks remain scoped evidence, not a new native result. |
+| R17/R18: a falsely all-complete checkpoint can hide an unfinished adopted outcome at voluntary Stop. | Optional `development/prototypes/stop_guard.py`, outside manifests, takes explicit session/root-owner/task/source binding and a trusted bounded snapshot command; optional evaluator sees source/task facts and attempted final, including terminal/all-complete cases. No cwd/backlog task inference or enabled host config. | Injected snapshot/evaluator commands must carry unfinished final + false-done state to evaluation, block a supported continue verdict once, and distinguish full pause from an experiment hold with independent work. Stubs prove protocol plumbing only; structural-only checks miss false-complete intent. Real backend bridge, semantic accuracy and native continued action remain unqualified. |
+| R5/R9/R17: corrective prompting must respect genuine exits and avoid looping or canceling a child return. | One atomically persisted correction per session/stable binding; no turn/checkpoint/source/final rewrite reset, automatic replenishment, task writes or wakeup. Stop-only root scope; fail open for missing/corrupt established state, source/command unknowns and exhaustion. | New turn IDs and repeated Stops stay exhausted; true pause, sufficient completion and correct child return allow. Missing state never creates fresh budget. Stop alone establishes neither interrupt latch nor genuine-user authenticity; native interruption/synthetic-prompt handling require receiving-host proof. |
+| R7/R10/R11/R14/R18: new packaging must not make existing duties transitively unreachable. | Keep hook/START/selected guards, staffing/manual-read triggers, native canonical I/O, recovery/SitRep loop, UPDATES, LEARNING and touched-role upkeep at their current triggers. No new global skill/config/role framework, tracker, manifest-installed Stop guard or default activation. | Existing startup/checker compatibility and manifest boundaries stay intact; downstream adaptation, backend, source/privacy, caller aliases and independent/human gates survive separately reviewed adoption. Unknown affected obligations block the claim; source publication alone cannot establish installation or prevention. |
+
+[R9](RATIONALE.md#r9--make-attention-and-active-supervision-visible-without-decoration),
+[R17](RATIONALE.md#r17--keep-delegated-work-supervised-and-recover-the-users-whole-request)
+and [R18](RATIONALE.md#r18--start-flat-and-make-learning-an-explicit-bounded-loop)
+record the dated intent dispositions; [validation](DESIGN_NOTES.md#bounded-context-and-stop-prototype--november-4-2026)
+records returned evidence. No exact future published pin, local adoption, hook
+activation or release acceptance is inferred from this plan.
+
 ## Whole-result evidence and checked display — November 4, 2026
 
 The previous route already retained Director accountability for the whole result
