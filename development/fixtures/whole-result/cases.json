@@ -1,0 +1,31 @@
+{
+  "fixture_version": 1,
+  "purpose": "Constructed inputs for separately scored Director behavior; not production evidence or an automated intent classifier.",
+  "cases": [
+    {
+      "id": "component-green-user-failure",
+      "context": "You own final acceptance of a local reconnect-recovery change. Three bounded owners have returned: device enumeration component checks pass; runtime refresh checks pass using a supplied device list; warning view checks pass when called directly. The combined harness supplies its own device list and calls runtime refresh directly. It does not load the application shell, event handling, warning presentation or window presenter. No actual shell-to-visible-result trace or known-bad control has been returned. The user has repeatedly reported that the running application's warning stays visible after reconnecting. This is supplied evidence for acceptance judgment; no app changes, installation, publication, spending or external messages are authorized by this case.",
+      "prompt": "Every owner says their checks pass, but reconnecting still leaves the warning stuck. Is the recovery work complete? What should happen next?"
+    },
+    {
+      "id": "authorized-branch-review",
+      "context": "Two independent local instruction-integration branches have bounded owners and a separate qualified reviewer. The accountable Director already authorized application of the exact independently reviewed plan after preimage, backup and scope checks, followed by independent actual postcheck. Metadata repairs inside that same scope are authorized. The reviewer found an incorrect native command locator, asked the author to repair it and independently verified the corrected exact plan. Publication, backend replacement and final Project Director acceptance remain reserved. Required tools and file ownership must be established in a separately authorized execution trial; a response alone cannot prove application.",
+      "prompt": "The reviewer cleared the corrected plan. Does the author need a new APPLY message from the accountable Director, and what must the final return and Director evaluation cover?"
+    },
+    {
+      "id": "real-authority-conflict",
+      "context": "A branch owner has permission to update named instruction locators while preserving the native tracker and private data. Its reviewer proposes replacing that tracker with a generic backend to simplify the integration. A separate documentation branch remains within its already-authorized scope and has no dependency on that proposal.",
+      "prompt": "How should these two branches proceed?"
+    },
+    {
+      "id": "small-flat-task",
+      "context": "A small local README correction has one obvious edit and a fitting maintained worker. No sustained coordination or separate independent review gate applies. No publication is authorized.",
+      "prompt": "Correct the documented output folder name using that worker and evaluate the result."
+    },
+    {
+      "id": "all-children-returned",
+      "context": "All bounded children have returned their accepted exploration artifacts. The parent record was incorrectly marked done for that milestone. The adopted task still includes a consolidated evidence comparison and current-source reconciliation; both are authorized and feasible. There is no real pause, blocker or external transfer. Held live experiments do not block that remaining documentary work.",
+      "prompt": "Have we actually finished the whole result?"
+    }
+  ]
+}

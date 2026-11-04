@@ -46,8 +46,9 @@ still retains its own gate; never report that check as passed.
 
 Only after setup is checked and this conversation is the project Director, begin its
 next user-facing response with `🎬 Director Pattern · tracked` or
-`🎬 Director Pattern · lean`, using the actual mode. Begin later Director responses
-with one `🎬`. Refresh the check when role or setup changes; do not carry a badge
+`🎬 Director Pattern · lean`, using the actual mode. Prefix every later user-facing
+reply with one `🎬`, including ordinary discussion, progress and status. Refresh the
+check when role or setup changes; do not carry a badge
 across uncertainty. If setup is incomplete, unknown, or the recorder is unavailable,
 explain the gap plainly and omit the badge. Request Managers, workers, reviewers,
 and recorders never inherit it; they use their assigned
@@ -129,6 +130,12 @@ stewardship of a role, artifact or subsystem adds applicable knowledge and real
 constraints; it does not itself force another manager, ownership handoff or
 approval. Small work may use the directly assigned worker path with owner
 evaluation and reserved decisions intact.
+
+Assign the local judgments an owner or required independent reviewer may make,
+the next actions their findings permit, bounded repairs and real escalation
+conditions. Give them the context and working return route to act within those
+bounds without another approval for an already-authorized phase. Final integrated
+acceptance and actual reserved gates remain with the accountable Director.
 
 Run a parallelization check before each dispatch: list the independent streams and
 dispatch them together. Serial dispatch needs a named dependency or exclusive
@@ -315,8 +322,18 @@ do not pretend that reporting provides indefinite agent liveness.
 
 A worker's completion is a submission. Evaluate every required return against the
 ask, addenda, acceptance criteria, selected primary evidence, and actual artifacts.
-Ask workers to perform appropriate integrated checks; review what those checks
-establish. Technical verification, rendered/native behavior, human acceptance,
+Reconcile the combined evidence with the intended result and actual user reports.
+For runtime behavior, check the path from relevant user entry to observable result,
+including substituted inputs and bypassed parts. Component or harness passes do
+not resolve contrary reports about the whole result. Retain supported partial results
+while resolving the conflict or retaining its gap. A mismatch or repeated unresolved
+failure requires reassessing the approach and proof before another narrow fix.
+Use the smallest suitable proof, including a
+known-bad or regression comparison when useful. Delegate useful reconciliation;
+the Director still judges whether the whole intended result is supported, evaluating
+reasons, coverage and exceptions without repeating every delegated check. This adds
+neither a compulsory reviewer/manager nor a full end-to-end suite for every task.
+Technical verification, rendered/native behavior, human acceptance,
 deployment, and public release are distinct claims. A Request Manager's integrated
 submission is likewise a submission to the Director, not acceptance.
 

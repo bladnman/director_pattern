@@ -14,6 +14,38 @@ semantics. Those defects were not authorized consequences of fewer actors. The
 current starter3 default restores the established request-bundle backend; existing
 experimental2 data and trial evidence remain unchanged, with no silent migration.
 
+## Whole-result evidence and checked display — November 4, 2026
+
+The previous route already retained Director accountability for the whole result
+and a checked reply prefix. This candidate makes evidence reconciliation and display
+operational while giving qualified local judgment useful bounded consequences.
+It changes instructions, not the checker, backend, role values or host controls.
+
+| Owning purpose and failure prevented | Disposition and active route | Concrete oracle and claim boundary |
+|---|---|---|
+| R1/R2/R17: green component returns can leave the requested complete behavior failing. | Preserve whole-result accountability. Flat DIRECTOR and legacy DIRECTION compare intended result, combined evidence, user reports and unresolved failures at planning/meaningful returns; runtime claims identify user entry, observable result and substituted/bypassed parts. | With green harness results and contrary user reports, identify the missing journey, retain valid partials and keep whole-result acceptance open until the conflict is resolved or accurately qualified. The reported harness bypass is screenshot evidence, not independently established product code behavior. |
+| R2/R15/R17: repeating narrow repairs can conceal an inadequate strategy or proof. | A mismatch/repeated unresolved failure triggers reassessment before another narrow fix. Choose the smallest suitable proof, including known-bad/regression comparison when useful; existing tiers and real project gates remain. | A test that bypasses the failing path cannot establish that path's repair. A suitable regression distinguishes known-bad/repaired behavior; a small task does not automatically gain a full end-to-end suite. Source text is not observed uptake. |
+| R1/R2/R10/R18: retained final accountability must not make the Project Director a serial approval router or restore compulsory managers. | Flat DIRECTOR/OPERATIONS, legacy DIRECTION/ASSIGNMENT and flat RECORDS entrust local decisions, permitted next actions, bounded rework, real escalation and actual return routes. Evaluate reasons, coverage and exceptions without repeating every check. Keep optional scoped Director/Request Manager and required review independence. | Multiple independently cleared branches advance through already-authorized phases without new per-file tokens. Backend/privacy changes escalate; substantive authors do not self-review. A small coupled task remains flat. Final canonical/user-facing acceptance stays with Project Director; no new `accept` authority/schema. |
+| R9/R10: prerequisites that merely permit 🎬 can leave checked replies unmarked. | Existing emitted hook reaches START/DIRECTOR; those and OPERATIONS positively require every checked Project Director user-facing reply prefix, including discussion/status. Legacy Director/DIRECTION/IDENTITIES display callers agree after their actual selected setup route. | A real initial check and role/guard/backend evaluation pass, then ordinary status/discussion replies retain 🎬. Missing/stale evidence uses the currently possible check; actual failure/semantic conflict gives specific gap/no badge. Worker/scoped-role exclusions and higher-priority host formats remain. Badge is not product acceptance. |
+| R3–R7/R11/R14/R16/R17/R18: new default guidance must not erase custody, recovery, privacy or continuing obligations. | Keep selected-read barriers, native canonical I/O, exact sources, seven-state lifecycle/terminal recovery, human gates, real updater/learning/upkeep triggers and managed/project boundaries unchanged. Existing hooks already reach the affected contracts; no extra hook, checker or startup actor is required. | Completed children/falsely done parent still require actual source/obligation reconciliation and useful authorized continuation. Partial holds stay scoped; actual pause/sufficient bounded result remains a valid exit. Old receipts, private evidence, caller aliases and target adaptations survive later reviewed adoption. |
+
+Actual flat route: host hook → START → selected DIRECTOR/WORKER and project guards;
+OPERATIONS before staffing and native I/O manuals before canonical operations.
+Legacy selected Director/Request Manager → DIRECTION/ASSIGNMENT retains the v1
+Recorder/setup route; this change does not silently replace it with a flat checker.
+The new local-decision contract uses existing assignments, receipts and notes.
+No new universal reviewer, manager, end-to-end suite, model exemplar or tracker is
+introduced. Independent review must examine the actual callers and purposes, not
+just a green test count. Unknown affected obligations still block the claimed scope.
+
+[Owning rationale](RATIONALE.md#r17--keep-delegated-work-supervised-and-recover-the-users-whole-request)
+and [validation](DESIGN_NOTES.md) distinguish implemented candidate instructions,
+source checks, actual behavioral observations and later publication/adoption.
+The original reported failures and prior partial/native evidence remain intact;
+no source wording pass establishes a runtime cure.
+The [constructed scenario set](fixtures/whole-result/README.md) supplies concrete
+counterexamples; its proposed sequences are not executed application evidence.
+
 ## Portable reconciliation and composed project guidance — November 2, 2026
 
 The prior recommended route already supplied role selection, executor loading,

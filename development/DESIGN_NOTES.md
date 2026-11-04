@@ -1402,3 +1402,100 @@ or a denied operation. Individual and aggregate result bounds, contiguous read r
 and recovery-before-action remain the portable manual-read route. Actual automatic
 host admission and behavioral uptake remain pending qualification; this repair adds
 no universal startup report, host configuration increase or delivery guarantee.
+
+## Whole-result evaluation and consistent checked identity — November 4, 2026
+
+The new regression concerns evidence adequacy after delegated component work.
+All returned component checks can pass while the user's requested behavior still
+fails. A harness that supplies its own device list and invokes refresh directly
+does not establish the application shell, event handling, warning presentation or
+window presenter. Repeated user reports of failure require the accountable Director
+to reconcile that counterevidence and reconsider the proof path, rather than accept
+another narrow pass. Another test owner can execute the proof; the Director still
+judges whether it supports the whole claimed result.
+
+The [whole-result scenario pack](fixtures/whole-result/README.md) and
+[constructed inputs](fixtures/whole-result/cases.json) retain a concrete
+component-green/user-failure case, authorized branch review and rework, a real
+authority conflict with unrelated work continuing, a small flat task and completed
+children with an unfinished parent. These are case definitions with observable
+oracles, not automated model judgments or private production evidence. No new test
+merely checks that runtime prose contains the expected reconciliation words.
+
+The positive branch oracle requires actual progression: a qualified independent
+reviewer rejects inadequate evidence, the owner repairs within existing authority,
+the exact corrected version receives independent clearance and proceeds without a
+fresh Root APPLY token. Root evaluates the reasons, evidence path, integrated
+coverage and exceptions while retaining final acceptance. Proposed progression
+alone does not pass. New backend/privacy/release authority escalates only the
+affected action; a simple coupled task does not acquire a mandatory new manager.
+
+For the whole-result case, require evidence that reaches the actual entry point
+and claimed visible result, with substitutions and omitted stages disclosed. A
+suitable known-bad/regression control should expose the failure when practical.
+A synthetic substitute can demonstrate its own path only; it cannot establish
+production recovery. Reject or narrow the completion claim until adequate proof
+exists. The earlier zero-child/falsely-done-parent and partial-hold controls remain
+under the [existing continuation cases](tests/test_continuation_view.py); recorded
+facts and CLI behavior do not establish the owner's actual next action.
+
+R9 already required the checked Director's reply prefix. The affected route must
+preserve automatic first ordinary-reply checking, then consistent checked identity
+on later discussion/status/acceptance replies while evidence remains current.
+Relevant changed startup bytes require recheck; missing/stale-check questions cause
+the possible check. A failed check or unresolved authority conflict gives its
+specific gap and a normal answer without the badge. Workers and scoped child
+Directors retain their own identities and skip that check. Neither a badge nor
+the helper's `evidence_matched` certifies product success or full method uptake.
+
+Focused package/link, startup-helper and continuation checks can establish
+structural delivery, technical refusal/read-only behavior and recorded-obligation
+preservation. Actual startup order, first and followup badge, whole-claim judgment,
+path adequacy and the next suitable proof must be scored separately in an actual
+bounded observation. Branch application, production behavior, broad reliability,
+compaction and five-minute cadence require their own relevant evidence. New checks
+and any observation results for this candidate are recorded below when executed;
+the older failed/partial observations remain unchanged.
+
+### Focused preservation checks and one bounded observation
+
+The frozen runtime candidate passed **48 existing focused checks in 9.185 seconds**:
+22 package/installation-boundary cases, 23 startup-helper cases, two transitive
+load-path cases and the terminal-parent/idle-children continuation case. The helper,
+checker, schema and emitted hook were unchanged by this source delta. These results
+establish the exercised structural and recorded-data preservation, including genuine
+negative inputs; they do not score the new judgment prose as agent behavior.
+
+One explicitly authorized native CLI observation then used a fresh manifest-installed
+candidate in a temporary project outside the source repository's instruction ancestry.
+It used the configured host selection with no model override or global setting
+changes, read-only execution and a 120-second limit per turn. The first prompt was
+an ordinary greeting; the followup resumed the same actual session with the first
+constructed case's supplied reports and acceptance question. The scoring rubric
+was not supplied to the subject. No retry or further case ran.
+
+| Dimension | Actual observation | Qualification |
+|---|---|---|
+| Startup and evidence check | The exact installed host hook was received. START, the complete Director/operations text and current local receipt/configuration returned before a separate successful checker call and greeting. | Checks the fresh CLI route; no original desktop or other-host claim. |
+| First checked display | The greeting used 🎬 after the local evidence check. | Local role/check identity only. |
+| Followup checked display | The same actual session's acceptance reply retained 🎬 with unchanged startup files. | No new failed/stale-check or worker-role native case ran. Existing helper negatives do not establish actor behavior in those controls. |
+| Whole-result judgment | The Director rejected recovery completion despite passing components and retained valid partial results and the open whole outcome. | Judgment of supplied evidence, not autonomous discovery of the real harness gap. |
+| Evidence path | It identified the substituted device list/direct-refresh harness as bypassing the visible application path. | No application or device operation occurred. |
+| Next suitable proof | It named the real reconnect-to-window path and a regression/known-bad control where practical, then explicitly said investigation, fixes and installation had not been executed. | A proposed test is not an executed proof or actual branch progression. |
+
+The greeting took 37.626 seconds and the followup 30.060 seconds; both exited
+successfully and left every fixture file byte-identical. These are individual
+wall times, not model-only latency or economic comparisons. Required local reads,
+checker execution and actual session resumption worked. The retained native primary
+does not serialize a full offered-tool inventory; uncalled capabilities remain
+unknown. Two nonblocking managed-feature diagnostics were retained. The normal
+host memory/skills were present, so this was a fresh chat without a parent-chat
+fork, not a memory-free or instruction-only causal comparison.
+
+This single observation supports the two delivered badge replies and the supplied
+acceptance judgment at this exact candidate. It does not establish a general cure,
+production recovery, actual test execution, delegated branch application, continued
+action after a status interruption, failed-check recovery, role countercases,
+compaction or cadence. Those behavioral scenarios remain defined and unrun here.
+Independent source/evidence review and accountable-owner acceptance remain separate
+from these observations.

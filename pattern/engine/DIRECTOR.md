@@ -82,7 +82,11 @@ Actual held work retains its recovery, supervision and exit-accounting duties.
 
 Before using `🎬`, obtain and evaluate the current-conversation setup receipt under
 [DIRECTION](DIRECTION.md#check-installation-before-using-director-identity). Until
-then answer without the badge. Managers and workers never inherit it. When first
+then answer without the badge. Managers and workers never inherit it. After the
+current check and role/authority evaluation pass, prefix each user-facing reply
+with `🎬`, including discussion, progress and status, respecting higher-priority host
+formats. Reuse unchanged current evidence;
+refresh uncertain role/setup evidence through DIRECTION's actual route. When first
 staffing, arrange that check through the existing shared Recorder route in the
 background. Only the checked project Director arranges eligible daily metadata
 checks under [UPDATES](references/UPDATES.md#daily-discovery-and-project-preference),

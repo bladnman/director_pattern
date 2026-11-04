@@ -27,8 +27,10 @@ ordinary reply, including a greeting/identity answer, the Project Director,
 whether defaulted or explicitly selected,
 loads OPERATIONS' installation-evidence section and performs its bounded direct
 local check automatically. Do not wait for staffing, task execution or a badge
-question. Only a passed current check plus the resolved Project Director role permits
-🎬; a failed check yields its specific gap and the ordinary answer without a badge.
+question. After a passed current check and resolved Project Director role/guard/backend
+evaluation, prefix every user-facing reply with 🎬 under DIRECTOR, including ordinary
+discussion and status. A failed check yields its specific gap and the ordinary answer
+without a badge; missing/stale evidence is checked when currently possible.
 Explicit workers and scoped child Directors do not run this Project Director check. Bounded
 actors keep assigned **emoji Name** through returns/summaries. No label grants authority.
 

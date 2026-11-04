@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated November3,2026. This repository authors a
+Living design rationale · updated November4,2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -33,6 +33,16 @@ installations. Earlier dated decisions remain below as history; existing
 installations retain their authority until explicitly integrated.
 
 ## R1 — One accountable conversation, without a forced organization
+
+**November 4 — entrust local judgment, retain whole-result acceptance:** Qualified
+owners and required independent reviewers receive the local decisions they may
+make, what their findings permit next, bounded repairs and real escalation conditions.
+The Project Director evaluates their reasons, evidence coverage and exceptions
+against the whole intended result without repeating every delegated check. This
+implements the useful per-outcome judgment of the earlier Manager design while
+preserving R18's flat default and optional scoped coordination. It adds no new role
+value or mandatory reviewer/manager. [R17](#r17--keep-delegated-work-supervised-and-recover-the-users-whole-request)
+owns the concrete evidence-reconciliation trigger and limits.
 
 **Latest supersession, October 30:** [R18](#r18--start-flat-and-make-learning-an-explicit-bounded-loop)
 restores the flat default for new starter installations; the earlier manager route
@@ -483,6 +493,29 @@ installation payload. Raw conversations and internal references remain private.
 copying of authoring material, or unintended publication of private evidence.
 
 ## R9 — Make attention and active supervision visible without decoration
+
+**November 4 — make checked display an explicit action:** The flat START and
+DIRECTOR described when a badge was permitted, while the earlier accepted purpose
+already required the checked Director to keep its reply prefix. Reports of missing
+prefixes expose a display problem; they do not alone establish that the check was
+skipped or why the actor omitted it. The flat START/DIRECTOR/OPERATIONS now directly
+require a 🎬 prefix on every Project Director user-facing reply after its actual
+current check and role/guard/backend evaluation pass, including discussion, progress
+and status. Legacy Director/DIRECTION/IDENTITIES callers state the same display
+rule after their selected setup route passes; the separate v1 setup route is not
+silently replaced with the flat checker.
+
+The automatic first ordinary-reply check needs no preliminary greeting. Unchanged
+current-conversation evidence is reused; missing/stale evidence is checked when
+currently possible. Failure or unresolved role/authority/backend gives the specific
+gap and ordinary answer without a badge. Workers and scoped child Directors retain
+their own identities. Higher-priority host formats still apply. No new checking
+actor, tracker operation, startup history scan or badge-as-product-acceptance claim
+is introduced. The oracle is successful initial check followed by ordinary status
+and discussion prefixes, missing/stale recovery, failed technical or semantic
+authority check without a badge, and worker/scoped-role exclusion. These instruction
+changes are implemented as a source candidate; source checks, observed display and
+target adoption remain separate in [validation](DESIGN_NOTES.md).
 
 **November 2 — distinguish managed integrity from current project guidance:**
 An unchanged valid installation could fail its local check after unrelated project
@@ -1710,6 +1743,53 @@ establish universal future compatibility or fresh-session compliance.
 or project-owned callers require repeated reconstruction after compatible updates.
 
 ## R17 — Keep delegated work supervised and recover the user’s whole request
+
+**November 4 — reconcile the evidence path and unresolved counterevidence:** A
+reported application failure continued after component/harness passes. Supplied
+screenshots describe a harness supplying its own inputs and calling a runtime path
+directly, leaving the shell, warning and window journey outside its proof. This is
+reported evidence, not an independent code inspection. The baseline already made
+the Director accountable for the whole result; absence of another reconciliation
+actor does not explain away that responsibility. The inspectable contract gap was
+less operational guidance for evaluating whether combined evidence actually covered
+the requested behavior and what to do when real reports contradicted narrow passes.
+
+The flat [DIRECTOR](../pattern/starter/payload/DIRECTOR.md) and legacy
+[DIRECTION](../pattern/engine/DIRECTION.md#stay-with-execution-and-evaluate-returns)
+now require that comparison at planning and meaningful returns. For runtime claims,
+identify the relevant user entry through observable result, substituted inputs and
+bypassed parts. Retain supported component milestones, but resolve contrary reports
+or keep the whole-result gap open. A mismatch or repeated unresolved failure triggers
+reassessment of approach and proof before another narrow repair. Use a known-bad or
+regression comparison when it distinguishes a repair; select the smallest adequate
+proof rather than requiring a full end-to-end suite universally.
+
+Useful investigation, integration and review can be entrusted to qualified actors
+with bounded judgment, repair and next-action authority. The
+[staffing guide](../pattern/starter/payload/OPERATIONS.md#staffing-and-maintained-roles),
+[assignment caller](../pattern/engine/ASSIGNMENT.md) and
+[record mapping](../pattern/starter/payload/RECORDS.md#outcome-ownership-in-the-record)
+carry that authority without another mandatory actor or canonical acceptance
+operation. Positive findings can activate an already-authorized phase; actual
+reserved gates and Project Director final integrated acceptance remain. A substantive
+author cannot supply its required independent review. Per-file approval
+queues are not the replacement for thoughtful evaluation of returned judgments.
+
+**Tradeoff and oracle:** This adds judgment about evidence sufficiency and possible
+strategy change; it cannot guarantee that an actor will make that judgment well.
+Give an owner green component returns plus repeated unresolved user failure and a
+harness bypassing the affected production journey. It must preserve useful partials,
+identify the proof gap, reassess and take the next suitable authorized action rather
+than declare the whole result complete or default to another narrow patch. Qualified
+independent branches should progress under bounded authority; scope/privacy/backend
+changes still escalate. A small coupled task stays flat, and a sufficient bounded
+result or real pause remains a valid exit. The existing terminal-parent recovery,
+source custody, native recording, human gates and supervision triggers are unchanged.
+This is an implemented instruction candidate; [validation](DESIGN_NOTES.md) must
+separate source/fixture checks from actual uptake and any later native adoption.
+The [constructed scenarios](fixtures/whole-result/README.md) preserve the proof-path,
+delegated-authority, false-done and small-flat-task countercases without publishing
+private source material or claiming a product reproduction.
 
 **November 2 — retain parent obligations after all children finish:** A reviewed
 continuation failure had completed children and a parent marked done, followed by

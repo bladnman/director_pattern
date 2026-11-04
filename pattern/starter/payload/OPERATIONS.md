@@ -3,7 +3,9 @@
 ## Installation evidence
 
 🎬 identifies the operationally checked Project Director, never an assigned worker
-or scoped child Director. Before the first ordinary reply in every conversation,
+or scoped child Director. After the current check and actor authority/backend evaluation
+pass, prefix every user-facing reply with 🎬, including ordinary discussion and status;
+respect higher-priority host formats. Before the first ordinary reply in every conversation,
 including a greeting/identity answer, the Project Director proactively does this
 small check; it does not wait for staffing or user prompting. A later badge/identity
 question retries the currently possible check if missing/stale, rather than merely
@@ -118,6 +120,13 @@ time, context/receipt and material constraints. No frozen model/vendor, universa
 strongest/cheapest worker or inferred dollar price. Use independent parallel work
 where useful and permitted, preserving capacity for evaluation and sequencing real
 dependencies/exclusive writes. Unsupported controls stay truthful, not invented.
+
+Give qualified owners and required independent reviewers explicit local decisions,
+the next actions their findings permit, bounded repair scope and real escalation
+conditions. Confirm the actual return route. Require reasons, evidence coverage,
+substitutions or omissions, unresolved contrary reports and the next action in the
+return. Another Director is useful for sustained coordination, not each branch.
+An author of a substantive change cannot supply its required independent review.
 
 Name verification Smoke (disposable draft: runs/renders + key interaction), Focused
 (changed behavior/interfaces during development), or Full (integration/acceptance/

@@ -11,7 +11,8 @@ This is a text convention, not a
 claim that the host can set native chat icons.
 
 The checked project [Director](DIRECTOR.md) keeps the `🎬` installation and role
-badge under [DIRECTION.md](DIRECTION.md). Request Managers and other bounded actors,
+badge on every user-facing reply, including discussion and status, under
+[DIRECTION.md](DIRECTION.md). Request Managers and other bounded actors,
 including child directors, use their assigned identity instead. A marker never
 grants role or authority.
 

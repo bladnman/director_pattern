@@ -77,6 +77,12 @@ models, identities, or outcome owner phases. Map them onto existing validated fi
 | `submit` → review | Integrated worker or scoped child Director submission for Project Director evaluation. The accountable owner retains the whole outcome while a submission waits. |
 | `accept` event `director`; stored `director_acceptance.director` | The Project Director evaluates the complete submission and makes the final acceptance decision. A worker or scoped child Director cannot self-accept for the Project Director. Required human gates and independent verification still apply; rework stays with the same outcome owner and outcome. |
 
+Retain delegated local judgments, their permitted next actions, repair bounds and
+actual findings in existing assignments, receipts and notes. A qualified review
+may activate an already-authorized phase; it does not grant Project Director final
+acceptance. That decision reconciles the whole intended result, evidence coverage
+and unresolved contrary reports, rather than counting successful child submissions.
+
 Unknown top-level event keys are rejected, and canonical fields are reconstructed
 by replay with exact equality. Do not bolt outcome owner metadata into request.md or
 invent JSON keys. Keep one outcome identity: distinguish its owner, its execution

@@ -41,7 +41,9 @@ Parent project ID + request ID, locator/return route, assigned requirement refer
 Owner acknowledgment and return references: own record/assignment ID + locator; requirement status/evidence/time:
 Outcome, exact source/addenda, full completion obligations and acceptance:
 Chosen deliverable and required review evidence (artifact, rendered alternatives, working behavior, or text):
+Evidence path/coverage, substituted or omitted parts, and unresolved contrary reports:
 Scope, file/resource ownership, authority, reserved decisions, exclusions, dependencies:
+Delegated local judgments, next actions they permit, bounded repairs and escalation conditions:
 Selection/authority package used by assigner; startup-required definitions + project authority/shared guardrails:
 Task-required references + explicit affected-work trigger:
 Action-required protocols + explicit before-use trigger:
@@ -78,6 +80,11 @@ deferred manual repeat startup. This never waives an explicit project requiremen
 An assignment transfers only its explicit bounded authority. A marker, model tier,
 inherited conversation, role name, or permission to create descendants cannot
 enlarge it.
+
+Return the reasons and evidence for local judgments, their limits and the next
+action. A positive review may activate an already-authorized phase without another
+approval; final integrated acceptance and actual reserved gates stay with the
+accountable Director. Required independent review remains independent.
 
 Carry the same assigned responsibility, purpose, authority, selected context,
 accountable owner and return contract across permitted subagents, authorized
