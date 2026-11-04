@@ -129,6 +129,52 @@ def startup_hook(text, target, source='AGENTS.md'):
             'scope': 'marked route structure only'}
 
 
+def generated_receipt(receipt, project, config_name, backend_contract):
+    """Validate only the new generated format; existing receipt formats stay supported."""
+    if not (receipt.get('kind') == 'generated-instance-technical-setup' or
+            'first_use_intent' in receipt or ('generation_id' in receipt and 'provenance_sha256' in receipt)):
+        return False
+    need(set(receipt) == {'schema_version', 'kind', 'generation_id', 'template', 'provenance_sha256',
+                         'project_id', 'source', 'managed_files', 'backend', 'privacy', 'technical_check',
+                         'first_use_intent', 'created_at'} and
+         type(receipt.get('schema_version')) is int and receipt['schema_version'] == 1 and
+         receipt['kind'] == 'generated-instance-technical-setup' and
+         isinstance(receipt['generation_id'], str) and
+         re.fullmatch('[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}', receipt['generation_id']) and
+         isinstance(receipt['template'], str) and receipt['template'].strip() and
+         isinstance(receipt['provenance_sha256'], str) and re.fullmatch('[0-9a-f]{64}', receipt['provenance_sha256']) and
+         receipt['first_use_intent'] == '.director/.first-use.json' and
+         isinstance(receipt['created_at'], str) and receipt['created_at'].strip(), 'invalid generated setup receipt header')
+    managed = receipt['managed_files']
+    source = receipt['source']
+    need(isinstance(source, dict) and isinstance(source.get('pattern_tree_sha'), str) and
+         re.fullmatch('[0-9a-f]{40}', source['pattern_tree_sha']) and
+         ('local_delta' not in source or type(source['local_delta']) is bool), 'invalid generated source tree or delta evidence')
+    need(isinstance(managed, dict) and 0 < len(managed) <= 256 and
+         all(isinstance(k, str) and isinstance(v, str) and re.fullmatch('[0-9a-f]{64}', v)
+             for k, v in managed.items()), 'invalid generated setup baselines')
+    declaration = receipt['backend']
+    need(isinstance(declaration, dict), 'missing generated backend declaration')
+    if declaration.get('kind') == 'director-request-bundles':
+        need(declaration == {'kind': 'director-request-bundles', 'helper': '.director/tools/requests.py',
+                             'config': '.director/config.json'} and not backend_contract and
+             safe(project, config_name or '.director/config.json') == safe(project, declaration['config']),
+             'generated backend differs from selected native route')
+        need(isinstance(receipt['project_id'], str) and re.fullmatch('PROJ-[0-9a-f]{32}', receipt['project_id']),
+             'missing/invalid generated project identity')
+    else:
+        need(set(declaration) == {'kind', 'path'} and declaration['kind'] == 'project-contract' and
+             isinstance(declaration['path'], str) and not Path(declaration['path']).is_absolute() and
+             backend_contract and safe(project, declaration['path']) == safe(project, backend_contract) and
+             config_name is None and receipt['project_id'] is None, 'generated backend differs from selected custom contract')
+    technical, privacy = receipt['technical_check'], receipt['privacy']
+    need(isinstance(technical, dict) and technical.get('managed_hashes') == 'verified' and
+         technical.get('native_startup') == 'unrun' and technical.get('human_acceptance') == 'unrun' and
+         isinstance(privacy, dict) and privacy.get('source_warning_delivery') ==
+         'not performed; resolve before actual source capture', 'generated receipt claims unsupported acceptance or warning delivery')
+    return True
+
+
 def check(root, receipt_name=None, config_name=None, backend_contract=None, guards=(), expect_project_id=None,
           hook_source='AGENTS.md'):
     root = absolute(root)
@@ -142,6 +188,7 @@ def check(root, receipt_name=None, config_name=None, backend_contract=None, guar
     receipt = json_object(receipt_path, MAX_JSON, total)
     need(not receipt.get('not_setup_acceptance') and not receipt.get('not_configured_project_state'),
          'template provenance is not a configured installation receipt')
+    is_generated = generated_receipt(receipt, project, config_name, backend_contract)
     source = receipt.get('source')
     need(isinstance(source, dict) and isinstance(source.get('url'), str) and source['url'].rstrip('/') == 'https://github.com/bladnman/director_pattern',
          'missing/unsupported installation source URL')
@@ -185,11 +232,15 @@ def check(root, receipt_name=None, config_name=None, backend_contract=None, guar
         need(type(config.get('schema_version')) is int and config['schema_version'] == 1, 'unsupported configuration schema header')
         need(isinstance(config.get('record_mode'), str) and config['record_mode'] in {'tracked', 'lean'},
              'unknown configuration mode')
+        need(not is_generated or config['record_mode'] == 'tracked', 'generated native backend must remain tracked')
         if config['record_mode'] == 'tracked':
             store = config.get('request_store')
             need(isinstance(store, dict) and type(store.get('schema_version')) is int and store['schema_version'] == 2, 'unsupported tracked-store schema header')
             need(store.get('format') in {'director-request-bundles', 'request-bundles'}, 'unknown tracked-store format; use the actual project backend contract')
             need(isinstance(store.get('project_id'), str) and re.fullmatch('PROJ-[0-9a-f]{32}', store['project_id']), 'missing/invalid configured project identity')
+            if is_generated:
+                need(store['format'] == 'director-request-bundles' and store['project_id'] == receipt['project_id'],
+                     'generated receipt differs from actual native store identity or format')
             expected = expect_project_id or receipt.get('project_id')
             if expected is not None:
                 need(store['project_id'] == expected, 'configured project identity differs from selected project')

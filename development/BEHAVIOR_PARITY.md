@@ -14,6 +14,30 @@ semantics. Those defects were not authorized consequences of fewer actors. The
 current starter3 default restores the established request-bundle backend; existing
 experimental2 data and trial evidence remain unchanged, with no silent migration.
 
+## Generated-project first use — November 4, 2026
+
+The prior route correctly kept templates uninitialized and checks read-only, but
+omitted the executable handoff between actual generation and first-reply checking.
+An actual generated code project's greeting/identity startup reproduced that gap.
+This later refinement adds one generated-instance setup operation; it preserves
+the normal configured-project path and all earlier failed observations.
+
+| Owning purpose and failure prevented | Disposition and active route | Concrete oracle and claim boundary |
+|---|---|---|
+| R9/R10: a promised future setup cannot satisfy an immediate missing-receipt check. | Opted-in actual generator → fresh INSTANCE bound to copied provenance/root → host hook/START/selected Director and guards → FIRST_USE plus full native I/O/privacy prerequisites → guarded ensure/technical receipt → ordinary read-only checker → actor role/backend evaluation → first reply. | Actual pristine generated project, unhinted native greeting/identity, complete returned reads before ensure, real receipt/check and checked reply. Source wording/fixture setup and later user-prompted repair are not automatic proof. Marker or ensure return alone never earns 🎬. |
+| R9/R10: a silent-start metric can conflict with a receiving host's required tool-progress message. | START/DIRECTOR/OPERATIONS permit only an honest unbadged checking preamble required by a higher-priority host; no ordinary greeting/identity answer or setup/completion claim before the check. Ordinary answer/check/authority requirements remain. | Actual Code candidate returned all 13 selected bodies before ensure and gave its first ordinary greeting with 🎬 after a separate matched check. The zero-visible-message metric failed; commentary came after initial reads, and a wrong extra STATE guard was corrected in the same turn. These qualifications remain, without a universal silence or full-procedure claim. |
+| R9/R16: completed startup skips ensure, so helper-only receipt validation can be unreachable. | Preserve the receipt-present read-only caller; startup_check conditionally validates generated receipt format/backend/claims and actual native ID/format. Existing receipt formats retain their route; no new writes or caller change. | Direct ordinary checker rejects null/missing native ID, contradictory custom contract/identity and unsupported acceptance/warning claims without writes. Independent source/CLI checks passed; actual Code candidate first-use proof is qualified, while final installed Release/default-path proof remains open. Candidate observations do not prove uptake of every final wording change. |
+| R10/R16: generic seeds, arbitrary missing receipts or existing stores can be mistaken for pristine generated projects. | Require reviewed first-use integration plus actual generated-instance evidence. Generic seeds contain no INSTANCE/config/state/receipt. Missing/damaged provenance, existing state without verified owned intent and unknown integrations remain gaps; no fresh installer over copied integration. | Seed ensure refuses without writes; missing receipt alone allocates no identity; existing/moved/configured project reuses its real identity/receipt. Worker/scoped child neither initializes nor badges. Preserve unknown/mature data. |
+| R3–R6/R14/R16: first setup can duplicate identity, bypass canonical/privacy gates or replace a custom backend. | Native bundled init/validate only for verified pristine instances; custom contract route creates no bundled store. Full selected manual/index/privacy gates remain. Narrow locked owned-attempt recovery preserves intended identity and exact bytes; no stale-lock deletion or whole-directory replacement. | Two generated projects get distinct IDs; repeated/concurrent/interrupted ensure retains one identity. Conflicting state fails rather than rebaselining. Custom/video route retains its backend/private rules; canonical requests/walks contain no user records, permitting only exact reviewed empty .gitkeep placeholders and structural directories. Reviewed noncanonical journal/team seeds may match baselines. Existing assets, guards and opt-outs survive. |
+| R9/R14/R18: transport or technical metadata can falsely imply acceptance, warning delivery or a successful native first reply. | Keep original transport provenance separate; write technical setup evidence only after actual checks, with native/human acceptance unrun. Normal later conversations use the ordinary read-only command. No setup actor, source capture, Git init/push, policy seed or Stop activation. | Actual second conversation has no reinitialization; checker failure or authority conflict gives a specific gap/no badge. No copied completed receipt, marker-as-badge or fabricated privacy-warning delivery. Native first-use proof and downstream publication/adoption remain separate. |
+
+[R9/R10/R14/R16/R18 rationale](RATIONALE.md#r9--make-attention-and-active-supervision-visible-without-decoration)
+owns the dated scope refinement; [validation](DESIGN_NOTES.md#generated-project-first-use--november-4-2026)
+must retain deterministic and actual native outcomes separately. Unknown affected
+obligations remain acceptance-blocking. Bounded candidate results are recorded; final
+installed Release/default-path proof remains required for whole acceptance. A qualified
+source release can precede that separate installed-route gate.
+
 ## Bounded context and Stop prototype — November 4, 2026
 
 The selected repair preserves the previous recommended flat and legacy routes.

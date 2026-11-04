@@ -25,13 +25,18 @@ Director foundation plus its explicit coordination overlay. Briefly acknowledge
 the resolved package once, then address the original request. Before its first
 ordinary reply, including a greeting/identity answer, the Project Director,
 whether defaulted or explicitly selected,
-loads OPERATIONS' installation-evidence section and performs its bounded direct
-local check automatically. Do not wait for staffing, task execution or a badge
+loads OPERATIONS' installation-evidence section. For a selected unconfigured
+generated instance, complete its guarded first-use action before the
+ordinary bounded read-only check; otherwise perform the normal check directly.
+Any higher-priority host-required checking preamble follows OPERATIONS: no badge,
+greeting/identity answer or setup/completion claim before the actual check.
+Do not wait for staffing, task execution or a badge
 question. After a passed current check and resolved Project Director role/guard/backend
 evaluation, prefix every user-facing reply with 🎬 under DIRECTOR, including ordinary
 discussion and status. A failed check yields its specific gap and the ordinary answer
 without a badge; missing/stale evidence is checked when currently possible.
-Explicit workers and scoped child Directors do not run this Project Director check. Bounded
+Explicit workers and scoped child Directors do not run this Project Director check
+or perform root first-use setup. Bounded
 actors keep assigned **emoji Name** through returns/summaries. No label grants authority.
 
 Preserve host/user/project authority, independent review requirements, other
@@ -51,9 +56,10 @@ does not prove no semantically applicable rule. Then query matching knowledge wi
 `python3 .director/canonical_learning.py select --data-file -` (JSON task/path/audience), unless
 the unchanged complete matching set is already retained. Read all matching pages,
 preserving their scope and provenance. An empty/simple reply needs no request/history or learning query. The Project
-Director's first-reply technical check reads only selected local config/receipt/
+Director's ordinary technical check reads only selected local config/receipt/
 hashes; it is not canonical request/source/history I/O and needs no tracker manuals
-or new checkpoint write. Later real tracker I/O retains all its required protocols.
+or new checkpoint write. Actual native I/O, including first-use setup, retains its
+complete required protocols.
 Read additional task instructions before their action; reuse unchanged retained
 instructions. Runtime helper and [learning](LEARNING.md) guides are action references,
 not additional startup reads. Installer/source documentation is not startup.

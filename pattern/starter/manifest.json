@@ -19,6 +19,8 @@
     "update_check.py",
     ".gitignore",
     "startup_check.py",
-    "context_check.py"
+    "context_check.py",
+    "first_use.py",
+    "FIRST_USE.md"
   ]
 }

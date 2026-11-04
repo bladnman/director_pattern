@@ -1569,3 +1569,101 @@ unqualified. No new marker-uptake trial ran. The live-model/native experiment ho
 continues; publication would not activate the prototype. Source publication, target
 installation, template updates and behavioral acceptance require separate evidence.
 No future published pin is invented; prior failed/partial observations remain intact.
+
+## Generated-project first use — November 4, 2026
+
+An actual template-generated code project reproduced the missing setup-receipt
+failure on ordinary native greeting and identity startup: selected instructions
+returned, the checker failed, replies omitted 🎬 and no setup files were written.
+Those turns took **27.162 seconds** and **15.098 seconds**, respectively, with zero
+project-file changes. They are individual wall times, not model-only timings.
+Source inspection found copying without durable generation evidence, promised setup
+deferred until later work and a read-only first-reply check requiring that missing
+receipt. A later explicitly prompted setup of the original project is recovery,
+not an automatic first-use observation. These failures remain evidence.
+
+The selected repair adds actual opt-in generation metadata and guarded
+`first_use.py ensure` before the existing read-only check. [Rationale](RATIONALE.md#r9--make-attention-and-active-supervision-visible-without-decoration)
+and the [intent matrix](BEHAVIOR_PARITY.md#generated-project-first-use--november-4-2026)
+preserve template/mature/backend/privacy/read-loading obligations. Generic templates
+remain uninitialized; arbitrary absent receipts authorize no setup.
+The selected folder ID and content profile may legitimately differ; both are valid
+labels bound by the exact provenance digest and managed bytes/backend, not equality.
+
+Required deterministic oracles include seed refusal/no writes, two generation/store
+identities, successful real receipt plus ordinary checker, idempotent reuse,
+concurrency/interruption with stable identity, drift/unsafe/missing evidence refusal,
+existing/configured/custom-store preservation and custom-contract use without a
+bundled store. A verified owned attempt with exact still-empty matching config may
+recover its receipt using the same ID; it must not reinitialize. Effective ignore/
+privacy and complete applicable canonical I/O guards
+must precede setup writes; technical receipts cannot claim warning delivery or native/
+human acceptance. All selected host/shared entrypoints must reach the same route.
+Custom canonical requests/walks must contain no user records. The later reviewed
+semantic-empty refinement permits only exact managed zero-byte `.gitkeep` files
+and their structural directories; real/hash-listed records, nonempty or unreviewed
+placeholders/directories and symlinks still refuse. Reviewed noncanonical journal/
+team seeds do not authorize prepopulated canonical records. Earlier literal-empty
+candidate evidence did not qualify the actual five-placeholder video scaffold.
+
+Required behavioral evidence is the actual generator-produced pristine project and
+an unhinted native first ordinary reply: complete returned authority/manual reads,
+actual ensure, real receipt, separate checker, actor role/backend evaluation and
+checked reply. A second fresh conversation must retain identity with no initialization.
+Bounded-worker, generic-seed and damaged-provenance controls remain excluded/no badge.
+Record received instructions, tool/result order, changed files and identity separately;
+source assertions and preseeded fixture receipts cannot substitute for this proof.
+
+The author's existing flat-starter/startup-check suites passed **33 cases in
+17.329 seconds**. These are preservation checks, not first-use behavioral evidence.
+Independent final component review then passed **61 cases in 25.189 seconds**:
+28 first-use methods, 23 existing startup-check cases and 10 fresh-installer cases.
+A separate independent first-use replay passed the same **28 methods in 22.924
+seconds**; repetitions are not additional distinct cases. This is deterministic
+helper/native-backend/checker evidence, not actor uptake.
+
+The subsequent semantic-empty candidate passed **30 focused methods in 12.692
+seconds**, independently replayed in **12.084 seconds**, plus discriminating actual
+placeholder/state probes. These are overlapping candidate refinements, not additive
+new-suite counts. The three staged profiles' control/scratch exclusions passed real
+ignore/index checks; **14 stage tests passed in 1.094 seconds**, including refusal
+of malformed manifests attempting to seed config, receipts or runtime records.
+
+Independent review first found a null native ID accepted on receipt reuse. Fixing
+only `ensure` left the receipt-present caller unprotected because it skips ensure.
+The conditional generated-format correction is now exercised directly through the
+ordinary read-only checker: null/missing native ID, wrong store format, contradictory
+custom contract/identity and forged native-acceptance/warning claims refuse without
+writes. Existing receipt formats and fresh installation retain their tested route.
+No additional bootstrap call or startup write was needed for the completed path.
+
+Actual candidate observations used the real generation route through an isolated
+`TEST_HOOKS` private data root, declared published base and explicit candidate delta.
+They establish these bounded results:
+
+| Route | Actual result | Qualification |
+|---|---|---|
+| Code, unhinted native hello | All 13 exact selected bodies returned before ensure; real native identity/receipt created; separate checker matched; first ordinary final greeting used 🎬. | An extra wrong STATE guard first failed, then the same actor corrected it using the already-read actual path. The original turn and failure remain; this was no coached retry. |
+| Code reuse and negative control | Same-session identity and a fresh conversation retained the same ID without project writes; the fresh conversation ran the ordinary checker. Invalid provenance refused setup, yielded no badge and changed no project files. | Bounded candidate-host observations, not universal behavior or installed Release proof. |
+| Brain, actual generated fixture | Assigned mechanical ensure and separate ordinary checker passed with a native identity/receipt. | Helper/backend path proof, not native actor uptake or a worker badge. |
+| Video, first actual generated attempt | Setup wrote its custom technical evidence, but three descriptor bodies were read late and an over-appended guard list exceeded the existing 20-path bound. | **Procedure failed.** That fixture and its late-read/guard-limit evidence remain unchanged; the limit was not raised. |
+| Video, fresh generated fixture | Supported Git creation, native privacy/index checks for 11 destinations, ensure with null custom ID and separate descriptor-derived 20-path checker passed. Only three setup control/receipt files appeared; no bundled config/store/native writer lock. | Mechanical execution, not native video actor uptake. Independent primary audit confirmed all 15 exact descriptor bodies returned before fresh generation, then checked the 60 managed entries, absences and command results. |
+
+Code also emitted an honest unbadged checking preamble before ensure. Independent
+review confirmed that this host requires commentary for tool work; the text gave
+no greeting/identity answer, setup/completion claim or badge. The literal
+zero-visible-message-before-ensure metric remains **not met**. The preamble came
+after initial manual reads, so blanket compliance with the host's pre-tool timing
+is not claimed. The narrow contract clarification permits required checking progress
+while retaining the first ordinary answer after complete reads, required setup,
+separate actual check and role/guard/backend evaluation. It does not prove uptake
+of every final wording change or promise silent startup on other hosts.
+
+Independent review also cleared a signed production Release preparation candidate's
+104 source inputs and 21 bundle entries. Preparation and candidate CLI isolation do
+not establish installation or the Release/default live route. That final installed
+proof remains required for whole acceptance; a qualified source release and separate
+authorized target/template updates may precede it. No exact future published pin is
+invented here. The original failing baseline, manually prompted recovery and failed
+Video procedure remain distinct; no broader Stop, compaction, supervision or
+universal-host claim follows.

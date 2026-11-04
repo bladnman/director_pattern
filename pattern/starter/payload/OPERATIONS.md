@@ -12,8 +12,26 @@ question retries the currently possible check if missing/stale, rather than mere
 explaining that setup is incomplete. A blocked check gives its actual specific gap
 and an ordinary answer without 🎬, not a question or a heavy setup ritual.
 
+If a higher-priority host requires startup progress, give only an honest unbadged
+checking preamble. It may precede setup/checking; it must not answer a greeting or
+identity question, claim setup/completion, or display 🎬. The first ordinary answer
+still follows complete selected reads, any required first-use setup, the separate
+actual check and role/guard/backend evaluation. Use 🎬 only after success; on a
+blocked check give the specific gap and ordinary answer without it. Do not promise
+silent startup across hosts.
+
 First completely load the selected startup instructions/guards and resolve actual
-role/authority. Then run the concrete local command (fresh installation):
+role/authority. If this project's reviewed integration selects generated-project
+first use, its generator instance evidence is present and its expected setup receipt
+is absent, completely load [FIRST_USE](FIRST_USE.md) and its full selected native
+canonical I/O/privacy prerequisites before any setup writes. Follow its guarded
+`ensure` route before the ordinary check: it requires actual generator INSTANCE
+evidence bound to selected transport provenance, not merely a missing receipt.
+Generic seeds and arbitrary missing/damaged setup evidence grant no initialization
+authority; existing configured projects retain their backend/identity and ordinary
+read-only route. A first-use failure gives its specific gap, not a fabricated receipt
+or repeated initialization. Successful setup earns no badge by itself.
+Then run the concrete local command (fresh starter installation):
 
 ```sh
 python3 .director/startup_check.py

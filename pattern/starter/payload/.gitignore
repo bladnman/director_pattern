@@ -8,5 +8,11 @@
 .update-check.json
 .update-check.lock
 .update-check-*.tmp
+# Generation-local evidence and first-use recovery scratch; not project identity.
+INSTANCE.json
+.INSTANCE-*.tmp
+.first-use.json
+.first-use.lock
+.first-use-*
 backups/
 __pycache__/

@@ -494,6 +494,68 @@ copying of authoring material, or unintended publication of private evidence.
 
 ## R9 — Make attention and active supervision visible without decoration
 
+**Later November 4 — distinguish required checking progress from the ordinary answer:**
+The candidate's first Code greeting followed complete selected reads, actual setup
+and a separate successful check, but an honest unbadged checking preamble appeared
+before setup. The recorded higher-priority host requires commentary for tool work.
+START/DIRECTOR/OPERATIONS now permit only that required pending-progress message:
+no greeting/identity answer, setup/completion claim or 🎬 before the actual check.
+The first ordinary answer still follows full reads, required setup, separate check
+and role/guard/backend evaluation; failure retains the specific-gap/no-badge route.
+This is no promise of silent startup or permission for an early checked identity.
+The literal zero-visible-message metric remains unmet, and the preamble arrived
+after initial reads, so blanket host-procedure compliance is not established.
+The same turn's rejected extra STATE guard and subsequent correction also remain
+qualifications. [Validation](DESIGN_NOTES.md#generated-project-first-use--november-4-2026)
+separates the observed ordinary answer, recoveries and still-pending installed route.
+
+**Later November 4 — validate generated receipts on the completed route:** A
+receipt-present conversation correctly skips first-use setup and reaches the normal
+read-only checker directly. Independent review showed that this checker accepted
+a generated receipt whose native project ID was null; stricter validation inside
+`ensure` alone was unreachable on that real path. The
+[checker](../pattern/starter/payload/startup_check.py) now conditionally validates
+the generated technical format, backend/claims and actual native identity/format,
+including when an expected-ID override is supplied. Existing receipt formats retain
+their supported route. No caller change, new write or setup retry is added.
+The oracle is direct ordinary-checker refusal of incomplete/contradictory generated
+evidence without writes, alongside preserved legacy/fresh-installer cases. Those
+source/CLI cases passed independent review. Qualified candidate observations and
+pending final installed-app proof are separated in [validation](DESIGN_NOTES.md#generated-project-first-use--november-4-2026).
+
+**Later November 4 — complete verified generated first use before checking:** An
+actual generated code project reproduced missing setup receipt, no badge and no
+writes on ordinary greeting/identity startup. Its selected rules promised later
+setup but correctly forbade initialization merely to make the first-reply checker
+pass. The actual generator copied transport provenance without a durable creation
+handoff. This was a missing executable lifecycle edge; more badge wording could not
+create the receipt. Later explicitly prompted setup is recovery, not automatic proof.
+
+The accepted repair inserts a distinct generated-instance operation before the
+ordinary read-only check: opted-in generation emits fresh instance metadata; the
+Project Director loads complete selected authority, [FIRST_USE](../pattern/starter/payload/FIRST_USE.md)
+and applicable native I/O/privacy prerequisites; guarded `first_use.py ensure`
+verifies that instance and selected provenance, performs only eligible setup and
+writes an honest technical receipt; then the ordinary read-only checker and actor evaluation
+earn 🎬. [START](../pattern/starter/payload/START.md),
+[DIRECTOR](../pattern/starter/payload/DIRECTOR.md) and
+[OPERATIONS](../pattern/starter/payload/OPERATIONS.md#installation-evidence) route
+that order. A marker/ensure return alone earns no badge. Missing receipt alone grants
+no initialization authority, and existing configured/mature projects retain their
+read-only route. Workers/scoped children do neither root setup nor the check.
+
+This narrowly refines the October 31 no-startup-write assumption for recognized
+unconfigured generated instances; it adds no writes inside `startup_check.py`, setup
+actor or blanket greeting initialization. Generic templates remain uninitialized;
+existing identity/backend/privacy choices survive. The acceptance oracle is an actual
+generator-produced pristine project and unhinted first native reply: complete reads
+→ ensure → real receipt → checker/evaluation → badge, followed by a new conversation
+that reuses the same identity without initialization. Seed/malformed provenance and
+worker countercases must remain honest. Source components and bounded candidate
+routes are checked; final installed-route proof remains pending in
+[validation](DESIGN_NOTES.md#generated-project-first-use--november-4-2026);
+the previous failed observations remain intact.
+
 **November 4 — restore positive attention instructions:** The flat Director named
 reserved ❓/🖐️ markers without directly requiring their use. Existing R9 intent and
 legacy DIRECTION already supplied that behavior. Flat
@@ -742,6 +804,15 @@ if selections feel forced, categories harden into authority signals, or rotation
 and late-report protection diverge across owners.
 
 ## R10 — Assign roles explicitly; preserve project ownership across entry routes
+
+**Later November 4 — selected first-use writes retain their full prerequisites:**
+[R9's generated-instance operation](#r9--make-attention-and-active-supervision-visible-without-decoration)
+is a real setup action before the first check, so it loads FIRST_USE plus complete
+applicable canonical I/O/privacy protocols before writing. It has no thin-read
+exemption. Every selected host/shared entrypoint must reach that same distinction;
+an ordinary task is still not a bounded-worker assignment. Existing configured
+startup stays read-only; worker/scoped-child exclusions and returned-read barriers
+are unchanged. An actual cold trace, not source links alone, must prove that order.
 
 **Later November 1 — classify requested work before applying the direct-answer
 exception:** The order correction in R2 preserves startup and role authority while
@@ -1529,6 +1600,15 @@ claimed; running chats can retain earlier loaded instructions.
 
 ## R14 — Commit the installation with the project
 
+**Later November 4 — generation evidence is local handoff, not shared identity:**
+The opt-in generator's fresh instance marker records creation/provenance only;
+generic seeds contain neither that marker nor initialized config, records or receipt.
+First-use control scratch and instance evidence follow the integration's effective
+ignore policy before writes. Existing privacy choices remain; setup records warning
+due rather than inventing public/unknown-remote warning delivery. No Git init,
+commit/push, source capture or update policy is added merely for setup. Generated
+native stores receive distinct IDs; moved/configured projects preserve theirs.
+
 **October31 restoration:** Starter2 changed the fresh default to ignored durable
 state without superseding this continuity decision. Starter3 restores Git-eligible
 config/requests/sources/receipts and once-only public/unknown-remote awareness;
@@ -1695,6 +1775,29 @@ Actual host routing and absence of false saved-state claims remain behavioral
 checks, separate from fixture/schema guarantees.
 
 ## R16 — Separate replaceable engine from project-owned integration
+
+**Later November 4 — retain a semantically empty video seed:** The real generic
+video template has five zero-byte `.gitkeep` placeholders in canonical requests/
+walks. The initial literal-empty-directory rule below rejected that preserved seed.
+The reviewed refinement permits only exact managed empty regular `.gitkeep` files
+and their structural directories. Real records, even hash-listed ones, nonempty or
+unreviewed placeholders/directories and unsafe paths still block setup. This narrowly
+supersedes literal directory emptiness, not the ban on copied user/runtime state;
+earlier candidate tests did not establish that the real video scaffold worked.
+
+**Later November 4 — bind generation without initializing the stencil:** The
+reviewed template provenance selects first-use helper/backend/receipt/guards; actual
+generation adds instance metadata bound to its copied provenance and new root.
+The actual selected folder ID may differ from the content profile; both must be
+valid, with the provenance digest and managed hashes binding the copied backend/bytes.
+The helper verifies the managed baselines instead of blessing current drift.
+Completed projects reuse real setup evidence; partial owned attempts recover only
+their verified identity/bytes. Existing unknown/configured/custom state is preserved,
+and custom contracts acquire no bundled store. This supplies R9's missing creation
+handoff while preserving stencil/engine ownership; real generator/cold-first-use and
+custom-backend countercases remain required acceptance evidence.
+Custom canonical requests/walks must be empty; only expressly reviewed noncanonical
+journal and team seed files may match their transport baselines.
 
 **November 1 route and phase clarification:** "Flat layout" in this decision meant
 the legacy pre-engine v1 layout, not starter 2/3. The supported transition and its
@@ -1985,6 +2088,15 @@ history and unrun acceptance gates. Static edits can establish preservation and
 reachability; the next actual selected use must establish uptake.
 
 ## R18 — Start flat and make learning an explicit bounded loop
+
+**Later November 4 — one deterministic generated setup, then the normal route:**
+[R9](#r9--make-attention-and-active-supervision-visible-without-decoration) adds a
+guarded first-use helper and real generation handoff, not another actor, tracker or
+startup framework. The ordinary checker remains read-only. Existing native backend,
+privacy, full instruction loading, staffing, recovery, updates and learning triggers
+remain reachable. Generic templates and arbitrary markerless/mature projects never
+gain initialization authority from an absent receipt. Source/fixture checks alone
+cannot close the observed first-reply defect; actual generated cold use is required.
 
 **November 4 — bounded implementation plan, no packaging replacement:** Preserve
 host hook → START → selected DIRECTOR/WORKER/guards, native canonical I/O,
