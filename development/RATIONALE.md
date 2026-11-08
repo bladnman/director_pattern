@@ -1908,6 +1908,33 @@ or project-owned callers require repeated reconstruction after compatible update
 
 ## R17 — Keep delegated work supervised and recover the user’s whole request
 
+**Later November 7 — an example of the suggested shape:** The maintainer found some
+SitReps easier to follow than others, chiefly ones that make it easy to see who is
+doing what, its status and its next step, and asked for an example rather than a
+required format. Starter [DIRECTOR](../pattern/starter/payload/DIRECTOR.md) now lists
+**In progress** as (who, what, actual status, next step) and follows the SitRep
+paragraph with a short example: a table with Who, Doing, Status and Next step columns,
+framed as a table where it renders well, with the same columns as lines also fine.
+Independent review then added blank lines so the example renders as a table when
+copied, filled every Next step cell and changed the intro to "For a full SitRep, for
+example"; the [SitRep example](DESIGN_NOTES.md#pending-scenarios) scenario stays
+pending.
+
+**Why/tradeoff:** An example shows the intended content faster than more rules, and the
+shape stays a suggestion: any layout with full coverage still satisfies the duty. The
+maintainer chose a table over lines or both; lines stay acceptable because rendering
+varies by host. The cost is about 12 more lines in a file every conversation reads,
+and an example's names or content could be copied literally.
+
+**Regression cases:** A SitRep that gives the same columns as lines passes. One that
+drops who, status or next step for a held stream, or hides a ❓ question or 🖐️
+user-only action, fails. Copying the example's names or content instead of the actual
+actors and work is wrong.
+
+**Status:** Decided by maintainer choice on November 7, 2026 and implemented in starter
+DIRECTOR wording with a static package test; live uptake is unverified. The v1 engine
+is unchanged.
+
 **November 7 — check each turn whether a SitRep is due, restore coverage and suggest
 a shape:** An adopting multi-day video project on the flat starter reported about 46
 hours without a labeled 📋 SitRep while notification-driven delegated work stayed

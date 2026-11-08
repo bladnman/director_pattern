@@ -268,7 +268,22 @@ class PackageBoundaryTests(unittest.TestCase):
         self.assertIn("about every five minutes from actual dispatch (or the agreed interval)", sitrep)
         self.assertIn("On every turn, including worker returns and notifications, check whether one is due, using host timestamps or a clock check, and note each SitRep's time", sitrep)
         self.assertIn("Cover every held stream, including quiet, stalled or returned-but-unevaluated work, with actual handles/observations, results, blockers, steering and next proof", sitrep)
-        self.assertIn('A suggested shape: **Done** · **In progress** (owner, actual status) · **Waiting on you** (❓ questions, 🖐️ user-only actions, or "nothing") · **Next**', sitrep)
+        self.assertIn('A suggested shape: **Done** · **In progress** (who, what, actual status, next step) · **Waiting on you** (❓ questions, 🖐️ user-only actions, or "nothing") · **Next**', sitrep)
+        self.assertNotIn("(owner, actual status)", sitrep)
+        intro = "For a full SitRep, for example (a table where it renders well; the same columns as lines also work):"
+        self.assertIn(intro, sitrep)
+        example = sitrep[sitrep.index(intro):]
+        for part in ("| Who | Doing | Status | Next step |", "**📋 SitRep**", "**Done:**", "**Waiting on you:**", "**Next:**"):
+            self.assertIn(part, example)
+        # Raw text: blank lines keep the copied example rendering as a table.
+        raw = (PATTERN / "starter/payload/DIRECTOR.md").read_text(encoding="utf-8")
+        raw_example = raw[raw.index("For a full SitRep, for example"):raw.index("Answer status questions briefly")]
+        self.assertIn("\n\n| Who | Doing | Status | Next step |", raw_example)
+        self.assertIn("|\n\n**Waiting on you:**", raw_example)
+        rows = [line.split("|")[1:-1] for line in raw_example.splitlines() if line.startswith("| ") and "Next step" not in line]
+        self.assertTrue(rows)
+        for cells in rows:
+            self.assertNotIn(cells[-1].strip(), ("", "—", "-"), "Every example row names a next step")
         self.assertIn("When nothing changed since the last SitRep, give one line per held stream, not the full shape", sitrep)
         self.assertIn("Reserve 📋 for that report heading; between due reports use ordinary prose, not another full block", sitrep)
         self.assertIn("Ordinary progress/status answers and notification replies do not reset or replace it", sitrep)

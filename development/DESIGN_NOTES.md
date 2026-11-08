@@ -1770,6 +1770,7 @@ docs and the changelog entries checked do not describe it.
 | Informative update | An informative ordinary update or a notification reply does not reset the clock; the report arrives unasked. | Pending |
 | First-reply check | Unhinted greeting → reads → check → 🎬, with time and tokens measured before and after any change; one edited DIRECTOR byte gives a specific gap and no 🎬; a source checkout, worker or scoped child gets no check or badge. | Pending |
 | Generated reuse and compaction | Pristine generated project → ensure → check → 🎬; a second conversation reuses its identity; badge behavior after compaction is recorded. After any prose split, a blocked check still reaches the diagnosis text. | Pending |
+| SitRep example | A real SitRep uses the example's columns (who, doing, status, next step), as a table or as lines, with the actual actors and work, not the example's names or content. | Pending |
 | Refused report-named write | On that host, a brief naming a `FINDINGS_` file gets the full content plus the refusal, with no workaround; the owner saves it verbatim and reads back; a `NOTES_` name writes normally. Another host gets no avoidance rule. | Pending |
 
 **Limits:** one host, one adopting project and, for startup cost, one first
@@ -1783,7 +1784,11 @@ change. Starter DIRECTOR now carries the reviewed paragraph verbatim, and a stat
 package test pins its key phrases; both establish wording and reachability only. The
 maintainer kept the startup-check and write-refusal dispositions (decided: no pattern
 change); the startup trigger-prose test remains proposed only, and the v1 engine mirror
-is not applied. Every live scenario above remains pending.
+is not applied. Every live scenario above remains pending. Later November 7, the
+maintainer chose an example for the suggested shape: **In progress** now lists who,
+what, actual status and next step, followed by an example table for a full SitRep
+(review added blank lines so it renders as a table and filled every Next step), with
+its static test updated; live uptake is pending.
 
 **Executed static checks, November 7:** from the repository root,
 `PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests`

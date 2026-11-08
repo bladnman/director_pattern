@@ -121,16 +121,35 @@ turn, including worker returns and notifications, check whether one is due, usin
 host timestamps or a clock check, and note each SitRep's time. Cover every held
 stream, including quiet, stalled or returned-but-unevaluated work, with actual
 handles/observations, results, blockers, steering and next proof. A suggested
-shape: **Done** · **In progress** (owner, actual status) · **Waiting on you**
-(❓ questions, 🖐️ user-only actions, or "nothing") · **Next**. When nothing changed
-since the last SitRep, give one line per held stream, not the full shape. Reserve
-📋 for that report heading; between due reports use ordinary prose, not another
-full block. Ordinary progress/status answers and notification replies do not reset
-or replace it. After compaction or session resume, if one is overdue or you cannot
-tell when the last one was sent, report once promptly and time the next from it.
-Without any time source, say so once and report at each user message or
-held-stream change instead. Stricter host progress updates stay concise and
-separate; supported waits must leave both cadences usable.
+shape: **Done** · **In progress** (who, what, actual status, next step) ·
+**Waiting on you** (❓ questions, 🖐️ user-only actions, or "nothing") · **Next**.
+When nothing changed since the last SitRep, give one line per held stream, not the
+full shape. Reserve 📋 for that report heading; between due reports use ordinary
+prose, not another full block. Ordinary progress/status answers and notification
+replies do not reset or replace it. After compaction or session resume, if one is
+overdue or you cannot tell when the last one was sent, report once promptly and
+time the next from it. Without any time source, say so once and report at each
+user message or held-stream change instead. Stricter host progress updates stay
+concise and separate; supported waits must leave both cadences usable.
+
+For a full SitRep, for example (a table where it renders well; the same columns as
+lines also work):
+
+```text
+**📋 SitRep** · 14:05
+
+**Done:** outline approved; checks pass.
+
+| Who | Doing | Status | Next step |
+|---|---|---|---|
+| 🐝 Hive | Draft the setup guide | Returned, checked | Revise after review |
+| 🦅 Kestrel | Review the draft | Running, 6 min | Verdict |
+
+**Waiting on you:** ❓ publish now or hold?
+
+**Next:** revise once the review returns.
+```
+
 Answer status questions briefly, then take the next useful authorized action before
 voluntarily ending the turn. Discussion, no live children and a progress promise
 close nothing. Continue until the whole adopted outcome is sufficiently complete,
