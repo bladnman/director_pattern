@@ -34,6 +34,76 @@ installations retain their authority until explicitly integrated.
 
 ## R1 — One accountable conversation, without a forced organization
 
+**November 7 — act as the user's partner, map the request onto the project's own
+route, and judge a better route on merit:** An independent audit of a session that
+rolled out a starter update found the Director treating a literal request as an
+order. Asked to roll an update out, it dispatched outside workers to patch other
+projects instead of using each project's own Director and
+[update route](#r11--update-from-a-pinned-public-source-without-replacing-project-state);
+it read only part of the update guide before planning; and when the user proposed the
+right route, it recommended finishing its own in-flight workers first. The guidance
+that should have prevented this was scattered preservation and ownership constraints
+that could be satisfied by their letter, while momentum rules (finish what is
+started) pulled the other way. The audit account is the maintainer's; the causes
+beyond what the session did are hypotheses.
+
+The maintainer decided on a partner rule at the top of starter
+[DIRECTOR](../pattern/starter/payload/DIRECTOR.md), the one file every conversation
+reads. The Director is the user's partner, not a literal executor: the user may not
+know every mechanism the system already has, so before acting the Director maps a
+request onto the project's established mechanism and owner. When the literal request
+would bypass it, the Director says so, proposes the established route and recommends
+it. Recommendations are judged on merit, not on work already started: when a better
+route appears mid-flight, conflicting work pauses first, then the Director
+recommends. The user still decides; this adds no new role, hierarchy or approval
+step.
+
+**Review refinement (independent review, same day):** the review found the first
+wording left the recommendation easy to bury and the in-flight work free to continue.
+The runtime text now marks the recommendation ❓ as a user decision and holds the
+bypassing or paused work, neither started nor resumed until the user chooses, while
+independent, unaffected work continues. The user's choice stands within project
+rules: where a rule forbids the literal route, the Director gives the permitted route
+or the 🖐️ action. DIRECTOR also now points to reading the whole
+[UPDATES](../pattern/starter/payload/UPDATES.md) guide before planning any update, in
+this or another project, and says another installation is updated only by its own
+project's Director (or, without one, an agent the user directs there) in its own
+conversation; this is a reachability fix, since the field Director had read only part
+of the guide.
+
+**Why/tradeoff:** One short rule that names the failure (a literal reading that
+bypasses an established owner) is easier to follow than constraints that each look
+satisfied in isolation, and it sits where it is read in every conversation. Pausing
+before recommending removes the pull of sunk work from the recommendation; the cost
+is that a pause can briefly idle work that turns out to be fine, and pausing is
+reversible where a patch outside the owner is not. Holding only the affected work
+keeps independent work moving; the cost is that the user is asked at a decision point
+and an unanswered ❓ leaves that work held. The rule may add a short exchange
+when a request bypasses an established route. The risk is a Director second-guessing
+requests that do not bypass anything; the rule applies only when a literal reading
+would bypass an established mechanism or owner, and the user's choice stands. That
+the top-of-file position raises uptake is a hypothesis. Reading the complete
+selected guide before planning is an existing requirement and is unchanged.
+
+**Regression cases:** Asked to roll an update out to several projects, the Director
+maps it onto each project's own Director, starts or requests a session in each, and
+writes nothing in those projects from outside. When the user proposes a better route
+while workers are in flight, the Director first pauses conflicting work, then
+recommends on merit, not on finishing what is started. A request that already fits
+the established route proceeds without a detour or lecture. A Director that explains
+the established route but still dispatches the outside patch fails. A better route
+mid-flight yields a ❓ recommendation with the affected work held and unaffected work
+continuing; a recommendation buried in prose, or conflicting work resumed before the
+user chooses, fails. Where a project rule forbids the user's literal choice, the
+Director offers the permitted route or the 🖐️ action rather than silently complying
+or refusing. Planning an update begins with the complete UPDATES guide.
+
+**Status:** Decided by the maintainer on November 7, 2026, with wording refined by the
+independent review that day, and implemented in starter DIRECTOR wording. Live
+behavior is unverified; installed copies keep their adopted text until updated, and
+the v1 engine is unchanged. See the
+[validation cases](DESIGN_NOTES.md#partner-rule-and-explicit-dispatch-settings--november-7-2026).
+
 **November 4 — entrust local judgment, retain whole-result acceptance:** Qualified
 owners and required independent reviewers receive the local decisions they may
 make, what their findings permit next, bounded repairs and real escalation conditions.
@@ -99,6 +169,67 @@ record mapping only; no live manager behavior has been observed
 ([scenarios](DESIGN_NOTES.md#request-manager-scenarios--october-21-2026)).
 
 ## R2 — Protect judgment and conversation from execution/bookkeeping
+
+**November 7 — set capability and effort explicitly on every dispatch; the strong
+default is the strong tier at high effort:** An independent audit of a session that
+rolled out a starter update found that 9 of its first 12 workers were dispatched with
+no model and no effort, inheriting the strongest tier at the session's top effort;
+these accounted for about 74% of the subagent output tokens. The audit identified
+three contributing causes. The flat starter's rewrite had dropped the v1 [MODELS](../pattern/engine/MODELS.md)
+sentences that make the policy the explicit instruction and forbid silent inheritance
+by omission. The host's delegation tool reserves effort for explicit instructions, so
+an unset effort fell back to the parent's. And an earlier review had stated the
+"explicit choice at dispatch, not inherited parent settings" principle only in the
+November 5 entry below, which is not loaded at runtime, so the runtime text never
+carried it. The figures are the audit's, not re-run here.
+
+The maintainer decided the rule now in starter
+[OPERATIONS](../pattern/starter/payload/OPERATIONS.md#staffing-and-maintained-roles),
+with one sentence in starter [DIRECTOR](../pattern/starter/payload/DIRECTOR.md).
+The guidance is itself the explicit instruction to set capability and reasoning
+effort for each delegated task wherever the host allows, including hosts that reserve
+those controls for explicit instructions. Both are set on every dispatch; omission is
+not a choice. **Extending and tightening the November 5 entry:** the strong default
+means the strong tier at high effort, chosen at dispatch rather than inherited; the
+lighter-tier path (a lighter tier at high or extra-high effort, or the strong tier at
+medium, for small, well-specified, easily checked work) stands as that entry
+describes. The strong tier's top effort levels are reserved for hard diagnosis,
+conflicting evidence or a consequential independent review. Each choice is recorded
+with a one-line reason (size, how easily the result is checked, consequence of
+error); "inherited" or "not set" is acceptable only with the host constraint that
+forced it. This restores in runtime text the v1 intent to select both for each job and
+never inherit by omission; it does not restore the v1 "smallest suitable capability"
+sentence, which the November 5 entry already departs from.
+
+**Why/tradeoff:** An explicit rule closes the gap the audit found: omission was
+silently the most expensive choice. High effort was chosen over medium or matching
+the parent: medium would under-serve routine strong-tier work, and matching the
+parent is exactly how the session's top effort reached most of the output. The cost
+is that routine strong-tier work now runs at high, not medium, and each dispatch
+carries a recorded reason. Where a host cannot set one control, the honest record is
+the constraint, not a claimed choice. The no-frozen-model, no-vendor and
+no-universal-strongest/cheapest rules stand; effort names map to the nearest supported
+controls. A reason line can become boilerplate; review of dispatch records is the
+check, and its quality is unproven.
+
+**Regression cases:** A lookup-only dispatch sets an explicit lighter tier and effort
+with a one-line reason, not the parent's settings. A normal build or review dispatch
+sets the strong tier at high effort unless the work meets the lighter-tier conditions
+or genuinely needs the top levels, and says why. A dispatch record "inherit; not set"
+without a forcing host constraint fails review. A host that reserves effort for
+explicit instructions still receives a value, because the guidance is the explicit
+instruction. A host that cannot set effort records that constraint and the settings
+observed or unknown. Guidance names no vendor or model.
+
+**Status:** Decided by the maintainer on November 7, 2026, with the independent
+review's wording changes included (DIRECTOR also says to record a one-line reason, and
+OPERATIONS lets a guide name a case that meets the lighter-tier conditions, as
+[R11](#r11--update-from-a-pinned-public-source-without-replacing-project-state) does
+for ordinary updates), and implemented in starter OPERATIONS and DIRECTOR wording.
+Live dispatch behavior is unverified; installed
+copies keep their adopted text until updated, and the v1 engine and its MODELS
+contract are unchanged. See the
+[validation cases](DESIGN_NOTES.md#partner-rule-and-explicit-dispatch-settings--november-7-2026).
 
 **Later November 1 — dispatch before detailed investigation/review:** A fresh
 installed review request loaded the current Director/operational instructions but
@@ -310,6 +441,14 @@ v1 engine and actual host staffing behavior are unchanged and unverified.
 Independently reviewed on November 7 alongside the SitRep change; the
 [validation cases](DESIGN_NOTES.md#occasional-lighter-tier-staffing--november-5-2026)
 remain pending.
+**Extended, November 7:** An ordinary compatible update is named as a case that fits
+the lighter tier at high effort, or the strong tier at medium (OPERATIONS now says a
+guide may name such a case; its independent review uses the strong tier at high
+effort); see
+[R11](#r11--update-from-a-pinned-public-source-without-replacing-project-state).
+**Extended, later November 7:** Settings are now set explicitly on every dispatch and
+the strong default is the strong tier at high effort; see the entry at the top of this
+decision.
 
 **Superseded in part, October 24 — PROJECT is enduring project context:**
 The October 23 scoped-observation/cache approach did not go far enough. Its
@@ -480,6 +619,21 @@ The [storage comparison](REQUEST_STORAGE_COMPARISON.md) explains the alternative
 revise the bounded implementation, not the accepted independent-outcome requirement.
 
 ## R7 — Keep the reasons durable, current, and revisable
+
+**November 7 — fix runtime failures in runtime text:** The audit behind the
+[dispatch-settings rule](#r2--protect-judgment-and-conversation-from-executionbookkeeping)
+found that an earlier review had recorded the correct principle (explicit choice at
+dispatch, no inheritance by omission) only in this rationale, which receiving agents
+do not load, so the observed failure recurred. The maintainer added a rule to the
+repository's [maintainer instructions](../AGENTS.md): when an observed failure is
+runtime behavior, fix it in runtime text, not only in the rationale or design notes.
+This adds no startup read for target actors. **Why/tradeoff:** a design note records
+the reason but cannot change what a loaded instruction says; the cost is that each
+runtime fix also needs the existing regression oracle and a payload change that
+installations must update to receive. **Regression case:** a review of a runtime
+failure that edits only RATIONALE or DESIGN_NOTES, with no runtime text change or
+stated reason none is needed, is incomplete. **Status:** decided by the maintainer and
+written in the maintainer instructions; whether authors follow it is unverified.
 
 **October31 maintainer guard:** Before accepting a refactor, replacement default/
 onboarding route or recommended alternative package, read each affected
@@ -1345,6 +1499,105 @@ correction establishes universal host compliance.
 
 ## R11 — Update from a pinned public source without replacing project state
 
+**November 7 — each installation is updated from its own project, an ordinary
+update is bounded and checked, and the starter gets a readable revision:** In a field
+case, a Director in this source repository was asked to roll out a new starter
+revision. It dispatched outside workers that merged the new
+[DIRECTOR](../pattern/starter/payload/DIRECTOR.md)/[OPERATIONS](../pattern/starter/payload/OPERATIONS.md)
+text into seven downstream projects directly, bypassing each project's own Director,
+tracker records and acceptance. Each project ended with new files but its previous
+accepted receipt, a half-updated state. The workers wrote backups and stopped short
+of acceptance; the projects' own Directors were then asked to review or redo. The
+same session dispatched nearly every worker on the inherited strongest tier with no
+effort chosen. The maintainer made three decisions; an independent review then
+changed the wording of each, recorded here as the current text.
+
+1. **Update from inside the project.** This project's Director, or an agent it
+   authorizes within that project, performs the update in that project's own
+   conversation; when no working Director exists here, an agent the user directs in
+   this project's own conversation performs it. To update other projects, ask each
+   project's Director to "update director pattern". A session in another project
+   starts only when the user asked for that update, and carries the user's request;
+   if no session can be started there, the user gets the 🖐️ action to open one and
+   say it. Never patch another installation from outside, even by following the
+   protocol. Only that Director knows the project's layout, roles, adaptations,
+   tracker, records and acceptance gates. A template or stencil without its own
+   Director is updated only through its maintainer's reviewed staging route; if none
+   is documented, the gap is reported and the template is not edited. This narrows the
+   earlier UPDATES wording that let any authorized installation agent perform an
+   update and said it "need not already be a Director"; the performer's scope,
+   compatibility decisions and acceptance remain the accountable owner's. The
+   starter DIRECTOR also now points to reading the whole UPDATES guide before
+   planning any update, a reachability fix because the field Director had read only
+   part of it.
+2. **An ordinary compatible update is bounded, well specified and checked by the
+   required independent review.** It therefore fits the
+   [lighter-tier choice](#r2--protect-judgment-and-conversation-from-executionbookkeeping)
+   (November 5): a lighter capability tier at high effort, or the strong tier at
+   medium, recorded at dispatch. Starter OPERATIONS now says a guide may name such a
+   case, and UPDATES does. The independent review stays and uses the strong tier at
+   high effort. Harder cases (unresolved conflicts, migrations, unknown provenance or
+   ambiguous project adaptations) use the strong tier at high effort or above, with a
+   recorded reason. The update case is no longer described as "small": the
+   lighter-tier conditions are bounded, well-specified, easily checked work, and an
+   update meets them through its specification and the independent review that checks
+   it, not through size. [R17](#r17--keep-delegated-work-supervised-and-recover-the-users-whole-request)
+   carries the cross-reference.
+3. **A readable `starter_revision` ("3.1")** is added to the starter
+   [manifest](../pattern/starter/manifest.json) and recorded in the receipt on
+   install and update. `starter_version` stays 3 as the install format: bumping it
+   would make every existing receipt an unknown format and imply a migration. The
+   maintainer instructions in [AGENTS](../AGENTS.md) now require bumping the revision
+   with each published starter payload change. An update names the previous and new
+   revision when reporting; an install with none is reported as "unrecorded".
+
+**Why/tradeoff:** Only the project's own Director can judge adaptations, tracker
+records and acceptance, and an outside patch cannot see them. Merging into a project
+while its receipt stays unchanged leaves it looking accepted and current when it is
+neither. The cost is one session per project instead of one script across all of
+them: slower, but each project's owner reviews its own result. Starting another
+project's session only on the user's request and carrying it keeps the user in
+control of which projects change; the fallback to an agent the user directs covers a
+project with no working Director without reopening outside patching. Naming ordinary
+updates as bounded, checked work avoids spending the strongest tier on routine merges;
+a wrong call is caught by the independent review, now at the strong tier and high
+effort, and the Director's acceptance. A separate readable revision gives people and
+agents something to say and compare ("3.1") without changing the install format; the
+cost is one more number to bump with each payload change (now a maintainer rule), and
+an install from before it has an unknown previous revision, reported as "unrecorded"
+rather than guessed. Reporting a template with no staging route as a gap leaves it
+stale instead of risking an unreviewed edit.
+
+**Regression cases:** Asked to roll out an update to several projects, a Director
+starts a session in each project at the user's request, carries the request, asks its
+Director to "update director pattern", and follows its reports; where it cannot start
+one it gives the 🖐️ action. It does not dispatch workers into those projects' files,
+and a project that has not run its own update keeps its previous accepted receipt
+with no new files. A stencil with no documented staging route is reported as a gap,
+not edited. A project with no working Director is updated by an agent the user directs
+in that project's own conversation, not from outside. An update dispatch records a
+lighter tier at high effort, or the strong tier at medium, with requested and
+effective settings or unknowns; its independent review records the strong tier at
+high effort; an unresolved conflict, migration, unknown provenance or ambiguous
+adaptation records the strong tier at high or above with the reason. An update report
+names the previous and new `starter_revision`; for an install with no recorded
+revision it says "unrecorded". A fresh install's receipt records the revision;
+`starter_version` remains 3 and an existing receipt is not treated as an unknown
+format. A starter payload change merged without a revision bump violates the
+maintainer instruction.
+
+**Status:** Decided by the maintainer on November 7, 2026; the independent review's
+wording changes are included. Implemented in starter
+[UPDATES](../pattern/starter/payload/UPDATES.md) and DIRECTOR/OPERATIONS wording, the
+manifest's `starter_revision`, the installer's report and receipt, and the maintainer
+instructions, with the starter README noting the revision. Static package checks
+establish wording and reachability only. Live rollout through each project's own
+Director is pending, and no downstream update has been verified. Installed copies keep
+their adopted text until updated. **Open gap:** the v1 engine's UPDATES, INSTALL-v1
+and README-v1 still allow outside or non-Director updates; they are not changed in
+3.1 (see the [matrix](BEHAVIOR_PARITY.md#why-each-mechanism-existed-and-the-new-route)
+and [validation](DESIGN_NOTES.md#update-ownership-and-starter-revision--november-7-2026)).
+
 **November 2 — project composition and update baselines:** R9's
 [composed-guidance correction](#r9--make-attention-and-active-supervision-visible-without-decoration)
 separates strict managed startup integrity from historical snapshots of current
@@ -1907,6 +2160,16 @@ establish universal future compatibility or fresh-session compliance.
 or project-owned callers require repeated reconstruction after compatible updates.
 
 ## R17 — Keep delegated work supervised and recover the user’s whole request
+
+**November 7 — update staffing (cross-reference):** An ordinary compatible update
+is bounded, well specified and checked by the required independent review: a lighter
+capability tier at high effort, or the strong tier at medium, with that review kept
+at the strong tier and high effort, and harder cases (conflicts, migrations, unknown
+provenance, ambiguous adaptations) at the strong tier at high effort or above with a
+recorded reason; a field session had dispatched nearly
+every update worker on the inherited strongest tier with no effort chosen. Owned by
+[R11](#r11--update-from-a-pinned-public-source-without-replacing-project-state);
+the rule it applies is [R2's November 5 entry](#r2--protect-judgment-and-conversation-from-executionbookkeeping).
 
 **Later November 7 — an example of the suggested shape:** The maintainer found some
 SitReps easier to follow than others, chiefly ones that make it easy to see who is

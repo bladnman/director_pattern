@@ -13,6 +13,9 @@ reviewed instruction/adapter integration, not a fresh installer or second ledger
 The [design-obligation matrix](https://github.com/bladnman/director_pattern/blob/main/development/BEHAVIOR_PARITY.md) explains the
 old reasons, revised routes, evidence and remaining verification limits.
 
+The manifest's `starter_revision` (now 3.1) is a readable revision number bumped with
+each published payload change; `starter_version` stays the install-format number.
+
 ## Install beside ordinary notes and assets
 
 Python3.10+ on POSIX with stdlib `fcntl` (macOS/Linux); current executed checks are

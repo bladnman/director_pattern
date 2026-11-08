@@ -38,8 +38,11 @@ Keep the living rationale coherent at formative decisions: preserve dated change
 and superseded reasoning, link affected contracts and a concrete regression case,
 and distinguish stored, decided, implemented, and verified. Label hypotheses/open choices.
 Write runtime instructions as clear, direct actions for the receiving agent's work;
-keep debugging history and design explanations in the rationale. When simplifying,
-preserve the underlying behavior and its regression oracle.
+keep debugging history and design explanations in the rationale. When an observed
+failure is runtime behavior, fix it in runtime text, not only in the rationale or
+design notes. When simplifying, preserve the underlying behavior and its regression
+oracle. Bump `starter_revision` in `pattern/starter/manifest.json` with each
+published starter payload change.
 
 Retain exact source conversations and internal reference material privately,
 separate from public documentation. Preserve originals without rewriting them;

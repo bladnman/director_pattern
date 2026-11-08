@@ -7,9 +7,12 @@ reviewed operation below, never rerunning it as an overwrite. A version/schema
 change is not permission to migrate an older canonical store.
 
 Published [GitHub main](https://github.com/bladnman/director_pattern) is the upstream
-source of truth. An agent performs an update on an explicit request or recorded
-project-scoped standing authorization. The project Director arranges a tiny
-metadata check at its first/next active project-work opportunity, at most once per rolling
+source of truth. This project's Director, or an agent it authorizes within this
+project, performs an update in this project's own conversation on an explicit
+request or recorded project-scoped standing authorization; when no working Director
+exists here, an agent the user directs in this project's own conversation performs
+it. Read this whole guide before planning an update. The project Director arranges
+a tiny metadata check at its first/next active project-work opportunity, at most once per rolling
 24 hours, and defaults to notifying the user. No worker, optional outcome Director, bootstrap,
 or global skill starts these checks. This adds no daemon, scheduler, runtime
 installation, dependency, or wakeup. Existing project and host permissions still apply.
@@ -129,10 +132,35 @@ every turn; the daily discovery reservation already limits retries. Never run
 incoming downloaded helper code as an unattended installer.
 
 The current accountable owner retains scope, compatibility decisions and acceptance.
-The authorized installation agent follows its actual host/assignment rules; it need
-not already be a Director. The Director handles bounded validated records/receipts
-and delegates substantial update execution to a bounded worker. Each assignment
-names role, outcome, scope and authority. Report unavailable capabilities.
+This project's Director, or an agent it authorizes within this project, performs
+the update, following its actual host/assignment rules; when no working Director
+exists here, an agent the user directs in this project's own conversation performs
+it. The Director handles bounded validated records/receipts and delegates
+substantial update execution to a bounded worker. Each assignment names role,
+outcome, scope and authority. Report unavailable capabilities.
+
+Update each installation from its own project, through that project's Director. Only
+that Director knows the project's layout, roles, adaptations, tracker, records and
+acceptance gates. To update another project's installation, ask that project's
+Director (or the agent the user directs there) to update its Director Pattern in its
+own conversation, for example by
+starting a session there with "update director pattern", then follow its reports.
+Start a session in another project only when the user asked for that update, and
+carry the user's request with it. If you cannot start a session in that project,
+give the user the 🖐️ action to open it and say "update director pattern", then
+follow its reports. Never patch another installation's files from outside, even by
+following this protocol. A template or stencil without its own Director is updated
+only through its maintainer's reviewed staging route. If no documented staging
+route exists, report the gap; do not edit the template.
+
+An ordinary compatible update is bounded, well specified and checked by the
+required independent review. It is a case where the
+[lighter-tier choice](OPERATIONS.md#staffing-and-maintained-roles) fits: for its
+execution, choose a lighter capability tier at high effort, or the strong tier at
+medium effort, and record the choice. Keep the required independent review; by
+default it uses the strong tier at high effort. Use the strong tier at high effort or above, with a
+recorded reason, for unresolved conflicts, migrations, unknown provenance or
+ambiguous project adaptations.
 
 ## Pin and inspect the incoming revision
 
@@ -325,6 +353,9 @@ or failed update retains the old accepted revision and records the actual mixed
 state and next action; it must not advertise complete adoption. Restore only owned
 edits from verified backups when safe, preserving intervening changes.
 
+Record the incoming manifest's `starter_revision` in the update receipt, and name
+the previous and new `starter_revision` when reporting the update to the user. When
+the installed receipt has none, report the previous one as "unrecorded".
 Report what changed, what remained locally adapted, verification and limitations.
 Refresh the director's current-conversation installation check after relevant setup
 changes; a successful file update alone grants no badge, role, or live supervision

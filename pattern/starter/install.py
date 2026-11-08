@@ -162,7 +162,7 @@ def operation(mode, target, initiator="owner", opportunity="closure", min_incide
     if mode != "plan":
         value, files = files_for(target, initiator, opportunity, min_incidents, "PROJ-" + uuid.uuid4().hex)
     report = {"operation": mode, "changed": True, "format": value["format"], "starter_version": 3,
-              "target": str(target), "files": {p: {"sha256": sha(b), "bytes": len(b)} for p, b in files.items()},
+              "starter_revision": value.get("starter_revision"), "target": str(target), "files": {p: {"sha256": sha(b), "bytes": len(b)} for p, b in files.items()},
               "payload_bytes": sum(len(b) for b in files.values()),
               "version_control": version_control(target, remote_visibility),
               "startup_bytes_director": sum(len(files[".director/" + p]) for p in ["START.md", "DIRECTOR.md"]) + len(files["AGENTS.md"]),
@@ -180,7 +180,8 @@ def operation(mode, target, initiator="owner", opportunity="closure", min_incide
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(data)
             path.chmod(0o600 if name.endswith("config.json") else 0o644)
-        receipt = {"format": value["format"], "starter_version": 3, "target": ".",
+        receipt = {"format": value["format"], "starter_version": 3,
+                   "starter_revision": value.get("starter_revision"), "target": ".",
                    "target_created": target_created, "manifest_sha256": sha((SOURCE / "manifest.json").read_bytes()),
                    "managed": {name: sha(data) for name, data in files.items()},
                    "source": source_info,

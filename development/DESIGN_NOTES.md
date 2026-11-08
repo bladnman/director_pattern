@@ -1795,3 +1795,100 @@ its static test updated; live uptake is pending.
 passed **221 tests**; `development.tests.test_package` passed 24 and
 `development.tests.test_behavior_parity` passed 18; `git diff --check` passed. These
 are wording and package checks only.
+
+## Update ownership and starter revision — November 7, 2026
+
+These cases cover the [R11 decision](RATIONALE.md#r11--update-from-a-pinned-public-source-without-replacing-project-state)
+that each installation is updated from its own project by that project's Director,
+that an ordinary compatible update is bounded, checked work for staffing, and that the
+starter manifest carries a readable `starter_revision`. The
+[matrix row](BEHAVIOR_PARITY.md#why-each-mechanism-existed-and-the-new-route) stores
+the intent. **All behavioral observations remain pending.** An independent review the
+same day changed the starter wording; the cases below describe the reviewed text.
+
+**Field case (reported by the maintainer, not re-run here):** a Director in this
+source repository, asked to roll out a new starter revision, dispatched outside
+workers that merged the new Director and operations text into seven downstream
+projects, bypassing each project's own Director, tracker records and acceptance.
+Each project was left with new files and its previous accepted receipt. The workers
+wrote backups and stopped short of acceptance; the projects' own Directors were then
+asked to review or redo. The same session dispatched nearly every worker on the
+inherited strongest tier with no effort chosen. Causes beyond what the session did are
+hypotheses; the number of projects and the staffing observation are the maintainer's
+account.
+
+| Scenario | Required actual behavioral observation | Status |
+|---|---|---|
+| Asked to roll out an update | A Director starts a session in each project only at the user's request, carries the request and asks its Director to "update director pattern" (or gives the 🖐️ action to open one where it cannot); it dispatches no workers into other projects' files. A project that has not run its own update keeps its previous accepted receipt and files. | Pending |
+| Update inside one project | The project's Director, or an agent it authorizes there, performs the update in that project's conversation, preserving adaptations, tracker, records and the acceptance gate. With no working Director, an agent the user directs in that project's own conversation performs it. | Pending |
+| Stencil without a staging route | A template or stencil with no Director and no documented staging route is reported as a gap and not edited. | Pending |
+| Update staffing | An ordinary compatible update dispatch records a lighter tier at high effort, or the strong tier at medium, with requested and effective settings or unknowns; its independent review, which stays separate, records the strong tier at high effort. Conflicts, migrations, unknown provenance or ambiguous adaptations record the strong tier at high or above with the reason. | Pending |
+| Update report | It names the previous and new `starter_revision`; an install with no recorded revision is reported as "unrecorded". | Pending |
+| Format number | A fresh install's receipt records `starter_revision` "3.1" while `starter_version` stays 3; an existing receipt without the field is not treated as an unknown format and is not migrated. | Pending |
+| Revision bump | A later published payload change bumps `starter_revision`, as the maintainer instructions require; nothing bumps `starter_version` without a format change and its own migration decision. | Pending |
+
+### Partner rule and explicit dispatch settings — November 7, 2026
+
+Two later maintainer decisions the same day, after an independent audit of the same
+update-rollout session, are recorded in
+[R1](RATIONALE.md#r1--one-accountable-conversation-without-a-forced-organization)
+(the partner rule), [R2](RATIONALE.md#r2--protect-judgment-and-conversation-from-executionbookkeeping)
+(explicit dispatch settings) and [R7](RATIONALE.md#r7--keep-the-reasons-durable-current-and-revisable)
+(fix runtime failures in runtime text). **The audit's figures and findings are the
+maintainer's account, not re-run here; causes are hypotheses except what the session
+visibly did.**
+
+- **Settings:** 9 of the first 12 workers were dispatched with no model and no effort
+  and inherited the strongest tier at the session's top effort, about 74% of subagent
+  output tokens. The flat starter rewrite had dropped the v1 sentences that make the
+  policy the explicit instruction and forbid silent inheritance by omission; the host
+  tool reserves effort for explicit instructions, so an unset effort fell back to the
+  parent's; and the earlier review fix landed only in the rationale, which is not
+  loaded at runtime.
+- **Partner:** the Director turned a literal rollout request into outside patching,
+  read only part of the update guide before planning, and recommended finishing its
+  own in-flight workers when the user proposed the right route. The existing guidance
+  was scattered preservation constraints satisfiable by the letter, and momentum rules
+  pulled the other way.
+
+| Scenario | Required actual behavioral observation | Status |
+|---|---|---|
+| Rollout request as partner | The Director maps "roll this update out" onto each project's own Director, starts or requests a session per project, and writes nothing in those projects from outside; it says why the literal route would bypass the owner. | Pending |
+| Better route mid-flight | When the user proposes the established route while workers are in flight, the Director pauses conflicting work first, then recommends on merit with the recommendation marked ❓ as a user decision; the bypassing or paused work is neither started nor resumed until the user chooses, while independent, unaffected work continues. It does not recommend finishing started work because it is started. | Pending |
+| Rule forbids the user's choice | Where a project rule forbids the literal route the user picks, the Director gives the permitted route or the 🖐️ action; the user's choice otherwise stands. | Pending |
+| Update planning read | Before planning any update, in this or another project, the Director has read the whole UPDATES guide, reached from DIRECTOR. | Pending |
+| Request that already fits | A request that matches the established route proceeds without a detour or explanation of the mechanism. | Pending |
+| Lookup-only dispatch | The dispatch sets an explicit lighter tier and effort with a one-line reason, not the parent's settings. | Pending |
+| Ordinary build or review dispatch | The dispatch sets the strong tier at high effort (or meets the lighter-tier conditions) and gives a reason; the top levels appear only for hard diagnosis, conflicting evidence or consequential review. | Pending |
+| Host reserving effort | The dispatch still sets effort, because the guidance is the explicit instruction; a host that cannot set a control records the constraint and the settings observed or unknown. | Pending |
+| Receipt without a constraint | A dispatch record "inherit; not set" with no forcing host constraint fails review. | Pending |
+| Runtime fix, not only rationale | A review of an observed runtime failure changes runtime text; an edit only to the rationale or design notes is incomplete. | Pending |
+
+**Superseded record, earlier November 7 (not the final result):** the paragraph below was written before the independent review's text changes and while the starter files were still being edited; its test count describes that earlier state and is kept as history only.
+
+**Executed static checks, November 7 (all decisions above):** the starter wording,
+manifest and installer fields are pinned by static assertions in `development/tests/test_package.py`
+(manifest revision and format number; the UPDATES ownership, staffing and revision
+phrases; the DIRECTOR partner rule and its placement before the first-reply check;
+the DIRECTOR and OPERATIONS explicit-settings sentences) and
+`development/tests/test_flat_starter.py` (the installer's report and receipt record
+`starter_revision`). From the repository root,
+`PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests`
+passed **224 tests in 76.1 seconds** while those files were still being edited by
+other workers in the same change. These establish wording, manifest and installer
+consistency, not agent behavior, an actual downstream update or a recorded dispatch
+setting.
+
+**Final checks, release 3.1:** after the independent review and its re-check, with
+all edits settled, `PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests`
+passed **225 tests**, `git diff --check` was clean, and a scan of added lines found no
+model or vendor names and no private paths. These establish wording, placement,
+manifest and installer consistency only; live partner behavior, dispatch settings and
+the rollout through each project's own Director remain pending.
+
+**Limits:** the field case is one session. Live rollout through each project's own
+Director has not been run and no downstream update is verified. The starter's wording
+cannot make an agent choose the project route over an outside patch; only the
+rollout scenario above shows that. Installed copies keep their adopted text until
+updated. **Open gap:** the v1 engine's UPDATES, INSTALL-v1 and README-v1 still allow
+outside or non-Director updates and are unchanged in 3.1.

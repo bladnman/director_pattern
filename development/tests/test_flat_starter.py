@@ -58,6 +58,9 @@ class StarterInstallTests(unittest.TestCase):
         self.assertEqual(self.cli('requests.py', 'validate'), {'valid': 0})
         receipt = json.loads((self.target / '.director/install.json').read_bytes())
         self.assertEqual(receipt['starter_version'], 3)
+        # Instruction wording / static only: the readable revision is recorded beside the format number.
+        self.assertEqual(receipt['starter_revision'], '3.1')
+        self.assertEqual(result['starter_revision'], '3.1')
         self.assertEqual(receipt['technical_check']['acceptance'], 'not implied')
         for path, digest in receipt['managed'].items():
             self.assertEqual(hashlib.sha256((self.target / path).read_bytes()).hexdigest(), digest)
@@ -100,6 +103,17 @@ class StarterInstallTests(unittest.TestCase):
             self.assertEqual(self.tree(), before)
         installer.rollback(self.target / '.director/install.json')
         self.assertEqual((self.target / 'notes.txt').read_text(), 'Keep')
+        self.assertFalse((self.target / '.director').exists())
+
+    def test_older_receipt_without_starter_revision_is_still_a_known_format(self):
+        # Receipts written before starter_revision existed stay valid; static fixture, not a migration test.
+        self.install()
+        receipt_path = self.target / '.director/install.json'
+        receipt = json.loads(receipt_path.read_bytes())
+        del receipt['starter_revision']
+        receipt_path.write_text(json.dumps(receipt, indent=2) + '\n')
+        self.assertFalse(self.install()['changed'])
+        installer.rollback(receipt_path)
         self.assertFalse((self.target / '.director').exists())
 
     def test_rollback_refuses_new_work(self):

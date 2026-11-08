@@ -293,6 +293,71 @@ class PackageBoundaryTests(unittest.TestCase):
         self.assertIn("supported waits must leave both cadences usable", sitrep)
         self.assertNotIn("report promptly if overdue or timing is unknown", director)
 
+    def test_starter_manifest_records_revision_and_format_number(self):
+        # Static manifest check only; the installer's receipt is checked in test_flat_starter.
+        manifest = json.loads((PATTERN / "starter/manifest.json").read_text(encoding="utf-8"))
+        self.assertEqual(manifest["starter_revision"], "3.1")
+        self.assertEqual(manifest["starter_version"], 3)
+
+    def test_updates_run_through_each_projects_own_director(self):
+        # Instruction wording / static only; actual update behavior is unverified.
+        updates = " ".join((PATTERN / "starter/payload/UPDATES.md").read_text(encoding="utf-8").split())
+        for phrase in (
+            "This project's Director, or an agent it authorizes within this project, performs an update",
+            "Update each installation from its own project, through that project's Director",
+            "ask that project's Director (or the agent the user directs there) to update its Director Pattern in its own conversation",
+            "Never patch another installation's files from outside, even by following this protocol",
+            "An ordinary compatible update is bounded, well specified and checked by the required independent review",
+            "choose a lighter capability tier at high effort, or the strong tier at medium effort, and record the choice",
+            "Keep the required independent review",
+            "Use the strong tier at high effort or above, with a recorded reason, for unresolved conflicts, migrations, unknown provenance or ambiguous project adaptations",
+            "Keep the required independent review; by default it uses the strong tier at high effort",
+            "Start a session in another project only when the user asked for that update, and carry the user's request with it",
+            "If no documented staging route exists, report the gap; do not edit the template",
+            "Record the incoming manifest's `starter_revision` in the update receipt, and name the previous and new `starter_revision` when reporting the update to the user",
+            'When the installed receipt has none, report the previous one as "unrecorded"',
+        ):
+            self.assertIn(phrase, updates)
+        self.assertNotIn("it need not already be a Director", updates)
+
+    def test_director_is_a_partner_and_sets_dispatch_settings(self):
+        # Instruction wording / static only; actual partner behavior and dispatch settings are unverified.
+        read = lambda path: " ".join(path.read_text(encoding="utf-8").split())
+        director = read(PATTERN / "starter/payload/DIRECTOR.md")
+        for phrase in (
+            "You are the user's partner, not a literal executor",
+            "map a request onto the project's established mechanism and owner",
+            "When the literal request would bypass it, say so, propose the established route and recommend it",
+            "Judge recommendations on merit, not on work already started",
+            "pause conflicting work first, then recommend",
+            "Set tier and effort explicitly on each dispatch; inheriting the parent's settings is not a selection",
+            "Mark that recommendation ❓ as a user decision",
+            "Do not start or resume the bypassing or paused work until the user chooses",
+            "Before planning any Director Pattern update, in this or another project, read [UPDATES](UPDATES.md) completely",
+            "an agent the user directs there",
+            "The strong default is the strong tier at high effort; record a one-line reason",
+        ):
+            self.assertEqual(director.count(phrase), 1, phrase)
+        # Reachability: the partner rule loads before the first-reply check paragraph.
+        first_reply = director.index("If you are the Project Director, before the first ordinary reply")
+        for phrase in ("You are the user's partner, not a literal executor", "pause conflicting work first, then recommend"):
+            self.assertLess(director.index(phrase), first_reply, phrase)
+        operations = read(PATTERN / "starter/payload/OPERATIONS.md")
+        start = operations.index("## Staffing and maintained roles")
+        staffing = operations[start:operations.index("## Continuity and privacy", start)]
+        for phrase in (
+            "This guidance is the explicit instruction to set capability and reasoning effort for each delegated task wherever the host allows",
+            "Set both on every dispatch; omitting one is not a choice",
+            "The strong default means the strong tier at high effort, chosen at dispatch rather than inherited",
+            "Record each choice with a one-line reason",
+            '"inherited" or "not set" is acceptable only with the host constraint that forced it',
+            "A guide may name a case that meets these conditions, such as an ordinary compatible update under UPDATES",
+        ):
+            self.assertIn(phrase, staffing)
+        maintainer = read(PATTERN.parent / "AGENTS.md")
+        self.assertIn("fix it in runtime text, not only in the rationale or design notes", maintainer)
+        self.assertIn("Bump `starter_revision` in `pattern/starter/manifest.json` with each published starter payload change", maintainer)
+
     def test_v1_and_explicit_lean_keep_the_selected_package_route(self):
         legacy = (PATTERN / "README-v1.md").read_text()
         starter = (PATTERN / "starter/README.md").read_text()

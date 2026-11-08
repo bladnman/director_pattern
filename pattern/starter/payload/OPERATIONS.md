@@ -155,6 +155,16 @@ the staffer need not load all executor manuals merely to assign them. Unqualifie
 mandatory references remain mandatory unless a reviewed local mapping preserves
 their authority and explicit triggers. Deferred timing never waives a guard.
 
+This guidance is the explicit instruction to set capability and reasoning effort for
+each delegated task wherever the host allows, including hosts that reserve those
+controls for explicit instructions. Set both on every dispatch; omitting one is not
+a choice, since hosts often fall back to the parent's settings. The strong default
+means the strong tier at high effort, chosen at dispatch rather than inherited;
+reserve the strong tier's top effort levels for hard diagnosis, conflicting evidence
+or a consequential independent review. Record each choice with a one-line reason
+(size, how easily the result is checked, consequence of error); "inherited" or "not
+set" is acceptable only with the host constraint that forced it.
+
 Choose capability and reasoning effort for uncertainty, consequence, tools/context
 and independent evaluation, within actual user budget and host controls. Resolve
 current supported identifiers/effort, permission, capacity, inheritance and return
@@ -170,9 +180,10 @@ suggestion, not a quota or cost target: when bounded work is small, well specifi
 and easily checked, and you have very high confidence that a lighter tier can do
 it, choose a lighter tier at high reasoning effort, or extra-high when a little
 less confident. The strong tier at medium effort is equally acceptable for such
-work. Keep ambiguous, consequential or hard-to-check work on the strong tier, and
-map these levels to the nearest current supported controls. Required independent
-review, the named verification tier and your evaluation of the return apply
+work. A guide may name a case that meets these conditions, such as an ordinary
+compatible update under UPDATES. Keep ambiguous, consequential or hard-to-check
+work on the strong tier, and map these levels to the nearest current supported
+controls. Required independent review, the named verification tier and your evaluation of the return apply
 unchanged at every tier; record requested and effective tier/effort, or unknowns.
 
 Give qualified owners and required independent reviewers explicit local decisions,
