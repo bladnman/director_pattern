@@ -237,6 +237,47 @@ class PackageBoundaryTests(unittest.TestCase):
         self.assertIn("Existing trackers use their own verified adapter", api)
         self.assertIn("Do not use this option to bypass required configuration, initialize a backend or certify an unconfigured template", operations)
 
+    def test_flat_staffing_keeps_strong_default_with_occasional_lighter_tier(self):
+        # Instruction wording only; actual host tier/effort selection is unverified.
+        read = lambda name: " ".join((PATTERN / "starter/payload" / name).read_text().split())
+        operations, director = read("OPERATIONS.md"), read("DIRECTOR.md")
+        staffing = operations.split("## Staffing and maintained roles", 1)[1].split("## Continuity and privacy", 1)[0]
+        self.assertIn("No frozen model/vendor, universal strongest/cheapest worker or inferred dollar price", staffing)
+        self.assertIn("A strong capability tier remains the default for delegated work", staffing)
+        self.assertIn("As an occasional suggestion, not a quota or cost target", staffing)
+        self.assertIn("when bounded work is small, well specified and easily checked, and you have very high confidence that a lighter tier can do it, choose a lighter tier at high reasoning effort, or extra-high when a little less confident", staffing)
+        self.assertIn("The strong tier at medium effort is equally acceptable for such work", staffing)
+        self.assertIn("Keep ambiguous, consequential or hard-to-check work on the strong tier", staffing)
+        self.assertIn("map these levels to the nearest current supported controls", staffing)
+        self.assertIn("Required independent review, the named verification tier and your evaluation of the return apply unchanged at every tier", staffing)
+        self.assertIn("record requested and effective tier/effort, or unknowns", staffing)
+        self.assertIn("No fixed model, blind strongest/cheapest choice or role-based permission follows", director)
+        self.assertIn("A strong tier stays the default", director)
+        self.assertIn("a lighter tier at high or extra-high effort, or the strong tier at medium, fits as OPERATIONS describes", director)
+        self.assertIn("Your evaluation and required independent review still apply at every tier", director)
+        self.assertEqual(director.count("OPERATIONS.md#staffing-and-maintained-roles"), 1)
+
+    def test_flat_sitrep_checks_due_each_turn_and_suggests_a_shape(self):
+        # Instruction wording only; actual SitRep cadence and uptake are unverified.
+        read = lambda name: " ".join((PATTERN / "starter/payload" / name).read_text(encoding="utf-8").split())
+        director = read("DIRECTOR.md")
+        heading = "While delegated work is outstanding, proactively send a labeled **📋 SitRep**"
+        self.assertEqual(director.count(heading), 1)
+        start = director.index(heading)
+        sitrep = director[start:director.index("Answer status questions briefly", start)]
+        self.assertIn("about every five minutes from actual dispatch (or the agreed interval)", sitrep)
+        self.assertIn("On every turn, including worker returns and notifications, check whether one is due, using host timestamps or a clock check, and note each SitRep's time", sitrep)
+        self.assertIn("Cover every held stream, including quiet, stalled or returned-but-unevaluated work, with actual handles/observations, results, blockers, steering and next proof", sitrep)
+        self.assertIn('A suggested shape: **Done** · **In progress** (owner, actual status) · **Waiting on you** (❓ questions, 🖐️ user-only actions, or "nothing") · **Next**', sitrep)
+        self.assertIn("When nothing changed since the last SitRep, give one line per held stream, not the full shape", sitrep)
+        self.assertIn("Reserve 📋 for that report heading; between due reports use ordinary prose, not another full block", sitrep)
+        self.assertIn("Ordinary progress/status answers and notification replies do not reset or replace it", sitrep)
+        self.assertIn("After compaction or session resume, if one is overdue or you cannot tell when the last one was sent, report once promptly and time the next from it", sitrep)
+        self.assertIn("Without any time source, say so once and report at each user message or held-stream change instead", sitrep)
+        self.assertIn("Stricter host progress updates stay concise and separate", sitrep)
+        self.assertIn("supported waits must leave both cadences usable", sitrep)
+        self.assertNotIn("report promptly if overdue or timing is unknown", director)
+
     def test_v1_and_explicit_lean_keep_the_selected_package_route(self):
         legacy = (PATTERN / "README-v1.md").read_text()
         starter = (PATTERN / "starter/README.md").read_text()

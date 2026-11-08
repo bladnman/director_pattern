@@ -165,6 +165,16 @@ strongest/cheapest worker or inferred dollar price. Use independent parallel wor
 where useful and permitted, preserving capacity for evaluation and sequencing real
 dependencies/exclusive writes. Unsupported controls stay truthful, not invented.
 
+A strong capability tier remains the default for delegated work. As an occasional
+suggestion, not a quota or cost target: when bounded work is small, well specified
+and easily checked, and you have very high confidence that a lighter tier can do
+it, choose a lighter tier at high reasoning effort, or extra-high when a little
+less confident. The strong tier at medium effort is equally acceptable for such
+work. Keep ambiguous, consequential or hard-to-check work on the strong tier, and
+map these levels to the nearest current supported controls. Required independent
+review, the named verification tier and your evaluation of the return apply
+unchanged at every tier; record requested and effective tier/effort, or unknowns.
+
 Give qualified owners and required independent reviewers explicit local decisions,
 the next actions their findings permit, bounded repair scope and real escalation
 conditions. Confirm the actual return route. Require reasons, evidence coverage,

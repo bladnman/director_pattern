@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated November4,2026. This repository authors a
+Living design rationale · updated November 7, 2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -269,6 +269,48 @@ able to choose from the stated task needs without interpreting that old name.
 This clarification is implemented in maintainer guidance outside the installation
 payload; it changes no runtime route and establishes no fresh-host behavior.
 
+**November 5 — strong default, occasional lighter tier for small confident work:**
+The user asked staffing to fit capability to bounded work: a strong capability
+tier stays the default, but occasionally, with very high confidence that a lighter
+tier can do small, well-specified and easily checked work, choose that tier at high
+reasoning effort, or extra-high when a little less confident; the strong tier at
+medium effort is equally acceptable. The user asked for this as a host-neutral
+suggestion, because the same pattern runs under different hosts, never as model
+names. Starter [OPERATIONS](../pattern/starter/payload/OPERATIONS.md#staffing-and-maintained-roles)
+and [DIRECTOR](../pattern/starter/payload/DIRECTOR.md) now state it.
+
+**Why/tradeoff:** A blanket strong tier spends capacity on work a lighter tier at
+higher effort can do reliably; a lighter default would under-serve ambiguous work
+and invite cost-driven choices. Gating on size, specification, easy checking and
+confidence bounds the risk, and the unchanged verification tier, required
+independent review and staffer evaluation catch a wrong call. "Occasional" is
+deliberate: no quota, ratio or cost target. Effort names map to the nearest
+supported controls. The no-frozen-model/vendor and no-universal-strongest/cheapest
+rules stand. This states a stronger default posture for the flat starter than the
+v1 [MODELS](../pattern/engine/MODELS.md) "smallest suitable capability" sentence;
+that compatibility contract is unchanged, and existing installations keep their
+adopted guidance until explicitly updated.
+The strong default is an explicit choice made at dispatch, not inherited parent
+settings, so task-fit selection, the lighter-tier path and the settings evidence keep
+R2 October 23's purpose that a clerk does not silently inherit its parent's strongest
+model/effort.
+
+**Regression cases:** A small help-text cleanup with an exact diff check may go to
+a lighter tier at high effort; its dispatch records requested and effective
+settings or unknowns, and the staffer still evaluates the return. A small fix with
+slightly less certainty uses a lighter tier at extra-high effort or the strong tier
+at medium. An ambiguous diagnosis, a consequential release step or work without a
+cheap check stays on the strong tier regardless of cost. A lighter builder never
+waives or absorbs required independent review. Guidance names no vendor or model;
+a host with different effort labels maps to its nearest supported levels.
+The dispatch records a deliberate tier choice; a child never takes its parent's
+settings merely by inheritance.
+**Status:** decided and implemented in starter guidance only. Installed copies, the
+v1 engine and actual host staffing behavior are unchanged and unverified.
+Independently reviewed on November 7 alongside the SitRep change; the
+[validation cases](DESIGN_NOTES.md#occasional-lighter-tier-staffing--november-5-2026)
+remain pending.
+
 **Superseded in part, October 24 — PROJECT is enduring project context:**
 The October 23 scoped-observation/cache approach did not go far enough. Its
 PROJECT template still invited host/time, tools, slots, permissions, context,
@@ -493,6 +535,13 @@ installation payload. Raw conversations and internal references remain private.
 copying of authoring material, or unintended publication of private evidence.
 
 ## R9 — Make attention and active supervision visible without decoration
+
+**November 7 — SitRep due check and suggested shape:** recorded under
+[R17](#r17--keep-delegated-work-supervised-and-recover-the-users-whole-request); its
+suggested **Waiting on you** part keeps ❓ questions and 🖐️ user-only actions visible,
+and the exact **📋 SitRep** heading is unchanged. Under the no-time-source fallback,
+each held-stream change, such as a worker return, gets a SitRep: a narrow refinement
+of R9 October 19 that applies only without a time source.
 
 **Later November 4 — distinguish required checking progress from the ordinary answer:**
 The candidate's first Code greeting followed complete selected reads, actual setup
@@ -1858,6 +1907,71 @@ establish universal future compatibility or fresh-session compliance.
 or project-owned callers require repeated reconstruction after compatible updates.
 
 ## R17 — Keep delegated work supervised and recover the user’s whole request
+
+**November 7 — check each turn whether a SitRep is due, restore coverage and suggest
+a shape:** An adopting multi-day video project on the flat starter reported about 46
+hours without a labeled 📋 SitRep while notification-driven delegated work stayed
+held; one-line "still waiting" notification replies took the report's place, and the
+owner had to ask about state. The October 27 rule was present, but nothing made each
+notification turn a place to check it, and the starter's compression of legacy
+DIRECTION had dropped coverage of quiet, stalled and unevaluated streams, brief
+unchanged reports and the no-full-block line. Invisible elapsed time, notification
+turns read as acknowledgments and a hard-to-find rule remain hypotheses.
+
+The maintainer approved the triaged change. Starter
+[DIRECTOR](../pattern/starter/payload/DIRECTOR.md) now checks on every turn,
+including worker returns and notifications, whether a SitRep is due, using host
+timestamps or a clock check, and notes each SitRep's time. It covers every held
+stream, gives one line per held stream, not the full shape, when nothing changed
+since the last SitRep, uses ordinary prose between due reports and suggests **Done**
+· **In progress** · **Waiting on you** (❓ questions, 🖐️ user-only actions, or
+"nothing") · **Next**. Notification replies, like ordinary progress, neither reset
+nor replace a due report. After compaction or session resume it reports once promptly
+only if one is overdue or timing is unknown, restoring the October 27 "if overdue or
+timing is unknown" condition, and times the next from that report; a notification
+wake-up is not a resume. Without any time source it says so once and reports at each
+user message or held-stream change.
+
+**Why/tradeoff:** The interval stays about five minutes or the agreed interval:
+nothing showed the number caused the lapse, and projects can already tune it. On
+hosts that give no timestamps, the per-turn check costs one extra small clock call
+each turn; the field session had ~220 wake-ups. A silence rule for notification
+replies was rejected; the owner did not ask for silence, hosts may render a reply
+every turn, and routine acknowledgments already need no extra message. Reporting only
+at meaningful changes or on request was rejected because it restores the October 27
+failure where the user had to ask. The shape is a suggestion, not a requirement: any
+order with full coverage satisfies the
+duty. When turns arrive further apart than the interval, each notification turn is
+due; the one-line unchanged report keeps that brief. The no-time-source fallback is
+the maintainer's call by approval. It should be rare, since delegating hosts usually
+expose a clock, but reporting at each user message could add reports to rapid
+exchanges; only the one-line rule limits that.
+
+**Regression cases:** Over three or more intervals of notification-driven held work
+with one stalled stream, the first turn after each interval carries a labeled SitRep
+naming that stream and what waits on the user; "nothing new" turns spanning a due
+interval without one fail. Sparse unchanged notification turns each carry at most a
+one-line-per-stream SitRep; full blocks on consecutive unchanged turns fail. Several
+exchanges inside one interval get direct answers and at most one full SitRep (R9
+October 19). An informative update or notification reply does not reset the clock
+(October 27). After compaction or session resume with a report overdue or its timing
+unknown, one prompt report, then the next timed from it; a notification wake-up is not
+a resume. No held work, no SitRep. Without a time source, one statement,
+then reports only at user messages or held-stream changes. A different order with full
+coverage passes; one hiding ❓ or 🖐️ items fails.
+
+**Status:** Decided by maintainer approval on November 7, 2026 and implemented in
+starter DIRECTOR only. After independent review the maintainer also approved
+tightening the unchanged-turn and resume sentences the same day. It is to ship
+together with the November 5 staffing change; that combined change alters both starter
+DIRECTOR and OPERATIONS, so installations refresh once. A static package test pins
+the wording; it proves wording and reachability, not cadence. The v1 engine mirror in
+[DIRECTION](../pattern/engine/DIRECTION.md#recover-and-supervise-held-work) and
+engine DIRECTOR is not applied and remains an open maintainer choice. Installed
+copies keep their adopted text until updated. Live cadence is unverified; the
+[matrix](BEHAVIOR_PARITY.md#field-report-triage--november-7-2026) and
+[validation](DESIGN_NOTES.md#field-report-triage--november-7-2026) keep the pending
+oracles.
 
 **November 4 — separate recovery from an optional stopping experiment:** Keep the
 terminal-inclusive `continuation` view and exact-source reconciliation unchanged.

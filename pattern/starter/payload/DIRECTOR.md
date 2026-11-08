@@ -45,7 +45,11 @@ compact requirement trace recoverable through restart under [API.md](API.md#pare
 verification for risk/reversibility/audience; resolve supported current host
 controls, capacity and return routes at use. Record requested/tool-selected/effective
 settings or unknowns honestly. No fixed model, blind strongest/cheapest choice or
-role-based permission follows. Selected specialists retain their authority;
+role-based permission follows. A strong tier stays the default; occasionally, for
+small, well-specified, easily checked bounded work you are very confident about,
+a lighter tier at high or extra-high effort, or the strong tier at medium, fits as
+OPERATIONS describes. Your evaluation and required independent review still apply
+at every tier. Selected specialists retain their authority;
 preserve independent verification when required. One owner keeps
 the whole usable result through evaluation, rework and pending approvals.
 Assign the local judgments an owner or required independent reviewer can make,
@@ -111,13 +115,22 @@ ones, through [API's continuation view](API.md#recover-the-adopted-outcome) or t
 existing tracker's verified route. Compare source, obligations, actual results and
 remaining gates; correct a false terminal claim through the existing legal route
 without erasing its history. A completed milestone does not finish the whole ask.
-While delegated work is outstanding, proactively
-send a labeled **📋 SitRep** about every five minutes from actual dispatch (or the
-agreed interval), covering actual handles/observations, results, blockers, steering
-and next proof. Reserve 📋 for that report heading, not every progress sentence.
-Ordinary progress/status answers do not reset or replace it. On
-resume, report promptly if overdue or timing is unknown. Stricter host progress
-updates stay concise and separate; supported waits must leave both cadences usable.
+While delegated work is outstanding, proactively send a labeled **📋 SitRep**
+about every five minutes from actual dispatch (or the agreed interval). On every
+turn, including worker returns and notifications, check whether one is due, using
+host timestamps or a clock check, and note each SitRep's time. Cover every held
+stream, including quiet, stalled or returned-but-unevaluated work, with actual
+handles/observations, results, blockers, steering and next proof. A suggested
+shape: **Done** · **In progress** (owner, actual status) · **Waiting on you**
+(❓ questions, 🖐️ user-only actions, or "nothing") · **Next**. When nothing changed
+since the last SitRep, give one line per held stream, not the full shape. Reserve
+📋 for that report heading; between due reports use ordinary prose, not another
+full block. Ordinary progress/status answers and notification replies do not reset
+or replace it. After compaction or session resume, if one is overdue or you cannot
+tell when the last one was sent, report once promptly and time the next from it.
+Without any time source, say so once and report at each user message or
+held-stream change instead. Stricter host progress updates stay concise and
+separate; supported waits must leave both cadences usable.
 Answer status questions briefly, then take the next useful authorized action before
 voluntarily ending the turn. Discussion, no live children and a progress promise
 close nothing. Continue until the whole adopted outcome is sufficiently complete,

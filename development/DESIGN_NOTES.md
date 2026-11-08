@@ -1667,3 +1667,126 @@ authorized target/template updates may precede it. No exact future published pin
 invented here. The original failing baseline, manually prompted recovery and failed
 Video procedure remain distinct; no broader Stop, compaction, supervision or
 universal-host claim follows.
+
+## Occasional lighter-tier staffing — November 5, 2026
+
+These cases cover the [strong-default refinement](RATIONALE.md#r2--protect-judgment-and-conversation-from-executionbookkeeping)
+in starter OPERATIONS and DIRECTOR. **All behavioral observations remain pending.**
+Wording checks do not establish an actual tier/effort choice or effective setting.
+
+| Scenario | Required actual behavioral observation | Status |
+|---|---|---|
+| Small confident bounded work | The staffer picks a lighter tier at high effort (or extra-high when a little less confident), or the strong tier at medium; the dispatch records requested and effective settings or unknowns; the return is still evaluated. | Pending |
+| Ambiguous or consequential work | The strong tier is kept; cost alone does not move it to a lighter tier, and lighter tiers are not used as a quota. | Pending |
+| Lighter builder with required review | Required independent review stays separate and is not waived or merged into the builder. | Pending |
+| Different host effort labels | The staffer maps high/extra-high/medium to the nearest supported controls and records that mapping; no model or vendor name appears in guidance. | Pending |
+
+**Executed static checks, November 5:** a new package assertion pins the starter
+wording and the retained no-frozen-model/vendor sentence. From the repository root,
+`PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests`
+passed **220 tests in 81.767 seconds** (219 before the change, all passing).
+`git diff --check` passed, and a scan of added lines found no vendor or model
+names. No helper, schema, startup route, installed copy or v1 engine contract
+changed. These checks establish wording and package consistency only.
+
+## Field report triage — November 7, 2026
+
+An adopting multi-day video project on Director starter 3 (source 9571ff0) reported
+three problems, routed here by the maintainer as a problem report. The
+[intent matrix](BEHAVIOR_PARITY.md#field-report-triage--november-7-2026) stores the
+dispositions for SitRep cadence and shape, the per-conversation startup check and the
+host's write refusal. At triage nothing was implemented; the later note
+below records the SitRep decision. No case below has run.
+
+### Reported SitRep lapse
+
+The project reported five labeled SitReps in one ~31-minute window on the first
+evening, then none for ~46 hours. During the session, 168 background-task
+notifications and 52 agent messages woke the Director (~220 turns); one window held
+~26 one-line "nothing new" or "still waiting" replies. The owner asked about state
+five times; a ~15-minute stall surfaced only after a complaint. The lapse began before
+the first compaction; a similar complaint recurred in an earlier project. This
+repository's validation never showed the five-minute cadence in sustained use. In
+triage, task notifications had no timestamp, so a clock command was needed to tell
+whether a report was due. The flat starter dropped legacy DIRECTION's clauses for
+quiet, stalled and unevaluated streams, brief unchanged reports and the active-turn
+duty; no static test pins its wording.
+
+**Hypotheses, not established causes:** without host timestamps or a clock call the
+agent cannot see elapsed time; notification turns were treated as acknowledgments, not
+supervision checkpoints; the rule was hard to find in a dense paragraph; a literal
+five-minute rule over days invites quietly dropping it.
+
+### Startup check cost
+
+The reported ~73k tokens and 86 s before the first real reply covered only the
+first conversation, including one-time generated first-use setup and its required
+native I/O manuals (~38 KB, ~42% of the reported machinery bytes) plus ~71 KB of
+project documents read regardless. No post-setup conversation was measured. The
+check ran three times in the first seven minutes (cause unknown), never after two
+compactions. Triage here (one macOS host, warm cache): the command took 0.27–0.33 s
+over three runs and printed ~1.6 KB (~340 tokens; output is capped at 4 KB). Its
+`bytes_read` number counts bytes hashed internally (68,544 here; 152,603 in the
+field) that never enter context. Prose read for the check is ≈10.6 KB (≈2.1k tokens):
+OPERATIONS' installation-evidence section ~7.7 KB plus START/DIRECTOR badge prose
+~2.9 KB; ~3.2 KB of its receipt/hook/backend-format detail is unused on a clean pass.
+Moving the check off per-conversation would save ≈2.4k tokens (≈3% of 73k) and one
+or two tool round trips. START loads only OPERATIONS' installation-evidence section;
+an agent reading all of OPERATIONS (~14.8 KB here; the field reported 16 KB) spends
+≈4k tokens on check prose instead, still small. Token figures are proxy counts, not
+host billing. Triage reported 53 existing startup/first-use tests passing; none pins
+the trigger prose.
+
+### Dated host fact — November 7, 2026
+
+Reported by the adopting project, not re-verified here: Claude Code builds 2.1.289,
+2.1.309 and 2.1.317 refuse a delegated agent's Write of a Markdown file whose basename
+begins with REPORT, SUMMARY, FINDINGS or ANALYSIS (any case), before permissions,
+asking for the content as text. The main conversation is unaffected and other
+filenames wrote normally; the edit tool, other hosts and later builds were not
+checked. Six reviewers hit it because their brief named outputs `FINDINGS_*`; each
+returned full text without a workaround, the Director saved each, and readback caught
+one misplaced extraction. Nothing was lost. This is dated evidence, not guidance.
+
+**Later November 7, verified in this repository's host:** all three installed builds
+(2.1.289, 2.1.309, 2.1.317) contain the same Write-tool check, with the four-prefix
+Markdown filename pattern, the refusal message and a tracking event together. No hook
+or settings file here or in the adopting project contains the message. A live probe
+from a delegated agent was refused for `FINDINGS_probe.md` and `report_probe.md` and
+wrote `NOTES_probe.md` and `FINDINGS_probe.txt` normally. The edit tool and other
+hosts remain unchecked. Public corroboration: an issue in the host's public tracker
+(https://github.com/anthropics/claude-code/issues/44657, opened April 2026, still open
+on November 7) reports the same refusal with no documented opt-out; the host's main
+docs and the changelog entries checked do not describe it.
+
+### Pending scenarios
+
+| Scenario | Required actual behavioral observation | Status |
+|---|---|---|
+| SitRep field lapse | Three or more intervals of notification-driven held work with one deliberately stalled stream: the first turn after each interval carries a labeled SitRep naming the stalled stream and what waits on the user; a run of "nothing new" turns spanning a due interval without a SitRep fails. A user returning after hours without turns gets a prompt report that claims none in between. | Pending |
+| Sparse unchanged turns | Notification turns more than an interval apart with nothing changed each carry at most a labeled one-line-per-stream SitRep; a full block on consecutive unchanged turns fails. | Pending |
+| Compaction/resume | After a compaction or session resume with a SitRep overdue or its time unknown, one prompt report, then the next timed from it — not one per turn. A notification wake-up is not a resume. | Pending |
+| SitRep without noise | Several exchanges and returns inside one interval get direct answers and at most one full SitRep; no held work gets none. No time source: one statement that timing is unavailable, then a SitRep only at a user message or held-stream change; a SitRep on an unchanged notification turn fails. A differently ordered report with full coverage passes; one hiding a ❓ or 🖐️ item fails. | Pending |
+| Informative update | An informative ordinary update or a notification reply does not reset the clock; the report arrives unasked. | Pending |
+| First-reply check | Unhinted greeting → reads → check → 🎬, with time and tokens measured before and after any change; one edited DIRECTOR byte gives a specific gap and no 🎬; a source checkout, worker or scoped child gets no check or badge. | Pending |
+| Generated reuse and compaction | Pristine generated project → ensure → check → 🎬; a second conversation reuses its identity; badge behavior after compaction is recorded. After any prose split, a blocked check still reaches the diagnosis text. | Pending |
+| Refused report-named write | On that host, a brief naming a `FINDINGS_` file gets the full content plus the refusal, with no workaround; the owner saves it verbatim and reads back; a `NOTES_` name writes normally. Another host gets no avoidance rule. | Pending |
+
+**Limits:** one host, one adopting project and, for startup cost, one first
+conversation including setup. Field figures come from the adopting project, not
+re-verified here except the host fact verified above; causes are hypotheses. Static
+tests prove wording and reachability only; a prose split would not show agents still
+run the check or cut the 86 s.
+
+**Later November 7 — SitRep change approved:** the maintainer approved the SitRep
+change. Starter DIRECTOR now carries the reviewed paragraph verbatim, and a static
+package test pins its key phrases; both establish wording and reachability only. The
+maintainer kept the startup-check and write-refusal dispositions (decided: no pattern
+change); the startup trigger-prose test remains proposed only, and the v1 engine mirror
+is not applied. Every live scenario above remains pending.
+
+**Executed static checks, November 7:** from the repository root,
+`PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests`
+passed **221 tests**; `development.tests.test_package` passed 24 and
+`development.tests.test_behavior_parity` passed 18; `git diff --check` passed. These
+are wording and package checks only.
