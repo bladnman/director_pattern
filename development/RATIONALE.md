@@ -690,6 +690,37 @@ copying of authoring material, or unintended publication of private evidence.
 
 ## R9 — Make attention and active supervision visible without decoration
 
+**November 9 — the video template reads its large docs at task time, not as startup
+guards (template-local; decided and staged):** For the My Work video template only,
+the three large video docs (`docs/DIRECTOR.md`, `docs/PROCESS.md`,
+`docs/CHANNEL.md`), `.team/TEAM.md` and the setup `TEMPLATE.md` leave the ordinary
+check's selected guards and the first-use guards. The template's Director startup
+supplement, `.team/roles/director-startup.md`, makes TEAM, docs/DIRECTOR and PROCESS
+complete reads before capture, intake, staffing, dispatch or any delivery step,
+including render and upload; CHANNEL before intake, briefing or judging creative
+work; and TEMPLATE at first use. It requires them again after compaction. A reply
+may come before those reads; acting may not. In the field, a working video
+project's greeting needed about 113 KB of required reads, and on a one-line note a
+Director skipped the large guard docs and gave no 🎬 for the rest of the
+conversation without naming the gap. The staged greeting reads about 47 KB, against
+117.5 KB for the same bytes under the old route.
+
+The November 2 rule above is unchanged for the guards that remain (the video
+adapter, the startup supplement and PROJECT): they are read completely, their
+snapshots are reported rather than blocking, and an unresolved conflict still
+prevents the badge. The tradeoff is that the moved docs get no per-conversation
+snapshot or badge-time conflict evaluation; their conflict review moves to the
+template's re-stage and the video system's own approved merge. The November 7
+deferral of splitting the starter OPERATIONS section stays in force; this changes
+one template's guard selection, not the starter. The binding change, the full
+oracle and the unknowns are recorded under
+[R16](#r16--separate-replaceable-engine-from-project-owned-integration). Concrete
+cases for this decision: an unhinted greeting reads only the first-reply set, runs
+the check and shows 🎬; a render task reads PROCESS and docs/DIRECTOR before acting;
+after compaction, a production task re-reads them before dispatch. The last case
+has not been tested live. **Open, acceptance-blocking:** nothing yet checks an
+unbound doc that contradicts Director authority.
+
 **November 7 — SitRep due check and suggested shape:** recorded under
 [R17](#r17--keep-delegated-work-supervised-and-recover-the-users-whole-request); its
 suggested **Waiting on you** part keeps ❓ questions and 🖐️ user-only actions visible,
@@ -2003,6 +2034,25 @@ claimed; running chats can retain earlier loaded instructions.
 
 ## R14 — Commit the installation with the project
 
+**November 9 — the video template's local-only privacy choice:** The My Work video
+template keeps requests, walks, journal and team activity out of Git for every
+generated video project, through a root ignore block that first use verifies. The
+October 21 decision below makes keeping more local a project's explicit later choice;
+here the template makes it at first use. The November 8 installation plan accepted
+that, and it is recorded as the template's dated choice, not a change to the
+starter's tracked default. The tradeoff is the continuity this decision protects:
+those records do not reach a clone or another machine. A generated project that wants
+them tracked changes its own recorded choice, and updates preserve whichever choice
+is recorded. With no remote, nothing is pushed, so the one-time warning is not yet
+due. When a remote is added, the warning becomes due unless the remote is verified
+private, and it is recorded as due rather than delivered until it is actually given
+(later November 4). The examined project captured sources while its receipt said the
+warning had not been given; it has no remote. **Oracle:** first use verifies the
+ignore block and records no delivered warning; after a public or unknown remote is
+added, the warning is given once before the next capture. **Status:** decided and
+recorded; the template already carries the ignore block, so no runtime text changes.
+The remote case has not been observed.
+
 **Later November 4 — generation evidence is local handoff, not shared identity:**
 The opt-in generator's fresh instance marker records creation/provenance only;
 generic seeds contain neither that marker nor initialized config, records or receipt.
@@ -2178,6 +2228,59 @@ Actual host routing and absence of false saved-state claims remain behavioral
 checks, separate from fixture/schema guarantees.
 
 ## R16 — Separate replaceable engine from project-owned integration
+
+**November 9 — template-local narrowing of the video template's binding (decided
+and staged, not yet applied or verified live):** For the My Work video template only,
+the three large video docs (`docs/DIRECTOR.md`, `docs/PROCESS.md`,
+`docs/CHANNEL.md`) become unbound managed files: its provenance binds 57 files
+instead of 60. They, `.team/TEAM.md` and `TEMPLATE.md` also leave the startup and
+first-use guards, becoming complete task-time reads named in
+`.team/roles/director-startup.md`, as recorded under
+[R9](#r9--make-attention-and-active-supervision-visible-without-decoration). A reply
+may come first; capture, dispatch and every delivery step, including render and
+upload, wait for those reads, and compaction requires them again.
+
+**Why:** In the field the greeting cost about 113 KB of required reads, and a
+Director skipped the guard docs and the badge on a one-line note. The template's
+bindings had also drifted: 7 of its 60 bound files no longer matched, so the next
+generated project would probably fail setup, and a stand-in handoff on a scratch
+copy of the current template did refuse. A repair that kept the docs bound would
+break again at the next docs publish, since a video doc changed again on November 8,
+after the drift.
+The un-pinning therefore ships with the repair.
+
+**What stays:** R16's later November 4 bindings that first use needs: the AGENTS hook
+file, the remaining guards, the tracker contract (`.team/RECORDS.md`,
+`.program/README.md`), the five exact empty placeholders (the empty-seed rule) and
+the reviewed journal and team seeds. Generation is still bound by the reviewed
+managed hashes, not by current drift. The shared first-use helper and the checker
+are unchanged; this narrows one template's binding, not the starter or the helper.
+R9's November 2 rule is unchanged for the remaining guards.
+
+**Regression oracle:** On scratch copies of the template, the stage plan is clean; a
+generated project completes first use and its check passes, and a second run reports
+existing setup; one changed byte in `.director/DIRECTOR.md`, or inside the AGENTS
+block, refuses at the handoff, at first use and in the stage plan; an edited video
+doc no longer blocks first use or the stage plan; a filled request file or an extra
+journal file still refuses, and no bundled store is created; and the greeting's
+required reads fall to about 47 KB from 117.5 KB for the same bytes under the old
+route. One cold read reached the private-upload rule through PROCESS and
+docs/DIRECTOR before acting on "render and upload". These checks first ran against
+a provisional pin; after the pin moved to the published 3.2 starter they were
+repeated with real exit codes and passed, and an independent reviewer confirmed
+the re-pin. The cold read was not repeated: its files are byte-identical.
+
+**Unknowns, acceptance-blocking:** nothing yet checks an unbound doc that contradicts
+Director authority; re-reading after compaction is not tested live; the real
+generator handoff was not run (a stand-in mirrored it); and the greeting and render
+reads were observed in one cold read only. The video system's publish also still
+carries two bound stencil-owned files (AGENTS.md and the startup supplement) and
+would restore older bytes until its publish route changes.
+
+**Status:** decided in the November 8 installation plan and staged through the
+template's staging route; not yet applied to the live template or verified live.
+The independent review of the staged revision requires this entry before the
+template is applied, and applying it needs the maintainer's yes.
 
 **Later November 4 — retain a semantically empty video seed:** The real generic
 video template has five zero-byte `.gitkeep` placeholders in canonical requests/
