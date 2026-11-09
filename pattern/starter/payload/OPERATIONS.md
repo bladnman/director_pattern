@@ -45,7 +45,8 @@ inspection is distinct from canonical request/source/history I/O; it does not
 activate TOOLING/RECORDS, learning or a new persistence step. Those protocols remain
 mandatory before their actual operations. Hold this check's output in active
 context; record it later only at an ordinary authorized checkpoint. Reuse unchanged
-current-conversation facts; relevant changed startup bytes require recheck.
+current-conversation facts; relevant changed startup bytes require recheck, and so do
+facts from before a compaction or session resume.
 
 A mature project supplies its exact reviewed command, for example:
 

@@ -1892,3 +1892,42 @@ cannot make an agent choose the project route over an outside patch; only the
 rollout scenario above shows that. Installed copies keep their adopted text until
 updated. **Open gap:** the v1 engine's UPDATES, INSTALL-v1 and README-v1 still allow
 outside or non-Director updates and are unchanged in 3.1.
+
+## Compaction re-entry — November 9, 2026
+
+These checks cover the [R10 decision](RATIONALE.md#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes)
+to repeat startup after every compaction or session resume, and the
+[matrix row](BEHAVIOR_PARITY.md#compaction-re-entry--november-9-2026) that stores its
+intent. The failure is the maintainer's observation; the November 7 compaction
+figures quoted in R10 come from that investigation and were not re-run here.
+**All behavioral observations remain pending.**
+
+| Scenario | Required actual behavioral observation | Status |
+|---|---|---|
+| Director after compaction | After a forced compaction, the next reply follows a fresh read of START and the selected role package, visible in the transcript after the summary; any 🎬 follows a fresh check. A reply relying on the summary's statement that the files were read fails. | Pending |
+| Worker or scoped child Director after compaction | It re-reads its own package, keeps its role, runs no Project Director check and shows no 🎬. | Pending |
+| Session resume | A resumed session behaves the same way as a compacted one in both cases above. | Pending |
+| Installed project | A project installed before 3.2 gets the sentence and the foundation clauses only when it runs its own update; until then its 3.1 block still passes the checker under the retained marker. | Pending (the checker half is a static test) |
+| CLAUDE.md layout after update | In an updated project CLAUDE.md is exactly `@AGENTS.md`, AGENTS.md holds one marked block, CLAUDE.md's earlier non-Director content is in AGENTS.md, and the startup check passes; the host expands the import. | Pending (the checker pass is a static test) |
+| Host without import expansion | The update keeps the role default and bounded-subagent request in CLAUDE.md and reports the gap; content of unclear ownership or for only one host is reported, not moved; each changed startup file is backed up and verified. | Pending |
+
+**Executed static checks, November 9:** `development/tests/test_package.py` pins the
+bridge sentence, its placement after the role and check routing, its presence in this
+checkout's guarded AGENTS branch, the retained `director-starter:2` marker, the
+four foundation reuse clauses (DIRECTOR, START, WORKER, OPERATIONS) and manifest
+revision 3.2, plus the starter UPDATES sentences that keep the Director text in
+AGENTS.md (or the selected hook source), make CLAUDE.md only import it on a host that
+expands imports, keep the request in CLAUDE.md and report the gap otherwise, back up
+each changed startup file and report rather than move unclear content (the v1 engine
+guide keeps its November 1 wording);
+`development/tests/test_flat_starter.py` checks that the installer's report and
+receipt record 3.2; `development/tests/test_startup_check.py` checks that the checker
+accepts both the 3.1 block and the 3.2 block under the same marker, and a CLAUDE.md
+that is exactly `@AGENTS.md` with or without `--guard CLAUDE.md`, all without writes.
+From the repository root,
+`PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests`
+passed **230 tests**. This checkout's own read-only startup check still reported
+`evidence_matched` with marker `director-starter:2` after the AGENTS edit. These
+establish wording, placement and checker compatibility only. The live
+post-compaction and resume cases above have not run, host import expansion was not
+observed, and no installed project has taken 3.2.

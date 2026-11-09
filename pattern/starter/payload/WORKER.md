@@ -19,9 +19,10 @@ No per-step approval ritual or routine acknowledgment/draft-progress exchange is
 needed unless authority, steering or recovery requires it.
 
 Read the complete applicable task instructions and matching accepted knowledge
-before action; reuse unchanged retained instructions. Recover incomplete reads.
-If the assignment blocks required startup or knowledge reads, return that conflict
-to the assigner before affected task work.
+before action; reuse unchanged retained instructions. A compaction summary does not
+retain them; after compaction or session resume, read them again. Recover incomplete
+reads. If the assignment blocks required startup or knowledge reads, return that
+conflict to the assigner before affected task work.
 Report meaningful evidence/corrections in your ordinary result so the owner can
 capture them without another actor. Use direct state operations only if assigned
 and permitted by the canonical tracker policy. Do not independently change scope,

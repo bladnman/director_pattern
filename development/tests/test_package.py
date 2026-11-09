@@ -175,6 +175,43 @@ class PackageBoundaryTests(unittest.TestCase):
         self.assertNotIn("no mandatory", text)
         self.assertIn("Workers, delegate useful independent subsets within your assigned scope", text)
 
+    def test_flat_bridge_repeats_startup_after_compaction_or_resume(self):
+        # Standing-text wiring only (November 9); it cannot prove an agent re-reads after compaction.
+        reentry = ("After every compaction or session resume, repeat this startup before your next reply. "
+                   "Read the files again; a summary that mentions them is not a substitute.")
+        tree = ast.parse((PATTERN / "starter/install.py").read_text())
+        bridge = next(ast.literal_eval(node.value) for node in tree.body
+                      if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == "BRIDGE" for t in node.targets))
+        authoring = (PATTERN.parent / "AGENTS.md").read_text(encoding="utf-8")
+        present = authoring.split("When `.director/START.md` exists in this checkout:", 1)[1].split("\nOtherwise:\n", 1)[0]
+        for label, block in (("installed bridge", bridge), ("source checkout branch", present)):
+            with self.subTest(block=label):
+                text = " ".join(block.split())
+                self.assertEqual(text.count(reentry), 1)
+                # Placed after the role/check routing and before the delegation request.
+                self.assertIn("that Project Director check. Preserve project/host authority. " + reentry +
+                              " Directors, delegate project investigations", text)
+        # The marker is the retained bridge interface; wording changes keep it.
+        self.assertTrue(bridge.startswith("<!-- director-starter:2 -->\n"))
+        self.assertTrue(bridge.endswith("<!-- /director-starter:2 -->\n"))
+
+    def test_flat_reuse_rules_do_not_survive_compaction_or_resume(self):
+        # Wording only (November 9): reuse rules cannot excuse skipping the re-read or re-check.
+        payload = PATTERN / "starter/payload"
+        read = lambda name: " ".join((payload / name).read_text(encoding="utf-8").split())
+        director, start, operations, worker = (read(name) for name in
+                                               ("DIRECTOR.md", "START.md", "OPERATIONS.md", "WORKER.md"))
+        self.assertIn("Reuse unchanged current-conversation evidence; evidence from before a compaction or "
+                      "session resume is stale. If missing or stale, run the currently possible check before replying",
+                      director)
+        self.assertNotIn("Reuse unchanged current-conversation evidence; if missing or stale", director)
+        self.assertIn("reuse unchanged retained instructions. A compaction summary does not retain them; "
+                      "after compaction or session resume, read them again.", start)
+        self.assertIn("Reuse unchanged current-conversation facts; relevant changed startup bytes require recheck, "
+                      "and so do facts from before a compaction or session resume.", operations)
+        self.assertIn("reuse unchanged retained instructions. A compaction summary does not retain them; "
+                      "after compaction or session resume, read them again. Recover incomplete reads.", worker)
+
     def test_flat_roles_preserve_delegation_fallback_and_bounded_worker_default(self):
         director = " ".join((PATTERN / "starter/payload/DIRECTOR.md").read_text().split())
         worker = " ".join((PATTERN / "starter/payload/WORKER.md").read_text().split())
@@ -296,7 +333,7 @@ class PackageBoundaryTests(unittest.TestCase):
     def test_starter_manifest_records_revision_and_format_number(self):
         # Static manifest check only; the installer's receipt is checked in test_flat_starter.
         manifest = json.loads((PATTERN / "starter/manifest.json").read_text(encoding="utf-8"))
-        self.assertEqual(manifest["starter_revision"], "3.1")
+        self.assertEqual(manifest["starter_revision"], "3.2")
         self.assertEqual(manifest["starter_version"], 3)
 
     def test_updates_run_through_each_projects_own_director(self):
@@ -409,10 +446,31 @@ class PackageBoundaryTests(unittest.TestCase):
             with self.subTest(name=name):
                 update = " ".join((PATTERN / name).read_text(encoding="utf-8").split())
                 self.assertRegex(update, r"incoming startup hook changes.*existing host-loaded entrypoint")
-                self.assertRegex(update, r"Back up and verify the startup file.*compare.*prior and incoming hook")
+                self.assertRegex(update, r"Back up and verify (the|each) startup file.*compare.*prior and incoming hook")
                 self.assertRegex(update, r"Preserve all unrelated bytes and project-specific instructions.*Do not append a duplicate hook")
                 self.assertRegex(update, r"ambiguous, retain the original and report the incomplete integration")
-                self.assertIn("keep the role default and explicit request for bounded subagents in the actual host entrypoint (AGENTS.md or CLAUDE.md) as well", update)
+        # The legacy v1 guide keeps its November 1 wording; starter 3.2 replaces it below.
+        legacy = " ".join((PATTERN / "engine/references/UPDATES.md").read_text(encoding="utf-8").split())
+        self.assertIn("keep the role default and explicit request for bounded subagents in the actual host entrypoint (AGENTS.md or CLAUDE.md) as well", legacy)
+
+    def test_starter_updates_keep_director_text_in_agents_and_claude_only_imports_it(self):
+        # Wording only (November 9); no downstream project update is exercised here.
+        update = " ".join((PATTERN / "starter/payload/UPDATES.md").read_text(encoding="utf-8").split())
+        self.assertIn("Keep the role default, the explicit request for bounded subagents and the marked block in "
+                      "AGENTS.md, or in the hook source the project's check selects, even when other rules live in a "
+                      "shared file. When the host loads CLAUDE.md and expands its imports into loaded text, make "
+                      "CLAUDE.md only import AGENTS.md (for example `@AGENTS.md`) and move its other content into "
+                      "AGENTS.md; never keep a second copy of the Director paragraph in CLAUDE.md. Where the host does "
+                      "not expand imports, keep the role default and the bounded-subagent request in CLAUDE.md and "
+                      "report that gap.", update)
+        self.assertIn("Back up and verify each startup file the update changes, both AGENTS.md and CLAUDE.md, "
+                      "compare the identifiable marked block", update)
+        self.assertIn("Report, rather than move, content whose ownership is unclear or that applies to only one host.",
+                      update)
+        self.assertNotIn("(AGENTS.md or CLAUDE.md) as well", update)
+        # Guarding CLAUDE.md in a check stays a supported example; it writes no Director text.
+        operations = (PATTERN / "starter/payload/OPERATIONS.md").read_text(encoding="utf-8")
+        self.assertIn("--guard CLAUDE.md", operations)
 
     def test_project_owned_index_and_selected_definitions_are_reachable_in_isolated_payload(self):
         # Installation fixture: target context is generated, never upstream payload.

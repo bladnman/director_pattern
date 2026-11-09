@@ -13,7 +13,7 @@ reviewed instruction/adapter integration, not a fresh installer or second ledger
 The [design-obligation matrix](https://github.com/bladnman/director_pattern/blob/main/development/BEHAVIOR_PARITY.md) explains the
 old reasons, revised routes, evidence and remaining verification limits.
 
-The manifest's `starter_revision` (now 3.1) is a readable revision number bumped with
+The manifest's `starter_revision` (now 3.2) is a readable revision number bumped with
 each published payload change; `starter_version` stays the install-format number.
 
 ## Install beside ordinary notes and assets
@@ -81,9 +81,11 @@ This local check does not prove native-host behavior or broader acceptance.
 Mature projects bind the exact receipt/config/selected guards under OPERATIONS;
 lean/manual routes use their authoritative known contract, not invented JSON state.
 
-The small bridge loads START and the exact selected Director/Worker package fully;
+The small bridge loads START and the exact selected Director/Worker package fully,
+and again after every compaction or session resume (a summary is not a re-read);
 selected project guards and task/action instructions remain binding before action.
-The marker `director-starter:2` is the retained bridge interface, not a state version.
+The marker `director-starter:2` is the retained bridge interface, not a state version;
+bridge wording can change between revisions under the same marker.
 Actors have fitting **emoji Name** labels plus actual handles, without identityfiles.
 While delegated work is held, proactive **📋 SitRep** runs about five minutes from
 actual dispatch, independently of short host progress updates; no offline wakeup.

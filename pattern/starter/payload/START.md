@@ -61,5 +61,7 @@ hashes; it is not canonical request/source/history I/O and needs no tracker manu
 or new checkpoint write. Actual native I/O, including first-use setup, retains its
 complete required protocols.
 Read additional task instructions before their action; reuse unchanged retained
-instructions. Runtime helper and [learning](LEARNING.md) guides are action references,
-not additional startup reads. Installer/source documentation is not startup.
+instructions. A compaction summary does not retain them; after compaction or
+session resume, read them again. Runtime helper and [learning](LEARNING.md) guides
+are action references, not additional startup reads. Installer/source documentation
+is not startup.

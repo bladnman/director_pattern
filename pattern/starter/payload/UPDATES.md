@@ -261,16 +261,24 @@ receipt into a seed. Generated projects perform their own first-use initializati
 When the incoming startup hook changes, integrate its applicable change into the
 existing host-loaded entrypoint as a reviewed project-owned adaptation; replacing
 the engine alone cannot update that hook.
-For rules kept in a shared file, keep the role default and explicit request for bounded
-subagents in the actual host entrypoint (AGENTS.md or CLAUDE.md) as well.
-Back up and verify the startup file,
-compare its identifiable marked block and local adaptations with the prior and
-incoming hook, and merge only the needed change. Preserve all unrelated bytes and
-project-specific instructions, including customizations inside the block. Do not
-append a duplicate hook. If the block or applicable authority is ambiguous, retain
-the original and report the incomplete integration for review. Verify the actual
-loaded route and select affected startup checks below; record the resulting hook
-and backup in the receipt rather than treating engine replacement as adoption.
+Keep the role default, the explicit request for bounded subagents and the marked
+block in AGENTS.md, or in the hook source the project's check selects, even when
+other rules live in a shared file. When the host loads CLAUDE.md and expands its
+imports into loaded text, make CLAUDE.md only import AGENTS.md (for example
+`@AGENTS.md`) and move its other content into AGENTS.md; never keep a second copy
+of the Director paragraph in CLAUDE.md. Where the host does not expand imports,
+keep the role default and the bounded-subagent request in CLAUDE.md and report
+that gap.
+Back up and verify each startup file the update changes, both AGENTS.md and
+CLAUDE.md, compare the identifiable marked block and local adaptations with the
+prior and incoming hook, and merge only the needed change. Report, rather than
+move, content whose ownership is unclear or that applies to only one host.
+Preserve all unrelated bytes and project-specific instructions, including
+customizations inside the block. Do not append a duplicate hook. If the block or
+applicable authority is ambiguous, retain the original and report the incomplete
+integration for review. Verify the actual loaded route and select affected startup
+checks below; record the resulting hook and backup in the receipt rather than
+treating engine replacement as adoption.
 
 Inspect helper/config/store schema compatibility before replacing a bundled helper.
 An incompatible or uncertain schema blocks that part of the update; preserve the

@@ -75,6 +75,40 @@ class StartupCheckTests(unittest.TestCase):
                 self.assertEqual(self.snapshots(r)['AGENTS.md'],'unchanged')
                 self.assertEqual(before,self.tree())
 
+    def test_previous_revision_bridge_under_the_retained_marker_still_passes(self):
+        # Revision 3.2 added the re-entry sentence without changing the marker, so a
+        # project still carrying the 3.1 block keeps a valid route until it updates.
+        reentry=('After every compaction or session resume, repeat this startup before your next\n'
+                 'reply. Read the files again; a summary that mentions them is not a substitute.\n')
+        self.assertEqual(installer.BRIDGE.count(reentry),1)
+        previous=installer.BRIDGE.replace(reentry,'')
+        agents=self.project/'AGENTS.md'
+        for label,text in (('previous revision',previous),('current revision',installer.BRIDGE)):
+            with self.subTest(bridge=label):
+                agents.write_text(text)
+                before=self.tree();r=self.run_check()
+                self.assertEqual(r['status'],'evidence_matched')
+                self.assertEqual(r['startup_hook']['marker'],'director-starter:2')
+                self.assertEqual(r['startup_hook']['target'],'.director/START.md')
+                self.assertEqual(self.snapshots(r)['AGENTS.md'],'changed' if label=='previous revision' else 'unchanged')
+                self.assertEqual(before,self.tree())
+
+    def test_claude_entrypoint_that_only_imports_agents_passes_with_one_marked_block(self):
+        # November 9 update layout: CLAUDE.md is exactly the import, AGENTS.md holds the only block.
+        claude=self.project/'CLAUDE.md';claude.write_text('@AGENTS.md\n')
+        agents=(self.project/'AGENTS.md').read_text()
+        self.assertEqual(agents.count('<!-- director-starter:2 -->'),1)
+        self.assertNotIn('director-starter',claude.read_text())
+        before=self.tree()
+        for args in ((),('--guard','CLAUDE.md')):
+            with self.subTest(args=args):
+                r=self.run_check(*args)
+                self.assertEqual(r['status'],'evidence_matched')
+                self.assertEqual(r['startup_hook']['path'],'AGENTS.md')
+                self.assertEqual(r['startup_hook']['marker'],'director-starter:2')
+        self.assertEqual(self.snapshots(r),{'AGENTS.md':'unchanged','CLAUDE.md':'not_recorded'})
+        self.assertEqual(before,self.tree())
+
     def test_local_entrypoint_can_be_read_without_a_historical_whole_file_snapshot(self):
         receipt=self.receipt()
         for name in ('managed','managed_files'):

@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated November 7, 2026. This repository authors a
+Living design rationale · updated November 9, 2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -1008,6 +1008,71 @@ and late-report protection diverge across owners.
 
 ## R10 — Assign roles explicitly; preserve project ownership across entry routes
 
+**November 9 — repeat startup after every compaction or session resume:** The
+maintainer observed that after compaction the host reloads AGENTS.md, but the agent
+does not re-read the files its block points to, `.director/START.md` and the
+selected role package. The Director habits those files carry then stop: the startup
+check, 🎬, delegation and SitReps. A November 7 investigation of Director sessions
+across compactions found the same shape: in 21 compactions across 9 Director
+sessions in 7 projects, none was followed by a complete re-read of START, the role
+package and OPERATIONS (its figures, not re-run here). The host re-injected the
+standing instruction file but not the files read through it, and the summary said
+those files had been read while carrying none of their rules. The block's only
+trigger was "before the first ordinary reply in each conversation", and a compacted
+session is still the same conversation, so no standing text asked for a re-read. The
+flat starter had also dropped v1's reload of no-longer-retained instructions without
+a recorded decision. Why each host restores what it restores is a hypothesis.
+
+**Decided and implemented:** At the maintainer's request for one simple sentence in
+the instruction file, the [installer's bridge](../pattern/starter/install.py) and
+this checkout's guarded AGENTS branch now say, right after the role and check
+routing: "After every compaction or session resume, repeat this startup before your
+next reply. Read the files again; a summary that mentions them is not a substitute."
+"This startup" is the block's own: complete reads of START and the selected package,
+and for the Project Director the bounded local check before 🎬. Workers and scoped
+child Directors re-read their own package and still skip that check. The November 7
+investigation proposed a larger stopgap for the block: an end-marker re-entry
+paragraph, summary steering, and explicit-settings and capture-and-split sentences.
+This sentence is its first piece only.
+
+After independent review, the same decision removes four readings of the
+foundations' reuse rules that could excuse skipping the re-read or the re-check:
+[DIRECTOR](../pattern/starter/payload/DIRECTOR.md) now says current-conversation
+evidence from before a compaction or session resume is stale;
+[START](../pattern/starter/payload/START.md) and [WORKER](../pattern/starter/payload/WORKER.md)
+say a compaction summary does not retain instructions, so after compaction or session
+resume they are read again; and [OPERATIONS](../pattern/starter/payload/OPERATIONS.md)
+says facts from before a compaction or session resume require recheck, like changed
+startup bytes. The marker
+stays `director-starter:2`, the retained bridge interface that the checker and update
+merges recognize; earlier wording changes kept it, and the checker accepts the
+previous and the new wording under it. The starter revision is now 3.2. Projects
+already installed get the sentence and the clauses only when each one runs its own
+update through its own Director ([R11](#r11--update-from-a-pinned-public-source-without-replacing-project-state)).
+
+**Not done here:** no end-of-file marker or mechanical re-entry test, no summary-steering,
+explicit-settings or capture-and-split sentence, no host hook or adapter, and no change
+to the checker. Nothing proves that a re-read happened; the text asks for one, and an
+agent can still carry on from the summary.
+
+**Why/tradeoff:** Standing text is what survives compaction, so the trigger has to
+live there. One sentence keeps the block small and leaves the pinned delegation
+sentence verbatim; the foundation clauses stop a re-read file from undoing it. The
+cost is a full startup re-read after each compaction or resume (and one bounded check
+for the Project Director), including a resume whose transcript still holds the files.
+
+**Regression cases:** In a Director session, force a compaction. The next reply comes
+after a fresh read of START and the selected role package, visible in the transcript
+as returned reads after the summary, and any 🎬 follows a fresh check. A reply that
+relies on the summary's statement that the files were read fails. A compacted worker
+or scoped child Director re-reads its own package, keeps its role, runs no Project
+Director check and shows no 🎬. A session resume behaves the same way as compaction
+in each case. **Status:** static tests pin the sentence, its placement,
+source/installed parity, the four foundation clauses and the checker's acceptance of
+the previous and current block; the live cases are pending
+([matrix](BEHAVIOR_PARITY.md#compaction-re-entry--november-9-2026),
+[validation](DESIGN_NOTES.md#compaction-re-entry--november-9-2026)).
+
 **Later November 4 — selected first-use writes retain their full prerequisites:**
 [R9's generated-instance operation](#r9--make-attention-and-active-supervision-visible-without-decoration)
 is a real setup action before the first check, so it loads FIRST_USE plus complete
@@ -1071,6 +1136,42 @@ copy the whole role foundation into each router. The oracle inspects the literal
 host-loaded entrypoint in every affected target, not just its referenced document.
 This repairs an integration route; it does not prove native behavior or resolve
 unrelated models' observed instruction-following failures.
+
+**November 9 — one Director paragraph, in AGENTS.md; CLAUDE.md only imports it:**
+The maintainer asked that projects use AGENTS.md rather than CLAUDE.md for Director
+text: move everything in CLAUDE.md into AGENTS.md and reconcile it there. Several
+installations carried the Director paragraph in both files. The likely cause, an
+inference from the wording rather than a traced update, was the starter update
+guide's wording of the decision above, which told updaters to keep the role default
+in "the actual host entrypoint (AGENTS.md or CLAUDE.md) as well". Two copies can
+drift apart, and an update merges only the one marked block it finds. Starter
+[UPDATES](../pattern/starter/payload/UPDATES.md) now keeps the role default, the
+explicit bounded-subagent request and the marked block in AGENTS.md, or in the hook
+source the project's check selects, even when other rules live in a shared file.
+When the host loads CLAUDE.md and expands its imports into loaded text, CLAUDE.md
+only imports AGENTS.md (for example `@AGENTS.md`), its other content moves into
+AGENTS.md, and no second copy of the Director paragraph stays in CLAUDE.md. After
+independent review, two guards were added: where the host does not expand imports,
+the role default and bounded-subagent request stay in CLAUDE.md and the gap is
+reported; and the update backs up and verifies each startup file it changes, both
+AGENTS.md and CLAUDE.md, reporting rather than moving content whose ownership is
+unclear or that applies to only one host.
+
+This keeps the November 1 mechanism. An import is literally loaded: the host
+inserts the imported text into the loaded instructions, so AGENTS.md imported by
+CLAUDE.md is still host-loaded entrypoint text, not a reference the agent must
+choose to follow. The November 1 failure was a pointer to another file; its oracle,
+that the literal loaded entrypoint carries the role default and request, still holds
+without the duplicate. The route relies on the host expanding the import, which is
+why a non-expanding host keeps the request in CLAUDE.md. The checker's default hook
+source is already AGENTS.md, so no checker change follows. The legacy v1 engine's
+update guide keeps the old wording, so a v1 update can still recreate the duplicate;
+it is not part of this starter revision. Projects already installed reconcile only when each runs its own
+update. **Regression case:** in an updated project, CLAUDE.md is exactly
+`@AGENTS.md`, AGENTS.md holds one marked block, CLAUDE.md's earlier non-Director
+content is in AGENTS.md, and the startup check passes. **Status:** starter 3.2
+wording; static tests pin the sentence and the checker's pass on that layout. No
+project has been updated, and host import expansion was not observed here.
 
 **October 31, 2026 — partial supersession for the first Project Director reply:**
 The earlier plain-factual-question regression below excluded hash checks before an

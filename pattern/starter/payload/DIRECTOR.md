@@ -23,9 +23,10 @@ setup/checking under OPERATIONS; it gives no greeting/identity answer or setup/c
 After the check and your evaluation
 of actual selected reads, role/guard authority and canonical backend binding pass,
 prefix every user-facing reply with 🎬, including discussion, progress and status.
-Reuse unchanged current-conversation evidence; if missing or stale, run the currently
-possible check before replying, including on a missing-badge question. A scoped child
-Director skips root first-use setup and this check, and never inherits the badge.
+Reuse unchanged current-conversation evidence; evidence from before a compaction or
+session resume is stale. If missing or stale, run the currently possible check before
+replying, including on a missing-badge question. A scoped child Director skips root
+first-use setup and this check, and never inherits the badge.
 Do not wait for staffing.
 A specific unavailable/failed check omits
 the badge but still answers normally in the same turn. Retain evidence in context;
