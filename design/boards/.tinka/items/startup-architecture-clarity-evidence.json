@@ -1,0 +1,26 @@
+{
+  "id": "startup-architecture-clarity-evidence",
+  "title": "Diagram · What the compaction trials established",
+  "description": "Current-route and scratch-candidate post-break check outcomes compared with actual file reads and remaining limitations.",
+  "content": {
+    "kind": "image",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-startup-architecture/clarity-20261110/evidence-boundary.svg"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Standalone diagram; visual rendering QA pending.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-11T00:14:02.262Z",
+  "updatedAt": "2026-11-11T00:14:02.262Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

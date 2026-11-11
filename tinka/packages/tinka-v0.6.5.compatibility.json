@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "version": "0.6.5",
+  "fromVersions": [
+    "0.6.0",
+    "0.6.1",
+    "0.6.2",
+    "0.6.3",
+    "0.6.4"
+  ],
+  "runtime": {
+    "node": ">=22",
+    "platforms": [
+      "darwin",
+      "linux"
+    ]
+  },
+  "schemas": {
+    "config": [
+      1
+    ],
+    "workspace": [
+      1,
+      2
+    ]
+  },
+  "migration": "none",
+  "archiveSha256": "8a298b32fe2085a635a3e9f46b486d4f56216f66c5781c77b15e9b5f674411d7"
+}

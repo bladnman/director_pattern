@@ -1,0 +1,26 @@
+{
+  "id": "startup-architecture-slug-review",
+  "title": "Independent review of the slug proposal",
+  "description": "Independent review of the slug proposal against the owner's requirements. A review, not an acceptance.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-startup-architecture/slug-review.md"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Independent review recorded. Not an acceptance of the proposal.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-09T21:21:15.924Z",
+  "updatedAt": "2026-11-09T21:21:15.924Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

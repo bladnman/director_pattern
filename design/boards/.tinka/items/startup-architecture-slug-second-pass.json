@@ -1,0 +1,26 @@
+{
+  "id": "startup-architecture-slug-second-pass",
+  "title": "Second pass (independent)",
+  "description": "Independent second pass on the slug proposal. A review, not an acceptance; nothing published or decided.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-startup-architecture/second-pass.md"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Independent second pass recorded. Not an acceptance of the proposal.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-09T21:58:40.351Z",
+  "updatedAt": "2026-11-09T21:58:40.351Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

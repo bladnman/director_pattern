@@ -1,0 +1,27 @@
+{
+  "id": "installation-reads",
+  "title": "Diagram: what an agent reads, and when",
+  "description": "Kilobytes read per case in a generated video project, split into the starter, the template's Director add-ons, and the video docs, crew and records. Saying hi reads 113 KB before the first reply; a one-line note, a script request and a research worker are shown too. Below, the Director's reads in order as grouped steps. Video files are the largest share in every case.",
+  "content": {
+    "kind": "image",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-08-installation/reads.svg"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Reads diagram. Plan decided on the 2026-11-08 evening after independent review; one yes/no open with Matt.",
+    "updatedAt": 1794191815649
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-09T02:32:34.968Z",
+  "updatedAt": "2026-11-09T02:36:55.657Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "status": "review"
+}

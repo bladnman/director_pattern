@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" role="img" aria-labelledby="t d">
+<title id="t">Three persistence layers, today and proposed</title>
+<desc id="d">Standing text about 1 KB today against an AGENTS.md block with a 1,500-character limit; loaded reads about 43 KB today, discarded at compaction, against CORE, ROSTER and SESSION files with hard limits; reference material 212 KB today, against manuals the Director does not read. A dashed compaction line sits between the standing layer and the loaded layer.</desc>
+<style>
+:root{--surface:#ffffff;--ink:#1c2229;--muted:#5a6470;--line:#d6d0c4;--accent:#2f5fa8;--inherit:#b8492f;--chosen:#2c7a66;--neutral:#8a93a0;--warn-bg:#fbebe5;--ok-bg:#e4f2ec;--mid-bg:#f6efd9;--on-accent:#ffffff}
+@media (prefers-color-scheme: dark){:root{--surface:#1c2027;--ink:#e8eaee;--muted:#a3abb7;--line:#3a414c;--accent:#79a6f0;--inherit:#ec8569;--chosen:#5fc3a8;--neutral:#8c95a3;--warn-bg:#40261f;--ok-bg:#1c372f;--mid-bg:#3a331d;--on-accent:#10141a}}
+
+svg text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.d-bg{fill:var(--surface)}
+.d-ink{fill:var(--ink)}
+.d-muted{fill:var(--muted)}
+.d-axis{stroke:var(--muted)}
+.d-inh{fill:var(--inherit)}
+.d-inh-ring{fill:none;stroke:var(--inherit);stroke-width:2.5}
+.d-cho{fill:var(--chosen)}
+.d-neu{fill:var(--neutral)}
+.d-ctx{fill:var(--accent)}
+.d-ctx-soft{fill:var(--accent);fill-opacity:.2}
+.d-onctx{fill:var(--on-accent)}
+.d-cut{stroke:var(--inherit)}
+.d-num{fill:var(--ink)}
+.d-onnum{fill:var(--surface)}
+.d-box{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.d-okbox{fill:var(--ok-bg);stroke:var(--chosen);stroke-width:1.5}
+.d-midbox{fill:var(--mid-bg);stroke:var(--neutral);stroke-width:1.5}
+.d-warnbox{fill:var(--warn-bg);stroke:var(--inherit);stroke-width:2}
+.d-arrow{stroke:var(--accent)}
+.d-arrowhead{fill:var(--accent)}
+</style>
+<rect class="d-bg" x="0" y="0" width="1200" height="640" rx="18"/>
+<text class="d-ink" x="60" y="44" font-size="24" font-weight="700">Three persistence layers: what survives compaction</text>
+<text class="d-muted" x="60" y="70" font-size="15">Today against the proposal. Sizes come from the report. Boxes are labelled, not drawn to scale.</text>
+<text class="d-muted" x="60" y="114" font-size="13" font-weight="600" letter-spacing=".04em">LAYER</text>
+<text class="d-muted" x="460" y="114" font-size="13" font-weight="600" letter-spacing=".04em" text-anchor="middle">TODAY</text>
+<text class="d-muted" x="900" y="114" font-size="13" font-weight="600" letter-spacing=".04em" text-anchor="middle">PROPOSED</text>
+
+<text class="d-ink" x="60" y="160" font-size="16" font-weight="700">L0 · standing</text>
+<text class="d-muted" x="60" y="182" font-size="13">system prompt, root file,</text>
+<text class="d-muted" x="60" y="200" font-size="13">skill lines, auto-memory</text>
+<rect class="d-okbox" x="300" y="130" width="320" height="96" rx="10"/>
+<text class="d-ink" x="320" y="168" font-size="26" font-weight="700">about 1 KB</text>
+<text class="d-muted" x="320" y="194" font-size="13.5">the standing layer, re-sent every turn</text>
+<text class="d-muted" x="320" y="214" font-size="13.5">survives compaction by construction</text>
+<rect class="d-okbox" x="660" y="130" width="480" height="96" rx="10"/>
+<text class="d-ink" x="680" y="168" font-size="20" font-weight="700">AGENTS.md block</text>
+<text class="d-muted" x="680" y="194" font-size="13.5">hard limit 1,500 characters, target 1,250</text>
+<text class="d-muted" x="680" y="214" font-size="13.5">carries the re-entry trigger and the end-marker search</text>
+
+<text class="d-inh" x="60" y="240" font-size="13" font-weight="700" letter-spacing=".03em">COMPACTION LINE: below it, context is discarded (L1) and reference material is not expected to survive (L2)</text>
+<line class="d-cut" x1="60" y1="244" x2="1140" y2="244" stroke-width="2.5" stroke-dasharray="6 5"/>
+
+<text class="d-ink" x="60" y="296" font-size="16" font-weight="700">L1 · loaded</text>
+<text class="d-muted" x="60" y="318" font-size="13">files read with tools,</text>
+<text class="d-muted" x="60" y="336" font-size="13">skill bodies, hook output</text>
+<rect class="d-warnbox" x="300" y="262" width="320" height="116" rx="10"/>
+<text class="d-ink" x="320" y="300" font-size="26" font-weight="700">about 43 KB</text>
+<text class="d-muted" x="320" y="326" font-size="13.5">START, DIRECTOR, OPERATIONS and checks</text>
+<text class="d-muted" x="320" y="346" font-size="13.5">read once as tool output</text>
+<text class="d-ink" x="320" y="366" font-size="13.5" font-weight="700">gone after compaction</text>
+<rect class="d-midbox" x="660" y="262" width="480" height="116" rx="10"/>
+<text class="d-ink" x="680" y="298" font-size="17" font-weight="700">CORE.md ≤ 10,000 characters (target 8,000)</text>
+<text class="d-muted" x="680" y="320" font-size="13.5">ROSTER.md ≤ 4,000 (target 3,000)</text>
+<text class="d-muted" x="680" y="342" font-size="13.5">SESSION.md ≤ 2,000 (target 1,000; Git-ignored)</text>
+<text class="d-muted" x="680" y="364" font-size="13.5">re-entered by end-marker search after compaction</text>
+
+<text class="d-ink" x="60" y="428" font-size="16" font-weight="700">L2 · reference</text>
+<text class="d-muted" x="60" y="450" font-size="13">manuals, rationale,</text>
+<text class="d-muted" x="60" y="468" font-size="13">history</text>
+<rect class="d-box" x="300" y="394" width="320" height="116" rx="10"/>
+<text class="d-ink" x="320" y="432" font-size="26" font-weight="700">212 KB</text>
+<text class="d-muted" x="320" y="458" font-size="13.5">RATIONALE file; largest decision 35 KB</text>
+<text class="d-muted" x="320" y="478" font-size="13.5">read on demand, not expected to survive</text>
+<rect class="d-box" x="660" y="394" width="480" height="116" rx="10"/>
+<text class="d-ink" x="680" y="432" font-size="20" font-weight="700">Manuals</text>
+<text class="d-muted" x="680" y="458" font-size="13.5">executor craft manuals; two small Director-craft manuals</text>
+<text class="d-muted" x="680" y="478" font-size="13.5">read only at their own action trigger</text>
+<text class="d-muted" x="680" y="498" font-size="13.5">no size limit; the Director never reads the rest</text>
+
+<text class="d-ink" x="60" y="552" font-size="15.5"><tspan font-weight="700">Proposed fix:</tspan> the re-entry trigger sits in the standing block, and CORE.md is re-read or injected verbatim, never summarized.</text>
+<text class="d-muted" x="60" y="578" font-size="13.5">Outside Claude Code, L1 is replaced by a summary sentence. Sources: report sections 2, 3 and 6.1.</text>
+
+</svg>

@@ -1,0 +1,31 @@
+{
+  "id": "agentic-exec-sol-scale",
+  "title": "Across the organisation",
+  "description": "A continuous zoom from one familiar domain to varied systems across an organisation. GPT-6.1 Sol · Codex · November 11, 2026.",
+  "build": {
+    "state": "ready",
+    "message": "Speed and scale Focused QA plus independent review passed; ready for owner creative review."
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-11T15:41:50.039Z",
+  "updatedAt": "2026-11-11T15:52:56.920Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "content": {
+    "kind": "html",
+    "resource": {
+      "rootId": "agentic-executive-sol",
+      "path": "scale.html"
+    }
+  },
+  "preview": {
+    "resource": {
+      "rootId": "agentic-executive-sol",
+      "path": "previews/scale.png"
+    }
+  }
+}

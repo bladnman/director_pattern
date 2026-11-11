@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+<title id="title">Current and proposed Director startup routes</title><desc id="desc">The current local route and new-project starter route enter through startup documents and a check. The proposed route starts with a standing AGENTS block and reads an action card before its trigger.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="#596572"/></marker><style>text{font-family:system-ui,sans-serif;fill:#20252b}.muted{fill:#596572}.small{font-size:18px}.head{font-size:22px;font-weight:700}.box{fill:#fff;stroke:#315b99;stroke-width:2}.prop{fill:#fffaf0;stroke:#81621c;stroke-width:2}.flow{stroke:#596572;stroke-width:2;fill:none;marker-end:url(#arrow)}.red{fill:#f8e9e5;stroke:#a74433;stroke-width:2}</style></defs>
+<rect width="1200" height="620" fill="#f4f2ed"/>
+<text x="40" y="52" font-size="30" font-weight="800">Where the instructions enter</text>
+<text x="40" y="91" class="small muted">A route change changes the normal read path; keeping a file on disk does not keep its duties reachable.</text>
+<text x="40" y="150" class="head" fill="#315b99">CURRENT SETUP · THIS CHECKOUT</text>
+<rect class="box" x="40" y="174" width="215" height="98" rx="16"/><text x="147" y="209" text-anchor="middle" class="head">Root AGENTS.md</text><text x="147" y="239" text-anchor="middle" class="small muted">selects local route</text>
+<path class="flow" d="M255 223H310"/>
+<rect class="box" x="320" y="174" width="215" height="98" rx="16"/><text x="427" y="209" text-anchor="middle" class="head">START + role</text><text x="427" y="239" text-anchor="middle" class="small muted">startup duties</text>
+<path class="flow" d="M535 223H590"/>
+<rect class="box" x="600" y="174" width="245" height="98" rx="16"/><text x="722" y="209" text-anchor="middle" class="head">Operations + guards</text><text x="722" y="239" text-anchor="middle" class="small muted">preflight, authority</text>
+<path class="flow" d="M845 223H900"/>
+<rect class="box" x="910" y="174" width="245" height="98" rx="16"/><text x="1032" y="209" text-anchor="middle" class="head">Startup check</text><text x="1032" y="239" text-anchor="middle" class="small muted">then 🎬 if it passes</text>
+<line x1="40" y1="324" x2="1160" y2="324" stroke="#d7d2c8" stroke-width="2"/>
+<text x="40" y="376" class="head" fill="#81621c">PROPOSED SETUP · NOT ADOPTED</text>
+<rect class="prop" x="40" y="402" width="275" height="112" rx="16"/><text x="177" y="440" text-anchor="middle" class="head">AGENTS block</text><text x="177" y="470" text-anchor="middle" class="small muted">reminders + route table</text><text x="177" y="496" text-anchor="middle" class="small muted">not the full method</text>
+<path class="flow" d="M315 458H375"/>
+<rect class="prop" x="385" y="402" width="260" height="112" rx="16"/><text x="515" y="440" text-anchor="middle" class="head">Action trigger</text><text x="515" y="470" text-anchor="middle" class="small muted">e.g. staffing or recovery</text><text x="515" y="496" text-anchor="middle" class="small muted">must actually occur</text>
+<path class="flow" d="M645 458H705"/>
+<rect class="prop" x="715" y="402" width="205" height="112" rx="16"/><text x="817" y="440" text-anchor="middle" class="head">Read a card</text><text x="817" y="470" text-anchor="middle" class="small muted">open before action</text>
+<path class="flow" d="M920 458H975"/>
+<rect class="red" x="985" y="402" width="170" height="112" rx="16"/><text x="1070" y="440" text-anchor="middle" class="head">Observed</text><text x="1070" y="470" text-anchor="middle" class="small">0 cards opened</text><text x="1070" y="496" text-anchor="middle" class="small">in 2 trials</text>
+<text x="40" y="578" class="small muted">Public scratch recipe: old START/DIRECTOR/OPERATIONS files stayed for hash checks; checker route was not shipped.</text>
+</svg>

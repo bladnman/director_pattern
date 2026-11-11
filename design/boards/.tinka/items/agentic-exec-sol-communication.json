@@ -1,0 +1,31 @@
+{
+  "id": "agentic-exec-sol-communication",
+  "title": "Coordinate across systems",
+  "description": "GPT-6.1 Sol · Codex · November 11, 2026",
+  "build": {
+    "state": "ready",
+    "message": "Speed and scale Focused QA plus independent review passed; ready for owner creative review."
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-11T15:00:06.262Z",
+  "updatedAt": "2026-11-11T15:52:56.639Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "content": {
+    "kind": "html",
+    "resource": {
+      "rootId": "agentic-executive-sol",
+      "path": "communication.html"
+    }
+  },
+  "preview": {
+    "resource": {
+      "rootId": "agentic-executive-sol",
+      "path": "previews/communication.png"
+    }
+  }
+}

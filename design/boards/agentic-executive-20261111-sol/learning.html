@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Inside agentic systems · Executive briefing · GPT-6.1 Sol</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a class="brand" href="#systems~1"><span class="brand-mark" aria-hidden="true"></span>Inside agentic systems</a>
+    <span class="edition">Executive briefing</span>
+  </header>
+  <main>
+    <section class="explanation" aria-live="polite">
+      <p class="chapter-name" id="chapter-name"></p>
+      <h1 id="headline"></h1>
+      <p id="explanation"></p>
+      <p class="takeaway" id="takeaway"></p>
+    </section>
+    <figure class="scene">
+      <svg id="diagram" viewBox="0 0 940 650" role="img" aria-labelledby="scene-title scene-description">
+        <title id="scene-title">A coordinated system around one domain</title>
+        <desc id="scene-description"></desc>
+        <defs>
+          <radialGradient id="cell-fill"><stop stop-color="#143245" stop-opacity=".55"/><stop offset="1" stop-color="#15313c" stop-opacity=".15"/></radialGradient>
+          <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="4"/></filter>
+        </defs>
+        <g id="scene"></g>
+      </svg>
+      <figcaption><span><i class="dot"></i> Agent / responsibility</span><span><i class="dash"></i> Work / message</span><span id="scene-state" aria-live="polite">Playing cue</span></figcaption>
+    </figure>
+  </main>
+  <footer>
+    <div class="controls">
+      <button id="previous" aria-label="Previous cue" title="Previous cue (←)">←</button>
+      <button id="replay" title="Replay cue (R)">Replay</button>
+      <button id="pause" title="Pause / resume cue (Space)">Pause</button>
+      <button id="next" class="next" aria-label="Next cue" title="Next cue (→)">Next <span aria-hidden="true">→</span></button>
+    </div>
+    <div class="progress"><div id="cue-buttons" aria-label="Chapter cues"></div><span id="cue-count"></span></div>
+    <label class="chapter-picker"><span class="sr-only">Choose topic</span><select id="chapter"><option value="systems">1 · Agentic systems</option><option value="director">2 · The Director Pattern</option><option value="learning">3 · Learning and adaptation</option><option value="communication">4 · Across systems</option><option value="human">5 · People in the loop</option><option value="scale">6 · Across the organisation</option></select></label>
+  </footer>
+  <div class="attribution">GPT-6.1 Sol · Codex · November 11, 2026 <span>← → to present · R to replay</span></div>
+  <script>if(!location.hash)history.replaceState(null,"","#learning~1");</script>
+  <script src="presentation.js"></script>
+</body>
+</html>

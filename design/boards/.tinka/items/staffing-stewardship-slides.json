@@ -1,0 +1,27 @@
+{
+  "id": "staffing-stewardship-slides",
+  "title": "Slides: the paged telling",
+  "description": "22 self-contained slides. Page with arrow keys, Space or the on-screen buttons; light and dark themes; readable at phone width.",
+  "content": {
+    "kind": "html",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-staffing-and-stewardship/slides.html"
+    }
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-08T01:48:49.558Z",
+  "updatedAt": "2026-11-08T02:10:51.444Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "review",
+    "message": "Headless render, paging, light/dark and 375px checks passed; awaiting owner review",
+    "updatedAt": 1794102933102
+  },
+  "status": "review"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "startup-architecture-slug-layout",
+  "title": "Proposed file layout, cards and what moved where",
+  "description": "Proposed file layout, card sizes and what moves where, as a companion to the slug draft. Proposal only; not decided or implemented.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-startup-architecture/layout.md"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Proposal for owner review. Not decided, not implemented.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-09T21:21:15.666Z",
+  "updatedAt": "2026-11-09T21:21:15.666Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

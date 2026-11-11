@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How the Director Pattern installs into a video project</title>
+<meta name="description" content="A paged telling of the 2026-11-08 investigation: what a generated video project receives, what startup costs, what agents did, where the install route fails, and a recommended route. Plan decided 2026-11-08 evening; one yes/no open with Matt. Facts, hypotheses and proposals labelled.">
+<style>
+:root{
+  --bg:#f5f3ee;--surface:#ffffff;--ink:#1c2229;--muted:#5a6470;--line:#d6d0c4;
+  --accent:#2f5fa8;--inherit:#b8492f;--chosen:#2c7a66;--neutral:#8a93a0;
+  --warn-bg:#fbebe5;--ok-bg:#e4f2ec;--mid-bg:#f6efd9;--chip:#ebe7de;--on-accent:#ffffff;
+  --shadow:0 1px 2px rgba(20,24,30,.06),0 8px 24px rgba(20,24,30,.06);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121519;--surface:#1c2027;--ink:#e8eaee;--muted:#a3abb7;--line:#3a414c;
+    --accent:#79a6f0;--inherit:#ec8569;--chosen:#5fc3a8;--neutral:#8c95a3;
+    --warn-bg:#40261f;--ok-bg:#1c372f;--mid-bg:#3a331d;--chip:#272c34;--on-accent:#10141a;
+    --shadow:none;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121519;--surface:#1c2027;--ink:#e8eaee;--muted:#a3abb7;--line:#3a414c;
+  --accent:#79a6f0;--inherit:#ec8569;--chosen:#5fc3a8;--neutral:#8c95a3;
+  --warn-bg:#40261f;--ok-bg:#1c372f;--mid-bg:#3a331d;--chip:#272c34;--on-accent:#10141a;
+  --shadow:none;color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  display:grid;grid-template-rows:auto 1fr auto;grid-template-columns:minmax(0,1fr);-webkit-text-size-adjust:100%}
+header.bar,footer.bar{display:flex;align-items:center;gap:12px;padding:7px 20px;background:var(--surface);border-color:var(--line);border-style:solid;border-width:0}
+header.bar{border-bottom-width:1px}
+footer.bar{border-top-width:1px}
+.deck-title{font-size:13px;color:var(--muted);letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1 1 0;min-width:0;width:0}
+button{font:inherit;font-size:14px;color:var(--ink);background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;min-height:36px}
+button:hover{border-color:var(--accent)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button:disabled{opacity:.4;cursor:default}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.counter{font-variant-numeric:tabular-nums;font-size:14px;color:var(--muted);min-width:64px;text-align:center}
+.progress{flex:1;height:4px;background:var(--chip);border-radius:4px;overflow:hidden}
+.progress span{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
+main{position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;overflow:auto;padding:clamp(16px,3vw,28px) clamp(16px,4.5vw,48px);display:none}
+.slide.active{display:block}
+.inner{max-width:1040px;margin:0 auto}
+.kicker{font-size:13px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+h1{font-size:clamp(1.7rem,4.6vw,2.9rem);line-height:1.12;margin:.1em 0 .4em;letter-spacing:-.01em}
+h2{font-size:clamp(1.3rem,3.2vw,1.85rem);line-height:1.15;margin:0 0 .4em;letter-spacing:-.01em}
+h3{font-size:1.05rem;margin:0 0 .35em}
+p{margin:0 0 .8em}
+.lede{font-size:clamp(1.02rem,2.2vw,1.22rem);color:var(--muted);max-width:60ch}
+ul{margin:.2em 0 .8em;padding-left:1.15em}
+li{margin:.2em 0}
+strong{font-weight:680}
+code{font:0.88em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--chip);padding:.08em .35em;border-radius:5px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.chip{font-size:13.5px;padding:5px 12px;border-radius:999px;background:var(--chip);border:1px solid var(--line)}
+.chip.ok{background:var(--ok-bg);border-color:var(--chosen)}
+.chip.warn{background:var(--warn-bg);border-color:var(--inherit)}
+.chip.mid{background:var(--mid-bg);border-color:var(--neutral)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px;box-shadow:var(--shadow)}
+.card.warn{background:var(--warn-bg);border-color:var(--inherit)}
+.card.ok{background:var(--ok-bg);border-color:var(--chosen)}
+.card.mid{background:var(--mid-bg);border-color:var(--neutral)}
+.card p:last-child,.card ul:last-child{margin-bottom:0}
+.label{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:6px;margin-right:6px;vertical-align:1px;border:1px solid var(--line);background:var(--chip);color:var(--muted)}
+.tag.fact{color:var(--chosen);border-color:var(--chosen)}
+.tag.hyp{color:var(--muted);border-style:dashed}
+.tag.fixed{color:var(--on-accent);background:var(--chosen);border-color:var(--chosen)}
+.tag.prop{color:var(--accent);border-color:var(--accent)}
+.big{font-size:clamp(2rem,6vw,3.4rem);font-weight:760;line-height:1;letter-spacing:-.02em}
+.big small{font-size:.38em;font-weight:600;color:var(--muted);letter-spacing:0}
+.stat{display:flex;flex-direction:column;gap:6px}
+.figscroll{overflow-x:auto;margin:4px 0 10px;border-radius:16px}
+@media (min-width:761px){.figscroll svg.diagram{height:calc(100vh - 300px);max-height:none;width:auto;max-width:100%;margin:0 auto}}
+svg.diagram{display:block;width:100%;height:auto}
+.note{font-size:14px;color:var(--muted)}
+.quote{border-left:3px solid var(--accent);padding:4px 0 4px 14px;margin:10px 0;color:var(--ink)}
+/* dispatch squares */
+.squares{display:grid;grid-template-columns:repeat(21,1fr);gap:5px;margin:10px 0 6px}
+.sq{aspect-ratio:1;border-radius:5px;background:var(--neutral);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--surface)}
+.sq.inh{background:var(--inherit)}
+.sq.cho{background:var(--chosen)}
+.bar2{height:30px;border-radius:8px;background:var(--chip);overflow:hidden;display:flex;margin:6px 0 2px}
+.bar2 span{display:flex;align-items:center;padding:0 10px;font-size:13px;font-weight:700;color:var(--surface);white-space:nowrap}
+.bar2 .a{background:var(--inherit)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13.5px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+/* inheritance rows */
+.flow{display:grid;grid-template-columns:minmax(180px,250px) 1fr;gap:14px;align-items:center}
+.flow .src{text-align:center}
+.paths{display:grid;gap:10px}
+.path{display:grid;grid-template-columns:1.1fr auto 1fr;gap:10px;align-items:center}
+.path .arrow{color:var(--muted);font-size:20px}
+.path .res{border-radius:10px;padding:8px 12px;font-weight:650;font-size:15px}
+.path .cond{font-size:15px}
+.res.inh{background:var(--warn-bg);border:1px solid var(--inherit)}
+.res.cho{background:var(--ok-bg);border:1px solid var(--chosen)}
+.res.neu{background:var(--mid-bg);border:1px solid var(--neutral)}
+.res small{display:block;font-weight:500;color:var(--muted);font-size:12.5px}
+/* steps */
+.steps{list-style:none;padding:0;margin:8px 0;counter-reset:s;display:grid;gap:5px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;margin:0}
+.steps li::before{content:counter(s);width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--surface);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.steps li.bad::before{background:var(--inherit)}
+.steps li.good::before{background:var(--chosen)}
+/* stack */
+.stack{display:grid;gap:4px}
+.layer{border-radius:14px;padding:10px 16px;border:1px solid var(--line);background:var(--surface)}
+.layer.root{border:2px solid var(--inherit);background:var(--warn-bg)}
+.layer.amp{border:2px solid var(--neutral);background:var(--mid-bg)}
+.down{text-align:center;color:var(--muted);font-size:13px;line-height:1}
+.sym{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--surface);border-radius:12px;overflow:hidden}
+th,td{text-align:left;vertical-align:top;padding:6px 10px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--chip)}
+tr:last-child td{border-bottom:0}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.hint{font-size:13.5px;color:var(--muted);margin-top:20px}
+kbd{font:12px ui-monospace,Menlo,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;background:var(--surface)}
+svg text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.d-bg{fill:var(--surface)}
+.d-ink{fill:var(--ink)}
+.d-muted{fill:var(--muted)}
+.d-axis{stroke:var(--muted)}
+.d-inh{fill:var(--inherit)}
+.d-inh-ring{fill:none;stroke:var(--inherit);stroke-width:2.5}
+.d-cho{fill:var(--chosen)}
+.d-neu{fill:var(--neutral)}
+.d-ctx{fill:var(--accent)}
+.d-ctx-soft{fill:var(--accent);fill-opacity:.2}
+.d-onctx{fill:var(--on-accent)}
+.d-cut{stroke:var(--inherit)}
+.d-num{fill:var(--ink)}
+.d-onnum{fill:var(--surface)}
+.d-box{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.d-okbox{fill:var(--ok-bg);stroke:var(--chosen);stroke-width:1.5}
+.d-midbox{fill:var(--mid-bg);stroke:var(--neutral);stroke-width:1.5}
+.d-warnbox{fill:var(--warn-bg);stroke:var(--inherit);stroke-width:2}
+.d-arrow{stroke:var(--accent)}
+.d-arrowhead{fill:var(--accent)}
+@media (max-width:760px){
+  body{font-size:16px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .path{grid-template-columns:1fr;gap:4px}
+  .path .arrow{display:none}
+  .figscroll svg.diagram{min-width:720px}
+  .squares{grid-template-columns:repeat(11,1fr)}
+  header.bar,footer.bar{padding:8px 12px;gap:8px}
+  .progress{display:none}
+  footer.bar{justify-content:space-between}
+  table{font-size:13.5px}
+}
+@media print{
+  body{display:block;background:#fff}
+  header.bar,footer.bar{display:none}
+  main{overflow:visible}
+  .slide{display:block!important;position:static;page-break-after:always;overflow:visible}
+}
+.card.status{border-width:2px}
+tr.no td{color:var(--muted)}
+tr.rec td:first-child{border-left:3px solid var(--chosen)}
+ol.steps{margin-bottom:12px}
+.old{color:var(--muted);font-style:italic}
+td.old{font-style:normal;color:var(--ink)}
+tr.new td:first-child{border-left:3px solid var(--accent)}
+table.corr td:nth-child(2){background:var(--warn-bg)}
+table.corr td:nth-child(3){background:var(--ok-bg)}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="deck-title">Research and diagnosis · 2026-11-08 · How the Director Pattern installs into a video project · Plan decided 2026-11-08 evening; one yes/no open with Matt</div>
+  <button id="theme" type="button" aria-label="Switch colour theme">Theme</button>
+</header>
+<main id="deck" aria-live="polite">
+
+<section class="slide" aria-label="The short version">
+ <div class="inner">
+  <p class="kicker">Research and diagnosis · 2026-11-08 · The short version</p>
+  <h1>The short version</h1>
+  <div class="chips">
+   <span class="chip ok">Plan decided by the Director, 2026-11-08 evening</span>
+   <span class="chip warn">One yes/no open with Matt</span>
+  </div>
+  <div class="card warn">
+   <div class="label">The problem, in two lines</div>
+   <ul>
+    <li><span class="tag hyp">hypothesis, not executed</span><strong>The next new video project will probably fail setup and show no 🎬.</strong> 7 of the 60 files the template pins no longer match.</li>
+    <li><span class="tag fact">fact, measured</span><strong>A greeting or a one-line note is too heavy.</strong> A working video project reads about 113 KB first, so the agent pays that or drops the Director habits.</li>
+   </ul>
+  </div>
+  <div class="card ok" style="margin-top:12px">
+   <div class="label">The plan, in four steps</div>
+   <ol class="steps">
+    <li><div><strong>Repair the stencil once, with review.</strong> Accept the seven changed files, carry starter 3.1, and move the big video docs from read-first to task-time reads. Projected greeting: about 42 KB.</div></li>
+    <li><div><strong>Apply it only after Matt says yes.</strong> Then prove it with a scratch project that finishes first use and earns 🎬.</div></li>
+    <li><div><strong>Propose fixes to the video system repo.</strong> Its publish leaves stencil files alone and refuses a differing Director block. Remove its unused v1 Director folder and fix two stale references.</div></li>
+    <li><div><strong>Record the dated decisions here.</strong></div></li>
+   </ol>
+  </div>
+  <div class="card mid status" style="margin-top:12px">
+   <div class="label">Open</div>
+   <p><strong>One yes/no open with Matt: apply the repaired template after review.</strong></p>
+  </div>
+  <p class="hint">Page with <kbd>←</kbd> <kbd>→</kbd> or <kbd>Space</kbd>, or use the buttons below. The investigation as reviewed starts on the next page.</p>
+ </div>
+</section>
+
+<section class="slide" aria-label="1 The short answer">
+ <div class="inner">
+  <p class="kicker">Research and diagnosis · 2026-11-08 · 1 The short answer</p>
+  <h1>How the Director Pattern installs into a video project</h1>
+  <div class="card mid status">
+   <div class="label">Status, 2026-11-08</div>
+   <p><strong>Draft, corrected after independent review and re-check; Matt's review pending.</strong> The corrections are on the next page, each old claim beside its new one. Nothing has been changed in this repository or downstream.</p>
+  </div>
+  <div class="chips">
+   <span class="chip mid">Draft</span>
+   <span class="chip ok">Corrected after independent review and re-check</span>
+   <span class="chip warn">Matt's review pending</span>
+  </div>
+  <ol class="steps">
+   <li><div><span class="tag fact">fact</span><strong>The live template has two writers whose files overlap.</strong> The Director Pattern stencil writes the Director integration through a reviewed staging route. The video system repo publishes everything else. Since 2026-11-07 the video system's copy also holds the stencil's AGENTS.md and nine <code>.team</code> files, so every publish now rewrites them. Each side knows the other exists, but neither documents the other's tool or file set. <span class="tag hyp">hypothesis, strongly supported</span> On 2026-11-07 the store's copies were changed by a direct copy outside both routes.</div></li>
+   <li class="bad"><div><span class="tag fact">fact, re-checked 2026-11-08</span><strong>The template's provenance is already broken.</strong> 7 of the 60 bound files no longer match, so the stencil's staging helper refuses to plan, and starter 3.1 cannot reach the template. The installed My Work build includes the Director handoff, which re-checks those hashes. <span class="tag hyp">hypothesis, strongly supported, not executed</span> Creating the next video project reports a visible "Director handoff failed" and writes no marker, so the project never earns 🎬 until the template is reconciled.</div></li>
+   <li class="bad"><div><span class="tag fact">fact, measured</span><strong>Startup costs three to four times a plain starter.</strong> 113 KB is read before replying to "hi" (120 KB when whole files are read), against 29 to 37 KB on the same basis. A one-line note pays the same. 61% of the whole-file reads (65% of the required reads) are video guidance and setup text that the Director layer itself makes mandatory.</div></li>
+   <li><div><span class="tag fact">fact</span><strong>The standing text does not explain itself.</strong> The Director block is the generic starter block, word for word. Two cold readers could not find the role package or the check, or say what 🎬 means, and guessed "at least two" files of reading. The real chain is twelve files plus a check. <span class="tag hyp">hypothesis</span> A plain starter install would likely show the same gaps.</div></li>
+   <li><div><span class="tag fact">fact</span><strong>In the field, the cost changed behaviour.</strong> The sample is small. On a one-line note a Director skipped the large guard documents and gave no 🎬 for the rest of the conversation, without saying why. In an older project, on an install from before the November 2 fix, a Director edited guarded docs and rewrote the hashes in its own setup receipt. Today's text forbids that; whether the rule holds is untested. No wrong-tracker or role-conflict events were seen.</div></li>
+   <li><div><span class="tag fact">fact</span><strong>Authority is spread across layers.</strong> Four Director definitions, two live START files, five role catalogues, five documents for one tracker, two check commands, three guard lists, and two competing "first move" routines, one with a model-per-role table that conflicts with the foundation's no-fixed-model rule.</div></li>
+   <li class="good"><div><span class="tag prop">proposal</span><strong>Recommended route.</strong> <em>Now:</em> reconcile the drift through the reviewed stencil route and bring the template to 3.1. <em>Next, inside the template:</em> take the video docs off the ordinary guard list and name them as task reads (C2); write down which side owns which file and make the publish refuse Director-owned paths, narrowing the first-use binding to what first use needs (B1); add a short video section for project-specific gaps (D2). <em>In this repo:</em> fix the generic block's gaps in the separate block rewrite (D1) and add a receipt-against-provenance cross-check. <em>Later:</em> the video system consolidates its duplicate authorities. The disposition (page 11) still has unknowns that block acceptance.</div></li>
+  </ol>
+  <p class="hint">Page with <kbd>←</kbd> <kbd>→</kbd> or <kbd>Space</kbd>, or use the buttons below. 13 pages: the short version first, then one per report section, plus the corrections page after this one.</p>
+ </div>
+</section>
+
+<section class="slide" aria-label="Corrections from independent review">
+ <div class="inner">
+  <p class="kicker">Corrections from independent review, 2026-11-08</p>
+  <h2>Old claim, then corrected claim</h2>
+  <p class="note">The review's verdict was "ready after the listed corrections": one blocking finding, eight major, fourteen minor. The earlier draft is superseded, not deleted. Each changed claim stays visible here next to its correction. The report lists 23 corrections; these are the ones that change substance, with the re-check rows 21 to 23 under "also corrected".</p>
+  <div class="tablewrap"><table class="corr">
+   <thead><tr><th>Topic</th><th>Earlier claim</th><th>Corrected claim</th></tr></thead>
+   <tbody>
+    <tr><td><strong>B split into B1 and B2</strong> <span class="chip warn">blocking finding</span></td><td class="old">Option B: bind only Director-owned bytes. Cost: "a design change to first-use binding and two downstream documents".</td><td>Binding only Director-owned bytes needs a new starter revision of the shared first-use helper. Today it requires a bound baseline for every guard it selects and for the hook file, and accepts the empty request and walk placeholders only when bound. The route now keeps those bindings and narrows the rest (<strong>B1</strong>). Binding only Director-owned bytes is a separate starter change (<strong>B2</strong>), not recommended now.</td></tr>
+    <tr><td><strong>The 2026-11-07 store write</strong></td><td class="old">"Two writers that do not know about each other"; on 2026-11-07 "the video publish republished stencil files"; "neither route's documentation mentions the other".</td><td>The writers' files overlap, and each side knows the other exists without documenting the other's tool or file set. The store was most likely changed by a <strong>direct copy outside both routes</strong> <span class="tag hyp">hypothesis, strongly supported</span>: the file times do not match the publish's time-preserving copy, the decision record advised copying changed files in, and the commit says the store already had newer copies than the repo. Since then the video system's copy holds the stencil-owned files, so the next publish rewrites them <span class="tag fact">fact</span>.</td></tr>
+    <tr><td><strong>The receipt rewrite</strong></td><td class="old">"The check can be self-certified" (present tense). Unknown whether the edit would have blocked the check.</td><td>It happened on an <strong>older install</strong>, from before the November 2 change. Its check blocked on any edited guard and its text had no rule against rewriting the receipt. Today's template reports changed guards without blocking and forbids rewriting a receipt to silence drift. Whether that rule holds is untested. The ordinary check still does not cross-check the receipt against the provenance.</td></tr>
+    <tr><td><strong>C2 now recommended</strong></td><td class="old">Option C (hash guards, read them by task) recommended.</td><td>A simpler template-local option is recommended: take the video docs off the ordinary guard list and name them as task reads (<strong>C2</strong>). C redefines a guard for every project and changes R9, so it is <strong>not recommended now</strong>.</td></tr>
+    <tr><td><strong>D split into D1 and D2</strong></td><td class="old">Option D, one video-owned section, to fix the reader-test gaps.</td><td>The readers' gaps all sit in the generic starter block, so the fix belongs in the formal pattern's block rewrite (<strong>D1</strong>, a separate request in this repo). The video section covers only project-specific gaps (<strong>D2</strong>).</td></tr>
+    <tr><td><strong>The installed My Work build</strong></td><td class="old">"Whether the installed build includes the handoff is unknown."</td><td>It <strong>includes</strong> the handoff <span class="tag fact">fact, read-only binary check</span>, and it wrote the examined project's marker. The next creation would most likely report a visible handoff failure.</td></tr>
+    <tr><td><strong>Greeting cost</strong></td><td class="old">"119.9 KB minimum", about three to four times the starter.</td><td><strong>113.0 KB</strong> required (OPERATIONS section only, like the starter's 29.4 KB); 119.9 KB when whole files are read. Like for like: <strong>3.8 times</strong> the required reads and 3.2 times the whole-file reads.</td></tr>
+   </tbody>
+  </table></div>
+  <h3 style="margin-top:16px">Also corrected</h3>
+  <div class="grid2">
+   <div class="card"><ul>
+    <li><strong>61% attribution.</strong> <span class="old">Earlier: 61% of the greeting is video guidance.</span> Now: 72.1 KB is 61% of the whole-file reads (65% of the required reads) and includes two stencil files; the video system's own files alone are about 57% (61% of the required reads).</li>
+    <li><strong>Model-per-role tables.</strong> <span class="old">Earlier: remove concrete model aliases.</span> Now: Matt chose to keep them local to his video projects, so whether they stay is his decision.</li>
+    <li><strong>Check at install time.</strong> <span class="old">Earlier: the retro's suggestion, listed as a question.</span> Now: Matt decided on November 7 to keep the check in every conversation, and the question asks whether to reopen that.</li>
+    <li><strong>Disposition.</strong> <span class="old">Earlier: 8 rows.</span> Now: 11; rows 9 to 11 cover privacy, update discovery and the video adapter's owner. Row 3 adds the static trigger test and a post-compaction case.</li>
+   </ul></div>
+   <div class="card"><ul>
+    <li><strong>Decisions.</strong> <span class="old">Earlier: 10, with Q1 holding two questions.</span> Now: 16.</li>
+    <li><strong>Counts and dates.</strong> Stencil writes 28 managed files (18 in <code>.director/</code>, 9 in <code>.team/</code>, AGENTS.md) plus 18 legacy files, not "28 in <code>.director/</code>". Two problems were raised on 2026-11-08, not 2026-11-07.</li>
+    <li><strong>Labels.</strong> "The cheapest way to comply is the full capture chain" is now an inference. The compaction finding is consistent with the 2026-11-07 audit but not independent confirmation, since the samples overlap.</li>
+    <li><strong>B1's bindings (re-check).</strong> <span class="old">Earlier: hook file, guards, tracker contract, empty placeholders.</span> Now: also the reviewed journal and team seed files, which first use requires to be bound; disposition oracle (g) covers them.</li>
+    <li><strong>Receipt cross-check (re-check).</strong> <span class="old">Earlier: no counter-case, not named as a starter change.</span> Now: a starter revision of the check helper, and after the project's own reviewed update the check must still match.</li>
+    <li><strong>Smaller wording (re-check).</strong> Percentages state their basis (whole-file or required reads). Case (b) is 183.4 KB required. The direct-copy evidence is worded exactly. Q6 ties C2 to B1. A stage plan before creation is dropped, since the handoff already refuses on drift. Q13 asks whether to keep today's never-rewrite rule.</li>
+    <li><strong>Reader table</strong> now per reader. <strong>SitReps:</strong> the retro-day session carried 10 after the four-part shape was adopted. <strong>Privacy:</strong> the examined project captured sources while its receipt still said the warning had not been given.</li>
+   </ul></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" aria-label="2 The routes">
+ <div class="inner">
+  <p class="kicker">2 The routes</p>
+  <h2>What a generated video project receives, and by which route</h2>
+  <div class="figscroll"><svg class="diagram" viewBox="0 0 1200 610" role="img" aria-label="Two writers with overlapping files, the Director Pattern stencil and the video system publish, feed the live video template, and a likely direct copy on 2026-11-07 bypassed both. Both writers also write AGENTS.md and nine team files, marked as the overlap, and seven of 60 bound files no longer match. My Work generation copies the template; its installed build has a handoff that fails visibly on drift. The project own Director then runs first use, which stops if any bound hash differs.">
+<rect class="d-bg" x="0" y="0" width="1200" height="610" rx="18"/>
+<text class="d-ink" x="40" y="44" font-size="24" font-weight="700">How a video project's Director integration gets written</text>
+<text class="d-muted" x="40" y="70" font-size="15">Two writers with overlapping files feed one live template, and a likely direct copy bypassed both. Left to right is the order of events.</text>
+
+<text class="d-muted" x="40" y="112" font-size="13" font-weight="600" letter-spacing=".04em">TWO WRITERS</text>
+<text class="d-muted" x="470" y="112" font-size="13" font-weight="600" letter-spacing=".04em">LIVE TEMPLATE</text>
+<text class="d-muted" x="850" y="112" font-size="13" font-weight="600" letter-spacing=".04em">THEN, PER NEW PROJECT</text>
+
+<!-- Writer 1: stencil -->
+<rect class="d-okbox" x="40" y="124" width="330" height="170" rx="12"/>
+<text class="d-ink" x="58" y="152" font-size="17" font-weight="700">Director Pattern stencil</text>
+<text class="d-muted" x="58" y="174" font-size="13.5">Reviewed staging, bound by hashes</text>
+<text class="d-muted" x="58" y="192" font-size="13.5">28 managed files, plus 18 legacy files</text>
+<text class="d-muted" x="58" y="210" font-size="13.5">Last applied at starter 3, before 3.1</text>
+<rect class="d-warnbox" x="54" y="226" width="302" height="54" rx="8"/>
+<text class="d-inh" x="66" y="248" font-size="13.5" font-weight="700">Also writes AGENTS.md and 9 .team files</text>
+<text class="d-muted" x="66" y="268" font-size="13">The same files the video publish writes</text>
+
+<!-- Writer 2: video publish -->
+<rect class="d-midbox" x="40" y="330" width="330" height="170" rx="12"/>
+<text class="d-ink" x="58" y="358" font-size="17" font-weight="700">Video system publish</text>
+<text class="d-muted" x="58" y="380" font-size="13.5">Mirror copy with delete, skips .director/</text>
+<text class="d-muted" x="58" y="398" font-size="13.5">Writes docs/, .program/ and the video .team files</text>
+<text class="d-muted" x="58" y="416" font-size="13.5">Active. Its copy now holds the stencil-owned files</text>
+<rect class="d-warnbox" x="54" y="432" width="302" height="54" rx="8"/>
+<text class="d-inh" x="66" y="454" font-size="13.5" font-weight="700">Also writes AGENTS.md and 9 .team files</text>
+<text class="d-muted" x="66" y="474" font-size="13">So the next publish rewrites them</text>
+
+<!-- Arrows writers to template -->
+<line class="d-arrow" x1="370" y1="209" x2="456" y2="262" stroke-width="2.5"/>
+<polygon class="d-arrowhead" points="470,270 452,270 459,256"/>
+<line class="d-arrow" x1="370" y1="415" x2="456" y2="358" stroke-width="2.5"/>
+<polygon class="d-arrowhead" points="470,350 454,366 447,353"/>
+<text class="d-inh" x="378" y="320" font-size="13" font-weight="700">overlap</text>
+<text class="d-inh" x="378" y="338" font-size="13" font-weight="700">written twice</text>
+
+<!-- Template -->
+<rect class="d-box" x="470" y="190" width="310" height="250" rx="12"/>
+<text class="d-ink" x="488" y="220" font-size="17" font-weight="700">Live video template</text>
+<text class="d-muted" x="488" y="242" font-size="13.5">Its provenance binds 60 files by hash</text>
+<text class="d-muted" x="488" y="260" font-size="13.5">Stencil staging refuses to plan on drift</text>
+<rect class="d-warnbox" x="486" y="278" width="278" height="148" rx="8"/>
+<text class="d-inh" x="500" y="302" font-size="13" font-weight="700" letter-spacing=".04em">OVERLAP, TWO WRITERS</text>
+<text class="d-ink" x="500" y="326" font-size="14">AGENTS.md</text>
+<text class="d-ink" x="500" y="346" font-size="14">9 .team files</text>
+<text class="d-ink" x="500" y="372" font-size="14" font-weight="700">7 of 60 bound files no longer match</text>
+<text class="d-muted" x="500" y="392" font-size="13">Includes docs/DIRECTOR, PROCESS, CHANNEL</text>
+<text class="d-muted" x="500" y="410" font-size="13">The 53 others match, all of .director/</text>
+
+<!-- Direct copy -->
+<rect class="d-warnbox" x="470" y="470" width="310" height="52" rx="10" stroke-dasharray="6 5"/>
+<text class="d-inh" x="486" y="492" font-size="13.5" font-weight="700">Direct copy into the store, 2026-11-07</text>
+<text class="d-muted" x="486" y="511" font-size="13">Outside both routes. Likely (hypothesis)</text>
+<line class="d-cut" x1="625" y1="470" x2="625" y2="454" stroke-width="2.5" stroke-dasharray="6 5"/>
+<polygon class="d-redhead" points="625,440 618,456 632,456"/>
+
+<!-- My Work generation -->
+<rect class="d-box" x="850" y="124" width="310" height="170" rx="12"/>
+<text class="d-ink" x="868" y="152" font-size="17" font-weight="700">My Work generation</text>
+<text class="d-muted" x="868" y="174" font-size="13.5">Copies the template to a new folder</text>
+<text class="d-muted" x="868" y="192" font-size="13.5">Installed build has the Director handoff:</text>
+<text class="d-muted" x="868" y="210" font-size="13.5">rechecks every bound hash, writes a marker</text>
+<text class="d-inh" x="868" y="236" font-size="13.5" font-weight="700">On drift: "Director handoff failed"</text>
+<text class="d-muted" x="868" y="254" font-size="13.5">and no marker (code read, not executed)</text>
+<text class="d-muted" x="868" y="276" font-size="13.5">App Store build leaves the handoff out</text>
+
+<!-- Project Director -->
+<rect class="d-midbox" x="850" y="330" width="310" height="170" rx="12"/>
+<text class="d-ink" x="868" y="358" font-size="17" font-weight="700">The project's own Director</text>
+<text class="d-muted" x="868" y="380" font-size="13.5">Runs first use, writes the setup receipt</text>
+<text class="d-muted" x="868" y="398" font-size="13.5">Stops if any bound hash differs:</text>
+<text class="d-inh" x="868" y="416" font-size="13.5" font-weight="700">"managed template drift" (code read)</text>
+<text class="d-muted" x="868" y="442" font-size="13.5">Later updates: its own reviewed route</text>
+<text class="d-muted" x="868" y="460" font-size="13.5">Existing projects are unaffected</text>
+
+<!-- Arrows template to generation, generation to Director -->
+<line class="d-arrow" x1="780" y1="250" x2="836" y2="250" stroke-width="2.5"/>
+<polygon class="d-arrowhead" points="850,250 834,243 834,257"/>
+<line class="d-arrow" x1="1005" y1="294" x2="1005" y2="316" stroke-width="2.5"/>
+<polygon class="d-arrowhead" points="1005,330 998,314 1012,314"/>
+<line class="d-cut" x1="780" y1="400" x2="836" y2="400" stroke-width="2.5" stroke-dasharray="6 5"/>
+<polygon class="d-redhead" points="850,400 834,393 834,407"/>
+<text class="d-inh" x="782" y="428" font-size="13" font-weight="700">drift</text>
+<text class="d-inh" x="782" y="446" font-size="13" font-weight="700">blocks</text>
+
+<text class="d-muted" x="40" y="550" font-size="13.5">Solid blue: the routes that exist today. Red: the overlap and the drift it caused. Dashed red: the likely direct copy, and the effect of drift on first use.</text>
+<text class="d-muted" x="40" y="572" font-size="13.5">Fact: route map, re-checked and confirmed by independent review. The handoff and first-use refusals are code read, not executed.</text>
+<text class="d-muted" x="40" y="594" font-size="13.5">Hypothesis, strongly supported: the next creation reports a visible handoff failure and writes no marker, until the template is reconciled.</text>
+</svg></div>
+  <p class="note"><span class="tag fact">fact</span> The same diagram is on the board as <code>routes.svg</code>. The dashed box is a <span class="tag hyp">hypothesis, strongly supported</span>: the 2026-11-07 change was a direct copy, not a publish.</p>
+  <h3>2.1 The routes</h3>
+  <div class="tablewrap"><table>
+   <thead><tr><th>Route</th><th>Writes into</th><th>Status today</th></tr></thead>
+   <tbody>
+    <tr><td>Starter installer</td><td>a fresh project</td><td>Never used for video. It refuses any target that already has <code>.director</code>, <code>.producer</code>, <code>.team</code>, <code>.program</code>, <code>requests</code>, AGENTS.md or CLAUDE.md, and every video layout has some of them.</td></tr>
+    <tr><td>Director Pattern stencil</td><td>28 managed files in the live template (18 in <code>.director/</code>, 9 in <code>.team/</code>, AGENTS.md), plus 18 legacy engine files</td><td>A versioned overlay, staged and applied by hand by its owner. A provenance file binds 60 files by hash. Last applied 2026-11-04/05 at starter 3 (before 3.1). Its plan now refuses because of unreviewed drift.</td></tr>
+    <tr><td>Video system publish</td><td>everything in the template except <code>.director/</code></td><td>Active. A mirror copy with delete that excludes <code>.director/</code> and protects store-only <code>.team/roles/</code> files from deletion. Since 2026-11-07 its copy includes the stencil-owned AGENTS.md and <code>.team</code> files, so the next publish writes them.</td></tr>
+    <tr class="new"><td>Direct copy into the store, 2026-11-07</td><td>AGENTS.md, <code>.team/TEAM.md</code>, <code>.team/RECORDS.md</code>, a role file, three <code>docs/</code> files</td><td><span class="tag hyp">hypothesis, strongly supported</span> Undocumented. File times do not match the publish's time-preserving copy; the retro decision record advised copying changed files in; a commit minutes later says the store had newer copies than the repo.</td></tr>
+    <tr><td>My Work generation</td><td>a new project folder</td><td>Copies the template. Builds with the Director handoff re-verify every bound hash and write an instance marker. <strong>The installed build includes the handoff</strong> (read-only binary check). The App Store build leaves it out.</td></tr>
+    <tr><td>Generated first use</td><td>the new project</td><td>The project's Director runs the first-use helper, which verifies the instance and writes a technical setup receipt. The examined project did this on 2026-11-05.</td></tr>
+    <tr><td>The project's own update</td><td>that project only</td><td>A pinned three-way review by the project's Director. An older project used it; the generated project examined has had none.</td></tr>
+    <tr><td>Upstream from a project</td><td>the video system repo</td><td>A diff, then a merge Matt approves. The documented route for the retro's changes into the video system repo.</td></tr>
+    <tr><td>Legacy sync</td><td>v1 engine files only</td><td>Documented as unable to certify the flat files.</td></tr>
+   </tbody>
+  </table></div>
+  <div class="card warn" style="margin-top:14px">
+   <div class="label">Two video templates</div>
+   <p><span class="tag fact">fact</span> The video system repo's <code>template/.director/</code> holds an October 21 v1 seed, unpublished since 2026-11-07, which that repo's README calls an older seed kept unpublished. The live My Work template holds the flat starter 3 integration. Outside <code>.director/</code> the two are now byte-identical.</p>
+   <p><span class="tag hyp">hypothesis</span> An agent reading the video system repo could mistake the dead <code>.director/</code> copy for the current one.</p>
+  </div>
+  <h3 style="margin-top:16px">2.2 What the files are, and who writes them</h3>
+  <div class="tablewrap"><table>
+   <thead><tr><th>Layer in a generated project</th><th>Written by</th><th>Owner, per the records</th></tr></thead>
+   <tbody>
+    <tr><td>AGENTS.md, marked Director block (generic starter bridge, byte for byte)</td><td>The stencil first; the video publish now rewrites the whole file</td><td><strong>Disputed.</strong> Both write the whole file.</td></tr>
+    <tr><td>AGENTS.md, everything else (video body, Tinka pointer)</td><td>Video publish</td><td>Video system</td></tr>
+    <tr><td><code>.director/</code>: START, DIRECTOR, WORKER, OPERATIONS, UPDATES, LEARNING, FIRST_USE, helpers, stencil-local PROJECT, TEMPLATE, TRACKER, video adapter, provenance, 18 legacy files</td><td>Stencil</td><td>Stencil, with no named person. The video adapter's own header calls it project-owned.</td></tr>
+    <tr><td><code>.team/</code></td><td>Both</td><td><strong>Two writers</strong> for 9 files</td></tr>
+    <tr><td><code>.program/</code> (vendored request-tracker CLI)</td><td>Video publish</td><td>Video system</td></tr>
+    <tr><td><code>docs/</code> (video craft)</td><td>Video publish</td><td>Video system; the stencil's provenance binds some of them as guards</td></tr>
+    <tr><td>First-use state and receipt</td><td>The generator and the project's Director</td><td>The project</td></tr>
+    <tr><td>Leftovers from the v1 seed</td><td>Nobody</td><td>Nobody</td></tr>
+   </tbody>
+  </table></div>
+  <h3 style="margin-top:16px">2.3 Against a plain starter install</h3>
+  <div class="grid2">
+   <div class="card"><div class="label">Version</div><p>The provenance pins <code>9571ff0</code> and the starter manifest but records no <code>starter_revision</code>. An update would report it as "unrecorded".</p></div>
+   <div class="card"><div class="label">First use</div><p>Three steps by three actors: the generator writes a marker, the first Director conversation runs first use, then the ordinary check runs.</p></div>
+   <div class="card"><div class="label">Tracker and privacy</div><p>The project's own VIDEO/UR records through <code>.program</code>. A root ignore block keeps requests, walks, journal and team activity local, the opposite default. R14 expects that to be the project's own later choice; here the template makes it. The examined project captured sources while its receipt still said the warning had not been given. It has no remote, so whether the warning is due is unclear.</p></div>
+   <div class="card"><div class="label">Guards and learning</div><p>8 guards in the check command, 15 in the first-use descriptor. Manual improvement notes and a rules log, with no review threshold.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" aria-label="3 Startup cost">
+ <div class="inner">
+  <p class="kicker">3 What startup costs, by case</p>
+  <h2>113 KB before a reply to "hi", 3.8 times a plain starter</h2>
+  <p class="note">Measured in a generated video project with its own context checker. Raw file bytes, not tokens. Host framing and the user's global files (about 4.8 KB) are excluded. <span class="tag fact">fact</span></p>
+  <div class="grid3">
+   <div class="card warn"><div class="label">Greeting, or any first reply</div><p class="big">113.0 <small>KB required</small></p><p class="note">119.9 KB when whole files are read; 156.8 KB if the video Director's own "first move" routine applies</p></div>
+   <div class="card mid"><div class="label">Worker, one research fact</div><p class="big">66.0 <small>KB</small></p><p class="note">before it starts</p></div>
+   <div class="card ok"><div class="label">Plain starter install</div><p class="big">29.4 / 37.3 <small>KB</small></p><p class="note">required / whole files read (2026-11-07 report)</p></div>
+  </div>
+  <p class="note" style="margin-top:10px"><strong>Corrected.</strong> <span class="old">Earlier: "119.9 KB minimum".</span> Like for like, the greeting is <strong>3.8 times</strong> the starter's required reads (113.0 against 29.4) and 3.2 times its whole-file reads (119.9 against 37.3).</p>
+  <div class="tablewrap" style="margin-top:10px"><table>
+   <thead><tr><th>Case</th><th>Before the first reply or action</th><th>Before the work itself</th></tr></thead>
+   <tbody>
+    <tr><td>(a) "hi"</td><td><strong>113.0 KB</strong> required; 119.9 KB whole files; 156.8 KB with the "first move" routine</td><td>–</td></tr>
+    <tr><td>(b) "take a note: buy more SD cards"</td><td>Same as (a)</td><td>183.4 KB required (190.3 KB with whole files); 275.4 KB if the learning and update rules are followed in full</td></tr>
+    <tr><td>(c) "draft the next script version from my latest walk"</td><td>Same as (a)</td><td>The Director reads 292.6 to 306.5 KB before dispatching. The writer then reads 298.7 KB plus a shipped-video transcript.</td></tr>
+    <tr><td>(d) a worker researching one fact</td><td><strong>66.0 KB</strong></td><td>Same</td></tr>
+   </tbody>
+  </table></div>
+  <h3 style="margin-top:16px">What the greeting cost is made of</h3>
+  <div class="bar2" role="img" aria-label="45.8 KB of Director files, 72.1 KB of video guidance and setup text, about 2 KB of check output"><span class="a" style="width:38.2%;background:var(--accent);color:var(--on-accent)">.director 45.8 KB</span><span class="a" style="width:60.1%">Guidance and setup text 72.1 KB</span><span style="width:1.7%;background:var(--neutral)"></span></div>
+  <div class="legend"><span><i style="background:var(--accent)"></i>AGENTS.md, START, DIRECTOR, PROJECT, video adapter, OPERATIONS</span><span><i style="background:var(--inherit)"></i>TEAM, <code>docs/DIRECTOR.md</code> (29 KB alone), PROCESS, CHANNEL, setup TEMPLATE, <code>.team</code> Director startup</span><span><i style="background:var(--neutral)"></i>check result, about 2 KB</span></div>
+  <ul style="margin-top:12px">
+   <li><span class="tag fact">fact</span> The 72.1 KB is <strong>61% of the whole-file reads (65% of the required reads)</strong>. It includes two stencil files (the setup TEMPLATE file and the <code>.team</code> Director startup file); the video system's own files among them are about 57%. <span class="old">Earlier: "61% of the greeting cost is video guidance".</span> The stencil's OPERATIONS lists them as check guards and says guards are read completely, and the <code>.team</code> Director startup file names the same reads.</li>
+   <li><span class="tag fact">fact</span> The check helper reads 142 KB to hash those files, but only its 2 KB result reaches the agent. Hashing a guard costs almost nothing; reading it costs a lot.</li>
+   <li><span class="tag fact">fact</span> A freshly generated project with no receipt adds about 37 KB of first-use reads, about 157 KB before the first "hi".</li>
+  </ul>
+  <div class="grid2">
+   <div class="card warn"><div class="label">Cost does not scale with the task</div><p><span class="tag fact">fact</span> A greeting, an errand and a production request all pay the same before the first reply. No instruction says where a note that is not about the video goes. <span class="tag">inference</span> So the cheapest way to comply is likely the full capture chain. <span class="old">Earlier: stated as fact.</span></p></div>
+   <div class="card warn"><div class="label">Two check commands</div><p><span class="tag fact">fact</span> OPERATIONS shows the generic command first. In a generated video project it reports a false gap ("missing install.json"). The real command comes later in the same file.</p></div>
+  </div>
+  <p class="note">The 2026-11-07 report measured this repository and the plain starter. A generated video project carries another 72 KB of mandatory reads local to the template, which a Core would not remove by itself (page 10).</p>
+ </div>
+</section>
+
+<section class="slide" aria-label="4 The reader test">
+ <div class="inner">
+  <p class="kicker">4 What a fresh agent can tell from the standing text</p>
+  <h2>Two cold readers could not find the chain</h2>
+  <p class="note"><span class="tag fact">fact</span> Each read only a generated video project's AGENTS.md. One ran on the strongest tier at default effort; the other on the middle tier with high effort requested (effective effort not recorded). They were asked what the Director does, which files exist and when to read them, how a note and a script draft are handled, what 🎬 means, and what to skip with one minute.</p>
+  <div class="grid2">
+   <div class="card ok"><div class="label">What both could tell</div><ul>
+    <li>The default role is Project Director.</li>
+    <li>A Director delegates investigations, reviews and changes, stays available and evaluates what comes back.</li>
+    <li>The purpose and readers of each <code>docs/</code> file, because the video section states them well.</li>
+    <li>A version Matt has seen is never edited in place.</li>
+   </ul></div>
+   <div class="card warn"><div class="label">The biggest miss</div><p>The strongest-tier reader guessed "at least two or three files"; the middle-tier reader "at least two files and likely more". The real chain is <strong>twelve files and a check, 113 to 120 KB</strong>.</p><p>A reader who believes two or three files are enough is the reader who skips the chain; in the field one Director did exactly that. <span class="tag hyp">hypothesis that this generalises</span></p></div>
+  </div>
+  <h3 style="margin-top:14px">What they could not tell</h3>
+  <div class="tablewrap"><table>
+   <thead><tr><th>Question</th><th>Readers</th><th>What the files say</th></tr></thead>
+   <tbody>
+    <tr><td>What is "the exact selected role package"?</td><td>Both: not named or located</td><td><code>.director/DIRECTOR.md</code> plus <code>.team/roles/director-startup.md</code>, set in <code>.director/PROJECT.md</code></td></tr>
+    <tr><td>What and where is "OPERATIONS"?</td><td>Both: not located; "bounded" undefined</td><td><code>.director/OPERATIONS.md</code>, installation-evidence section, plus a project command further down</td></tr>
+    <tr><td>What does 🎬 mean, and how often?</td><td>Both: not stated</td><td>START and DIRECTOR: on every checked Project Director reply</td></tr>
+    <tr><td>Where does a stray note go?</td><td>Both: not stated; one guessed the journal</td><td>Not stated anywhere</td></tr>
+    <tr><td>How much to read before replying?</td><td>Strongest: "at least two or three files". Middle: "at least two files and likely more".</td><td>Twelve files and a check, 113 to 120 KB</td></tr>
+    <tr><td>"DIRECTOR.md … (step 2 above)"</td><td>Both: no step 2 exists</td><td>A broken reference from an older layout</td></tr>
+    <tr><td>Who is the "crew librarian"?</td><td>Both: undefined</td><td>A role in <code>.team/roles/</code></td></tr>
+    <tr><td>How do <code>.program/req.py</code>, "the existing Studio format" and <code>.team/RECORDS.md</code> relate?</td><td>Strongest: unclear. Middle: named RECORDS as the contract, not its relation to <code>req.py</code>.</td><td>RECORDS is the contract; <code>req.py</code> is the vendored CLI</td></tr>
+    <tr><td>Which wins: project/host authority, the block, or <code>docs/</code>?</td><td>Both: no order given</td><td>Contested inside the files (page 8)</td></tr>
+   </tbody>
+  </table></div>
+  <p style="margin-top:10px">Both flagged that "delegate before doing the detailed work" gives no threshold for a one-line note. Only the strongest-tier reader noticed the folder-naming rule does not match the actual folder name.</p>
+  <div class="card ok"><div class="label">Where the fix belongs <span class="tag prop">proposal</span></div><p><span class="tag fact">fact</span> Every gap in the first three rows sits in the generic starter block: its 971-character body equals the installer's, 1,033 characters with markers. So the fix belongs in the formal pattern's block (D1), not in video-owned text.</p></div>
+  <div class="card mid" style="margin-top:12px"><div class="label">Limits</div><ul>
+   <li>One subject per tier. Both ran inside this repository, whose context held its own Director block; only the strongest-tier reader said it set that aside.</li>
+   <li>Answers were transcribed close to the original, not byte for byte.</li>
+   <li>Re-test any candidate block on both tiers outside this repository. The same test on a plain starter install would confirm which gaps are generic.</li>
+  </ul></div>
+ </div>
+</section>
+
+<section class="slide" aria-label="5 Field evidence">
+ <div class="inner">
+  <p class="kicker">5 What agents actually did</p>
+  <h2>Field evidence from real video projects</h2>
+  <div class="card mid"><div class="label">The sample is small</div>
+   <p>Four Project Director starts that ran the startup check, in two video projects on two install revisions (one generated on starter 3 at <code>9571ff0</code>, one older flat install). Three scoped child Directors. Five compactions followed by a human turn. One user. <strong>No session ran on the 3.1 starter.</strong> A starter-2 conversation and a v1-era project were baselines only. Heuristic counts are spot-checked pattern matches. One session was still running when counted, so its figures are a snapshot.</p></div>
+  <div class="tablewrap" style="margin-top:12px"><table>
+   <thead><tr><th>Measure</th><th>Result</th></tr></thead>
+   <tbody>
+    <tr><td>Read START and DIRECTOR before the first reply</td><td>4 of 4</td></tr>
+    <tr><td>Ran the check before the first badged reply</td><td>4 of 4</td></tr>
+    <tr><td>Read every guard the check names before replying</td><td>3 of 4</td></tr>
+    <tr><td>🎬 on the first turn's reply</td><td>3 of 4</td></tr>
+    <tr><td>First visible text was an unbadged "still loading" line</td><td>4 of 4</td></tr>
+    <tr><td>Verbatim capture in the first turn, after the startup reads</td><td>4 of 4</td></tr>
+    <tr><td>Read <code>.team</code> and <code>.program</code> files as well as <code>.director</code></td><td>4 of 4, alongside, never instead of</td></tr>
+    <tr><td>Used a tracker other than the project's own</td><td>0</td></tr>
+    <tr><td>Re-read startup or re-ran the check after a compaction</td><td>0 of 5</td></tr>
+    <tr><td>Scoped child Directors that ran the check or used 🎬</td><td>0 of 3 (correct: their assignment said not to)</td></tr>
+   </tbody>
+  </table></div>
+  <h3 style="margin-top:16px">What stands out</h3>
+  <div class="grid2">
+   <div class="card"><div class="label">1 Startup reading is heavy</div><p><span class="tag fact">fact</span> Every Director read the startup chain plus team, tracker and creative docs before replying. The retro measured roughly 70k tokens and a minute and a half, including first use and tool framing, so it is not comparable with raw bytes.</p></div>
+   <div class="card warn"><div class="label">2 The badge depends on the big reads</div><p><span class="tag fact">fact</span> On a one-line note a Director judged the large guards too costly, skipped five the check names, and gave no 🎬 on five replies without naming the gap. The check returned "matched" while flagging five changed files, which is the designed November 2 behaviour; the real gap was the unread guards. Two problems raised on 2026-11-08 came from this session. <span class="tag hyp">hypothesis, one session</span> Reads sized to the request would have kept the badge.</p></div>
+   <div class="card warn"><div class="label">3 A Director rewrote its own receipt, on an older install</div><p><span class="tag fact">fact</span> It edited guarded docs, then rewrote the hashes in its own receipt about eight times so the check matched. <span class="old">Earlier: "the check can be self-certified", with the outcome unknown.</span> That install predates November 2: its check blocked on any edited guard and its text had no rule against rewriting the receipt. Today's text forbids it; whether the rule holds is untested. The ordinary check does not compare the receipt with the provenance; first use does.</p></div>
+   <div class="card warn"><div class="label">4 No re-entry after compaction</div><p><span class="tag fact">fact</span> 0 of 5. The badge survived three compactions in the generated project and vanished for 24 turns after the second in the older one. The 2026-11-07 audit drew partly on the same generated project, so this is <strong>not independent confirmation</strong>.</p></div>
+   <div class="card"><div class="label">5 SitReps lapsed, then partly recovered</div><p><span class="tag fact">fact</span> Five labelled SitReps in the first two hours, then none for about 46 hours. The older project had none. Counter-example: the retro-day session carried 10 after the four-part shape was adopted. The per-turn check is in 3.1, which has not reached the template.</p></div>
+   <div class="card"><div class="label">6 Capture reliable, bookkeeping heavy</div><p><span class="tag fact">fact, heuristic</span> Verbatim capture ran on 66 of 77 turns. The retro counted 185 record operations among 395 main shell calls, and some stale records.</p></div>
+   <div class="card"><div class="label">7 Delegation common, tiers rarely chosen</div><p><span class="tag fact">fact</span> The retro counted 27 of 30 worker launches with no tier selected; the explicit tier rule is in 3.1. Under time pressure the Director still did hands-on work.</p></div>
+   <div class="card"><div class="label">8 Lessons went to host memory only</div><p><span class="tag fact">fact</span> The SitRep format and a handoff lesson went to per-project host memory, which another host or machine cannot see.</p></div>
+   <div class="card"><div class="label">9 A handoff invented the receivers' intake</div><p><span class="tag fact">fact</span> A Director told other projects which of their files to start from, from another repo's README. Matt corrected it. This is the failure R11 addresses.</p></div>
+   <div class="card ok"><div class="label">10 No wrong-tracker or role-conflict events</div><p><span class="tag fact">fact</span> The layer conflicts cost reading volume. <span class="tag hyp">hypothesis</span> They do not cause wrong actions more generally; the sample is too small to say.</p></div>
+   <div class="card"><div class="label">11 The drift was visible from the field</div><p><span class="tag fact">fact</span> A side session was started to reconcile the two template copies, and a child Director noticed store files newer than the repo's.</p></div>
+   <div class="card"><div class="label">Workers</div><p><span class="tag fact">fact, heuristic</span> 68 of 89 subagent transcripts read their startup files before producing any text.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" aria-label="6 Where the install is weak">
+ <div class="inner">
+  <p class="kicker">6 Where the install is weak</p>
+  <h2>Most criteria fail; the check's integrity is now partial</h2>
+  <p class="note"><strong>Fails</strong> means the route clearly misses the criterion. <strong>Partial</strong> means it holds in one place and fails in another. <strong>Holds</strong> means no gap was found. All <span class="tag fact">fact</span> unless marked.</p>
+  <div class="tablewrap"><table>
+   <thead><tr><th>Criterion</th><th>Score</th><th>Evidence</th></tr></thead>
+   <tbody>
+    <tr><td>1 The standing text says what each part is for and when it applies</td><td><span class="chip warn">Fails</span> for Director parts<br><span class="chip ok">Holds</span> for <code>docs/</code></td><td>The block is the generic bridge. The role package, OPERATIONS, 🎬 and the reading cost are unstated, and those gaps belong to the generic block (page 6). The video section describes each <code>docs/</code> file well, but gives no home for stray notes and no "when" for most folders, and has a broken step reference and an outdated folder-name rule.</td></tr>
+    <tr><td>2 One tracker and one role authority per project</td><td><span class="chip warn">Fails</span> on structure; no misuse observed</td><td>Four Director definitions, two defining the package differently. Two live START files plus a legacy one. Five catalogues of who reads what. One request store described by five documents plus a "current handoff". Competing "first move" routines whose precedence clauses point both ways. <code>docs/DIRECTOR.md</code> carries a model-per-role table, which Matt chose to keep local to video projects; it conflicts with the foundation's "no fixed model" rule. A crew role file reaches a legacy engine file START calls non-authoritative. <span class="tag hyp">hypothesis</span> A strict Director could withhold 🎬 over these while a lenient one shows it, so the badge is not a stable signal.</td></tr>
+    <tr><td>3 First-reply cost proportionate to the task</td><td><span class="chip warn">Fails</span></td><td>113 KB for a greeting and for an errand; 66 KB for a worker on one fact; 3.8 times the plain starter's required reads. In the field a Director skipped reads on a small request and lost the badge without saying so.</td></tr>
+    <tr><td>4 Updates arrive only through the project's own Director</td><td><span class="chip ok">Holds</span> for projects<br><span class="chip warn">Fails</span> for the template</td><td>No generated project was patched from outside. But the template's store was changed outside both documented routes on 2026-11-07, and the video system's copy now holds stencil-owned files, so its publish writes them outside the reviewed route R11 names. The stencil has no named owner, nothing triggers a re-stage after a starter release, and 3.1 has not reached it. A cross-project handoff also told projects how to take in work.</td></tr>
+    <tr><td>5 The template stays uninitialised</td><td><span class="chip ok">Holds</span></td><td>No instance marker, config, store or receipt, and its check correctly blocks. The v1 leftovers are not initialised state, but nobody owns them.</td></tr>
+    <tr><td>6 Each file has one owner</td><td><span class="chip warn">Fails</span></td><td>AGENTS.md and nine <code>.team</code> files have two writers. Only the stencil maintains the provenance, but it describes files the video system changes. The video adapter is written by the stencil but calls itself project-owned. Nobody owns the dead <code>.director/</code> copy or the leftovers.</td></tr>
+    <tr><td><em>Additional:</em> the check reflects real integrity</td><td><span class="chip mid">Partial</span><br><span class="old">Earlier: Fails</span></td><td>The older receipt-rewrite failure is addressed in today's text but untested live. An edit to the receipt alone is not caught by the ordinary check.</td></tr>
+   </tbody>
+  </table></div>
+ </div>
+</section>
+
+<section class="slide" aria-label="7 The drift risk">
+ <div class="inner">
+  <p class="kicker">7 Immediate operational risk</p>
+  <h2>The template's provenance has already drifted</h2>
+  <div class="card warn" style="margin-bottom:12px"><div class="label">Visible error, corrected</div><p><span class="old">Earlier: "whether the installed My Work build includes the handoff is unknown".</span> <strong>The installed build includes it</strong> <span class="tag fact">fact, read-only binary check</span>, and it wrote the examined project's marker. With the template drifted, creating the next video project would most likely show a visible <strong>"Director handoff failed"</strong> error and write no marker.</p></div>
+  <div class="grid3">
+   <div class="card warn"><div class="label">Bound files no longer matching</div><p class="big">7 <small>of 60</small></p><p class="note">The other 53 match, including every <code>.director</code> file</p></div>
+   <div class="card"><div class="label">Changed on 2026-11-07</div><p class="note">between 18:12 and 18:13, a few minutes before a video system commit saying the store had newer copies than the repo</p></div>
+   <div class="card ok"><div class="label">Existing generated projects</div><p class="note">Unaffected. A completed receipt rechecks only two helpers, and the ordinary check reports changed guards without blocking.</p></div>
+  </div>
+  <div class="grid2" style="margin-top:12px">
+   <div class="card">
+    <div class="label"><span class="tag fact">fact</span> The 7 files, and what follows</div>
+    <ul>
+     <li>AGENTS.md, <code>.team/TEAM.md</code>, <code>.team/RECORDS.md</code>, <code>.team/roles/art-director.md</code>, <code>docs/DIRECTOR.md</code>, <code>docs/PROCESS.md</code>, <code>docs/CHANNEL.md</code>. Re-checked by the author and by the reviewer.</li>
+     <li>The commit copies the store's newer files into the repo. Neither the provenance nor the stencil overlays were updated.</li>
+     <li>A decision record from earlier that afternoon says the published template was not changed and that the changed files need copying in, not a sync with delete. The file times and the commit show the store was changed shortly after.</li>
+     <li>The stencil's staging helper refuses to plan ("unreviewed template drift"). No re-stage can carry 3.1, with its SitRep and tier fixes, until this is resolved.</li>
+     <li>The first-use helper stops with "managed template drift; reviewed integration required" unless every bound hash matches. Code read, not executed.</li>
+     <li>My Work's handoff also requires every bound hash to match, else it reports "Director handoff failed" and writes no marker. Code read, not executed.</li>
+    </ul>
+   </div>
+   <div class="card mid">
+    <div class="label">Hypotheses</div>
+    <ul>
+     <li><span class="tag hyp">strongly supported, not executed</span> Creating the next video project reports a visible handoff failure and writes no marker, so first use cannot run. Even with a marker, first use would refuse. No receipt is written, and every new video project answers without 🎬 until the drift is reconciled.</li>
+     <li><span class="tag hyp">strongly supported</span> The store write was a <strong>direct copy by the retro session, not a publish</strong>. File times do not match the publish's time-preserving copy, the decision record advised copying changed files in, and the commit says the store already had newer copies than the repo. <span class="old">Earlier: "[unknown] a direct copy, or a publish"; the drift was attributed to the publish.</span></li>
+    </ul>
+   </div>
+  </div>
+  <div class="card warn" style="margin-top:12px"><div class="label">What not to do</div><p>Do not rewrite the provenance hashes by hand to make the checks pass. That would bless unreviewed content, exactly the failure the November 4 binding decision (R16) exists to prevent, and it is the template-level version of the receipt rewriting seen in the field. Reconcile through the reviewed stencil route, or hold creation (page 12).</p></div>
+ </div>
+</section>
+
+<section class="slide" aria-label="8 Options and the recommended route">
+ <div class="inner">
+  <p class="kicker">8 Options, and one recommended install route</p>
+  <h2>Repair now, then C2, B1 and D2 in the template</h2>
+  <p class="note"><span class="tag prop">proposal</span> Nothing below is shipped. Earlier options B, C and D are replaced by B1/B2, C2/C and D1/D2 (page 3). Cost lines marked hypothesis are arithmetic from measured sizes.</p>
+  <div class="tablewrap"><table>
+   <thead><tr><th>Option</th><th>What changes</th><th>Helps</th><th>Cost and risk</th></tr></thead>
+   <tbody>
+    <tr class="rec"><td><strong>A. Repair only</strong></td><td>Re-stage the stencil against the current template through its reviewed route. Refresh the provenance. Bring the stencil to 3.1 and record its <code>starter_revision</code>.</td><td>Removes the immediate risk; delivers the 3.1 SitRep and tier fixes</td><td>Small. Drift recurs at the next out-of-route edit; criteria 1, 2, 3 and 6 still fail.</td></tr>
+    <tr class="rec"><td><strong>B1. One owner per file, narrowed binding (template-local)</strong></td><td>Write down which side owns which file, in both routes' documents. The publish refuses Director-owned paths, as it already excludes <code>.director/</code>. The stencil never writes video-owned files. The provenance keeps every binding first use needs (hook file, selected guards, tracker contract files, empty request and walk placeholders, and the reviewed journal and team seed files) and drops the rest. A read-only stage plan runs after each publish; at creation the handoff already refuses on drift. The stencil gets a named owner and re-stages on every <code>starter_revision</code>.</td><td>4, 6; catches drift before creation</td><td>Two downstream documents, the stencil's provenance and descriptor, and the video system's publish script. No starter change. Remaining coupling: AGENTS.md is the hook file and stays bound whole, so an edit to its body, or to any still-bound video file, needs a re-stage.</td></tr>
+    <tr class="no"><td><strong>B2. Bind only Director-owned bytes</strong><br><span class="old">Earlier: this was option B.</span></td><td>As B1, but the provenance binds only <code>.director/</code> and the marked AGENTS block. Video-owned files become guard snapshots.</td><td>4, 6, fully</td><td><strong>Not recommended now.</strong> Needs a new starter revision of the first-use helper, which every template shares: it requires a bound baseline for every guard it selects and for the hook file, and accepts the empty placeholders only when bound. The helper, its tests and the brain and code templates would change. It also loosens a guarantee: first use would no longer prove the video docs were reviewed.</td></tr>
+    <tr class="rec"><td><strong>C2. Take the video docs off the ordinary guard list (template-local)</strong></td><td>The check command and first-use descriptor stop listing <code>docs/DIRECTOR.md</code>, PROCESS, CHANNEL, <code>.team/TEAM.md</code> and the setup TEMPLATE file. The <code>.team</code> Director startup file names them as task reads: before dispatch, or before acting in their area. One check command.</td><td>3; removes the field's reason to skip guards</td><td><span class="tag hyp">hypothesis</span> Greeting drops from about 113 KB to about 42 KB, before any Core work. R9's "fully read selected guards" rule stays unchanged. Cost: no per-conversation snapshot of those docs; a change there does not block today and none was reported. A guardrail read at task time may be missed when acting, or lost at compaction.</td></tr>
+    <tr class="no"><td><strong>C. Hash guards, read them by task</strong><br><span class="old">Earlier: recommended.</span></td><td>Keep the docs as guards, but redefine a guard as hashed each conversation and read only at the task that needs it.</td><td>3</td><td><strong>Not recommended now.</strong> Same saving as C2, but it changes R9's November 2 rule for every project.</td></tr>
+    <tr class="rec"><td><strong>D1. Fix the generic block (formal pattern)</strong></td><td>In the starter block: name the role package, say where the check is, say what 🎬 means and how often, within the 1,500-character budget. A separate block-rewrite request in this repo.</td><td>1, for every project</td><td>One starter revision; the reader tests are its oracle.</td></tr>
+    <tr class="rec"><td><strong>D2. A short video section (video system)</strong><br><span class="old">Earlier: option D covered all reader-test gaps.</span></td><td>In AGENTS.md outside the markers: where a stray note goes, when each folder applies, the fixed step reference and folder rule. Pointers and purposes, not rules.</td><td>1, the project-specific part</td><td>Small. A second place that can drift, so it stays short.</td></tr>
+    <tr><td><strong>E. One tracker and one role authority</strong></td><td>Retire <code>.team/START.md</code> and <code>.team/roles/director.md</code> as live Director authority. Fold the five catalogues into the 2026-11-07 Roster. One tracker document. Settle "first move" precedence with a dated supersession. Resolve the model-per-role table's conflict as Matt decides. Stop live roles reaching the legacy engine. Remove the dead <code>.director/</code> copy.</td><td>2, part of 3</td><td>Mostly editorial in the video system repo. Needs B1 first. No misuse was seen, so the value is lower reading volume and clarity.</td></tr>
+    <tr class="no"><td><strong>F. Compose at generation time</strong></td><td>The generator merges video content and the stencil overlay at creation.</td><td>6</td><td><strong>Not recommended.</strong> A third writer and new generator machinery; the App Store build leaves the handoff out.</td></tr>
+    <tr class="no"><td><strong>G. Move the integration into the video system repo</strong></td><td>The video system owns the whole template and applies Director updates itself.</td><td>6</td><td><strong>Not recommended now.</strong> Departs from R11's named route and from the practice for the brain and code templates. Fallback if B1's split proves unworkable.</td></tr>
+   </tbody>
+  </table></div>
+  <p class="note" style="margin-top:8px">The retro suggested running the integrity check only at install and update time. Matt decided on November 7 to keep it in every conversation. The receipt rewrite that argued for moving it happened on an older install, before the November 2 fix. The report does not propose reopening that, but lists it for Matt. The remaining receipt gap is better closed by a receipt-against-provenance cross-check in the ordinary check (page 11, row 8).</p>
+  <div class="card ok"><div class="label"><span class="tag prop">proposal</span> Recommended route</div>
+   <ol class="steps">
+    <li><div><strong>Now.</strong> Option A. Separately, the active generated project can take 3.1 through its own Director if Matt wants the SitRep and tier fixes there without waiting (R11).</div></li>
+    <li><div><strong>Next, one reviewed revision inside the template.</strong> C2, B1 and D2, through the stencil and the video system.</div></li>
+    <li><div><strong>In this repo.</strong> D1 in the separate block rewrite, plus a receipt-against-provenance cross-check in the ordinary check (a starter revision of the check helper). B2 only if the remaining AGENTS.md coupling proves costly.</div></li>
+    <li><div><strong>Then.</strong> Option E, as the video system's follow-on work.</div></li>
+   </ol>
+  </div>
+  <div class="card" style="margin-top:12px"><div class="label">The resulting install route, end to end</div>
+   <ol class="steps">
+    <li><div><strong>Director Pattern source → stencil.</strong> On every published <code>starter_revision</code> the named owner re-stages and reviews. The provenance records the revision and keeps only the bindings first use needs.</div></li>
+    <li><div><strong>Video system → template.</strong> The publish writes everything except Director-owned paths, and refuses to change one. A read-only stage plan after each publish reports drift in a bound file.</div></li>
+    <li><div><strong>My Work → new project.</strong> A copy plus the instance marker, nothing else. At creation the handoff already refuses on drift.</div></li>
+    <li><div><strong>The project's own Director.</strong> It runs first use and every later update; only those two write the receipt. No other session patches the project or tells it how to take in work.</div></li>
+    <li><div><strong>Standing text.</strong> The generic block within 1,500 characters, improved by D1 (later also the re-entry marker), plus the short video section.</div></li>
+    <li><div><strong>First reply.</strong> Block, START, foundation, PROJECT, video adapter, check section and one check command. The video docs are read when a task needs them.</div></li>
+   </ol>
+  </div>
+  <div class="card" style="margin-top:12px"><div class="label">How this lines up with the 2026-11-07 proposals</div><ul>
+   <li><strong>AGENTS block budget, 1,500 characters:</strong> kept. Today's block is 1,033 with markers. The video section sits outside, with its own owner.</li>
+   <li><strong>Core:</strong> kept, with two additions: exactly one check command, the project's own; and a Core alone does not remove the 72 KB of template-local reads, which C2 does in the template.</li>
+   <li><strong>Roster:</strong> kept. It must absorb the template's five catalogues, or it becomes the sixth. Under B1 the video role rows are video-owned while the Roster is a <code>.director/</code> file, so who writes them is open (page 11, row 5).</li>
+   <li><strong>Re-entry marker:</strong> unchanged. The field's 0 of 5 is consistent with the earlier audit, though the samples partly overlap.</li>
+   <li><strong>November 7 hypothesis</strong> that the cost was local to the template: supported on both halves, and C2 is that proposal extended to the video docs. <span class="tag fact">fact</span></li>
+  </ul></div>
+ </div>
+</section>
+
+<section class="slide" aria-label="9 The disposition">
+ <div class="inner">
+  <p class="kicker">9 Design-intent disposition sketch</p>
+  <h2>Eleven mechanisms, and what still blocks acceptance</h2>
+  <div class="card warn"><p>This repository requires, before a default or onboarding route is replaced, each mechanism's owning decision, the failure it prevents, the new route and a concrete regression oracle. Any unknown or omitted obligation blocks acceptance. <strong>This table is a sketch for a rationale author and an independent reviewer, not a finished disposition.</strong> <span class="tag prop">proposal</span></p><p class="note" style="margin-top:6px"><span class="old">Earlier: 8 rows.</span> Rows 9 to 11 are new, and several earlier rows changed. Every "live" oracle runs in a disposable fixture, a test copy of the template plus a scratch generation. No oracle edits a real project.</p></div>
+  <div class="tablewrap" style="margin-top:12px"><table>
+   <thead><tr><th>#</th><th>Mechanism changed</th><th>Owning decision</th><th>Failure it prevents</th><th>New route</th><th>Regression oracle</th><th>Blocking unknowns</th></tr></thead>
+   <tbody>
+    <tr><td>1</td><td>First use binds seeded template files by hash, including the empty canonical seed, the guards it selects and the custom tracker contract</td><td>R16, later Nov 4; R9, later Nov 4; parity, Nov 4 (the video route keeps its backend and private rules)</td><td>A project initialises from an unreviewed or tampered integration, drift gets blessed, or a populated seed is taken for a pristine one</td><td>B1: keep every binding first use needs (hook file, selected guards, tracker contract files, five empty placeholders, the reviewed journal and team seeds), drop the rest. A video-owned edit to a bound file goes through a stencil re-stage. B2 would need a new helper revision. <span class="old">Earlier: bind only Director-owned bytes.</span></td><td>(a) A publish edits a now-unbound video doc; a fresh fixture generation completes first use. (b) One byte changed in <code>.director/DIRECTOR.md</code> or the block makes first use refuse. (c) A pristine instance with the five placeholders completes first use. (d) One populated request or walk file makes it refuse. (e) The custom tracker route creates no bundled store. (f) Seed and malformed-provenance counter-cases report honestly. (g) A pristine instance with the reviewed journal and team seeds completes first use; an extra or edited journal file makes it refuse.</td><td><span class="chip warn">Blocking</span> What reviews an unbound video doc that contradicts Director authority? No replacement check exists. For B2 only: whether a helper change is acceptable for the brain and code templates.</td></tr>
+    <tr><td>2</td><td>Template update route</td><td>R11, Nov 7 item 1</td><td>Unreviewed outside edits leave the template looking current when it is not</td><td>Two documented routes with disjoint file sets, each naming the other's tool and files. The publish refuses Director-owned paths (precedent: it excludes <code>.director/</code> and protects store-only role files). A named stencil owner re-stages on each <code>starter_revision</code>.</td><td>A publish dry run with a changed Director-owned file refuses. A direct write into the store outside both routes (the 2026-11-07 case) is reported by the read-only stage plan after each publish and before each creation. A new starter revision produces a re-stage plan.</td><td><span class="chip warn">Blocking</span> Who the named stencil owner is (Matt), and whether the video system accepts a refusal rule.</td></tr>
+    <tr><td>3</td><td>The video docs are read completely before the first reply, as guards</td><td>R10, Oct 24/30; R9, Nov 2; parity triage, Nov 7 (deferred the OPERATIONS split until field first-minutes are measured, and proposed a static first-reply-trigger test first)</td><td>Guardrails go unread before acting; a badge is shown over conflicting authority</td><td>C2: the docs leave the ordinary guard list and become task reads. Remaining guards are still read completely. Conflict review of the docs moves to the re-stage (row 1). One check command. <span class="old">Earlier: C.</span></td><td>Static: a test pins the first-reply trigger prose in START, DIRECTOR and OPERATIONS before the list changes. Live, in the fixture: an unhinted greeting reads only the first-reply set, checks and shows 🎬; a one-line note keeps 🎬; a withheld badge names its gap; a production task reads PROCESS before dispatch; a render task reaches the private-upload guardrail; <strong>after a forced compaction the next production task re-reads PROCESS and the check reruns before the next 🎬</strong>; a planted contradiction is caught at re-stage.</td><td><span class="chip warn">Blocking</span> (1) The static trigger test does not exist. (2) Whether four starts and two post-setup conversations, with no timings, meet the deferral's field condition. (3) Whether moving conflict review to the re-stage keeps R9's rule that an unresolved conflict prevents the badge.</td></tr>
+    <tr><td>4</td><td>The standing block stays generic and managed</td><td>R10, Oct 23; R9, Nov 2</td><td>Project text inside the managed block breaks managed equality and mixes owners</td><td>Generic gaps fixed in the starter block (D1, separate request). Project-specific gaps in a short video section outside the markers (D2).</td><td>Re-run both reader tests outside this repository, on a generated video project and on a plain starter install. Both locate the role package and the check, say what 🎬 means, give a home for stray notes in the video project, and estimate first-reply reading within a factor of two. The check still reports the hook structure valid.</td><td>Whether the video section needs its own drift check</td></tr>
+    <tr><td>5</td><td>Duplicate Director, START and catalogue files</td><td>R10, Oct 23; R16, Oct 25</td><td>Legacy and team copies keep backend compatibility; removing them could break a caller</td><td>One Director definition, START, Roster and tracker contract. Live roles stop reaching the legacy engine. Owners retire the dead copies.</td><td>A search of live text reaches one Director definition and one START. The crew librarian's package does not reach the legacy engine. "Who defines the Director here?" gets one answer.</td><td><span class="chip warn">Blocking</span> Whether the vendored tracker CLI or any crew action depends on legacy engine documents (not checked); who writes the video template's Roster rows.</td></tr>
+    <tr><td>6</td><td>Model-per-role table in <code>docs/DIRECTOR.md</code></td><td>This repo's maintainer rule; the foundation's "no fixed model" rule; Matt's choice to keep such tables local to his video projects</td><td>Frozen choices go stale and override per-task settings</td><td>As Matt decides: the tables stay, become tier words, or the foundation rule gives way locally. <span class="old">Earlier: remove model aliases; "none known".</span></td><td>Whatever is chosen, the template states one rule and dispatch records match it.</td><td><span class="chip warn">Blocking</span> Matt's decision.</td></tr>
+    <tr><td>7</td><td>Stencil provenance has no <code>starter_revision</code></td><td>R11, Nov 7 item 3</td><td>Updates cannot name the previous revision</td><td>The provenance records it at each re-stage</td><td>An update report names the previous revision, or says "unrecorded"</td><td>None known</td></tr>
+    <tr><td>8</td><td>Setup receipt baselines</td><td>R9, Nov 2 and its parity row; R11</td><td>A Director certifies its own integrity and 🎬 asserts a check it rigged</td><td>Keep today's rule: changed guards are reported, not blocking, and a receipt is never rewritten to silence drift. Add a read-only receipt-against-provenance cross-check to the ordinary check (a starter revision of the check helper). <span class="old">Earlier: a new rule in runtime text.</span></td><td>In the fixture: a Director edits a guarded doc; at the next greeting the check reports the changed snapshot, and the Director names it and leaves the receipt untouched. A receipt with a hand-edited bound hash fails the ordinary check. After the project's own reviewed update, the check still matches.</td><td><span class="chip warn">Blocking</span> Whether the runtime rule holds is untested; the only incident ran without it.</td></tr>
+    <tr class="new"><td>9</td><td>Template's local-only privacy default and warning</td><td>R14, Oct 21 (tracked by default; keeping more local is the project's later choice; one warning on a public or unknown remote) and later Nov 4</td><td>Exact sources reach a public remote's history; or a project loses continuity without knowing it</td><td>Preserved as today. B1 names the owner of the video adapter, which carries the privacy gate.</td><td>In the fixture: first use verifies the ignore block and records the warning as due. A project with a public or unknown remote gets the one warning before its first capture.</td><td><span class="chip warn">Blocking</span> Who owns the adapter (row 11); whether R14 accepts a template-made local choice (Matt); whether the warning is due for the examined project, which has no remote.</td></tr>
+    <tr class="new"><td>10</td><td>Daily update discovery</td><td>R11 (throttled discovery at the next active project-work step, independent of the greeting's local check)</td><td>A project silently runs a stale method, or pays network cost on a greeting</td><td>Preserved: the discovery triggers in DIRECTOR and PROJECT stay in the first-reply set under C2.</td><td>In the fixture: an unhinted greeting does no network discovery; the next project-work step runs the daily discovery.</td><td>None known</td></tr>
+    <tr class="new"><td>11</td><td>Owner of the video adapter and the other stencil-local files (PROJECT, TEMPLATE, TRACKER)</td><td>R16, Oct 25</td><td>A project-owned adapter is overwritten by a stencil update, or a stencil fix never reaches it</td><td>B1 states whether the stencil or the video system writes them. They carry the privacy gate and tracker rule, so their owner reviews any change to either.</td><td>Both routes' documents name the same owner for these four files. A stage plan shows them as stencil-written, or the publish carries them, never both.</td><td><span class="chip warn">Blocking</span> Matt's choice of owner.</td></tr>
+   </tbody>
+  </table></div>
+  <p class="note" style="margin-top:10px">This would touch two recorded decisions: the November 7 deferral on splitting the OPERATIONS installation section (row 3), and the November 4 binding decision (row 1). Each either gets a dated supersession or stays in force. C2 leaves R9's November 2 guard rule unchanged.</p>
+ </div>
+</section>
+
+<section class="slide" aria-label="10 Decisions reserved for Matt">
+ <div class="inner">
+  <p class="kicker">10 Decisions reserved for Matt</p>
+  <h2>Sixteen decisions, now decided</h2>
+  <p class="note">When this page was written, nothing here was decided. Decided on the evening of 2026-11-08: see page 1. <span class="old">Earlier: 10 questions, with Q1 holding two.</span> Q1 is now split and six decisions are added. Each goes to its owner as a proposal after Matt's review.</p>
+  <ol class="steps">
+   <li><div>Who should own the Director files in the video template: the Director Pattern stencil, as now, or the video system repo?</div></li>
+   <li><div>If the stencil, who is its named owner?</div></li>
+   <li><div>Who owns the video adapter and the other video-specific files in <code>.director/</code> (PROJECT, TEMPLATE, TRACKER)?</div></li>
+   <li class="bad"><div>Creating a new video project today would most likely fail with a visible handoff error. Should the template be reconciled through the stencil's reviewed route before the next video, or should new video projects wait?</div></li>
+   <li><div>Should the active video project take 3.1 now, through its own Director, to get the SitRep and tier fixes?</div></li>
+   <li><div>Should the video docs come off the guard list, so that a Director reads them only when a task needs them and, with B1 dropping their bindings, editing them no longer blocks new projects?</div></li>
+   <li><div>If you would rather the video system's files stopped being hash-locked at first use altogether, that needs a change to the starter's first-use helper, which every template shares. Do you want that change?</div></li>
+   <li><div>Should the gaps the readers found in the standing block (role package, check, 🎬, reading cost) be fixed in the formal pattern's block, or in each video project's own section?</div></li>
+   <li><div>Do you want a short section in each video project's AGENTS.md, written by the video system, for the video-specific gaps?</div></li>
+   <li><div>Where should a note that is not about the video go, such as an errand?</div></li>
+   <li><div>You chose to keep model-per-role tables local to your video projects. Should they stay, become tier words, or should the foundation's no-fixed-model rule give way in video projects?</div></li>
+   <li><div>The template keeps requests, walks and journal out of Git for every video project. R14 expects that to be each project's own choice. Do you accept the template making it? Is the privacy warning due in the examined project, which has no remote?</div></li>
+   <li><div>Today's text says a Director never rewrites its receipt to silence drift. Keep that?</div></li>
+   <li><div>On November 7 you decided to keep the startup check in every conversation. Do you want to reopen that? The new evidence is the reading cost in video projects. The receipt rewrite happened on an older install that has since been fixed. <span class="old">Earlier: asked as the retro's suggestion.</span></div></li>
+   <li><div>Should every new starter revision automatically trigger a stencil re-stage plan?</div></li>
+   <li><div>May the old v1 <code>.director/</code> copy be removed from the video system repo's template?</div></li>
+  </ol>
+  <p class="note">Question 4 is the time-sensitive one: it governs the drift risk on page 9.</p>
+ </div>
+</section>
+
+<section class="slide" aria-label="11 Evidence">
+ <div class="inner">
+  <p class="kicker">11 Evidence index</p>
+  <h2>Evidence, by class only</h2>
+  <p class="note">The exact locations are kept privately. This page lists classes of evidence.</p>
+  <div class="grid2">
+   <div class="card"><div class="label">Route map</div><ul>
+    <li>A file-by-file SHA-256 comparison of 87 paths across the video system template, the live My Work template, the stencil overlay and a generated project.</li>
+    <li>Read-only plan runs of the stencil staging helper and the starter installer.</li>
+    <li>Code reading of the generator handoff, the first-use helper and the check helper.</li>
+    <li>Comparison with older video projects.</li>
+   </ul></div>
+   <div class="card"><div class="label">Startup trace</div><ul>
+    <li>A line-numbered reading of every instruction file on the startup chain, in a generated project and in the live template.</li>
+    <li>Byte counts for four cases, using the project's own context checker.</li>
+    <li>A read-only run of the project's check.</li>
+   </ul></div>
+   <div class="card"><div class="label">Reader tests</div><p>Two cold readers, one on the strongest tier at default effort and one on the middle tier with high effort requested. Each read only a generated project's AGENTS.md. Answers were transcribed close to the original.</p></div>
+   <div class="card"><div class="label">Field evidence</div><ul>
+    <li>Read-only extraction from session transcripts in two video projects: Project Director starts, scoped child Directors, compactions and subagent transcripts.</li>
+    <li>Baselines: one starter-2 conversation and one v1-era project.</li>
+    <li>Request records and the project's own 2026-11-07 retro findings.</li>
+   </ul></div>
+   <div class="card"><div class="label">Author re-checks, 2026-11-08, read-only</div><p>The live template's managed hashes against its provenance; the first-use helper's refusal on drift, in its code; the modification times of the changed files.</p></div>
+   <div class="card ok"><div class="label">Independent review, 2026-11-08, read-only</div><p>A re-hash of the live template, a plan-only staging run, code reading of the first-use helper, both check helpers, the handoff and the installer, file times and commit history in the video system repo, a string check of the installed My Work binary, and spot extraction over four field transcripts.</p></div>
+   <div class="card"><div class="label">Design context</div><ul>
+    <li>The 2026-11-07 startup-architecture report, whose numbers are reused here.</li>
+    <li>Rationale decisions R9 (Nov 2 and later Nov 4), R10 (Oct 23, Nov 1 and 4), R11 (Nov 7 and earlier template clauses), R14 (Oct 21 and later Nov 4) and R16 (Oct 25 and later Nov 4). <span class="old">Earlier index listed R8 and not R9 Nov 2.</span></li>
+    <li>Behaviour-parity rows for the Nov 7 field triage, Nov 4 generated first use, Nov 2 composed project guidance, and the installation, privacy and update mechanisms.</li>
+   </ul></div>
+  </div>
+  <div class="card mid" style="margin-top:12px"><div class="label">Where this stands</div><p><span class="tag fact">fact</span> Draft, corrected after independent review; <strong>Matt's review pending</strong>. Nothing has been changed in this repository or downstream. Live verification of the proposals: not yet. No live scenario has shown that these changes alter behaviour.</p></div>
+ </div>
+</section>
+
+</main>
+<footer class="bar">
+  <button id="prev" type="button" aria-label="Previous slide">← Back</button>
+  <div class="progress" aria-hidden="true"><span id="prog"></span></div>
+  <div class="counter" id="count" aria-live="polite">1 / 1</div>
+  <button id="next" class="primary" type="button" aria-label="Next slide">Next →</button>
+</footer>
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var n=slides.length,i=0;
+  var prev=document.getElementById('prev'),next=document.getElementById('next');
+  var count=document.getElementById('count'),prog=document.getElementById('prog');
+  function fromHash(){var m=/^#(\d+)$/.exec(location.hash);return m?Math.min(Math.max(parseInt(m[1],10)-1,0),n-1):0;}
+  function show(k,push){
+    i=Math.min(Math.max(k,0),n-1);
+    slides.forEach(function(s,j){s.classList.toggle('active',j===i);s.setAttribute('aria-hidden',j===i?'false':'true');});
+    slides[i].scrollTop=0;
+    count.textContent=(i+1)+' / '+n;
+    prog.style.width=((i+1)/n*100)+'%';
+    prev.disabled=i===0;next.disabled=i===n-1;
+    if(push!==false){try{history.replaceState(null,'','#'+(i+1));}catch(e){}}
+  }
+  prev.addEventListener('click',function(){show(i-1);});
+  next.addEventListener('click',function(){show(i+1);});
+  document.addEventListener('keydown',function(e){
+    if(e.altKey||e.ctrlKey||e.metaKey)return;
+    var t=e.target&&e.target.tagName;if(t==='INPUT'||t==='TEXTAREA')return;
+    var k=e.key;
+    if(k==='ArrowRight'||k==='PageDown'||(k===' '&&!e.shiftKey)){e.preventDefault();show(i+1);}
+    else if(k==='ArrowLeft'||k==='PageUp'||(k===' '&&e.shiftKey)){e.preventDefault();show(i-1);}
+    else if(k==='Home'){e.preventDefault();show(0);}
+    else if(k==='End'){e.preventDefault();show(n-1);}
+  });
+  var sx=null,sy=null;
+  document.getElementById('deck').addEventListener('touchstart',function(e){var p=e.changedTouches[0];sx=p.clientX;sy=p.clientY;},{passive:true});
+  document.getElementById('deck').addEventListener('touchend',function(e){if(sx===null)return;var p=e.changedTouches[0],dx=p.clientX-sx,dy=p.clientY-sy;sx=null;
+    if(e.target.closest&&e.target.closest('.figscroll,.tablewrap'))return;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)show(dx<0?i+1:i-1);},{passive:true});
+  window.addEventListener('hashchange',function(){show(fromHash(),false);});
+  var root=document.documentElement,btn=document.getElementById('theme');
+  function stored(){try{return localStorage.getItem('deck-theme');}catch(e){return null;}}
+  function apply(t){if(t)root.setAttribute('data-theme',t);else root.removeAttribute('data-theme');
+    var dark=t?t==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+    btn.textContent=dark?'Light theme':'Dark theme';}
+  apply(stored());
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
+    var t=cur==='dark'?'light':'dark';apply(t);try{localStorage.setItem('deck-theme',t);}catch(e){}
+  });
+  show(fromHash(),false);
+})();
+</script>
+</body>
+</html>

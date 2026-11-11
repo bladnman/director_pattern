@@ -1,0 +1,27 @@
+{
+  "id": "staffing-stewardship-report",
+  "title": "Report (markdown)",
+  "description": "Readable report: short answer, timeline, evidence, revised root cause with facts and hypotheses labelled, review corrections, conflict map, compaction audit, request recording after compaction (7a, added 2026-11-08), fixes with regression cases and status, the owner correction (8a), open questions.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-staffing-and-stewardship/report.md"
+    }
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-08T01:48:48.459Z",
+  "updatedAt": "2026-11-08T02:10:52.672Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "review",
+    "message": "Headless render, paging, light/dark and 375px checks passed; awaiting owner review",
+    "updatedAt": 1794102931770
+  },
+  "status": "review"
+}

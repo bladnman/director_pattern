@@ -1,0 +1,239 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 3771" width="600" height="3771" role="img" aria-labelledby="t d">
+<title id="t">What an agent reads in a generated video project, and when</title>
+<desc id="d">Portrait diagram. A bar per case shows kilobytes read, split into three layers: the Director Pattern starter, the template's own Director add-ons, and the video docs, crew and records. Saying hi reads 113 KB before the first reply; a one-line note reads 183.4 KB before it is saved; a script request has the Director read 292.6 KB before the writer starts, and the writer then reads 298.7 KB plus a transcript; a research worker reads 66.0 KB before acting. Video files are the largest share in every case. Below, the Director's reads are shown in order as fourteen grouped steps with three milestones, then the research worker's three grouped steps.</desc>
+<style>
+:root{--surface:#ffffff;--ink:#1c2229;--muted:#5a6470;--line:#d6d0c4;--accent:#2f5fa8;--inherit:#b8492f;--chosen:#2c7a66;--neutral:#8a93a0;--warn-bg:#fbebe5;--ok-bg:#e4f2ec;--mid-bg:#f6efd9;--on-accent:#ffffff}
+@media (prefers-color-scheme: dark){:root{--surface:#1c2027;--ink:#e8eaee;--muted:#a3abb7;--line:#3a414c;--accent:#79a6f0;--inherit:#ec8569;--chosen:#5fc3a8;--neutral:#8c95a3;--warn-bg:#40261f;--ok-bg:#1c372f;--mid-bg:#3a331d;--on-accent:#10141a}}
+
+svg text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.d-bg{fill:var(--surface)}
+.d-ink{fill:var(--ink)}
+.d-muted{fill:var(--muted)}
+.d-inh{fill:var(--inherit)}
+.d-onacc{fill:var(--on-accent)}
+.d-box{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.d-okbox{fill:var(--ok-bg);stroke:var(--chosen);stroke-width:1.5}
+.d-midbox{fill:var(--mid-bg);stroke:var(--neutral);stroke-width:1.5}
+.d-warnbox{fill:var(--warn-bg);stroke:var(--inherit);stroke-width:2}
+.d-addbox{fill:var(--surface);stroke:var(--accent);stroke-width:1.5}
+.d-mile{fill:var(--surface);stroke:var(--ink);stroke-width:2.5}
+.d-arrow{stroke:var(--accent)}
+.d-arrowhead{fill:var(--accent)}
+</style>
+<rect class="d-bg" x="0" y="0" width="600" height="3771" rx="18"/>
+<text class="d-ink" x="24" y="56" font-size="32" font-weight="700">What an agent reads, and when</text>
+<text class="d-muted" x="24" y="90" font-size="20">In a generated video project, before it replies</text>
+<text class="d-muted" x="24" y="116" font-size="20">or starts work. Raw file sizes in KB.</text>
+<rect class="d-okbox" x="24" y="146" width="44" height="28" rx="7" stroke-width="2"/>
+<text class="d-ink" x="84" y="168" font-size="21" font-weight="700">Director Pattern starter</text>
+<rect class="d-addbox" x="24" y="186" width="44" height="28" rx="7" stroke-width="2"/>
+<text class="d-ink" x="84" y="208" font-size="21" font-weight="700">Template's Director add-ons</text>
+<rect class="d-midbox" x="24" y="226" width="44" height="28" rx="7" stroke-width="2"/>
+<text class="d-ink" x="84" y="248" font-size="21" font-weight="700">Video docs, crew and records</text>
+<text class="d-muted" x="24" y="300" font-size="18" font-weight="600" letter-spacing=".06em">KB READ, BY CASE</text>
+<text class="d-ink" x="24" y="338" font-size="22" font-weight="700">Say hi, before the first reply</text>
+<text class="d-ink" x="576" y="338" font-size="22" font-weight="700" text-anchor="end">113.0 KB</text>
+<rect class="d-okbox" x="24" y="350" width="60.4422" height="30" rx="4" stroke-width="2"/>
+<rect class="d-addbox" x="84.4422" y="350" width="23.1803" height="30" rx="4" stroke-width="2"/>
+<rect class="d-midbox" x="107.622" y="350" width="124.342" height="30" rx="4" stroke-width="2"/>
+<text class="d-muted" x="24" y="406" font-size="19">starter 32.8 · add-ons 12.6 · video 67.6</text>
+<text class="d-ink" x="24" y="442" font-size="22" font-weight="700">A note, before saving it</text>
+<text class="d-ink" x="576" y="442" font-size="22" font-weight="700" text-anchor="end">183.4 KB</text>
+<rect class="d-okbox" x="24" y="454" width="69.0718" height="30" rx="4" stroke-width="2"/>
+<rect class="d-addbox" x="93.0718" y="454" width="32.1466" height="30" rx="4" stroke-width="2"/>
+<rect class="d-midbox" x="125.218" y="454" width="236.291" height="30" rx="4" stroke-width="2"/>
+<text class="d-muted" x="24" y="510" font-size="19">starter 37.5 · add-ons 17.5 · video 128.4</text>
+<text class="d-ink" x="24" y="546" font-size="22" font-weight="700">A script, before the writer starts</text>
+<text class="d-ink" x="576" y="546" font-size="22" font-weight="700" text-anchor="end">292.6 KB</text>
+<rect class="d-okbox" x="24" y="558" width="131.107" height="30" rx="4" stroke-width="2"/>
+<rect class="d-addbox" x="155.107" y="558" width="38.4174" height="30" rx="4" stroke-width="2"/>
+<rect class="d-midbox" x="193.525" y="558" width="368.786" height="30" rx="4" stroke-width="2"/>
+<text class="d-muted" x="24" y="614" font-size="19">starter 71.3 · add-ons 20.9 · video 200.4</text>
+<text class="d-ink" x="24" y="650" font-size="22" font-weight="700">The writer, before drafting</text>
+<text class="d-ink" x="576" y="650" font-size="22" font-weight="700" text-anchor="end">298.7 KB +</text>
+<rect class="d-okbox" x="24" y="662" width="23.46" height="30" rx="4" stroke-width="2"/>
+<rect class="d-addbox" x="47.46" y="662" width="19.5739" height="30" rx="4" stroke-width="2"/>
+<rect class="d-midbox" x="67.0339" y="662" width="506.655" height="30" rx="4" stroke-width="2"/>
+<text class="d-muted" x="24" y="718" font-size="19">starter 12.8 · add-ons 10.6 · video 275.4</text>
+<text class="d-ink" x="24" y="754" font-size="22" font-weight="700">A research worker, before acting</text>
+<text class="d-ink" x="576" y="754" font-size="22" font-weight="700" text-anchor="end">66.0 KB</text>
+<rect class="d-okbox" x="24" y="766" width="23.46" height="30" rx="4" stroke-width="2"/>
+<rect class="d-addbox" x="47.46" y="766" width="19.5739" height="30" rx="4" stroke-width="2"/>
+<rect class="d-midbox" x="67.0339" y="766" width="78.4355" height="30" rx="4" stroke-width="2"/>
+<text class="d-muted" x="24" y="822" font-size="19">starter 12.8 · add-ons 10.6 · video 42.6</text>
+<rect class="d-warnbox" x="24" y="838" width="552" height="100" rx="12"/>
+<text class="d-inh" x="42" y="872" font-size="22" font-weight="700">Cost does not scale with the task</text>
+<text class="d-muted" x="42" y="900" font-size="19">Hi, a note and a script request all read</text>
+<text class="d-muted" x="42" y="924" font-size="19">the same 113 KB before the first reply.</text>
+<text class="d-muted" x="24" y="992" font-size="18" font-weight="600" letter-spacing=".06em">THE DIRECTOR, IN READ ORDER</text>
+<line class="d-arrow" x1="48" y1="1084" x2="48" y2="2813" stroke-width="3"/>
+<polygon class="d-arrowhead" points="48,1620 40,1604 56,1604"/>
+<polygon class="d-arrowhead" points="48,2249 40,2233 56,2233"/>
+<polygon class="d-arrowhead" points="48,2827 40,2811 56,2811"/>
+<text class="d-ink" x="84" y="1036" font-size="22" font-weight="700">Every conversation, before the first reply</text>
+<rect class="d-okbox" x="84" y="1054" width="492" height="70" rx="12"/>
+<text class="d-ink" x="100" y="1086" font-size="22" font-weight="700">Hook and Director role</text>
+<text class="d-ink" x="560" y="1086" font-size="22" font-weight="700" text-anchor="end">21.5 KB</text>
+<text class="d-muted" x="100" y="1114" font-size="19">AGENTS.md · START · DIRECTOR</text>
+<text class="d-muted" x="560" y="1114" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">starter</text>
+<rect class="d-addbox" x="84" y="1138" width="492" height="96" rx="12"/>
+<text class="d-ink" x="100" y="1170" font-size="22" font-weight="700">Template's Director setup</text>
+<text class="d-ink" x="560" y="1170" font-size="22" font-weight="700" text-anchor="end">9.3 KB</text>
+<text class="d-muted" x="100" y="1198" font-size="19">PROJECT · video adapter</text>
+<text class="d-muted" x="100" y="1224" font-size="19">director-startup</text>
+<text class="d-muted" x="560" y="1224" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">add-on</text>
+<rect class="d-okbox" x="84" y="1248" width="492" height="70" rx="12"/>
+<text class="d-ink" x="100" y="1280" font-size="22" font-weight="700">OPERATIONS, needed part</text>
+<text class="d-ink" x="560" y="1280" font-size="22" font-weight="700" text-anchor="end">9.4 KB</text>
+<text class="d-muted" x="100" y="1308" font-size="19">16.2 KB if read whole</text>
+<text class="d-muted" x="560" y="1308" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">starter</text>
+<rect class="d-addbox" x="84" y="1332" width="492" height="70" rx="12"/>
+<text class="d-ink" x="100" y="1364" font-size="22" font-weight="700">TEMPLATE</text>
+<text class="d-ink" x="560" y="1364" font-size="22" font-weight="700" text-anchor="end">3.3 KB</text>
+<text class="d-muted" x="100" y="1392" font-size="19">Setup file, read as a guard</text>
+<text class="d-muted" x="560" y="1392" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">add-on</text>
+<rect class="d-midbox" x="84" y="1416" width="492" height="96" rx="12"/>
+<text class="d-ink" x="100" y="1448" font-size="22" font-weight="700">Video guides, read in full</text>
+<text class="d-ink" x="560" y="1448" font-size="22" font-weight="700" text-anchor="end">67.6 KB</text>
+<text class="d-muted" x="100" y="1476" font-size="19">docs/DIRECTOR 29.1 · PROCESS 16.6</text>
+<text class="d-muted" x="100" y="1502" font-size="19">CHANNEL 12.9 · .team/TEAM 9.1</text>
+<text class="d-muted" x="560" y="1502" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">video</text>
+<rect class="d-okbox" x="84" y="1526" width="492" height="70" rx="12"/>
+<text class="d-ink" x="100" y="1558" font-size="22" font-weight="700">Run the check</text>
+<text class="d-ink" x="560" y="1558" font-size="22" font-weight="700" text-anchor="end">2.0 KB</text>
+<text class="d-muted" x="100" y="1586" font-size="19">Hashes 142 KB; only 2 KB is read</text>
+<text class="d-muted" x="560" y="1586" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">starter</text>
+<rect class="d-mile" x="24" y="1620" width="552" height="159" rx="14"/>
+<text class="d-ink" x="42" y="1658" font-size="26" font-weight="700">Say hi: 113 KB</text>
+<text class="d-ink" x="42" y="1686" font-size="21">before the first reply</text>
+<text class="d-muted" x="42" y="1714" font-size="18.5">A note or a script request pays this first too.</text>
+<text class="d-muted" x="42" y="1739" font-size="18.5">119.9 KB with whole files. 156.8 KB under</text>
+<text class="d-muted" x="42" y="1764" font-size="18.5">docs/DIRECTOR's own first-move routine.</text>
+<text class="d-ink" x="84" y="1829" font-size="22" font-weight="700">A one-line note, before saving it</text>
+<text class="d-muted" x="84" y="1853" font-size="19">After steps 1–6, it adds:</text>
+<rect class="d-midbox" x="84" y="1877" width="492" height="70" rx="12"/>
+<text class="d-ink" x="100" y="1909" font-size="22" font-weight="700">Journal and team activity</text>
+<text class="d-ink" x="560" y="1909" font-size="22" font-weight="700" text-anchor="end">24.9 KB</text>
+<text class="d-muted" x="100" y="1937" font-size="19">STATE · PIVOT_LOG · 2 activity files</text>
+<text class="d-muted" x="560" y="1937" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">video</text>
+<rect class="d-midbox" x="84" y="1961" width="492" height="96" rx="12"/>
+<text class="d-ink" x="100" y="1993" font-size="22" font-weight="700">Records and open requests</text>
+<text class="d-ink" x="560" y="1993" font-size="22" font-weight="700" text-anchor="end">35.9 KB</text>
+<text class="d-muted" x="100" y="2021" font-size="19">RECORDS · 4 requests + inputs</text>
+<text class="d-muted" x="100" y="2047" font-size="19">.program/README 13.8</text>
+<text class="d-muted" x="560" y="2047" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">video</text>
+<rect class="d-addbox" x="84" y="2071" width="492" height="70" rx="12"/>
+<text class="d-ink" x="100" y="2103" font-size="22" font-weight="700">TRACKER</text>
+<text class="d-ink" x="560" y="2103" font-size="22" font-weight="700" text-anchor="end">4.9 KB</text>
+<text class="d-muted" x="100" y="2131" font-size="19">Read before any write</text>
+<text class="d-muted" x="560" y="2131" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">add-on</text>
+<rect class="d-okbox" x="84" y="2155" width="492" height="70" rx="12"/>
+<text class="d-ink" x="100" y="2187" font-size="22" font-weight="700">LEARNING</text>
+<text class="d-ink" x="560" y="2187" font-size="22" font-weight="700" text-anchor="end">4.7 KB</text>
+<text class="d-muted" x="100" y="2215" font-size="19">Check past lessons</text>
+<text class="d-muted" x="560" y="2215" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">starter</text>
+<rect class="d-mile" x="24" y="2249" width="552" height="134" rx="14"/>
+<text class="d-ink" x="42" y="2287" font-size="26" font-weight="700">Note: 183.4 KB</text>
+<text class="d-ink" x="42" y="2315" font-size="21">before saving it</text>
+<text class="d-muted" x="42" y="2343" font-size="18.5">190.3 KB with whole files. 275.4 KB if the</text>
+<text class="d-muted" x="42" y="2368" font-size="18.5">learning and update rules are followed in full.</text>
+<text class="d-ink" x="84" y="2433" font-size="22" font-weight="700">A script from the walk, before the writer</text>
+<text class="d-muted" x="84" y="2457" font-size="19">After steps 1–10, it adds:</text>
+<rect class="d-midbox" x="84" y="2481" width="492" height="70" rx="12"/>
+<text class="d-ink" x="100" y="2513" font-size="22" font-weight="700">Rules log and ledger</text>
+<text class="d-ink" x="560" y="2513" font-size="22" font-weight="700" text-anchor="end">58.3 KB</text>
+<text class="d-muted" x="100" y="2541" font-size="19">RULES_LOG 54.1 · LEDGER 4.1</text>
+<text class="d-muted" x="560" y="2541" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">video</text>
+<rect class="d-okbox" x="84" y="2565" width="492" height="70" rx="12"/>
+<text class="d-ink" x="100" y="2597" font-size="22" font-weight="700">UPDATES</text>
+<text class="d-ink" x="560" y="2597" font-size="22" font-weight="700" text-anchor="end">26.8 KB</text>
+<text class="d-muted" x="100" y="2625" font-size="19">Update rules, followed in full</text>
+<text class="d-muted" x="560" y="2625" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">starter</text>
+<rect class="d-midbox" x="84" y="2649" width="492" height="70" rx="12"/>
+<text class="d-ink" x="100" y="2681" font-size="22" font-weight="700">Latest walk, read whole</text>
+<text class="d-ink" x="560" y="2681" font-size="22" font-weight="700" text-anchor="end">12.0 KB</text>
+<text class="d-muted" x="100" y="2709" font-size="19">WALK_09. Walks 05–08 would add 13.9</text>
+<text class="d-muted" x="560" y="2709" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">video</text>
+<rect class="d-addbox" x="84" y="2733" width="241" height="70" rx="12"/>
+<text class="d-ink" x="98" y="2763" font-size="20" font-weight="700">ROLE_INDEX</text>
+<text class="d-ink" x="313" y="2791" font-size="20" font-weight="700" text-anchor="end">3.4 KB</text>
+<text class="d-muted" x="98" y="2791" font-size="17" font-weight="600" letter-spacing=".03em">add-on</text>
+<rect class="d-midbox" x="335" y="2733" width="241" height="70" rx="12"/>
+<text class="d-ink" x="349" y="2763" font-size="20" font-weight="700">ASSIGNMENT</text>
+<text class="d-ink" x="564" y="2791" font-size="20" font-weight="700" text-anchor="end">1.7 KB</text>
+<text class="d-muted" x="349" y="2791" font-size="17" font-weight="600" letter-spacing=".03em">video</text>
+<rect class="d-mile" x="24" y="2827" width="552" height="134" rx="14"/>
+<text class="d-ink" x="42" y="2865" font-size="26" font-weight="700">Script: 292.6 KB</text>
+<text class="d-ink" x="42" y="2893" font-size="21">before the writer starts</text>
+<text class="d-muted" x="42" y="2921" font-size="18.5">306.5 KB with walks 05–08. Counts OPERATIONS whole.</text>
+<text class="d-muted" x="42" y="2946" font-size="18.5">Then the writer reads 298.7 KB + a transcript.</text>
+<circle class="d-arrowhead" cx="48" cy="1084" r="19"/>
+<text class="d-onacc" x="48" y="1091" font-size="19" font-weight="700" text-anchor="middle">1</text>
+<circle class="d-arrowhead" cx="48" cy="1168" r="19"/>
+<text class="d-onacc" x="48" y="1175" font-size="19" font-weight="700" text-anchor="middle">2</text>
+<circle class="d-arrowhead" cx="48" cy="1278" r="19"/>
+<text class="d-onacc" x="48" y="1285" font-size="19" font-weight="700" text-anchor="middle">3</text>
+<circle class="d-arrowhead" cx="48" cy="1362" r="19"/>
+<text class="d-onacc" x="48" y="1369" font-size="19" font-weight="700" text-anchor="middle">4</text>
+<circle class="d-arrowhead" cx="48" cy="1446" r="19"/>
+<text class="d-onacc" x="48" y="1453" font-size="19" font-weight="700" text-anchor="middle">5</text>
+<circle class="d-arrowhead" cx="48" cy="1556" r="19"/>
+<text class="d-onacc" x="48" y="1563" font-size="19" font-weight="700" text-anchor="middle">6</text>
+<circle class="d-arrowhead" cx="48" cy="1907" r="19"/>
+<text class="d-onacc" x="48" y="1914" font-size="19" font-weight="700" text-anchor="middle">7</text>
+<circle class="d-arrowhead" cx="48" cy="1991" r="19"/>
+<text class="d-onacc" x="48" y="1998" font-size="19" font-weight="700" text-anchor="middle">8</text>
+<circle class="d-arrowhead" cx="48" cy="2101" r="19"/>
+<text class="d-onacc" x="48" y="2108" font-size="19" font-weight="700" text-anchor="middle">9</text>
+<circle class="d-arrowhead" cx="48" cy="2185" r="19"/>
+<text class="d-onacc" x="48" y="2192" font-size="19" font-weight="700" text-anchor="middle">10</text>
+<circle class="d-arrowhead" cx="48" cy="2511" r="19"/>
+<text class="d-onacc" x="48" y="2518" font-size="19" font-weight="700" text-anchor="middle">11</text>
+<circle class="d-arrowhead" cx="48" cy="2595" r="19"/>
+<text class="d-onacc" x="48" y="2602" font-size="19" font-weight="700" text-anchor="middle">12</text>
+<circle class="d-arrowhead" cx="48" cy="2679" r="19"/>
+<text class="d-onacc" x="48" y="2686" font-size="19" font-weight="700" text-anchor="middle">13</text>
+<circle class="d-arrowhead" cx="48" cy="2763" r="19"/>
+<text class="d-onacc" x="48" y="2770" font-size="19" font-weight="700" text-anchor="middle">14</text>
+<text class="d-muted" x="24" y="3009" font-size="18" font-weight="600" letter-spacing=".06em">AN ASSIGNED CREW WORKER</text>
+<line class="d-arrow" x1="48" y1="3101" x2="48" y2="3397" stroke-width="3"/>
+<polygon class="d-arrowhead" points="48,3411 40,3395 56,3395"/>
+<text class="d-ink" x="84" y="3053" font-size="22" font-weight="700">Research one fact, before acting</text>
+<rect class="d-okbox" x="84" y="3071" width="492" height="70" rx="12"/>
+<text class="d-ink" x="100" y="3103" font-size="22" font-weight="700">Hook and worker role</text>
+<text class="d-ink" x="560" y="3103" font-size="22" font-weight="700" text-anchor="end">12.8 KB</text>
+<text class="d-muted" x="100" y="3131" font-size="19">AGENTS.md · START · WORKER</text>
+<text class="d-muted" x="560" y="3131" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">starter</text>
+<rect class="d-addbox" x="84" y="3155" width="492" height="96" rx="12"/>
+<text class="d-ink" x="100" y="3187" font-size="22" font-weight="700">Template's worker setup</text>
+<text class="d-ink" x="560" y="3187" font-size="22" font-weight="700" text-anchor="end">10.6 KB</text>
+<text class="d-muted" x="100" y="3215" font-size="19">worker-startup · worker role</text>
+<text class="d-muted" x="100" y="3241" font-size="19">PROJECT · video adapter</text>
+<text class="d-muted" x="560" y="3241" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">add-on</text>
+<rect class="d-midbox" x="84" y="3265" width="492" height="122" rx="12"/>
+<text class="d-ink" x="100" y="3297" font-size="22" font-weight="700">Crew and video guides</text>
+<text class="d-ink" x="560" y="3297" font-size="22" font-weight="700" text-anchor="end">42.6 KB</text>
+<text class="d-muted" x="100" y="3325" font-size="19">TEAM 9.1 · RENDER 6.0 · CREW 7.3</text>
+<text class="d-muted" x="100" y="3351" font-size="19">CHANNEL 12.9 · STATE 4.9</text>
+<text class="d-muted" x="100" y="3377" font-size="19">RESEARCH and the shared job 2.5</text>
+<text class="d-muted" x="560" y="3377" font-size="17" font-weight="600" text-anchor="end" letter-spacing=".03em">video</text>
+<rect class="d-mile" x="24" y="3411" width="552" height="134" rx="14"/>
+<text class="d-ink" x="42" y="3449" font-size="26" font-weight="700">Worker: 66.0 KB</text>
+<text class="d-ink" x="42" y="3477" font-size="21">before its first action</text>
+<text class="d-muted" x="42" y="3505" font-size="18.5">Workers get no badge. Steps restart at 1.</text>
+<text class="d-muted" x="42" y="3530" font-size="18.5">The writer worker reads 298.7 KB.</text>
+<circle class="d-arrowhead" cx="48" cy="3101" r="19"/>
+<text class="d-onacc" x="48" y="3108" font-size="19" font-weight="700" text-anchor="middle">1</text>
+<circle class="d-arrowhead" cx="48" cy="3185" r="19"/>
+<text class="d-onacc" x="48" y="3192" font-size="19" font-weight="700" text-anchor="middle">2</text>
+<circle class="d-arrowhead" cx="48" cy="3295" r="19"/>
+<text class="d-onacc" x="48" y="3302" font-size="19" font-weight="700" text-anchor="middle">3</text>
+<text class="d-muted" x="24" y="3573" font-size="18">Fact: measured in a generated video project with its</text>
+<text class="d-muted" x="24" y="3597" font-size="18">own context checker, 2026-11-08. Raw bytes, not tokens.</text>
+<text class="d-muted" x="24" y="3621" font-size="18">Leaves out host framing and the user's global files,</text>
+<text class="d-muted" x="24" y="3645" font-size="18">about 4.8 KB. AGENTS.md is counted whole as starter;</text>
+<text class="d-muted" x="24" y="3669" font-size="18">it also holds the video body. Layer totals are sums of</text>
+<text class="d-muted" x="24" y="3693" font-size="18">the per-file sizes; layers follow report section 2.2.</text>
+<text class="d-muted" x="24" y="3717" font-size="18">A brand-new project adds about 37 KB of first-use</text>
+<text class="d-muted" x="24" y="3741" font-size="18">reads before its first reply.</text>
+</svg>

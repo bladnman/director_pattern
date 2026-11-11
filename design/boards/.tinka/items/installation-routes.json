@@ -1,0 +1,27 @@
+{
+  "id": "installation-routes",
+  "title": "Diagram: install routes and the overlap",
+  "description": "Two writers with overlapping files feed the live template, with a likely direct copy outside both routes on 2026-11-07, then My Work generation, then the project's own Director. The overlap and the provenance drift are marked.",
+  "content": {
+    "kind": "image",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-08-installation/routes.svg"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Routes diagram. Plan decided on the 2026-11-08 evening after independent review; one yes/no open with Matt.",
+    "updatedAt": 1794191743256
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-08T20:53:14.595Z",
+  "updatedAt": "2026-11-09T02:35:43.265Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "status": "review"
+}

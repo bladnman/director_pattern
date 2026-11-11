@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 2,
+  "id": "research-2026-11-08-installation",
+  "ownerItemId": "research-2026-11-08-installation",
+  "title": "2026-11-08 · How the Director Pattern installs into a video project",
+  "description": "Plan decided 2026-11-08 evening after independent review; one yes/no open with Matt. Report, 13-page slides, routes diagram and reads diagram.",
+  "createdAt": "2026-11-08T20:53:00.430Z",
+  "updatedAt": "2026-11-09T02:35:34.694Z",
+  "placements": [
+    {
+      "x": 40,
+      "y": 40,
+      "width": 760,
+      "height": 1000,
+      "z": 0,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-6ace57f3-95ee-4521-988b-1709641561ee",
+      "itemId": "installation-report"
+    },
+    {
+      "x": 850,
+      "y": 40,
+      "width": 1002,
+      "height": 766,
+      "z": 1,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1000,
+          "height": 720
+        }
+      },
+      "id": "placement-bd127b2a-03f0-4951-8d73-76aab57cb86e",
+      "itemId": "installation-slides"
+    },
+    {
+      "x": 850,
+      "y": 856,
+      "width": 1002,
+      "height": 546,
+      "z": 2,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1200,
+          "height": 610
+        }
+      },
+      "id": "placement-33d60223-b224-4727-910c-cbfbcf63aa27",
+      "itemId": "installation-routes"
+    },
+    {
+      "x": 1902,
+      "y": 856,
+      "width": 602,
+      "height": 3817,
+      "z": 3,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 600,
+          "height": 3771
+        }
+      },
+      "id": "placement-66bbc1ba-0a94-4f9e-824a-a7a2c2bc6e50",
+      "itemId": "installation-reads"
+    }
+  ],
+  "reviewOrder": [
+    "placement-6ace57f3-95ee-4521-988b-1709641561ee",
+    "placement-bd127b2a-03f0-4951-8d73-76aab57cb86e",
+    "placement-33d60223-b224-4727-910c-cbfbcf63aa27",
+    "placement-66bbc1ba-0a94-4f9e-824a-a7a2c2bc6e50"
+  ],
+  "rounds": [],
+  "decorations": []
+}

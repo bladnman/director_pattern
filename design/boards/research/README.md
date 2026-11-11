@@ -16,6 +16,9 @@ Research and diagnosis work gets a durable, progressive Tinka report.
 
 | Date | Investigation | Folder |
 |---|---|---|
+| 2026-11-07 | Why the Director ran everything at full strength, and stopped being a steward | `2026-11-07-staffing-and-stewardship/` |
+| 2026-11-07 | Where the Director Pattern should live after compaction: scale, surfaces, architecture. 2026-11-09: proposed Director slug and layout (brief.md, slug-draft.md); independent second pass (second-pass.md). 2026-11-10: route, card triggers and trial clarification (`clarity-20261110/`). | `2026-11-07-startup-architecture/` |
+| 2026-11-08 | How the Director Pattern installs into a video project (draft, corrected after independent review) | `2026-11-08-installation/` |
 | 2026-11-10 | Making the system feel alive: original diagnosis, five reviewed chapter revisions and separate category ratings. Final delivery QA and owner creative acceptance remain open. | `2026-11-10-living-system-art/` |
 
 ## Public boundary
@@ -38,5 +41,5 @@ Tinka, from the repository root:
 python3 -m http.server 8878 --bind 127.0.0.1 --directory design/boards/research
 ```
 
-Then open `http://127.0.0.1:8878/2026-11-10-living-system-art/slides.html`.
+Then open `http://127.0.0.1:8878/2026-11-07-staffing-and-stewardship/slides.html`.
 Stop that server when you are finished.

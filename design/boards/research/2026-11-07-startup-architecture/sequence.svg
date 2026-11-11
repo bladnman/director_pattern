@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600" role="img" aria-labelledby="t d">
+<title id="t">Six steps, one gate, and an oracle for each</title>
+<desc id="d">Six steps from report section 10, left to right, each with its oracle beneath. Step 3, the disposition table, is the gate: steps 4 to 6 wait for it.</desc>
+<style>
+:root{--surface:#ffffff;--ink:#1c2229;--muted:#5a6470;--line:#d6d0c4;--accent:#2f5fa8;--inherit:#b8492f;--chosen:#2c7a66;--neutral:#8a93a0;--warn-bg:#fbebe5;--ok-bg:#e4f2ec;--mid-bg:#f6efd9;--on-accent:#ffffff}
+@media (prefers-color-scheme: dark){:root{--surface:#1c2027;--ink:#e8eaee;--muted:#a3abb7;--line:#3a414c;--accent:#79a6f0;--inherit:#ec8569;--chosen:#5fc3a8;--neutral:#8c95a3;--warn-bg:#40261f;--ok-bg:#1c372f;--mid-bg:#3a331d;--on-accent:#10141a}}
+
+svg text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.d-bg{fill:var(--surface)}
+.d-ink{fill:var(--ink)}
+.d-muted{fill:var(--muted)}
+.d-axis{stroke:var(--muted)}
+.d-inh{fill:var(--inherit)}
+.d-inh-ring{fill:none;stroke:var(--inherit);stroke-width:2.5}
+.d-cho{fill:var(--chosen)}
+.d-neu{fill:var(--neutral)}
+.d-ctx{fill:var(--accent)}
+.d-ctx-soft{fill:var(--accent);fill-opacity:.2}
+.d-onctx{fill:var(--on-accent)}
+.d-cut{stroke:var(--inherit)}
+.d-num{fill:var(--ink)}
+.d-onnum{fill:var(--surface)}
+.d-box{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.d-okbox{fill:var(--ok-bg);stroke:var(--chosen);stroke-width:1.5}
+.d-midbox{fill:var(--mid-bg);stroke:var(--neutral);stroke-width:1.5}
+.d-warnbox{fill:var(--warn-bg);stroke:var(--inherit);stroke-width:2}
+.d-arrow{stroke:var(--accent)}
+.d-arrowhead{fill:var(--accent)}
+</style>
+<rect class="d-bg" x="0" y="0" width="1200" height="600" rx="18"/>
+<text class="d-ink" x="60" y="44" font-size="24" font-weight="700">Six steps, one gate, and an oracle for each</text>
+<text class="d-muted" x="60" y="70" font-size="15">Section 10 of the report, read left to right. Step 3 is the gate: nothing in steps 4 to 6 lands before it.</text>
+<text class="d-muted" x="330" y="124" font-size="13" font-weight="600" letter-spacing=".04em" text-anchor="middle">BEFORE THE GATE</text>
+<text class="d-muted" x="870" y="124" font-size="13" font-weight="600" letter-spacing=".04em" text-anchor="middle">AFTER THE GATE</text>
+<line class="d-axis" x1="60" y1="150" x2="1140" y2="150" stroke-width="2"/>
+<path class="d-arrowhead" d="M1146 150 l-12 -7 l0 14 z"/>
+<line class="d-cut" x1="600" y1="132" x2="600" y2="480" stroke-width="3" stroke-dasharray="7 6"/>
+<text class="d-inh" x="600" y="124" font-size="13" font-weight="700" letter-spacing=".04em" text-anchor="middle">GATE</text>
+<circle class="d-num" cx="150" cy="150" r="16"/>
+<text class="d-onnum" x="150" y="155.5" font-size="15" font-weight="700" text-anchor="middle">1</text>
+<rect class="d-box" x="68" y="182" width="164" height="100" rx="10"/>
+<text class="d-ink" x="78" y="208" font-size="14" font-weight="700">Stopgap</text>
+<text class="d-ink" x="78" y="227" font-size="14">one revision, no</text>
+<text class="d-ink" x="78" y="246" font-size="14">architecture change</text>
+<text class="d-muted" x="68" y="306" font-size="11.5" font-weight="700" letter-spacing=".06em">ORACLE</text>
+<rect class="d-box" x="68" y="314" width="164" height="164" rx="10"/>
+<text class="d-ink" x="76" y="338" font-size="12.5">Transcript scanner</text>
+<text class="d-ink" x="76" y="355" font-size="12.5">over a forced</text>
+<text class="d-ink" x="76" y="372" font-size="12.5">compaction in this repo.</text>
+<circle class="d-num" cx="330" cy="150" r="16"/>
+<text class="d-onnum" x="330" y="155.5" font-size="15" font-weight="700" text-anchor="middle">2</text>
+<rect class="d-box" x="248" y="182" width="164" height="100" rx="10"/>
+<text class="d-ink" x="258" y="208" font-size="14" font-weight="700">Local hook trial</text>
+<text class="d-ink" x="258" y="227" font-size="14">this machine only;</text>
+<text class="d-ink" x="258" y="246" font-size="14">settings.local.json</text>
+<text class="d-muted" x="248" y="306" font-size="11.5" font-weight="700" letter-spacing=".06em">ORACLE</text>
+<rect class="d-box" x="248" y="314" width="164" height="164" rx="10"/>
+<text class="d-ink" x="256" y="338" font-size="12.5">Transcript scanner</text>
+<text class="d-ink" x="256" y="355" font-size="12.5">as the pass test.</text>
+<circle class="d-num" cx="510" cy="150" r="16"/>
+<text class="d-onnum" x="510" y="155.5" font-size="15" font-weight="700" text-anchor="middle">3</text>
+<rect class="d-warnbox" x="428" y="182" width="164" height="100" rx="10"/>
+<text class="d-ink" x="438" y="208" font-size="14" font-weight="700">Disposition table</text>
+<text class="d-ink" x="438" y="227" font-size="14">one row per obligation</text>
+<text class="d-ink" x="438" y="246" font-size="14">independent review</text>
+<text class="d-muted" x="428" y="306" font-size="11.5" font-weight="700" letter-spacing=".06em">ORACLE</text>
+<rect class="d-box" x="428" y="314" width="164" height="164" rx="10"/>
+<text class="d-ink" x="436" y="338" font-size="12.5">Each row: new route,</text>
+<text class="d-ink" x="436" y="355" font-size="12.5">Core line or roster row,</text>
+<text class="d-ink" x="436" y="372" font-size="12.5">and its oracle.</text>
+<circle class="d-num" cx="690" cy="150" r="16"/>
+<text class="d-onnum" x="690" y="155.5" font-size="15" font-weight="700" text-anchor="middle">4</text>
+<rect class="d-box" x="608" y="182" width="164" height="100" rx="10"/>
+<text class="d-ink" x="618" y="208" font-size="14" font-weight="700">Core and Roster</text>
+<text class="d-ink" x="618" y="227" font-size="14">helper enforcement</text>
+<text class="d-ink" x="618" y="246" font-size="14">and footer</text>
+<text class="d-muted" x="608" y="306" font-size="11.5" font-weight="700" letter-spacing=".06em">ORACLE</text>
+<rect class="d-box" x="608" y="314" width="164" height="164" rx="10"/>
+<text class="d-ink" x="616" y="338" font-size="12.5">Budget tests, inventory</text>
+<text class="d-ink" x="616" y="355" font-size="12.5">test, transcript scanner,</text>
+<text class="d-ink" x="616" y="372" font-size="12.5">capture and split rate.</text>
+<circle class="d-num" cx="870" cy="150" r="16"/>
+<text class="d-onnum" x="870" y="155.5" font-size="15" font-weight="700" text-anchor="middle">5</text>
+<rect class="d-box" x="788" y="182" width="164" height="100" rx="10"/>
+<text class="d-ink" x="798" y="208" font-size="14" font-weight="700">Adapters by hand</text>
+<text class="d-ink" x="798" y="227" font-size="14">per host run</text>
+<text class="d-ink" x="798" y="246" font-size="14">gated on role</text>
+<text class="d-muted" x="788" y="306" font-size="11.5" font-weight="700" letter-spacing=".06em">ORACLE</text>
+<rect class="d-box" x="788" y="314" width="164" height="164" rx="10"/>
+<text class="d-ink" x="796" y="338" font-size="12.5">Worker transcript:</text>
+<text class="d-ink" x="796" y="355" font-size="12.5">no Director Core</text>
+<text class="d-ink" x="796" y="372" font-size="12.5">injected. Scanner</text>
+<text class="d-ink" x="796" y="389" font-size="12.5">passes across a forced</text>
+<text class="d-ink" x="796" y="406" font-size="12.5">compaction in a</text>
+<text class="d-ink" x="796" y="423" font-size="12.5">Director session with</text>
+<text class="d-ink" x="796" y="440" font-size="12.5">adapter on.</text>
+<circle class="d-num" cx="1050" cy="150" r="16"/>
+<text class="d-onnum" x="1050" y="155.5" font-size="15" font-weight="700" text-anchor="middle">6</text>
+<rect class="d-box" x="968" y="182" width="164" height="100" rx="10"/>
+<text class="d-ink" x="978" y="208" font-size="14" font-weight="700">Later, optional</text>
+<text class="d-ink" x="978" y="227" font-size="14">agent files, skills,</text>
+<text class="d-ink" x="978" y="246" font-size="14">compiler if needed</text>
+<text class="d-muted" x="968" y="306" font-size="11.5" font-weight="700" letter-spacing=".06em">ORACLE</text>
+<rect class="d-box" x="968" y="314" width="164" height="164" rx="10"/>
+<text class="d-ink" x="976" y="338" font-size="12.5">Worker compaction trial:</text>
+<text class="d-ink" x="976" y="355" font-size="12.5">the worker still follows</text>
+<text class="d-ink" x="976" y="372" font-size="12.5">its manual after its own</text>
+<text class="d-ink" x="976" y="389" font-size="12.5">compaction. Compiler:</text>
+<text class="d-ink" x="976" y="406" font-size="12.5">byte-identical output</text>
+<text class="d-ink" x="976" y="423" font-size="12.5">against the hand-written</text>
+<text class="d-ink" x="976" y="440" font-size="12.5">Core, before it replaces</text>
+<text class="d-ink" x="976" y="457" font-size="12.5">anything.</text>
+<text class="d-ink" x="600" y="508" font-size="14.5" font-weight="700" text-anchor="middle">Step 3 is the gate: steps 4 to 6 wait for its review.</text>
+<rect class="d-warnbox" x="60" y="530" width="14" height="14" rx="3"/>
+<text class="d-muted" x="82" y="542" font-size="13">gate (step 3)</text>
+<rect class="d-box" x="210" y="530" width="14" height="14" rx="3"/>
+<text class="d-muted" x="232" y="542" font-size="13">step, with its oracle beneath</text>
+<text class="d-muted" x="60" y="578" font-size="13.5">Each oracle is quoted or condensed from the report, section 10, steps 1 to 6.</text>
+
+</svg>

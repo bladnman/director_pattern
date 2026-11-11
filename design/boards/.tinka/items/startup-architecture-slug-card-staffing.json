@@ -1,0 +1,26 @@
+{
+  "id": "startup-architecture-slug-card-staffing",
+  "title": "Sample card: staffing",
+  "description": "Sample action card for staffing, showing the proposed card shape. Proposal only; not installed.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-startup-architecture/card-sample-staffing.md"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Sample proposal for owner review. Not installed, not decided.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-09T21:21:15.790Z",
+  "updatedAt": "2026-11-09T21:21:15.790Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

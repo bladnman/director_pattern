@@ -1,0 +1,25 @@
+{
+  "id": "startup-architecture-clarity-report",
+  "title": "2026-11-10 · Startup route clarification (report)",
+  "description": "Dated supplement: current local route vs public starter vs scratch candidate, eight card triggers, reachability gaps, post-compaction reads, evidence limits and open owner calls. Proposal only; no payload change or acceptance.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-startup-architecture/clarity-20261110/report.md"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Factual review incorporated. Desktop and phone render, paging, report link, theme toggle, and overflow checks passed; owner acceptance remains open."
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-11T00:13:24.565Z",
+  "updatedAt": "2026-11-11T00:20:09.340Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

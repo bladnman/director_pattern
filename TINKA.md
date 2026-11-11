@@ -95,15 +95,54 @@ and commit the changed version pin. Setup preserves existing boards and notes;
 it never silently upgrades a checkout to the latest release.
 
 
+## Local hover-fix candidate - 2026-11-02
+
+The current pinned app is **0.6.5**, an unpublished local candidate. Its exact
+ZIP, SHA-256 sidecar and compatibility metadata are retained in `tinka/packages/`
+for offline restore with `node tinka/setup.mjs`. ZIP SHA-256:
+`8a298b32fe2085a635a3e9f46b486d4f56216f66c5781c77b15e9b5f674411d7`.
+Earlier package versions and guidance above remain historical recovery material.
+
+Preview hover retains the visible artwork in light and dark appearances. This
+app replacement preserves existing board data, stable IDs, saved geometry,
+notes, resource files and update preferences; it performs no workspace migration.
+Keep prior packages and app backups. Never restore data over subsequent live work.
+Technical installation and browser checks do not establish owner acceptance or
+public publication.
+
+
 ## Local cover-layer candidate - 2026-11-02
 
-The current pin is **0.6.6**.
+The current pin is **0.6.6**, superseding the local 0.6.5 candidate above.
 It preserves translucent hover and hides fallback labels behind available cover
 previews while keeping unavailable/title-only fallbacks. The exact ZIP, checksum
 and compatibility metadata are in `tinka/packages/` for offline pinned restore.
 ZIP SHA-256: `d7ac7a901f0227319878baa7331be19503f364f1a1482c31dea2c8428004958f`.
 Boards, geometry, notes, resource files and prior packages remain preserved; no
 workspace conversion was performed. This remains an unpublished local candidate.
+
+
+## Research and diagnosis boards - 2026-11-08
+
+Research and diagnosis work gets a durable, progressive Tinka report. The root
+board is **Research and diagnosis** (stable ID `research`), on Home. It is the
+starting point for every investigation. It holds a short intro card stating that
+rule, and one item per investigation. Each item opens a child board containing a
+markdown `report.md` and a self-contained, paged `slides.html`, with optional SVG
+diagrams. Update an investigation as findings land, keeping corrections visible.
+
+Resources live in [design/boards/research/](design/boards/research/README.md),
+registered as the `research` resource root. Read that folder's
+[AGENTS.md](design/boards/research/AGENTS.md) before adding an investigation. The
+first investigation (child board `research-2026-11-07-staffing-stewardship`)
+diagnoses why a Director inherited full-strength worker settings and stopped acting
+as the project's steward. It includes the corrections from independent review and
+from the owner. The board is public: distil the evidence, and keep raw
+conversations and private locators out.
+
+After starting this project, append `/boards/research/` to the printed URL's
+origin, or select it from Home. To open the first investigation's slides directly,
+append `/resources/research/2026-11-07-staffing-and-stewardship/slides.html`.
 
 
 ## Inside agentic systems — November 10, 2026
@@ -121,3 +160,14 @@ Source and standalone run instructions live in
 [the suite README](design/boards/agentic-systems-20261110/README.md).
 
 The reviewed revision now includes a [native chapter gallery](design/boards/agentic-systems-20261110/gallery.html), [progressive art report](design/boards/research/2026-11-10-living-system-art/report.md), [five-page telling](design/boards/research/2026-11-10-living-system-art/slides.html) and [separate review scores](design/boards/research/2026-11-10-living-system-art/score-matrix.md). All five chapter reviews meet the seven-category bar; final delivery QA and owner creative acceptance remain separate. The first version and frozen iterations are preserved.
+
+
+## Agentic systems executive briefing — November 11, 2026
+
+The **Agentic systems — executive briefing (Claude Fable 5.2)** board (stable ID
+`agentic-systems-briefing-20261111`) is a separate, simpler 24-step telling of the
+same five topics plus a closing zoom-out to many systems for a ten-minute briefing, authored by Claude Fable 5.2. It shares
+no files with the Inside agentic systems suite, which is unchanged. Open
+`/resources/agentic-briefing/presenter.html`; source and notes are in
+[its README](design/boards/agentic-systems-briefing-20261111/README.md).
+First draft; owner review open.

@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 2,
+  "id": "agentic-executive-20261111-sol",
+  "ownerItemId": "item-080a74ea-d2c6-4fb5-ae4c-9d118263f4d8",
+  "title": "Inside agentic systems · Executive briefing · GPT-6.1 Sol",
+  "description": "Six executive topics with 26 concise cues, including a continuous zoom to varied systems across an organisation. GPT-6.1 Sol · Codex · November 11, 2026. Owner creative review remains open.",
+  "createdAt": "2026-11-11T15:00:05.533Z",
+  "updatedAt": "2026-11-11T15:52:57.048Z",
+  "placements": [
+    {
+      "x": 0,
+      "y": 0,
+      "width": 1002,
+      "height": 646,
+      "z": 0,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1280,
+          "height": 768
+        }
+      },
+      "id": "placement-f14dac03-f58d-4acb-a7c9-534051ed92fc",
+      "itemId": "agentic-exec-sol-presenter"
+    },
+    {
+      "x": 1060,
+      "y": 0,
+      "width": 1002,
+      "height": 646,
+      "z": 1,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1280,
+          "height": 768
+        }
+      },
+      "id": "placement-bf9cad95-939d-44f4-baf0-91f4007ce509",
+      "itemId": "agentic-exec-sol-systems"
+    },
+    {
+      "x": 0,
+      "y": 700,
+      "width": 1002,
+      "height": 646,
+      "z": 2,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1280,
+          "height": 768
+        }
+      },
+      "id": "placement-cde959a9-30c8-4924-9eba-a3a6540f41f7",
+      "itemId": "agentic-exec-sol-director"
+    },
+    {
+      "x": 1060,
+      "y": 700,
+      "width": 1002,
+      "height": 646,
+      "z": 3,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1280,
+          "height": 768
+        }
+      },
+      "id": "placement-58455a26-b751-4f48-b1e2-ca821609faa2",
+      "itemId": "agentic-exec-sol-learning"
+    },
+    {
+      "x": 0,
+      "y": 1400,
+      "width": 1002,
+      "height": 646,
+      "z": 4,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1280,
+          "height": 768
+        }
+      },
+      "id": "placement-82a47d81-58d8-4baf-b55c-d60925d96770",
+      "itemId": "agentic-exec-sol-communication"
+    },
+    {
+      "x": 1060,
+      "y": 1400,
+      "width": 1002,
+      "height": 646,
+      "z": 5,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1280,
+          "height": 768
+        }
+      },
+      "id": "placement-f5467305-5f1b-4f56-b629-c25c12cac533",
+      "itemId": "agentic-exec-sol-human"
+    },
+    {
+      "x": 0,
+      "y": 2100,
+      "width": 1002,
+      "height": 646,
+      "z": 6,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1280,
+          "height": 768
+        }
+      },
+      "id": "placement-7e548146-eb1c-45ad-9af3-1eacee18a8f6",
+      "itemId": "agentic-exec-sol-scale"
+    }
+  ],
+  "reviewOrder": [
+    "placement-f14dac03-f58d-4acb-a7c9-534051ed92fc",
+    "placement-bf9cad95-939d-44f4-baf0-91f4007ce509",
+    "placement-cde959a9-30c8-4924-9eba-a3a6540f41f7",
+    "placement-58455a26-b751-4f48-b1e2-ca821609faa2",
+    "placement-82a47d81-58d8-4baf-b55c-d60925d96770",
+    "placement-f5467305-5f1b-4f56-b629-c25c12cac533",
+    "placement-7e548146-eb1c-45ad-9af3-1eacee18a8f6"
+  ],
+  "rounds": [],
+  "decorations": []
+}

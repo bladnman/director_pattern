@@ -1,0 +1,25 @@
+{
+  "id": "startup-architecture-clarity-slides",
+  "title": "2026-11-10 · Startup route clarification (5-page slides)",
+  "description": "A five-page self-contained walkthrough: current route, proposed block and card triggers, reachability gaps, observed post-compaction reads, trial limits and open owner calls. Includes paging controls and local sources.",
+  "content": {
+    "kind": "html",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-startup-architecture/clarity-20261110/slides.html"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Desktop and phone paging, report link, theme toggle, no-error and no-horizontal-overflow checks passed. Longer phone pages scroll internally; owner acceptance remains open."
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-11T00:13:32.185Z",
+  "updatedAt": "2026-11-11T00:20:15.913Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

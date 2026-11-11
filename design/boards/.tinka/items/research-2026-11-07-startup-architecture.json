@@ -1,0 +1,21 @@
+{
+  "id": "research-2026-11-07-startup-architecture",
+  "title": "2026-11-07 · Where the Director Pattern should live after compaction: scale, surfaces, architecture",
+  "description": "Markdown report, paged slides and diagrams. Scale audit of the startup chain, what each host keeps across compaction, and a proposed Core/Roster/Manuals/State/Adapters architecture. Facts and proposals labelled.",
+  "schemaVersion": 2,
+  "createdAt": "2026-11-08T02:28:57.770Z",
+  "updatedAt": "2026-11-08T02:45:30.399Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "ready",
+    "message": "Report, 20 slides and two diagrams in place; checks passed at the metadata and HTTP level.",
+    "updatedAt": 1794105930392
+  },
+  "childBoardId": "research-2026-11-07-startup-architecture",
+  "status": "ready"
+}

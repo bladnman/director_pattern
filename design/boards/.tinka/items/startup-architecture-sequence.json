@@ -1,0 +1,27 @@
+{
+  "id": "startup-architecture-sequence",
+  "title": "Diagram: sequence and gates",
+  "description": "The six steps of report section 10, left to right, with each step's oracle beneath it. Step 3, the disposition table, is the gate for steps 4 to 6.",
+  "content": {
+    "kind": "image",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-startup-architecture/sequence.svg"
+    }
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-08T02:45:06.612Z",
+  "updatedAt": "2026-11-08T02:45:29.370Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "ready",
+    "message": "Six-step sequence with oracles and step 3 gate; served SVG HTTP 200 and well-formed. Not browser-rendered.",
+    "updatedAt": 1794105929362
+  },
+  "status": "ready"
+}

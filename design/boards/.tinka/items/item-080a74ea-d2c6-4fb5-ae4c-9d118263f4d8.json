@@ -1,0 +1,26 @@
+{
+  "title": "Inside agentic systems · Executive briefing · GPT-6.1 Sol",
+  "description": "A new five-part executive diagram set. GPT-6.1 Sol · Codex · November 11, 2026. Independent draft; earlier diagrams are preserved.",
+  "schemaVersion": 2,
+  "id": "item-080a74ea-d2c6-4fb5-ae4c-9d118263f4d8",
+  "createdAt": "2026-11-11T15:00:05.533Z",
+  "updatedAt": "2026-11-11T15:07:07.437Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "ready",
+    "message": "",
+    "updatedAt": 0
+  },
+  "childBoardId": "agentic-executive-20261111-sol",
+  "preview": {
+    "resource": {
+      "rootId": "agentic-executive-sol",
+      "path": "previews/systems.png"
+    }
+  }
+}

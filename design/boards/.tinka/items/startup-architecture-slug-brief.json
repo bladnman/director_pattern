@@ -1,0 +1,26 @@
+{
+  "id": "startup-architecture-slug-brief",
+  "title": "Start here: the Director slug in one page (2026-11-09 proposal)",
+  "description": "One-page brief for a proposed Director slug in AGENTS.md. Proposal only; nothing published or decided.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-startup-architecture/brief.md"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Proposal for owner review. Not decided, not implemented.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-09T21:21:15.401Z",
+  "updatedAt": "2026-11-09T21:21:15.401Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

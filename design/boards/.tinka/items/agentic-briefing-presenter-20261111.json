@@ -1,0 +1,26 @@
+{
+  "id": "agentic-briefing-presenter-20261111",
+  "title": "Agentic systems briefing — presenter (Claude Fable 5.2)",
+  "description": "Arrow keys step through six chapters: an agentic system, the Director Pattern, learning and growing, across systems, people in the loop, at scale. Made by Claude Fable 5.2 (claude-fable-5-2).",
+  "content": {
+    "kind": "html",
+    "resource": {
+      "rootId": "agentic-briefing",
+      "path": "presenter.html"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "First draft by Claude Fable 5.2; owner review open.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-11T15:04:04.325Z",
+  "updatedAt": "2026-11-11T15:37:24.365Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

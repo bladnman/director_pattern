@@ -21,6 +21,75 @@
     },
     {
       "x": 800,
+      "y": 40,
+      "width": 600,
+      "height": 440,
+      "z": 1,
+      "presentation": {
+        "mode": "card"
+      },
+      "id": "placement-86dde388-af85-4cdf-894b-a0f84b8de6d3",
+      "itemId": "research-2026-11-07-staffing-stewardship"
+    },
+    {
+      "x": 1440,
+      "y": 0,
+      "width": 320,
+      "height": 240,
+      "z": 2,
+      "id": "placement-27ea7e09-0a78-4019-bcf1-dd4feca80e39",
+      "itemId": "research-2026-11-07-staffing-stewardship",
+      "removedAt": "2026-11-08T01:48:33.477Z",
+      "removalReason": "remove"
+    },
+    {
+      "x": 800,
+      "y": 520,
+      "width": 600,
+      "height": 440,
+      "z": 2,
+      "presentation": {
+        "mode": "card"
+      },
+      "id": "placement-0c819382-1ac9-412e-8d49-48c9825c4ee5",
+      "itemId": "research-2026-11-07-startup-architecture"
+    },
+    {
+      "x": 1440,
+      "y": 0,
+      "width": 320,
+      "height": 240,
+      "z": 3,
+      "id": "placement-42b2a517-46cf-47b4-9ad8-a304711a64f4",
+      "itemId": "research-2026-11-07-startup-architecture",
+      "removedAt": "2026-11-08T02:29:31.287Z",
+      "removalReason": "remove"
+    },
+    {
+      "x": 800,
+      "y": 1000,
+      "width": 600,
+      "height": 440,
+      "z": 3,
+      "presentation": {
+        "mode": "card"
+      },
+      "id": "placement-dc03b6ba-a5ef-445a-8574-164aa3c52255",
+      "itemId": "research-2026-11-08-installation"
+    },
+    {
+      "x": 1440,
+      "y": 0,
+      "width": 320,
+      "height": 240,
+      "z": 4,
+      "id": "placement-d991d065-cfa8-42e0-94a7-f973fc6cd522",
+      "itemId": "research-2026-11-08-installation",
+      "removedAt": "2026-11-08T20:53:10.657Z",
+      "removalReason": "remove"
+    },
+    {
+      "x": 800,
       "y": 1480,
       "width": 600,
       "height": 440,
@@ -45,6 +114,9 @@
   ],
   "reviewOrder": [
     "placement-858a04cb-14dc-48e7-8fdc-c789b594ae59",
+    "placement-86dde388-af85-4cdf-894b-a0f84b8de6d3",
+    "placement-0c819382-1ac9-412e-8d49-48c9825c4ee5",
+    "placement-dc03b6ba-a5ef-445a-8574-164aa3c52255",
     "placement-9f9b32f8-18c9-415a-8b7f-17825c372ee3"
   ],
   "rounds": [],

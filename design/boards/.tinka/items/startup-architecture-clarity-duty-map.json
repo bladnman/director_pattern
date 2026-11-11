@@ -1,0 +1,26 @@
+{
+  "id": "startup-architecture-clarity-duty-map",
+  "title": "Diagram · Eight action cards and their triggers",
+  "description": "Each proposed card is paired with the action that is supposed to trigger a complete read.",
+  "content": {
+    "kind": "image",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-startup-architecture/clarity-20261110/duty-map.svg"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Standalone diagram; visual rendering QA pending.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-11T00:13:55.782Z",
+  "updatedAt": "2026-11-11T00:13:55.782Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

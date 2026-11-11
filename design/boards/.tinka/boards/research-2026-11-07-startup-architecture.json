@@ -1,0 +1,251 @@
+{
+  "schemaVersion": 2,
+  "id": "research-2026-11-07-startup-architecture",
+  "ownerItemId": "research-2026-11-07-startup-architecture",
+  "title": "2026-11-07 · Where the Director Pattern should live after compaction: scale, surfaces, architecture",
+  "description": "Markdown report, paged slides and diagrams. Scale audit of the startup chain, what each host keeps across compaction, and a proposed Core/Roster/Manuals/State/Adapters architecture. Facts and proposals labelled. 2026-11-09: adds a one-page brief and a proposed Director slug, layout, sample card and independent review. Proposal only; nothing published. Also 2026-11-09: an independent second pass (second-pass.md).",
+  "createdAt": "2026-11-08T02:28:59.255Z",
+  "updatedAt": "2026-11-11T00:14:02.262Z",
+  "placements": [
+    {
+      "x": 40,
+      "y": 40,
+      "width": 760,
+      "height": 1000,
+      "z": 0,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-18e290dc-7a3c-4554-a312-f94a5d71d3d8",
+      "itemId": "startup-architecture-report"
+    },
+    {
+      "x": 850,
+      "y": 40,
+      "width": 1002,
+      "height": 766,
+      "z": 1,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1000,
+          "height": 720
+        }
+      },
+      "id": "placement-f12627e3-e3a2-4e09-832a-cc907429b6b2",
+      "itemId": "startup-architecture-slides"
+    },
+    {
+      "x": 850,
+      "y": 856,
+      "width": 1002,
+      "height": 580,
+      "z": 2,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1200,
+          "height": 640
+        }
+      },
+      "id": "placement-c03bfe17-9cf8-4c3f-9883-792af10e6c94",
+      "itemId": "startup-architecture-layers"
+    },
+    {
+      "x": 850,
+      "y": 1452,
+      "width": 1002,
+      "height": 546,
+      "z": 3,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1200,
+          "height": 600
+        }
+      },
+      "id": "placement-c730fbce-e393-4c98-aea1-ab78ab994c74",
+      "itemId": "startup-architecture-sequence"
+    },
+    {
+      "x": -780,
+      "y": 40,
+      "width": 760,
+      "height": 820,
+      "z": 4,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-a1026693-0c38-4807-a66f-4f9b39c6b717",
+      "itemId": "startup-architecture-slug-brief"
+    },
+    {
+      "x": -780,
+      "y": 900,
+      "width": 760,
+      "height": 1100,
+      "z": 5,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-03abcbb3-9665-4a41-abfb-adb5d914aa9e",
+      "itemId": "startup-architecture-slug-draft"
+    },
+    {
+      "x": 1900,
+      "y": 40,
+      "width": 760,
+      "height": 1000,
+      "z": 6,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-bae728fe-c6eb-4eb5-a07a-f57a92b4205e",
+      "itemId": "startup-architecture-slug-layout"
+    },
+    {
+      "x": 1900,
+      "y": 1080,
+      "width": 760,
+      "height": 800,
+      "z": 7,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-4552445c-4e5e-4780-ba95-569cf1a3a0ea",
+      "itemId": "startup-architecture-slug-card-staffing"
+    },
+    {
+      "x": 1900,
+      "y": 1920,
+      "width": 760,
+      "height": 1000,
+      "z": 8,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-9215ff92-41aa-438a-8c4b-042b858e2961",
+      "itemId": "startup-architecture-slug-review"
+    },
+    {
+      "x": 1900,
+      "y": 2960,
+      "width": 760,
+      "height": 1100,
+      "z": 9,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-5853d448-7ef1-4c7f-82e8-54cd2aa884cb",
+      "itemId": "startup-architecture-slug-second-pass"
+    },
+    {
+      "x": 2700,
+      "y": 1920,
+      "width": 760,
+      "height": 1000,
+      "z": 10,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-fb850b21-d7bc-4e13-a667-3045299bf248",
+      "itemId": "startup-architecture-slug-swap-audit"
+    },
+    {
+      "x": 3600,
+      "y": 40,
+      "width": 760,
+      "height": 1000,
+      "z": 11,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-901f089c-7558-47a5-8a31-e8831b150d13",
+      "itemId": "startup-architecture-clarity-report"
+    },
+    {
+      "x": 4400,
+      "y": 40,
+      "width": 1002,
+      "height": 766,
+      "z": 12,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1000,
+          "height": 720
+        }
+      },
+      "id": "placement-9406be13-f536-4ec8-bf0f-f854159e46c9",
+      "itemId": "startup-architecture-clarity-slides"
+    },
+    {
+      "x": 4400,
+      "y": 850,
+      "width": 1002,
+      "height": 546,
+      "z": 13,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1200,
+          "height": 620
+        }
+      },
+      "id": "placement-5c179b60-cf2e-4ea3-ba13-a6e8dba36fe6",
+      "itemId": "startup-architecture-clarity-route-map"
+    },
+    {
+      "x": 4400,
+      "y": 1420,
+      "width": 1002,
+      "height": 606,
+      "z": 14,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1200,
+          "height": 720
+        }
+      },
+      "id": "placement-535cc7f9-cbdf-4fdf-8c0f-570a598642b1",
+      "itemId": "startup-architecture-clarity-duty-map"
+    },
+    {
+      "x": 4400,
+      "y": 2050,
+      "width": 1002,
+      "height": 546,
+      "z": 15,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1200,
+          "height": 620
+        }
+      },
+      "id": "placement-d84f023b-ea5c-44eb-82d3-56d594cd66ae",
+      "itemId": "startup-architecture-clarity-evidence"
+    }
+  ],
+  "reviewOrder": [
+    "placement-a1026693-0c38-4807-a66f-4f9b39c6b717",
+    "placement-03abcbb3-9665-4a41-abfb-adb5d914aa9e",
+    "placement-18e290dc-7a3c-4554-a312-f94a5d71d3d8",
+    "placement-f12627e3-e3a2-4e09-832a-cc907429b6b2",
+    "placement-c03bfe17-9cf8-4c3f-9883-792af10e6c94",
+    "placement-c730fbce-e393-4c98-aea1-ab78ab994c74",
+    "placement-bae728fe-c6eb-4eb5-a07a-f57a92b4205e",
+    "placement-4552445c-4e5e-4780-ba95-569cf1a3a0ea",
+    "placement-9215ff92-41aa-438a-8c4b-042b858e2961",
+    "placement-5853d448-7ef1-4c7f-82e8-54cd2aa884cb",
+    "placement-fb850b21-d7bc-4e13-a667-3045299bf248",
+    "placement-901f089c-7558-47a5-8a31-e8831b150d13",
+    "placement-9406be13-f536-4ec8-bf0f-f854159e46c9",
+    "placement-5c179b60-cf2e-4ea3-ba13-a6e8dba36fe6",
+    "placement-535cc7f9-cbdf-4fdf-8c0f-570a598642b1",
+    "placement-d84f023b-ea5c-44eb-82d3-56d594cd66ae"
+  ],
+  "rounds": [],
+  "decorations": []
+}

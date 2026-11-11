@@ -1,0 +1,21 @@
+{
+  "id": "research-2026-11-07-staffing-stewardship",
+  "title": "2026-11-07 · Why the Director ran everything at full strength, and stopped being a steward",
+  "description": "Diagnosis of one Project Director session: 9 of 12 workers inherited the strongest tier at extra-high, and a literal rollout request bypassed each project's own Director. Revised by two independent reviews (primary cause: no steward stance; amplifier: compaction without re-load; the partial read is a symptom). The owner then retracted one proposed fix in favour of a roster and sub-directors, an open design. Report, slides and diagrams inside.",
+  "schemaVersion": 2,
+  "createdAt": "2026-11-08T01:48:14.647Z",
+  "updatedAt": "2026-11-08T01:55:44.582Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "review",
+    "message": "Headless render, paging, light/dark and 375px checks passed; awaiting owner review",
+    "updatedAt": 1794102930490
+  },
+  "childBoardId": "research-2026-11-07-staffing-stewardship",
+  "status": "review"
+}

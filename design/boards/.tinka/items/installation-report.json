@@ -1,0 +1,27 @@
+{
+  "id": "installation-report",
+  "title": "Report (markdown)",
+  "description": "Report with a corrections table (old claim, corrected claim, reason) after independent review, then the short answer, install routes, startup cost, reader test, field evidence, weak points, drift risk, options B1/B2/C2/D1/D2, an 11-row disposition sketch, 16 decisions for Matt, and evidence.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-08-installation/report.md"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Report. Plan decided on the 2026-11-08 evening after independent review; one yes/no open with Matt.",
+    "updatedAt": 1794191740494
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-08T20:53:11.963Z",
+  "updatedAt": "2026-11-09T02:35:40.502Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "status": "review"
+}

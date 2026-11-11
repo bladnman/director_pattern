@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "id": "workspace-c1f46a1d-27b8-4521-a775-b8c0ffc96cc5",
-  "revision": 166,
+  "revision": 234,
   "createdAt": "2026-10-31T17:57:07.080Z",
-  "updatedAt": "2026-11-11T08:38:02.548Z",
+  "updatedAt": "2026-11-11T15:52:57.048Z",
   "resourceRoots": {
     "legacy": {
       "path": ".."
@@ -16,12 +16,688 @@
     },
     "agentic-systems": {
       "path": "../agentic-systems-20261110"
+    },
+    "agentic-executive-sol": {
+      "path": "../agentic-executive-20261111-sol"
+    },
+    "agentic-briefing": {
+      "path": "../agentic-systems-briefing-20261111"
     }
   },
   "homeBoardIds": [
     "director-pattern-explainer",
     "research",
-    "agentic-systems-20261110"
+    "agentic-systems-20261110",
+    "agentic-executive-20261111-sol",
+    "agentic-systems-briefing-20261111"
   ],
-  "recentOperations": []
+  "recentOperations": [
+    {
+      "operationId": "1d469a26-b1da-4e92-a510-ba6eef7cfa82",
+      "fingerprint": "9109da818b7b1e6ac348594fac52744009bdec41592f91cd83bdd067466198ff",
+      "response": {
+        "revision": 171,
+        "result": {
+          "itemId": "agentic-exec-sol-director",
+          "boardId": "agentic-executive-20261111-sol",
+          "placementIds": [
+            "placement-cde959a9-30c8-4924-9eba-a3a6540f41f7"
+          ]
+        }
+      }
+    },
+    {
+      "operationId": "fc629921-e46c-444d-8184-f748b823ee00",
+      "fingerprint": "8e2b6c64836dd812002e04e43a1095f8a789c820b3959d8a4ef4db7c4ce0ccad",
+      "response": {
+        "revision": 172,
+        "result": {
+          "itemId": "agentic-exec-sol-learning",
+          "boardId": "agentic-executive-20261111-sol",
+          "placementIds": [
+            "placement-58455a26-b751-4f48-b1e2-ca821609faa2"
+          ]
+        }
+      }
+    },
+    {
+      "operationId": "ce407189-e32c-4f46-8f12-acda43df358e",
+      "fingerprint": "c595664303fe9ad45b1264d375663c84ca7b8167021325e673c98ca434e55104",
+      "response": {
+        "revision": 173,
+        "result": {
+          "itemId": "agentic-exec-sol-communication",
+          "boardId": "agentic-executive-20261111-sol",
+          "placementIds": [
+            "placement-82a47d81-58d8-4baf-b55c-d60925d96770"
+          ]
+        }
+      }
+    },
+    {
+      "operationId": "de286247-1426-4745-b5fd-f532f80523f0",
+      "fingerprint": "97b4df0419e6e745634c4f520269d01f694dfbe3eb43100ae9fb995e18050805",
+      "response": {
+        "revision": 174,
+        "result": {
+          "itemId": "agentic-exec-sol-human",
+          "boardId": "agentic-executive-20261111-sol",
+          "placementIds": [
+            "placement-f5467305-5f1b-4f56-b629-c25c12cac533"
+          ]
+        }
+      }
+    },
+    {
+      "operationId": "briefing-20261111-root",
+      "fingerprint": "b5046149637b096e5b429b33aee62961c06b5590ba73efce85b86f476db82cd4",
+      "response": {
+        "revision": 175,
+        "result": {
+          "workspaceId": "workspace-c1f46a1d-27b8-4521-a775-b8c0ffc96cc5"
+        }
+      }
+    },
+    {
+      "operationId": "briefing-20261111-board",
+      "fingerprint": "7aea131e548f71834c2b140538536be5e3cb7676ea4c934a55943bcb12c72744",
+      "response": {
+        "revision": 176,
+        "result": {
+          "boardId": "agentic-systems-briefing-20261111",
+          "itemId": "item-8339fb8d-fd6a-4018-b79d-e6b415d77a56",
+          "placementIds": []
+        }
+      }
+    },
+    {
+      "operationId": "briefing-20261111-presenter",
+      "fingerprint": "12a248caf49544d22a18db9d910b42881359771f51f41292266a2b79736e7d07",
+      "response": {
+        "revision": 177,
+        "result": {
+          "itemId": "agentic-briefing-presenter-20261111",
+          "boardId": "agentic-systems-briefing-20261111",
+          "placementIds": [
+            "placement-5a816716-5729-4e53-b25e-30427fb9837d"
+          ]
+        }
+      }
+    },
+    {
+      "operationId": "76c74e51-e84d-4a0f-9a06-bc027beda86f",
+      "fingerprint": "56c5b3240bd430b4440b83057fa54eb08ddfb7958f69d596dfbecb4bf66b5177",
+      "response": {
+        "revision": 178,
+        "result": {
+          "itemId": "agentic-exec-sol-presenter"
+        }
+      }
+    },
+    {
+      "operationId": "2181c409-2b48-4617-b0a8-bdf454d88734",
+      "fingerprint": "e3a428d12a1e8c3e7422e9594a745e6b1c156b163ad34322585ec4a6c98d4028",
+      "response": {
+        "revision": 179,
+        "result": {
+          "itemId": "agentic-exec-sol-systems"
+        }
+      }
+    },
+    {
+      "operationId": "79eec1f1-1a18-4e3f-ae81-5e2858c6b6b6",
+      "fingerprint": "8d7b510dfa5711884da8f9658e2bf8a6ef847bea150dfbbbc1f1c8165b7774f2",
+      "response": {
+        "revision": 180,
+        "result": {
+          "itemId": "agentic-exec-sol-director"
+        }
+      }
+    },
+    {
+      "operationId": "2c4aacda-eecf-4ff5-8064-d83ac2383051",
+      "fingerprint": "7828c572028d9bf791948933481dc78e4a7282c8cd47e906ba39ad84fb9a8cdb",
+      "response": {
+        "revision": 181,
+        "result": {
+          "itemId": "agentic-exec-sol-learning"
+        }
+      }
+    },
+    {
+      "operationId": "9f9dadc0-54c1-4c49-8277-406d8d4c9477",
+      "fingerprint": "325d76ff05e2e56ffbd1489ae7ad309513f7aee6252f5efea0d2620f3d95581e",
+      "response": {
+        "revision": 182,
+        "result": {
+          "itemId": "agentic-exec-sol-communication"
+        }
+      }
+    },
+    {
+      "operationId": "6cd779db-b1be-41b9-a0b7-321319add595",
+      "fingerprint": "d5458ce4c1f1ab83aec860f6d45664222c546708f989bef7b3d6890508748c0a",
+      "response": {
+        "revision": 183,
+        "result": {
+          "itemId": "agentic-exec-sol-human"
+        }
+      }
+    },
+    {
+      "operationId": "93fcceab-906a-4e27-b691-2d9ba3d5faa6",
+      "fingerprint": "c71c705103a28c1e4ec17f7164268bd364153d9a543df8ba8632d43f766bdc1e",
+      "response": {
+        "revision": 184,
+        "result": {
+          "itemId": "item-080a74ea-d2c6-4fb5-ae4c-9d118263f4d8"
+        }
+      }
+    },
+    {
+      "operationId": "9888d0c2-e355-478b-813d-e61d3d9ec049",
+      "fingerprint": "de7a354ff174c744aa9f831a375e3c38ecd56ae2de0900b63d97c5f4e9d2f353",
+      "response": {
+        "revision": 185,
+        "result": {
+          "itemId": "agentic-exec-sol-presenter"
+        }
+      }
+    },
+    {
+      "operationId": "bda84053-3dd6-4d7d-893e-bf70915201d4",
+      "fingerprint": "78446f71ee3fe96a38e8f6527320cfed1df2f3f453b61cb30e00d955479ae80d",
+      "response": {
+        "revision": 186,
+        "result": {
+          "itemId": "agentic-exec-sol-systems"
+        }
+      }
+    },
+    {
+      "operationId": "c3a63f9e-1e23-4ae6-9abc-04749cd46522",
+      "fingerprint": "50f89037ffb260d17e6971fd0a2dd26fe6c19c55a1d7e0f39677a374dc8b4ad6",
+      "response": {
+        "revision": 187,
+        "result": {
+          "itemId": "agentic-exec-sol-director"
+        }
+      }
+    },
+    {
+      "operationId": "9018270e-e030-41ba-9f93-b0507dad5df3",
+      "fingerprint": "ec28edfca8e6d764b721667b71f757179c7eb2cc0903d4aedd3431e8ddd3ba49",
+      "response": {
+        "revision": 188,
+        "result": {
+          "itemId": "agentic-exec-sol-learning"
+        }
+      }
+    },
+    {
+      "operationId": "5d0d2c5c-a0a9-4062-970b-f42a27bb1ea3",
+      "fingerprint": "c837cea7ded5f03ae11d337a45a07081db94e7c6fb186ce61cf82ede9da9e202",
+      "response": {
+        "revision": 189,
+        "result": {
+          "itemId": "agentic-exec-sol-communication"
+        }
+      }
+    },
+    {
+      "operationId": "c0cca3d3-deef-4839-8e5e-7658cb778f8a",
+      "fingerprint": "17a52341e0503f9a3ad929157557dda42ef91d2af3d1219353cfefe72bb9379d",
+      "response": {
+        "revision": 190,
+        "result": {
+          "itemId": "agentic-exec-sol-human"
+        }
+      }
+    },
+    {
+      "operationId": "0b5bad7c-1452-4d88-9bf6-0d28c6cd5197",
+      "fingerprint": "c2f7e7725056dc7eb5fb988c8118b14e3570daa36d1502f3e082bb09a083e5b9",
+      "response": {
+        "revision": 191,
+        "result": {
+          "itemId": "agentic-exec-sol-presenter"
+        }
+      }
+    },
+    {
+      "operationId": "f373e801-a5c6-4d7c-85f1-1817a91d08d8",
+      "fingerprint": "7f761499c96804d0fb38aa194916c6dfd0b6170907d3007e4cf63ff23174c087",
+      "response": {
+        "revision": 192,
+        "result": {
+          "itemId": "agentic-exec-sol-systems"
+        }
+      }
+    },
+    {
+      "operationId": "e9f0dbad-df8b-4550-9c61-91d743340827",
+      "fingerprint": "5c75f7ad54f933a7a87463157024927d4a2a67567e41dc22b1a0101be5d8fed5",
+      "response": {
+        "revision": 193,
+        "result": {
+          "itemId": "agentic-exec-sol-director"
+        }
+      }
+    },
+    {
+      "operationId": "6f01bcd7-ec95-40fe-b0c4-b6a265a38a64",
+      "fingerprint": "e7d861e9b9c31ca056f399ea80a84faab0b8a2a53db9bcb86b4babc8d5c40656",
+      "response": {
+        "revision": 194,
+        "result": {
+          "itemId": "agentic-exec-sol-learning"
+        }
+      }
+    },
+    {
+      "operationId": "f3168e12-fee6-44d0-91ac-b53f1430404a",
+      "fingerprint": "d38da6b431515bd8a3f4eeb972220601183de3b1e1e5e2311b85475d4146342e",
+      "response": {
+        "revision": 195,
+        "result": {
+          "itemId": "agentic-exec-sol-communication"
+        }
+      }
+    },
+    {
+      "operationId": "bd383c8e-d6d7-4c82-80e9-e8e5a5f8da53",
+      "fingerprint": "5c8ae5417b6ddfc3fbcbbf338e948a205f060dada0dadbe11349243e9d9291d8",
+      "response": {
+        "revision": 196,
+        "result": {
+          "itemId": "agentic-exec-sol-human"
+        }
+      }
+    },
+    {
+      "operationId": "b120c486-a596-4ed5-a71e-b26d194a383b",
+      "fingerprint": "51d1e34a4751661f78ee7da7463058a6183bb5bfa6c10d5133264bd02f95bffd",
+      "response": {
+        "revision": 197,
+        "result": {
+          "itemId": "agentic-exec-sol-presenter"
+        }
+      }
+    },
+    {
+      "operationId": "c42b6d94-5906-4ed1-8973-d24b4ac6040b",
+      "fingerprint": "f2a8b40dc83df05ee724ef52602ac0a5110df0c20f171a98a345012cd5647713",
+      "response": {
+        "revision": 198,
+        "result": {
+          "itemId": "agentic-exec-sol-systems"
+        }
+      }
+    },
+    {
+      "operationId": "5592f563-502a-4f75-9f78-2436ffb77580",
+      "fingerprint": "156efeaf7e183e304a6078609168a3d75cdd6cc7f40eaab8e54f0c7b9f1041a8",
+      "response": {
+        "revision": 199,
+        "result": {
+          "itemId": "agentic-exec-sol-director"
+        }
+      }
+    },
+    {
+      "operationId": "0bebb75e-3515-4e66-8c15-ae90a03fd211",
+      "fingerprint": "406b639c004ce10c61ddce1decaeb9c63710b70a653e1bf34f21c80c284f2d9b",
+      "response": {
+        "revision": 200,
+        "result": {
+          "itemId": "agentic-exec-sol-learning"
+        }
+      }
+    },
+    {
+      "operationId": "cffaf7fd-e1ff-4d7c-a5c8-c885f5edd909",
+      "fingerprint": "a1a899ca2d0c1fdab87eaa6f4c85be4fe6f641f5d73796a7a9d177e6d50f1924",
+      "response": {
+        "revision": 201,
+        "result": {
+          "itemId": "agentic-exec-sol-communication"
+        }
+      }
+    },
+    {
+      "operationId": "b6b767ec-d46c-4e3e-a139-28bd32a7ab5c",
+      "fingerprint": "c35aa43fbd448bda62affce400b30f13cb75aa1163d72bc2c9afb4f3750f2d0a",
+      "response": {
+        "revision": 202,
+        "result": {
+          "itemId": "agentic-exec-sol-human"
+        }
+      }
+    },
+    {
+      "operationId": "d04c265e-c69e-48ba-bb73-a8cbb0ba3280",
+      "fingerprint": "9cbb0ede0e306b84eced698c68695de5cd0368414ea72bcfab5c352cf460226d",
+      "response": {
+        "revision": 203,
+        "result": {
+          "itemId": "agentic-exec-sol-presenter"
+        }
+      }
+    },
+    {
+      "operationId": "79d547ec-8dcf-464a-94ce-0c2582697b77",
+      "fingerprint": "925d467900e0ea011374eb8de8b734f3b2f9b35695d297747cd050a9cb7a5d69",
+      "response": {
+        "revision": 204,
+        "result": {
+          "itemId": "agentic-exec-sol-systems"
+        }
+      }
+    },
+    {
+      "operationId": "e66ee3c7-56d7-43ce-955b-d7361f0df35e",
+      "fingerprint": "d84e24a910beaf15640d8d2a90a8a778920f6c1dfcc962f211b8e255d740ba6e",
+      "response": {
+        "revision": 205,
+        "result": {
+          "itemId": "agentic-exec-sol-director"
+        }
+      }
+    },
+    {
+      "operationId": "2ad9130e-47e4-49c0-9232-710d54479227",
+      "fingerprint": "d95d1c8037b0bb6a247641259d591dee993884e119bb98b43f4e2613804ff575",
+      "response": {
+        "revision": 206,
+        "result": {
+          "itemId": "agentic-exec-sol-learning"
+        }
+      }
+    },
+    {
+      "operationId": "b4c1748d-d059-468f-9fa4-54e5f8fd1970",
+      "fingerprint": "43a3b66eb1c6b6834d9bd8d4c0fa1743006ce93ffbd31f3276631ee8c97cf75f",
+      "response": {
+        "revision": 207,
+        "result": {
+          "itemId": "agentic-exec-sol-communication"
+        }
+      }
+    },
+    {
+      "operationId": "68ec96d7-59a2-4cb4-9974-3260dafa3a86",
+      "fingerprint": "bd74e203ab40cd905b0100e94a8ea88b526cc34be417841fbf61d607978be62d",
+      "response": {
+        "revision": 208,
+        "result": {
+          "itemId": "agentic-exec-sol-human"
+        }
+      }
+    },
+    {
+      "operationId": "5d65cec3-35a2-4ec5-82ad-73321eb3875f",
+      "fingerprint": "c0f64d91c84c7ddebe8556b55e3bcd5d8d7c0a1d2d6c87bceea32f16e5126c61",
+      "response": {
+        "revision": 209,
+        "result": {
+          "itemId": "agentic-exec-sol-presenter"
+        }
+      }
+    },
+    {
+      "operationId": "5c3520d1-6ca0-43d7-bbc5-14cc66e9b8a2",
+      "fingerprint": "b88fec38c2b4e8df41ae71ee8dd9e1c23e54d817cee516bbe4e7cc95cc8b2ad5",
+      "response": {
+        "revision": 210,
+        "result": {
+          "itemId": "agentic-exec-sol-systems"
+        }
+      }
+    },
+    {
+      "operationId": "b06ea54d-3379-4f7d-9d8e-9fc7a619d752",
+      "fingerprint": "812c916e6d2c585805eb4e02895ca7795a7127efce11460b9be6d9a62f4aaf32",
+      "response": {
+        "revision": 211,
+        "result": {
+          "itemId": "agentic-exec-sol-director"
+        }
+      }
+    },
+    {
+      "operationId": "009f5d51-0acd-46b8-a9f8-ef3b0970495b",
+      "fingerprint": "f4c440f9c878dbf1a4688eef16910a3054d6c07e789426c1ba3f71129b0a6aef",
+      "response": {
+        "revision": 212,
+        "result": {
+          "itemId": "agentic-exec-sol-learning"
+        }
+      }
+    },
+    {
+      "operationId": "8635c9b9-604d-447b-95d7-908a662170b9",
+      "fingerprint": "81e5952752eb6efeaf8b1d7737af9452a8fd05b9845ac96f5f522add0bda4f04",
+      "response": {
+        "revision": 213,
+        "result": {
+          "itemId": "agentic-exec-sol-communication"
+        }
+      }
+    },
+    {
+      "operationId": "af9b47c1-3b0b-461b-bb4b-44457bec91e9",
+      "fingerprint": "3b1113568dc71702656b6980c2732ff768205d1f4f2a73f05cfe9549453a10b7",
+      "response": {
+        "revision": 214,
+        "result": {
+          "itemId": "agentic-exec-sol-human"
+        }
+      }
+    },
+    {
+      "operationId": "briefing-20261111-board-desc2",
+      "fingerprint": "ab20d953441521ef95df783b7be6564078d4cc842177bb47b756b13d89428409",
+      "response": {
+        "revision": 215,
+        "result": {
+          "boardId": "agentic-systems-briefing-20261111"
+        }
+      }
+    },
+    {
+      "operationId": "briefing-20261111-item-desc2",
+      "fingerprint": "79aa72d3b89ac3035db4b3b2c1c7e41e86644f23f268a8465925a4209bc31500",
+      "response": {
+        "revision": 216,
+        "result": {
+          "itemId": "agentic-briefing-presenter-20261111"
+        }
+      }
+    },
+    {
+      "operationId": "a7239299-100d-4d7a-a13e-a2e4599c85cc",
+      "fingerprint": "a502ee473123743aa3b8413d89d2518b7ecd7b057da1508365aca9e7de0798b6",
+      "response": {
+        "revision": 217,
+        "result": {
+          "itemId": "agentic-exec-sol-presenter"
+        }
+      }
+    },
+    {
+      "operationId": "dd2442cf-c566-44d3-b57c-2dc8e63e4bc2",
+      "fingerprint": "83ad619f502bd201eba87773adc4e55c03946807ec8bfdfa2d758c525531c4b6",
+      "response": {
+        "revision": 218,
+        "result": {
+          "itemId": "agentic-exec-sol-systems"
+        }
+      }
+    },
+    {
+      "operationId": "7593a104-3d41-48b2-8777-d44b87ad11e2",
+      "fingerprint": "811ff2e77be5135a3ea49ac1129289627c540c67c9027ebfa105d8dd239c3f08",
+      "response": {
+        "revision": 219,
+        "result": {
+          "itemId": "agentic-exec-sol-director"
+        }
+      }
+    },
+    {
+      "operationId": "d64c40f7-d8ec-4365-a6ae-1a6cf3a49041",
+      "fingerprint": "93fcbf93fddb2844524989723958dcd73a25a30910a29eafabe5e290508205e6",
+      "response": {
+        "revision": 220,
+        "result": {
+          "itemId": "agentic-exec-sol-learning"
+        }
+      }
+    },
+    {
+      "operationId": "28ddfd99-e5d5-4f0a-9035-3bd294f2981d",
+      "fingerprint": "0f2c952076131f46c15a42df8ff45748456566ff6ea54b9551dcb48d75b2ac8d",
+      "response": {
+        "revision": 221,
+        "result": {
+          "itemId": "agentic-exec-sol-communication"
+        }
+      }
+    },
+    {
+      "operationId": "8ed3c7b2-9ad3-4b51-80c0-991ef9de58ca",
+      "fingerprint": "24c4a6820e8a99e28ce39ca617db683f4c0879d00d9967bceb85f9b93a40ab66",
+      "response": {
+        "revision": 222,
+        "result": {
+          "itemId": "agentic-exec-sol-human"
+        }
+      }
+    },
+    {
+      "operationId": "73b497d2-e6d0-41a6-9d86-8d27168ef000",
+      "fingerprint": "bf53d026e22fec3b0a393c04be78b1d33f2bc412c8ac18397dd4b559e34d66bc",
+      "response": {
+        "revision": 223,
+        "result": {
+          "itemId": "agentic-exec-sol-scale",
+          "boardId": "agentic-executive-20261111-sol",
+          "placementIds": [
+            "placement-7e548146-eb1c-45ad-9af3-1eacee18a8f6"
+          ]
+        }
+      }
+    },
+    {
+      "operationId": "briefing-20261111-board-desc3",
+      "fingerprint": "052253872b56121bc6ca805a695a809cf9721a85f03fc2a44198e128f8277769",
+      "response": {
+        "revision": 224,
+        "result": {
+          "boardId": "agentic-systems-briefing-20261111"
+        }
+      }
+    },
+    {
+      "operationId": "0b68180c-0e48-44ed-9a35-c8804db2201c",
+      "fingerprint": "cb698bcc5ee6e0e13a9e7a7f0325d181a33907ba81f5e7c6d3a7b2e5953b22fe",
+      "response": {
+        "revision": 225,
+        "result": {
+          "itemId": "agentic-exec-sol-scale"
+        }
+      }
+    },
+    {
+      "operationId": "fdffb702-0001-434a-8428-d22bf4d1db14",
+      "fingerprint": "d0ced327279e13bcf7c9741dc985f91975482560bd21a3956822b06e4dcd360c",
+      "response": {
+        "revision": 226,
+        "result": {
+          "boardId": "agentic-executive-20261111-sol"
+        }
+      }
+    },
+    {
+      "operationId": "941bc322-9326-4dbd-ba4d-01b5df69e418",
+      "fingerprint": "911b2de10ea985381379e04c3d0b31d842a1ec9645ada87fef47fee4e0f1c9e3",
+      "response": {
+        "revision": 227,
+        "result": {
+          "itemId": "agentic-exec-sol-presenter"
+        }
+      }
+    },
+    {
+      "operationId": "d2e446d5-5db5-47ff-9bc0-3c45e488e6fe",
+      "fingerprint": "c2a081fbdc0ff866864bd711fef6102ae8b192e4be55bca47d12026b1f098f86",
+      "response": {
+        "revision": 228,
+        "result": {
+          "itemId": "agentic-exec-sol-systems"
+        }
+      }
+    },
+    {
+      "operationId": "0fa088f5-6ce4-4711-a32a-5cc42885cdb4",
+      "fingerprint": "26171ad584cea95721cdba5563bce55ad5abab7c714790bf473e2f7c46d19fa1",
+      "response": {
+        "revision": 229,
+        "result": {
+          "itemId": "agentic-exec-sol-director"
+        }
+      }
+    },
+    {
+      "operationId": "491fcf6d-0721-4b7c-9b80-efa2d407701c",
+      "fingerprint": "56c380b06ecd0f86b10e939340b80f47269c0425600fd11d92f320035668b86a",
+      "response": {
+        "revision": 230,
+        "result": {
+          "itemId": "agentic-exec-sol-learning"
+        }
+      }
+    },
+    {
+      "operationId": "92e5e146-361f-47fa-adcf-0fe2cf379223",
+      "fingerprint": "b2c10ed00213ba09af103c11dae3c17396da541eafa5ce8056e5cf24efb6feb4",
+      "response": {
+        "revision": 231,
+        "result": {
+          "itemId": "agentic-exec-sol-communication"
+        }
+      }
+    },
+    {
+      "operationId": "bac0eaa6-a39d-4c93-9103-a75140a60c7e",
+      "fingerprint": "9218a4f26257cfd3f6c0ecd1a00758f437156f92eeed423a558db6c2ec0aaca7",
+      "response": {
+        "revision": 232,
+        "result": {
+          "itemId": "agentic-exec-sol-human"
+        }
+      }
+    },
+    {
+      "operationId": "08ca9bb9-86aa-43e1-8cca-a137eb6e76b3",
+      "fingerprint": "55ef45f63524cc164c6d3c1af91796e1074b900511b711f667a19d761f644f6b",
+      "response": {
+        "revision": 233,
+        "result": {
+          "itemId": "agentic-exec-sol-scale"
+        }
+      }
+    },
+    {
+      "operationId": "0e1611a0-7a50-4ed6-ab23-f46f93dc9acb",
+      "fingerprint": "f09908a067af40d6215cf77a64a5bdc301bef1447f19e04547743c7c15967551",
+      "response": {
+        "revision": 234,
+        "result": {
+          "boardId": "agentic-executive-20261111-sol"
+        }
+      }
+    }
+  ],
+  "movementHistoryKey": "635d9f29921b18a3b8c0ce1cb88cebb47853ab13c7e61a862f4eda32e76b9f7c"
 }

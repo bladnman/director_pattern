@@ -1,0 +1,27 @@
+{
+  "id": "startup-architecture-layers",
+  "title": "Diagram: persistence layers",
+  "description": "Three persistence layers, today and proposed: standing, loaded and reference. The compaction line sits between the standing and loaded layers.",
+  "content": {
+    "kind": "image",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-startup-architecture/layers.svg"
+    }
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-08T02:45:05.524Z",
+  "updatedAt": "2026-11-08T02:45:28.356Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "ready",
+    "message": "Three-layer diagram; served SVG HTTP 200 and well-formed. Not browser-rendered.",
+    "updatedAt": 1794105928349
+  },
+  "status": "ready"
+}

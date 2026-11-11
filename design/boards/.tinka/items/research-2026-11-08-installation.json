@@ -1,0 +1,21 @@
+{
+  "id": "research-2026-11-08-installation",
+  "title": "2026-11-08 · How the Director Pattern installs into a video project",
+  "description": "Plan decided 2026-11-08 evening after independent review; one yes/no open with Matt. Markdown report, paged slides, a routes diagram and a reads diagram. What a generated video project receives, what startup costs, what a fresh reader can tell, what agents did, where the install route fails, and the decided plan. Facts, hypotheses and proposals labelled.",
+  "build": {
+    "state": "review",
+    "message": "Plan decided 2026-11-08 evening after independent review; one yes/no open with Matt.",
+    "updatedAt": 1794191814272
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-08T20:52:56.505Z",
+  "updatedAt": "2026-11-09T02:37:40.472Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "childBoardId": "research-2026-11-08-installation",
+  "status": "review"
+}

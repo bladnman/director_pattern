@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" role="img" aria-labelledby="t d">
+<title id="t">What survives compaction</title>
+<desc id="d">Host text and the AGENTS.md instruction block stay present every turn; the role package read once as tool output is gone after compaction; the summary keeps only the claim that files were read.</desc>
+<style>
+:root{--surface:#ffffff;--ink:#1c2229;--muted:#5a6470;--line:#d6d0c4;--accent:#2f5fa8;--inherit:#b8492f;--chosen:#2c7a66;--neutral:#8a93a0;--warn-bg:#fbebe5;--ok-bg:#e4f2ec;--mid-bg:#f6efd9;--on-accent:#ffffff}
+@media (prefers-color-scheme: dark){:root{--surface:#1c2027;--ink:#e8eaee;--muted:#a3abb7;--line:#3a414c;--accent:#79a6f0;--inherit:#ec8569;--chosen:#5fc3a8;--neutral:#8c95a3;--warn-bg:#40261f;--ok-bg:#1c372f;--mid-bg:#3a331d;--on-accent:#10141a}}
+
+svg text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.d-bg{fill:var(--surface)}
+.d-ink{fill:var(--ink)}
+.d-muted{fill:var(--muted)}
+.d-axis{stroke:var(--muted)}
+.d-inh{fill:var(--inherit)}
+.d-inh-ring{fill:none;stroke:var(--inherit);stroke-width:2.5}
+.d-cho{fill:var(--chosen)}
+.d-neu{fill:var(--neutral)}
+.d-ctx{fill:var(--accent)}
+.d-ctx-soft{fill:var(--accent);fill-opacity:.2}
+.d-onctx{fill:var(--on-accent)}
+.d-cut{stroke:var(--inherit)}
+.d-num{fill:var(--ink)}
+.d-onnum{fill:var(--surface)}
+.d-box{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.d-okbox{fill:var(--ok-bg);stroke:var(--chosen);stroke-width:1.5}
+.d-midbox{fill:var(--mid-bg);stroke:var(--neutral);stroke-width:1.5}
+.d-warnbox{fill:var(--warn-bg);stroke:var(--inherit);stroke-width:2}
+.d-arrow{stroke:var(--accent)}
+.d-arrowhead{fill:var(--accent)}
+</style>
+<rect class="d-bg" x="0" y="0" width="1200" height="640" rx="18"/>
+<text class="d-ink" x="60" y="44" font-size="24" font-weight="700">What the Director could still see after compaction</text>
+<text class="d-muted" x="60" y="70" font-size="15">Source session, 2026-11-08 00:04 UTC. Host restoration is partial and varies between sessions.</text>
+<text class="d-muted" x="80" y="114" font-size="13" font-weight="600" letter-spacing=".04em">INSTRUCTION LAYER</text>
+<text class="d-muted" x="690" y="114" font-size="13" font-weight="600" letter-spacing=".04em" text-anchor="middle">BEFORE</text>
+<text class="d-muted" x="970" y="114" font-size="13" font-weight="600" letter-spacing=".04em" text-anchor="middle">AFTER COMPACTION</text>
+<rect class="d-box" x="60" y="130" width="520" height="76" rx="10"/>
+<text class="d-ink" x="80" y="162" font-size="17" font-weight="700">Host system and tool text</text>
+<text class="d-muted" x="80" y="186" font-size="13.5">“do exactly that” · “when in doubt, don’t spawn” · effort “only when asked”</text>
+<rect class="d-okbox" x="600" y="130" width="180" height="76" rx="10"/>
+<text class="d-ink" x="690.0" y="173" font-size="15" text-anchor="middle">present</text>
+<rect class="d-okbox" x="800" y="130" width="340" height="76" rx="10"/>
+<text class="d-ink" x="970.0" y="173" font-size="15" text-anchor="middle">present, every turn</text>
+<rect class="d-box" x="60" y="218" width="520" height="76" rx="10"/>
+<text class="d-ink" x="80" y="250" font-size="17" font-weight="700">AGENTS.md instruction block, user instructions</text>
+<text class="d-muted" x="80" y="274" font-size="13.5">block: read START … “before the first ordinary reply”</text>
+<rect class="d-okbox" x="600" y="218" width="180" height="76" rx="10"/>
+<text class="d-ink" x="690.0" y="261" font-size="15" text-anchor="middle">present</text>
+<rect class="d-midbox" x="800" y="218" width="340" height="76" rx="10"/>
+<text class="d-ink" x="970.0" y="261" font-size="15" text-anchor="middle">present, but never fires again</text>
+<rect class="d-box" x="60" y="306" width="520" height="76" rx="10"/>
+<text class="d-ink" x="80" y="338" font-size="17" font-weight="700">Role package, read once as tool output</text>
+<text class="d-muted" x="80" y="362" font-size="13.5">START · DIRECTOR · OPERATIONS · capability guard</text>
+<rect class="d-okbox" x="600" y="306" width="180" height="76" rx="10"/>
+<text class="d-ink" x="690.0" y="349" font-size="15" text-anchor="middle">read in full at 21:10</text>
+<rect class="d-warnbox" x="800" y="306" width="340" height="76" rx="10"/>
+<text class="d-ink" x="970.0" y="349" font-size="15" text-anchor="middle" font-weight="700">gone</text>
+<rect class="d-box" x="60" y="394" width="520" height="76" rx="10"/>
+<text class="d-ink" x="80" y="426" font-size="17" font-weight="700">Recently used files</text>
+<text class="d-muted" x="80" y="450" font-size="13.5">includes the project file with the authority guard</text>
+<rect class="d-okbox" x="600" y="394" width="180" height="76" rx="10"/>
+<text class="d-ink" x="690.0" y="437" font-size="15" text-anchor="middle">present</text>
+<rect class="d-midbox" x="800" y="394" width="340" height="76" rx="10"/>
+<text class="d-ink" x="970.0" y="437" font-size="15" text-anchor="middle">re-attached; guard not applied</text>
+<rect class="d-box" x="60" y="482" width="520" height="76" rx="10"/>
+<text class="d-ink" x="80" y="514" font-size="17" font-weight="700">Conversation summary</text>
+<text class="d-muted" x="80" y="538" font-size="13.5">12.9k characters</text>
+<rect class="d-box" x="600" y="482" width="180" height="76" rx="10"/>
+<text class="d-ink" x="690.0" y="525" font-size="15" text-anchor="middle">—</text>
+<rect class="d-warnbox" x="800" y="482" width="340" height="76" rx="10"/>
+<text class="d-ink" x="970.0" y="525" font-size="15" text-anchor="middle" font-weight="700">claim only: “files read”, “🎬 every reply”</text>
+<line class="d-cut" x1="790" y1="124" x2="790" y2="568" stroke-width="2.5" stroke-dasharray="6 5"/>
+<path class="d-arrow" d="M48 344 C 24 330, 24 270, 48 256" fill="none" stroke-width="2.5"/>
+<path class="d-arrowhead" d="M48 256 l-11 -1 l6 9 z"/>
+<text class="d-ink" x="60" y="604" font-size="15.5"><tspan font-weight="700">Proposed fix:</tspan> put the re-load trigger and the short explicit requests into the AGENTS.md instruction block,</text>
+<text class="d-ink" x="60" y="626" font-size="15.5">plain text the host re-loads every turn, not a host-configured hook. A summary saying files were read is not a read.</text>
+</svg>

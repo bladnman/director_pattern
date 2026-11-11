@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Startup route clarification</title>
+<meta name="description" content="A five-page guide to the current Director Pattern startup route, proposed action cards, open gaps and observed compaction trials.">
+<style>
+:root{color-scheme:light;--bg:#f4f2ed;--paper:#fff;--ink:#20252b;--muted:#596572;--line:#d7d2c8;--blue:#315b99;--blue-pale:#e8eef8;--green:#28735d;--green-pale:#e6f2ed;--red:#a74433;--red-pale:#f8e9e5;--amber:#81621c;--amber-pale:#f5efdc;--shadow:0 8px 28px #1822380c}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#12161b;--paper:#1c222a;--ink:#edf0f4;--muted:#abb4bf;--line:#39424d;--blue:#8eafe7;--blue-pale:#202d43;--green:#73c5a7;--green-pale:#1d342e;--red:#ef9383;--red-pale:#402722;--amber:#dcc178;--amber-pale:#3b341f;--shadow:none}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#12161b;--paper:#1c222a;--ink:#edf0f4;--muted:#abb4bf;--line:#39424d;--blue:#8eafe7;--blue-pale:#202d43;--green:#73c5a7;--green-pale:#1d342e;--red:#ef9383;--red-pale:#402722;--amber:#dcc178;--amber-pale:#3b341f;--shadow:none}
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{display:grid;grid-template-rows:auto 1fr auto;grid-template-columns:minmax(0,1fr);background:var(--bg);color:var(--ink);font:16px/1.42 system-ui,-apple-system,"Segoe UI",sans-serif}header,footer{min-width:0;display:flex;align-items:center;gap:10px;padding:8px 16px;background:var(--paper);border-color:var(--line);border-style:solid}header{border-width:0 0 1px}footer{border-width:1px 0 0}.name{flex:1;min-width:0;font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{min-height:38px;border:1px solid var(--line);border-radius:999px;padding:6px 13px;background:var(--bg);color:var(--ink);font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}button:hover{border-color:var(--blue)}button:disabled{opacity:.45;cursor:default}.count{min-width:58px;text-align:center;font-variant-numeric:tabular-nums;color:var(--muted)}.progress{height:4px;flex:1;background:var(--line);border-radius:4px;overflow:hidden}.progress b{display:block;height:100%;width:20%;background:var(--blue);transition:width .2s}main{position:relative;min-width:0;overflow:hidden}.slide{display:none;position:absolute;inset:0;min-width:0;overflow:auto;padding:clamp(16px,3vw,32px)}.slide.active{display:block}.inner{min-width:0;max-width:1080px;margin:0 auto}.eyebrow{font-size:12px;font-weight:750;letter-spacing:.09em;text-transform:uppercase;color:var(--blue);margin:0 0 8px}h1{font-size:clamp(1.65rem,4vw,2.7rem);line-height:1.12;margin:.05em 0 .38em;letter-spacing:-.02em}h2{font-size:clamp(1.2rem,2.4vw,1.75rem);line-height:1.18;margin:0 0 .4em}h3{font-size:1rem;line-height:1.2;margin:0 0 5px}p{margin:0 0 .7em}.lead{font-size:clamp(1rem,2vw,1.2rem);color:var(--muted);max-width:68ch}.tag{display:inline-block;padding:2px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:750}.tag.current{color:var(--blue);border-color:var(--blue)}.tag.proposed{color:var(--amber);border-color:var(--amber)}.tag.observed{color:var(--green);border-color:var(--green)}.tag.miss{color:var(--red);border-color:var(--red)}.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}.triple{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}.box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:13px 15px;box-shadow:var(--shadow)}.box.current{border-top:4px solid var(--blue)}.box.proposed{border-top:4px solid var(--amber)}.box.good{background:var(--green-pale);border-color:var(--green)}.box.bad{background:var(--red-pale);border-color:var(--red)}.box.question{background:var(--amber-pale)}.box p:last-child{margin-bottom:0}.route{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:stretch;margin:18px 0}.node{min-width:0;border:1px solid var(--line);border-radius:12px;background:var(--paper);padding:10px;text-align:center}.node strong{display:block;font-size:14px}.node small{display:block;font-size:12px;color:var(--muted);margin-top:3px}.arrow{align-self:center;color:var(--muted);font-size:22px}.callout{padding:9px 12px;border-left:4px solid var(--red);background:var(--red-pale);border-radius:4px 10px 10px 4px}.list{display:grid;grid-template-columns:1fr 1fr;gap:8px}.card{display:grid;grid-template-columns:38px 1fr;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 12px}.num{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--blue-pale);color:var(--blue);font-weight:800}.trigger{color:var(--muted);font-size:14px}.readmap{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px}.readmap th,.readmap td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}.readmap th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:var(--bg)}.readmap tr:last-child td{border:0}.pill{font-variant-numeric:tabular-nums;font-weight:750;white-space:nowrap}.no{color:var(--red)}.yes{color:var(--green)}.caveat{font-size:13px;color:var(--muted)}.sources{font-size:12px;color:var(--muted);margin-top:12px}.sources a,.link a{color:var(--blue);text-decoration-thickness:1px;text-underline-offset:2px}.link{margin-top:10px;font-size:14px}.decision{display:grid;grid-template-columns:1fr 1fr;gap:9px}.decision .box{padding:10px 12px}.decision h3{font-size:14px}.decision p{font-size:13.5px;color:var(--muted)}.small{font-size:13px;color:var(--muted)}code{overflow-wrap:anywhere;word-break:break-word}
+@media(max-width:700px){body{min-width:0;font-size:15.5px}main{min-width:0}.cols,.triple,.list,.decision{grid-template-columns:1fr}.route{grid-template-columns:1fr;gap:5px}.route .arrow{transform:rotate(90deg);justify-self:center;line-height:1}.readmap{font-size:12px}.readmap th,.readmap td{padding:6px}.readmap td:first-child{min-width:84px}.progress{display:none}header,footer{padding:7px 9px;gap:6px}button{padding:5px 10px}.count{min-width:47px}.slide{min-width:0;padding:16px}}
+@media print{body{display:block;background:#fff}header,footer{display:none}main{overflow:visible}.slide{display:block!important;position:static;page-break-after:always;overflow:visible}}
+</style>
+</head>
+<body>
+<header><div class="name">Research · Startup route clarification · November 10, 2026</div><button id="theme" type="button" aria-label="Switch theme">Theme</button></header>
+<main id="deck" aria-live="polite">
+<section class="slide active" aria-label="Current and proposed setup">
+ <div class="inner">
+  <p class="eyebrow">1 · Start with the route</p>
+  <h1>Most detailed guidance moves into eight separate files.</h1>
+  <p class="lead">The proposed AGENTS block carries reminders and tells the agent which file to open before each action. The old startup files would remain on disk but stop being the normal reading path. In the observed candidate sessions, the recovery card was not opened after compaction.</p>
+  <div class="cols">
+   <article class="box current"><span class="tag current">Current setup · this checkout</span><h2 style="margin-top:10px">Startup package first</h2>
+    <div class="route"><div class="node"><strong>Root AGENTS</strong><small>selects local route</small></div><span class="arrow">→</span><div class="node"><strong>START + role</strong><small>Director reads duties</small></div><span class="arrow">→</span><div class="node"><strong>Operations + check</strong><small>guards and current route</small></div></div>
+    <p><code>.director/START.md</code> → <code>.director/DIRECTOR.md</code> + selected <code>.director/OPERATIONS.md</code> section and project guards → <code>.director/startup_check.py</code>, before the first ordinary reply.</p>
+   </article>
+   <article class="box proposed"><span class="tag proposed">Proposed setup · scratch candidate</span><h2 style="margin-top:10px">Reminder, then action card</h2>
+    <div class="route"><div class="node"><strong>AGENTS block</strong><small>standing reminders</small></div><span class="arrow">→</span><div class="node"><strong>Action trigger</strong><small>e.g. staffing, recovery</small></div><span class="arrow">→</span><div class="node"><strong>Open that card</strong><small>details before action</small></div></div>
+    <p>The block does not contain the full method. It calls for a check before the first reply, then repeats startup after a break. Current evidence can be reused between breaks; the check is not run before every reply. A card is useful only if opened at its trigger.</p>
+   </article>
+  </div>
+  <p class="callout"><strong>Observed miss:</strong> both candidate sessions opened zero cards after compaction; the recovery card was missed before the first project action.</p>
+  <p class="sources">Repo sources: <code>AGENTS.md</code> · <code>pattern/starter/payload/START.md</code> · <a href="../test-install.md">scratch recipe</a></p>
+ </div>
+</section>
+<section class="slide" aria-label="Proposed action card triggers">
+ <div class="inner">
+  <p class="eyebrow">2 · What lives where</p><h1>The block routes. Each card carries one kind of work.</h1>
+  <p class="lead">“Open before” is the proposed trigger. The card's content is retrieved on demand; its name in the block does not mean it has already been read.</p>
+  <div class="list">
+   <div class="card"><div class="num">01</div><div><h3>Badge · check and 🎬</h3><div class="trigger">Open after a failed check, or when changing how instructions load. Explains what the check claims and when to retry.</div></div></div>
+   <div class="card"><div class="num">02</div><div><h3>Recovery · held work</h3><div class="trigger"><strong style="color:var(--red);font-size:11px;letter-spacing:.04em">INTENDED · NOT YET DEMONSTRATED</strong><br>The prose trigger says to read it at a Director's first project action after compaction or resume. The scratch recipe installs no host hook or settings to prompt that read; both observed candidate sessions missed the card. <strong>Nov 10 update:</strong> offline hook plumbing passed synthetic input only. In the native attempt, PreCompact fired, but provider quota stopped the task before output; <code>/compact</code> produced no boundary. Native recovery remains unverified.</div></div></div>
+   <div class="card"><div class="num">03</div><div><h3>Requests · capture and steer</h3><div class="trigger">Open before capturing, splitting, steering, or running a store command. Covers request lifecycle and state work.</div></div></div>
+   <div class="card"><div class="num">04</div><div><h3>Staffing · assign work</h3><div class="trigger">Open before staffing, briefing, or setting tier and effort. Covers role choice, scope, authority, and checks.</div></div></div>
+   <div class="card"><div class="num">05</div><div><h3>Supervision · evaluate work</h3><div class="trigger">Open while supervising, evaluating a return, or ending a turn with work out. Covers SitReps and completion.</div></div></div>
+   <div class="card"><div class="num">06</div><div><h3>Knowledge · learn and maintain</h3><div class="trigger">Open for task knowledge, recording a correction, or outcome closure. Covers selectors and upkeep.</div></div></div>
+   <div class="card"><div class="num">07</div><div><h3>Update check · update authority</h3><div class="trigger">Open when the last daily check is older than 24 hours (or none is recorded), or when discussing an update.</div></div></div>
+   <div class="card"><div class="num">08</div><div><h3>Privacy · exact sources</h3><div class="trigger">Open before first exact-source capture or changing Git tracking. Covers visibility and ignore choices.</div></div></div>
+  </div>
+  <p class="sources">Source: <a href="../layout.md#ii-cards">card trigger map</a> · <a href="../slug-draft.md">candidate block</a> · <code>cards/</code> drafts</p>
+ </div>
+</section>
+<section class="slide" aria-label="Reachability and omissions">
+ <div class="inner">
+  <p class="eyebrow">3 · What the route leaves unresolved</p><h1>Old files can stay installed and still become unreachable.</h1>
+  <p class="lead">The scratch recipe retained old startup files to satisfy the shipped checker's file hashes. The candidate block did not send the Director to START or DIRECTOR; Operations was named only as detail in selected cases.</p>
+  <div class="triple">
+   <article class="box"><span class="tag current">Still on disk</span><h2 style="margin-top:9px">Not the default route</h2><p>START, DIRECTOR and OPERATIONS remained unchanged in the scratch folder. Their presence is not proof that the candidate reads the obligations they contain.</p></article>
+   <article class="box bad"><span class="tag miss">Observed reachability miss</span><h2 style="margin-top:9px">Recovery card unopened</h2><p>The trigger is compaction or resume. New work already outstanding at conversation start may not trigger it.</p></article>
+   <article class="box question"><span class="tag proposed">Needs disposition</span><h2 style="margin-top:9px">Several duties shift</h2><p>Read order, assignment conflicts, first-use order, guard timing, update authority, role aliases and other duties need an explicit home and regression oracle.</p></article>
+  </div>
+  <div class="callout"><strong>Another mismatch:</strong> the badge card points to old startup files and says to confirm complete startup reads, while the proposed block removes those reads from the normal Director route. The candidate's checker also needed a route change that was not shipped.</div>
+  <p class="link"><a href="./report.md#reachability-and-obligations-left-outside-the-route">Read full omission map →</a> · <a href="../swap-audit.md">Independent swap audit →</a></p>
+  <p class="sources">Sources: <a href="../test-install.md">test-install recipe</a> · <a href="../layout.md#iii-where-each-obligation-group-lands">obligation map</a> · <a href="../slug-review.md">independent review</a></p>
+ </div>
+</section>
+<section class="slide" aria-label="What compaction trials show">
+ <div class="inner">
+  <p class="eyebrow">4 · What was actually observed</p><h1>A passing check did not mean the new cards were read.</h1>
+  <p class="lead">Four live session trials: two disposable starter 3.2 controls and two scratch-candidate sessions. The control is neither this checkout's local `.director` route nor a published release. Each had one manually forced compaction on one host.</p>
+  <div class="box" style="overflow-x:auto">
+   <table class="readmap"><thead><tr><th>After compaction</th><th>Scratch control · 2 sessions</th><th>Candidate · 2 sessions</th></tr></thead><tbody>
+    <tr><td>Check and 🎬</td><td><span class="yes">Both passed</span> with shipped checker</td><td><span class="yes">Both passed</span> with throwaway patched checker</td></tr>
+    <tr><td>DIRECTOR file</td><td>Both freshly reread completely</td><td>Candidate uses block and cards; no card was opened</td></tr>
+    <tr><td>START file</td><td>Host re-attached; not a fresh tool read</td><td>No card re-entry followed</td></tr>
+    <tr><td>OPERATIONS file</td><td>Partial in one; complete in one</td><td>No card re-entry followed</td></tr>
+    <tr><td>Recovery card</td><td>Not the proposed route</td><td><span class="no">Missed in both</span> before first project action</td></tr>
+   </tbody></table>
+  </div>
+  <div class="cols">
+   <article class="box good"><h2>What passed</h2><p>The post-break check and badge path in each trial's own setup. One initial control greeting was permission-blocked and unbadged; it passed after compaction. The other control passed initially. Both candidate greetings passed initially only with the patched checker.</p></article>
+   <article class="box bad"><h2>What remains unproved</h2><p>Card re-entry, held-work recovery, actual request/state writes, returns and SitRep cadence, reliable delegation, resumes, repeated compaction, other hosts, or a real installer/checker change.</p></article>
+  </div>
+  <p class="caveat">The follow-up prompts were a status question and a small code lookup. Both setups allowed direct handling, so differing handoff counts are ambiguous. Writes were denied. Do not infer a rate or general reliability from four trials.</p>
+  <p class="sources">Sources: <a href="../test-install.md">scratch test mechanics</a> · <a href="./report.md#what-the-existing-evidence-shows">full evidence limits</a> · <a href="../report.md#23-what-happens-at-compaction-sibling-evidence-not-re-derived-here">prior compaction evidence</a></p>
+ </div>
+</section>
+<section class="slide" aria-label="Open owner decision">
+ <div class="inner">
+  <p class="eyebrow">5 · The decision is still open</p><h1>Should the startup route change—and what must the replacement prove?</h1>
+  <p class="lead">A smaller first-read path is not enough. The proposed route needs an accepted home for every affected duty and an observable recovery test.</p>
+  <div class="decision">
+   <article class="box question"><h3>Role and authority</h3><p>Who is a worker when spawned to report back? Should the roster replace role-definition reads? Should Director package acknowledgment be removed?</p></article>
+   <article class="box question"><h3>Check and badge</h3><p>Should 🎬 stop certifying read/hash-managed startup parity? Must project guards and generated first-use happen before the check?</p></article>
+   <article class="box question"><h3>Triggers and missing duties</h3><p>Where do assignment conflicts, role aliases, cross-project updates, and work already held at a new conversation get a reliable trigger?</p></article>
+   <article class="box question"><h3>Updates and size</h3><p>How does project-owned setup survive updates? Are the block/card caps, over-cap badge card, and old-pointer contradictions acceptable?</p></article>
+  </div>
+  <div class="box" style="margin-top:12px"><strong>Next gate:</strong> independently review the obligation map and concrete regression cases—including the observed “check passed, zero cards read” case—before any payload implementation. N1/N2/N4/N5/N6 are design choices in the proposal but absent from the scratch recipe; N3 remains unchecked.</div>
+  <p class="link"><a href="./report.md">Open the complete report map →</a> · Review requirement: <code>development/BEHAVIOR_PARITY.md</code></p>
+  <p class="sources">Status: drafted · scratch-prototyped · not implemented in the starter/source · not accepted or published.</p>
+ </div>
+</section>
+</main>
+<footer><button id="prev" type="button" aria-label="Previous page">← Back</button><span class="count" id="count" aria-live="polite">1 / 5</span><div class="progress" aria-hidden="true"><b id="progress"></b></div><button id="next" type="button" class="primary" aria-label="Next page">Next →</button></footer>
+<script>
+(()=>{const pages=[...document.querySelectorAll('.slide')],prev=document.querySelector('#prev'),next=document.querySelector('#next'),count=document.querySelector('#count'),progress=document.querySelector('#progress');let i=0;function show(n){i=Math.max(0,Math.min(pages.length-1,n));pages.forEach((p,j)=>{p.classList.toggle('active',j===i);p.setAttribute('aria-hidden',j===i?'false':'true')});count.textContent=`${i+1} / ${pages.length}`;progress.style.width=`${(i+1)/pages.length*100}%`;prev.disabled=i===0;next.disabled=i===pages.length-1;location.hash=`page-${i+1}`}prev.addEventListener('click',()=>show(i-1));next.addEventListener('click',()=>show(i+1));document.querySelector('#theme').addEventListener('click',()=>{const dark=document.documentElement.dataset.theme!=='dark';document.documentElement.dataset.theme=dark?'dark':'light'});document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||e.target.closest('a,button'))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1)}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1)}});const m=location.hash.match(/page-(\d+)/);if(m)show(Number(m[1])-1);else show(0)})();
+</script>
+</body>
+</html>

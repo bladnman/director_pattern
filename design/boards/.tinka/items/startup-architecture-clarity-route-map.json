@@ -1,0 +1,26 @@
+{
+  "id": "startup-architecture-clarity-route-map",
+  "title": "Diagram · Current and proposed startup routes",
+  "description": "Two routes side by side: current local startup chain and proposed block → action trigger → card. The observed candidate zero-card result is marked.",
+  "content": {
+    "kind": "image",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-startup-architecture/clarity-20261110/route-map.svg"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Standalone diagram; visual rendering QA pending.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-11T00:13:49.762Z",
+  "updatedAt": "2026-11-11T00:13:49.762Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

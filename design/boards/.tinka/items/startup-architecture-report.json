@@ -1,0 +1,27 @@
+{
+  "id": "startup-architecture-report",
+  "title": "Report (markdown)",
+  "description": "Readable report: short answer, scale measurements, compaction evidence, per-host survival table, Matt's questions answered, diagnosis, proposed Core/Roster/Manuals/State/Adapters architecture with budgets and a mechanical re-entry test, what changes in existing text, what blocks acceptance, hypotheses, sequence, evidence. Independent review corrections marked inline.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-startup-architecture/report.md"
+    }
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-08T02:29:01.029Z",
+  "updatedAt": "2026-11-08T02:45:26.122Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "ready",
+    "message": "Final report in place; independent review corrections marked inline.",
+    "updatedAt": 1794105926114
+  },
+  "status": "ready"
+}

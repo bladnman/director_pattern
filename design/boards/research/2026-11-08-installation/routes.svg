@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 610" width="1200" height="610" role="img" aria-labelledby="t d">
+<title id="t">How a video project's Director integration gets written</title>
+<desc id="d">Two writers feed one live video template: the Director Pattern stencil, which writes the Director integration through a reviewed staging route, and the video system publish, which writes everything except the Director folder. Both also write AGENTS.md and nine team files, marked as the overlap. A likely direct copy into the store on 2026-11-07, outside both routes, is shown as a dashed box. Seven of the 60 files bound by the template's provenance no longer match. The template feeds My Work generation, whose installed build has a handoff that fails visibly on drift. The project's own Director then runs first use, which refuses when a bound file differs.</desc>
+<style>
+:root{--surface:#ffffff;--ink:#1c2229;--muted:#5a6470;--line:#d6d0c4;--accent:#2f5fa8;--inherit:#b8492f;--chosen:#2c7a66;--neutral:#8a93a0;--warn-bg:#fbebe5;--ok-bg:#e4f2ec;--mid-bg:#f6efd9;--on-accent:#ffffff}
+@media (prefers-color-scheme: dark){:root{--surface:#1c2027;--ink:#e8eaee;--muted:#a3abb7;--line:#3a414c;--accent:#79a6f0;--inherit:#ec8569;--chosen:#5fc3a8;--neutral:#8c95a3;--warn-bg:#40261f;--ok-bg:#1c372f;--mid-bg:#3a331d;--on-accent:#10141a}}
+
+svg text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.d-bg{fill:var(--surface)}
+.d-ink{fill:var(--ink)}
+.d-muted{fill:var(--muted)}
+.d-inh{fill:var(--inherit)}
+.d-cut{stroke:var(--inherit)}
+.d-box{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.d-okbox{fill:var(--ok-bg);stroke:var(--chosen);stroke-width:1.5}
+.d-midbox{fill:var(--mid-bg);stroke:var(--neutral);stroke-width:1.5}
+.d-warnbox{fill:var(--warn-bg);stroke:var(--inherit);stroke-width:2}
+.d-arrow{stroke:var(--accent)}
+.d-arrowhead{fill:var(--accent)}
+.d-redhead{fill:var(--inherit)}
+</style>
+<rect class="d-bg" x="0" y="0" width="1200" height="610" rx="18"/>
+<text class="d-ink" x="40" y="44" font-size="24" font-weight="700">How a video project's Director integration gets written</text>
+<text class="d-muted" x="40" y="70" font-size="15">Two writers with overlapping files feed one live template, and a likely direct copy bypassed both. Left to right is the order of events.</text>
+
+<text class="d-muted" x="40" y="112" font-size="13" font-weight="600" letter-spacing=".04em">TWO WRITERS</text>
+<text class="d-muted" x="470" y="112" font-size="13" font-weight="600" letter-spacing=".04em">LIVE TEMPLATE</text>
+<text class="d-muted" x="850" y="112" font-size="13" font-weight="600" letter-spacing=".04em">THEN, PER NEW PROJECT</text>
+
+<!-- Writer 1: stencil -->
+<rect class="d-okbox" x="40" y="124" width="330" height="170" rx="12"/>
+<text class="d-ink" x="58" y="152" font-size="17" font-weight="700">Director Pattern stencil</text>
+<text class="d-muted" x="58" y="174" font-size="13.5">Reviewed staging, bound by hashes</text>
+<text class="d-muted" x="58" y="192" font-size="13.5">28 managed files, plus 18 legacy files</text>
+<text class="d-muted" x="58" y="210" font-size="13.5">Last applied at starter 3, before 3.1</text>
+<rect class="d-warnbox" x="54" y="226" width="302" height="54" rx="8"/>
+<text class="d-inh" x="66" y="248" font-size="13.5" font-weight="700">Also writes AGENTS.md and 9 .team files</text>
+<text class="d-muted" x="66" y="268" font-size="13">The same files the video publish writes</text>
+
+<!-- Writer 2: video publish -->
+<rect class="d-midbox" x="40" y="330" width="330" height="170" rx="12"/>
+<text class="d-ink" x="58" y="358" font-size="17" font-weight="700">Video system publish</text>
+<text class="d-muted" x="58" y="380" font-size="13.5">Mirror copy with delete, skips .director/</text>
+<text class="d-muted" x="58" y="398" font-size="13.5">Writes docs/, .program/ and the video .team files</text>
+<text class="d-muted" x="58" y="416" font-size="13.5">Active. Its copy now holds the stencil-owned files</text>
+<rect class="d-warnbox" x="54" y="432" width="302" height="54" rx="8"/>
+<text class="d-inh" x="66" y="454" font-size="13.5" font-weight="700">Also writes AGENTS.md and 9 .team files</text>
+<text class="d-muted" x="66" y="474" font-size="13">So the next publish rewrites them</text>
+
+<!-- Arrows writers to template -->
+<line class="d-arrow" x1="370" y1="209" x2="456" y2="262" stroke-width="2.5"/>
+<polygon class="d-arrowhead" points="470,270 452,270 459,256"/>
+<line class="d-arrow" x1="370" y1="415" x2="456" y2="358" stroke-width="2.5"/>
+<polygon class="d-arrowhead" points="470,350 454,366 447,353"/>
+<text class="d-inh" x="378" y="320" font-size="13" font-weight="700">overlap</text>
+<text class="d-inh" x="378" y="338" font-size="13" font-weight="700">written twice</text>
+
+<!-- Template -->
+<rect class="d-box" x="470" y="190" width="310" height="250" rx="12"/>
+<text class="d-ink" x="488" y="220" font-size="17" font-weight="700">Live video template</text>
+<text class="d-muted" x="488" y="242" font-size="13.5">Its provenance binds 60 files by hash</text>
+<text class="d-muted" x="488" y="260" font-size="13.5">Stencil staging refuses to plan on drift</text>
+<rect class="d-warnbox" x="486" y="278" width="278" height="148" rx="8"/>
+<text class="d-inh" x="500" y="302" font-size="13" font-weight="700" letter-spacing=".04em">OVERLAP, TWO WRITERS</text>
+<text class="d-ink" x="500" y="326" font-size="14">AGENTS.md</text>
+<text class="d-ink" x="500" y="346" font-size="14">9 .team files</text>
+<text class="d-ink" x="500" y="372" font-size="14" font-weight="700">7 of 60 bound files no longer match</text>
+<text class="d-muted" x="500" y="392" font-size="13">Includes docs/DIRECTOR, PROCESS, CHANNEL</text>
+<text class="d-muted" x="500" y="410" font-size="13">The 53 others match, all of .director/</text>
+
+<!-- Direct copy -->
+<rect class="d-warnbox" x="470" y="470" width="310" height="52" rx="10" stroke-dasharray="6 5"/>
+<text class="d-inh" x="486" y="492" font-size="13.5" font-weight="700">Direct copy into the store, 2026-11-07</text>
+<text class="d-muted" x="486" y="511" font-size="13">Outside both routes. Likely (hypothesis)</text>
+<line class="d-cut" x1="625" y1="470" x2="625" y2="454" stroke-width="2.5" stroke-dasharray="6 5"/>
+<polygon class="d-redhead" points="625,440 618,456 632,456"/>
+
+<!-- My Work generation -->
+<rect class="d-box" x="850" y="124" width="310" height="170" rx="12"/>
+<text class="d-ink" x="868" y="152" font-size="17" font-weight="700">My Work generation</text>
+<text class="d-muted" x="868" y="174" font-size="13.5">Copies the template to a new folder</text>
+<text class="d-muted" x="868" y="192" font-size="13.5">Installed build has the Director handoff:</text>
+<text class="d-muted" x="868" y="210" font-size="13.5">rechecks every bound hash, writes a marker</text>
+<text class="d-inh" x="868" y="236" font-size="13.5" font-weight="700">On drift: "Director handoff failed"</text>
+<text class="d-muted" x="868" y="254" font-size="13.5">and no marker (code read, not executed)</text>
+<text class="d-muted" x="868" y="276" font-size="13.5">App Store build leaves the handoff out</text>
+
+<!-- Project Director -->
+<rect class="d-midbox" x="850" y="330" width="310" height="170" rx="12"/>
+<text class="d-ink" x="868" y="358" font-size="17" font-weight="700">The project's own Director</text>
+<text class="d-muted" x="868" y="380" font-size="13.5">Runs first use, writes the setup receipt</text>
+<text class="d-muted" x="868" y="398" font-size="13.5">Stops if any bound hash differs:</text>
+<text class="d-inh" x="868" y="416" font-size="13.5" font-weight="700">"managed template drift" (code read)</text>
+<text class="d-muted" x="868" y="442" font-size="13.5">Later updates: its own reviewed route</text>
+<text class="d-muted" x="868" y="460" font-size="13.5">Existing projects are unaffected</text>
+
+<!-- Arrows template to generation, generation to Director -->
+<line class="d-arrow" x1="780" y1="250" x2="836" y2="250" stroke-width="2.5"/>
+<polygon class="d-arrowhead" points="850,250 834,243 834,257"/>
+<line class="d-arrow" x1="1005" y1="294" x2="1005" y2="316" stroke-width="2.5"/>
+<polygon class="d-arrowhead" points="1005,330 998,314 1012,314"/>
+<line class="d-cut" x1="780" y1="400" x2="836" y2="400" stroke-width="2.5" stroke-dasharray="6 5"/>
+<polygon class="d-redhead" points="850,400 834,393 834,407"/>
+<text class="d-inh" x="782" y="428" font-size="13" font-weight="700">drift</text>
+<text class="d-inh" x="782" y="446" font-size="13" font-weight="700">blocks</text>
+
+<text class="d-muted" x="40" y="550" font-size="13.5">Solid blue: the routes that exist today. Red: the overlap and the drift it caused. Dashed red: the likely direct copy, and the effect of drift on first use.</text>
+<text class="d-muted" x="40" y="572" font-size="13.5">Fact: route map, re-checked and confirmed by independent review. The handoff and first-use refusals are code read, not executed.</text>
+<text class="d-muted" x="40" y="594" font-size="13.5">Hypothesis, strongly supported: the next creation reports a visible handoff failure and writes no marker, until the template is reconciled.</text>
+</svg>

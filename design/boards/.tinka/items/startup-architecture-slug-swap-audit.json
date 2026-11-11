@@ -1,0 +1,26 @@
+{
+  "id": "startup-architecture-slug-swap-audit",
+  "title": "Swap audit: what the candidate trades away",
+  "description": "Audit of what the slug candidate gives up in exchange for its gains. A review, not an acceptance; nothing published or decided.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-startup-architecture/swap-audit.md"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Swap audit recorded. Not an acceptance of the proposal.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-09T23:53:08.670Z",
+  "updatedAt": "2026-11-09T23:53:08.670Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

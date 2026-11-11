@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 2,
+  "id": "research-2026-11-07-staffing-stewardship",
+  "ownerItemId": "research-2026-11-07-staffing-stewardship",
+  "title": "2026-11-07 · Why the Director ran everything at full strength, and stopped being a steward",
+  "description": "Markdown report, paged slides and two diagrams. Distilled from private session records; corrections from independent review kept visible.",
+  "createdAt": "2026-11-08T01:48:14.777Z",
+  "updatedAt": "2026-11-08T01:48:51.751Z",
+  "placements": [
+    {
+      "x": 40,
+      "y": 40,
+      "width": 760,
+      "height": 1000,
+      "z": 0,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-7f32db49-9b8a-4620-bbaf-0b6c7e08fc24",
+      "itemId": "staffing-stewardship-report"
+    },
+    {
+      "x": 850,
+      "y": 40,
+      "width": 1002,
+      "height": 766,
+      "z": 1,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1000,
+          "height": 720
+        }
+      },
+      "id": "placement-e6830d27-2a6e-4eb9-8250-aa937e68a60e",
+      "itemId": "staffing-stewardship-slides"
+    },
+    {
+      "x": 850,
+      "y": 856,
+      "width": 1002,
+      "height": 546,
+      "z": 2,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1200,
+          "height": 600
+        }
+      },
+      "id": "placement-181957bc-9e11-4ba5-8750-7c408f73a74b",
+      "itemId": "staffing-stewardship-timeline"
+    },
+    {
+      "x": 850,
+      "y": 1452,
+      "width": 1002,
+      "height": 580,
+      "z": 3,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1200,
+          "height": 640
+        }
+      },
+      "id": "placement-f18a6af0-c801-4de7-aadd-b464db6fd009",
+      "itemId": "staffing-stewardship-layers"
+    }
+  ],
+  "reviewOrder": [
+    "placement-7f32db49-9b8a-4620-bbaf-0b6c7e08fc24",
+    "placement-e6830d27-2a6e-4eb9-8250-aa937e68a60e",
+    "placement-181957bc-9e11-4ba5-8750-7c408f73a74b",
+    "placement-f18a6af0-c801-4de7-aadd-b464db6fd009"
+  ],
+  "rounds": [],
+  "decorations": []
+}

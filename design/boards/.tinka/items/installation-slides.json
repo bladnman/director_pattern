@@ -1,0 +1,27 @@
+{
+  "id": "installation-slides",
+  "title": "Paged slides",
+  "description": "13 self-contained pages: the short version first, then one per report section plus a corrections page after the short answer, showing each old claim beside its correction. Corrected after independent review and re-check; plan decided 2026-11-08 evening. Page with arrow keys, Space or the buttons; light and dark themes; readable at phone width.",
+  "content": {
+    "kind": "html",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-08-installation/slides.html"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "13 pages. Plan decided on the 2026-11-08 evening after independent review; one yes/no open with Matt.",
+    "updatedAt": 1794191741886
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-08T20:53:13.278Z",
+  "updatedAt": "2026-11-09T02:37:41.814Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "status": "review"
+}

@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where the Director Pattern should live after compaction</title>
+<meta name="description" content="A paged telling of the 2026-11-07 investigation: scale of the Director startup chain, what survives compaction on each host, and a proposed Core, Roster, Manuals, State and Adapters architecture. Facts and proposals labelled.">
+<style>
+:root{
+  --bg:#f5f3ee;--surface:#ffffff;--ink:#1c2229;--muted:#5a6470;--line:#d6d0c4;
+  --accent:#2f5fa8;--inherit:#b8492f;--chosen:#2c7a66;--neutral:#8a93a0;
+  --warn-bg:#fbebe5;--ok-bg:#e4f2ec;--mid-bg:#f6efd9;--chip:#ebe7de;--on-accent:#ffffff;
+  --shadow:0 1px 2px rgba(20,24,30,.06),0 8px 24px rgba(20,24,30,.06);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121519;--surface:#1c2027;--ink:#e8eaee;--muted:#a3abb7;--line:#3a414c;
+    --accent:#79a6f0;--inherit:#ec8569;--chosen:#5fc3a8;--neutral:#8c95a3;
+    --warn-bg:#40261f;--ok-bg:#1c372f;--mid-bg:#3a331d;--chip:#272c34;--on-accent:#10141a;
+    --shadow:none;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121519;--surface:#1c2027;--ink:#e8eaee;--muted:#a3abb7;--line:#3a414c;
+  --accent:#79a6f0;--inherit:#ec8569;--chosen:#5fc3a8;--neutral:#8c95a3;
+  --warn-bg:#40261f;--ok-bg:#1c372f;--mid-bg:#3a331d;--chip:#272c34;--on-accent:#10141a;
+  --shadow:none;color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  display:grid;grid-template-rows:auto 1fr auto;grid-template-columns:minmax(0,1fr);-webkit-text-size-adjust:100%}
+header.bar,footer.bar{display:flex;align-items:center;gap:12px;padding:7px 20px;background:var(--surface);border-color:var(--line);border-style:solid;border-width:0}
+header.bar{border-bottom-width:1px}
+footer.bar{border-top-width:1px}
+.deck-title{font-size:13px;color:var(--muted);letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1 1 0;min-width:0;width:0}
+button{font:inherit;font-size:14px;color:var(--ink);background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;min-height:36px}
+button:hover{border-color:var(--accent)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button:disabled{opacity:.4;cursor:default}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.counter{font-variant-numeric:tabular-nums;font-size:14px;color:var(--muted);min-width:64px;text-align:center}
+.progress{flex:1;height:4px;background:var(--chip);border-radius:4px;overflow:hidden}
+.progress span{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
+main{position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;overflow:auto;padding:clamp(16px,3vw,28px) clamp(16px,4.5vw,48px);display:none}
+.slide.active{display:block}
+.inner{max-width:1040px;margin:0 auto}
+.kicker{font-size:13px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+h1{font-size:clamp(1.7rem,4.6vw,2.9rem);line-height:1.12;margin:.1em 0 .4em;letter-spacing:-.01em}
+h2{font-size:clamp(1.3rem,3.2vw,1.85rem);line-height:1.15;margin:0 0 .4em;letter-spacing:-.01em}
+h3{font-size:1.05rem;margin:0 0 .35em}
+p{margin:0 0 .8em}
+.lede{font-size:clamp(1.02rem,2.2vw,1.22rem);color:var(--muted);max-width:60ch}
+ul{margin:.2em 0 .8em;padding-left:1.15em}
+li{margin:.2em 0}
+strong{font-weight:680}
+code{font:0.88em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--chip);padding:.08em .35em;border-radius:5px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.chip{font-size:13.5px;padding:5px 12px;border-radius:999px;background:var(--chip);border:1px solid var(--line)}
+.chip.ok{background:var(--ok-bg);border-color:var(--chosen)}
+.chip.warn{background:var(--warn-bg);border-color:var(--inherit)}
+.chip.mid{background:var(--mid-bg);border-color:var(--neutral)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px;box-shadow:var(--shadow)}
+.card.warn{background:var(--warn-bg);border-color:var(--inherit)}
+.card.ok{background:var(--ok-bg);border-color:var(--chosen)}
+.card.mid{background:var(--mid-bg);border-color:var(--neutral)}
+.card p:last-child,.card ul:last-child{margin-bottom:0}
+.label{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:6px;margin-right:6px;vertical-align:1px;border:1px solid var(--line);background:var(--chip);color:var(--muted)}
+.tag.fact{color:var(--chosen);border-color:var(--chosen)}
+.tag.hyp{color:var(--muted);border-style:dashed}
+.tag.fixed{color:var(--on-accent);background:var(--chosen);border-color:var(--chosen)}
+.tag.prop{color:var(--accent);border-color:var(--accent)}
+.big{font-size:clamp(2rem,6vw,3.4rem);font-weight:760;line-height:1;letter-spacing:-.02em}
+.big small{font-size:.38em;font-weight:600;color:var(--muted);letter-spacing:0}
+.stat{display:flex;flex-direction:column;gap:6px}
+.figscroll{overflow-x:auto;margin:4px 0 10px;border-radius:16px}
+@media (min-width:761px){.figscroll svg.diagram{height:calc(100vh - 300px);max-height:none;width:auto;max-width:100%;margin:0 auto}}
+svg.diagram{display:block;width:100%;height:auto}
+.note{font-size:14px;color:var(--muted)}
+.quote{border-left:3px solid var(--accent);padding:4px 0 4px 14px;margin:10px 0;color:var(--ink)}
+/* dispatch squares */
+.squares{display:grid;grid-template-columns:repeat(21,1fr);gap:5px;margin:10px 0 6px}
+.sq{aspect-ratio:1;border-radius:5px;background:var(--neutral);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--surface)}
+.sq.inh{background:var(--inherit)}
+.sq.cho{background:var(--chosen)}
+.bar2{height:30px;border-radius:8px;background:var(--chip);overflow:hidden;display:flex;margin:6px 0 2px}
+.bar2 span{display:flex;align-items:center;padding:0 10px;font-size:13px;font-weight:700;color:var(--surface);white-space:nowrap}
+.bar2 .a{background:var(--inherit)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13.5px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+/* inheritance rows */
+.flow{display:grid;grid-template-columns:minmax(180px,250px) 1fr;gap:14px;align-items:center}
+.flow .src{text-align:center}
+.paths{display:grid;gap:10px}
+.path{display:grid;grid-template-columns:1.1fr auto 1fr;gap:10px;align-items:center}
+.path .arrow{color:var(--muted);font-size:20px}
+.path .res{border-radius:10px;padding:8px 12px;font-weight:650;font-size:15px}
+.path .cond{font-size:15px}
+.res.inh{background:var(--warn-bg);border:1px solid var(--inherit)}
+.res.cho{background:var(--ok-bg);border:1px solid var(--chosen)}
+.res.neu{background:var(--mid-bg);border:1px solid var(--neutral)}
+.res small{display:block;font-weight:500;color:var(--muted);font-size:12.5px}
+/* steps */
+.steps{list-style:none;padding:0;margin:8px 0;counter-reset:s;display:grid;gap:5px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;margin:0}
+.steps li::before{content:counter(s);width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--surface);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.steps li.bad::before{background:var(--inherit)}
+.steps li.good::before{background:var(--chosen)}
+/* stack */
+.stack{display:grid;gap:4px}
+.layer{border-radius:14px;padding:10px 16px;border:1px solid var(--line);background:var(--surface)}
+.layer.root{border:2px solid var(--inherit);background:var(--warn-bg)}
+.layer.amp{border:2px solid var(--neutral);background:var(--mid-bg)}
+.down{text-align:center;color:var(--muted);font-size:13px;line-height:1}
+.sym{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--surface);border-radius:12px;overflow:hidden}
+th,td{text-align:left;vertical-align:top;padding:6px 10px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--chip)}
+tr:last-child td{border-bottom:0}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.hint{font-size:13.5px;color:var(--muted);margin-top:20px}
+kbd{font:12px ui-monospace,Menlo,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;background:var(--surface)}
+svg text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.d-bg{fill:var(--surface)}
+.d-ink{fill:var(--ink)}
+.d-muted{fill:var(--muted)}
+.d-axis{stroke:var(--muted)}
+.d-inh{fill:var(--inherit)}
+.d-inh-ring{fill:none;stroke:var(--inherit);stroke-width:2.5}
+.d-cho{fill:var(--chosen)}
+.d-neu{fill:var(--neutral)}
+.d-ctx{fill:var(--accent)}
+.d-ctx-soft{fill:var(--accent);fill-opacity:.2}
+.d-onctx{fill:var(--on-accent)}
+.d-cut{stroke:var(--inherit)}
+.d-num{fill:var(--ink)}
+.d-onnum{fill:var(--surface)}
+.d-box{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.d-okbox{fill:var(--ok-bg);stroke:var(--chosen);stroke-width:1.5}
+.d-midbox{fill:var(--mid-bg);stroke:var(--neutral);stroke-width:1.5}
+.d-warnbox{fill:var(--warn-bg);stroke:var(--inherit);stroke-width:2}
+.d-arrow{stroke:var(--accent)}
+.d-arrowhead{fill:var(--accent)}
+@media (max-width:760px){
+  body{font-size:16px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .path{grid-template-columns:1fr;gap:4px}
+  .path .arrow{display:none}
+  .figscroll svg.diagram{min-width:720px}
+  .squares{grid-template-columns:repeat(11,1fr)}
+  header.bar,footer.bar{padding:8px 12px;gap:8px}
+  .progress{display:none}
+  footer.bar{justify-content:space-between}
+  table{font-size:13.5px}
+}
+@media print{
+  body{display:block;background:#fff}
+  header.bar,footer.bar{display:none}
+  main{overflow:visible}
+  .slide{display:block!important;position:static;page-break-after:always;overflow:visible}
+}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="deck-title">Research and diagnosis · 2026-11-07 · Where the Director Pattern should live after compaction</div>
+  <button id="theme" type="button" aria-label="Switch colour theme">Theme</button>
+</header>
+<main id="deck" aria-live="polite">
+
+<section class="slide" aria-label="Title">
+ <div class="inner">
+  <p class="kicker">Research and diagnosis · 2026-11-07</p>
+  <h1>Where the Director Pattern should live after compaction</h1>
+  <p class="lede">Scale, surfaces and a proposed architecture. Facts carry their source class; design claims are labelled proposal or hypothesis. Independent review corrections are kept visible.</p>
+  <div class="chips">
+   <span class="chip mid">Proposal, not shipped</span>
+   <span class="chip ok">Independent review folded in</span>
+   <span class="chip warn">Not ready to ship as architecture</span>
+  </div>
+  <p class="hint">Page with <kbd>←</kbd> <kbd>→</kbd> or <kbd>Space</kbd>, or use the buttons below. For the full written report, open <code>report.md</code> beside this deck.</p>
+ </div>
+</section>
+
+<section class="slide" aria-label="Short answer, part 1">
+ <div class="inner">
+  <p class="kicker">The short answer (1 of 2)</p>
+  <h2>We are not in the wrong surface. We are in the wrong layer.</h2>
+  <div class="grid2">
+   <div class="card ok">
+    <div class="label">Surface</div>
+    <p>Plain instruction files plus a root <code>AGENTS.md</code> block remain the only portable surface across hosts.</p>
+    <p>Moving to skills does not fix it, and neither does a plugin. Plugins are packaging, not persistence.</p>
+   </div>
+   <div class="card warn">
+    <div class="label">Layer</div>
+    <p>The pattern treats a one-time tool read (START, DIRECTOR, OPERATIONS) as if it were standing context.</p>
+    <p>Every host keeps a small standing layer across compaction and discards what arrived through tool reads. The pattern puts <strong>about 1 KB</strong> in the first and <strong>about 43 KB</strong> in the second.</p>
+   </div>
+  </div>
+  <div class="chips">
+   <span class="chip warn">Skills: re-injected only in Claude Code, capped at 5,000 tokens per skill</span>
+   <span class="chip mid">Plugins: packaging, not persistence</span>
+  </div>
+ </div>
+</section>
+
+<section class="slide" aria-label="Short answer, part 2">
+ <div class="inner">
+  <p class="kicker">The short answer (2 of 2)</p>
+  <h2>A small, re-enterable Core, with a gate before any of it lands</h2>
+  <div class="grid3">
+   <div class="card">
+    <div class="label">Scale today</div>
+    <p class="big">43 to 50 <small>KB</small></p>
+    <p class="note">five files plus one section, about 100 distinct obligations</p>
+   </div>
+   <div class="card ok">
+    <div class="label">Proposed target</div>
+    <p class="big">about 18 <small>KB</small></p>
+    <p class="note">across five small files, with mechanical re-entry</p>
+   </div>
+   <div class="card warn">
+    <div class="label">Gate</div>
+    <p><strong>Not ready to ship as architecture.</strong> The repo's rule needs an obligation-by-obligation disposition, plus dated supersessions for three recorded deferrals.</p>
+   </div>
+  </div>
+  <ul>
+   <li>Hooks re-inject after compaction in exactly two hosts (Claude Code and Codex). They are a per-host accelerator, never the method. This repo cannot commit them, because <code>.director/</code> is ignored in every clone.</li>
+   <li>Proposed shape: a hand-written Core under a hard budget, a Roster with tier words, Manuals the Director never reads, a tiny ignored continuation State, mechanical re-entry, store-enforced dispatch fields, and optional adapters trialled by hand.</li>
+  </ul>
+ </div>
+</section>
+
+<section class="slide" aria-label="Scale table">
+ <div class="inner">
+  <p class="kicker">The scale (section 2.1)</p>
+  <h2>Required reads before a fresh Project Director's first reply</h2>
+  <div class="tablewrap"><table>
+   <thead><tr><th>Layout</th><th>Unambiguously required</th><th>If whole files are read</th><th>Files</th></tr></thead>
+   <tbody>
+    <tr><td>Live install in this checkout (revision 3.0)</td><td>42.8 KB, about 10.7k tokens</td><td>50.0 KB, about 12.5k tokens</td><td>AGENTS, START, DIRECTOR, PROJECT, CAPABILITY_POLICY, OPERATIONS section, check output</td></tr>
+    <tr><td>Starter payload for a new project (revision 3.1)</td><td>29.4 KB, about 7.4k tokens</td><td>37.3 KB, about 9.3k tokens</td><td>bridge block, START, DIRECTOR, OPERATIONS section, check output</td></tr>
+    <tr><td>v1 engine, reply only</td><td>26.9 KB</td><td>97 KB with badge, 125 KB with staffing</td><td>6 files, 4 serial stages</td></tr>
+    <tr><td>Explicit worker (pattern-author)</td><td>24.1 KB</td><td>28.2 KB with ROLE_INDEX</td><td>6 files</td></tr>
+   </tbody>
+  </table></div>
+  <ul style="margin-top:16px">
+   <li>An ordinary task adds 10 to 40 KB more in this repository, from a 212 KB RATIONALE whose largest decision is 35 KB.</li>
+   <li>The installer's own <code>plan</code> reports 20 KB for the Director chain. It omits the OPERATIONS section that START makes mandatory, so it understates by about 38%.</li>
+  </ul>
+  <p class="note"><span class="tag fact">fact</span> scale audit</p>
+ </div>
+</section>
+
+<section class="slide" aria-label="What the chain is made of">
+ <div class="inner">
+  <p class="kicker">What the chain is made of (section 2.2)</p>
+  <h2>About 100 obligations, and about 12 of them apply on every turn</h2>
+  <div class="grid3">
+   <div class="card"><p class="big">about 100</p><p class="note">distinct obligations imposed on a Director</p></div>
+   <div class="card"><p class="big">about 12</p><p class="note">every-turn invariants: badge, delegation, SitRep check, explicit tier and effort, and others</p></div>
+   <div class="card"><p class="big">1%</p><p class="note">verbatim duplication across files</p></div>
+   <div class="card"><p class="big">12 to 13%</p><p class="note">the same rule restated in other words (the badge theme alone: 31 sentences in 5 files)</p></div>
+   <div class="card"><p class="big">34%</p><p class="note">of sentences contain a negation or disclaimer</p></div>
+   <div class="card"><p class="big">7.8 KB</p><p class="note">OPERATIONS installation-evidence section, mostly receipt formats and hook variants</p></div>
+  </div>
+  <ul style="margin-top:16px">
+   <li>Runtime rules that mention compaction: one (SitRep timing). Host hook mechanisms used by the pattern: none.</li>
+   <li>Two regressions surfaced: v1's "reload no-longer-retained instructions" clause was dropped in the flat starter with no recorded decision, and this checkout's live install lags the 3.1 payload.</li>
+  </ul>
+ </div>
+</section>
+
+<section class="slide" aria-label="What happens at compaction">
+ <div class="inner">
+  <p class="kicker">What happens at compaction (section 2.3)</p>
+  <h2>After compaction, nothing re-reads the role files</h2>
+  <ul>
+   <li><span class="tag fact">fact</span>21 compactions across 9 Director sessions in 7 projects. None was followed by a complete re-read of START, the role file and OPERATIONS. Dispatching resumed 1 to 5 minutes later.</li>
+   <li><span class="tag fact">fact</span>The host re-injected the instructions attachment and a few recent files. In the audited session that was PROJECT.md and two scratch notes, never START, DIRECTOR or OPERATIONS.</li>
+   <li><span class="tag fact">fact</span>The 12.9k-character summary said the files were "read" and that "every reply carries 🎬", with zero rule text.</li>
+   <li><span class="tag fact">fact</span>The surviving trigger says "before the first ordinary reply in each conversation", and a compacted session is the same conversation.</li>
+   <li><span class="tag hyp">hypothesis</span>Request capture before work fell from about 74% to about 53% after compaction. These are approximate figures from a small sample, and memory-resident duties degrading is the sibling's own hypothesis, not a fact.</li>
+   <li><span class="tag hyp">interpretation</span>Standing host text appears to beat pattern text read once, consistent with transcripts but not measured.</li>
+  </ul>
+ </div>
+</section>
+
+<section class="slide" aria-label="Three layers">
+ <div class="inner">
+  <p class="kicker">What survives compaction, by layer (section 3)</p>
+  <h2>Three layers, three different fates</h2>
+<div class="figscroll"><svg class="diagram" viewBox="0 0 1200 640" role="img" aria-label="Three persistence layers, today and proposed. Standing text about 1 KB today; loaded reads about 43 KB today and discarded at compaction; reference material 212 KB today. A dashed compaction line sits between the standing and loaded layers.">
+<rect class="d-bg" x="0" y="0" width="1200" height="640" rx="18"/>
+<text class="d-ink" x="60" y="44" font-size="24" font-weight="700">Three persistence layers: what survives compaction</text>
+<text class="d-muted" x="60" y="70" font-size="15">Today against the proposal. Sizes come from the report. Boxes are labelled, not drawn to scale.</text>
+<text class="d-muted" x="60" y="114" font-size="13" font-weight="600" letter-spacing=".04em">LAYER</text>
+<text class="d-muted" x="460" y="114" font-size="13" font-weight="600" letter-spacing=".04em" text-anchor="middle">TODAY</text>
+<text class="d-muted" x="900" y="114" font-size="13" font-weight="600" letter-spacing=".04em" text-anchor="middle">PROPOSED</text>
+
+<text class="d-ink" x="60" y="160" font-size="16" font-weight="700">L0 · standing</text>
+<text class="d-muted" x="60" y="182" font-size="13">system prompt, root file,</text>
+<text class="d-muted" x="60" y="200" font-size="13">skill lines, auto-memory</text>
+<rect class="d-okbox" x="300" y="130" width="320" height="96" rx="10"/>
+<text class="d-ink" x="320" y="168" font-size="26" font-weight="700">about 1 KB</text>
+<text class="d-muted" x="320" y="194" font-size="13.5">the standing layer, re-sent every turn</text>
+<text class="d-muted" x="320" y="214" font-size="13.5">survives compaction by construction</text>
+<rect class="d-okbox" x="660" y="130" width="480" height="96" rx="10"/>
+<text class="d-ink" x="680" y="168" font-size="20" font-weight="700">AGENTS.md block</text>
+<text class="d-muted" x="680" y="194" font-size="13.5">hard limit 1,500 characters, target 1,250</text>
+<text class="d-muted" x="680" y="214" font-size="13.5">carries the re-entry trigger and the end-marker search</text>
+
+<text class="d-inh" x="60" y="240" font-size="13" font-weight="700" letter-spacing=".03em">COMPACTION LINE: below it, context is discarded (L1) and reference material is not expected to survive (L2)</text>
+<line class="d-cut" x1="60" y1="244" x2="1140" y2="244" stroke-width="2.5" stroke-dasharray="6 5"/>
+
+<text class="d-ink" x="60" y="296" font-size="16" font-weight="700">L1 · loaded</text>
+<text class="d-muted" x="60" y="318" font-size="13">files read with tools,</text>
+<text class="d-muted" x="60" y="336" font-size="13">skill bodies, hook output</text>
+<rect class="d-warnbox" x="300" y="262" width="320" height="116" rx="10"/>
+<text class="d-ink" x="320" y="300" font-size="26" font-weight="700">about 43 KB</text>
+<text class="d-muted" x="320" y="326" font-size="13.5">START, DIRECTOR, OPERATIONS and checks</text>
+<text class="d-muted" x="320" y="346" font-size="13.5">read once as tool output</text>
+<text class="d-ink" x="320" y="366" font-size="13.5" font-weight="700">gone after compaction</text>
+<rect class="d-midbox" x="660" y="262" width="480" height="116" rx="10"/>
+<text class="d-ink" x="680" y="298" font-size="17" font-weight="700">CORE.md ≤ 10,000 characters (target 8,000)</text>
+<text class="d-muted" x="680" y="320" font-size="13.5">ROSTER.md ≤ 4,000 (target 3,000)</text>
+<text class="d-muted" x="680" y="342" font-size="13.5">SESSION.md ≤ 2,000 (target 1,000; Git-ignored)</text>
+<text class="d-muted" x="680" y="364" font-size="13.5">re-entered by end-marker search after compaction</text>
+
+<text class="d-ink" x="60" y="428" font-size="16" font-weight="700">L2 · reference</text>
+<text class="d-muted" x="60" y="450" font-size="13">manuals, rationale,</text>
+<text class="d-muted" x="60" y="468" font-size="13">history</text>
+<rect class="d-box" x="300" y="394" width="320" height="116" rx="10"/>
+<text class="d-ink" x="320" y="432" font-size="26" font-weight="700">212 KB</text>
+<text class="d-muted" x="320" y="458" font-size="13.5">RATIONALE file; largest decision 35 KB</text>
+<text class="d-muted" x="320" y="478" font-size="13.5">read on demand, not expected to survive</text>
+<rect class="d-box" x="660" y="394" width="480" height="116" rx="10"/>
+<text class="d-ink" x="680" y="432" font-size="20" font-weight="700">Manuals</text>
+<text class="d-muted" x="680" y="458" font-size="13.5">executor craft manuals; two small Director-craft manuals</text>
+<text class="d-muted" x="680" y="478" font-size="13.5">read only at their own action trigger</text>
+<text class="d-muted" x="680" y="498" font-size="13.5">no size limit; the Director never reads the rest</text>
+
+<text class="d-ink" x="60" y="552" font-size="15.5"><tspan font-weight="700">Proposed fix:</tspan> the re-entry trigger sits in the standing block, and CORE.md is re-read or injected verbatim, never summarized.</text>
+<text class="d-muted" x="60" y="578" font-size="13.5">Outside Claude Code, L1 is replaced by a summary sentence. Sources: report sections 2, 3 and 6.1.</text>
+
+</svg></div>
+  <ul>
+   <li>Claude Code re-reads up to five recently used files under 5,000 tokens, and re-injects invoked skill bodies (5,000 per skill, 25,000 in total). Elsewhere, loaded content is gone, replaced by a summary sentence.</li>
+   <li>Standing text is re-sent or re-injected from disk. Reference material is read on demand and is not expected to survive.</li>
+  </ul>
+ </div>
+</section>
+
+<section class="slide" aria-label="Per-host table, part 1">
+ <div class="inner">
+  <p class="kicker">What survives, host by host (1 of 2, section 3)</p>
+  <h2>Claude Code and Codex can re-inject; the others mostly cannot</h2>
+  <div class="tablewrap"><table><thead><tr><th>Host</th><th>Root file re-injected</th><th>Post-compaction hook</th><th>Per-turn hook</th><th>Skill body survives</th><th><code>.agents/skills</code></th><th>Reads <code>.claude/settings.json</code> hooks</th></tr></thead><tbody>
+   <tr><td><strong>Claude Code</strong></td><td>Project-root CLAUDE.md; AGENTS.md is read in its place when no CLAUDE.md exists (docs). The exact rule needs a dated check.</td><td>SessionStart with sources startup, resume, clear, compact, fork; 10,000 characters per hook string</td><td>UserPromptSubmit can add context (verify against the hooks reference)</td><td>Yes, capped</td><td>Not documented</td><td>Native</td></tr>
+   <tr><td><strong>Codex</strong></td><td>AGENTS.md re-sent as turn context (community; whether it is re-read from disk each turn is a different claim)</td><td>SessionStart <code>source: compact</code>, <code>additionalContext</code></td><td><code>UserPromptSubmit</code> <code>additionalContext</code></td><td>No (community)</td><td>Yes</td><td>Reads Claude marketplace and plugin formats</td></tr>
+   <tr><td><strong>Cursor</strong></td><td>Always-on rules and root or nested AGENTS.md (staff: system prompt plus summary)</td><td>None (preCompact shows a message only)</td><td>None that injects</td><td>Undocumented</td><td>Yes</td><td>With third-party hooks enabled</td></tr>
+   <tr><td><strong>Copilot CLI</strong></td><td>Instruction files and AGENTS.md; custom-agent instructions dropped after compaction (open issue)</td><td>None (preCompact is notification only)</td><td>None</td><td>Undocumented</td><td>Yes</td><td>Yes (per the cross-host researcher)</td></tr>
+  </tbody></table></div>
+  <p class="note" style="margin-top:14px">Facts from two documentation passes on 2026-11-07. The reviewer did not re-verify the host details; section 3 lists which ones need dated primary quotes.</p>
+ </div>
+</section>
+
+<section class="slide" aria-label="Per-host table, part 2">
+ <div class="inner">
+  <p class="kicker">What survives, host by host (2 of 2, section 3)</p>
+  <h2>The remaining hosts, and what has not been verified</h2>
+  <div class="tablewrap"><table><thead><tr><th>Host</th><th>Root file re-injected</th><th>Post-compaction hook</th><th>Per-turn hook</th><th>Skill body survives</th><th><code>.agents/skills</code></th><th>Reads <code>.claude/settings.json</code> hooks</th></tr></thead><tbody>
+   <tr><td><strong>Gemini CLI / Antigravity</strong></td><td>Context files sent with every prompt</td><td>PreCompress exists; injection unclear</td><td>BeforeAgent can add context</td><td>Undocumented</td><td>Yes</td><td>No</td></tr>
+   <tr><td><strong>Amp</strong></td><td>AGENTS.md; re-inclusion not stated</td><td>None</td><td><code>agent.start</code> can append a hidden message each turn</td><td>Undocumented</td><td>Yes</td><td>No</td></tr>
+   <tr><td><strong>Cline</strong></td><td>Rules and AGENTS.md; re-application not stated</td><td>PreCompact with <code>contextModification</code> (extension)</td><td>UserPromptSubmit / beforeRun</td><td>Undocumented</td><td><code>.claude/skills</code> only</td><td>No</td></tr>
+  </tbody></table></div>
+  <div class="grid2" style="margin-top:16px">
+   <div class="card">
+    <div class="label">Standards</div>
+    <p>The Agent Skills specification has no field to stop auto-invocation; each host adds its own. Agent Plugins 1.0 covers skills and MCP servers only.</p>
+   </div>
+   <div class="card mid">
+    <div class="label">Not yet verified</div>
+    <p>SessionStart <code>fork</code>, PreCompact stdout as summary instructions, the 1,536-character description limit, Copilot reading <code>.claude/settings.json</code>, and the plugin standard's hook exclusion. The reviewer asked for dated primary quotes before these carry design weight.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" aria-label="Matt's questions, part 1">
+ <div class="inner">
+  <p class="kicker">Matt's questions, answered (1 of 2, section 4)</p>
+  <h2>Skills, plugins and hooks</h2>
+  <div class="grid3">
+   <div class="card">
+    <div class="label">Skills</div>
+    <p><em>Does this need to be a skill? Do skills get reread after compaction for free?</em></p>
+    <p>Only in Claude Code, only when invoked, and capped.</p>
+    <p><strong>Verdict:</strong> not for the Director core. Possibly later for executor craft manuals.</p>
+   </div>
+   <div class="card">
+    <div class="label">Plugins</div>
+    <p><em>Plugins versus skills; do plugins reload after compaction?</em></p>
+    <p>Nothing about being a plugin survives compaction. Only a hook inside one would, and plugin hooks are vendor-specific.</p>
+    <p><strong>Verdict:</strong> no plugin.</p>
+   </div>
+   <div class="card ok">
+    <div class="label">Literal hooks</div>
+    <p><em>Would literal hooks help?</em></p>
+    <p>Yes, materially, in Claude Code and Codex. But <code>.director/</code> is ignored, so a committed hook fails in every clone.</p>
+    <p>Trial in <code>.claude/settings.local.json</code> only. A receipt can say "emitted", never "active". Gate injection to Director sessions. Per-turn text stays under about 400 characters.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" aria-label="Matt's questions, part 2">
+ <div class="inner">
+  <p class="kicker">Matt's questions, answered (2 of 2, section 4)</p>
+  <h2>Surface, size, START, and compilation</h2>
+  <div class="grid2">
+   <div class="card">
+    <div class="label">Are we in the wrong surface area?</div>
+    <p><strong>No.</strong> Files are the only portable surface, and the root AGENTS.md block is the only portable standing text. What must change is which obligations live in standing text, which in a re-enterable Core, and which in manuals the Director never reads.</p>
+   </div>
+   <div class="card">
+    <div class="label">How big are we, and how many files does a new Director read?</div>
+    <p>Five files plus a section, 43 to 50 KB. The proposal brings re-entry to one file under 10,000 characters, and startup to about 18 KB across five small files.</p>
+   </div>
+   <div class="card">
+    <div class="label">Could a single START be the thing that is reread?</div>
+    <p><strong>Almost.</strong> The reread target is one file under a hard budget, the Core. The re-entry trigger must live in the AGENTS.md block, because the Core cannot carry its own trigger. START today is 5 KB that routes the agent to 12 more things.</p>
+   </div>
+   <div class="card">
+    <div class="label">Compile step?</div>
+    <p><strong>Not now.</strong> A fragment compiler would create a second source of truth beside the pinned payload. Hand-write CORE.md as a managed file with a provenance sidecar. Revisit a compiler only if the Core proves hard to keep consistent by hand.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" aria-label="Diagnosis">
+ <div class="inner">
+  <p class="kicker">Diagnosis (section 5)</p>
+  <h2>Authority is in the wrong layer, and the proof model is 'a read happened'</h2>
+  <ol class="steps">
+   <li><div><strong>Authority is allocated to the wrong layer.</strong> About 1 KB standing and about 43 KB loaded. After compaction the loaded layer becomes "a summary says you read it", which is worse than nothing.</div></li>
+   <li><div><strong>The proof model is "a read happened".</strong> Hashes, complete-read discipline and the check establish a read at time T, not that the text is in context at T plus n.</div></li>
+   <li><div><span class="tag hyp">hypothesis</span><strong>Shell reads may be invisible to the host's restore.</strong> That would explain why START, DIRECTOR and OPERATIONS were never restored while PROJECT.md was. Test with <code>/context</code> after a forced compaction.</div></li>
+   <li><div><strong>The real problem is that the text is not present after compaction, not its wording.</strong> Host standing text wins ties on delegation. This is a reviewer correction to the draft's diagnosis.</div></li>
+   <li><div><span class="tag hyp">hypothesis</span><strong>Judgment-shaped duties slip; form-shaped duties hold.</strong> Whatever the helper enforces survives; whatever memory enforces does not.</div></li>
+   <li><div><strong>The reread chain is too long to re-enter under pressure.</strong> 43 to 50 KB in six places with ordering rules. Re-entry must be one file, one command, one mechanical test.</div></li>
+  </ol>
+ </div>
+</section>
+
+<section class="slide" aria-label="Budgets">
+ <div class="inner">
+  <p class="kicker">Budgets (section 6.1)</p>
+  <h2>Every artifact has a hard limit and a target</h2>
+  <div class="tablewrap"><table>
+   <thead><tr><th>Artifact</th><th>Layer</th><th>Hard limit</th><th>Target</th></tr></thead>
+   <tbody>
+    <tr><td>AGENTS.md block (bridge)</td><td>L0 standing, portable</td><td>1,500 characters</td><td>1,250</td></tr>
+    <tr><td><code>.director/CORE.md</code></td><td>L1, re-entered</td><td>10,000 characters</td><td>8,000</td></tr>
+    <tr><td><code>.director/ROSTER.md</code></td><td>L1, re-entered</td><td>4,000 characters</td><td>3,000</td></tr>
+    <tr><td><code>.director/PROJECT.md</code></td><td>L1, project-owned</td><td>4,000 characters</td><td>3,000</td></tr>
+    <tr><td><code>.director/SESSION.md</code>, ignored by Git</td><td>L1, rewritten at checkpoints</td><td>2,000 characters</td><td>1,000</td></tr>
+    <tr><td>Manuals</td><td>L2</td><td>none</td><td>n/a</td></tr>
+   </tbody>
+  </table></div>
+  <ul style="margin-top:16px">
+   <li>Core, Roster and Session do not fit one 10,000-character hook string. Treat that as expected: Core in one string, Roster plus Session in a second.</li>
+   <li><span class="tag hyp">hypothesis</span>Each hook entry gets its own cap. If not, the Core target drops to about 6,000 characters.</li>
+   <li>Targets need enforcement too. The installer's <code>plan</code> should report and refuse when a file is over budget.</li>
+  </ul>
+ </div>
+</section>
+
+<section class="slide" aria-label="Mechanical re-entry test">
+ <div class="inner">
+  <p class="kicker">The mechanical re-entry test (section 6.2)</p>
+  <h2>A search the model can perform, not a self-assessment</h2>
+  <p class="lede" style="margin-bottom:6px">The block as written in the report, quoted verbatim:</p>
+  <div class="quote">
+  <p>Director re-entry, checked before every reply: find a line starting <code>CORE-END sha256:</code> plus 64 hex characters inside a tool result or host-injected block that appears after the latest conversation summary (any message saying earlier turns were summarized or continued). This block, a summary and your own replies do not count. If you cannot point to that line, read <code>.director/CORE.md</code> completely through it before any other action, then rerun its check; until then no 🎬. Never copy that line into replies or summaries.</p>
+  <p>When summarizing this conversation: do not say instruction files were read or that 🎬 applies; list <code>.director/CORE.md</code> as must-reread; copy open request IDs, live worker names and handles, and the last SitRep time exactly.</p>
+  </div>
+  <div class="grid2">
+   <div class="card">
+    <div class="label">Why it is mechanical</div>
+    <ul>
+     <li>It is a string search at a stated position, not a judgment.</li>
+     <li>The hash appears in neither AGENTS nor any summary.</li>
+     <li>The marker is the last line, so a truncated read fails.</li>
+     <li>The hash changes with each Core revision, so a stale copy fails.</li>
+    </ul>
+   </div>
+   <div class="card warn">
+    <div class="label">Why the draft wording failed</div>
+    <p>The draft trigger ("if the literal text of CORE.md is not in your context") was a self-assessment. In 17 of 21 segments the model carried on from a summary that said "read" and quoted gist lines.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" aria-label="Core, Roster and Session">
+ <div class="inner">
+  <p class="kicker">Core, Roster and Session (sections 6.3 to 6.5)</p>
+  <h2>One hand-written file, one table, one state file</h2>
+  <div class="grid3">
+   <div class="card ok">
+    <div class="label">CORE.md · 10,000 hard, 8,000 target</div>
+    <ul>
+     <li>Who you are and what you own</li>
+     <li>The 12 every-turn invariants</li>
+     <li>Startup with one check command</li>
+     <li>The badge rule, redefined</li>
+     <li>Dispatch packet, staffing bail points</li>
+     <li>Four helper commands and SitRep cadence</li>
+     <li>Ordered post-compaction recovery list</li>
+     <li>Action triggers and the end marker line</li>
+    </ul>
+   </div>
+   <div class="card">
+    <div class="label">ROSTER.md · 4,000 hard, 3,000 target</div>
+    <p>One table: role ID, when to pick it, a tier word and effort word (never a model name), manual path, owner and route constraints.</p>
+    <p>New rows: <code>general-worker</code>, <code>sub-director</code> (alias of <code>request-manager</code>), <code>privacy-notice</code>, <code>learning-review</code>, <code>update-owner</code>. Workers do not read the Roster.</p>
+   </div>
+   <div class="card">
+    <div class="label">SESSION.md · 2,000 hard, 1,000 target, Git-ignored</div>
+    <p>Role, open request IDs with owners, live dispatches with handles, last SitRep time, pending user gates.</p>
+    <p>Injected at SessionStart <code>compact</code>, not PreCompact. Idle compaction in the audited session wrote the summary at 22:42 and applied it at 00:04, so PreCompact state can be 80 minutes stale.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" aria-label="Store-enforced duties">
+ <div class="inner">
+  <p class="kicker">Store-enforced duties and the per-call footer (sections 6.8 and 6.9)</p>
+  <h2>Make the helper refuse incomplete records, and print a footer on every call</h2>
+  <div class="grid3">
+   <div class="card ok">
+    <div class="label">Dispatch binding</div>
+    <p>The helper refuses a dispatch record unless it has:</p>
+    <ul>
+     <li>a tier word and an effort word</li>
+     <li>a one-line reason</li>
+     <li>an independent reviewer, or an explicit "none required" with the rule that permits it</li>
+     <li>parent and requirement IDs</li>
+    </ul>
+   </div>
+   <div class="card ok">
+    <div class="label">Footer, 300 characters at most</div>
+    <p>Every helper call prints the SitRep due time, held streams, the current Core marker and an uncaptured-input hint.</p>
+    <p>Text a tool prints on every call is the one Director-facing text that returns after compaction on every host, with no hook. This may matter more than the hooks.</p>
+   </div>
+   <div class="card mid">
+    <div class="label">Option: clear and resume</div>
+    <p>Near the context limit, at a checkpoint, the Director offers a 🖐️ step: start a new session, then say "resume".</p>
+    <p>The cold-start first-reply route is the one route with tests behind it. This is an option, not a decision.</p>
+   </div>
+  </div>
+  <p class="note" style="margin-top:14px"><span class="tag hyp">hypothesis</span> Whatever the helper enforces survives compaction; whatever memory enforces does not.</p>
+ </div>
+</section>
+
+<section class="slide" aria-label="Adapters">
+ <div class="inner">
+  <p class="kicker">Host adapters (section 6.7)</p>
+  <h2>Optional, trialled by hand, never required</h2>
+  <div class="tablewrap"><table>
+   <thead><tr><th>Host</th><th>Adapter</th><th>Gate</th></tr></thead>
+   <tbody>
+    <tr><td><strong>Claude Code</strong>, <code>settings.local.json</code> first</td><td>SessionStart (startup, resume, clear, compact, fork) injects Core in one string and Roster plus Session in another. PreCompact prints the summary-steering paragraph.</td><td>Inject only in a Director session, checked by a role marker. Otherwise print nothing.</td></tr>
+    <tr><td><strong>Claude Code</strong>, stronger</td><td>PreToolUse on the Agent tool, and UserPromptSubmit, read the transcript, find the last compact boundary and look for the Core end marker after it. If missing, deny the dispatch or inject.</td><td>The same role gate. Extends <code>development/prototypes/stop_guard.py</code>, which exists unactivated.</td></tr>
+    <tr><td><strong>Codex</strong></td><td>SessionStart with <code>source: compact</code>. UserPromptSubmit is limited to a 400-character pointer, not the Core.</td><td>The same role gate. A 15 KB per-turn injection would fill a window in about 50 turns.</td></tr>
+    <tr><td><strong>Copilot CLI</strong></td><td>Reads <code>.claude/settings.json</code> hooks; sessionStart injects.</td><td>The same role gate. Session start only, then the re-entry rule.</td></tr>
+    <tr><td><strong>Cursor</strong></td><td>An always-on rule containing the block text.</td><td>Not applicable. A second copy can drift; prefer the AGENTS.md root support Cursor already has.</td></tr>
+    <tr><td><strong>Any other host</strong></td><td>AGENTS.md block only.</td><td>Not applicable. The re-entry rule carries the method.</td></tr>
+   </tbody>
+  </table></div>
+  <p class="note" style="margin-top:14px">Installer emission is deferred. A November 4 decision records no enabled host config and no default activation.</p>
+ </div>
+</section>
+
+<section class="slide" aria-label="What blocks acceptance">
+ <div class="inner">
+  <p class="kicker">What blocks acceptance (section 8)</p>
+  <h2>Nine obligations have no disposition yet, and three deferrals stand in the way</h2>
+  <div class="grid2">
+   <div class="card warn">
+    <div class="label">No disposition yet</div>
+    <ul>
+     <li>The author of a substantive change cannot supply its independent review (OPERATIONS)</li>
+     <li>Task-time knowledge selectors, paged with <code>canonical_learning.py</code> (START)</li>
+     <li>Generated-project first use before the check (Nov 4 row)</li>
+     <li>Privacy notice at first source capture (R14)</li>
+     <li>Daily update discovery (R11)</li>
+     <li>Three-incident learning review and touched-knowledge upkeep at closure (R18)</li>
+     <li>Steering by expected revision to the same owner (R17)</li>
+     <li>Caller-ID and alias preservation (START)</li>
+     <li>Source-subset limit for external routes (DIRECTOR)</li>
+    </ul>
+   </div>
+   <div class="card mid">
+    <div class="label">Recorded deferrals this would override</div>
+    <ul>
+     <li>Splitting the OPERATIONS installation section before the first-minutes measurement (Nov 7)</li>
+     <li>No enabled host config and no default activation (Nov 4)</li>
+     <li>The continuation API left unchanged, with no new recovery API (Nov 4). SESSION.md is one.</li>
+    </ul>
+    <p><strong>Next concrete step:</strong> a disposition table, one row per obligation, by a rationale-author worker, independently reviewed.</p>
+    <p class="note">Owner decision still open: whether to read UPDATES completely before planning an update (section 7).</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" aria-label="Sequence">
+ <div class="inner">
+  <p class="kicker">The sequence and its gate (section 10)</p>
+  <h2>Six steps, with step 3 as the gate</h2>
+<div class="figscroll"><svg class="diagram" viewBox="0 0 1200 600" role="img" aria-label="Six steps from report section 10, left to right, each with its oracle beneath. Step 3, the disposition table, is the gate: steps 4 to 6 wait for it.">
+<rect class="d-bg" x="0" y="0" width="1200" height="600" rx="18"/>
+<text class="d-ink" x="60" y="44" font-size="24" font-weight="700">Six steps, one gate, and an oracle for each</text>
+<text class="d-muted" x="60" y="70" font-size="15">Section 10 of the report, read left to right. Step 3 is the gate: nothing in steps 4 to 6 lands before it.</text>
+<text class="d-muted" x="330" y="124" font-size="13" font-weight="600" letter-spacing=".04em" text-anchor="middle">BEFORE THE GATE</text>
+<text class="d-muted" x="870" y="124" font-size="13" font-weight="600" letter-spacing=".04em" text-anchor="middle">AFTER THE GATE</text>
+<line class="d-axis" x1="60" y1="150" x2="1140" y2="150" stroke-width="2"/>
+<path class="d-arrowhead" d="M1146 150 l-12 -7 l0 14 z"/>
+<line class="d-cut" x1="600" y1="132" x2="600" y2="480" stroke-width="3" stroke-dasharray="7 6"/>
+<text class="d-inh" x="600" y="124" font-size="13" font-weight="700" letter-spacing=".04em" text-anchor="middle">GATE</text>
+<circle class="d-num" cx="150" cy="150" r="16"/>
+<text class="d-onnum" x="150" y="155.5" font-size="15" font-weight="700" text-anchor="middle">1</text>
+<rect class="d-box" x="68" y="182" width="164" height="100" rx="10"/>
+<text class="d-ink" x="78" y="208" font-size="14" font-weight="700">Stopgap</text>
+<text class="d-ink" x="78" y="227" font-size="14">one revision, no</text>
+<text class="d-ink" x="78" y="246" font-size="14">architecture change</text>
+<text class="d-muted" x="68" y="306" font-size="11.5" font-weight="700" letter-spacing=".06em">ORACLE</text>
+<rect class="d-box" x="68" y="314" width="164" height="164" rx="10"/>
+<text class="d-ink" x="76" y="338" font-size="12.5">Transcript scanner</text>
+<text class="d-ink" x="76" y="355" font-size="12.5">over a forced</text>
+<text class="d-ink" x="76" y="372" font-size="12.5">compaction in this repo.</text>
+<circle class="d-num" cx="330" cy="150" r="16"/>
+<text class="d-onnum" x="330" y="155.5" font-size="15" font-weight="700" text-anchor="middle">2</text>
+<rect class="d-box" x="248" y="182" width="164" height="100" rx="10"/>
+<text class="d-ink" x="258" y="208" font-size="14" font-weight="700">Local hook trial</text>
+<text class="d-ink" x="258" y="227" font-size="14">this machine only;</text>
+<text class="d-ink" x="258" y="246" font-size="14">settings.local.json</text>
+<text class="d-muted" x="248" y="306" font-size="11.5" font-weight="700" letter-spacing=".06em">ORACLE</text>
+<rect class="d-box" x="248" y="314" width="164" height="164" rx="10"/>
+<text class="d-ink" x="256" y="338" font-size="12.5">Transcript scanner</text>
+<text class="d-ink" x="256" y="355" font-size="12.5">as the pass test.</text>
+<circle class="d-num" cx="510" cy="150" r="16"/>
+<text class="d-onnum" x="510" y="155.5" font-size="15" font-weight="700" text-anchor="middle">3</text>
+<rect class="d-warnbox" x="428" y="182" width="164" height="100" rx="10"/>
+<text class="d-ink" x="438" y="208" font-size="14" font-weight="700">Disposition table</text>
+<text class="d-ink" x="438" y="227" font-size="14">one row per obligation</text>
+<text class="d-ink" x="438" y="246" font-size="14">independent review</text>
+<text class="d-muted" x="428" y="306" font-size="11.5" font-weight="700" letter-spacing=".06em">ORACLE</text>
+<rect class="d-box" x="428" y="314" width="164" height="164" rx="10"/>
+<text class="d-ink" x="436" y="338" font-size="12.5">Each row: new route,</text>
+<text class="d-ink" x="436" y="355" font-size="12.5">Core line or roster row,</text>
+<text class="d-ink" x="436" y="372" font-size="12.5">and its oracle.</text>
+<circle class="d-num" cx="690" cy="150" r="16"/>
+<text class="d-onnum" x="690" y="155.5" font-size="15" font-weight="700" text-anchor="middle">4</text>
+<rect class="d-box" x="608" y="182" width="164" height="100" rx="10"/>
+<text class="d-ink" x="618" y="208" font-size="14" font-weight="700">Core and Roster</text>
+<text class="d-ink" x="618" y="227" font-size="14">helper enforcement</text>
+<text class="d-ink" x="618" y="246" font-size="14">and footer</text>
+<text class="d-muted" x="608" y="306" font-size="11.5" font-weight="700" letter-spacing=".06em">ORACLE</text>
+<rect class="d-box" x="608" y="314" width="164" height="164" rx="10"/>
+<text class="d-ink" x="616" y="338" font-size="12.5">Budget tests, inventory</text>
+<text class="d-ink" x="616" y="355" font-size="12.5">test, transcript scanner,</text>
+<text class="d-ink" x="616" y="372" font-size="12.5">capture and split rate.</text>
+<circle class="d-num" cx="870" cy="150" r="16"/>
+<text class="d-onnum" x="870" y="155.5" font-size="15" font-weight="700" text-anchor="middle">5</text>
+<rect class="d-box" x="788" y="182" width="164" height="100" rx="10"/>
+<text class="d-ink" x="798" y="208" font-size="14" font-weight="700">Adapters by hand</text>
+<text class="d-ink" x="798" y="227" font-size="14">per host run</text>
+<text class="d-ink" x="798" y="246" font-size="14">gated on role</text>
+<text class="d-muted" x="788" y="306" font-size="11.5" font-weight="700" letter-spacing=".06em">ORACLE</text>
+<rect class="d-box" x="788" y="314" width="164" height="164" rx="10"/>
+<text class="d-ink" x="796" y="338" font-size="12.5">Worker transcript:</text>
+<text class="d-ink" x="796" y="355" font-size="12.5">no Director Core</text>
+<text class="d-ink" x="796" y="372" font-size="12.5">injected. Scanner</text>
+<text class="d-ink" x="796" y="389" font-size="12.5">passes across a forced</text>
+<text class="d-ink" x="796" y="406" font-size="12.5">compaction in a</text>
+<text class="d-ink" x="796" y="423" font-size="12.5">Director session with</text>
+<text class="d-ink" x="796" y="440" font-size="12.5">adapter on.</text>
+<circle class="d-num" cx="1050" cy="150" r="16"/>
+<text class="d-onnum" x="1050" y="155.5" font-size="15" font-weight="700" text-anchor="middle">6</text>
+<rect class="d-box" x="968" y="182" width="164" height="100" rx="10"/>
+<text class="d-ink" x="978" y="208" font-size="14" font-weight="700">Later, optional</text>
+<text class="d-ink" x="978" y="227" font-size="14">agent files, skills,</text>
+<text class="d-ink" x="978" y="246" font-size="14">compiler if needed</text>
+<text class="d-muted" x="968" y="306" font-size="11.5" font-weight="700" letter-spacing=".06em">ORACLE</text>
+<rect class="d-box" x="968" y="314" width="164" height="164" rx="10"/>
+<text class="d-ink" x="976" y="338" font-size="12.5">Worker compaction trial:</text>
+<text class="d-ink" x="976" y="355" font-size="12.5">the worker still follows</text>
+<text class="d-ink" x="976" y="372" font-size="12.5">its manual after its own</text>
+<text class="d-ink" x="976" y="389" font-size="12.5">compaction. Compiler:</text>
+<text class="d-ink" x="976" y="406" font-size="12.5">byte-identical output</text>
+<text class="d-ink" x="976" y="423" font-size="12.5">against the hand-written</text>
+<text class="d-ink" x="976" y="440" font-size="12.5">Core, before it replaces</text>
+<text class="d-ink" x="976" y="457" font-size="12.5">anything.</text>
+<text class="d-ink" x="600" y="508" font-size="14.5" font-weight="700" text-anchor="middle">Step 3 is the gate: steps 4 to 6 wait for its review.</text>
+<rect class="d-warnbox" x="60" y="530" width="14" height="14" rx="3"/>
+<text class="d-muted" x="82" y="542" font-size="13">gate (step 3)</text>
+<rect class="d-box" x="210" y="530" width="14" height="14" rx="3"/>
+<text class="d-muted" x="232" y="542" font-size="13">step, with its oracle beneath</text>
+<text class="d-muted" x="60" y="578" font-size="13.5">Each oracle is quoted or condensed from the report, section 10, steps 1 to 6.</text>
+
+</svg></div>
+  <p class="note">Nothing in steps 4 to 6 lands before the disposition table. Each step's oracle is the one the report gives in section 10.</p>
+ </div>
+</section>
+
+<section class="slide" aria-label="Evidence">
+ <div class="inner">
+  <p class="kicker">Evidence and what is still unproven (sections 9 and 11)</p>
+  <h2>Evidence, and what is still unproven</h2>
+  <div class="grid2">
+   <div class="card">
+    <div class="label">Where the evidence comes from</div>
+    <ul>
+     <li>Scale audit: scratch scripts and the figures in section 2.</li>
+     <li>Documentation passes on 2026-11-07: Claude Code, plus Codex, Cursor, Copilot CLI, Gemini CLI, Antigravity, Amp, Cline and the Agent Skills and Agent Plugins standards.</li>
+     <li>Sibling research: the settings audit and the single-thread stall triage, with the linked board <code>research-2026-11-07-staffing-stewardship</code>.</li>
+     <li>Independent review by a strongest-tier reviewer at extra-high effort: 17 findings and 3 proposed mechanisms, all incorporated or recorded.</li>
+    </ul>
+   </div>
+   <div class="card warn">
+    <div class="label">Still unproven</div>
+    <ul>
+     <li><span class="tag hyp">hypothesis</span>An 8,000-character Core preserves behaviour. Test: the obligation-inventory test plus the transcript oracle.</li>
+     <li><span class="tag hyp">hypothesis</span>Shell reads are invisible to the host's file restore. Test with <code>/context</code> after a forced compaction.</li>
+     <li><span class="tag hyp">hypothesis</span>Standing text can beat the host's per-turn counter-text on delegation. Needs a live trial.</li>
+     <li><span class="tag">open</span>Whether Codex re-sends AGENTS.md each turn (community source).</li>
+    </ul>
+    <p class="note">Live proof: not yet. No live scenario has shown that these changes alter behaviour.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" aria-label="2026-11-09 follow-on: the Director slug (proposal)">
+ <div class="inner">
+  <p class="kicker">Follow-on proposal, 2026-11-09</p>
+  <h2>2026-11-09 follow-on: the Director slug (proposal)</h2>
+  <p class="lede">A proposal only: independently reviewed, not tested in a real session, and nothing published.</p>
+  <div class="grid2">
+   <div class="card ok">
+    <div class="label">What it is and what moved in</div>
+    <ul>
+     <li>A 6 KB block at the top of AGENTS.md. After compaction the host brings AGENTS.md back, so the block is the Director's memory. Today's 1 KB block says "go read three files", which agents stop doing after a summary.</li>
+     <li>It holds the every-turn Director duties, plus a "before X, read card Y" table.</li>
+    </ul>
+   </div>
+   <div class="card">
+    <div class="label">Who it applies to, and re-reading</div>
+    <ul>
+     <li>Workers, sub-directors and the Director. Only the user or an explicit assignment can say "not a Director"; other agents' messages never change a role.</li>
+     <li>Details sit in eight cards under 6 KB, each ending in an END line. Before an action, the agent needs its own full read of that card, made after the latest summary; a search hit or a quoted END line does not count.</li>
+    </ul>
+   </div>
+  </div>
+  <div class="card" style="margin-top:14px">
+   <div class="label">The roster and status</div>
+   <ul>
+    <li>The roster is a project-owned section under the block: one line per role, 3 KB at most. Updates never touch it.</li>
+    <li><span class="tag prop">proposal</span> Independently reviewed, untested in a real session, nothing published. See <code>brief.md</code> and <code>slug-draft.md</code> in this folder.</li>
+   </ul>
+  </div>
+ </div>
+</section>
+
+</main>
+<footer class="bar">
+  <button id="prev" type="button" aria-label="Previous slide">← Back</button>
+  <div class="progress" aria-hidden="true"><span id="prog"></span></div>
+  <div class="counter" id="count" aria-live="polite">1 / 1</div>
+  <button id="next" class="primary" type="button" aria-label="Next slide">Next →</button>
+</footer>
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var n=slides.length,i=0;
+  var prev=document.getElementById('prev'),next=document.getElementById('next');
+  var count=document.getElementById('count'),prog=document.getElementById('prog');
+  function fromHash(){var m=/^#(\d+)$/.exec(location.hash);return m?Math.min(Math.max(parseInt(m[1],10)-1,0),n-1):0;}
+  function show(k,push){
+    i=Math.min(Math.max(k,0),n-1);
+    slides.forEach(function(s,j){s.classList.toggle('active',j===i);s.setAttribute('aria-hidden',j===i?'false':'true');});
+    slides[i].scrollTop=0;
+    count.textContent=(i+1)+' / '+n;
+    prog.style.width=((i+1)/n*100)+'%';
+    prev.disabled=i===0;next.disabled=i===n-1;
+    if(push!==false){try{history.replaceState(null,'','#'+(i+1));}catch(e){}}
+  }
+  prev.addEventListener('click',function(){show(i-1);});
+  next.addEventListener('click',function(){show(i+1);});
+  document.addEventListener('keydown',function(e){
+    if(e.altKey||e.ctrlKey||e.metaKey)return;
+    var t=e.target&&e.target.tagName;if(t==='INPUT'||t==='TEXTAREA')return;
+    var k=e.key;
+    if(k==='ArrowRight'||k==='PageDown'||(k===' '&&!e.shiftKey)){e.preventDefault();show(i+1);}
+    else if(k==='ArrowLeft'||k==='PageUp'||(k===' '&&e.shiftKey)){e.preventDefault();show(i-1);}
+    else if(k==='Home'){e.preventDefault();show(0);}
+    else if(k==='End'){e.preventDefault();show(n-1);}
+  });
+  var sx=null,sy=null;
+  document.getElementById('deck').addEventListener('touchstart',function(e){var p=e.changedTouches[0];sx=p.clientX;sy=p.clientY;},{passive:true});
+  document.getElementById('deck').addEventListener('touchend',function(e){if(sx===null)return;var p=e.changedTouches[0],dx=p.clientX-sx,dy=p.clientY-sy;sx=null;
+    if(e.target.closest&&e.target.closest('.figscroll,.tablewrap'))return;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)show(dx<0?i+1:i-1);},{passive:true});
+  window.addEventListener('hashchange',function(){show(fromHash(),false);});
+  var root=document.documentElement,btn=document.getElementById('theme');
+  function stored(){try{return localStorage.getItem('deck-theme');}catch(e){return null;}}
+  function apply(t){if(t)root.setAttribute('data-theme',t);else root.removeAttribute('data-theme');
+    var dark=t?t==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+    btn.textContent=dark?'Light theme':'Dark theme';}
+  apply(stored());
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
+    var t=cur==='dark'?'light':'dark';apply(t);try{localStorage.setItem('deck-theme',t);}catch(e){}
+  });
+  show(fromHash(),false);
+})();
+</script>
+</body>
+</html>

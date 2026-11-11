@@ -1,0 +1,26 @@
+{
+  "id": "startup-architecture-slug-draft",
+  "title": "Proposed Director slug for AGENTS.md (draft text)",
+  "description": "Candidate text for the managed block, as it would appear in a target project's AGENTS.md. Proposal only; not decided or implemented.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-startup-architecture/slug-draft.md"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Draft proposal for owner review. Not decided, not implemented.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-09T21:21:15.526Z",
+  "updatedAt": "2026-11-09T21:21:15.526Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "title": "Agentic systems — executive briefing (Claude Fable 5.2)",
+  "description": "A new, simpler 10-minute telling of the agentic-systems story for an executive briefing: five chapters, 18 steps, generic request (no Fieldwork story). Authored by Claude Fable 5.2 (claude-fable-5-2) on November 11, 2026. Separate from the Inside agentic systems suite, which is unchanged. First draft; owner review open.",
+  "schemaVersion": 2,
+  "id": "item-8339fb8d-fd6a-4018-b79d-e6b415d77a56",
+  "createdAt": "2026-11-11T15:04:03.058Z",
+  "updatedAt": "2026-11-11T15:04:03.058Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "ready",
+    "message": "",
+    "updatedAt": 0
+  },
+  "childBoardId": "agentic-systems-briefing-20261111"
+}

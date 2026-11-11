@@ -1,0 +1,27 @@
+{
+  "id": "staffing-stewardship-timeline",
+  "title": "Diagram: session timeline around the compaction",
+  "description": "Workers dispatched, role text in context and the checked-Director marker, 21:10 to 01:05 UTC.",
+  "content": {
+    "kind": "image",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-staffing-and-stewardship/timeline.svg"
+    }
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-08T01:48:50.662Z",
+  "updatedAt": "2026-11-08T01:55:34.484Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "review",
+    "message": "Headless render, paging, light/dark and 375px checks passed; awaiting owner review",
+    "updatedAt": 1794102934476
+  },
+  "status": "review"
+}

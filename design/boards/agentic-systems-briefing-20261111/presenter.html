@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="author" content="Claude Fable 5.2 (claude-fable-5-2)">
+<title>Agentic systems — briefing</title>
+<style>
+:root{--space:#03090f;--ink:#e1edf5;--muted:#93a6b4;--teal:#27ddc8;--rose:#f58eab;--amber:#e9bd79;--violet:#a99cff;--line:#2a4350}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--space);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{display:grid;grid-template-rows:auto 1fr auto;min-height:100dvh;background:radial-gradient(ellipse at 68% 46%,#0b1a25 0,transparent 60%),var(--space);overflow:hidden}
+button{font:inherit;color:inherit;background:transparent;border:1px solid transparent;border-radius:6px;cursor:pointer}
+button:hover{background:#172932}
+button:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 4vw 0;color:#b9ccd8;font-size:15px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand i{width:22px;height:20px;border:1px solid var(--teal);border-radius:46% 52% 49% 43%;position:relative}
+.brand i:after{content:"";position:absolute;left:8px;top:7px;width:4px;height:4px;border-radius:50%;background:var(--ink)}
+header button{font-size:22px;width:38px;height:38px;color:#718995}
+main{display:grid;grid-template-columns:minmax(280px,34%) 1fr;align-items:center;gap:1vw;padding:0 2vw 0 5vw;min-height:0}
+.copy{transition:opacity .25s}
+.copy.swap{opacity:0}
+.chapter{color:var(--teal);font-size:14px;letter-spacing:.03em;margin:0 0 22px;display:flex;gap:12px;align-items:center}
+.chapter:before{content:"";width:26px;border-top:1px solid var(--teal)}
+h1{font:400 clamp(30px,3.7vw,58px)/1.08 Georgia,"Times New Roman",serif;letter-spacing:-.03em;margin:0 0 26px;text-wrap:balance}
+.copy p.body{font-size:clamp(16px,1.5vw,23px);line-height:1.55;color:var(--muted);margin:0;max-width:30ch;text-wrap:pretty}
+svg{width:100%;height:100%;max-height:calc(100dvh - 150px);overflow:visible}
+footer{display:flex;align-items:center;gap:20px;padding:10px 4vw 16px;font-size:13px;color:#7d95a3}
+.transport button{font-size:22px;width:40px;height:40px}
+nav{display:flex;gap:6px;flex:1;justify-content:center;flex-wrap:wrap}
+nav button{padding:6px 12px 8px;color:#7d95a3;text-align:left}
+nav button[aria-current=true]{color:var(--ink)}
+nav .dots{display:flex;gap:4px;margin-top:6px}
+nav .dots i{width:16px;height:2px;background:#2a4350;border-radius:2px}
+nav .dots i.done{background:#3d7f80}
+nav .dots i.now{background:var(--teal)}
+.credit{white-space:nowrap;color:#5f7886}
+nav button{font-size:12.5px}
+@media (max-width:860px){body{overflow:auto}main{grid-template-columns:1fr;padding:12px 16px}svg{max-height:60dvh}footer{flex-wrap:wrap;padding:10px 16px}nav button span{display:none}.credit{width:100%;text-align:center}}
+
+/* diagram */
+text{fill:#c9dbe6;font-size:24px;font-family:inherit}
+.scene,.layer{opacity:0;transition:opacity .6s;pointer-events:none}
+.scene.show,.layer.show{opacity:1}
+.membrane{fill:url(#interior);stroke:var(--teal);stroke-width:1.6;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s ease,stroke-width .5s,filter .5s}
+.show .membrane{stroke-dashoffset:0}
+.ctx .membrane{stroke-width:4;filter:drop-shadow(0 0 10px #27ddc8aa)}
+.breathe{animation:breathe 9s ease-in-out infinite;transform-origin:500px 400px}
+@keyframes breathe{50%{transform:scale(1.012) rotate(.6deg)}}
+.edge{stroke:var(--line);stroke-width:1.2;transition:opacity .6s,stroke .4s}
+.node circle.core{fill:#7f9bab;transition:fill .3s,r .3s}
+.node circle.halo{fill:#bfe9ff;opacity:0;transition:opacity .3s}
+.node.hub circle.core{fill:#b9d2df}
+.node.on circle.core{fill:#f2fbff}
+.node.on circle.halo{opacity:.28}
+.node.bad circle.core{fill:var(--rose)}.node.bad circle.halo{fill:var(--rose);opacity:.35}
+.node.good circle.core{fill:var(--teal)}.node.good circle.halo{fill:var(--teal);opacity:.35}
+.node.trace circle.core{fill:var(--amber)}.node.trace circle.halo{fill:var(--amber);opacity:.35}
+.node,.lbl{transition:opacity .7s,transform .7s}
+.gone{opacity:0!important}
+.off{opacity:.22!important}
+.amber .node circle.core{fill:var(--amber)}.amber .edge{stroke:#6b5a3c}.amber text{fill:var(--amber)}
+#dirLabel{font-size:27px;fill:#fff}
+.ctxlabel{font-size:19px;fill:var(--teal);letter-spacing:.04em}
+.small{font-size:19px;fill:#8ea5b3}
+.cfile{transition:opacity .5s,transform .5s}
+.cfile path.pg{fill:#0b2226;stroke:var(--teal);stroke-width:.55}
+.cfile path.ln{fill:none;stroke:var(--teal);stroke-width:.45;opacity:.75}
+.cfile.lesson{opacity:0}.learned .cfile.lesson{opacity:1}
+.cfile.archf{opacity:0;transform-box:fill-box}.tuned .cfile.archf{opacity:1}.tuned .cfile.old{opacity:0}
+.cfile.lesson path.pg,.cfile.archf path.pg{stroke:var(--amber);fill:#2b2416}.cfile.lesson path.ln,.cfile.archf path.ln{stroke:var(--amber)}
+.cstack{transition:filter .3s}.cstack.flash{filter:drop-shadow(0 0 9px var(--amber))}.cstack.read{filter:drop-shadow(0 0 9px var(--teal))}
+.file path{fill:#0c1c26;stroke:#9fc3d6;stroke-width:1}
+.file{animation:pop .7s cubic-bezier(.2,.8,.2,1) both}
+.file path{animation:ink 1.3s ease-out both}
+.file.flash path{stroke:var(--amber);fill:#3a2f1c}
+.file.lesson path{stroke:var(--amber)}
+@keyframes pop{0%{opacity:0;transform:scale(5)}35%{opacity:1;transform:scale(3.2)}100%{transform:scale(1)}}
+@keyframes ink{0%,45%{stroke:#fff;fill:#2b5266}}
+.tool rect{fill:#0c1c26;stroke:#b9d2df;stroke-width:1.4}
+.sweep{stroke:var(--amber);stroke-width:2;opacity:.7}
+.person circle,.person path{fill:none;stroke:#c9dbe6;stroke-width:1.6}
+.today .agent{fill:#9fc3d6}
+.today .ping{fill:#f2fbff;animation:ping 2.4s ease-in-out infinite}
+@keyframes ping{0%,100%{transform:translateX(0)}50%{transform:translateX(34px)}}
+/* exchange */
+.logbox{fill:#07141c;stroke:#22404d;stroke-width:1.2}
+.row{transition:transform .65s cubic-bezier(.4,0,.2,1),opacity .5s}
+.row rect{fill:#5d7482;transition:fill .5s,stroke .3s;stroke:transparent;stroke-width:2}
+.row.hl rect{stroke:#fff}
+.row .bar{fill:#03090f;opacity:.35}
+.c-us{--c:var(--teal)}.c-ds{--c:var(--rose)}.c-ot{--c:var(--violet)}.c-pp{--c:var(--amber)}
+.row.colored rect{fill:var(--c)}
+.mini .mem{fill:url(#interior);stroke:var(--c);stroke-width:1.6;transition:stroke-width .4s,filter .4s}
+.mini.wake .mem{stroke-width:3.5;filter:drop-shadow(0 0 9px var(--c))}
+.mini .d{fill:#9fb8c6;transition:fill .25s}.mini .d.lit{fill:#f2fbff;filter:drop-shadow(0 0 5px #bfe9ff)}.mini .l{stroke:var(--line)}
+.mini .core{fill:#f2fbff}
+.mini text{font-size:22px}
+.mini .state{font-size:18px;opacity:0;transition:opacity .4s}
+.mini[data-state=waiting] .state.w{opacity:1;fill:var(--amber)}
+.mini[data-state=working] .state.k{opacity:1;fill:var(--teal)}
+.mini .d0{transition:r .4s}
+.mini[data-state=waiting] .d0{fill:var(--amber);r:9px;filter:drop-shadow(0 0 6px var(--amber))}
+.mini[data-state=working] .d0{r:6px}
+.waitfx{opacity:0;transition:opacity .4s}.mini[data-state=waiting] .waitfx{opacity:1}
+.waitfx .ring{fill:none;stroke:var(--amber);stroke-width:1.6;transform-box:fill-box;transform-origin:center;animation:ripple 1.8s ease-out infinite}
+.waitfx rect{fill:#2b2416;stroke:var(--amber);stroke-width:1.2}
+.waitfx .td{fill:var(--amber);animation:think 1.2s infinite}
+@keyframes ripple{from{transform:scale(1);opacity:.9}to{transform:scale(2.6);opacity:0}}
+@keyframes think{0%,60%,100%{opacity:.25}30%{opacity:1}}
+.mini[data-state=working] .d0{fill:var(--teal)}
+@keyframes blink{50%{opacity:.25}}
+.mini .ghostperson{opacity:0;transition:opacity .5s}
+.mini.ghost .mem{stroke-dasharray:5 7;fill:none;opacity:.6}
+.mini.ghost .d,.mini.ghost .l,.mini.ghost .core{opacity:0}
+.mini.ghost .ghostperson{opacity:1}
+.bubble{opacity:0;transition:opacity .3s}
+.bubble.show{opacity:1}
+.bubble rect{fill:#0c1c26;stroke:var(--c);stroke-width:1.2}
+.bubble text{font-size:17px;fill:#fff}
+.spine{fill:none;stroke:url(#spineFade);stroke-width:2}
+.spine.glowline{stroke-width:8;opacity:.4;filter:url(#glow)}
+#orgWorld{transform-origin:0 0}
+.ocell{transition:opacity .8s}
+.ocell .mem{fill:url(#interior);stroke:var(--c);stroke-width:1.5;vector-effect:non-scaling-stroke;transition:stroke-width .4s,stroke .4s}
+.ocell .inner,.ocell .gp{transition:opacity .8s}
+.ocell .d{fill:#8fa9b8;transition:fill .3s}.ocell .d.lit{fill:#fff}
+.ocell .l{stroke:var(--line);stroke-width:.8}
+.ocell .core{fill:#f2fbff}
+.ocell .gp{opacity:0}
+.ocell.ghost .mem{stroke-dasharray:4 6;fill:none;opacity:.6}
+.ocell.ghost .inner{opacity:0}.ocell.ghost .gp{opacity:1}
+.ocell.mixed .mem{stroke-dasharray:4 6}
+.ocell.mixed .l,.ocell.mixed .core{opacity:0}.ocell.mixed .gp{opacity:1}
+.ocell .lp{opacity:0}.ocell.led .lp{opacity:1}
+.ocell .lp circle,.ocell .lp path,.insider circle,.insider path{stroke:var(--amber)}
+.ocell .lp line,.insider line{stroke:var(--amber);stroke-width:1;stroke-dasharray:2 3}
+.ocell .d.tr{fill:var(--amber)}
+.ocell.flag .mem{stroke:var(--rose);stroke-width:4}
+.insider{opacity:0;transition:opacity .5s}.mini.hasInsider .insider{opacity:1}
+.watch circle{fill:none;stroke:var(--amber);stroke-width:2}
+.watch text{fill:var(--amber)}
+.logcard{opacity:0;transform:translateY(40px);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1)}
+.logcard.show{opacity:1;transform:none}
+.logcard .bg{fill:#081820;stroke:var(--amber);stroke-width:1.6;filter:drop-shadow(0 12px 30px #000c)}
+.logcard .lead{stroke:var(--amber);stroke-width:1.4;opacity:.7}
+.logcard .hd{font-size:20px;fill:var(--amber);letter-spacing:.04em}
+.logcard .live{fill:var(--teal);animation:blink 1.2s infinite}
+.lrow{transition:transform .35s ease,opacity .35s}
+.lrow>g{animation:rowin .45s ease-out both}
+@keyframes rowin{from{opacity:0;transform:translateX(-24px)}}
+.lrow .rb{fill:#0f2a35;stroke:#1f4654;stroke-width:1}
+.lrow .ar{fill:none;stroke:#8ea5b3;stroke-width:1.6}
+.lrow .bar{fill:#2a4a59}
+.lrow .to{transition:fill .5s}
+.lrow .pz rect{fill:#4a6878;transition:fill .3s}
+.lrow .pz circle{fill:none;stroke:var(--amber);stroke-width:1.6;opacity:0;transform-box:fill-box;transform-origin:center}
+.lrow.hot .rb{stroke:var(--amber);fill:#2b2416}
+.lrow.held .pz rect{fill:var(--amber)}
+.lrow.held .pz circle{animation:ripple 1s ease-out 2}
+.ocell.hid{opacity:0}.ocell.paused{opacity:.25}
+.ocell.wake .mem{stroke-width:4}
+.ocell.hot .mem{stroke:var(--amber);stroke-width:4}
+.opeople{--c:var(--amber)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="brand"><i></i>Agentic systems</div><button id="fs" aria-label="Full screen" title="Full screen (F)">⛶</button></header>
+<main>
+<div class="copy" id="copy" aria-live="polite"><p class="chapter" id="chapter"></p><h1 id="title"></h1><p class="body" id="body"></p></div>
+<svg id="svg" viewBox="0 0 1000 800" role="img" aria-label="Animated diagram of agentic systems">
+<defs>
+<radialGradient id="interior"><stop stop-color="#11313d" stop-opacity=".34"/><stop offset=".75" stop-color="#0a1d25" stop-opacity=".16"/><stop offset="1" stop-color="#1ab9ab" stop-opacity=".12"/></radialGradient>
+<linearGradient id="spineFade" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1000" y2="0"><stop stop-color="#3c8f96" stop-opacity="0"/><stop offset=".12" stop-color="#3c8f96"/><stop offset=".9" stop-color="#3c8f96"/><stop offset="1" stop-color="#3c8f96" stop-opacity="0"/></linearGradient>
+<filter id="edgeBlur" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="14"/></filter>
+<mask id="stageMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="800"><rect x="6" y="6" width="988" height="788" fill="#fff" filter="url(#edgeBlur)"/></mask>
+<filter id="glow" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="4"/></filter>
+</defs>
+<g id="cellScene" class="scene"></g>
+<g id="exScene" class="scene"></g>
+<g id="orgScene" class="scene" mask="url(#stageMask)"></g>
+<g id="fx"></g>
+</svg>
+</main>
+<footer>
+<div class="transport"><button id="prev" aria-label="Previous step" title="Previous (←)">‹</button><button id="next" aria-label="Next step" title="Next (→ or Space)">›</button><button id="replay" aria-label="Replay step" title="Replay (R)">↺</button></div>
+<nav id="nav" aria-label="Chapters"></nav>
+<span class="credit">Diagrams by Claude Fable 5.2 · Nov 11, 2026</span>
+</footer>
+<script>
+"use strict";
+/* ---------- tiny engine ---------- */
+const NS='http://www.w3.org/2000/svg';
+const $=id=>document.getElementById(id);
+const el=(tag,attrs={},parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;};
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let gen=0;
+class Cancel extends Error{}
+const sleep=ms=>{const g=gen;return new Promise((res,rej)=>setTimeout(()=>g===gen?res():rej(new Cancel()),reduce?0:ms));};
+const tween=(ms,fn)=>{const g=gen;return new Promise((res,rej)=>{if(reduce){fn(1);return res();}const t0=performance.now();const f=now=>{if(g!==gen)return rej(new Cancel());const t=Math.min(1,Math.max(0,(now-t0)/ms));fn(t);t<1?requestAnimationFrame(f):res();};requestAnimationFrame(f);});};
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const bg=p=>{p.catch(()=>{});return p;};
+const COL={teal:'#27ddc8',rose:'#f58eab',amber:'#e9bd79',violet:'#a99cff',ink:'#f2fbff',grey:'#8ea5b3'};
+const fx=$('fx');
+function mover(pos,ms,o={}){const color=o.hex||COL[o.color]||COL.ink,r=o.r||5;
+  const g=el('g',{},o.parent||fx);el('circle',{r:r*2.4,fill:color,opacity:.45,filter:'url(#glow)'},g);el('circle',{r,fill:color},g);
+  const st=new Map(),put=k=>{const p=pos(k);g.setAttribute('transform',`translate(${p.x},${p.y})`);crossing(p,st);};put(0);
+  return tween(ms,t=>put(ease(t))).finally(()=>g.remove());}
+const fly=(a,b,o={})=>mover(k=>({x:a.x+(b.x-a.x)*k,y:a.y+(b.y-a.y)*k}),o.ms||520,o);
+const showScene=id=>{curScene=id;['cellScene','exScene','orgScene'].forEach(s=>$(s).classList.toggle('show',s===id));};
+const pol=(c,deg,r)=>({x:c.x+r*Math.cos(deg*Math.PI/180),y:c.y+r*Math.sin(deg*Math.PI/180)});
+const radii=(r,seed,n)=>Array.from({length:n},(_,i)=>r*(1+.06*Math.sin(i*2.3+seed)+.035*Math.cos(i*1.1+seed*2)));
+function blob(c,r,seed,n=11){return pathFrom(c,radii(r,seed,n));}
+function pathFrom(c,R){const n=R.length,p=R.map((r,i)=>pol(c,i/n*360,r));
+  let d=`M${p[0].x.toFixed(1)},${p[0].y.toFixed(1)}`;
+  for(let i=0;i<n;i++){const p0=p[(i-1+n)%n],p1=p[i],p2=p[(i+1)%n],p3=p[(i+2)%n];
+    d+=`C${(p1.x+(p2.x-p0.x)/6).toFixed(1)},${(p1.y+(p2.y-p0.y)/6).toFixed(1)} ${(p2.x-(p3.x-p1.x)/6).toFixed(1)},${(p2.y-(p3.y-p1.y)/6).toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;}
+  return d+'Z';}
+/* living membranes: a slow idle wobble, plus a ripple wherever a message crosses */
+const MEM=[];let curScene='';
+function alive(elm,c,r,seed,n,scene,world=c,rot=0){const R=radii(r,seed,n),m=n*3,B=[];
+  for(let j=0;j<m;j++){const u=j/m*n,i=Math.floor(u),f=u-i,g=k=>R[((i+k)%n+n)%n],p0=g(-1),p1=g(0),p2=g(1),p3=g(2);
+    B.push(.5*(2*p1+(p2-p0)*f+(2*p0-5*p1+4*p2-p3)*f*f+(3*p1-p0-3*p2+p3)*f*f*f));}
+  MEM.push({el:elm,c,r,B,m,seed,scene,world,rot:rot*Math.PI/180,kicks:[],amp:scene==='orgScene'?r*.028:Math.max(3,Math.min(13,r*.07)),idle:scene==='orgScene'?.75:r>200?1:1.8});}
+function crossing(p,st){for(const M of MEM){if(M.scene!==curScene)continue;const dx=p.x-M.world.x,dy=p.y-M.world.y,ins=dx*dx+dy*dy<M.r*M.r*.94,was=st.get(M);
+  if(was!==undefined&&was!==ins&&M.kicks.length<6)M.kicks.push({ang:Math.atan2(dy,dx)-M.rot,t0:performance.now()/1000,s:ins?-1:1});st.set(M,ins);}}
+(function(){if(reduce)return;let odd=0;const TAU=Math.PI*2;
+  const tick=now=>{requestAnimationFrame(tick);if(odd^=1)return;const t=now/1000,zoomed=curScene==='orgScene'&&$('orgWorld').style.transform.includes('scale'),zg=zoomed?2.4:1;
+    for(const M of MEM){if(M.scene!==curScene)continue;if(M.kicks.length)M.kicks=M.kicks.filter(k=>t-k.t0<2.4);
+      const R=M.B.map((b,j)=>{const th=j/M.m*TAU;let v=b*(1+(zoomed?1.8:M.idle)*(.011*Math.sin(2*th+t*.55+M.seed)+.008*Math.sin(3*th-t*.4+M.seed*2.1)));
+        for(const k of M.kicks){let d=Math.abs(th-k.ang)%TAU;if(d>Math.PI)d=TAU-d;const q=Math.max(0,t-k.t0);
+          v+=k.s*M.amp*zg*(1-Math.exp(-q/.06))*Math.exp(-q/.65)*Math.exp(-((d/1.25)**2))*Math.cos(11*q-4.5*d);}
+        return v;});
+      M.el.setAttribute('d',pathFrom(M.c,R));}};
+  requestAnimationFrame(tick);})();
+function personGlyph(parent,x,y,s=1){const g=el('g',{class:'person',transform:`translate(${x},${y}) scale(${s})`},parent);el('circle',{cy:-9,r:7},g);el('path',{d:'M-13,14c0-9 6-13 13-13s13,4 13,13'},g);return g;}
+
+/* ---------- scene 1: the cell ---------- */
+const cell=$('cellScene'),C={x:500,y:400},N={};
+const L={};['today','body','req','ctx','tool','arch','db'].forEach(k=>L[k]=el('g',{class:'layer',id:'L-'+k},cell));
+// order: today, body (membrane, edges, nodes), then extras
+(function buildToday(){L.today.classList.add('today');
+  [[330,190],[640,150],[800,330],[720,560],[420,620],[270,410],[530,380]].forEach(([x,y],i)=>{
+    personGlyph(L.today,x,y,1.25);el('circle',{class:'agent',cx:x+62,cy:y,r:6},L.today);
+    el('circle',{class:'ping',cx:x+22,cy:y,r:3,style:`animation-delay:${-i*.37}s`},L.today);});})();
+const bodyG=el('g',{class:'breathe'},L.body);
+const membrane=el('path',{class:'membrane',d:blob(C,352,1.7),pathLength:1},bodyG);alive(membrane,C,352,1.7,11,'cellScene');
+const edgesG=el('g',{},bodyG),nodesG=el('g',{},bodyG),filesG=el('g',{},bodyG);
+function mkEdge(a,b,parent){return el('line',{class:'edge',x1:N[a].x,y1:N[a].y,x2:N[b].x,y2:N[b].y,'data-e':a+'-'+b},parent);}
+function mkNode(id,parent,r,cls=''){const n=N[id],g=el('g',{class:'node '+cls,transform:`translate(${n.x},${n.y})`},parent);
+  el('circle',{class:'halo',r:r*3,filter:'url(#glow)'},g);el('circle',{class:'core',r},g);n.el=g;n.parts=[g];return g;}
+function team(id,deg,rad,label,eParent,nParent,n=4,leafR=82){
+  const h=pol(C,deg,rad);N[id]={x:h.x,y:h.y};const ids=[];
+  for(let i=0;i<n;i++){const p=pol(h,deg+(i-(n-1)/2)*38,i%2?leafR:leafR-16);N[id+i]={x:p.x,y:p.y};ids.push(id+i);}
+  const kid=pol(N[id+1],deg+20,38);N[id+'k']={x:kid.x,y:kid.y};
+  const es=[mkEdge('dir',id,eParent),...ids.map(l=>mkEdge(id,l,eParent)),mkEdge(id+1,id+'k',eParent)];
+  mkNode(id,nParent,7,'hub');ids.forEach(l=>mkNode(l,nParent,4));mkNode(id+'k',nParent,3);
+  es.slice(1).forEach((e,i)=>{const leaf=i<n?ids[i]:id+'k';N[leaf].parts.push(e);});N[id].parts.push(es[0]);
+  const perp=pol(h,deg+(Math.sin(deg*Math.PI/180)>0?90:-90)*(Math.cos(deg*Math.PI/180)>0?1:-1),0);
+  const up=Math.sin(deg*Math.PI/180)<0;
+  const t=el('text',{class:'lbl',x:h.x,y:h.y+(up?38:-22),'text-anchor':'middle'},nParent);t.textContent=label;N[id].label=t;
+  return ids;}
+N.dir={x:C.x,y:C.y};
+const TEAMS={design:team('design',-160,210,'Design',edgesG,nodesG),eng:team('eng',-52,210,'Engineering',edgesG,nodesG),
+  quality:team('quality',48,210,'Quality',edgesG,nodesG),ops:team('ops',128,210,'Operations',edgesG,nodesG)};
+mkNode('dir',nodesG,11,'hub');
+const dirLabel=el('text',{id:'dirLabel',class:'lbl gone',x:C.x,y:C.y+46,'text-anchor':'middle'},nodesG);dirLabel.textContent='Director';
+// requester
+N.req={x:60,y:522};
+(function(){personGlyph(L.req,N.req.x,N.req.y,1.3);const t=el('text',{class:'small',x:N.req.x,y:N.req.y+44,'text-anchor':'middle'},L.req);t.textContent='Request';})();
+// shared context: a stack of files inside the system
+N.ctx={x:500,y:590};
+const cstack=el('g',{class:'cstack'},L.ctx);
+(function(){for(let i=0;i<5;i++){const k=3-i,les=i===4;
+    const g=el('g',{class:'cfile'+(les?' lesson':''),transform:`translate(${N.ctx.x-28+i*7},${N.ctx.y-30+i*5}) scale(2.6)`},cstack);
+    el('path',{class:'pg',d:'M0,0h6.5l3.5,3.5v9.5h-10z'},g);el('path',{class:'ln',d:'M2,5.5h6M2,7.8h6M2,10.1h4'},g);}
+  cstack.querySelector('.cfile').classList.add('old');
+  const a=el('g',{class:'cfile archf',transform:`translate(${N.ctx.x-28+5*7},${N.ctx.y-30+5*5}) scale(2.6)`},cstack);el('path',{class:'pg',d:'M0,0h6.5l3.5,3.5v9.5h-10z'},a);el('path',{class:'ln',d:'M2,5.5h6M2,7.8h6M2,10.1h4'},a);
+  const t=el('text',{class:'ctxlabel',x:N.ctx.x,y:N.ctx.y+48,'text-anchor':'middle'},L.ctx);t.textContent='Shared context';})();
+const readCtx=async(ids,o={})=>{cstack.classList.add('read');await Promise.all(ids.map((id,i)=>(async()=>{await sleep(i*140);await fly(N.ctx,N[id],{ms:520,r:3.5,color:'teal',...o});on(id);})()));cstack.classList.remove('read');};
+// shared tool
+N.tool=pol(C,-2,255);
+(function(){const g=el('g',{class:'tool',transform:`translate(${N.tool.x},${N.tool.y}) rotate(45)`},L.tool);el('rect',{x:-8,y:-8,width:16,height:16,rx:2},g);
+  const t=el('text',{class:'small',x:N.tool.x,y:N.tool.y+34,'text-anchor':'middle'},L.tool);t.textContent='shared tool';})();
+// architect subgraph
+L.arch.classList.add('amber');
+(function(){const eg=el('g',{},L.arch),ng=el('g',{},L.arch);TEAMS.arch=team('arch',-108,150,'Architect',eg,ng,3,56);N.arch.label.setAttribute('y',N.arch.y-60);N.archk.el.remove();N.archk.parts[1].remove();})();
+const sweep=el('line',{class:'sweep',x1:C.x,y1:C.y,x2:C.x,y2:C.y,opacity:0},L.arch);
+// database team (grown later)
+(function(){const eg=el('g',{},L.db),ng=el('g',{},L.db);N.db={x:N.tool.x,y:N.tool.y};
+  const ids=[];[-60,0,60].forEach((a,i)=>{const p=pol(N.db,a-2,i==1?58:50);N['db'+i]={x:p.x,y:p.y};ids.push('db'+i);});
+  mkEdge('dir','db',eg);ids.forEach(l=>mkEdge('db',l,eg));mkNode('db',ng,7,'hub');ids.forEach(l=>mkNode(l,ng,4));TEAMS.db=ids;
+  const t=el('text',{class:'lbl',x:N.db.x-12,y:N.db.y+36,'text-anchor':'end'},ng);t.textContent='Database';})();
+
+const on=(id,c='on')=>N[id].el.classList.add(c);
+const offc=(id,...c)=>N[id].el.classList.remove(...(c.length?c:['on','bad','good','trace']));
+function file(id,o={}){const n=N[id],k=filesG.querySelectorAll(`[data-for="${id}"]`).length,g=el('g',{transform:`translate(${n.x+9+k*9},${n.y-19-k*3})`},filesG);
+  const f=el('g',{class:'file'+(o.cls?' '+o.cls:''),style:'transform-origin:5px 6px'},g);el('path',{d:'M0,0h6.5l3.5,3.5v9.5h-10z'},f);
+  if(o.instant){f.style.animation='none';f.firstChild.style.animation='none';}g.dataset.for=id;return f;}
+const fileOf=id=>filesG.querySelector(`[data-for="${id}"] .file`);
+const filesOf=id=>[...filesG.querySelectorAll(`[data-for="${id}"] .file`)];
+function cellState(s={}){
+  showScene('cellScene');
+  for(const k in L)L[k].classList.toggle('show',!!s[k]);
+  L.body.classList.toggle('ctx',!!s.ctx);L.ctx.classList.toggle('learned',!!s.learned);L.ctx.classList.toggle('tuned',!!s.tuned);cstack.classList.remove('flash','read');
+  dirLabel.classList.toggle('gone',!s.dirLabel);
+  Object.keys(N).forEach(id=>{if(N[id].el)offc(id);});
+  filesG.innerHTML='';(s.files||[]).forEach(id=>file(id,{instant:true}));
+  document.querySelectorAll('#cellScene .gone:not(#dirLabel),#cellScene .off').forEach(e=>e.classList.remove('gone','off'));
+  (s.gone||[]).forEach(id=>N[id].parts.forEach(p=>p.classList.add('gone')));
+  (s.off||[]).forEach(t=>dimTeam(t,true));
+  sweep.setAttribute('opacity',0);
+}
+function dimTeam(t,v){[t,t+'k',...TEAMS[t]].forEach(id=>N[id].parts.forEach(p=>p.classList.toggle('off',v)));N[t].label.classList.toggle('off',v);}
+async function hop(a,b,o={}){await fly(N[a],N[b],o);if(o.light!==false&&N[b].el)on(b,o.cls||'on');}
+/* a team does a piece of work: out to the hub, fan to leaves, come back */
+async function work(t,o={}){const leaves=(o.leaves||TEAMS[t]).filter(l=>!o.skip||!o.skip.includes(l));
+  await hop('dir',t,o);if(o.files){file(t);await sleep(500);}
+  await Promise.all(leaves.map(async(l,i)=>{await sleep(i*140);await hop(t,l,{...o,ms:340,r:3.5});
+    if(l===t+'1'){await hop(l,t+'k',{...o,ms:260,r:3});await fly(N[t+'k'],N[l],{...o,ms:260,r:3});}
+    await sleep(350+i*90);await fly(N[l],N[t],{...o,ms:340,r:3.5});}));
+  if(o.files){file(t);await sleep(700);}
+  await fly(N[t],N.dir,o);}
+const FILES_A=['dir','dir','eng','eng'];
+const FILES_B=[...FILES_A,'quality','quality','design','ops'],FILES_C=[...FILES_B,'arch'];
+
+/* ---------- scene 2: the message layer ---------- */
+const ex=$('exScene');
+const SYS={us:{x:165,y:400,r:108,label:'Our system',bub:{x:165,y:262}},ds:{x:845,y:210,r:88,label:'Design system',bub:{x:845,y:92}},
+  ot:{x:845,y:585,r:88,label:'Another system',bub:{x:845,y:467}},pp:{x:500,y:722,r:0,label:'People',bub:{x:660,y:716}}};
+const LOG={x:398,y:150,w:204,h:480,rowH:24,step:33};
+(function(){el('rect',{class:'logbox',x:LOG.x,y:LOG.y,width:LOG.w,height:LOG.h,rx:14},ex);
+  const t=el('text',{x:500,y:LOG.y-18,'text-anchor':'middle'},ex);t.textContent='Shared message layer';})();
+const rowsG=el('g',{},ex);
+// each small system has its own shape: [angle, distance, sub-agents]
+const SHAPE={
+  us:[[135,.56],[-62,.44,[[-105,.3],[-55,.36],[-8,.3]]],[12,.5,[[-25,.27],[40,.27]]],[-152,.6],[58,.6]],
+  ds:[[160,.55],[-75,.42,[[-75,.26,[[-40,.24]]]]],[20,.42,[[-18,.3],[22,.34],[62,.3]]],[100,.55]],
+  ot:[[150,.46,[[118,.3],[188,.3]]],[-112,.58],[-45,.42,[[-82,.3],[-18,.32]]],[38,.56],[92,.36,[[92,.3]]]]};
+function mini(id){const s=SYS[id],g=el('g',{class:'mini c-'+id,id:'sys-'+id},ex);s.g=g;s.dots=[];
+  alive(el('path',{class:'mem',d:blob(s,s.r,id.charCodeAt(0),9)},g),s,s.r,id.charCodeAt(0),9,'exScene');
+  s.tree=[];const lg=el('g',{},g),dg=el('g',{},g);
+  const add=(spec,from,depth)=>{const[a,f,kids]=spec,p=pol(from,a,s.r*f),n={x:p.x,y:p.y,from,kids:[],depth};
+    el('line',{class:'l',x1:from.x,y1:from.y,x2:p.x,y2:p.y},lg);n.el=el('circle',{class:'d d'+s.dots.length,cx:p.x,cy:p.y,r:kids?5:depth?3:4},dg);s.dots.push(n);
+    (kids||[]).forEach(k=>n.kids.push(add(k,n,depth+1)));return n;};
+  SHAPE[id].forEach(sp=>s.tree.push(add(sp,s,0)));
+  el('circle',{class:'core',cx:s.x,cy:s.y,r:7},g);
+  (function(){const p=s.dots[0],w=el('g',{class:'waitfx'},g);el('circle',{class:'ring',cx:p.x,cy:p.y,r:9},w);
+    el('rect',{x:p.x-21,y:p.y-38,width:42,height:19,rx:9.5},w);[-10,0,10].forEach((dx,i)=>el('circle',{class:'td',cx:p.x+dx,cy:p.y-28.5,r:3,style:`animation-delay:${i*.2}s`},w));})();
+  const gp=el('g',{class:'ghostperson'},g);personGlyph(gp,s.x,s.y,1.5);
+  if(id==='us'){s.ins={x:s.x-8,y:s.y+58};const ig=el('g',{class:'insider'},g);el('line',{x1:s.x,y1:s.y,x2:s.ins.x,y2:s.ins.y-16},ig);personGlyph(ig,s.ins.x,s.ins.y,1);}
+  const t=el('text',{class:'name',x:s.x,y:s.y+s.r+34,'text-anchor':'middle'},g);t.textContent=s.label;s.text=t;
+  ['w:waiting on a reply','k:work resumes'].forEach(v=>{const[k,txt]=v.split(':');const st=el('text',{class:'state '+k,x:s.x,y:s.y+s.r+58,'text-anchor':'middle'},g);st.textContent=txt;});}
+['us','ds','ot'].forEach(mini);
+const people=el('g',{class:'layer c-pp',id:'sys-pp'},ex);SYS.pp.g=people;
+(function(){personGlyph(people,SYS.pp.x-34,SYS.pp.y,1.3);personGlyph(people,SYS.pp.x,SYS.pp.y,1.3);personGlyph(people,SYS.pp.x+34,SYS.pp.y,1.3);
+  const t=el('text',{x:SYS.pp.x,y:SYS.pp.y+46,'text-anchor':'middle'},people);t.textContent='People';})();
+const bubbles={};
+for(const id in SYS){const b=SYS[id].bub,g=el('g',{class:'bubble c-'+id,transform:`translate(${b.x},${b.y})`},ex);
+  el('rect',{x:-88,y:-19,width:176,height:36,rx:18},g);const t=el('text',{y:6,'text-anchor':'middle'},g);t.textContent='Anything for me?';bubbles[id]=g;}
+let rows=[];
+const rowPos=i=>({x:LOG.x+16,y:LOG.y+18+i*LOG.step});
+const place=(r,i)=>{const p=rowPos(i);r.el.style.transform=`translate(${p.x}px,${p.y}px)`;};
+const layout=()=>rows.forEach(place);
+function addRow(color,colored=true){const g=el('g',{class:'row c-'+color+(colored?' colored':'')},rowsG);
+  el('rect',{width:LOG.w-32,height:LOG.rowH,rx:7},g);el('rect',{class:'bar',x:12,y:9,width:70,height:6,rx:3},g);el('rect',{class:'bar',x:90,y:9,width:38,height:6,rx:3},g);
+  const r={color,el:g};rows.push(r);g.style.transition='none';place(r,rows.length-1);g.getBoundingClientRect();g.style.transition='';return r;}
+function exState(s={}){
+  showScene('exScene');
+  rowsG.innerHTML='';rows=[];(s.rows||[]).forEach(c=>addRow(c));
+  people.classList.toggle('show',!!s.people);
+  for(const id in bubbles)bubbles[id].classList.remove('show');
+  ['us','ds','ot'].forEach(id=>{SYS[id].g.classList.remove('wake');});
+  SYS.us.g.dataset.state=s.us||'idle';SYS.us.g.classList.toggle('hasInsider',!!s.insider);
+  SYS.ot.g.classList.toggle('ghost',!!s.ghost);SYS.ot.text.textContent=s.ghost?'A team — no system yet':SYS.ot.label;
+}
+const rowCenter=i=>{const p=rowPos(i);return{x:p.x+(LOG.w-32)/2,y:p.y+LOG.rowH/2};};
+async function drop(from,color){const s=SYS[from];s.g.classList.add('wake');await sleep(300);
+  await fly(s,rowCenter(rows.length),{color:'grey',r:6,ms:800});
+  const r=addRow(color,false);s.g.classList.remove('wake');await sleep(550);r.el.classList.add('colored');await sleep(500);}
+async function sortRows(){const order=[];rows.forEach(r=>{if(!order.includes(r.color))order.push(r.color);});
+  rows=[...rows].sort((a,b)=>order.indexOf(a.color)-order.indexOf(b.color));layout();await sleep(800);}
+async function ask(who){const s=SYS[who];s.g.classList.add('wake');bubbles[who].classList.add('show');await sleep(700);
+  await fly(s,{x:500,y:Math.min(LOG.y+LOG.h-20,Math.max(LOG.y+20,s.y))},{color:who==='us'?'teal':who==='ds'?'rose':who==='ot'?'violet':'amber',r:4,ms:600});}
+async function take(who){const s=SYS[who],mine=rows.filter(r=>r.color===who);
+  mine.forEach(r=>r.el.classList.add('hl'));await sleep(650);
+  for(const r of mine){r.el.style.transition='transform .7s cubic-bezier(.5,0,.8,.4),opacity .25s .5s';r.el.style.transform=`translate(${s.x-20}px,${s.y-8}px) scale(.25)`;r.el.style.opacity=0;await sleep(130);}
+  await sleep(700);mine.forEach(r=>r.el.remove());rows=rows.filter(r=>r.color!==who);layout();
+  bubbles[who].classList.remove('show');await sleep(500);if(s.g.classList)s.g.classList.remove('wake');}
+/* work inside a small system: several branches at once, each at its own pace; chains run in sequence */
+const rnd=(a,b)=>a+Math.random()*(b-a);
+async function branch(n,color){const ms=rnd(220,360),r=n.depth?2.4:3;
+  await fly(n.from,n,{color,r,ms});n.el.classList.add('lit');
+  try{if(n.kids.length)await Promise.all(n.kids.map(async(k,i)=>{await sleep(i*rnd(60,220));await branch(k,color);}));
+    await sleep(rnd(150,650));}finally{n.el.classList.remove('lit');}
+  await fly(n,n.from,{color,r,ms});}
+async function buzz(id,n=5,color){const s=SYS[id],wait=s.g.dataset.state==='waiting';
+  const pool=s.tree.filter((b,i)=>!(wait&&i===0));
+  for(let k=0;k<Math.ceil(n/2);k++){const picks=pool.filter(()=>Math.random()<.65);if(picks.length<2)picks.splice(0,9,...pool.slice(k%2,k%2+2));
+    await Promise.all(picks.map(async b=>{await sleep(rnd(0,500));await branch(b,color);}));await sleep(rnd(80,250));}}
+
+/* ---------- scene 3: the organization ---------- */
+const org=$('orgScene'),orgWorld=el('g',{id:'orgWorld'},org);
+const spineY=x=>400+30*Math.sin(x/160);
+(function(){let d='';for(let x=0;x<=1000;x+=20)d+=(d?'L':'M')+x+','+spineY(x).toFixed(1);
+  el('path',{class:'spine glowline',d},orgWorld);el('path',{class:'spine',d},orgWorld);})();
+const PAL=['#27ddc8','#f58eab','#a99cff','#e9bd79','#7fb8ff','#8fe39a'];
+const ORG=[[110,600,70],[90,150,55,'led'],[215,255,38],[330,120,80,'led'],[470,235,45],[590,110,60],[700,250,34],[820,140,90],[940,280,30,'mixed'],[250,520,36,'mixed'],[360,650,62],[500,545,40],[610,680,75,'led'],[740,560,48],[880,650,66],
+  [945,500,26,'ghost'],[455,75,24,'ghost'],[235,720,28,'ghost'],[60,300,30,'new'],[760,700,22,'new'],[480,730,30]].map(([x,y,r,kind],i)=>({x,y,r,kind,i,col:PAL[i%6]}));
+ORG.forEach(c=>{const i=c.i,g=el('g',{class:'ocell',style:`--c:${c.col}`},orgWorld);c.g=g;c.dots=[];c.pts=[];
+  const sx=1+.18*Math.sin(i*1.9+.6);
+  alive(el('path',{class:'mem',d:blob({x:0,y:0},c.r,i*1.3,9),transform:`translate(${c.x},${c.y}) rotate(${i*47}) scale(${sx.toFixed(2)},${(2-sx).toFixed(2)})`},g),{x:0,y:0},c.r,i*1.3,9,'orgScene',c,i*47);
+  const inner=el('g',{class:'inner'},g),n=Math.max(2,Math.round(c.r/7));
+  for(let j=0;j<n;j++){const p=pol(c,j*137.5+i*30,c.r*(.26+.42*((j*.618+.3)%1)));el('line',{class:'l',x1:c.x,y1:c.y,x2:p.x,y2:p.y},inner);c.pts.push(p);c.dots.push(el('circle',{class:'d',cx:p.x,cy:p.y,r:c.r>50?2.6:2.2},inner));}
+  el('circle',{class:'core',cx:c.x,cy:c.y,r:2.2+c.r/24},inner);
+  const gp=el('g',{class:'gp'},g);personGlyph(gp,c.x,c.y,c.kind==='mixed'?c.r/42:c.r/30);
+  if(c.kind==='led'){c.lp={x:c.x-c.r*.2,y:c.y+c.r*.52};const lp=el('g',{class:'lp'},g);el('line',{x1:c.x,y1:c.y,x2:c.lp.x,y2:c.lp.y-8},lp);personGlyph(lp,c.lp.x,c.lp.y,.62);}});
+const OPEOPLE=[[385,330],[640,470],[830,345]].map(([x,y])=>{const g=el('g',{class:'opeople'},orgWorld);personGlyph(g,x-11,y,.8);personGlyph(g,x+11,y,.8);return{x,y,col:'#e9bd79',dots:[],person:1};});
+const orgLabels=el('g',{class:'layer'},orgWorld);
+[[840,276,'middle','a large domain'],[655,256,'end','a small one'],[985,552,'end','a team, no system yet'],[610,788,'middle','decision-makers inside'],[200,468,'start','people, with a few agents'],[500,spineY(500)-16,'middle','shared message layer']].forEach(([x,y,a,s])=>{const t=el('text',{class:'small',x,y,'text-anchor':a},orgLabels);t.textContent=s;});
+const pausedLabel=el('text',{class:'small layer',x:360,y:570,'text-anchor':'middle'},orgWorld);pausedLabel.textContent='paused';
+const watch=el('g',{class:'watch layer'},orgWorld);(function(){const y=spineY(500);el('circle',{cx:500,cy:y,r:15},watch);el('circle',{cx:500,cy:y,r:23,opacity:.4},watch);
+  const t=el('text',{class:'small',x:512,y:y+52,'text-anchor':'end'},watch);t.textContent='observe · trace · steer';})();
+const orgFx=el('g',{},orgWorld);
+// activity card: a live view of the message layer
+const LC={x:600,y:452,w:345,h:316},logCard=el('g',{class:'logcard'},org);
+el('line',{class:'lead',x1:512,y1:spineY(500)+12,x2:LC.x+4,y2:LC.y+4},logCard);el('rect',{class:'bg',x:LC.x,y:LC.y,width:LC.w,height:LC.h,rx:14},logCard);
+(function(){const t=el('text',{class:'hd',x:LC.x+40,y:LC.y+34},logCard);t.textContent='ACTIVITY';el('circle',{class:'live',cx:LC.x+22,cy:LC.y+27,r:5},logCard);})();
+const logRows=el('g',{},logCard);let lrows=[];
+function logRow(a,b,o={}){const g=el('g',{class:'lrow'+(o.hot?' hot':'')},logRows),r=el('g',{},g);
+  el('rect',{class:'rb',width:LC.w-32,height:34,rx:8},r);el('circle',{cx:22,cy:17,r:7.5,fill:a.col},r);el('path',{class:'ar',d:'M38,17h20m-6,-5l6,5l-6,5'},r);
+  g.to=el('circle',{class:'to',cx:76,cy:17,r:7.5,fill:b.col},r);el('rect',{class:'bar',x:98,y:12,width:90+Math.random()*70,height:10,rx:5},r);
+  const z=el('g',{class:'pz'},r);el('rect',{x:LC.w-62,y:10,width:4,height:14},z);el('rect',{x:LC.w-54,y:10,width:4,height:14},z);el('circle',{cx:LC.w-56,cy:17,r:11},z);
+  lrows.unshift(g);if(lrows.length>6)lrows.pop().remove();lrows.forEach((x,i)=>x.style.transform=`translate(${LC.x+16}px,${LC.y+50+i*42}px)`);return g;}
+function orgState(s={}){showScene('orgScene');orgFx.innerHTML='';
+  ORG.forEach(c=>{c.g.setAttribute('class','ocell'+(c.kind==='ghost'&&!s.grown?' ghost':'')+(c.kind==='new'&&!s.grown?' hid':'')+(c.kind==='mixed'?' mixed':'')+(c.kind==='led'?' led':''));c.dots.forEach(d=>d.classList.remove('tr','lit'));});
+  watch.classList.toggle('show',!!s.watch);logCard.classList.remove('show');logRows.innerHTML='';lrows=[];
+  orgLabels.classList.toggle('show',!!s.labels);pausedLabel.classList.remove('show');
+  orgWorld.style.transition='none';orgWorld.style.transform=s.zoom&&!reduce?'translate(60px,-2000px) scale(4)':'none';orgWorld.getBoundingClientRect();}
+const liveCells=()=>ORG.filter(c=>!/ghost|hid|paused/.test(c.g.getAttribute('class')));
+async function orgMsg(a,b,o={}){const k=o.slow||1,hex=o.hex||b.col,r=o.r||3,P=orgFx;
+  const pa={x:a.x,y:spineY(a.x)},pb={x:b.x,y:spineY(b.x)};
+  await fly(a,pa,{parent:P,hex,r,ms:380*k});
+  await mover(t=>{const x=pa.x+(pb.x-pa.x)*t;return{x,y:spineY(x)};},(300+Math.abs(pb.x-pa.x)*1.5)*k,{parent:P,hex,r});
+  await fly(pb,b,{parent:P,hex,r,ms:380*k});}
+function ambient(every=420){if(reduce)return;const g=gen,pick=L=>L[Math.random()*L.length|0];
+  (async()=>{while(g===gen){const L=liveCells(),ends=[...L,...OPEOPLE];const a=pick(ends),b=pick(ends);if(a!==b)bg(orgMsg(a,b));
+    const c=pick(L),d=pick(c.dots);if(c.lp)bg(fly(c,c.lp,{parent:orgFx,hex:'#e9bd79',r:2,ms:500}).then(()=>fly(c.lp,c,{parent:orgFx,hex:'#e9bd79',r:2,ms:500})));d.classList.add('lit');setTimeout(()=>d.classList.remove('lit'),600);await sleep(every);}})().catch(()=>{});}
+const flash=async(c,ms=1100)=>{c.g.classList.add('wake');await sleep(ms);c.g.classList.remove('wake');};
+
+/* ---------- the story ---------- */
+const CH=[{id:'system',name:'An agentic system'},{id:'director',name:'The Director Pattern'},{id:'learning',name:'Learning and growing'},{id:'across',name:'Across systems'},{id:'people',name:'People in the loop'},{id:'scale',name:'At scale'}];
+const STEPS=[
+/* 1 — an agentic system */
+{ch:0,title:'Today: one person, one agent.',body:'Useful — but every agent starts from zero. Nothing is shared and nothing accumulates.',
+ setup(){cellState({today:1});},async play(){}},
+{ch:0,title:'An agentic system is built around a domain.',body:'A team of agents, in whatever roles the problem needs, sharing one domain’s history, instructions and guardrails.',
+ setup(){cellState({body:1});},
+ async play(){const ids=Object.keys(N).filter(i=>N[i].el&&L.body.contains(N[i].el));for(const id of ids){on(id);await sleep(45);}await sleep(500);ids.forEach(i=>offc(i));}},
+{ch:0,title:'A request comes in. The system works it.',body:'One request becomes coordinated work across just the agents it needs, each doing its part.',
+ setup(){cellState({body:1,req:1});},
+ async play(){await sleep(400);await hop('req','dir',{ms:900,r:6});await sleep(300);
+   await work('eng',{leaves:['eng1','eng2']});await sleep(200);
+   await Promise.all([work('design',{leaves:['design2']}),(async()=>{await sleep(700);await work('quality',{leaves:['quality0']});})()]);}},
+{ch:0,title:'One answer comes back.',body:'The requester asks once. The planning, hand-offs and checking all happen inside the system.',
+ setup(){cellState({body:1,req:1});['dir','eng','design','quality','eng1','engk','eng2','design2','quality0'].forEach(i=>on(i));},
+ async play(){await sleep(500);await work('quality',{leaves:['quality2']});on('dir','good');await sleep(400);await fly(N.dir,N.req,{color:'teal',ms:1000,r:6});}},
+/* 2 — the director pattern */
+{ch:1,title:'One Director. One way in, one way out.',body:'Every request arrives at the Director and every report leaves from it. That makes a system predictable to work with.',
+ setup(){cellState({body:1,req:1,dirLabel:1});},
+ async play(){await sleep(400);on('dir');for(let i=0;i<2;i++){await hop('req','dir',{ms:850,r:6});await sleep(500);await fly(N.dir,N.req,{color:'teal',ms:850,r:6});await sleep(400);}}},
+{ch:1,title:'It delegates — and the work is written down.',body:'The Director and each team lead keep requests, plans and results as records, so work can be traced, resumed and checked.',
+ setup(){cellState({body:1,req:1,dirLabel:1});},
+ async play(){await sleep(300);await hop('req','dir',{ms:800,r:6});file('dir');await sleep(800);await work('eng',{files:1,leaves:['eng1','eng2']});
+   file('dir');await sleep(800);await fly(N.dir,N.req,{color:'teal',ms:850,r:6});}},
+{ch:1,title:'Every agent works from the same context.',body:'Instructions, history and guardrails are files that belong to the domain, not to each agent. Solve a problem once and the whole team has it.',
+ setup(){cellState({body:1,dirLabel:1,files:FILES_A});},
+ async play(){await sleep(300);L.ctx.classList.add('show');L.body.classList.add('ctx');await sleep(900);
+   on('dir');await readCtx(['design','eng','quality','ops']);
+   Object.keys(TEAMS).filter(t=>t!=='arch'&&t!=='db').forEach(t=>TEAMS[t].forEach(i=>on(i)));await sleep(900);
+   L.tool.classList.add('show');await sleep(600);
+   for(let i=0;i<2;i++){await fly(N.eng,N.tool,{ms:450,r:4});await fly(N.tool,N.eng,{ms:450,r:4});await fly(N.quality,N.tool,{ms:450,r:4});await fly(N.tool,N.quality,{ms:450,r:4});}}},
+{ch:1,title:'Collected — so it can be understood and controlled.',body:'You can see what happened and why, and pause or switch off any part, without hunting across separate agents.',
+ setup(){cellState({body:1,dirLabel:1,ctx:1,tool:1,files:FILES_B});},
+ async play(){await sleep(400);for(const id of ['dir','eng','eng1','engk','eng2']){on(id,'trace');filesOf(id).forEach(f=>f.classList.add('flash'));await sleep(380);}
+   await sleep(900);dimTeam('ops',true);}},
+/* 3 — learning and growing */
+{ch:2,title:'It gets better at its own domain.',body:'When work goes wrong, the system records what it learned as domain guidance. Next time it gets it right — for this domain.',
+ setup(){cellState({body:1,dirLabel:1,ctx:1,tool:1,files:FILES_B});},
+ async play(){await sleep(300);await hop('dir','quality');await hop('quality','quality2',{ms:340,r:3.5,cls:'bad'});await sleep(500);
+   await fly(N.quality2,N.quality,{color:'rose',ms:340,r:3.5});on('quality','bad');await fly(N.quality,N.dir,{color:'rose'});await sleep(300);
+   const f=file('quality',{cls:'lesson'});f.parentNode.setAttribute('transform',`translate(${N.quality.x-22},${N.quality.y-19})`);f.classList.add('flash');await sleep(700);
+   await fly(N.quality,N.ctx,{color:'amber',ms:600,r:4});L.ctx.classList.add('learned');cstack.classList.add('flash');await sleep(900);cstack.classList.remove('flash');
+   offc('quality');offc('quality2');await hop('dir','quality');await fly(N.ctx,N.quality,{color:'teal',ms:450,r:3.5});await hop('quality','quality2',{ms:340,r:3.5,cls:'good'});await sleep(400);
+   await fly(N.quality2,N.quality,{color:'teal',ms:340,r:3.5});on('quality','good');await fly(N.quality,N.dir,{color:'teal'});on('dir','good');}},
+{ch:2,title:'An Architect watches how the work flows.',body:'Part of the system studies its own work: what repeats, what fails, what keeps needing a human to steer. Then it rewrites the shared context to match.',
+ setup(){cellState({learned:1,body:1,dirLabel:1,ctx:1,tool:1,files:FILES_B});},
+ async play(){await sleep(300);L.arch.classList.add('show');await sleep(900);['arch',...TEAMS.arch].forEach(i=>on(i));
+   sweep.setAttribute('opacity',.7);
+   const users=['eng','quality','design'];
+   bg((async()=>{for(let k=0;k<2;k++)for(const u of users){await fly(N[u],N.tool,{color:'amber',ms:500,r:4});on(u,'trace');await sleep(120);}})());
+   await tween(4200,t=>{const p=pol(C,-108+t*360,335);sweep.setAttribute('x2',p.x);sweep.setAttribute('y2',p.y);});sweep.setAttribute('opacity',0);file('arch',{cls:'lesson'});await sleep(900);
+   await fly(N.arch,N.ctx,{color:'amber',ms:700,r:4});L.ctx.classList.add('tuned');cstack.classList.add('flash');await sleep(1000);cstack.classList.remove('flash');}},
+{ch:2,title:'It grows when the work calls for it.',body:'Three teams keep reaching for the same database. The Architect proposes a new team member to own it for everyone.',
+ setup(){cellState({learned:1,tuned:1,body:1,dirLabel:1,ctx:1,tool:1,arch:1,files:FILES_C});['eng','quality','design'].forEach(i=>on(i,'trace'));},
+ async play(){await sleep(500);await fly(N.arch,N.dir,{color:'amber'});await fly(N.dir,N.tool,{color:'amber'});
+   L.tool.classList.remove('show');L.db.classList.add('show');await sleep(900);['eng','quality','design'].forEach(i=>offc(i));
+   for(const u of ['eng','design']){await fly(N[u],N.dir,{});await hop('dir','db');await Promise.all(TEAMS.db.map(l=>hop('db',l,{ms:300,r:3.5})));await sleep(250);await fly(N.db,N.dir,{});await fly(N.dir,N[u],{});TEAMS.db.forEach(l=>offc(l));}}},
+{ch:2,title:'And it shrinks when parts go unused.',body:'Unused roles are removed. So is a whole team, once its work has gone away. The system sizes itself to the work it is actually asked to do.',
+ setup(){cellState({learned:1,tuned:1,body:1,dirLabel:1,ctx:1,arch:1,db:1,files:FILES_C});},
+ async play(){await sleep(400);['arch',...TEAMS.arch].forEach(i=>on(i));
+   for(const id of ['design0','quality3']){await fly(N.arch,N[id],{color:'amber',ms:420,r:3.5});on(id,'trace');}
+   await sleep(500);for(const id of ['design0','quality3']){N[id].parts.forEach(p=>p.classList.add('gone'));await sleep(200);}
+   await fly(N.arch,N.ctx,{color:'amber',ms:420,r:3.5});cstack.querySelectorAll('.cfile')[1].classList.add('gone');await sleep(600);
+   // the big pull: a whole team goes
+   const ops=['ops',...TEAMS.ops,'opsk'];await fly(N.arch,N.dir,{color:'amber',ms:450,r:5});await fly(N.dir,N.ops,{color:'amber',ms:550,r:5});
+   for(const id of ops){on(id,'trace');await sleep(90);}await sleep(1100);
+   for(const id of ['opsk',...TEAMS.ops]){N[id].parts.forEach(p=>p.classList.add('gone'));await sleep(140);}
+   await sleep(250);N.ops.parts.forEach(p=>p.classList.add('gone'));N.ops.label.classList.add('gone');filesOf('ops').forEach(f=>f.parentNode.classList.add('gone'));}},
+/* 4 — across systems */
+{ch:3,title:'Systems don’t call each other. They leave messages.',body:'Our system needs a design. Its Director writes that to a shared layer, and the layer works out who it is for.',
+ setup(){exState({rows:['ot','ds','ot'],us:'idle'});},
+ async play(){await sleep(600);await buzz('us',2);SYS.us.g.dataset.state='waiting';await sleep(1100);await fly(SYS.us.dots[0],SYS.us,{color:'amber',r:4,ms:600});await sleep(250);await drop('us','ds');}},
+{ch:3,title:'Messages gather by who they’re for.',body:'Nothing is wired point to point, and no inbox has to exist in advance. A system simply has messages waiting.',
+ setup(){exState({rows:['ot','ds','ot','ds'],us:'waiting'});},
+ async play(){await sleep(400);await drop('ot','ds');await drop('ds','ot');await sleep(300);await sortRows();}},
+{ch:3,title:'“Anything for me?”',body:'Each system checks in when it is ready. Its messages are handed over and leave the layer.',
+ setup(){exState({rows:['ot','ot','ot','ds','ds','ds'],us:'waiting'});},
+ async play(){await sleep(500);await ask('ds');await take('ds');await buzz('ds',4,'rose');}},
+{ch:3,title:'The answer returns the same way. Work resumes.',body:'The design arrives, our designer checks it, and the paused request carries on. Nobody had to push.',
+ setup(){exState({rows:['ot','ot','ot'],us:'waiting'});},
+ async play(){await sleep(400);await buzz('ds',2,'rose');await drop('ds','us');await sleep(300);await ask('us');await take('us');SYS.us.g.dataset.state='working';await buzz('us',5,'teal');}},
+/* 5 — people in the loop */
+{ch:4,title:'People use the same layer.',body:'When a system needs a decision, an approval or expertise, it leaves a message. People pick it up like any other participant.',
+ setup(){exState({rows:['ot','ot','ot'],us:'idle',people:1});},
+ async play(){await sleep(500);await buzz('us',2);SYS.us.g.dataset.state='waiting';await sleep(1100);await fly(SYS.us.dots[0],SYS.us,{color:'amber',r:4,ms:600});await sleep(250);await drop('us','pp');await sleep(400);await ask('pp');await take('pp');}},
+{ch:4,title:'Their answer goes back in.',body:'A person can start work or steer it the same way. The system comes back for the answer when it needs it.',
+ setup(){exState({rows:['ot','ot','ot'],us:'waiting',people:1});},
+ async play(){await sleep(500);await drop('pp','us');await sleep(300);await ask('us');await take('us');SYS.us.g.dataset.state='working';await buzz('us',5,'teal');}},
+{ch:4,title:'Some people sit inside the system.',body:'A domain’s own decision-makers can work with its Director directly, with nothing in between. Same system, same rules.',
+ setup(){exState({rows:['ot','ot','ot'],us:'idle',people:1});},
+ async play(){await sleep(500);SYS.us.g.classList.add('hasInsider');await sleep(900);const u=SYS.us;
+   for(let i=0;i<3;i++){await buzz('us',1);await fly(u,u.ins,{color:'amber',r:4,ms:500});await sleep(400);await fly(u.ins,u,{color:'teal',r:4,ms:500});}await buzz('us',3,'teal');}},
+{ch:4,title:'Start where it helps. Grow from there.',body:'No system waits for another to exist. Each domain is self-sufficient, improves itself, and coordinates through one simple layer.',
+ setup(){exState({rows:['ot','ot','ot'],us:'working',people:1,ghost:1,insider:1});},
+ async play(){await sleep(700);await ask('ot');await take('ot');await sleep(500);await drop('ot','us');await drop('us','ds');
+   await Promise.all([(async()=>{await ask('us');await take('us');await buzz('us',4,'teal');})(),(async()=>{await sleep(900);await ask('ds');await take('ds');await buzz('ds',4,'rose');})()]);}},
+/* 6 — at scale */
+{ch:5,title:'Now zoom out.',body:'One system is useful. An organization full of them, each built around its own domain, is the point.',
+ setup(){orgState({zoom:1});},
+ async play(){await sleep(900);orgWorld.style.transition='transform 3.2s cubic-bezier(.6,0,.2,1)';orgWorld.style.transform='none';await sleep(3000);ambient(380);}},
+{ch:5,title:'Different sizes and shapes. The same simple rules.',body:'Large or small. Fully agentic, or mostly people with a few agents. Some keep their decision-makers inside. Each still presents one Director and one way to talk.',
+ setup(){orgState({labels:1});},
+ async play(){ambient(520);await sleep(700);for(const i of [7,6,12,9,15])await flash(ORG[i],1300);}},
+{ch:5,title:'It grows one domain at a time.',body:'A new system needs no rewiring of the others. It joins the layer and starts asking, “Anything for me?”',
+ setup(){orgState({});},
+ async play(){ambient(600);await sleep(800);
+   for(const c of ORG.filter(c=>c.kind==='ghost'||c.kind==='new')){c.g.classList.remove('ghost','hid');bg(flash(c,1400));await sleep(500);bg(orgMsg(c,ORG[(c.i*5)%15]));bg(orgMsg(ORG[(c.i*3)%15],c));await sleep(700);}}},
+{ch:5,title:'See it all in one place. Steer from there.',body:'Because every system talks the same way, one simple view shows who is talking to whom. From that same view you can pause a system or send its work elsewhere.',
+ setup(){orgState({grown:1});},
+ async play(){ambient(1100);await sleep(400);watch.classList.add('show');await sleep(700);logCard.classList.add('show');await sleep(700);
+   for(const[i,j]of[[0,4],[7,2],[5,11],[1,9],[3,6]]){const a=ORG[i],b=ORG[j];bg(orgMsg(a,b,{r:4}));bg(flash(a,600));await sleep(400);logRow(a,b);await sleep(560);}
+   // steer: hold one message, pause its target, send the work elsewhere
+   const a=ORG[5],b=ORG[10],alt=ORG[2],hex='#e9bd79',P=orgFx,sx=b.x+95,along=(x0,x1)=>t=>{const x=x0+(x1-x0)*t;return{x,y:spineY(x)};};
+   await fly(a,{x:a.x,y:spineY(a.x)},{parent:P,hex,r:5.5,ms:500});const row=logRow(a,b,{hot:1});
+   await mover(along(a.x,sx),700,{parent:P,hex,r:5.5});const park=el('circle',{cx:sx,cy:spineY(sx),r:5.5,fill:hex},P);await sleep(500);
+   row.classList.add('held');await sleep(500);b.g.classList.add('paused');pausedLabel.classList.add('show');await sleep(1300);
+   row.to.setAttribute('fill',alt.col);await sleep(600);park.remove();await mover(along(sx,alt.x),600,{parent:P,hex,r:5.5});
+   await fly({x:alt.x,y:spineY(alt.x)},alt,{parent:P,hex,r:5.5,ms:500});bg(flash(alt,1400));}},
+{ch:5,title:'Go inside only where it’s needed.',body:'When something needs diagnosis, open that one system. Its Director, records and history are where you expect them, every time.',
+ setup(){orgState({grown:1,watch:1});},
+ async play(){ambient(750);const c=ORG[3];await sleep(700);c.g.classList.add('flag');await sleep(1100);
+   orgWorld.style.transition='transform 2.2s cubic-bezier(.6,0,.2,1)';orgWorld.style.transform=`translate(${500-c.x*3.2}px,${400-c.y*3.2}px) scale(3.2)`;await sleep(2400);
+   await Promise.all(c.pts.map(async(pt,j)=>{if(j%2)return;await sleep(j*90+Math.random()*250);await fly(c,pt,{parent:orgFx,hex:'#e9bd79',r:2,ms:300+Math.random()*200});c.dots[j].classList.add('tr');}));
+   await fly(c,c.lp,{parent:orgFx,hex:'#e9bd79',r:2,ms:450});await fly(c.lp,c,{parent:orgFx,hex:'#27ddc8',r:2,ms:450});
+   c.g.classList.remove('flag');await sleep(900);orgWorld.style.transform='none';}},
+];
+
+/* ---------- presenter ---------- */
+let cur=0;
+const firstOf=c=>STEPS.findIndex(s=>s.ch===c);
+const nav=$('nav');
+CH.forEach((c,i)=>{const b=document.createElement('button');b.innerHTML=`<span>${i+1} · ${c.name}</span><div class="dots">${STEPS.filter(s=>s.ch===i).map(()=>'<i></i>').join('')}</div>`;b.onclick=()=>go(firstOf(i));nav.appendChild(b);});
+function paintNav(){const c=STEPS[cur].ch,k=cur-firstOf(c);[...nav.children].forEach((b,i)=>{b.setAttribute('aria-current',i===c);[...b.querySelectorAll('i')].forEach((d,j)=>{d.className=i<c||(i===c&&j<k)?'done':(i===c&&j===k?'now':'');});});}
+function go(i,opts={}){i=Math.max(0,Math.min(STEPS.length-1,i));const changed=i!==cur||opts.force;cur=i;gen++;fx.innerHTML='';orgFx.innerHTML='';
+  const s=STEPS[i],c=CH[s.ch],k=i-firstOf(s.ch),n=STEPS.filter(x=>x.ch===s.ch).length;
+  const copy=$('copy');
+  const write=()=>{$('chapter').textContent=`${s.ch+1} · ${c.name}  ·  ${k+1} / ${n}`;$('title').textContent=s.title;$('body').textContent=s.body;copy.classList.remove('swap');};
+  if(changed&&!reduce&&!opts.first){copy.classList.add('swap');setTimeout(write,220);}else write();
+  paintNav();document.title=`${c.name} — Agentic systems`;
+  const h=`#${c.id}~${k+1}`;if(location.hash!==h)history.replaceState(null,'',h);
+  s.setup();bg(Promise.resolve().then(()=>s.play()));}
+function fromHash(){const m=location.hash.match(/^#([a-z]+)(?:~(\d+))?/);if(!m)return 0;const c=CH.findIndex(x=>x.id===m[1]);if(c<0)return 0;
+  const n=STEPS.filter(x=>x.ch===c).length;return firstOf(c)+Math.max(0,Math.min(n-1,(+m[2]||1)-1));}
+$('next').onclick=()=>go(cur+1);$('prev').onclick=()=>go(cur-1);$('replay').onclick=()=>go(cur,{force:1});
+const fs=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();
+$('fs').onclick=fs;
+addEventListener('keydown',e=>{if(e.metaKey||e.ctrlKey||e.altKey)return;const onBtn=e.target.closest&&e.target.closest('button');
+  if(e.key==='ArrowRight'||e.key==='PageDown'||(e.key===' '&&!onBtn)){e.preventDefault();go(cur+1);}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(cur-1);}
+  else if(e.key==='r'||e.key==='R')go(cur,{force:1});
+  else if(e.key==='Home')go(firstOf(STEPS[cur].ch));
+  else if(e.key==='f'||e.key==='F')fs();});
+addEventListener('hashchange',()=>{const i=fromHash();if(i!==cur)go(i);});
+cur=fromHash();go(cur,{first:1});
+</script>
+</body>
+</html>

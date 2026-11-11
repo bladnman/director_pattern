@@ -1,0 +1,27 @@
+{
+  "id": "staffing-stewardship-layers",
+  "title": "Diagram: what survives compaction",
+  "description": "Instruction layers before and after the compaction, and where the proposed re-load trigger belongs.",
+  "content": {
+    "kind": "image",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-07-staffing-and-stewardship/layers.svg"
+    }
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-08T01:48:51.751Z",
+  "updatedAt": "2026-11-08T01:55:35.761Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "review",
+    "message": "Headless render, paging, light/dark and 375px checks passed; awaiting owner review",
+    "updatedAt": 1794102935753
+  },
+  "status": "review"
+}
