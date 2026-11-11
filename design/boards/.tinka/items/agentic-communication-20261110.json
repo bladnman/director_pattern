@@ -1,0 +1,31 @@
+{
+  "id": "agentic-communication-20261110",
+  "title": "Across systems",
+  "description": "Animated conceptual diagram; a chapter in Inside agentic systems.",
+  "build": {
+    "state": "review",
+    "message": "Both independent chapter reviews meet every category bar. Ready for owner review; owner creative acceptance remains open."
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-10T23:51:51.168Z",
+  "updatedAt": "2026-11-11T08:38:01.514Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "content": {
+    "kind": "html",
+    "resource": {
+      "rootId": "agentic-systems",
+      "path": "communication.html"
+    }
+  },
+  "preview": {
+    "resource": {
+      "rootId": "agentic-systems",
+      "path": "preview-communication.jpg"
+    }
+  }
+}

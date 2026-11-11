@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 2,
+  "id": "agentic-systems-20261110",
+  "ownerItemId": "item-91759043-36cc-48fc-a4bb-89768f34015a",
+  "title": "Inside agentic systems",
+  "description": "A connected visual suite: agentic systems, the Director Pattern, learning and growth, cross-system exchange, and people in the loop. Explanatory prototypes; creative review open.",
+  "createdAt": "2026-11-10T23:51:11.956Z",
+  "updatedAt": "2026-11-11T01:04:21.671Z",
+  "placements": [
+    {
+      "x": 0,
+      "y": 120,
+      "width": 1082,
+      "height": 654,
+      "z": 0,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1440,
+          "height": 810
+        }
+      },
+      "id": "placement-290aacfc-839c-472c-a0bf-8fa66193fcd8",
+      "itemId": "agentic-systems-20261110"
+    },
+    {
+      "x": 1140,
+      "y": 120,
+      "width": 1082,
+      "height": 654,
+      "z": 1,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1440,
+          "height": 810
+        }
+      },
+      "id": "placement-46789aab-aca1-45e6-b9d2-a9674f878d8e",
+      "itemId": "agentic-director-20261110"
+    },
+    {
+      "x": 0,
+      "y": 880,
+      "width": 1082,
+      "height": 654,
+      "z": 2,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1440,
+          "height": 810
+        }
+      },
+      "id": "placement-5c3ee195-e178-4116-a532-3817f8922447",
+      "itemId": "agentic-learning-20261110"
+    },
+    {
+      "x": 1140,
+      "y": 880,
+      "width": 1082,
+      "height": 654,
+      "z": 3,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1440,
+          "height": 810
+        }
+      },
+      "id": "placement-08552c56-87a0-4613-ac40-f972a2f2c69b",
+      "itemId": "agentic-communication-20261110"
+    },
+    {
+      "x": 0,
+      "y": 1640,
+      "width": 1082,
+      "height": 654,
+      "z": 4,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1440,
+          "height": 810
+        }
+      },
+      "id": "placement-6314722a-92e6-49d4-8acd-096fb15afdf7",
+      "itemId": "agentic-human-20261110"
+    },
+    {
+      "x": 0,
+      "y": -700,
+      "width": 1082,
+      "height": 654,
+      "z": 5,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      "id": "placement-ab78986f-5f7c-4a3d-8721-9399df098654",
+      "itemId": "agentic-suite-presenter-20261110"
+    },
+    {
+      "x": 1140,
+      "y": -700,
+      "width": 700,
+      "height": 654,
+      "z": 6,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-8982af75-fd93-460c-bccb-56c5af6861ce",
+      "itemId": "agentic-suite-notes-20261110"
+    },
+    {
+      "x": 1140,
+      "y": 1640,
+      "width": 700,
+      "height": 440,
+      "z": 7,
+      "id": "placement-8b5d6d02-0128-49ac-bf95-d1a8ec4740a9",
+      "itemId": "research-2026-11-10-living-system-art",
+      "presentation": {
+        "mode": "card"
+      }
+    }
+  ],
+  "reviewOrder": [
+    "placement-290aacfc-839c-472c-a0bf-8fa66193fcd8",
+    "placement-46789aab-aca1-45e6-b9d2-a9674f878d8e",
+    "placement-5c3ee195-e178-4116-a532-3817f8922447",
+    "placement-08552c56-87a0-4613-ac40-f972a2f2c69b",
+    "placement-6314722a-92e6-49d4-8acd-096fb15afdf7",
+    "placement-ab78986f-5f7c-4a3d-8721-9399df098654",
+    "placement-8982af75-fd93-460c-bccb-56c5af6861ce",
+    "placement-8b5d6d02-0128-49ac-bf95-d1a8ec4740a9"
+  ],
+  "rounds": [],
+  "decorations": []
+}

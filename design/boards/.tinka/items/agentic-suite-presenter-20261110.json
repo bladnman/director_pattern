@@ -1,0 +1,31 @@
+{
+  "id": "agentic-suite-presenter-20261110",
+  "title": "Start here — Inside agentic systems",
+  "description": "Five reviewed connected explainers with native views and a linked guide/gallery. Ready for owner review; owner creative acceptance remains open.",
+  "content": {
+    "kind": "html",
+    "resource": {
+      "rootId": "agentic-systems",
+      "path": "presenter.html"
+    }
+  },
+  "preview": {
+    "resource": {
+      "rootId": "agentic-systems",
+      "path": "cover.jpg"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Five chapter review bars complete; scoped delivery checks passed. Ready for owner review; owner creative acceptance remains open."
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-11T00:07:52.984Z",
+  "updatedAt": "2026-11-11T08:38:01.741Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

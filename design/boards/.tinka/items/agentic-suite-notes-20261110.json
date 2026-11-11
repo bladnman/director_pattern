@@ -1,0 +1,25 @@
+{
+  "id": "agentic-suite-notes-20261110",
+  "title": "Design notes and scope",
+  "description": "Presenter controls, five reviewed chapter scopes, native gallery, separate scores, preservation and evidence limits.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "agentic-systems",
+      "path": "README.md"
+    }
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-11T00:07:53.122Z",
+  "updatedAt": "2026-11-11T08:38:01.973Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "review",
+    "message": "Guide and native gallery ready for owner review; owner creative acceptance remains open."
+  }
+}

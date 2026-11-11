@@ -1,0 +1,343 @@
+'use strict';
+const NS='http://www.w3.org/2000/svg';
+const $=id=>document.getElementById(id);
+const el=(tag,attrs={},text='')=>{const n=document.createElementNS(NS,tag);for(const[k,v]of Object.entries(attrs))n.setAttribute(k,v);if(text)n.textContent=text;return n};
+const H=(tag,attrs={},text='')=>{const n=document.createElement(tag);for(const[k,v]of Object.entries(attrs))n.setAttribute(k,v);n.textContent=text;return n};
+const roles=[{id:'design',name:'Design',x:-105,y:-108},{id:'engineering',name:'Engineering',x:112,y:-109},{id:'quality',name:'Quality',x:161,y:72},{id:'operations',name:'Operations',x:-23,y:169},{id:'research',name:'Research',x:-168,y:61}];
+const chapters={
+systems:{label:'Agentic systems',title:'An area of work.\nA system of its own.',description:'One cell holds the people, responsibilities and memory that support an ongoing area of work.',scope:'A general model',steps:[
+ ['A domain, held together','A cell can include several teams and many outputs. Its branches represent responsibilities, not a fixed organization.','overview'],
+ ['A request enters','The Director is the point of contact. The request comes in, and its intent is recorded.','intake'],
+ ['Work goes to a responsibility','Design records its assignment. Its branch comes alive as work moves through the local graph.','design'],
+ ['A return changes the next move','Design updates its work record and returns an outcome. The Director updates the request before routing again.','design-return'],
+ ['One request can become several','Engineering and Quality receive different, bounded assignments. The flow can branch and run in parallel.','parallel'],
+ ['Returns are brought together','Each responsibility updates its own record. The Director evaluates the combined result and asks Quality for a final check.','verify'],
+ ['The final check returns','Quality updates its record and sends the checked result back. The Director records that final return before closing the request.','final-return'],
+ ['The request is concluded','The Director reconciles the result with the request and returns an outcome to the caller.','conclude'],
+ ['A cell is one part of a wider world','Other areas of work have systems of their own. Requests cross a boundary; results come back.','network'],
+ ['Cooperation becomes a network','More systems exchange work. Each keeps its own responsibilities while contributing to shared outcomes.','network-many']
+]},
+director:{label:'The Director Pattern',title:'One conversation.\nWork in many places.',description:'The Director keeps the whole outcome in view while bounded work moves through the system.',scope:'Current method · illustrated',steps:[
+ ['Start with the whole request','The cell holds capabilities and durable memory. The Director remains accountable for the usable outcome.','overview'],
+ ['Understand and record','A request arrives. The Director preserves intent, identifies the obligations and records what success means.','intake'],
+ ['Delegate bounded work','Design gets a clear assignment and records it locally. A message carries the work; a durable record preserves continuity.','design'],
+ ['Evaluate, then branch','The first result returns. The Director updates the request and dispatches distinct work to Engineering and Quality.','parallel-status'],
+ ['Keep the caller informed','Engineering returns first. The Director records the result and gives the caller a progress update while Quality continues.','partial-return'],
+ ['Review the whole result','Quality returns its findings. The Director evaluates the evidence and routes a focused follow-up when needed.','verify-status'],
+ ['The follow-up returns','Quality updates its record and returns the focused check. The Director evaluates that return and updates the request.','final-return'],
+ ['Conclude against the request','The records reflect the final result. The caller receives the outcome after the work has been evaluated.','conclude']
+]},
+learning:{label:'Learning and growth',title:'Experience becomes\nbetter instructions.',description:'Work leaves evidence. A deliberate review turns selected lessons into guidance the system can use again.',scope:'Current learning loop · optional growth',qualification:'Role growth is a proposed illustration.',steps:[
+ ['Work leaves a trace','Completed work, corrections and exceptions provide evidence. Recording an observation does not yet change the system.','learn-observe'],
+ ['The owner initiates a review','At an appropriate checkpoint, the Director assigns a bounded learning review. The review examines selected evidence.','learn-review'],
+ ['Propose a better way','The reviewer proposes a scoped improvement. Better instructions, changed routing or a new specialty are different kinds of proposal.','learn-propose'],
+ ['An owner decides','The owner evaluates the proposal. Accepted guidance is maintained in the instructions that future work will actually load.','learn-decide'],
+ ['A later task loads the lesson','A matching request loads the maintained guidance. A stored lesson helps only when later work actually uses it.','learn-reuse'],
+ ['A recurring need can justify growth','Sometimes the evidence supports a new specialty. Its responsibility and routing are reviewed and implemented before it becomes available.','learn-grow'],
+ ['Later work reaches the new role','On a separate encounter, a request reaches the maintained specialty. Actual work tests whether the change helps.','learn-use']
+]},
+communication:{label:'Across systems',title:'Independent systems.\nA common exchange.',description:'An addressed message can cross a domain boundary without moving ownership of either system.',scope:'Proposed transport',qualification:'A shared exchange is a proposed mechanism.',steps:[
+ ['A place to leave work','Systems keep their own internal graphs. A shared exchange carries addressed requests, acknowledgments and returns.','exchange-overview'],
+ ['Write to the destination','Fieldwork places a request addressed to Infrastructure in the exchange, with context and a return route.','exchange-send'],
+ ['Pick up the work addressed to you','Infrastructure selects its message. Other messages remain for their intended recipients.','exchange-pickup'],
+ ['Acknowledge, then work locally','Infrastructure accepts the bounded work and activates its own graph. Fieldwork keeps its commitment to the caller.','exchange-work'],
+ ['Return through the same exchange','Infrastructure updates its record and writes a result addressed back to Fieldwork.','exchange-return'],
+ ['Evaluate the returned outcome','Fieldwork picks up the result, updates its own record and evaluates whether the commitment is met.','exchange-evaluate']
+]},
+human:{label:'People in the loop',title:'A person is part\nof the conversation.',description:'The same exchange can carry a decision to a person and bring their answer back to the system.',scope:'Proposed exchange · human authority',qualification:'The exchange illustrates a proposed transport.',steps:[
+ ['Work reaches a human boundary','The system can prepare a concrete decision for a person. Human judgment remains part of the workflow.','human-overview'],
+ ['Put a reviewable question in the exchange','The Director sends the context, proposed action and decision needed. The message is addressed to the person.','human-send'],
+ ['Waiting is visible','The dependent action waits. Other authorized work may continue while the decision remains unanswered.','human-wait'],
+ ['The person reviews and decides','The person picks up the request and returns an explicit choice: approve, revise or decline.','human-decide'],
+ ['Bring the decision back','The system receives and records the answer, then resumes only the work that answer authorizes.','human-return'],
+ ['Close the loop','The Director reports what happened. A recorded human decision is a return in the conversation, not a transfer of all authority.','human-conclude']
+]}
+};
+let chapter='systems',index=0,playing=false,motionRunning=true,storyStarted=false,playMode='cue',elapsed=0,lifeTime=0,last=performance.now(),scene='',cellNodes={},signals=[],camera={},timeline=null,duration=8200;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+motionRunning=!reduced;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ease=x=>x*x*(3-2*x);
+const recordOffsets={director:[23,47],design:[28,-65],engineering:[4,82],quality:[-186,58],operations:[18,22],research:[-82,22]};
+function layoutMode(){const w=window.innerWidth||1600;return w<=600?'phone':w<=1000?'compact':'wide';}
+function pairPose(id){return layoutMode()==='phone'?{x:300,y:id==='left'?260:1260,s:.55}:{x:id==='left'?730:1380,y:450,s:id==='left'?.65:.61};}
+function neighborViews(){return layoutMode()==='phone'?[['infrastructure',475,600,.30],['publishing',475,1000,.28],['research-cell',115,1000,.28],['care',115,600,.28]]:[['infrastructure',1365,200,.35],['publishing',1360,720,.31],['research-cell',700,730,.28],['care',630,165,.25]];}
+function phoneRecordBase(){const code=chapters[chapter].steps[index][2];return chapter==='learning'&&code!=='learn-observe'?(code==='learn-review'?860:1000):600;}
+function phoneRecordSlot(role){const order=chapter==='learning'?['director','engineering','research','design','quality','operations']:['director','design','engineering','quality','research','operations'];const i=Math.max(0,order.indexOf(role));return[30+(i%2)*300,phoneRecordBase()+Math.floor(i/2)*90];}
+function prepareSceneViewport(){
+ const mode=layoutMode(),phone=mode==='phone',svg=$('diagram'),code=chapters[chapter].steps[index][2];document.body.dataset.layout=mode;
+ if(mode==='wide'){svg.setAttribute('viewBox','0 0 1600 900');svg.style.height='';}
+ else if(mode==='compact'){svg.setAttribute('viewBox',scene==='cell'?'450 0 1150 900':'400 150 1200 800');svg.style.height=scene==='cell'?'600px':'520px';}
+ else{let h=scene!=='cell'?1700:code.startsWith('network')?1250:600;if(scene==='cell'&&!code.startsWith('network'))for(const e of timeline.records)if(e.cell==='main')h=Math.max(h,phoneRecordSlot(e.role)[1]+80);if(chapter==='learning'&&code!=='learn-observe')h=Math.max(h,960);svg.setAttribute('viewBox',`0 0 600 ${h}`);svg.style.height=(h*(window.innerWidth||390)/600)+'px';}
+ if(scene==='cell'){
+  $('caller').querySelector('circle').setAttribute('cx',phone?45:480);$('caller').querySelector('circle').setAttribute('cy',phone?300:455);const label=$('caller').querySelector('text');label.setAttribute('x',phone?45:480);label.setAttribute('y',phone?332:487);label.style.fontSize=phone?'18px':'';
+  $('wide-main-label').setAttribute('x',phone?300:1000);$('wide-main-label').setAttribute('y',phone?430:665);
+  $('instructions-actor').setAttribute('transform',phone?'translate(-285 76)':'');$('learning-decision').setAttribute('transform',phone?'translate(120 850)':'translate(1100 736)');
+ }else{
+  for(const id of ['left',...(scene==='exchange'?['right']:[])]){const q=pairPose(id);setCamera(id,q.x,q.y,q.s);}
+  $('exchange').setAttribute('transform',phone?'translate(201 625)':'translate(965 292)');$('exchange-state').setAttribute('x',phone?300:1064);$('exchange-state').setAttribute('y',phone?1610:730);
+  $('left-domain').setAttribute('x',phone?300:730);$('left-domain').setAttribute('y',phone?525:715);$('right-domain').setAttribute('x',phone?300:1380);$('right-domain').setAttribute('y',phone?1525:715);
+  if(scene==='human'){$('person').setAttribute('transform',phone?'translate(300 1260)':'translate(1380 450)');$('person-decision').setAttribute('transform',phone?'translate(170 1040)':'translate(1250 240)');}
+ }
+}
+function seed(n){const x=Math.sin(n*127.1+311.7)*43758.5453123;return x-Math.floor(x)}
+function buildDust(){for(let i=0;i<120;i++)$('dust').append(el('circle',{cx:seed(i+1)*1600,cy:seed(i+180)*900,r:seed(i+350)*2.5+.3,fill:i%6?'#276780':'#91c8db',opacity:seed(i+600)*.13+.025}));}
+function record(label){const g=el('g',{class:'record'});g.append(el('rect',{x:0,y:0,width:28,height:30,rx:3}));for(let i=0;i<3;i++)g.append(el('path',{d:`M6 ${8+i*6} H${i===2?17:22}`,fill:'none',class:'record-line',pathLength:1}));g.append(el('text',{x:35,y:12,class:'record-name'},label),el('text',{x:35,y:27,class:'record-status'},''));return g}
+function createCell(name,id,{labels=true,simple=false,color='#27ddc8',variant=id}={}){
+ variant={main:0,left:0,right:1,infrastructure:1,publishing:2,'research-cell':3,care:4}[id]??variant;
+ const c=LivingCell.create({id,name,roles,labels,simple,color,variant});c.g.classList.add('cell');
+ if(id==='main')c.domainTitle=[...c.g.querySelectorAll('text')].find(n=>n.textContent===name);
+ c.records={director:record('Request')};c.g.append(c.records.director);
+ for(const r of roles){c.records[r.id]=record('Work record');c.g.append(c.records[r.id]);}
+ cellNodes[id]=c;return c.g;
+}
+function fixedWire(id,from,to,color='#42606f',curve=0){const p=el('path',{id,d:`M${from[0]},${from[1]} Q${(from[0]+to[0])/2},${(from[1]+to[1])/2+curve} ${to[0]},${to[1]}`,fill:'none',stroke:color,'stroke-width':1.2,opacity:.3});$('world').prepend(p);return p}
+function globalPoint(cellId,roleId='director'){
+ const c=cellNodes[cellId],p=c.point(roleId),svg=$('diagram');
+ const q=new DOMPoint(p.x,p.y).matrixTransform(c.g.getCTM()).matrixTransform(svg.getCTM().inverse());return[q.x,q.y];
+}
+function pointOn(path,f){const p=path.getPointAtLength(path.getTotalLength()*clamp(f));const q=new DOMPoint(p.x,p.y).matrixTransform(path.getCTM()).matrixTransform($('diagram').getCTM().inverse());return[q.x,q.y];}
+function setCamera(id,x,y,s,opacity=1){const old=camera[id];if(old&&old.to.x===x&&old.to.y===y&&old.to.s===s&&old.to.opacity===opacity)return;const value=old?.value||{x,y,s,opacity};camera[id]={from:{...value},to:{x,y,s,opacity},value:{...value},at:lifeTime};}
+// Fit the whole-cell overview to the actual clipped stage. Working scenes
+// deliberately move closer to the Director; the domain title leaves that frame.
+function mainView(code){
+ const network=code.startsWith('network'),opening=code==='overview'||code==='learn-observe',mode=layoutMode();
+ if(mode==='phone')return{x:300,y:network?250:300,s:network?.5:.74};
+ if(mode==='compact')return{x:network?1000:1060,y:network?450:437,s:network?.59:opening||code.startsWith('learn-')?1.31:1.48};
+ if(network)return{x:1000,y:450,s:.59};
+ if(!opening&&!code.startsWith('learn-'))return{x:1080,y:450,s:2};
+ const wanted={x:1060,y:437,s:opening||code.startsWith('learn-')?1.31:1.48};
+ const stage=$('stage'),svg=$('diagram');
+ if(!stage.getBoundingClientRect||!svg.getScreenCTM)return wanted;
+ const box=stage.getBoundingClientRect(),matrix=svg.getScreenCTM();if(!matrix)return wanted;
+ const inverse=matrix.inverse(),top=new DOMPoint(box.left,box.top+18).matrixTransform(inverse).y,bottom=new DOMPoint(box.left,box.bottom-18).matrixTransform(inverse).y;
+ const above=opening?325:300,below=300,s=Math.min(wanted.s,(bottom-top)/(above+below));
+ return{x:wanted.x,y:clamp(wanted.y,top+above*s,bottom-below*s),s};
+}
+function applyMainView(code){const view=mainView(code);setCamera('main',view.x,view.y,view.s);}
+function renderCamera(){for(const[id,v]of Object.entries(camera)){const f=reduced?1:ease(clamp((lifeTime-v.at)/1700));for(const k of ['x','y','s','opacity'])v.value[k]=v.from[k]+(v.to[k]-v.from[k])*f;const q=v.value;cellNodes[id]?.g.setAttribute('transform',`translate(${q.x} ${q.y}) scale(${q.s})`);cellNodes[id]?.g.setAttribute('opacity',q.opacity);const title=cellNodes[id]?.domainTitle;if(id!=='main'&&title){title.style.fontSize=(20/q.s)+'px';title.setAttribute('y',300+30/q.s)}if(layoutMode()==='phone'&&id==='main'){for(const role of Object.values(cellNodes[id].rs))if(role.label)role.label.style.fontSize=(18/q.s)+'px';const director=[...cellNodes[id].g.querySelectorAll('text')].find(n=>n.textContent==='Director');if(director)director.style.fontSize=(18/q.s)+'px';if(title)title.style.fontSize=(20/q.s)+'px';}else if(id==='main'){for(const role of Object.values(cellNodes[id].rs))if(role.label)role.label.style.fontSize='14px';const director=[...cellNodes[id].g.querySelectorAll('text')].find(n=>n.textContent==='Director');if(director)director.style.fontSize='14px';if(title)title.style.fontSize='14px';}}}
+function makeLearningTools(){
+ const g=el('g',{id:'learning-tools'});
+ const review=el('g',{id:'review-actor',class:'learning-actor'});
+ review.append(el('circle',{cx:730,cy:365,r:21,fill:'url(#star)',class:'review-halo'}),el('circle',{cx:730,cy:365,r:6,fill:'#e9bd79',class:'review-core'}),el('text',{x:730,y:318,'text-anchor':'middle',class:'tool-label'},'Bounded review'));
+ const branches=el('g',{id:'review-branches'});
+ for(const [i,x,y]of [[0,680,382],[1,699,422],[2,763,421],[3,780,366]]){branches.append(el('path',{d:`M730,365 Q${(730+x)/2},${y-8} ${x},${y}`,fill:'none',stroke:'#e9bd79','stroke-width':1.1,'data-branch':i}),el('circle',{cx:x,cy:y,r:3,fill:'#e9bd79'}));}
+ review.append(branches);const rr=record('Review record');rr.id='review-record';rr.setAttribute('transform','translate(676 447) scale(1.6)');review.append(rr);g.append(review);
+ const instructions=el('g',{id:'instructions-actor'});instructions.append(el('rect',{x:705,y:574,width:43,height:40,rx:4,fill:'#10242b',stroke:'#e9bd79','stroke-width':1.4}),el('path',{d:'M715 586 H739 M715 594 H739 M715 602 H733',fill:'none',stroke:'#e9bd79','stroke-width':1.2}),el('text',{x:726,y:650,'text-anchor':'middle',class:'tool-label',id:'instructions-label'},'Maintained instructions'));g.append(instructions);
+ const decision=el('g',{id:'learning-decision',transform:'translate(1100 736)'});decision.append(el('rect',{width:360,height:70,rx:7,class:'decision-panel'}),el('text',{x:18,y:25,class:'decision-title'},'Owner decision'),el('text',{x:18,y:51,class:'tool-status',id:'decision-label'},'Proposal under review'));g.append(decision);
+ $('world').append(g);
+ fixedWire('review-wire',[1060,437],[730,365],'#9c865d',-35);
+ fixedWire('proposal-wire',[730,365],[1100,770],'#9c865d',40).setAttribute('d','M730,365 C1030,330 970,600 1100,770');
+ fixedWire('guidance-wire',[1100,770],[726,594],'#9c865d',35);
+ fixedWire('guidance-director-wire',[726,594],[1060,437],'#9c865d',45);
+}
+function makeScene(kind){if(scene===kind)return;scene=kind;cellNodes={};camera={};$('world').replaceChildren();$('signals').replaceChildren();
+ if(kind==='cell'){
+  $('world').append(createCell('Fieldwork','main',{variant:0}),el('text',{id:'wide-main-label',x:1000,y:665,'text-anchor':'middle',class:'exchange-domain',opacity:0},'Fieldwork'));
+  const caller=el('g',{id:'caller',class:'caller'});caller.append(el('circle',{cx:480,cy:455,r:5,fill:'#a5c5d4'}),el('text',{x:480,y:487,'text-anchor':'middle',class:'external-label'},'Caller'));$('world').append(caller);fixedWire('caller-wire',[480,455],[1060,437]);
+  for(const[n,id,x,y,s,c]of [['Infrastructure','infrastructure',1365,200,.35,'#7d9fe2'],['Publishing','publishing',1360,720,.31,'#f58eab'],['Research','research-cell',700,730,.28,'#e9bd79'],['Customer care','care',630,165,.25,'#68b6b8']]){const g=createCell(n,id,{labels:false,simple:true,color:c,variant:id});const title=el('text',{y:335,'text-anchor':'middle',class:'neighbor-label',style:`fill:${c};font-size:43px`},n);g.append(title);cellNodes[id].domainTitle=title;$('world').append(g);const v=neighborViews().find(v=>v[0]===id);setCamera(id,v[1],v[2],v[3],0)}
+  for(const[id,from,to]of [['network-infrastructure','main','infrastructure'],['network-publishing','main','publishing'],['network-research','main','research-cell'],['network-care','care','infrastructure']]){const p=fixedWire(id,[0,0],[0,0]);p.dataset.from=from;p.dataset.to=to;p.classList.add('network-wire');}
+  makeLearningTools();
+ }else{
+  $('world').append(createCell('Fieldwork','left',{labels:false,simple:false,variant:0}));{const q=pairPose('left');setCamera('left',q.x,q.y,q.s);}
+  if(kind==='exchange'){$('world').append(createCell('Infrastructure','right',{labels:false,simple:false,color:'#f58eab',variant:1}));{const q=pairPose('right');setCamera('right',q.x,q.y,q.s);}}
+  else{const p=el('g',{id:'person',transform:'translate(1380 450)'});p.append(el('circle',{cx:0,cy:-46,r:29,fill:'none',stroke:'#e9bd79','stroke-width':2,class:'person-head'}),el('path',{d:'M-59 70 C-59 -8 59 -8 59 70 M-78 91 H78',fill:'none',stroke:'#e9bd79','stroke-width':2}),el('circle',{cx:0,cy:0,r:67,fill:'#e9bd79',opacity:0,class:'person-catch'}));const reply=el('g',{id:'person-decision',transform:'translate(1250 240)',opacity:0});reply.append(el('rect',{width:260,height:76,rx:7,class:'decision-panel'}),el('text',{x:18,y:27,class:'decision-title'},'Explicit reply'),el('text',{x:18,y:54,class:'tool-status'},'Approve this action'));$('world').append(p,reply)}
+  $('world').append(el('text',{id:'left-domain',x:730,y:715,'text-anchor':'middle',class:'exchange-domain'},'Fieldwork'),el('text',{id:'right-domain',x:1380,y:715,'text-anchor':'middle',class:'exchange-domain',style:`fill:${kind==='exchange'?'#f58eab':'#e9bd79'}`},kind==='exchange'?'Infrastructure':'Person'));
+  fixedWire('exchange-left',[730,450],[968,450]);fixedWire('exchange-right',[1160,450],[1380,450]);
+  const ex=el('g',{id:'exchange',transform:'translate(965 292)'});ex.append(el('rect',{width:198,height:290,rx:12,fill:'#07131c',stroke:'#294651','stroke-width':1.3}),el('text',{x:99,y:-25,'text-anchor':'middle',class:'exchange-label'},'Shared exchange'));
+  for(let i=0;i<4;i++){const row=el('g',{id:'mail-'+i,transform:`translate(13 ${20+i*66})`});row.append(el('rect',{width:172,height:51,rx:5,class:'exchange-card'}),el('circle',{cx:14,cy:18,r:3.5,fill:['#7d9fe2','#f58eab','#e9bd79','#27ddc8'][i]}),el('text',{x:26,y:22,class:'exchange-text'},['Research','Infrastructure','Person','Fieldwork'][i]),el('text',{x:26,y:41,class:'mail-status'},'Addressed message'));ex.append(row)}$('world').append(ex,el('text',{id:'exchange-state',x:1064,y:730,'text-anchor':'middle',class:'exchange-caption'},'Each system keeps its own work.'));
+ }
+}
+function newTimeline(){signals=[];$('signals').replaceChildren();timeline={records:[],work:[],arrivals:[],mail:[],caption:[],tools:[],toolRecords:[],toolArrivals:[],decisions:[],reveal:[]};duration=8200;}
+function recAt(cell,role='director',at=0,updated=false,kind=updated?'complete':'received',label=null){timeline.records.push({cell,role,at,updated,kind,label:label||(kind==='complete'?'Result recorded':kind==='received'?'Received':'Updated')});}
+function work(cell,role,start,end){timeline.work.push({cell,role,start,end});}
+function message(pathProvider,{reverse=false,color='#27ddc8',at=300,travel=1550,toCell=null,toRole='director',receipt='Received',toTool=null}={}){
+ const g=el('g');const halo=el('circle',{r:13,fill:color,opacity:.28,filter:'url(#glow)'}),tail=el('circle',{r:2.5,fill:color,opacity:.45}),dot=el('circle',{r:4.5,fill:color});g.append(halo,tail,dot);$('signals').append(g);signals.push({pathProvider,reverse,color,at,travel,g,halo,tail,dot});
+ if(toCell){timeline.arrivals.push({cell:toCell,role:toRole,at:at+travel});recAt(toCell,toRole,at+travel+300,false,'received',receipt)}
+ if(toTool)timeline.toolArrivals.push({tool:toTool,at:at+travel});
+}
+function internal(cell,role,reverse=false,at=1200,travel=1450,color='#27ddc8',receipt=null,writeSource=true){
+ if(writeSource)recAt(cell,reverse?role:'director',at-800,true,reverse?'complete':'routed',reverse?'Result recorded':'Assignment ready');
+ message(()=>cellNodes[cell].route(role),{reverse,at,travel,color,toCell:cell,toRole:reverse?'director':role,receipt:receipt||(reverse?'Result received':'Assignment received')});
+}
+function external(id,reverse=false,at=1200,travel=1450,color='#27ddc8',toCell=null,toRole='director',receipt='Received',toTool=null){
+ const ends={'caller-wire':[null,'main'],'network-infrastructure':['main','infrastructure'],'network-publishing':['main','publishing'],'network-research':['main','research-cell'],'network-care':['care','infrastructure'],'exchange-left':['left',null],'exchange-right':[null,scene==='exchange'?'right':null],'review-wire':['main',null],'proposal-wire':[null,null],'guidance-wire':[null,null],'guidance-director-wire':[null,'main']}[id]||[null,null];
+ toCell=toCell||ends[reverse?0:1];message(()=>$(id),{reverse,at,travel,color,toCell,toRole,receipt,toTool});
+}
+function baseline(cell,entries){for(const entry of entries){const [role,updated,label]=typeof entry==='string'?[entry,false,entry==='director'?'Request held':'Assignment held']:entry;recAt(cell,role,0,updated,updated?'complete':'received',label||(updated?'Result recorded':'Assignment received'))}}
+function mail(index,at,returned=false,status=null){timeline.mail.push({index,at,returned,status:status||(returned?'Result ready':'Request waiting')})}
+function caption(text,at=0){timeline.caption.push({text,at})}
+function tool(id,at=0){timeline.tools.push({id,at})}
+function toolRecord(at,label,complete=false){timeline.toolRecords.push({at,label,complete})}
+function decision(text,at=0){timeline.decisions.push({text,at})}
+function finishTimeline(){timeline.records.sort((a,b)=>a.at-b.at);timeline.mail.sort((a,b)=>a.at-b.at);timeline.caption.sort((a,b)=>a.at-b.at);duration=Math.max(6200,...signals.map(e=>e.at+e.travel+850),...timeline.records.filter(e=>e.at>0).map(e=>e.at+1100),...timeline.work.map(e=>e.end+450),...timeline.toolRecords.filter(e=>e.at>0).map(e=>e.at+1100),...timeline.tools.map(e=>(e.end??e.at)+650),...timeline.decisions.map(e=>e.at+1100),...timeline.caption.map(e=>e.at+1100),...timeline.mail.map(e=>e.at+1100),...timeline.reveal.map(e=>e.at+1300));}
+function configureCell(code){makeScene('cell');newTimeline();const network=code.startsWith('network'),learning=code.startsWith('learn-');
+ applyMainView(code);
+ for(const[id,x,y,s]of neighborViews())setCamera(id,x,y,s,network?1:0);
+ $('caller').setAttribute('opacity',!network&&!learning&&code!=='overview'?1:0);$('caller-wire').setAttribute('opacity',!network&&!learning&&code!=='overview'?.28:0);
+ for(const id of ['review-actor','instructions-actor','learning-decision','review-wire','proposal-wire','guidance-wire','guidance-director-wire'])$(id).setAttribute('opacity',0);
+ for(const p of $('world').querySelectorAll('.network-wire'))p.setAttribute('opacity',network?.28:0);
+ for(const label of cellNodes.main.g.querySelectorAll('text'))label.style.opacity=network?'0':'1';$('wide-main-label').setAttribute('opacity',network?1:0);if(cellNodes.main.domainTitle)cellNodes.main.domainTitle.style.opacity=code==='overview'||code==='learn-observe'?'1':'0';
+ for(const r of roles){const n=cellNodes.main.rs[r.id];n.group.setAttribute('opacity',learning&&r.id==='research'?0:1);if(n.label)n.label.textContent=r.name;}
+ cellNodes.main.mem.removeAttribute('transform');
+ if(code==='overview')return;
+ if(network){
+  baseline('main',[['director',true,'Outcome retained']]);recAt('main','director',900,true,'routed','Shared work ready');external('network-infrastructure',false,1800,1500,'#7d9fe2','infrastructure');work('infrastructure','engineering',4200,6200);recAt('infrastructure','director',6500,true,'complete','Result recorded');external('network-infrastructure',true,7300,1500,'#27ddc8','main','director','Return received');recAt('main','director',10050,true,'evaluated','Return evaluated');
+  if(code==='network-many'){
+   work('publishing','design',0,700);recAt('publishing','director',1100,true,'complete','Result recorded');external('network-publishing',true,1950,1550,'#f58eab','main','director','Publishing returned');
+   recAt('main','director',4750,true,'evaluated','Publishing evaluated');recAt('main','director',5750,true,'routed','Research request ready');external('network-research',false,6600,1550,'#e9bd79','research-cell');work('research-cell','research',9000,11050);recAt('research-cell','director',11450,true,'complete','Result recorded');external('network-research',true,12350,1550,'#e9bd79','main','director','Research returned');recAt('main','director',15150,true,'evaluated','Returns evaluated');
+  }return;
+ }
+ if(code==='intake'){external('caller-wire',false,300,1600,'#27ddc8','main','director','Intent recorded');return}
+ if(learning){configureLearning(code);return}
+ baseline('main',[['director',false,'Intent recorded']]);
+ if(code==='design'){internal('main','design',false,1300);work('main','design',3750,7100);return}
+ if(code==='design-return'){baseline('main',[['design',false,'Assignment held']]);work('main','design',0,1400);internal('main','design',true,2600,1500,'#dbeaf7');recAt('main','director',5300,true,'evaluated','Outcome evaluated');return}
+ if(code==='parallel'||code==='parallel-status'){
+  baseline('main',[['design',code==='parallel',code==='parallel'?'Result recorded':'Assignment held']]);let start=1400;
+  if(code==='parallel-status'){work('main','design',0,1000);internal('main','design',true,2100,1450,'#dbeaf7');recAt('main','director',4750,true,'evaluated','Outcome evaluated');start=6400}else baseline('main',[['director',true,'Outcome evaluated']]);
+  recAt('main','director',start-850,true,'routed','Assignments ready');
+  internal('main','engineering',false,start,1450,'#27ddc8',null,false);internal('main','quality',false,start+450,1450,'#27ddc8',null,false);work('main','engineering',start+2350,start+5100);work('main','quality',start+2800,start+5500);
+  if(code==='parallel-status'){recAt('main','director',8500,true,'updated','Status recorded');external('caller-wire',true,9350,1500,'#e9bd79');}return;
+ }
+ if(code==='partial-return'){baseline('main',[['design',true],'engineering','quality']);work('main','engineering',0,1100);work('main','quality',0,9200);internal('main','engineering',true,2300,1450,'#dbeaf7');recAt('main','director',5000,true,'evaluated','Progress evaluated');recAt('main','director',6000,true,'updated','Status recorded');external('caller-wire',true,6850,1500,'#e9bd79');return}
+ if(code==='verify'||code==='verify-status'){
+  baseline('main',[['design',true],'engineering','quality']);
+  if(code==='verify'){work('main','engineering',0,900);internal('main','engineering',true,2100,1450,'#dbeaf7')}else baseline('main',[['engineering',true],['director',true,'Progress retained']]);
+  work('main','quality',0,1400);internal('main','quality',true,2800,1450,'#dbeaf7');recAt('main','director',5500,true,'evaluated','Results evaluated');internal('main','quality',false,7500,1450,'#27ddc8','Follow-up received');work('main','quality',9800,12200);if(code==='verify-status'){recAt('main','director',8500,true,'updated','Status recorded');external('caller-wire',true,9350,1500,'#e9bd79');}return;
+ }
+ if(code==='final-return'){baseline('main',[['design',true],['engineering',true],'quality',['director',true,'Follow-up held']]);work('main','quality',0,1450);internal('main','quality',true,2700,1500,'#dbeaf7');recAt('main','director',5400,true,'evaluated','Final check evaluated');return}
+ if(code==='conclude'){baseline('main',[['design',true],['engineering',true],['quality',true],['director',true,'Checks retained']]);recAt('main','director',750,true,'complete','Outcome concluded');external('caller-wire',true,1800,1800,'#27ddc8');return}
+}
+function configureLearning(code){
+ const amber='#e9bd79';
+ if(code==='learn-observe'){baseline('main',[['engineering',true,'Evidence retained'],['director',true,'Corrections retained']]);return}
+ baseline('main',[['director',true,'Evidence retained'],['engineering',true,'Work retained']]);
+ if(code==='learn-review'){
+  tool('review-actor');tool('review-wire');recAt('main','director',450,true,'routed','Review prepared');external('review-wire',false,1450,1500,amber,null,'director','Received','review');toolRecord(3250,'Evidence received');timeline.tools.push({id:'review-work',at:3900,end:7100});toolRecord(7500,'Evidence reviewed',true);return;
+ }
+ tool('review-actor');toolRecord(0,'Evidence reviewed',true);
+ if(code==='learn-propose'){
+  tool('proposal-wire',1300);tool('learning-decision',0);decision('Scoped proposal under review');timeline.tools.push({id:'review-work',at:0,end:1800});toolRecord(2150,'Proposal recorded',true);external('proposal-wire',false,3250,1700,amber,null,'director','Received','decision');decision('Proposal received · decision pending',5400);return;
+ }
+ tool('learning-decision');
+ if(code==='learn-decide'){
+  tool('instructions-actor',2400);
+  decision('Evaluate evidence and scope');decision('Guidance accepted',1800);tool('guidance-wire',1850);external('guidance-wire',false,2850,1700,amber,null,'director','Received','instructions');decision('Accepted guidance maintained',5200);return;
+ }
+ tool('instructions-actor');decision('Accepted guidance maintained');
+ if(code==='learn-reuse'){
+  $('caller').setAttribute('opacity',1);$('caller-wire').setAttribute('opacity',.28);external('caller-wire',false,300,1450,'#27ddc8','main','director','Matching request recorded');tool('guidance-director-wire',2200);external('guidance-director-wire',false,2850,1450,amber,'main','director','Guidance loaded');internal('main','engineering',false,6400,1400);work('main','engineering',8700,10500);decision('Later matching work uses the lesson',8700);return;
+ }
+ if(code==='learn-grow'){
+  decision('A recurring need supports a proposal');decision('Responsibility and routing reviewed',2200);decision('New specialty implemented',4400);timeline.reveal.push({role:'research',at:4650});recAt('main','director',4800,true,'updated','Routing maintained');return;
+ }
+ if(code==='learn-use'){
+  cellNodes.main.rs.research.group.setAttribute('opacity',1);cellNodes.main.rs.research.label.textContent='Synthesis';decision('Maintained role · a later encounter');$('caller').setAttribute('opacity',1);$('caller-wire').setAttribute('opacity',.28);external('caller-wire',false,300,1450,'#27ddc8','main','director','New request recorded');internal('main','research',false,3900,1450);work('main','research',6200,8500);internal('main','research',true,10500,1450,'#dbeaf7');recAt('main','director',13150,true,'evaluated','New result evaluated');return;
+ }
+}
+function configureExchange(code,human){makeScene(human?'human':'exchange');newTimeline();caption('Each system keeps its own work.');
+ timeline.exchangeIndex=human?(code==='human-return'?3:2):['exchange-work','exchange-return','exchange-evaluate'].includes(code)?3:1;
+ if(human){
+  if(code==='human-overview'){caption('A person uses the same addressed exchange.');return}
+  baseline('left',[['director',false,'Decision needed']]);
+  if(code==='human-send'){recAt('left','director',450,true,'routed','Question prepared');external('exchange-left',false,1450,1600,'#e9bd79');mail(2,3350,false,'Decision requested');caption('Context, proposed action and a clear decision.',3350)}
+  if(code==='human-wait'){baseline('left',[['engineering',false,'Other work authorized']]);mail(2,0,false,'Awaiting a reply');caption('Decision pending. The dependent action waits.');work('left','engineering',800,7000)}
+  if(code==='human-decide'){mail(2,0,false,'Decision requested');external('exchange-right',false,750,1650,'#e9bd79',null,'director','Received','person');mail(2,750,false,'Picked up');caption('The person reviews the concrete proposal.',2850);caption('Explicit reply: “Approve this action.”',5200);tool('person-decision',5200);timeline.toolArrivals.push({tool:'person-decision',at:5200})}
+  if(code==='human-return'){tool('person-decision');external('exchange-right',true,1000,1550,'#e9bd79');mail(3,2850,true,'Explicit approval');caption('The person’s actual answer returns.',2850);mail(3,3900,true,'Picked up');external('exchange-left',true,3900,1550,'#27ddc8','left','director','Decision recorded');recAt('left','director',6700,true,'evaluated','Authority checked');internal('left','quality',false,8500,1200,'#27ddc8','Authorized work');work('left','quality',10850,13100);caption('The reply authorizes this action. Work resumes.',10850)}
+  if(code==='human-conclude'){baseline('left',[['director',true,'Decision recorded'],['quality',false,'Authorized work held']]);work('left','quality',0,1150);internal('left','quality',true,2400,1200,'#dbeaf7');recAt('left','director',4800,true,'evaluated','Outcome evaluated');recAt('left','director',5800,true,'complete','Report recorded');external('exchange-left',false,6650,1400);mail(2,8350,true,'Outcome reported');mail(2,9350,true,'Picked up');external('exchange-right',false,9350,1450,'#27ddc8',null,'director','Received','person');caption('The person receives the outcome of the action.',11150)}
+ }else{
+  if(code==='exchange-overview')return;baseline('left',[['director',false,'Commitment held']]);
+  if(code==='exchange-send'){recAt('left','director',450,true,'routed','Shared work ready');external('exchange-left',false,1450,1600);mail(1,3350,false,'Request waiting');caption('To Infrastructure, with context and a return route.',3350)}
+  if(code==='exchange-pickup'){mail(1,0,false,'Request waiting');external('exchange-right',false,700,1600,'#f58eab','right','director','Request recorded');mail(1,700,false,'Picked up');internal('right','engineering',false,4400,1200,'#f58eab');work('right','engineering',6550,8500);caption('Only Infrastructure picks up its addressed request.',2650)}
+  if(code==='exchange-work'){baseline('right',[['director',false,'Request held'],['engineering',false,'Assignment held']]);work('right','engineering',0,7700);recAt('right','director',450,true,'updated','Acceptance recorded');external('exchange-right',true,1450,1450,'#f58eab');mail(3,3200,false,'Accepted by recipient');mail(3,4200,false,'Picked up');external('exchange-left',true,4200,1450,'#e9bd79','left','director','Acceptance recorded');caption('Acknowledged. Infrastructure owns its bounded work.',6050)}
+  if(code==='exchange-return'){baseline('right',[['director',false,'Work in progress'],['engineering',false,'Assignment held']]);work('right','engineering',0,1150);internal('right','engineering',true,2450,1250,'#dbeaf7');recAt('right','director',4900,true,'evaluated','Result evaluated');recAt('right','director',5900,true,'complete','Return recorded');external('exchange-right',true,7000,1550,'#f58eab');mail(3,8850,true,'Result and evidence');caption('The result is addressed back to Fieldwork.',8850)}
+  if(code==='exchange-evaluate'){baseline('right',[['director',true,'Return retained']]);mail(3,0,true,'Result and evidence');mail(3,800,true,'Picked up');external('exchange-left',true,800,1550,'#27ddc8','left','director','Return recorded');internal('left','quality',false,4400,1200);work('left','quality',6450,8400);internal('left','quality',true,10200,1200,'#dbeaf7');recAt('left','director',12600,true,'evaluated','Commitment evaluated');caption('Fieldwork evaluates the result against its commitment.',12600)}
+ }
+}
+function updateWires(){const phone=layoutMode()==='phone';if(scene==='cell'){
+ const d=globalPoint('main'),caller=phone?[45,300]:[480,455];$('caller-wire').setAttribute('d',`M${caller} C${caller[0]+(phone?80:145)},${caller[1]-45} ${d[0]-(phone?70:105)},${d[1]-38} ${d}`);
+ for(const p of $('world').querySelectorAll('.network-wire')){const a=globalPoint(p.dataset.from),b=globalPoint(p.dataset.to);p.setAttribute('d',`M${a} Q${(a[0]+b[0])/2+20},${(a[1]+b[1])/2-55} ${b}`)}
+ if(phone){$('review-wire').setAttribute('d',`M${d} C150,220 40,360 40,500 L40,660 H150`);$('proposal-wire').setAttribute('d','M150,660 C40,660 40,710 40,740 L40,884 H120');$('guidance-wire').setAttribute('d','M120,884 H40 V820 H585 V670 H441');$('guidance-director-wire').setAttribute('d',`M441,670 H570 V150 C570,90 ${d[0]},140 ${d}`);}
+ else{$('review-wire').setAttribute('d',`M${d} Q830,325 730,365`);$('proposal-wire').setAttribute('d','M730,365 C1030,330 970,600 1100,770');$('guidance-wire').setAttribute('d','M1100,770 Q913,717 726,594');$('guidance-director-wire').setAttribute('d',`M726,594 C840,620 ${d[0]-90},${d[1]-95} ${d}`);}
+ }else{const a=globalPoint('left'),b=scene==='exchange'?globalPoint('right'):phone?[300,1260]:[1380,450],row=timeline.exchangeIndex??1,y=(phone?625:292)+20+row*66+26;
+ if(phone){$('exchange-left').setAttribute('d',`M${a} C60,350 60,410 60,450 L60,${y} H214`);$('exchange-right').setAttribute('d',`M386,${y} H540 V1110 C540,1220 410,1260 ${b}`);}
+ else{$('exchange-left').setAttribute('d',`M${a} C${a[0]+120},${a[1]-45} 900,${y} 978,${y}`);$('exchange-right').setAttribute('d',`M1150,${y} C1230,${y} ${b[0]-120},${b[1]-45} ${b}`);}
+ }}
+function latest(events,t){let out=null;for(const e of events)if(e.at<=t&&(!out||e.at>=out.at))out=e;return out}
+const shortRecordStatus={
+ 'Commitment held':'Open','Shared work ready':'Prepared','Request recorded':'Recorded','Request held':'Open','Assignment ready':'Assigned','Assignment received':'Received','Acceptance recorded':'Accepted','Result recorded':'Finished','Work in progress':'In progress','Result received':'Returned','Result evaluated':'Evaluated','Return recorded':'Returned','Return retained':'Retained','Commitment evaluated':'Evaluated','Decision needed':'Pending','Question prepared':'Prepared','Decision recorded':'Answered','Authority checked':'Authorized','Authorized work':'Authorized','Other work authorized':'Other work','Authorized work held':'Authorized','Outcome evaluated':'Evaluated','Report recorded':'Reported'
+};
+const shortMailStatus={'Accepted by recipient':'Accepted','Result and evidence':'Result ready','Decision requested':'Decision needed','Picked up for review':'Picked up'};
+function initialSlotStatus(i){return i===0||(chapter==='human'?i===1:i===2)?'Waiting':'Empty';}
+function renderRecord(g,e,t){
+ const visible=Boolean(e),age=e?t-e.at:0;g.setAttribute('class','record'+(visible?' visible':'')+(e?.updated?' updated':''));g.style.opacity=String(visible?(e.at===0?1:clamp(age/250)):0);
+ const pulse=visible&&e.at>0?Math.max(0,1-age/850):0;g.querySelector('rect').style.strokeWidth=String(1+pulse*1.8);g.querySelector('rect').style.fill=pulse>.15?'#174b42':'#07171f';const paired=scene!=='cell',large=paired||layoutMode()==='phone';g.querySelector('.record-name').setAttribute('y',large?15:12);g.querySelector('.record-status').setAttribute('y',large?35:27);g.querySelector('rect').setAttribute('height',large?40:30);g.querySelector('.record-status').textContent=e?(paired?(shortRecordStatus[e.label]||e.label):e.label):'';
+ for(const[i,line]of [...g.querySelectorAll('.record-line')].entries()){const amount=e&&e.at>0?clamp((age-i*100)/260):1;line.style.strokeDasharray='1';line.style.strokeDashoffset=String(1-amount);line.style.stroke=pulse>.1?'#a3ffee':'#74a4b0'}
+}
+function render(){if(!timeline)return;const t=reduced?duration:elapsed;
+ for(const[id,c]of Object.entries(cellNodes)){
+  const active={},arrivals={};for(const w of timeline.work)if(w.cell===id&&t>=w.start&&t<=w.end)active[w.role]=clamp((t-w.start)/(w.end-w.start));for(const a of timeline.arrivals)if(a.cell===id&&t>=a.at)arrivals[a.role]=Math.min(arrivals[a.role]??Infinity,t-a.at);
+  c.update(lifeTime,{active,arrivals,reducedMotion:reduced});
+  for(const[role,g]of Object.entries(c.records)){
+   const paired=scene!=='cell',context=chapter==='learning'&&id==='main';
+   const owner=c.rs[role]?.label?.textContent||roles.find(r=>r.id===role)?.name||'Work';
+   g.querySelector('.record-name').textContent=role==='director'?'Request':paired?owner:owner+' record';
+   const e=latest(timeline.records.filter(e=>e.cell===id&&e.role===role),t);renderRecord(g,e,t);
+   const p=c.point(role);let offset=recordOffsets[role]||[20,30],scale=context?1.35:1;
+   if(context&&role==='engineering')offset=[-15,82];if(context&&role==='research')offset=[20,50];
+   let x=p.x+offset[0],y=p.y+offset[1];
+   if(paired){const q=camera[id].value,slot=role==='director'?[-95,205]:role==='quality'?[55,205]:[-90,-220];x=slot[0]/q.s;y=slot[1]/q.s;scale=1/q.s;}else if(layoutMode()==='phone'&&id==='main'&&!chapters[chapter].steps[index][2].startsWith('network')){const q=camera[id].value,slot=phoneRecordSlot(role);x=(slot[0]-q.x)/q.s;y=(slot[1]-q.y)/q.s;scale=1/q.s;}
+   g.setAttribute('transform',`translate(${x} ${y})${scale!==1?' scale('+scale+')':''}`);g.classList.toggle('mini-record',scene==='cell'&&id!=='main');
+  }
+ }
+ renderCamera();updateWires();
+ if(scene==='cell'){
+  const code=chapters[chapter].steps[index][2],wide=code.startsWith('network'),park=code==='learn-grow'?ease(clamp(t/1300)):code==='learn-use'?1:0;$('review-actor').setAttribute('transform',layoutMode()==='phone'?'translate(-580 295)':`translate(0 ${-90*park})`);
+  if(wide){const scale=camera.main.value.s,phone=layoutMode()==='phone',detail=phone?clamp((scale-.60)/.14):clamp((scale-.85)/.5);for(const label of cellNodes.main.g.querySelectorAll('text'))label.style.opacity=detail;if(cellNodes.main.domainTitle)cellNodes.main.domainTitle.style.opacity=0;$('wide-main-label').setAttribute('opacity',layoutMode()==='phone'?clamp((.60-scale)/.10):clamp((.75-scale)/.16));}
+  for(const id of ['review-actor','instructions-actor','learning-decision','review-wire','proposal-wire','guidance-wire','guidance-director-wire']){const e=latest(timeline.tools.filter(e=>e.id===id),t);$(id).setAttribute('opacity',e?(e.at===0?1:clamp((t-e.at)/550)):0)}
+  const age=t-(latest(timeline.toolArrivals.filter(e=>e.tool==='review'),t)?.at??-1e6),catchPulse=age>=0?Math.exp(-age/900)*Math.sin(Math.min(1,age/650)*Math.PI):0;$('review-actor').querySelector('.review-core').setAttribute('r',6+(reduced?0:catchPulse*6));$('review-actor').querySelector('.review-halo').setAttribute('r',21+(reduced?0:catchPulse*25));
+  const tw=latest(timeline.tools.filter(e=>e.id==='review-work'&&t<e.end),t),p=tw?clamp((t-tw.at)/(tw.end-tw.at)):0;for(const path of $('review-branches').querySelectorAll('path')){const b=Number(path.dataset.branch),energy=tw?Math.exp(-Math.pow((p-(.17+b*.16))/.18,2)):0;path.style.opacity=String(.25+energy*.75);path.style.strokeWidth=String(1+energy*1.7)}
+  const tr=latest(timeline.toolRecords,t);renderRecord($('review-record'),tr?{...tr,updated:tr.complete}:null,t);
+  const dec=latest(timeline.decisions,t);$('decision-label').textContent=dec?.text||'';
+  const instructionArrival=latest(timeline.toolArrivals.filter(e=>e.tool==='instructions'),t);$('instructions-label').textContent=chapter==='learning'&&chapters[chapter].steps[index][2]==='learn-decide'&&t<5200?'Guidance to maintain':'Maintained instructions';$('instructions-actor').classList.toggle('received',Boolean(instructionArrival));
+  if(chapter==='learning'&&chapters[chapter].steps[index][2]==='learn-grow'){const r=latest(timeline.reveal,t);cellNodes.main.rs.research.group.setAttribute('opacity',r?(reduced?1:clamp((t-r.at)/1000)):0);cellNodes.main.rs.research.label.textContent='Synthesis';}
+ }else{
+  for(let i=0;i<4;i++){const row=$('mail-'+i),m=latest(timeline.mail.filter(e=>e.index===i),t),status=m?(shortMailStatus[m.status]||m.status):initialSlotStatus(i),consumed=status==='Picked up',available=m&&!consumed;row.querySelector('rect').setAttribute('class','exchange-card'+(consumed?' consumed':available?' '+(m.returned?'return':'selected'):''));row.querySelector('.mail-status').textContent=status;}
+
+  $('exchange-state').textContent=latest(timeline.caption,t)?.text||'';
+  if(scene==='human'){$('person-decision').setAttribute('opacity',latest(timeline.tools.filter(e=>e.id==='person-decision'),t)?1:0);const a=latest(timeline.toolArrivals.filter(e=>e.tool==='person'),t),age=a?t-a.at:1e6,pulse=Math.exp(-age/900);$('person').querySelector('.person-head').setAttribute('r',29+(reduced?0:pulse*8));$('person').querySelector('.person-catch').setAttribute('opacity',reduced?0:pulse*.1);}
+ }
+ for(const s of signals){const f=(t-s.at)/s.travel,visible=f>=0&&f<=1,path=s.pathProvider();s.g.setAttribute('opacity',visible?1:0);if(!path)continue;const along=x=>s.reverse?1-x:x;const p=pointOn(path,along(ease(clamp(f)))),q=pointOn(path,along(ease(clamp(f-.075))));for(const n of[s.halo,s.dot]){n.setAttribute('cx',p[0]);n.setAttribute('cy',p[1])}s.tail.setAttribute('cx',q[0]);s.tail.setAttribute('cy',q[1]);}
+}
+// Derive every entry from the preceding settled story, including direct links,
+// back, dots and replay. A record changes only through a visible event in this cue.
+function configureWithContinuity(ch,target){
+ let carried=new Map(),reviewRecord=null,slots=new Map();
+ for(let i=0;i<=target;i++){
+  const code=ch.steps[i][2];
+  if(chapter==='communication'||chapter==='human')configureExchange(code,chapter==='human');else configureCell(code);
+  const freshBaseline=timeline.records.filter(e=>e.at===0&&!carried.has(e.cell+':'+e.role));
+  timeline.records=[...carried.values()].filter(e=>cellNodes[e.cell]?.records[e.role]).map(e=>({...e,at:0})).concat(freshBaseline,timeline.records.filter(e=>e.at>0));
+  const freshSlots=timeline.mail.filter(e=>e.at===0&&!slots.has(e.index));timeline.mail=[...slots.values()].map(e=>({...e,at:0})).concat(freshSlots,timeline.mail.filter(e=>e.at>0));
+  if(reviewRecord)timeline.toolRecords=[{...reviewRecord,at:0},...timeline.toolRecords.filter(e=>e.at>0)];
+  finishTimeline();
+  carried=new Map();for(const e of timeline.records){const key=e.cell+':'+e.role,old=carried.get(key);if(!old||e.at>=old.at)carried.set(key,e)}
+  reviewRecord=latest(timeline.toolRecords,duration)||reviewRecord;slots=new Map();for(const e of timeline.mail){const old=slots.get(e.index);if(!old||e.at>=old.at)slots.set(e.index,e)}
+ }
+}
+function show(){const ch=chapters[chapter],step=ch.steps[index];elapsed=0;$('chapter-label').textContent=ch.label;$('title').innerHTML=ch.title.replace('\n','<br>');$('description').textContent=ch.description;$('scope').textContent=ch.scope;$('qualification').textContent=ch.qualification||'';$('step-title').textContent=step[0];$('step-copy').textContent=step[1];$('step-count').textContent=`${String(index+1).padStart(2,'0')} / ${String(ch.steps.length).padStart(2,'0')}`;$('diagram-desc').textContent=step[0]+'. '+step[1];$('chapter').value=chapter;$('stage').dataset.chapter=chapter;$('diagram-key').style.display=step[2].startsWith('network')?'none':'flex';
+ $('steps').replaceChildren(...ch.steps.map((s,i)=>{const b=H('button',{'aria-label':`Step ${i+1}: ${s[0]}`,'aria-current':String(i===index),title:s[0],class:i<index?'completed':''});b.onclick=()=>cue(i);return b}));
+ configureWithContinuity(ch,index);prepareSceneViewport();$('previous').disabled=index===0;$('next').disabled=index===ch.steps.length-1;updatePlay();render();const hash=`#${chapter}${index?'~'+(index+1):''}`;if(location.hash!==hash)history.replaceState(null,'',hash);document.title=ch.label+' — Inside agentic systems';
+}
+function updatePlay(){const action=playing&&motionRunning&&playMode==='continuous'?'Pause':playing&&!motionRunning?'Continue':'Play all';$('play').innerHTML=(action==='Pause'?'Ⅱ':'▶')+' <span>'+action+'</span>';$('play').setAttribute('aria-label',action==='Pause'?'Pause all motion and story':action);$('motion').innerHTML=(motionRunning?'Ⅱ':'▷')+' <span>'+(motionRunning?'Pause motion':'Resume motion')+'</span>';$('motion').setAttribute('aria-label',motionRunning?'Pause all motion':'Resume motion');$('motion').title=motionRunning?'Pause the whole living system':'Resume the living system';$('motion').setAttribute('aria-pressed',String(!motionRunning));$('cue-status').textContent=playing?(motionRunning?'Animating':'Paused'):elapsed>=duration?'Ready':'Arrow keys present';}
+function cue(i){index=Math.max(0,Math.min(chapters[chapter].steps.length-1,i));playing=!reduced;playMode='cue';storyStarted=true;motionRunning=!reduced;show();if(reduced){elapsed=duration;render();updatePlay()}}
+function move(n){cue(index+n)}
+function selectChapter(k){chapter=chapters[k]?k:'systems';index=0;scene='';playing=false;storyStarted=false;show()}
+function parseHash(){playing=false;storyStarted=false;playMode='cue';const[k,s]=location.hash.slice(1).split('~');if(chapters[k]){chapter=k;index=Math.max(0,Math.min(chapters[k].steps.length-1,(parseInt(s)||1)-1))}else{chapter='systems';index=0}scene='';show()}
+$('previous').onclick=()=>move(-1);$('next').onclick=()=>move(1);$('play').onclick=()=>{if(playing&&motionRunning&&playMode==='continuous'){motionRunning=false}else{if(elapsed>=duration)elapsed=0;playMode='continuous';playing=true;storyStarted=true;motionRunning=true}last=performance.now();updatePlay()};$('motion').onclick=()=>{motionRunning=!motionRunning;last=performance.now();updatePlay()};$('replay').onclick=()=>cue(index);$('chapter').onchange=e=>selectChapter(e.target.value);
+$('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch{}};
+document.addEventListener('keydown',e=>{if(['SELECT','INPUT','TEXTAREA','BUTTON'].includes(e.target.tagName)&&e.key===' ')return;if(['SELECT','INPUT','TEXTAREA'].includes(e.target.tagName))return;if(e.key==='ArrowRight'){e.preventDefault();move(1)}else if(e.key==='ArrowLeft'){e.preventDefault();move(-1)}else if(e.code==='Space'){e.preventDefault();$('play').click()}else if(e.key.toLowerCase()==='r')$('replay').click();else if(e.key==='Home'){e.preventDefault();cue(0)}});window.addEventListener('hashchange',parseHash);window.addEventListener('resize',()=>{if(!timeline)return;prepareSceneViewport();if(scene==='cell'&&cellNodes.main){applyMainView(chapters[chapter].steps[index][2]);for(const[id,x,y,s]of neighborViews())setCamera(id,x,y,s,camera[id]?.to.opacity??0);}for(const c of Object.values(camera)){c.from={...c.to};c.value={...c.to};c.at=lifeTime;}render()});
+function animate(now){const dt=Math.min(100,now-last);last=now;if(motionRunning){lifeTime+=dt;if(playing){elapsed+=dt;if(elapsed>=duration){if(playMode==='continuous'&&index<chapters[chapter].steps.length-1){index++;show()}else{elapsed=duration;playing=false;updatePlay()}}}render()}requestAnimationFrame(animate)}
+buildDust();parseHash();requestAnimationFrame(animate);
+window.presentation={get state(){return{chapter,index,playing:playing&&motionRunning,motionRunning,storyStarted,playMode,elapsed,lifeTime,duration,scene,steps:chapters[chapter].steps.length}},go:(k,i=0)=>{selectChapter(k);index=Math.max(0,Math.min(chapters[k].steps.length-1,i));show()},chapters,diagnostics:()=>({timeline,duration,records:[...document.querySelectorAll('.record.visible')].map(g=>({label:g.querySelector('text')?.textContent,opacity:g.style.opacity})),wires:signals.map(s=>({at:s.at,arrival:s.at+s.travel,visiblePath:s.pathProvider()?.id||s.pathProvider()?.tagName}))})};

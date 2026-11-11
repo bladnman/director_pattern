@@ -1,0 +1,25 @@
+{
+  "id": "living-system-art-slides",
+  "title": "Paged telling · anatomy, motion and causality",
+  "description": "Five pages combine preserved diagnosis, native reviewed chapter views and separate category ratings; phone cards show all seven names and both reviews.",
+  "content": {
+    "kind": "html",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-10-living-system-art/slides.html"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Five reviewed chapters and individual scores ready for owner review; creative acceptance remains open."
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-11T01:02:44.018Z",
+  "updatedAt": "2026-11-11T08:38:02.548Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

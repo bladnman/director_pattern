@@ -1,0 +1,25 @@
+{
+  "id": "living-system-art-report",
+  "title": "Report · diagnosis, direction and remaining proof",
+  "description": "Progressive diagnosis and corrected five-chapter results, with preserved earlier findings, separate scores and explicit evidence limits.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-10-living-system-art/report.md"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Five reviewed chapters, historical diagnosis and scoped delivery evidence ready for owner review; creative acceptance remains open."
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-11T01:02:43.900Z",
+  "updatedAt": "2026-11-11T08:38:02.406Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

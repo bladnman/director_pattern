@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 2,
+  "id": "research-2026-11-10-living-system-art",
+  "ownerItemId": "research-2026-11-10-living-system-art",
+  "title": "Making the system feel alive · 2026-11-10",
+  "description": "A progressive visual diagnosis and art direction for Inside agentic systems. Original findings, current revision observations, and remaining proof stay distinct.",
+  "createdAt": "2026-11-11T01:02:43.768Z",
+  "updatedAt": "2026-11-11T01:02:44.018Z",
+  "placements": [
+    {
+      "x": 40,
+      "y": 40,
+      "width": 760,
+      "height": 1100,
+      "z": 0,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-87fe1eac-ab19-44d5-b8ee-fc265cad2bc9",
+      "itemId": "living-system-art-report"
+    },
+    {
+      "x": 850,
+      "y": 40,
+      "width": 1182,
+      "height": 946,
+      "z": 1,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1180,
+          "height": 900
+        }
+      },
+      "id": "placement-9d1fea5c-6e53-4c11-a59e-3ce8b7e30b40",
+      "itemId": "living-system-art-slides"
+    }
+  ],
+  "reviewOrder": [
+    "placement-87fe1eac-ab19-44d5-b8ee-fc265cad2bc9",
+    "placement-9d1fea5c-6e53-4c11-a59e-3ce8b7e30b40"
+  ],
+  "rounds": [],
+  "decorations": []
+}

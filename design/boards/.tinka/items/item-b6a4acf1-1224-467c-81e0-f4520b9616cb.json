@@ -1,0 +1,20 @@
+{
+  "title": "Research and diagnosis",
+  "description": "Starting point for every research and diagnosis investigation. One investigation per child board, updated as findings land, told as a markdown report plus a paged telling.",
+  "schemaVersion": 2,
+  "id": "item-b6a4acf1-1224-467c-81e0-f4520b9616cb",
+  "createdAt": "2026-11-08T01:48:03.487Z",
+  "updatedAt": "2026-11-08T01:48:03.487Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "ready",
+    "message": "",
+    "updatedAt": 0
+  },
+  "childBoardId": "research"
+}

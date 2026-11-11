@@ -1,0 +1,25 @@
+{
+  "title": "Inside agentic systems",
+  "description": "Five reviewed connected explainers with native views and a linked guide/gallery. Ready for owner review; owner creative acceptance remains open.",
+  "schemaVersion": 2,
+  "id": "item-91759043-36cc-48fc-a4bb-89768f34015a",
+  "createdAt": "2026-11-10T23:51:11.956Z",
+  "updatedAt": "2026-11-11T08:38:01.859Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "review",
+    "message": "Five chapter review bars complete; scoped delivery checks passed. Ready for owner review; owner creative acceptance remains open."
+  },
+  "childBoardId": "agentic-systems-20261110",
+  "preview": {
+    "resource": {
+      "rootId": "agentic-systems",
+      "path": "cover.jpg"
+    }
+  }
+}

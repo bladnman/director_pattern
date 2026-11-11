@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 2,
+  "id": "research",
+  "ownerItemId": "item-b6a4acf1-1224-467c-81e0-f4520b9616cb",
+  "title": "Research and diagnosis",
+  "description": "Starting point for every research and diagnosis investigation. One investigation per child board, updated as findings land, told as a markdown report plus a paged telling.",
+  "createdAt": "2026-11-08T01:48:03.487Z",
+  "updatedAt": "2026-11-11T01:04:21.562Z",
+  "placements": [
+    {
+      "x": 40,
+      "y": 40,
+      "width": 720,
+      "height": 640,
+      "z": 0,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-858a04cb-14dc-48e7-8fdc-c789b594ae59",
+      "itemId": "research-about"
+    },
+    {
+      "x": 800,
+      "y": 1480,
+      "width": 600,
+      "height": 440,
+      "z": 4,
+      "presentation": {
+        "mode": "card"
+      },
+      "id": "placement-9f9b32f8-18c9-415a-8b7f-17825c372ee3",
+      "itemId": "research-2026-11-10-living-system-art"
+    },
+    {
+      "x": 1440,
+      "y": 0,
+      "width": 320,
+      "height": 240,
+      "z": 5,
+      "id": "placement-eb740df2-1a11-44d9-ba6a-21fedfbd0c79",
+      "itemId": "research-2026-11-10-living-system-art",
+      "removedAt": "2026-11-11T01:04:21.562Z",
+      "removalReason": "remove"
+    }
+  ],
+  "reviewOrder": [
+    "placement-858a04cb-14dc-48e7-8fdc-c789b594ae59",
+    "placement-9f9b32f8-18c9-415a-8b7f-17825c372ee3"
+  ],
+  "rounds": [],
+  "decorations": []
+}

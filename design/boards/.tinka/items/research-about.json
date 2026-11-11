@@ -1,0 +1,27 @@
+{
+  "id": "research-about",
+  "title": "About this board: the research and diagnosis rule",
+  "description": "Purpose and standing rule: one investigation per child board, updated as findings land, with a markdown report and a paged telling.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "research",
+      "path": "README.md"
+    }
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-08T01:48:14.522Z",
+  "updatedAt": "2026-11-08T01:55:29.115Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "build": {
+    "state": "review",
+    "message": "Headless render, paging, light/dark and 375px checks passed; awaiting owner review",
+    "updatedAt": 1794102929107
+  },
+  "status": "review"
+}

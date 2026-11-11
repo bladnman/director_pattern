@@ -93,3 +93,31 @@ guide for compatibility, older-receipt bootstrap and recovery details.
 Upgrade deliberately with `node tinka/setup.mjs --version X.Y.Z`, then review
 and commit the changed version pin. Setup preserves existing boards and notes;
 it never silently upgrades a checkout to the latest release.
+
+
+## Local cover-layer candidate - 2026-11-02
+
+The current pin is **0.6.6**.
+It preserves translucent hover and hides fallback labels behind available cover
+previews while keeping unavailable/title-only fallbacks. The exact ZIP, checksum
+and compatibility metadata are in `tinka/packages/` for offline pinned restore.
+ZIP SHA-256: `d7ac7a901f0227319878baa7331be19503f364f1a1482c31dea2c8428004958f`.
+Boards, geometry, notes, resource files and prior packages remain preserved; no
+workspace conversion was performed. This remains an unpublished local candidate.
+
+
+## Inside agentic systems — November 10, 2026
+
+The **Inside agentic systems** board (stable ID `agentic-systems-20261110`)
+contains five connected animated diagrams: Agentic systems, The Director Pattern,
+Learning and growth, Across systems, and People in the loop. It is a visual
+prototype suite, with current method and proposed mechanisms distinguished.
+It does not change the operating pattern.
+
+Open `/boards/agentic-systems-20261110/` on this project's printed Tinka origin.
+The full presenter is `/resources/agentic-systems/presenter.html`; its five chapter
+links are `#systems`, `#director`, `#learning`, `#communication`, and `#human`.
+Source and standalone run instructions live in
+[the suite README](design/boards/agentic-systems-20261110/README.md).
+
+The reviewed revision now includes a [native chapter gallery](design/boards/agentic-systems-20261110/gallery.html), [progressive art report](design/boards/research/2026-11-10-living-system-art/report.md), [five-page telling](design/boards/research/2026-11-10-living-system-art/slides.html) and [separate review scores](design/boards/research/2026-11-10-living-system-art/score-matrix.md). All five chapter reviews meet the seven-category bar; final delivery QA and owner creative acceptance remain separate. The first version and frozen iterations are preserved.
