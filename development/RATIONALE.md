@@ -748,10 +748,13 @@ November 2 rule. A missing, duplicated, empty or over-cap project section blocks
 block that still points at START.md is the earlier route: it passes only while
 START.md, DIRECTOR.md, OPERATIONS.md and the checker match their recorded baselines
 and START.md is the earlier full file; once START.md is the stub, the check blocks
-and names the unfinished update. Cost and known hole: a receipt with no recorded
-block baseline (an older or generated receipt) passes with any block that keeps the
-markers and names WORKER.md, adding only an `actor_must_confirm` item that asks the
-actor to compare the block with the installed revision. This narrows the October 29
+and names the unfinished update. The first rework let a receipt with no recorded
+block baseline pass, adding only an `actor_must_confirm` item; any block that kept
+the markers and named WORKER.md would then have passed. The final commit of the same
+day closes that: on the block route a receipt without `director_block_sha256` blocks
+the check, and the installer, generated first use and the move each record it. Cost:
+a block-route project whose receipt predates the baseline is blocked until a reviewed
+update records it. This narrows the October 29
 and November 2 regression case "an update preserves customized text inside and
 outside the hook": text inside the block is now moved out, not kept in place.
 Oracle: `test_gutted_or_negated_director_block_blocks_the_check` (the review's
@@ -1154,7 +1157,7 @@ in this entry and stays acceptance-blocking.
 **Implemented on a branch as starter revision 3.3 (not merged, not published, not
 accepted):** the [installer](../pattern/starter/install.py) writes a marked Director
 block from [agents/block.md](../pattern/starter/agents/block.md) into the project's
-root AGENTS.md (7,861 bytes; the installer refuses above 8,000), followed by a
+root AGENTS.md (7,993 bytes; the installer refuses above 8,000), followed by a
 project-owned section from
 [agents/project-section.md](../pattern/starter/agents/project-section.md) (cap 3,000
 bytes). The block holds the role gate, ten every-turn duties for Directors, the
@@ -1187,7 +1190,7 @@ regression case. Test names are in `development/tests/`.
    word at the top of the block's read rules, and "this startup" is now defined there:
    the Project Director's first-reply reads and check, a Director's Recovery, a
    worker's WORKER.md and role file, a child's overlay or role file, and the file the
-   next action needs. Cost: about 7.9 KB of standing text for every agent the host
+   next action needs. Cost: about 8 KB of standing text for every agent the host
    gives AGENTS.md to, workers included; audience labels say who acts on a section but
    do not hide it; and every rule that left the standing text now depends on a card
    being opened at its trigger, which is the mechanism the draft trial saw fail.
@@ -1261,7 +1264,11 @@ regression case. Test names are in `development/tests/`.
     "Coverage shown in the read needs no separate verification call" have no
     successor text. They limited cost, not safety. WORKER.md keeps "Batch independent
     reads only". Two smaller clauses of START also have no successor: "with room for
-    tool framing", and "Installer/source documentation is not startup".
+    tool framing", and "Installer/source documentation is not startup". Three safety
+    rules that the first rework had left only in WORKER.md are back in the block's
+    read rules in the final commit: each range shows its range and the file's total
+    length, combined output stays bounded, and file existence and unprinted results
+    are not reads.
 12. **The update receipt may precede its fresh-session trials, for this move only**
     ([R11](#r11--update-from-a-pinned-public-source-without-replacing-project-state);
     recorded there).
@@ -1285,7 +1292,7 @@ work).
 **Tradeoff.** The block trades a smaller, cheaper first reply and rules that survive
 a compaction for two risks. The detail on the cards is reached only if the agent
 opens the card at its trigger, and the block alone produces plausible behaviour, so a
-skipped card is hard to see. And about 7.9 KB is now paid on every turn by every
+skipped card is hard to see. And about 8 KB is now paid on every turn by every
 agent the host gives the file to. The block is managed text: a project can no longer
 adapt wording inside it, only beside it.
 
@@ -1300,8 +1307,12 @@ empty or over-cap project section each block the check.
 
 **Status.** Decided: build the refactor with recovery in the always-loaded block
 (owner, November 11). Implemented: on a branch as starter revision 3.3, with an
-independent review on November 11 whose nine findings were applied. Verified
-statically and in a limited live trial on one host, with the limits recorded in
+independent review on November 11 whose nine findings were applied and a final
+commit the same day that closed five further items (a missing block baseline now
+blocks; the SitRep after a break is conditional; three read rules are back in the
+block; the staffing card names the assignment role and the exact task/action trigger
+map again; the gate names the user's authority). Verified statically and in three
+limited live trials on one host, with the limits recorded in
 [validation](DESIGN_NOTES.md#standing-block-and-cards-starter-33--november-11-2026).
 Not merged, not published, not accepted. This source checkout's own installation and
 its guarded AGENTS branch still use the 3.2 route, and no installed project has made
@@ -2724,13 +2735,14 @@ with "check run" added by the Project Director. Cost: about 1.1 KB of standing t
 for every reader, and a store read at the first acting reply of every new
 conversation even when nothing is held.
 
-*One wording difference is unresolved.* The November 7 entry below restored "after
-compaction or session resume, report once promptly only if one is overdue or timing
-is unknown". The supervision card keeps that sentence. The block's step 4 says "With
-work out, send a 📋 SitRep now and time the next from it", with no overdue-or-unknown
-condition. The block is the text that survives a break, so it will usually win. This
-is recorded as an open inconsistency for the owner, not as a decided supersession of
-November 7.
+*The SitRep after a break keeps the November 7 rule.* The November 7 entry below
+restored "after compaction or session resume, report once promptly only if one is
+overdue or timing is unknown", and the supervision card keeps that sentence. The
+first rework's step 4 said to send a SitRep "now" whenever work was out, without
+that condition. The final commit of the same day makes step 4 conditional: "With
+work out, if a 📋 SitRep is overdue or its last time unknown, send one now and time
+the next from it." The block, the card and November 7 now agree; nothing is
+superseded.
 
 *Read-only store views.* Before (R10 October 30, R9 October 31): the store manuals
 (API, TOOLING, RECORDS) are read completely before any store operation, so that a
@@ -2744,7 +2756,11 @@ store write, and `recover`, which is a write, still require the three manuals fi
 a project with its own store reads the files its project section names. This is the
 narrow form of a wider proposal (routine write commands on the card), which is not
 built and not decided. Cost: an agent reads store output without the manuals'
-context, and the card repeats part of the manuals and can drift from them. Oracle:
+context, and the card repeats part of the manuals and can drift from them. **Open:**
+in the one in-flight trial the Director ran the status and continuation views before
+it read the requests card, having read none of the manuals; it read the card
+immediately afterwards. The block routes the views through the card, and that order
+was not followed. Oracle:
 `test_card_audiences_and_moved_obligations` ties every gap name on the card to the
 helper's source; `test_table_names_only_shipped_files_and_every_card_has_a_trigger`.
 
@@ -2763,9 +2779,16 @@ draft trial: zero cards opened, no recovery.
 timing. Live, one host, on the build before the Recovery-timing and store-view
 changes: in two sessions, each with one real forced compaction, the Director reran
 the check, performed Recovery through the store and reported re-entry. Work was
-already finished at each compaction, so recovery of in-flight work was not observed.
-In-flight trial: pending. Resume, repeated compaction, a new conversation with work
-out, and other hosts are not verified
+already finished at each compaction. Live, one host, one session, on the reworked
+build before the final commit's wording changes, with a real compaction while two
+delegated workers were still running: the Director reran the check, ran the
+read-only views on both held requests, reported re-entry with the correct count and
+both workers named, and did not re-dispatch; both original workers completed with no
+duplicate. It sent no SitRep in the re-entry reply and sent them on schedule later.
+Closing the requests through the store was not reached. **Observed once; no rate
+implied; resume, repeated compaction and other hosts still unverified.** A new
+conversation with work out is also not verified, and the final commit's wording has
+no live run
 ([validation](DESIGN_NOTES.md#standing-block-and-cards-starter-33--november-11-2026)).
 
 **November 7 — update staffing (cross-reference):** An ordinary compatible update
