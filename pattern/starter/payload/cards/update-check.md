@@ -7,7 +7,7 @@ For the Project Director (daily discovery), and for any Director before discussi
 Before planning any Director Pattern update, in this or another project, read
 [UPDATES](../UPDATES.md) completely; another installation is updated only by its own
 project's Director (or, without a working one, an agent the user directs there) in its own
-conversation. Never patch another installation's files from outside. To get another project updated, start a session there with "update director pattern" only when the user asked for that update, or give the user the 🖐️ action to do so, then follow its reports.
+conversation. Never patch another installation's files from outside. To get another project updated, start a session there only when the user asked for that update, or give the user the 🖐️ action to do so, then follow its reports. Begin that session's first message with its role and the user's request, for example: "You are this project's Project Director. The user asks: update director pattern." Without the role, an agent started to report back counts as a worker there.
 
 ## Daily discovery
 
@@ -24,7 +24,7 @@ python3 .director/update_check.py --root .director check --receipt .director/ins
 
 - It makes at most three bounded metadata reads, fetches and runs no code, and throttles itself: `throttled`, `current`, `off` and `busy` need no action. Keep its `next_check_at` in view so later turns skip it.
 - `available` with `action: "notify"`: tell the user once, exactly: **A new Director Pattern is available. Say “update director pattern” to install it.** Do not repeat it on later turns.
-- `available` with `action: "request_safe_update"`: the user chose automatic. That is a pending safe update, not an applied one: read all of UPDATES.md, then run its protocol at the pinned `upstream_sha`.
+- `available` with `action: "request_safe_update"`: the user chose automatic. That is a pending safe update, not an applied one: read all of UPDATES.md, then run its protocol at the pinned `upstream_sha`. The one-time move to the AGENTS.md block is never started unattended: ask the owner first.
 - `error`: note it once; do not retry each turn or delay the user's work. If the runtime or network is unavailable, say so; never claim a check that did not run.
 - Preferences, saved with the same helper's `set-policy` and the user's source reference: “always update director pattern” saves **automatic** (standing authorization, no extra confirmation); “notify me instead” saves **notify**; “stop checking for updates” saves **off**. A later explicit update request still works with checks off.
 

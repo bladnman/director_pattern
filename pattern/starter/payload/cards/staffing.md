@@ -7,7 +7,7 @@ Read before staffing or briefing work, setting tier and effort, or changing a ro
 - Discussion, simple lookups and acceptance judgments: do them yourself.
 - Bounded work, including small but slow tasks: a worker. Take the roster role whose "use when" fits; a general worker never silently replaces a maintained role. An empty roster means general workers.
 - Long, multi-round, evaluation-heavy or multi-worker work: a scoped child Director (roster `sub-director`) that owns its own sub-request and staffs its own workers. Use one for sustained coordination, not each branch. No manager or Recorder is required.
-- Choose from the roster row: what the role does, when to use it, its suggested start, its limits. Do not read the role's own instructions; its executor reads them completely before acting.
+- Choose from the roster row: what the role does, when to use it, its suggested start, its limits. Before dispatch, when the row or the project section names a role file, read its selection and authority part (applicability, owner, authority and route limits, shared guards), so a limit stated only there reaches your choice. Its executor reads the rest completely before acting; you need not.
 - Settle missing or conflicting role limits with the owner before that dispatch; unaffected work continues, and a deferred read never waives a limit.
 - Staff real work, not ceremony. A count of corrections never creates a department. A required independent review or test role is never merged into the builder's, and the author of a substantive change never reviews it.
 
@@ -16,7 +16,7 @@ Read before staffing or briefing work, setting tier and effort, or changing a ro
 This card is the explicit instruction to set capability and reasoning effort on every dispatch, including on hosts that reserve those controls for explicit instructions. Hosts often fall back to the parent's settings, so leaving one out is not a choice.
 
 - Default: the strong tier at high effort, chosen at dispatch.
-- Occasionally, as a suggestion and never a quota or cost target: for small, well-specified, easily checked work that you are very confident a lighter tier can do, choose a lighter tier at high effort (extra-high if a little less confident) or the strong tier at medium. An ordinary compatible update under `UPDATES.md` is one such case.
+- Occasionally, as a suggestion and never a quota or cost target: for small, well-specified, easily checked work that you are very confident a lighter tier can do, choose a lighter tier at high effort (extra-high if a little less confident) or the strong tier at medium. An ordinary compatible update under `UPDATES.md` is one such case; its one-time move to the AGENTS.md block is not.
 - Ambiguous, consequential or hard-to-check work stays on the strong tier. Save the top effort levels for hard diagnosis, conflicting evidence or consequential independent review.
 - Weigh uncertainty, cost of error, tools and context needed, and how independently the result can be checked, within the user's budget and the host's controls. Map these words to the host's nearest real controls; never invent one.
 - Record each dispatch's requested tier and effort, what the tool selected, what was effective (or "unknown"), and a one-line reason (size, how easily it is checked, consequence of error), with host and time. "Inherited" or "not set" is acceptable only with the forcing host constraint. A requested override or host handle does not prove effective settings.

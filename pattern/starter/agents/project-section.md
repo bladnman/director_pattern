@@ -4,9 +4,10 @@
 Project-owned: written once at install; updates never replace it. Keep it under 3,000 bytes; if the roster outgrows it, move the table to `.director/ROSTER.md` and name that file here.
 
 - Check command: `python3 .director/startup_check.py`
-- Read before the work they govern: nothing yet.
-- Request store: the bundled store, with the manuals named above.
-- Role files: `.director/roles/<role>.md`; name the file in the brief.
+- Read before your first reply: nothing yet.
+- Read before named work (write each as: file, before which work): nothing yet.
+- Request store: the bundled store, with the card and manuals named above.
+- Role files: `.director/roles/<role>.md`; read its selection and authority part before dispatch, and name the file in the brief.
 
 | Role | Use when | Suggested start | Limits |
 |---|---|---|---|

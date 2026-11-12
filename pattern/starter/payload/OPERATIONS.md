@@ -38,8 +38,10 @@ facts from before a compaction or session resume.
 
 Its output adds `next` (what to do and read next), `update_check` (`due`, `not_due`,
 `off` or `unknown`, from the local cache only), `director_block` (`unchanged`,
-`changed` or `not_recorded` against the receipt's `director_block_sha256`) and
-`project_section` (its bytes and the 3,000-byte cap). None of these blocks the check.
+or `not_recorded` against the receipt's `director_block_sha256`) and
+`project_section` (its bytes and the 3,000-byte cap). A block that differs from its
+recorded baseline blocks the check, because the block is managed text; with no
+recorded baseline the check passes and adds the block to `actor_must_confirm`.
 
 A mature project supplies its exact reviewed command in the AGENTS.md project
 section, for example:
@@ -51,7 +53,8 @@ python3 .director/startup_check.py --root .director --receipt .director/SOURCE.j
 Receipt `managed`, `managed_files` or `installed_files` baselines may be maps of
 project-relative paths to SHA256 (or `{sha256:...}`), or a managed_files list of
 `{path,installed_sha256}`. The managed startup artifacts require known, matching
-hashes: WORKER.md, OPERATIONS.md, startup_check.py and the seven cards
+hashes: WORKER.md, OPERATIONS.md, startup_check.py, the START.md and DIRECTOR.md
+redirect stubs and the seven cards
 (`cards/staffing.md`, `requests.md`, `supervision.md`, `knowledge.md`,
 `update-check.md`, `privacy.md`, `badge.md`). AGENTS and explicitly selected
 project-owned guards are composed
@@ -71,7 +74,8 @@ The helper supports one standalone marked block: `director-starter:2` with
 It requires exactly one ordered pair outside Markdown code blocks and, inside it, a
 reference to the selected installation's WORKER.md. The same file must also hold
 exactly one ordered `director-project` / `/director-project` pair, the project-owned
-section; without it the gap is `project section missing`. Missing, duplicate,
+section; without it the gap is `project section missing`. The section must hold a
+`- Check command:` line and stay within 3,000 bytes, or the check blocks. Missing, duplicate,
 malformed or unsupported structure gives a specific route gap. This checks structure
 only; it does not prove which entrypoint the host loaded or what the prose means.
 

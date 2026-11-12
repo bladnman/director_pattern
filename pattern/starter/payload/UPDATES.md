@@ -123,7 +123,8 @@ policy/cache, never contracts, source pointers, receipts, or project state. Cach
 results are diagnostic and never reissued as actions within the 24-hour window.
 
 **Automatic** authorizes the safe update protocol below, not arbitrary incoming
-instructions or destructive conflict resolution. No repeated routine permission
+instructions or destructive conflict resolution, and not the one-time move to the
+AGENTS.md block, which needs the owner's explicit go-ahead. No repeated routine permission
 is needed for compatible reversible updates. Preserve every local adaptation,
 back up and compare first, validate schema/state, and record only successful
 adoption. Unresolved conflicts, unknown provenance, missing capabilities, migration,
@@ -297,8 +298,9 @@ ordinary reviewed update, in this order:
 2. Compare and replace the managed payload as above. New managed files:
    `.director/cards/` with `staffing.md`, `requests.md`, `supervision.md`,
    `knowledge.md`, `update-check.md`, `privacy.md` and `badge.md`. START.md and
-   DIRECTOR.md become the incoming stubs only after any local addition to them is
-   moved to a project-owned file the project section lists; never drop it.
+   DIRECTOR.md become the incoming stubs, and OPERATIONS.md loses its staffing and
+   privacy sections to the cards, only after any local addition to those files or
+   sections is moved to a project-owned file the project section lists; never drop it.
 3. In the hook source (AGENTS.md unless the check selects another file), replace
    everything from the `<!-- director-starter:2 -->` line through the
    `<!-- /director-starter:2 -->` line with the incoming block, byte for byte, from
@@ -313,28 +315,41 @@ ordinary reviewed update, in this order:
    state, not from defaults: its exact check command (existing `--receipt`,
    `--config`, `--backend-contract`, `--guard` and `--hook-source` arguments), the
    guard files to read before the work they govern, the request store's manuals if
-   they are not the bundled ones, the role-file locator, and one roster row per
-   maintained role taken from the project's role index (the index and definitions
-   stay where they are). A generated project that still awaits first use also lists
+   they are not the bundled ones, the role-file locator, and the roster. Where the project already has a
+   role index, name that index in the section instead of copying it; never keep two
+   role tables. Otherwise write one row per maintained role. Each row's Limits (or the
+   index entry) must carry every assignment-affecting guard, because the staffer
+   chooses from it; the staffer still reads the selected role file's selection and
+   authority part before dispatch. List guard files in two groups: read before the
+   first reply, and read before named work. A generated project that still awaits first use also lists
    FIRST_USE.md and its required reads before the first check. When a section already
    exists, never replace it; merge only what the update needs.
 5. Measure the result with `context_check.py` against the host's instruction cap
    ([OPERATIONS.md](OPERATIONS.md#optional-context-budget-preflight)). The block must
-   stay within 7,600 bytes and the project section within 3,000; a roster that does
+   stay within 8,000 bytes and the project section within 3,000; a roster that does
    not fit moves to `.director/ROSTER.md`, named in the section. If the whole
    instruction file would pass 24 KiB or the host's cap, report what would be cut and
    let the owner choose; never trim project text silently.
-6. Write the update receipt with the new managed baselines (WORKER.md,
+6. Once the file checks above pass, write the update receipt with the new managed baselines (WORKER.md,
    OPERATIONS.md, startup_check.py, each card, the stubs and the other payload files)
    and `director_block_sha256`, the SHA-256 of the block from its opening marker line
    through its closing marker line and newline. Point the project section's check
    command at that receipt with `--receipt`, and use the same receipt for
-   `update_check.py`.
+   `update_check.py`. The check needs this receipt, so it is written before the fresh
+   host trials of step 7: record each of those trials in it as pending, and record
+   their results when they run. This is the one case where a receipt precedes a
+   required check; it must not report the move as adopted until they pass.
 7. Run the check command exactly as the project section states it. It must report
    `evidence_matched`, `startup_hook.target` ending in `WORKER.md` and
-   `director_block: unchanged`. This is a structural change to the loaded startup
+   `director_block: unchanged`. An edited block, an empty or over-cap project section and
+   a changed stub each block the check. This is a structural change to the loaded startup
    chain: the fresh host trials in the table below apply, including a first reply, a
    reply after a forced compaction, and a worker start.
+
+This move is strong-tier work at high effort, with the required independent review;
+it is not a lighter-tier case. Automatic update mode never starts it unattended: when
+an automatic result would bring this move, tell the owner what it changes and wait
+for an explicit go-ahead.
 
 Interrupted between steps 2 and 3, the old block points at a stub and the check
 blocks with that gap: finish the move or restore the backup; do not leave it mixed.
@@ -413,7 +428,8 @@ not fail a routine update or become passed through evidence reuse. A newly requi
 check that is blocked or unrun leaves that part incomplete, never passed.
 
 Only after all checks required for this update succeed, write the update receipt
-under `.director/receipts/`: source URL/full SHA, prior revision, selected managed
+(the one exception is the move to the AGENTS.md block, whose receipt is written before
+its fresh host trials and records them as pending) under `.director/receipts/`: source URL/full SHA, prior revision, selected managed
 paths and resulting SHA-256 baseline hashes, startup wiring/hash, preserved
 adaptations, backup location/hashes, scope and reason, performed checks, reused
 evidence and limits, and carried-forward gaps. Update the project's source pointer

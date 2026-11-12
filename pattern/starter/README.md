@@ -17,7 +17,7 @@ The manifest's `starter_revision` (now 3.3) is a readable revision number bumped
 each published payload change; `starter_version` stays the install-format number.
 
 Revision 3.3 changes where the Director's rules live. The installer writes a marked
-Director block of about 7.5 KB into the project's AGENTS.md, followed by a
+Director block of about 7.9 KB into the project's AGENTS.md, followed by a
 project-owned settings section. The block holds the role gate, the ten standing
 duties, the first-reply check, the recovery steps and the reading rule, because hosts
 restore AGENTS.md after a compaction and do not restore files an agent read. Detail
@@ -58,7 +58,7 @@ The manifest includes the worker foundation, the seven action cards, deferred
 operational/record/learning guides, the established backend, thin CLI, canonical-note
 learning and daily discovery. Code on disk is not startup model context. `plan`
 reports exact per-file and total bytes, the standing block and project-section bytes
-with their caps (7,600 and 3,000), each card's bytes (cap 6,000) and the worker
+with their caps (8,000 and 3,000), each card's bytes (cap 6,500) and the worker
 foundation (cap 4,500); an over-cap block, section, card or worker file refuses. Existing privacy choices are preserved. Fresh
 config/request records/exact sources/receipts are Git-eligible by default so a clone
 can recover the same work. The owner warns once for a public/unknown remote and
@@ -100,7 +100,8 @@ Mature projects state their exact receipt/config/selected-guard command in the
 project section, with the structures in OPERATIONS;
 lean/manual routes use their authoritative known contract, not invented JSON state.
 The check also reports whether daily update discovery is due, whether the block still
-matches its recorded baseline, and what to do next.
+matches its recorded baseline, and what to do next. An edited block, a missing,
+empty or over-cap project section, or a changed redirect stub blocks the check.
 
 The block tells every role to repeat its startup after every compaction or session
 resume (a summary is not a re-read): the Project Director's check, a Director's

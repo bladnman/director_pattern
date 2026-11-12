@@ -23,7 +23,7 @@ BLOCK = (SOURCE / "agents/block.md").read_text(encoding="utf-8")
 PROJECT_SECTION = (SOURCE / "agents/project-section.md").read_text(encoding="utf-8")
 AGENTS = BLOCK + "\n" + PROJECT_SECTION
 # Byte caps: the block and section are standing context for every agent given AGENTS.md.
-BLOCK_CAP, SECTION_CAP, CARD_CAP, WORKER_CAP = 7600, 3000, 6000, 4500
+BLOCK_CAP, SECTION_CAP, CARD_CAP, WORKER_CAP = 8000, 3000, 6500, 4500
 
 
 def sha(data):

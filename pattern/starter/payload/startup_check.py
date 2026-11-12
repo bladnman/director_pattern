@@ -13,7 +13,8 @@ MAX_JSON = 512_000
 MAX_FILE = 1_000_000
 MAX_TOTAL = 4_000_000
 CARDS = ('staffing', 'requests', 'supervision', 'knowledge', 'update-check', 'privacy', 'badge')
-BLOCK_ROUTE = ('WORKER.md', 'OPERATIONS.md', 'startup_check.py', *('cards/' + name + '.md' for name in CARDS))
+BLOCK_ROUTE = ('WORKER.md', 'OPERATIONS.md', 'startup_check.py', 'START.md', 'DIRECTOR.md',
+               *('cards/' + name + '.md' for name in CARDS))
 START_ROUTE = ('START.md', 'DIRECTOR.md', 'OPERATIONS.md', 'startup_check.py')
 STUB = '<!-- director-redirect-stub -->'
 SECTION_CAP = 3000
@@ -172,7 +173,12 @@ def project_section(text, source='AGENTS.md'):
                             'project section missing or ambiguous (one director-project pair required)')
     raw = text.splitlines()
     size = len(('\n'.join(raw[markers[0][0]:markers[1][0] + 1]) + '\n').encode())
-    return {'path': source, 'bytes': size, 'cap': SECTION_CAP, 'within_cap': size <= SECTION_CAP}
+    body = lines[markers[0][0] + 1:markers[1][0]]
+    need(any(re.match(r'\s*[-*] Check command: *`[^`]+`', line) for line in body),
+         'project section has no check command: restore its "- Check command: `...`" line: ' + source)
+    need(size <= SECTION_CAP, 'project section exceeds ' + str(SECTION_CAP) + ' bytes (' + str(size) +
+         '): move the roster to .director/ROSTER.md and name it in the section: ' + source)
+    return {'path': source, 'bytes': size, 'cap': SECTION_CAP, 'within_cap': True}
 
 
 def update_discovery(root):
@@ -337,9 +343,13 @@ def check(root, receipt_name=None, config_name=None, backend_contract=None, guar
         recorded = receipt.get('director_block_sha256')
         need(recorded is None or (isinstance(recorded, str) and re.fullmatch('[0-9a-f]{64}', recorded)),
              'invalid recorded Director block baseline')
-        result['director_block'] = ('not_recorded' if recorded is None else
-                                    'unchanged' if recorded == hook.pop('block_sha256') else 'changed')
-        hook.pop('block_sha256', None)
+        actual = hook.pop('block_sha256')
+        need(recorded is None or recorded == actual,
+             'Director block differs from its recorded baseline: the block is managed text; restore it from the '
+             'installed revision (project wording belongs in the project section) or finish a reviewed update')
+        result['director_block'] = 'not_recorded' if recorded is None else 'unchanged'
+        if recorded is None:
+            result['actor_must_confirm'].append('Director block has no recorded baseline: compare it with the installed revision')
         result['project_section'] = section
     else:
         result['route_note'] = 'earlier START.md route; the standing AGENTS.md block is the current route (UPDATES.md)'

@@ -50,6 +50,7 @@ explicit limits prohibit them. Before selecting any descendant, completely load
 [cards/staffing.md](cards/staffing.md) and the selected project
 role's selection/authority guards; resolve missing/conflicting guards before
 dispatch and require the executor's full task references before affected action.
+An unqualified mandatory reference in a role or task file remains mandatory.
 Apply the same current capability/effort, verification and honest settings evidence
 policy at this depth. Give bounded packages/ownership, preserve shared capacity,
 supervise and evaluate their returns, and account for them before submission.
