@@ -11,6 +11,8 @@ import unittest
 STARTER=Path(__file__).resolve().parents[2]/'pattern/starter'
 spec=importlib.util.spec_from_file_location('badge_installer',STARTER/'install.py')
 installer=importlib.util.module_from_spec(spec);spec.loader.exec_module(installer)
+OLD=Path(__file__).resolve().parent/'fixtures/starter_3_2'
+import time
 
 PROJECT_BUILD_STORAGE = (
     '\n## Build/test storage\n\n'
@@ -35,6 +37,17 @@ class StartupCheckTests(unittest.TestCase):
         for name in ('managed','managed_files'):
             receipt[name][path]=hashlib.sha256(data).hexdigest()
         self.save_receipt(receipt)
+    def earlier_route(self):
+        # A revision 3.2 installation checked by the current checker: its own full START/DIRECTOR/OPERATIONS
+        # and the 3.2 bridge. Static fixture; no agent behavior.
+        receipt=self.receipt()
+        for name in ('START.md','DIRECTOR.md','OPERATIONS.md','WORKER.md'):
+            data=(OLD/name).read_bytes();(self.root/name).write_bytes(data)
+            for key in ('managed','managed_files'):receipt[key]['.director/'+name]=hashlib.sha256(data).hexdigest()
+        bridge=(OLD/'AGENTS.md').read_bytes();(self.project/'AGENTS.md').write_bytes(bridge)
+        for key in ('managed','managed_files'):receipt[key]['AGENTS.md']=hashlib.sha256(bridge).hexdigest()
+        receipt.pop('director_block_sha256');self.save_receipt(receipt)
+        return bridge.decode()
     def run_check(self,*args,ok=True):
         r=subprocess.run([sys.executable,'-B',str(self.root/'startup_check.py'),*args],cwd=self.project,text=True,capture_output=True)
         self.assertEqual(r.returncode==0,ok,r.stdout+r.stderr)
@@ -45,7 +58,14 @@ class StartupCheckTests(unittest.TestCase):
     def test_fresh_check_is_readonly_and_does_not_claim_consumption_role_or_ledger(self):
         before=self.tree();r=self.run_check()
         self.assertEqual(r['status'],'evidence_matched')
-        self.assertEqual(len(r['checked_paths']),5)
+        self.assertEqual(len(r['checked_paths']),11)
+        self.assertEqual(r['startup_hook']['target'],'.director/WORKER.md')
+        self.assertEqual(r['director_block'],'unchanged')
+        self.assertEqual(r['project_section']['within_cap'],True)
+        self.assertEqual(r['update_check'],'due')
+        self.assertIn('Recovery steps in the AGENTS.md Director block',r['next'])
+        self.assertEqual(r['actor_must_confirm'][0],'resolved Project Director role')
+        self.assertNotIn('startup reads',' '.join(r['actor_must_confirm']))
         self.assertEqual(r['backend']['record_mode'],'tracked')
         self.assertTrue(r['actor_must_confirm'])
         self.assertEqual(self.snapshots(r),{'AGENTS.md':'unchanged'})
@@ -68,30 +88,93 @@ class StartupCheckTests(unittest.TestCase):
         agents=self.project/'AGENTS.md'
         for prose in ('# Purple project\n\n', '# Orange project\n\n'):
             with self.subTest(prose=prose):
-                data=(prose+installer.BRIDGE+'\nKeep this project\'s release approval.\n').encode()
+                data=(prose+installer.AGENTS+'\nKeep this project\'s release approval.\n').encode()
                 agents.write_bytes(data);self.set_baseline('AGENTS.md',data)
                 before=self.tree();r=self.run_check()
                 self.assertEqual(r['status'],'evidence_matched')
                 self.assertEqual(self.snapshots(r)['AGENTS.md'],'unchanged')
                 self.assertEqual(before,self.tree())
 
-    def test_previous_revision_bridge_under_the_retained_marker_still_passes(self):
-        # Revision 3.2 added the re-entry sentence without changing the marker, so a
-        # project still carrying the 3.1 block keeps a valid route until it updates.
-        reentry=('After every compaction or session resume, repeat this startup before your next\n'
-                 'reply. Read the files again; a summary that mentions them is not a substitute.\n')
-        self.assertEqual(installer.BRIDGE.count(reentry),1)
-        previous=installer.BRIDGE.replace(reentry,'')
-        agents=self.project/'AGENTS.md'
-        for label,text in (('previous revision',previous),('current revision',installer.BRIDGE)):
-            with self.subTest(bridge=label):
-                agents.write_text(text)
-                before=self.tree();r=self.run_check()
-                self.assertEqual(r['status'],'evidence_matched')
-                self.assertEqual(r['startup_hook']['marker'],'director-starter:2')
-                self.assertEqual(r['startup_hook']['target'],'.director/START.md')
-                self.assertEqual(self.snapshots(r)['AGENTS.md'],'changed' if label=='previous revision' else 'unchanged')
+    def test_earlier_start_route_passes_only_with_its_own_full_startup_files(self):
+        # Revision 3.3 moved the rules into the block. A project that has not moved keeps a valid
+        # route while it still has its full START.md; structure only, not agent behavior.
+        fresh=(self.project/'AGENTS.md').read_text()
+        bridge=self.earlier_route()
+        self.assertIn('.director/START.md',bridge)
+        before=self.tree();r=self.run_check()
+        self.assertEqual(r['status'],'evidence_matched')
+        self.assertEqual(r['startup_hook']['marker'],'director-starter:2')
+        self.assertEqual(r['startup_hook']['target'],'.director/START.md')
+        self.assertIn('earlier START.md route',r['route_note'])
+        self.assertNotIn('project_section',r)
+        self.assertEqual(self.snapshots(r)['AGENTS.md'],'unchanged')
+        self.assertEqual(before,self.tree())
+        # The earlier route still hash-checks its own startup files.
+        (self.root/'DIRECTOR.md').write_text('changed local route')
+        self.assertIn('baseline mismatch',self.run_check(ok=False)['gap'])
+        self.assertNotEqual(fresh,bridge)
+
+    def test_old_bridge_pointing_at_the_redirect_stub_is_an_unfinished_update(self):
+        # Known-bad case: new payload copied, AGENTS.md still says to read START.md. The stub holds
+        # no rules, so a passing check here would badge a Director with no instructions.
+        (self.project/'AGENTS.md').write_bytes((OLD/'AGENTS.md').read_bytes())
+        self.assertIn('director-redirect-stub',(self.root/'START.md').read_text())
+        before=self.tree();r=self.run_check(ok=False)
+        self.assertEqual(r['status'],'blocked')
+        self.assertIn('redirect stub',r['gap']);self.assertIn('Move to the AGENTS.md block',r['gap'])
+        self.assertIn('cards/badge.md',r['next'])
+        self.assertEqual(before,self.tree())
+
+    def test_project_section_is_required_once_beside_the_block(self):
+        block,section=installer.BLOCK,installer.PROJECT_SECTION
+        cases={
+            'missing':block,
+            'duplicate':block+'\n'+section+'\n'+section,
+            'unclosed':block+'\n'+section.replace('<!-- /director-project -->\n',''),
+            'fenced':block+'\n```markdown\n'+section+'```\n',
+            'reversed':block+'\n<!-- /director-project -->\ntext\n<!-- director-project -->\n',
+        }
+        for name,text in cases.items():
+            with self.subTest(name=name):
+                (self.project/'AGENTS.md').write_text(text)
+                before=self.tree();r=self.run_check(ok=False)
+                self.assertIn('project section missing',r['gap'])
                 self.assertEqual(before,self.tree())
+        # Project-owned: edits and growth never block; the cap is reported, not enforced here.
+        grown=section.replace('<!-- /director-project -->','| `extra` | '+'x'*3000+' | strong, high | none |\n<!-- /director-project -->')
+        (self.project/'AGENTS.md').write_text('# Project\n\n'+block+'\n'+grown+'\nOwn text.\n')
+        r=self.run_check()
+        self.assertEqual(r['status'],'evidence_matched')
+        self.assertFalse(r['project_section']['within_cap'])
+        self.assertEqual(r['director_block'],'unchanged')
+
+    def test_edited_director_block_is_reported_without_blocking(self):
+        agents=self.project/'AGENTS.md';original=agents.read_text()
+        agents.write_text(original.replace('You route; workers execute.','You may do the work yourself.'))
+        r=self.run_check()
+        self.assertEqual(r['status'],'evidence_matched')
+        self.assertEqual(r['director_block'],'changed')
+        receipt=self.receipt();receipt.pop('director_block_sha256');self.save_receipt(receipt)
+        self.assertEqual(self.run_check()['director_block'],'not_recorded')
+        receipt['director_block_sha256']='invalid';self.save_receipt(receipt)
+        self.assertIn('Director block baseline',self.run_check(ok=False)['gap'])
+
+    def test_update_discovery_hint_reads_only_the_local_cache(self):
+        cases=[(None,None,'due'),({'schema_version':1,'last_attempt':time.time()-10},None,'not_due'),
+               ({'schema_version':1,'last_attempt':time.time()-90000},None,'due'),
+               ({'schema_version':1,'last_attempt':'yesterday'},None,'unknown'),
+               ({'schema_version':1,'last_attempt':time.time()-90000},{'schema_version':1,'mode':'off'},'off')]
+        for cache,policy,expected in cases:
+            with self.subTest(expected=expected,cache=cache):
+                for name,value in (('.update-check.json',cache),('update-policy.json',policy)):
+                    path=self.root/name
+                    if value is None:path.unlink(missing_ok=True)
+                    else:path.write_text(json.dumps(value))
+                before=self.tree();r=self.run_check()
+                self.assertEqual(r['status'],'evidence_matched');self.assertEqual(r['update_check'],expected)
+                self.assertEqual(before,self.tree())
+        (self.root/'update-policy.json').unlink();(self.root/'.update-check.json').write_text('{not json')
+        self.assertEqual(self.run_check()['update_check'],'unknown')
 
     def test_claude_entrypoint_that_only_imports_agents_passes_with_one_marked_block(self):
         # November 9 update layout: CLAUDE.md is exactly the import, AGENTS.md holds the only block.
@@ -140,7 +223,7 @@ class StartupCheckTests(unittest.TestCase):
             'duplicate':original+'\n'+original,
             'unclosed':original.replace(end,''),
             'reversed':original.replace(start,'MARKER').replace(end,start).replace('MARKER',end),
-            'wrong target':original.replace('.director/START.md','.elsewhere/START.md')+'\nReference outside hook: .director/START.md\n',
+            'wrong target':original.replace('.director/WORKER.md','.elsewhere/WORKER.md')+'\nReference outside hook: .director/WORKER.md\n',
         }
         for name,text in cases.items():
             with self.subTest(name=name):
@@ -152,19 +235,20 @@ class StartupCheckTests(unittest.TestCase):
 
     def test_alternate_installed_hook_and_documented_code_samples_are_distinguished(self):
         agents=self.project/'AGENTS.md'
-        alternate=installer.BRIDGE.replace('director-starter:2','director-pattern:start').replace('/director-pattern:start','director-pattern:end')
-        example='\n```markdown\n'+installer.BRIDGE+'```\n'
-        agents.write_text(alternate+example)
+        alternate=installer.BLOCK.replace('director-starter:2','director-pattern:start').replace('/director-pattern:start','director-pattern:end')
+        example='\n```markdown\n'+installer.AGENTS+'```\n'
+        agents.write_text(alternate+'\n'+installer.PROJECT_SECTION+example)
         r=self.run_check()
         self.assertEqual(r['startup_hook']['marker'],'director-pattern:start')
-        self.assertEqual(r['startup_hook']['target'],'.director/START.md')
+        self.assertEqual(r['startup_hook']['target'],'.director/WORKER.md')
+        self.assertEqual(r['director_block'],'changed')
 
     def test_only_live_hook_target_and_markers_count_as_routing_evidence(self):
         agents=self.project/'AGENTS.md'
         cases={
-            'fenced entire hook':'```markdown\n'+installer.BRIDGE+'```\n',
-            'indented entire hook':''.join('    '+line+'\n' for line in installer.BRIDGE.splitlines()),
-            'fenced target':'<!-- director-starter:2 -->\n```text\n.director/START.md\n```\n<!-- /director-starter:2 -->\n',
+            'fenced entire hook':'```markdown\n'+installer.BLOCK+'```\n'+installer.PROJECT_SECTION,
+            'indented entire hook':''.join('    '+line+'\n' for line in installer.BLOCK.splitlines())+installer.PROJECT_SECTION,
+            'fenced target':'<!-- director-starter:2 -->\n```text\n.director/WORKER.md\n```\n<!-- /director-starter:2 -->\n'+installer.PROJECT_SECTION,
         }
         for name,text in cases.items():
             with self.subTest(name=name):
@@ -173,7 +257,7 @@ class StartupCheckTests(unittest.TestCase):
 
     def test_shared_marked_hook_requires_an_explicit_source_and_keeps_outer_composition(self):
         shared=self.project/'docs/assistant_instructions.md'
-        shared.parent.mkdir();shared.write_text(installer.BRIDGE)
+        shared.parent.mkdir();shared.write_text(installer.AGENTS)
         (self.project/'AGENTS.md').write_text('Read docs/assistant_instructions.md before responding.\n')
         before=self.tree();default=self.run_check(ok=False)
         self.assertIn('hook',default['gap'])
@@ -189,7 +273,7 @@ class StartupCheckTests(unittest.TestCase):
 
     def test_shared_hook_does_not_certify_changed_outer_host_instructions(self):
         shared=self.project/'docs/assistant_instructions.md'
-        shared.parent.mkdir();shared.write_text(installer.BRIDGE)
+        shared.parent.mkdir();shared.write_text(installer.AGENTS)
         self.set_baseline('docs/assistant_instructions.md',shared.read_bytes())
         claude=self.project/'CLAUDE.md';claude.write_text('Import docs/assistant_instructions.md.\n')
         self.set_baseline('CLAUDE.md',claude.read_bytes())
@@ -217,10 +301,11 @@ class StartupCheckTests(unittest.TestCase):
         self.assertIn('symlink',self.run_check('--hook-source','docs/assistant_instructions.md',ok=False)['gap'])
         shared.unlink()
         cases={
-            'wrong target':installer.BRIDGE.replace('.director/START.md','.other/START.md'),
-            'duplicate hook':installer.BRIDGE+'\n'+installer.BRIDGE,
-            'unsupported marker':installer.BRIDGE.replace('director-starter:2','unknown-starter:2'),
-            'unmarked import':'Read .director/START.md.\n',
+            'wrong target':installer.AGENTS.replace('.director/WORKER.md','.other/WORKER.md'),
+            'duplicate hook':installer.AGENTS+'\n'+installer.BLOCK,
+            'unsupported marker':installer.AGENTS.replace('director-starter:2','unknown-starter:2'),
+            'unmarked import':'Read .director/WORKER.md.\n'+installer.PROJECT_SECTION,
+            'section left behind in AGENTS':installer.BLOCK,
         }
         for name,text in cases.items():
             with self.subTest(name=name):
@@ -230,7 +315,7 @@ class StartupCheckTests(unittest.TestCase):
 
     def test_shared_hook_selection_does_not_skip_missing_outer_entrypoint_or_explicit_host_guard(self):
         shared=self.project/'docs/assistant_instructions.md'
-        shared.parent.mkdir();shared.write_text(installer.BRIDGE)
+        shared.parent.mkdir();shared.write_text(installer.AGENTS)
         self.assertIn('missing',self.run_check('--hook-source','docs/assistant_instructions.md','--guard','CLAUDE.md',ok=False)['gap'])
         (self.project/'AGENTS.md').unlink()
         self.assertIn('missing',self.run_check('--hook-source','docs/assistant_instructions.md',ok=False)['gap'])
@@ -238,13 +323,13 @@ class StartupCheckTests(unittest.TestCase):
     def test_missing_provenance_and_corrupt_selected_route_block_without_writes(self):
         original=self.receipt();bad=json.loads(json.dumps(original));bad.pop('source');self.save_receipt(bad)
         before=self.tree();r=self.run_check(ok=False);self.assertIn('source URL',r['gap']);self.assertEqual(before,self.tree())
-        self.save_receipt(original);(self.root/'DIRECTOR.md').write_text('changed local route')
+        self.save_receipt(original);(self.root/'cards/supervision.md').write_text('changed local card')
         r=self.run_check(ok=False);self.assertIn('baseline mismatch',r['gap'])
 
     def test_managed_foundation_still_requires_known_installed_integrity(self):
         receipt=self.receipt()
         for name in ('managed','managed_files'):
-            del receipt[name]['.director/START.md']
+            del receipt[name]['.director/cards/requests.md']
         self.save_receipt(receipt)
         r=self.run_check(ok=False)
         self.assertIn('baseline',r['gap'])
@@ -328,7 +413,7 @@ class StartupCheckTests(unittest.TestCase):
 
     def test_paths_symlinks_oversized_receipt_and_missing_guard_are_not_followed(self):
         self.run_check('--receipt','../outside.json',ok=False)
-        (self.root/'DIRECTOR.md').unlink();(self.root/'DIRECTOR.md').symlink_to(self.root/'WORKER.md')
+        (self.root/'cards/staffing.md').unlink();(self.root/'cards/staffing.md').symlink_to(self.root/'WORKER.md')
         self.assertIn('symlink',self.run_check(ok=False)['gap'])
         (self.root/'install.json').write_bytes(b' '*512001)
         self.assertIn('bound',self.run_check(ok=False)['gap'])

@@ -112,14 +112,16 @@ class PackageBoundaryTests(unittest.TestCase):
         branches = re.fullmatch(r"\s*When `([^`]+)` exists in this checkout:\n(.*?)\nOtherwise:\n(.*?)\s*", hook.group(1), re.S)
         self.assertIsNotNone(branches)
         locator, present, absent = branches.groups()
-        # Keep the actual starter's role/delegation instructions in the guarded branch.
-        tree = ast.parse((PATTERN / "starter/install.py").read_text())
-        bridge = next(ast.literal_eval(node.value) for node in tree.body
-                      if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == "BRIDGE" for t in node.targets))
-        installed_hook = re.search(marker, bridge, re.S)
-        self.assertIsNotNone(installed_hook)
+        # Keep an actual starter block in the guarded branch. This checkout's own adoption is a local
+        # installation: it carries the revision 3.2 bridge until its own reviewed update moves it to the
+        # current block (starter UPDATES.md, "Move to the AGENTS.md block"), so either wording is valid here.
+        current = re.search(marker, (PATTERN / "starter/agents/block.md").read_text(encoding="utf-8"), re.S)
+        earlier = re.search(marker, (Path(__file__).resolve().parent / "fixtures/starter_3_2/AGENTS.md").read_text(encoding="utf-8"), re.S)
+        self.assertIsNotNone(current)
+        self.assertIsNotNone(earlier)
         normalize = lambda value: " ".join(value.split())
-        self.assertEqual(normalize(present), normalize(installed_hook.group(1)))
+        self.assertIn(normalize(present), {normalize(current.group(1)), normalize(earlier.group(1))})
+        moved = normalize(present) == normalize(current.group(1))
         manifest = json.loads((PATTERN / "starter/manifest.json").read_text())
         for adopted in (False, True):
             with self.subTest(adopted=adopted), tempfile.TemporaryDirectory() as temporary:
@@ -133,7 +135,8 @@ class PackageBoundaryTests(unittest.TestCase):
                 selected = present if (checkout / locator).is_file() else absent
                 reads = re.findall(r"Read\s+`([^`]+)`", selected)
                 if adopted:
-                    self.assertEqual(reads, [locator])
+                    # The earlier bridge names one file, its locator; the block names WORKER.md for workers.
+                    self.assertEqual(reads, [".director/WORKER.md"] if moved else [locator])
                     self.assertTrue(all((checkout / path).is_file() for path in reads))
                     # Reach real selected foundations without a hidden v1 engine/index.
                     for name in ("START.md", "DIRECTOR.md", "WORKER.md"):
@@ -161,12 +164,9 @@ class PackageBoundaryTests(unittest.TestCase):
         self.assertIn("Preserve project/host authority", text)
 
     def test_flat_installed_route_requests_subagents_without_repeated_user_permission(self):
-        # Exercise the hook actually emitted by the recommended installer, not
+        # Exercise the block actually emitted by the recommended installer, not
         # merely the retained legacy guide. This is instruction wiring, not uptake.
-        tree = ast.parse((PATTERN / "starter/install.py").read_text())
-        bridge = next(ast.literal_eval(node.value) for node in tree.body
-                      if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == "BRIDGE" for t in node.targets))
-        text = " ".join(bridge.split())
+        text = " ".join((PATTERN / "starter/agents/block.md").read_text(encoding="utf-8").split())
         self.assertIn("Default to Project Director unless explicitly assigned a worker or scoped child Director role", text)
         self.assertIn("Directors, delegate project investigations, reviews and changes to bounded subagents before doing the detailed work", text)
         self.assertIn("Scope assignments, stay available to the user, and evaluate the returned results", text)
@@ -174,68 +174,80 @@ class PackageBoundaryTests(unittest.TestCase):
         self.assertNotIn("when permitted", text)
         self.assertNotIn("no mandatory", text)
         self.assertIn("Workers, delegate useful independent subsets within your assigned scope", text)
+        installer = (PATTERN / "starter/install.py").read_text(encoding="utf-8")
+        self.assertIn('BLOCK = (SOURCE / "agents/block.md").read_text(encoding="utf-8")', installer)
+        self.assertIn('files["AGENTS.md"] = AGENTS.encode()', installer)
 
     def test_flat_bridge_repeats_startup_after_compaction_or_resume(self):
         # Standing-text wiring only (November 9); it cannot prove an agent re-reads after compaction.
         reentry = ("After every compaction or session resume, repeat this startup before your next reply. "
                    "Read the files again; a summary that mentions them is not a substitute.")
-        tree = ast.parse((PATTERN / "starter/install.py").read_text())
-        bridge = next(ast.literal_eval(node.value) for node in tree.body
-                      if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == "BRIDGE" for t in node.targets))
+        raw = (PATTERN / "starter/agents/block.md").read_text(encoding="utf-8")
+        block = " ".join(raw.split())
+        self.assertEqual(block.count(reentry), 1)
+        # Revision 3.3: the sentence opens the every-role Reading rule, and "this startup" is listed right after it.
+        self.assertIn("**Reading (every role).** " + reentry + " This startup: the Project Director's check; "
+                      "a Director's Recovery steps; a worker's WORKER.md and role file; a child's overlay or role file; "
+                      "the file your next action needs.", block)
+        self.assertIn("repeated means each step is fresh", block)
+        self.assertIn("Search hits, diffs, tails, summaries, hashes and quotes are not reads.", block)
+        # This checkout's own branch keeps the earlier bridge placement until its own update.
         authoring = (PATTERN.parent / "AGENTS.md").read_text(encoding="utf-8")
-        present = authoring.split("When `.director/START.md` exists in this checkout:", 1)[1].split("\nOtherwise:\n", 1)[0]
-        for label, block in (("installed bridge", bridge), ("source checkout branch", present)):
-            with self.subTest(block=label):
-                text = " ".join(block.split())
-                self.assertEqual(text.count(reentry), 1)
-                # Placed after the role/check routing and before the delegation request.
-                self.assertIn("that Project Director check. Preserve project/host authority. " + reentry +
-                              " Directors, delegate project investigations", text)
-        # The marker is the retained bridge interface; wording changes keep it.
-        self.assertTrue(bridge.startswith("<!-- director-starter:2 -->\n"))
-        self.assertTrue(bridge.endswith("<!-- /director-starter:2 -->\n"))
+        present = " ".join(authoring.split("When `.director/START.md` exists in this checkout:", 1)[1].split("\nOtherwise:\n", 1)[0].split())
+        self.assertEqual(present.count(reentry), 1)
+        self.assertIn("that Project Director check. Preserve project/host authority. " + reentry +
+                      " Directors, delegate project investigations", present)
+        # The marker is the retained interface; wording changes keep it.
+        self.assertTrue(raw.startswith("<!-- director-starter:2 -->\n"))
+        self.assertTrue(raw.endswith("<!-- /director-starter:2 -->\n"))
 
     def test_flat_reuse_rules_do_not_survive_compaction_or_resume(self):
-        # Wording only (November 9): reuse rules cannot excuse skipping the re-read or re-check.
+        # Wording only: reuse rules cannot excuse skipping the re-read or re-check.
         payload = PATTERN / "starter/payload"
         read = lambda name: " ".join((payload / name).read_text(encoding="utf-8").split())
-        director, start, operations, worker = (read(name) for name in
-                                               ("DIRECTOR.md", "START.md", "OPERATIONS.md", "WORKER.md"))
-        self.assertIn("Reuse unchanged current-conversation evidence; evidence from before a compaction or "
-                      "session resume is stale. If missing or stale, run the currently possible check before replying",
-                      director)
-        self.assertNotIn("Reuse unchanged current-conversation evidence; if missing or stale", director)
-        self.assertIn("reuse unchanged retained instructions. A compaction summary does not retain them; "
-                      "after compaction or session resume, read them again.", start)
+        block = " ".join((PATTERN / "starter/agents/block.md").read_text(encoding="utf-8").split())
+        operations, worker, badge = read("OPERATIONS.md"), read("WORKER.md"), read("cards/badge.md")
+        # Revision 3.3: the block's own test replaces the DIRECTOR and START clauses.
+        self.assertIn("A run or read is fresh if your own, still shown and after the latest break", block)
+        self.assertIn("begin every reply with 🎬 until the next break", block)
+        self.assertIn("Reconcile each with current evidence", block)
+        self.assertIn("Reuse an unchanged result within one uninterrupted conversation.", badge)
+        self.assertIn("After every compaction or session resume; when an opt-out ends; and when startup bytes change", badge)
         self.assertIn("Reuse unchanged current-conversation facts; relevant changed startup bytes require recheck, "
                       "and so do facts from before a compaction or session resume.", operations)
         self.assertIn("reuse unchanged retained instructions. A compaction summary does not retain them; "
                       "after compaction or session resume, read them again. Recover incomplete reads.", worker)
 
     def test_flat_roles_preserve_delegation_fallback_and_bounded_worker_default(self):
-        director = " ".join((PATTERN / "starter/payload/DIRECTOR.md").read_text().split())
-        worker = " ".join((PATTERN / "starter/payload/WORKER.md").read_text().split())
-        self.assertIn("Treat a requested project investigation or review as work to delegate", director)
-        self.assertIn("Before dispatch, read [OPERATIONS' staffing section](OPERATIONS.md#staffing-and-maintained-roles)", director)
-        self.assertIn("select the applicable maintained project role and guards through the project's discovery route", director)
-        self.assertIn("Give the worker its exact startup/task instructions and applicable accepted project knowledge, or access to retrieve it", director)
-        self.assertIn("Its scope must permit those required reads", director)
-        self.assertIn("Dispatch before doing the detailed work, then evaluate the return", director)
-        self.assertEqual(director.count("OPERATIONS.md#staffing-and-maintained-roles"), 1)
-        self.assertIn("Answer ordinary discussion, simple lookups and acceptance judgments directly", director)
-        self.assertNotIn("A reply that fulfills the intended discussion needs no delegation", director)
-        self.assertIn("If subagents are unavailable or prohibited, report the specific gap and stop affected execution; do not implement it yourself", director)
-        self.assertIn("Answer discussion directly", director)
-        self.assertIn("Narrow validated state operations are ordinary Director duties", director)
+        read = lambda name: " ".join((PATTERN / "starter" / name).read_text(encoding="utf-8").split())
+        block, worker = read("agents/block.md"), read("payload/WORKER.md")
+        staffing, requests = read("payload/cards/staffing.md"), read("payload/cards/requests.md")
+        # Standing block (duty 2): delegate first, answer discussion directly, gap-and-stop without subagents.
+        self.assertIn("Directors, delegate project investigations, reviews and changes to bounded subagents before doing the detailed work", block)
+        self.assertIn("Answer discussion, simple lookups and acceptance judgments yourself", block)
+        self.assertIn("If subagents are unavailable or prohibited, report the gap and stop that work instead of doing it", block)
+        self.assertIn("| staff or brief work, set tier and effort, or add, rename or retire a role | cards/staffing.md |", block)
+        # Staffing card: role choice from the roster, the executor's own reads, and a scope that permits them.
+        self.assertIn('Take the roster role whose "use when" fits; a general worker never silently replaces a maintained role', staffing)
+        self.assertIn("Do not read the role's own instructions; its executor reads them completely before acting", staffing)
+        self.assertIn("the role ID, its role file and the instructions it must read; its scope must permit those reads", staffing)
+        self.assertIn("**Applicable knowledge:** the selector tags or query context", staffing)
+        self.assertIn("Settle missing or conflicting role limits with the owner before that dispatch", staffing)
+        self.assertNotIn("A reply that fulfills the intended discussion needs no delegation", block)
+        self.assertIn("Answer discussion directly", requests)
+        self.assertIn("Narrow validated state operations are ordinary Director duties", requests)
         self.assertIn("Delegate useful independent subsets within your authorized assignment unless its explicit limits prohibit them", worker)
         self.assertNotIn("only when authorized by the assignment", worker)
         self.assertIn("If the assignment blocks required startup or knowledge reads, return that conflict to the assigner before affected task work", worker)
 
     def test_flat_root_check_and_final_acceptance_match_the_flat_roles(self):
-        start = " ".join((PATTERN / "starter/payload/START.md").read_text().split())
+        block = " ".join((PATTERN / "starter/agents/block.md").read_text(encoding="utf-8").split())
         records = " ".join((PATTERN / "starter/payload/RECORDS.md").read_text().split())
-        self.assertIn("the Project Director, whether defaulted or explicitly selected", start)
-        self.assertIn("Explicit workers and scoped child Directors do not run this Project Director check", start)
+        # Defaulted or explicitly selected, the user-facing session is the Project Director and runs the check.
+        self.assertIn("Otherwise you are the Project Director, even if a tool started the session", block)
+        self.assertIn("**🎬 and the check (Project Director only).** Before your first reply, even to a greeting", block)
+        self.assertIn("never the check or 🎬; report to your parent, who keeps acceptance", block)
+        self.assertIn("No check, no 🎬.", block)
         self.assertIn("The Project Director evaluates the complete submission and makes the final acceptance decision", records)
         self.assertIn("A worker or scoped child Director cannot self-accept for the Project Director", records)
         self.assertIn("Required human gates and independent verification still apply", records)
@@ -243,19 +255,23 @@ class PackageBoundaryTests(unittest.TestCase):
         self.assertIn("Preserve an existing roster/cursor when project policy requires it; do not create one for the flat starter", records)
 
     def test_flat_complete_reads_keep_combined_bounds_and_recovery(self):
-        start = " ".join((PATTERN / "starter/payload/START.md").read_text().split())
-        self.assertIn("An explicit bounded role assignment selects `worker` or `director`", start)
-        self.assertIn("Without an explicit role assignment, load [DIRECTOR.md](DIRECTOR.md)", start)
-        self.assertNotIn("Without an assignment, load", start)
-        self.assertIn("Batch independent reads only; wait for required instructions to return and read them before running dependent commands", start)
-        self.assertLess(start.index("Load the project's required canonical I/O instructions before querying knowledge"), start.index("page `canonical_learning.py selectors`"))
-        self.assertIn("individual and combined tool output bounded", start)
-        self.assertIn("read contiguous numbered ranges through EOF", start)
-        self.assertIn("total extent and returned range in the same read result", start)
-        self.assertIn("Recover every failed, missing or truncated portion", start)
-        self.assertIn("stop affected work if recovery fails", start)
-        self.assertIn("summaries, searches and unprinted results are not instruction reads", start)
-        self.assertIn("Coverage shown in the read needs no separate verification call", start)
+        read = lambda name: " ".join((PATTERN / "starter" / name).read_text(encoding="utf-8").split())
+        worker, block, knowledge = read("payload/WORKER.md"), read("agents/block.md"), read("payload/cards/knowledge.md")
+        # Full read rules: WORKER.md. Short form for every role: the block's Reading rule.
+        self.assertIn("An explicit bounded role assignment selects `worker` or `director`", worker)
+        self.assertIn("Batch independent reads only; wait for required instructions to return and read them before running dependent commands", worker)
+        self.assertIn("individual and combined tool output bounded", worker)
+        self.assertIn("read contiguous numbered ranges through EOF", worker)
+        self.assertIn("total extent and returned range in the same read result", worker)
+        self.assertIn("Recover every failed, missing or truncated portion", worker)
+        self.assertIn("stop affected work if recovery fails", worker)
+        self.assertIn("summaries, searches and unprinted results are not instruction reads", worker)
+        self.assertIn("have a fresh complete read; wait for it before the command it governs", block)
+        self.assertIn("Read long files in bounded numbered ranges, each range", block)
+        self.assertIn("If a cut-off read cannot be recovered, stop that work and say so", block)
+        self.assertIn("every line to its shown total length", block)
+        self.assertIn("Default to Project Director unless explicitly assigned a worker or scoped child Director role", block)
+        self.assertLess(knowledge.index("Load the project's required canonical I/O instructions before querying knowledge"), knowledge.index("page `canonical_learning.py selectors`"))
 
     def test_flat_action_clarifications_retain_the_fail_closed_routes(self):
         read = lambda name: " ".join((PATTERN / "starter/payload" / name).read_text().split())
@@ -276,28 +292,24 @@ class PackageBoundaryTests(unittest.TestCase):
 
     def test_flat_staffing_keeps_strong_default_with_occasional_lighter_tier(self):
         # Instruction wording only; actual host tier/effort selection is unverified.
-        read = lambda name: " ".join((PATTERN / "starter/payload" / name).read_text().split())
-        operations, director = read("OPERATIONS.md"), read("DIRECTOR.md")
-        staffing = operations.split("## Staffing and maintained roles", 1)[1].split("## Continuity and privacy", 1)[0]
-        self.assertIn("No frozen model/vendor, universal strongest/cheapest worker or inferred dollar price", staffing)
-        self.assertIn("A strong capability tier remains the default for delegated work", staffing)
-        self.assertIn("As an occasional suggestion, not a quota or cost target", staffing)
-        self.assertIn("when bounded work is small, well specified and easily checked, and you have very high confidence that a lighter tier can do it, choose a lighter tier at high reasoning effort, or extra-high when a little less confident", staffing)
-        self.assertIn("The strong tier at medium effort is equally acceptable for such work", staffing)
-        self.assertIn("Keep ambiguous, consequential or hard-to-check work on the strong tier", staffing)
-        self.assertIn("map these levels to the nearest current supported controls", staffing)
-        self.assertIn("Required independent review, the named verification tier and your evaluation of the return apply unchanged at every tier", staffing)
-        self.assertIn("record requested and effective tier/effort, or unknowns", staffing)
-        self.assertIn("No fixed model, blind strongest/cheapest choice or role-based permission follows", director)
-        self.assertIn("A strong tier stays the default", director)
-        self.assertIn("a lighter tier at high or extra-high effort, or the strong tier at medium, fits as OPERATIONS describes", director)
-        self.assertIn("Your evaluation and required independent review still apply at every tier", director)
-        self.assertEqual(director.count("OPERATIONS.md#staffing-and-maintained-roles"), 1)
+        read = lambda name: " ".join((PATTERN / "starter" / name).read_text(encoding="utf-8").split())
+        staffing, block = read("payload/cards/staffing.md"), read("agents/block.md")
+        tier = staffing.split("## Tier and effort", 1)[1].split("## The brief", 1)[0]
+        self.assertIn("No model name, vendor or price is ever a default", tier)
+        self.assertIn("Default: the strong tier at high effort, chosen at dispatch", tier)
+        self.assertIn("Occasionally, as a suggestion and never a quota or cost target", tier)
+        self.assertIn("for small, well-specified, easily checked work that you are very confident a lighter tier can do, choose a lighter tier at high effort (extra-high if a little less confident) or the strong tier at medium", tier)
+        self.assertIn("Ambiguous, consequential or hard-to-check work stays on the strong tier", tier)
+        self.assertIn("Map these words to the host's nearest real controls; never invent one", tier)
+        self.assertIn("Your evaluation and any required independent review apply unchanged at every tier", tier)
+        self.assertIn("Record each dispatch's requested tier and effort, what the tool selected, what was effective (or \"unknown\"), and a one-line reason", tier)
+        self.assertIn("Default: the strong tier at high effort.", block)
+        self.assertIn("Checks are never silently dropped or expanded", staffing)
 
     def test_flat_sitrep_checks_due_each_turn_and_suggests_a_shape(self):
         # Instruction wording only; actual SitRep cadence and uptake are unverified.
         read = lambda name: " ".join((PATTERN / "starter/payload" / name).read_text(encoding="utf-8").split())
-        director = read("DIRECTOR.md")
+        director = read("cards/supervision.md")
         heading = "While delegated work is outstanding, proactively send a labeled **📋 SitRep**"
         self.assertEqual(director.count(heading), 1)
         start = director.index(heading)
@@ -313,7 +325,7 @@ class PackageBoundaryTests(unittest.TestCase):
         for part in ("| Who | Doing | Status | Next step |", "**📋 SitRep**", "**Done:**", "**Waiting on you:**", "**Next:**"):
             self.assertIn(part, example)
         # Raw text: blank lines keep the copied example rendering as a table.
-        raw = (PATTERN / "starter/payload/DIRECTOR.md").read_text(encoding="utf-8")
+        raw = (PATTERN / "starter/payload/cards/supervision.md").read_text(encoding="utf-8")
         raw_example = raw[raw.index("For a full SitRep, for example"):raw.index("Answer status questions briefly")]
         self.assertIn("\n\n| Who | Doing | Status | Next step |", raw_example)
         self.assertIn("|\n\n**Waiting on you:**", raw_example)
@@ -329,11 +341,14 @@ class PackageBoundaryTests(unittest.TestCase):
         self.assertIn("Stricter host progress updates stay concise and separate", sitrep)
         self.assertIn("supported waits must leave both cadences usable", sitrep)
         self.assertNotIn("report promptly if overdue or timing is unknown", director)
+        block = " ".join((PATTERN / "starter/agents/block.md").read_text(encoding="utf-8").split())
+        self.assertIn("While delegated work is out, send a 📋 SitRep on every stream about every five minutes from dispatch; check each turn, including worker returns and notifications, whether one is due.", block)
+        self.assertIn("With work out, send a 📋 SitRep now and time the next from it.", block)
 
     def test_starter_manifest_records_revision_and_format_number(self):
         # Static manifest check only; the installer's receipt is checked in test_flat_starter.
         manifest = json.loads((PATTERN / "starter/manifest.json").read_text(encoding="utf-8"))
-        self.assertEqual(manifest["starter_revision"], "3.2")
+        self.assertEqual(manifest["starter_revision"], "3.3")
         self.assertEqual(manifest["starter_version"], 3)
 
     def test_updates_run_through_each_projects_own_director(self):
@@ -360,35 +375,43 @@ class PackageBoundaryTests(unittest.TestCase):
     def test_director_is_a_partner_and_sets_dispatch_settings(self):
         # Instruction wording / static only; actual partner behavior and dispatch settings are unverified.
         read = lambda path: " ".join(path.read_text(encoding="utf-8").split())
-        director = read(PATTERN / "starter/payload/DIRECTOR.md")
+        block = read(PATTERN / "starter/agents/block.md")
+        requests = read(PATTERN / "starter/payload/cards/requests.md")
+        updates = read(PATTERN / "starter/payload/cards/update-check.md")
+        staffing = read(PATTERN / "starter/payload/cards/staffing.md")
+        # Standing every turn: the partner rule, the mid-flight pause and explicit settings sit in the block,
+        # ahead of the check paragraph, so no file read is needed to meet them.
+        for phrase in (
+            "As the user's partner, not a literal executor, map each request onto the project's established mechanism and owner",
+            "if the literal request would bypass it, or a better route appears mid-flight, pause the conflicting work, say so, recommend that route as a ❓ decision and hold that work until the user chooses",
+            "Set the host's tier and reasoning-effort controls explicitly on every dispatch. Default: the strong tier at high effort.",
+            "tier, effort and a one-line reason",
+        ):
+            self.assertEqual(block.count(phrase), 1, phrase)
+            self.assertLess(block.index(phrase), block.index("**🎬 and the check (Project Director only).**"), phrase)
         for phrase in (
             "You are the user's partner, not a literal executor",
             "map a request onto the project's established mechanism and owner",
             "When the literal request would bypass it, say so, propose the established route and recommend it",
             "Judge recommendations on merit, not on work already started",
             "pause conflicting work first, then recommend",
-            "Set tier and effort explicitly on each dispatch; inheriting the parent's settings is not a selection",
             "Mark that recommendation ❓ as a user decision",
             "Do not start or resume the bypassing or paused work until the user chooses",
-            "Before planning any Director Pattern update, in this or another project, read [UPDATES](UPDATES.md) completely",
-            "an agent the user directs there",
-            "The strong default is the strong tier at high effort; record a one-line reason",
         ):
-            self.assertEqual(director.count(phrase), 1, phrase)
-        # Reachability: the partner rule loads before the first-reply check paragraph.
-        first_reply = director.index("If you are the Project Director, before the first ordinary reply")
-        for phrase in ("You are the user's partner, not a literal executor", "pause conflicting work first, then recommend"):
-            self.assertLess(director.index(phrase), first_reply, phrase)
-        operations = read(PATTERN / "starter/payload/OPERATIONS.md")
-        start = operations.index("## Staffing and maintained roles")
-        staffing = operations[start:operations.index("## Continuity and privacy", start)]
+            self.assertEqual(requests.count(phrase), 1, phrase)
         for phrase in (
-            "This guidance is the explicit instruction to set capability and reasoning effort for each delegated task wherever the host allows",
-            "Set both on every dispatch; omitting one is not a choice",
-            "The strong default means the strong tier at high effort, chosen at dispatch rather than inherited",
-            "Record each choice with a one-line reason",
-            '"inherited" or "not set" is acceptable only with the host constraint that forced it',
-            "A guide may name a case that meets these conditions, such as an ordinary compatible update under UPDATES",
+            "Before planning any Director Pattern update, in this or another project, read [UPDATES](../UPDATES.md) completely",
+            "an agent the user directs there",
+        ):
+            self.assertEqual(updates.count(phrase), 1, phrase)
+        self.assertIn("discuss or plan a Director Pattern update, here or elsewhere | cards/update-check.md; before planning, all of UPDATES.md |", block)
+        for phrase in (
+            "This card is the explicit instruction to set capability and reasoning effort on every dispatch, including on hosts that reserve those controls for explicit instructions",
+            "Hosts often fall back to the parent's settings, so leaving one out is not a choice",
+            "Default: the strong tier at high effort, chosen at dispatch",
+            "a one-line reason (size, how easily it is checked, consequence of error)",
+            '"Inherited" or "not set" is acceptable only with the forcing host constraint',
+            "An ordinary compatible update under `UPDATES.md` is one such case",
         ):
             self.assertIn(phrase, staffing)
         maintainer = read(PATTERN.parent / "AGENTS.md")
