@@ -1,7 +1,8 @@
 # Update the flat foundation without replacing the project
 
-Only the manifest-selected foundation/helper files are managed. Project authority,
-roles, adapters, state, exact sources and discovery pointers stay project-owned.
+Only the manifest-selected foundation/helper files and the marked Director block in
+AGENTS.md are managed. Project authority, the `director-project` section, roles,
+adapters, state, exact sources and discovery pointers stay project-owned.
 The fresh installer refuses existing installations; a compatible update is an actual
 reviewed operation below, never rerunning it as an overwrite. A version/schema
 change is not permission to migrate an older canonical store.
@@ -155,7 +156,7 @@ route exists, report the gap; do not edit the template.
 
 An ordinary compatible update is bounded, well specified and checked by the
 required independent review. It is a case where the
-[lighter-tier choice](OPERATIONS.md#staffing-and-maintained-roles) fits: for its
+[lighter-tier choice](cards/staffing.md) fits: for its
 execution, choose a lighter capability tier at high effort, or the strong tier at
 medium effort, and record the choice. Keep the required independent review; by
 default it uses the strong tier at high effort. Use the strong tier at high effort or above, with a
@@ -240,7 +241,7 @@ If a purported restriction's authority is unclear, resolve its provenance with t
 owner before weakening it. Record the cleanup and preserved evidence locator in
 the update receipt. Retained host-specific adapters must have explicit applicability
 and current capability validation before use; historical mappings do not configure
-the next host. Resolve runtime controls at their relevant use under [OPERATIONS](OPERATIONS.md#staffing-and-maintained-roles).
+the next host. Resolve runtime controls at their relevant use under [the staffing card](cards/staffing.md).
 
 Policy adoption does not reassign work. Existing open director-owned requests keep
 their owner, handles, and obligations until an explicit acknowledged assignment or
@@ -274,11 +275,72 @@ CLAUDE.md, compare the identifiable marked block and local adaptations with the
 prior and incoming hook, and merge only the needed change. Report, rather than
 move, content whose ownership is unclear or that applies to only one host.
 Preserve all unrelated bytes and project-specific instructions, including
-customizations inside the block. Do not append a duplicate hook. If the block or
+customizations inside the block. Do not append a duplicate hook. For the standing
+Director block, follow "Move to the AGENTS.md block" below: its text is managed, and
+a project's own wording moves to the project section instead of being lost. If the block or
 applicable authority is ambiguous, retain the original and report the incomplete
 integration for review. Verify the actual loaded route and select affected startup
 checks below; record the resulting hook and backup in the receipt rather than
 treating engine replacement as adoption.
+
+### Move to the AGENTS.md block
+
+From starter revision 3.3 the Director's standing rules are the marked block in
+AGENTS.md itself, with a project-owned section directly below it. START.md and
+DIRECTOR.md are redirect stubs, detail lives on the cards in `.director/cards/`, and
+the check requires the block to name `.director/WORKER.md`. An installation whose
+block still says to read `.director/START.md` makes this move once, as part of its
+ordinary reviewed update, in this order:
+
+1. Back up and verify AGENTS.md, CLAUDE.md if present, every managed file to be
+   changed and the current receipt, as above.
+2. Compare and replace the managed payload as above. New managed files:
+   `.director/cards/` with `staffing.md`, `requests.md`, `supervision.md`,
+   `knowledge.md`, `update-check.md`, `privacy.md` and `badge.md`. START.md and
+   DIRECTOR.md become the incoming stubs only after any local addition to them is
+   moved to a project-owned file the project section lists; never drop it.
+3. In the hook source (AGENTS.md unless the check selects another file), replace
+   everything from the `<!-- director-starter:2 -->` line through the
+   `<!-- /director-starter:2 -->` line with the incoming block, byte for byte, from
+   the pinned revision's `pattern/starter/agents/block.md`. Keep the block first in
+   the file where the project's own layout allows. The block's text is managed: do
+   not edit it. Move a project's own wording from inside the old block into the
+   project section or the surrounding project text, and report anything whose place
+   is unclear. A project using the `director-pattern:start` / `director-pattern:end`
+   markers keeps its marker lines around the same incoming text.
+4. Directly below the block, add the project section once, starting from
+   `pattern/starter/agents/project-section.md`. Fill it from this project's reviewed
+   state, not from defaults: its exact check command (existing `--receipt`,
+   `--config`, `--backend-contract`, `--guard` and `--hook-source` arguments), the
+   guard files to read before the work they govern, the request store's manuals if
+   they are not the bundled ones, the role-file locator, and one roster row per
+   maintained role taken from the project's role index (the index and definitions
+   stay where they are). A generated project that still awaits first use also lists
+   FIRST_USE.md and its required reads before the first check. When a section already
+   exists, never replace it; merge only what the update needs.
+5. Measure the result with `context_check.py` against the host's instruction cap
+   ([OPERATIONS.md](OPERATIONS.md#optional-context-budget-preflight)). The block must
+   stay within 7,600 bytes and the project section within 3,000; a roster that does
+   not fit moves to `.director/ROSTER.md`, named in the section. If the whole
+   instruction file would pass 24 KiB or the host's cap, report what would be cut and
+   let the owner choose; never trim project text silently.
+6. Write the update receipt with the new managed baselines (WORKER.md,
+   OPERATIONS.md, startup_check.py, each card, the stubs and the other payload files)
+   and `director_block_sha256`, the SHA-256 of the block from its opening marker line
+   through its closing marker line and newline. Point the project section's check
+   command at that receipt with `--receipt`, and use the same receipt for
+   `update_check.py`.
+7. Run the check command exactly as the project section states it. It must report
+   `evidence_matched`, `startup_hook.target` ending in `WORKER.md` and
+   `director_block: unchanged`. This is a structural change to the loaded startup
+   chain: the fresh host trials in the table below apply, including a first reply, a
+   reply after a forced compaction, and a worker start.
+
+Interrupted between steps 2 and 3, the old block points at a stub and the check
+blocks with that gap: finish the move or restore the backup; do not leave it mixed.
+An installation that keeps its earlier START.md route by a deliberate reviewed
+decision keeps its earlier START.md, DIRECTOR.md and OPERATIONS.md too, and records
+that choice in its receipt.
 
 Inspect helper/config/store schema compatibility before replacing a bundled helper.
 An incompatible or uncertain schema blocks that part of the update; preserve the
@@ -317,7 +379,7 @@ local rephase must preserve exact authority, applicability, transitive dependenc
 and before-use triggers, with old/new mapping in the receipt. Retain prior
 acceptance until newly required checks pass.
 Separating staffer selection knowledge from executor manuals likewise records the
-responsible actor and timing under OPERATIONS. Keep every assignment-affecting guard in
+responsible actor and timing under the staffing card. Keep every assignment-affecting guard in
 the selection package; unresolved authority cannot hide in a deferred manual.
 Existing unqualified actor and explicit staffer requirements survive engine
 replacement until that reviewed mapping is integrated and checked.
@@ -394,3 +456,5 @@ An `available` automatic result is a real pending safe-update operation, not pro
 of application. Execute only when the current host can perform the scoped protocol;
 otherwise retain the pinned pending operation/reason and inform the user of the
 meaningful limitation. No invented backend, daemon or unattended downloaded code.
+
+END UPDATES.md

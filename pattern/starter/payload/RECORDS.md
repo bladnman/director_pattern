@@ -165,3 +165,5 @@ ownership before overlapping replacement work. A file/status change starts no ag
 Both tracked and lean retain compact activity and important decisions through the
 owner. These are recovery pointers, not another lifecycle authority or a live
 watcher. The helper launches no agents, sends no messages, and schedules no wakeup.
+
+END RECORDS.md

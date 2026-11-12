@@ -260,3 +260,5 @@ execution route; no worker/owner startup invokes it automatically. It returns
 data and never updates contracts or request records. Runtime availability,
 metadata endpoints, policy commands, receipt schema, daily failure throttle,
 concurrency limits, and safe automatic-update handling are specified in UPDATES.
+
+END TOOLING.md

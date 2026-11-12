@@ -18,25 +18,12 @@ import uuid
 
 SOURCE = Path(__file__).resolve().parent
 GUARDS = (".director", ".producer", ".team", ".program", "requests", "AGENTS.md", "CLAUDE.md")
-BRIDGE = """<!-- director-starter:2 -->
-Default to Project Director unless explicitly assigned a worker or scoped child
-Director role.
-Read `.director/START.md` and the exact selected role package completely before
-the first ordinary reply in each conversation, including a greeting or identity
-question. A greeting is not an exemption from startup. The Project
-Director proactively performs the bounded read-only local check in OPERATIONS,
-then uses 🎬 only if it passes; failure gives a specific gap and an ordinary answer.
-Explicit workers and scoped child Directors load their selected package without
-that Project Director check. Preserve project/host authority.
-After every compaction or session resume, repeat this startup before your next
-reply. Read the files again; a summary that mentions them is not a substitute.
-Directors, delegate project investigations, reviews and changes to bounded subagents
-before doing the detailed work. Scope assignments, stay available to the user, and
-evaluate the returned results. Workers, delegate useful independent subsets within
-your assigned scope.
-Load selected task instructions before action; recover incomplete reads.
-<!-- /director-starter:2 -->
-"""
+# The managed Director block and the project-owned section it is installed with.
+BLOCK = (SOURCE / "agents/block.md").read_text(encoding="utf-8")
+PROJECT_SECTION = (SOURCE / "agents/project-section.md").read_text(encoding="utf-8")
+AGENTS = BLOCK + "\n" + PROJECT_SECTION
+# Byte caps: the block and section are standing context for every agent given AGENTS.md.
+BLOCK_CAP, SECTION_CAP, CARD_CAP, WORKER_CAP = 7600, 3000, 6000, 4500
 
 
 def sha(data):
@@ -55,7 +42,10 @@ def manifest():
     names = value["payload"]
     require(isinstance(names, list) and len(names) == len(set(names)), "duplicate payload")
     for name in names:
-        require(isinstance(name, str) and Path(name).name == name and name not in {".", ".."}, "unsafe payload path")
+        parts = Path(name).parts if isinstance(name, str) else ()
+        flat = len(parts) == 1 and parts[0] not in {".", ".."} and Path(name).name == name
+        card = len(parts) == 2 and parts[0] == "cards" and parts[1].endswith(".md") and name == "cards/" + parts[1]
+        require(flat or card, "unsafe payload path")
         require((SOURCE / "payload" / name).is_file() and not (SOURCE / "payload" / name).is_symlink(), "unsafe payload")
     return value
 
@@ -70,7 +60,14 @@ def runtime():
 def files_for(target, initiator, opportunity, min_incidents=3, project_id=None):
     value = manifest()
     files = {".director/" + name: (SOURCE / "payload" / name).read_bytes() for name in value["payload"]}
-    files["AGENTS.md"] = BRIDGE.encode()
+    files["AGENTS.md"] = AGENTS.encode()
+    for label, data, cap in [("Director block", BLOCK.encode(), BLOCK_CAP), ("project section", PROJECT_SECTION.encode(), SECTION_CAP),
+                             ("WORKER.md", files[".director/WORKER.md"], WORKER_CAP),
+                             *((name, data, CARD_CAP) for name, data in files.items() if name.startswith(".director/cards/"))]:
+        require(len(data) <= cap, label + " exceeds its byte cap of " + str(cap))
+    require(BLOCK.startswith("<!-- director-starter:2 -->\n") and BLOCK.endswith("<!-- /director-starter:2 -->\n")
+            and PROJECT_SECTION.startswith("<!-- director-project -->\n") and PROJECT_SECTION.endswith("<!-- /director-project -->\n"),
+            "malformed Director block or project section source")
     project_id = project_id or "PROJ-" + "0" * 32  # Plan placeholder only; never installed.
     config = {"schema_version": 1, "record_mode": "tracked", "request_store": {
         "schema_version": 2, "format": "director-request-bundles", "project_id": project_id}}
@@ -152,8 +149,11 @@ def operation(mode, target, initiator="owner", opportunity="closure", min_incide
         static = {k: v for k, v in files.items() if k != ".director/config.json"}
         for name, data in static.items():
             path = target / name
-            require(path.is_file() and not path.is_symlink() and path.read_bytes() == data,
-                    "installed instruction drift; no implicit overwrite")
+            require(path.is_file() and not path.is_symlink(), "installed instruction drift; no implicit overwrite")
+            # AGENTS.md is composed: only the managed block must be intact; the project section and
+            # the project's own text are project-owned.
+            same = BLOCK.encode() in path.read_bytes() if name == "AGENTS.md" else path.read_bytes() == data
+            require(same, "installed instruction drift; no implicit overwrite")
         current = runtime().Store(target / ".director")
         current.validate()
         return {"operation": mode, "changed": False, "status": "same starter; mutable state and optional roles preserved", "target": str(target)}
@@ -167,8 +167,11 @@ def operation(mode, target, initiator="owner", opportunity="closure", min_incide
               "starter_revision": value.get("starter_revision"), "target": str(target), "files": {p: {"sha256": sha(b), "bytes": len(b)} for p, b in files.items()},
               "payload_bytes": sum(len(b) for b in files.values()),
               "version_control": version_control(target, remote_visibility),
-              "startup_bytes_director": sum(len(files[".director/" + p]) for p in ["START.md", "DIRECTOR.md"]) + len(files["AGENTS.md"]),
-              "startup_bytes_worker": sum(len(files[".director/" + p]) for p in ["START.md", "WORKER.md"]) + len(files["AGENTS.md"])}
+              "standing_bytes": {"director_block": len(BLOCK.encode()), "project_section": len(PROJECT_SECTION.encode()),
+                                 "caps": {"director_block": BLOCK_CAP, "project_section": SECTION_CAP, "card": CARD_CAP, "worker": WORKER_CAP}},
+              "card_bytes": {p.removeprefix(".director/cards/"): len(b) for p, b in files.items() if p.startswith(".director/cards/")},
+              "startup_bytes_director": len(files["AGENTS.md"]),
+              "startup_bytes_worker": len(files[".director/WORKER.md"]) + len(files["AGENTS.md"])}
     if mode == "plan":
         report["files"][".director/config.json"]["sha256"] = None
         report["project_identity"] = "unallocated until first actual install; config bytes estimated with equal-length placeholder"
@@ -186,6 +189,7 @@ def operation(mode, target, initiator="owner", opportunity="closure", min_incide
                    "starter_revision": value.get("starter_revision"), "target": ".",
                    "target_created": target_created, "manifest_sha256": sha((SOURCE / "manifest.json").read_bytes()),
                    "managed": {name: sha(data) for name, data in files.items()},
+                   "director_block_sha256": sha(BLOCK.encode()), "project_section": "installed once; project-owned",
                    "source": source_info,
                    "version_control": report["version_control"],
                    "technical_check": {"payload_hashes": "verified", "store": "validate required", "acceptance": "not implied", "native_startup": "unrun"},
@@ -259,6 +263,7 @@ def rollback_locked(receipt_file):
     (target / ".director/config.json").unlink()
     for name in (safe | {".director/install.json", ".director/.requests.lock"}) - {".director/config.json"}:
         (target / name).unlink(missing_ok=True)
+    (target / ".director/cards").rmdir()
     (target / ".director").rmdir()
     if receipt["target_created"] and not list(target.iterdir()):
         target.rmdir()

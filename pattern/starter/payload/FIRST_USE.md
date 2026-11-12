@@ -87,3 +87,5 @@ multi-machine transaction or authenticate source evidence.
 The selected native init CLI has a 15-second timeout. Managed code is rechecked
 immediately before execution; the local cooperating-writer contract does not protect
 against a hostile process replacing code between verification and execution.
+
+END FIRST_USE.md

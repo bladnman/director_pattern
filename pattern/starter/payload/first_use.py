@@ -192,8 +192,19 @@ def transport(project, provenance_name, instance_name, completed=False):
          'invalid template labels or differing transport digest')
     managed = provenance.get('managed_files')
     need(isinstance(managed, dict) and 0 < len(managed) <= 256, 'missing or oversized managed hash map')
-    required = {'AGENTS.md', '.director/START.md', '.director/DIRECTOR.md', '.director/OPERATIONS.md',
-                '.director/startup_check.py', '.director/first_use.py', '.director/FIRST_USE.md', '.director/.gitignore'}
+    checker_hash = managed.get('.director/startup_check.py')
+    need(isinstance(checker_hash, str) and HEX.fullmatch(checker_hash) and
+         digest(read(selected(project, '.director/startup_check.py'), total)) == checker_hash,
+         'selected helper/guard lacks reviewed transport baseline or managed template drift; reviewed integration required')
+    checker = load_module(selected(project, '.director/startup_check.py'), 'first_use_startup_check')
+    for name in {'AGENTS.md', descriptor['hook_source']}:
+        selected(project, name)
+    hook_text = read(selected(project, descriptor['hook_source']), total).decode('utf-8')
+    route, _ = checker.startup_route(hook_text, '.director', descriptor['hook_source'])
+    if route == 'block':
+        checker.project_section(hook_text, descriptor['hook_source'])
+    required = {'AGENTS.md', '.director/first_use.py', '.director/FIRST_USE.md', '.director/.gitignore',
+                *('.director/' + name for name in (checker.BLOCK_ROUTE if route == 'block' else checker.START_ROUTE))}
     if backend['kind'] == 'director-request-bundles':
         required |= {backend['helper'], '.director/engine/tools/requests.py'}
     else:
@@ -216,10 +227,6 @@ def transport(project, provenance_name, instance_name, completed=False):
         if not completed or name in {'.director/startup_check.py', '.director/first_use.py'}:
             need(digest(read(path, total)) == expected, 'managed template drift; reviewed integration required')
     need(digest(read(Path(__file__), total)) == managed['.director/first_use.py'], 'executing helper differs from selected transport')
-    checker = load_module(selected(project, '.director/startup_check.py'), 'first_use_startup_check')
-    for name in {'AGENTS.md', descriptor['hook_source']}:
-        selected(project, name)
-    checker.startup_hook(read(selected(project, descriptor['hook_source']), total).decode('utf-8'), '.director/START.md', descriptor['hook_source'])
     privacy_snapshots = {}
     for name in ('.gitignore', '.director/.gitignore'):
         path = selected(project, name)

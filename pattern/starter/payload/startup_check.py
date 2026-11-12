@@ -7,10 +7,21 @@ import os
 from pathlib import Path
 import re
 import sys
+import time
 
 MAX_JSON = 512_000
 MAX_FILE = 1_000_000
 MAX_TOTAL = 4_000_000
+CARDS = ('staffing', 'requests', 'supervision', 'knowledge', 'update-check', 'privacy', 'badge')
+BLOCK_ROUTE = ('WORKER.md', 'OPERATIONS.md', 'startup_check.py', *('cards/' + name + '.md' for name in CARDS))
+START_ROUTE = ('START.md', 'DIRECTOR.md', 'OPERATIONS.md', 'startup_check.py')
+STUB = '<!-- director-redirect-stub -->'
+SECTION_CAP = 3000
+NEXT = ('Reads from before the latest summary or resume are gone. Before your first project action, '
+        'do the Recovery steps in the AGENTS.md Director block; before each action in its table, '
+        'read the card it names.')
+NEXT_FAILED = ('Answer without the badge and state this gap. Before acting on it read '
+               '.director/cards/badge.md. The Recovery steps and table in the AGENTS.md Director block still apply.')
 
 
 def need(ok, message):
@@ -110,23 +121,80 @@ def instruction_lines(text):
     return lines
 
 
-def startup_hook(text, target, source='AGENTS.md'):
-    """Recognize one supported marked route; prose authority remains an actor judgment."""
+def marked(text, source, labels, what):
+    """Return the lines and the one ordered marker pair of a supported standalone block."""
     lines = instruction_lines(text)
     markers = []
     for number, line in enumerate(lines):
         comment = re.fullmatch(r' {0,3}<!--[ \t]*(.*?)[ \t]*-->[ \t]*', line)
-        if comment and comment[1].startswith(('director-starter', '/director-starter', 'director-pattern', '/director-pattern')):
+        if comment and comment[1].startswith(tuple(prefix for pair in labels for prefix in
+                                                   (pair[0].split(':')[0], '/' + pair[0].split(':')[0]))):
             markers.append((number, comment[1]))
-    supported = {('director-starter:2', '/director-starter:2'),
-                 ('director-pattern:start', 'director-pattern:end')}
-    need(len(markers) == 2 and tuple(label for _, label in markers) in supported,
-         'missing, ambiguous or unsupported marked startup hook: ' + source)
+    need(len(markers) == 2 and tuple(label for _, label in markers) in labels, what + ': ' + source)
+    return lines, markers
+
+
+def references(body, target):
+    return bool(re.search(r'(?<![\w/.-])(?:\./)?' + re.escape(target) + r'(?![\w/.-])', body))
+
+
+HOOKS = {('director-starter:2', '/director-starter:2'), ('director-pattern:start', 'director-pattern:end')}
+
+
+def startup_hook(text, target, source='AGENTS.md'):
+    """Recognize one supported marked route; prose authority remains an actor judgment."""
+    lines, markers = marked(text, source, HOOKS, 'missing, ambiguous or unsupported marked startup hook')
     body = '\n'.join(lines[markers[0][0] + 1:markers[1][0]])
-    need(re.search(r'(?<![\w/.-])(?:\./)?' + re.escape(target) + r'(?![\w/.-])', body),
-         'marked startup hook does not reference selected route: ' + target)
+    need(references(body, target), 'marked startup hook does not reference selected route: ' + target)
     return {'path': source, 'marker': markers[0][1], 'target': target,
             'scope': 'marked route structure only'}
+
+
+def startup_route(text, root, source='AGENTS.md'):
+    """Select the route the marked block names: the standing block (WORKER.md) or the earlier START.md."""
+    lines, markers = marked(text, source, HOOKS, 'missing, ambiguous or unsupported marked startup hook')
+    body = '\n'.join(lines[markers[0][0] + 1:markers[1][0]])
+    start, worker = root + '/START.md', root + '/WORKER.md'
+    if references(body, start):
+        return 'start', startup_hook(text, start, source)
+    need(references(body, worker), 'marked startup hook does not reference selected route: ' + worker)
+    hook = startup_hook(text, worker, source)
+    raw = text.splitlines()
+    block = '\n'.join(raw[markers[0][0]:markers[1][0] + 1]) + '\n'
+    hook['block_sha256'] = hashlib.sha256(block.encode()).hexdigest()
+    hook['block_bytes'] = len(block.encode())
+    return 'block', hook
+
+
+def project_section(text, source='AGENTS.md'):
+    """The project-owned settings section must sit in the same file as the standing block."""
+    lines, markers = marked(text, source, {('director-project', '/director-project')},
+                            'project section missing or ambiguous (one director-project pair required)')
+    raw = text.splitlines()
+    size = len(('\n'.join(raw[markers[0][0]:markers[1][0] + 1]) + '\n').encode())
+    return {'path': source, 'bytes': size, 'cap': SECTION_CAP, 'within_cap': size <= SECTION_CAP}
+
+
+def update_discovery(root):
+    """Local cache only: says whether the daily metadata check is due. Never blocks."""
+    try:
+        policy = root / 'update-policy.json'
+        if policy.is_file() and not policy.is_symlink() and policy.stat().st_size <= 64_000:
+            if json.loads(policy.read_bytes()).get('mode') == 'off':
+                return 'off'
+        cache = root / '.update-check.json'
+        if not cache.exists():
+            return 'due'
+        if cache.is_symlink() or not cache.is_file() or cache.stat().st_size > 64_000:
+            return 'unknown'
+        last = json.loads(cache.read_bytes()).get('last_attempt')
+        if last is None:
+            return 'due'
+        if type(last) not in (int, float):
+            return 'unknown'
+        return 'due' if time.time() - last >= 24 * 60 * 60 else 'not_due'
+    except (OSError, ValueError, AttributeError):
+        return 'unknown'
 
 
 def generated_receipt(receipt, project, config_name, backend_contract):
@@ -195,25 +263,32 @@ def check(root, receipt_name=None, config_name=None, backend_contract=None, guar
     need(isinstance(source.get('sha'), str) and re.fullmatch('[0-9a-f]{40}', source['sha']),
          'missing/invalid installation source pin')
     need(type(source.get('published')) is bool, 'missing installation source publication status')
-    managed = [str(root / name) for name in ('START.md', 'DIRECTOR.md', 'OPERATIONS.md', 'startup_check.py')]
-    managed_paths = {safe(project, value).relative_to(project).as_posix() for value in managed}
     need(not Path(hook_source).is_absolute(), 'hook source must be project-relative')
-    hook_relative = safe(project, hook_source).relative_to(project).as_posix()
-    route = ['AGENTS.md', *managed, *guards, hook_source]
+    hook_path = safe(project, hook_source)
+    hook_relative = hook_path.relative_to(project).as_posix()
+    hook_text = read(hook_path, MAX_FILE, total).decode('utf-8')
+    route, hook = startup_route(hook_text, root.relative_to(project).as_posix(), hook_relative)
+    section = project_section(hook_text, hook_relative) if route == 'block' else None
+    managed = [str(root / name) for name in (BLOCK_ROUTE if route == 'block' else START_ROUTE)]
+    managed_paths = {safe(project, value).relative_to(project).as_posix() for value in managed}
+    paths = ['AGENTS.md', *managed, *guards, hook_source]
     if backend_contract:
-        route.append(backend_contract)
+        paths.append(backend_contract)
     selected = {}
-    for value in route:
+    for value in paths:
         path = safe(project, value)
         selected.setdefault(path.relative_to(project).as_posix(), path)
-    need(len(selected) <= 20, 'too many selected startup guards')
+    need(len(selected) <= 30, 'too many selected startup guards')
     checked = []
     snapshots = []
-    hook = None
     for relative, path in selected.items():
         expected = baseline(receipt, relative, required=relative in managed_paths)
         data = read(path, MAX_FILE, total)
         digest = hashlib.sha256(data).hexdigest()
+        if route == 'start' and path == root / 'START.md':
+            need(STUB not in data.decode('utf-8', 'replace'),
+                 'marked block still routes to ' + relative + ', which is now a redirect stub: unfinished update; '
+                 'merge the current Director block (UPDATES.md, "Move to the AGENTS.md block")')
         if relative in managed_paths:
             need(digest == expected, 'startup baseline mismatch: ' + relative)
         else:
@@ -221,7 +296,7 @@ def check(root, receipt_name=None, config_name=None, backend_contract=None, guar
             snapshots.append({'path': relative, 'snapshot': 'not_recorded' if expected is None else
                               'unchanged' if digest == expected else 'changed'})
         if relative == hook_relative:
-            hook = startup_hook(data.decode('utf-8'), (root / 'START.md').relative_to(project).as_posix(), relative)
+            need(data.decode('utf-8') == hook_text, 'selected hook source changed during the check')
         checked.append(relative)
     if backend_contract:
         backend = {'kind': 'project-declared contract', 'path': safe(project, backend_contract).relative_to(project).as_posix(),
@@ -246,17 +321,29 @@ def check(root, receipt_name=None, config_name=None, backend_contract=None, guar
                 need(store['project_id'] == expected, 'configured project identity differs from selected project')
         backend = {'kind': 'configuration header', 'path': config_path.relative_to(project).as_posix(),
                    'schema_version': config['schema_version'], 'record_mode': config['record_mode']}
-    return {'status': 'evidence_matched', 'scope': 'managed evidence and marked route structure checked; current project instruction evaluation still required',
+    result = {'status': 'evidence_matched', 'scope': 'managed evidence and marked route structure checked; current project instruction evaluation still required',
             'source_sha': source['sha'], 'source_published': source['published'],
             'source_local_delta': source.get('local_delta', 'not recorded'),
             'receipt': receipt_path.relative_to(project).as_posix(), 'checked_paths': checked,
             'startup_hook': hook, 'project_instruction_snapshots': snapshots,
-            'actor_must_confirm': ['resolved Project Director role and complete startup reads', 'all actual selected role/shared guards included', 'authoritative canonical backend and config/contract binding',
+            'actor_must_confirm': ['resolved Project Director role', 'all actual selected role/shared guards included in this command', 'authoritative canonical backend and config/contract binding',
                                   'effective host-loaded route and complete current project instructions, including conflicts outside the hook'],
             'backend': backend, 'bytes_read': total[0],
             'not_proved': ['instruction consumption or role authority', 'ledger/history integrity',
                            'native host behavior or effective model', 'human acceptance or live execution',
-                           'semantic compatibility of project instructions']}
+                           'semantic compatibility of project instructions'],
+            'update_check': update_discovery(root), 'next': NEXT}
+    if route == 'block':
+        recorded = receipt.get('director_block_sha256')
+        need(recorded is None or (isinstance(recorded, str) and re.fullmatch('[0-9a-f]{64}', recorded)),
+             'invalid recorded Director block baseline')
+        result['director_block'] = ('not_recorded' if recorded is None else
+                                    'unchanged' if recorded == hook.pop('block_sha256') else 'changed')
+        hook.pop('block_sha256', None)
+        result['project_section'] = section
+    else:
+        result['route_note'] = 'earlier START.md route; the standing AGENTS.md block is the current route (UPDATES.md)'
+    return result
 
 
 def main():
@@ -275,7 +362,8 @@ def main():
                        args.hook_source)
         code = 0
     except (ValueError, OSError, TypeError, KeyError, UnicodeError, RecursionError) as error:
-        result = {'status': 'blocked', 'scope': 'bounded local operational evidence only', 'gap': str(error)[:600]}
+        result = {'status': 'blocked', 'scope': 'bounded local operational evidence only', 'gap': str(error)[:600],
+                  'next': NEXT_FAILED}
         code = 1
     output = json.dumps(result, ensure_ascii=False, separators=(',', ':'))
     if len(output.encode()) > 4096:
