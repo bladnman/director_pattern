@@ -35,7 +35,7 @@ VIDEO_PLACEHOLDERS = ['requests/.gitkeep', 'requests/archive/.gitkeep',
 STARTER = REPO / 'pattern/starter'
 # Current route: the standing Director block plus the project-owned section.
 HOOK = (STARTER / 'agents/block.md').read_text() + '\n' + (STARTER / 'agents/project-section.md').read_text()
-ROUTE_FILES = ['WORKER.md', 'OPERATIONS.md', 'startup_check.py', 'first_use.py', 'FIRST_USE.md',
+ROUTE_FILES = ['WORKER.md', 'OPERATIONS.md', 'startup_check.py', 'START.md', 'DIRECTOR.md', 'first_use.py', 'FIRST_USE.md',
                *('cards/' + p.name for p in sorted((PAYLOAD / 'cards').glob('*.md')))]
 # Earlier route, kept by a project that has not moved yet: exact revision 3.2 startup files.
 OLD = Path(__file__).resolve().parent / 'fixtures/starter_3_2'

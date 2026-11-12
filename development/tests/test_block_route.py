@@ -53,7 +53,7 @@ class BlockTextTests(unittest.TestCase):
         self.assertEqual(self.block.count('director-starter:2 -->'), 2)
         size = len(self.block.encode())
         self.assertLessEqual(size, installer.BLOCK_CAP)
-        self.assertEqual(installer.BLOCK_CAP, 7600)
+        self.assertEqual(installer.BLOCK_CAP, 8000)
         self.assertEqual(installer.AGENTS, self.block + '\n' + installer.PROJECT_SECTION)
         # No fenced code inside the block: the checker ignores fenced lines as route evidence.
         self.assertNotIn('```', self.block)
@@ -127,7 +127,7 @@ class BlockTextTests(unittest.TestCase):
     def test_check_and_badge_paragraph_is_for_the_project_director_only(self):
         check = self.section('**🎬 and the check (Project Director only).**', '**Recovery (Directors only).**')
         for phrase in (
-            "Before your first reply, even to a greeting, run the project section's check command, after any first-use step it lists.",
+            "Before your first reply, even to a greeting, read the files the project section lists for the first reply and run its check command, after any first-use step it lists.",
             'If it reports evidence_matched and you confirm its actor_must_confirm items, begin every reply with 🎬 until the next break; otherwise state the specific gap and answer without it.',
             'Asked about a missing badge, rerun the check.',
             '🎬 means only that.',
@@ -137,17 +137,23 @@ class BlockTextTests(unittest.TestCase):
 
     def test_recovery_steps_live_in_the_block_not_on_a_card(self):
         recovery = self.section('**Recovery (Directors only).**', '**Reading (every role).**')
-        # Trigger: every break and every new conversation, so work already out is found without a break.
-        self.assertIn('After every compaction or session resume, and in every new conversation, before your first project action:', recovery)
+        # One timing: part of the repeated startup after a break; in a new conversation before the first
+        # reply that acts on the project, so work already out is found without a break.
+        self.assertIn('**Recovery (Directors only).** Part of startup: after a compaction or session resume, before your next reply; '
+                      'in a new conversation, before your first reply that acts on the project.', recovery)
+        self.assertNotIn('project action', self.text)
         self.assertEqual(re.findall(r'(?<= )(\d)\. (\w+)', recovery)[:4],
                          [('1', 'Find'), ('2', 'Reconcile'), ('3', 'Resume'), ('4', 'Report')])
         for phrase in (
             '1. Find held work: the request IDs, workers and pending ❓ and 🖐️ items your summary or the user names;',
-            "then the store's open requests and the continuation view of each request this task holds, even ones marked done (requests row).",
+            "then the store's open requests and the continuation view of each request this conversation holds, even ones marked done (requests row; read-only).",
             '2. Reconcile each with current evidence: exact source, obligations, actual results, remaining gates.',
             'A finished milestone or "done" record does not finish the ask; correct a false "done" by the store\'s legal route, keeping its history.',
-            '3. Resume ownership: every open outcome is still yours. Continue or rework existing workers by handle; never duplicate running work.',
-            '4. Report in your next reply: "Re-entered: check run; N requests open; N workers out."',
+            # Task-bound: a second conversation does not adopt another conversation's open requests.
+            '3. Resume ownership of the outcomes this conversation holds or the user names; other open requests stay with their owners.',
+            'Continue or rework existing workers by handle; never duplicate running work.',
+            # A child Director runs no check, so only the Project Director reports one.
+            '4. Report in that reply: "Re-entered: N requests held; N others open; N workers out", and the Project Director adds "check run".',
             'With work out, send a 📋 SitRep now and time the next from it.',
         ):
             self.assertEqual(recovery.count(phrase), 1, phrase)
@@ -159,7 +165,7 @@ class BlockTextTests(unittest.TestCase):
         for path in [PAYLOAD / 'cards' / (name + '.md') for name in CARDS] + [PAYLOAD / name for name in MANUALS]:
             self.assertNotIn('recovery.md', path.read_text(), path.name)
         # Recovery is one of the startup steps repeated after a break.
-        self.assertIn("This startup: the Project Director's check; a Director's Recovery steps; a worker's WORKER.md and role file; "
+        self.assertIn("This startup: the Project Director's first-reply reads and check; a Director's Recovery; a worker's WORKER.md and role file; "
                       "a child's overlay or role file; the file your next action needs.", self.text)
 
     def test_reading_rule_keeps_the_reentry_sentence_first_and_defines_a_fresh_read(self):
@@ -171,7 +177,7 @@ class BlockTextTests(unittest.TestCase):
             'A run or read is fresh if your own, still shown and after the latest break (before any, the whole conversation counts); repeated means each step is fresh.',
             "Cards in cards/, WORKER.md and the table's manuals end with a line `END ` plus their path; a complete read reaches that line or, for a file without one, every line to its shown total length.",
             'Before acting under a card, a table manual or a file the project section or your assignment says to read, have a fresh complete read; wait for it before the command it governs.',
-            'Read long files in bounded numbered ranges, each range.',
+            'Read a long file in bounded numbered ranges, every range.',
             'If a cut-off read cannot be recovered, stop that work and say so.',
             'Search hits, diffs, tails, summaries, hashes and quotes are not reads.',
         ):
@@ -182,8 +188,9 @@ class BlockTextTests(unittest.TestCase):
                       "request IDs, each live worker's emoji Name, handle and task, pending ❓ and 🖐️ items and the last "
                       'SitRep time; and begin next steps with "Earlier reads are gone: repeat startup before the next reply:" '
                       'and your startup steps, with the exact check command.', self.text)
-        self.assertIn("**Roster (Directors only).** Staff from the project section's roster, or the file it names; "
-                      "a role's own instructions are for its executor.", self.text)
+        # Recorded behaviour kept: the staffer reads the role's selection and authority part before dispatch.
+        self.assertIn("**Roster (Directors only).** Choose from the project section's roster, or the file it names. Before dispatch "
+                      "read the selection and authority part of any role file the row or section names; the rest is for its executor.", self.text)
 
     def test_table_names_only_shipped_files_and_every_card_has_a_trigger(self):
         rows = [line.split('|')[1:3] for line in self.block.splitlines() if line.startswith('| ') and 'Before you' not in line]
@@ -205,12 +212,12 @@ class BlockTextTests(unittest.TestCase):
                        'capture, split or steer a request, or run a store command',
                        'supervise delegated work, evaluate a return, or end a turn with work out',
                        'look up knowledge for a task, record a correction, or close an outcome',
-                       'as Project Director, begin project work when the check reports update discovery due; or discuss or plan a Director Pattern update, here or elsewhere',
+                       'as Project Director, begin project work when the check reports update discovery due or unknown; or discuss or plan a Director Pattern update, here or elsewhere',
                        'capture the first exact source, or change what Git tracks',
                        'handle a failed check, or change the check command or how this project installs or loads instructions'):
             self.assertIn(phrase, triggers)
         self.assertIn('before planning, all of UPDATES.md', self.text)
-        self.assertIn('before the command, API.md, TOOLING.md, RECORDS.md', self.text)
+        self.assertIn('cards/requests.md; before any store write, API.md, TOOLING.md, RECORDS.md', self.text)
 
     def test_project_section_is_project_owned_and_within_its_cap(self):
         section = installer.PROJECT_SECTION
@@ -220,9 +227,10 @@ class BlockTextTests(unittest.TestCase):
         text = flat(section)
         for phrase in ('Project-owned: written once at install; updates never replace it.',
                        '- Check command: `python3 .director/startup_check.py`',
-                       '- Read before the work they govern: nothing yet.',
-                       '- Request store: the bundled store, with the manuals named above.',
-                       '- Role files: `.director/roles/<role>.md`; name the file in the brief.',
+                       '- Read before your first reply: nothing yet.',
+                       '- Read before named work (write each as: file, before which work): nothing yet.',
+                       '- Request store: the bundled store, with the card and manuals named above.',
+                       '- Role files: `.director/roles/<role>.md`; read its selection and authority part before dispatch, and name the file in the brief.',
                        '| `general-worker` |', '| `sub-director` (scoped child Director) |',
                        'the Project Director keeps acceptance'):
             self.assertIn(phrase, text)
@@ -313,9 +321,22 @@ class CardAndManualTests(unittest.TestCase):
                        'Do not start or resume the bypassing or paused work until the user chooses',
                        'A linked request is a separate request record',
                        'the Project Director keeps acceptance of the whole',
-                       '`python3 .director/requests.py continuation REQ-...`',
-                       'completely before any store command; this card does not replace them'):
+                       '`python3 .director/requests.py continuation REQ-... REQ-...`',
+                       '`python3 .director/requests.py status` lists every request not done or canceled',
+                       'Read-only views (they change no record and repair nothing)',
+                       'completely before any store write or repair; this card does not replace them',
+                       'With the bundled store, the three read-only views below need this card alone.',
+                       'An error naming an interrupted mutation needs `recover`, which is a write: read the manuals first.'):
             self.assertIn(phrase, requests)
+        for gap in ('request_missing', 'checkpoint_missing', 'checkpoint_invalid', 'checkpoint_unsupported_version',
+                    'source_frontier_changed', 'events_after_checkpoint', 'terminal_with_unfinished_obligations'):
+            # Every gap the helper can return is explained on the card, so its output reads without the manuals.
+            self.assertIn('"' + gap + '"', (PAYLOAD / 'requests.py').read_text())
+            self.assertIn('`' + gap + '`', requests)
+        self.assertIn("read its selection and authority part (applicability, owner, authority and route limits, shared guards), so a limit stated only there reaches your choice", staffing)
+        self.assertIn("its one-time move to the AGENTS.md block is not", staffing)
+        self.assertIn("An unqualified mandatory reference in a role or task file remains mandatory.", flat((PAYLOAD / 'WORKER.md').read_text()))
+        self.assertIn("role's selection/authority guards", flat((PAYLOAD / 'WORKER.md').read_text()))
         # The badge card describes the block route: no startup-read chain, no old file pointers.
         for stale in ('complete current startup reads', 'START/DIRECTOR', 'installation-evidence', 'under DIRECTOR',
                       'complete selected reads'):
@@ -327,12 +348,20 @@ class CardAndManualTests(unittest.TestCase):
                        'A later badge or identity question reruns the currently possible check',
                        'After every compaction or session resume; when an opt-out ends; and when startup bytes change',
                        'Never rewrite a receipt to silence drift',
+                       'Read every "before your first reply" file completely before the check and the badge',
+                       '`Director block differs from its recorded baseline`: the managed block was edited.',
+                       'The project section has no check command or is over 3,000 bytes',
+                       'The receipt is absent in a generated project that still awaits setup: that is first use, not a broken install',
+                       '`director_block: not_recorded` appears in `actor_must_confirm`',
                        'Workers and scoped child Directors run no check, perform no root first-use setup and never show or inherit 🎬.'):
             self.assertIn(phrase, badge)
         for phrase in ('Before planning any Director Pattern update, in this or another project, read [UPDATES](../UPDATES.md) completely',
                        "another installation is updated only by its own project's Director",
                        "Never patch another installation's files from outside.",
-                       "the startup check's `update_check` value is `due`"):
+                       "the startup check's `update_check` value is `due`",
+                       "on `unknown`, run the command once in the conversation",
+                       "You are this project's Project Director. The user asks: update director pattern.",
+                       'The one-time move to the AGENTS.md block is never started unattended: ask the owner first.'):
             self.assertIn(phrase, updates)
 
     def test_update_card_repeats_the_exact_notify_sentence(self):
@@ -385,7 +414,7 @@ class InstallAndUpdateTests(unittest.TestCase):
         plan = installer.operation('plan', self.project)
         self.assertEqual(plan['standing_bytes']['director_block'], len(installer.BLOCK.encode()))
         self.assertEqual(plan['standing_bytes']['project_section'], len(installer.PROJECT_SECTION.encode()))
-        self.assertEqual(plan['standing_bytes']['caps'], {'director_block': 7600, 'project_section': 3000, 'card': 6000, 'worker': 4500})
+        self.assertEqual(plan['standing_bytes']['caps'], {'director_block': 8000, 'project_section': 3000, 'card': 6500, 'worker': 4500})
         self.assertEqual(sorted(plan['card_bytes']), sorted(name + '.md' for name in CARDS))
         self.assertEqual(plan['startup_bytes_director'], len(installer.AGENTS.encode()))
         installer.operation('install', self.project)
@@ -416,7 +445,7 @@ class InstallAndUpdateTests(unittest.TestCase):
         installer.operation('install', self.project)
         agents = self.project / 'AGENTS.md'
         agents.write_text('# Our project\n\n' + agents.read_text().replace(
-            '- Read before the work they govern: nothing yet.', '- Read before the work they govern: `docs/RELEASE.md` before a release.')
+            '- Read before your first reply: nothing yet.', '- Read before your first reply: `docs/RULES.md`.')
             + '\nOur own rules.\n')
         before = self.tree()
         self.assertFalse(installer.operation('install', self.project)['changed'])
@@ -568,7 +597,16 @@ class InstallAndUpdateTests(unittest.TestCase):
                        'never trim project text silently',
                        '`director_block_sha256`, the SHA-256 of the block from its opening marker line through its closing marker line and newline',
                        'It must report `evidence_matched`, `startup_hook.target` ending in `WORKER.md` and `director_block: unchanged`.',
-                       'finish the move or restore the backup; do not leave it mixed'):
+                       'finish the move or restore the backup; do not leave it mixed',
+                       'and OPERATIONS.md loses its staffing and privacy sections to the cards, only after any local addition to those files or sections is moved',
+                       'name that index in the section instead of copying it; never keep two role tables',
+                       "Each row's Limits (or the index entry) must carry every assignment-affecting guard",
+                       'record each of those trials in it as pending',
+                       'This move is strong-tier work at high effort, with the required independent review; it is not a lighter-tier case.',
+                       'Automatic update mode never starts it unattended',
+                       "and not the one-time move to the AGENTS.md block, which needs the owner's explicit go-ahead",
+                       'whose receipt is written before its fresh host trials and records them as pending',
+                       'An edited block, an empty or over-cap project section and a changed stub each block the check.'):
             self.assertIn(phrase, updates)
         self.assertTrue((STARTER / 'agents/block.md').is_file() and (STARTER / 'agents/project-section.md').is_file())
 

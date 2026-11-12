@@ -186,8 +186,8 @@ class PackageBoundaryTests(unittest.TestCase):
         block = " ".join(raw.split())
         self.assertEqual(block.count(reentry), 1)
         # Revision 3.3: the sentence opens the every-role Reading rule, and "this startup" is listed right after it.
-        self.assertIn("**Reading (every role).** " + reentry + " This startup: the Project Director's check; "
-                      "a Director's Recovery steps; a worker's WORKER.md and role file; a child's overlay or role file; "
+        self.assertIn("**Reading (every role).** " + reentry + " This startup: the Project Director's first-reply reads and check; "
+                      "a Director's Recovery; a worker's WORKER.md and role file; a child's overlay or role file; "
                       "the file your next action needs.", block)
         self.assertIn("repeated means each step is fresh", block)
         self.assertIn("Search hits, diffs, tails, summaries, hashes and quotes are not reads.", block)
@@ -229,7 +229,10 @@ class PackageBoundaryTests(unittest.TestCase):
         self.assertIn("| staff or brief work, set tier and effort, or add, rename or retire a role | cards/staffing.md |", block)
         # Staffing card: role choice from the roster, the executor's own reads, and a scope that permits them.
         self.assertIn('Take the roster role whose "use when" fits; a general worker never silently replaces a maintained role', staffing)
-        self.assertIn("Do not read the role's own instructions; its executor reads them completely before acting", staffing)
+        # Recorded behaviour (staffer reads the selection/authority package): a route prohibition in a role file reaches selection.
+        self.assertIn("Before dispatch, when the row or the project section names a role file, read its selection and authority part", staffing)
+        self.assertIn("Its executor reads the rest completely before acting; you need not", staffing)
+        self.assertIn("Before dispatch read the selection and authority part of any role file the row or section names", block)
         self.assertIn("the role ID, its role file and the instructions it must read; its scope must permit those reads", staffing)
         self.assertIn("**Applicable knowledge:** the selector tags or query context", staffing)
         self.assertIn("Settle missing or conflicting role limits with the owner before that dispatch", staffing)
@@ -267,7 +270,7 @@ class PackageBoundaryTests(unittest.TestCase):
         self.assertIn("stop affected work if recovery fails", worker)
         self.assertIn("summaries, searches and unprinted results are not instruction reads", worker)
         self.assertIn("have a fresh complete read; wait for it before the command it governs", block)
-        self.assertIn("Read long files in bounded numbered ranges, each range", block)
+        self.assertIn("Read a long file in bounded numbered ranges, every range", block)
         self.assertIn("If a cut-off read cannot be recovered, stop that work and say so", block)
         self.assertIn("every line to its shown total length", block)
         self.assertIn("Default to Project Director unless explicitly assigned a worker or scoped child Director role", block)
