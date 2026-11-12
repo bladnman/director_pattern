@@ -316,8 +316,18 @@ def validate_intent(intent, instance, instance_sha, provenance_sha, backend):
          'owned first-use intent differs; preserve for owner recovery')
 
 
+def block_baseline(project, descriptor, checker):
+    """SHA-256 of the managed Director block on the block route; None on the earlier START.md route."""
+    text = read(selected(project, descriptor['hook_source']), [0]).decode('utf-8')
+    route, hook = checker.startup_route(text, '.director', descriptor['hook_source'])
+    return hook['block_sha256'] if route == 'block' else None
+
+
 def validate_receipt(receipt, provenance, provenance_sha, descriptor, instance):
-    need(set(receipt) == {'schema_version', 'kind', 'generation_id', 'template', 'provenance_sha256',
+    need('director_block_sha256' not in receipt or
+         (isinstance(receipt['director_block_sha256'], str) and HEX.fullmatch(receipt['director_block_sha256'])),
+         'existing receipt differs from this exact generated setup; preserve for owner review')
+    need(set(receipt) - {'director_block_sha256'} == {'schema_version', 'kind', 'generation_id', 'template', 'provenance_sha256',
                          'project_id', 'source', 'managed_files', 'backend', 'privacy', 'technical_check',
                          'first_use_intent', 'created_at'} and
          type(receipt['schema_version']) is int and receipt['schema_version'] == 1 and
@@ -449,6 +459,9 @@ def ensure(root, instance_name=INSTANCE, provenance_name='.director/PROVENANCE.j
                                            'native_startup': 'unrun', 'human_acceptance': 'unrun', 'role_authority': 'actor evaluation required',
                                            'payload_publication': 'unpublished candidate against declared base' if provenance['source'].get('local_delta') or not provenance['source']['published'] else 'caller-declared published transport; not authenticated'},
                        'first_use_intent': JOURNAL, 'created_at': intent['created_at']}
+            baseline = block_baseline(project, descriptor, checker)
+            if baseline:
+                receipt['director_block_sha256'] = baseline
             receipt_path.parent.mkdir(exist_ok=True)
             safe(receipt_path.parent)
             create_json(receipt_path, receipt)

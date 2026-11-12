@@ -190,7 +190,7 @@ class PackageBoundaryTests(unittest.TestCase):
                       "a Director's Recovery; a worker's WORKER.md and role file; a child's overlay or role file; "
                       "the file your next action needs.", block)
         self.assertIn("repeated means each step is fresh", block)
-        self.assertIn("Search hits, diffs, tails, summaries, hashes and quotes are not reads.", block)
+        self.assertIn("Search hits, diffs, tails, summaries, hashes, quotes, file existence and unprinted results are not reads.", block)
         # This checkout's own branch keeps the earlier bridge placement until its own update.
         authoring = (PATTERN.parent / "AGENTS.md").read_text(encoding="utf-8")
         present = " ".join(authoring.split("When `.director/START.md` exists in this checkout:", 1)[1].split("\nOtherwise:\n", 1)[0].split())
@@ -226,7 +226,7 @@ class PackageBoundaryTests(unittest.TestCase):
         self.assertIn("Directors, delegate project investigations, reviews and changes to bounded subagents before doing the detailed work", block)
         self.assertIn("Answer discussion, simple lookups and acceptance judgments yourself", block)
         self.assertIn("If subagents are unavailable or prohibited, report the gap and stop that work instead of doing it", block)
-        self.assertIn("| staff or brief work, set tier and effort, or add, rename or retire a role | cards/staffing.md |", block)
+        self.assertIn("| staff or brief work, set tier and effort, or change a role | cards/staffing.md |", block)
         # Staffing card: role choice from the roster, the executor's own reads, and a scope that permits them.
         self.assertIn('Take the roster role whose "use when" fits; a general worker never silently replaces a maintained role', staffing)
         # Recorded behaviour (staffer reads the selection/authority package): a route prohibition in a role file reaches selection.
@@ -271,6 +271,7 @@ class PackageBoundaryTests(unittest.TestCase):
         self.assertIn("summaries, searches and unprinted results are not instruction reads", worker)
         self.assertIn("have a fresh complete read; wait for it before the command it governs", block)
         self.assertIn("Read a long file in bounded numbered ranges, every range", block)
+        self.assertIn("keep combined output bounded", block)
         self.assertIn("If a cut-off read cannot be recovered, stop that work and say so", block)
         self.assertIn("every line to its shown total length", block)
         self.assertIn("Default to Project Director unless explicitly assigned a worker or scoped child Director role", block)
@@ -346,7 +347,7 @@ class PackageBoundaryTests(unittest.TestCase):
         self.assertNotIn("report promptly if overdue or timing is unknown", director)
         block = " ".join((PATTERN / "starter/agents/block.md").read_text(encoding="utf-8").split())
         self.assertIn("While delegated work is out, send a 📋 SitRep on every stream about every five minutes from dispatch; check each turn, including worker returns and notifications, whether one is due.", block)
-        self.assertIn("With work out, send a 📋 SitRep now and time the next from it.", block)
+        self.assertIn("With work out, if a 📋 SitRep is overdue or its last time unknown, send one now and time the next from it.", block)
 
     def test_starter_manifest_records_revision_and_format_number(self):
         # Static manifest check only; the installer's receipt is checked in test_flat_starter.

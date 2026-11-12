@@ -37,11 +37,11 @@ current-conversation facts; relevant changed startup bytes require recheck, and 
 facts from before a compaction or session resume.
 
 Its output adds `next` (what to do and read next), `update_check` (`due`, `not_due`,
-`off` or `unknown`, from the local cache only), `director_block` (`unchanged`,
-or `not_recorded` against the receipt's `director_block_sha256`) and
+`off` or `unknown`, from the local cache only), `director_block` (`unchanged`
+against the receipt's `director_block_sha256`) and
 `project_section` (its bytes and the 3,000-byte cap). A block that differs from its
-recorded baseline blocks the check, because the block is managed text; with no
-recorded baseline the check passes and adds the block to `actor_must_confirm`.
+recorded baseline blocks the check, because the block is managed text, and so does a
+receipt with no recorded baseline: the installer, first use and the UPDATES move each record it.
 
 A mature project supplies its exact reviewed command in the AGENTS.md project
 section, for example:

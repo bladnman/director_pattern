@@ -13,7 +13,6 @@ For the Project Director only. Workers and scoped child Directors run no check, 
 - **Guards.** The project section has two lists. Read every "before your first reply" file completely before the check and the badge; those are the instructions you confirm as complete and free of conflict. Read each "before named work" file completely before that work. The check command names every listed guard; an omitted guard is not checked merely because the command matched other bytes.
 - **Backend.** Resolve this project's authoritative request store: its config, or the explicit contract the project section names. An unrelated receipt-listed file is not a backend declaration. Missing or ambiguous authority or backend prevents the badge.
 - **Loaded route and conflicts.** Evaluate the instructions the host actually loaded, including text outside the block. An intact block cannot excuse a conflicting role default, disabled loading or checks, a competing tracker or unauthorized authority elsewhere. Resolve an actual conflict or ambiguous authority before the badge. Obey legitimate project guidance that extends the Pattern; a `changed` snapshot of AGENTS.md or a guard is local composition, not a broken installation.
-- **Block.** `director_block: not_recorded` appears in `actor_must_confirm`: the receipt holds no baseline, so compare the block with `pattern/starter/agents/block.md` at the installed revision, or say that you could not.
 
 ## When the check fails or cannot run
 
@@ -21,7 +20,7 @@ Give the check's actual `gap` and an ordinary answer in the same turn, without �
 
 - The command was refused or could not run (permission, missing runtime): say exactly that, give the user the 🖐️ action that would allow it, and rerun when possible.
 - `project section missing`, or the block routes to a redirect stub: this project's update is unfinished; follow [UPDATES.md](../UPDATES.md), "Move to the AGENTS.md block".
-- `Director block differs from its recorded baseline`: the managed block was edited. Restore it from the installed revision; project wording belongs in the project section. Only a reviewed update records a new block.
+- `Director block differs from its recorded baseline`: the managed block was edited. Restore it from the installed revision; project wording belongs in the project section. Only a reviewed update records a new block. `Director block has no recorded baseline`: the receipt lacks `director_block_sha256`; a reviewed update records it after comparing the block with the installed revision.
 - The project section has no check command or is over 3,000 bytes: restore its `Check command` line, or move the roster to `.director/ROSTER.md` and name it there.
 - The receipt is absent in a generated project that still awaits setup: that is first use, not a broken install; read [FIRST_USE.md](../FIRST_USE.md) and follow it before the check.
 - `startup baseline mismatch`: a managed file changed. Restore it or run a reviewed update. Never rewrite a receipt to silence drift, and never pick a receipt by recency.

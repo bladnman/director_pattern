@@ -174,12 +174,14 @@ class StartupCheckTests(unittest.TestCase):
         # Text outside the block is project composition and still passes; conflicts there are the actor's to judge.
         agents.write_text(original+'\nOur own rule.\n')
         self.assertEqual(self.run_check()['director_block'],'unchanged')
-        # No recorded baseline (an older or generated receipt): passes, and the actor must confirm the block.
+        # No recorded baseline: any block that kept its markers would pass, so the check blocks,
+        # for the intact block as well as an edited one.
         receipt=self.receipt();receipt.pop('director_block_sha256');self.save_receipt(receipt)
-        agents.write_text(one_word)
-        r=self.run_check()
-        self.assertEqual(r['director_block'],'not_recorded')
-        self.assertTrue(any('no recorded baseline' in item for item in r['actor_must_confirm']))
+        for text in (original,one_word):
+            agents.write_text(text)
+            before=self.tree();r=self.run_check(ok=False)
+            self.assertIn('Director block has no recorded baseline',r['gap'])
+            self.assertEqual(before,self.tree())
         receipt['director_block_sha256']='invalid';self.save_receipt(receipt)
         self.assertIn('Director block baseline',self.run_check(ok=False)['gap'])
 

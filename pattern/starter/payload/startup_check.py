@@ -208,7 +208,7 @@ def generated_receipt(receipt, project, config_name, backend_contract):
     if not (receipt.get('kind') == 'generated-instance-technical-setup' or
             'first_use_intent' in receipt or ('generation_id' in receipt and 'provenance_sha256' in receipt)):
         return False
-    need(set(receipt) == {'schema_version', 'kind', 'generation_id', 'template', 'provenance_sha256',
+    need(set(receipt) - {'director_block_sha256'} == {'schema_version', 'kind', 'generation_id', 'template', 'provenance_sha256',
                          'project_id', 'source', 'managed_files', 'backend', 'privacy', 'technical_check',
                          'first_use_intent', 'created_at'} and
          type(receipt.get('schema_version')) is int and receipt['schema_version'] == 1 and
@@ -347,9 +347,10 @@ def check(root, receipt_name=None, config_name=None, backend_contract=None, guar
         need(recorded is None or recorded == actual,
              'Director block differs from its recorded baseline: the block is managed text; restore it from the '
              'installed revision (project wording belongs in the project section) or finish a reviewed update')
-        result['director_block'] = 'not_recorded' if recorded is None else 'unchanged'
-        if recorded is None:
-            result['actor_must_confirm'].append('Director block has no recorded baseline: compare it with the installed revision')
+        need(recorded is not None,
+             'Director block has no recorded baseline: the receipt must record director_block_sha256 '
+             '(written by the installer, first use and the UPDATES.md move); never add it to pass a changed block')
+        result['director_block'] = 'unchanged'
         result['project_section'] = section
     else:
         result['route_note'] = 'earlier START.md route; the standing AGENTS.md block is the current route (UPDATES.md)'

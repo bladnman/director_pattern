@@ -188,12 +188,17 @@ class FirstUseTests(unittest.TestCase):
         result = self.check(project)
         self.assertEqual(result['startup_hook']['target'], '.director/WORKER.md')
         self.assertIn('project_section', result)
+        # First use records the managed block's baseline, which the ordinary check requires on this route.
+        self.assertEqual(self.read(project, RECEIPT)['director_block_sha256'],
+                         sha((STARTER / 'agents/block.md').read_bytes()))
+        self.assertEqual(result['director_block'], 'unchanged')
         # A project still on the earlier START.md route keeps working with its own full START.md.
         earlier = self.seed(earlier_route=True)
         self.assertEqual(self.ensure(earlier)['status'], 'prepared')
         result = self.check(earlier)
         self.assertEqual(result['startup_hook']['target'], '.director/START.md')
         self.assertIn('route_note', result)
+        self.assertNotIn('director_block_sha256', self.read(earlier, RECEIPT))
         # The block route without its project-owned section, or missing a card baseline, cannot initialize.
         for name, change in (('no project section', lambda p: (p / 'AGENTS.md').write_text((STARTER / 'agents/block.md').read_text())),
                              ('card outside transport', lambda p: None)):
