@@ -1,4 +1,5 @@
 """Check package isolation and declared payload links, not agent installation behavior."""
+import hashlib
 import json
 import ast
 import os
@@ -105,23 +106,44 @@ class PackageBoundaryTests(unittest.TestCase):
 
     def test_source_hook_reaches_flat_package_or_preserves_absent_private_installation(self):
         # Filesystem/reference wiring for both public-clone states, not model behavior.
+        # Revision 3.3 (this checkout's own move, UPDATES.md "Move to the AGENTS.md block"): the
+        # managed block sits unedited in root AGENTS.md with the project section below it; a
+        # project-owned paragraph above it keeps the block inert in a clone without the
+        # private installation.
         authoring = (PATTERN.parent / "AGENTS.md").read_text(encoding="utf-8")
-        marker = r"<!-- director-starter:2 -->(.*?)<!-- /director-starter:2 -->"
-        hook = re.search(marker, authoring, re.S)
-        self.assertIsNotNone(hook)
-        branches = re.fullmatch(r"\s*When `([^`]+)` exists in this checkout:\n(.*?)\nOtherwise:\n(.*?)\s*", hook.group(1), re.S)
-        self.assertIsNotNone(branches)
-        locator, present, absent = branches.groups()
-        # Keep an actual starter block in the guarded branch. This checkout's own adoption is a local
-        # installation: it carries the revision 3.2 bridge until its own reviewed update moves it to the
-        # current block (starter UPDATES.md, "Move to the AGENTS.md block"), so either wording is valid here.
-        current = re.search(marker, (PATTERN / "starter/agents/block.md").read_text(encoding="utf-8"), re.S)
-        earlier = re.search(marker, (Path(__file__).resolve().parent / "fixtures/starter_3_2/AGENTS.md").read_text(encoding="utf-8"), re.S)
-        self.assertIsNotNone(current)
-        self.assertIsNotNone(earlier)
-        normalize = lambda value: " ".join(value.split())
-        self.assertIn(normalize(present), {normalize(current.group(1)), normalize(earlier.group(1))})
-        moved = normalize(present) == normalize(current.group(1))
+        block = (PATTERN / "starter/agents/block.md").read_text(encoding="utf-8")
+        self.assertEqual(authoring.count(block), 1, "root AGENTS.md must hold the managed block byte for byte")
+        self.assertEqual(authoring.count("<!-- director-starter:2 -->"), 1)
+        before, after = authoring.split(block, 1)
+        self.assertIn("# Maintaining this repository", before)
+        section = re.fullmatch(r"\n(<!-- director-project -->\n.*?<!-- /director-project -->\n)(.*)", after, re.S)
+        self.assertIsNotNone(section, "the project section must sit directly below the block")
+        section, rest = section.groups()
+        self.assertLessEqual(len(section.encode()), 3000)
+        self.assertIn("## Tinka", rest)
+        command = re.search(r"^- Check command: `([^`]+)`$", section, re.M)
+        self.assertIsNotNone(command)
+        argv = command.group(1).split()
+        self.assertEqual(argv[:2], ["python3", ".director/startup_check.py"])
+        options = list(zip(argv[2::2], argv[3::2]))
+        guards = [value for key, value in options if key == "--guard"]
+        self.assertEqual(guards, [".director/PROJECT.md", ".director/CAPABILITY_POLICY.md"])
+        first_reply = re.search(r"^- Read before your first reply: (.*)$", section, re.M).group(1)
+        self.assertLess(first_reply.index("`.director/PROJECT.md`"), first_reply.index("`.director/CAPABILITY_POLICY.md`"))
+        self.assertIn("`.director/ROLE_INDEX.md`", re.search(r"^- Roster: (.*)$", section, re.M).group(1))
+        # The tracked file is public: no private project or request identity.
+        self.assertIsNone(re.search(r"\b(?:PROJ|REQ|UR)-[0-9a-f]{32}\b", authoring))
+        gate = re.search(r"apply only in a checkout that holds\s+this project's adopted local installation.*?"
+                         r"when `([^`]+)` exists\. (Otherwise .*?)\n\n", before, re.S)
+        self.assertIsNotNone(gate)
+        locator, absent = gate.groups()
+        # The locator is the file the block itself routes workers to, so it exists exactly when the block can run.
+        self.assertEqual(locator, ".director/WORKER.md")
+        self.assertEqual(re.findall(r"Read\s+`([^`]+)`", block), [locator])
+        absent = " ".join(absent.split())
+        self.assertIn("repository maintainer rules above", absent)
+        self.assertIn("assigns no Director role", absent)
+        self.assertNotIn("Default to Project Director", absent)
         manifest = json.loads((PATTERN / "starter/manifest.json").read_text())
         for adopted in (False, True):
             with self.subTest(adopted=adopted), tempfile.TemporaryDirectory() as temporary:
@@ -132,25 +154,40 @@ class PackageBoundaryTests(unittest.TestCase):
                         target = checkout / ".director" / name
                         target.parent.mkdir(parents=True, exist_ok=True)
                         shutil.copy2(PATTERN / "starter/payload" / name, target)
-                selected = present if (checkout / locator).is_file() else absent
-                reads = re.findall(r"Read\s+`([^`]+)`", selected)
+                    for guard in guards:
+                        (checkout / guard).write_text("Project guard fixture.\n")
+                    values = dict(options)
+                    config = checkout / values["--config"]
+                    config.write_text(json.dumps({"schema_version": 1, "record_mode": "tracked", "request_store": {
+                        "schema_version": 2, "format": "director-request-bundles", "project_id": "PROJ-" + "0" * 32}}))
+                    sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+                    managed = {".director/" + name: sha(checkout / ".director" / name) for name in manifest["payload"]}
+                    receipt = checkout / values["--receipt"]
+                    receipt.parent.mkdir(parents=True, exist_ok=True)
+                    receipt.write_text(json.dumps({"source": {"url": "https://github.com/bladnman/director_pattern",
+                                                              "sha": "0" * 40, "published": True},
+                                                   "project_id": "PROJ-" + "0" * 32, "managed_files": managed,
+                                                   "director_block_sha256": hashlib.sha256(block.encode()).hexdigest()}))
+                present = (checkout / locator).is_file()
+                self.assertEqual(present, adopted)
+                # The section's exact command: it passes on the block route with the installation
+                # and is refused without one, where the paragraph above the block sets it aside.
+                run = subprocess.run([sys.executable, *argv[1:]], cwd=checkout, capture_output=True, text=True)
                 if adopted:
-                    # The earlier bridge names one file, its locator; the block names WORKER.md for workers.
-                    self.assertEqual(reads, [".director/WORKER.md"] if moved else [locator])
-                    self.assertTrue(all((checkout / path).is_file() for path in reads))
-                    # Reach real selected foundations without a hidden v1 engine/index.
-                    for name in ("START.md", "DIRECTOR.md", "WORKER.md"):
+                    result = json.loads(run.stdout)
+                    self.assertEqual(run.returncode, 0, result)
+                    self.assertEqual(result["status"], "evidence_matched")
+                    self.assertEqual(result["startup_hook"]["target"], locator)
+                    self.assertEqual(result["director_block"], "unchanged")
+                    # Reach real selected foundations and cards without a hidden v1 engine/index.
+                    for name in ("START.md", "DIRECTOR.md", "WORKER.md", *(n for n in manifest["payload"] if n.startswith("cards/"))):
                         document = checkout / ".director" / name
                         for link in markdown_links(document):
                             self.assertTrue((document.parent / link).exists(), link)
                     self.assertFalse((checkout / ".director/engine").exists())
                 else:
-                    self.assertEqual(reads, [])
+                    self.assertNotEqual(run.returncode, 0)
                     self.assertFalse((checkout / ".director").exists())
-                    self.assertIn("repository maintainer rules above", selected)
-                    self.assertIn("assigns no Director role", selected)
-                    self.assertNotIn("Default to Project Director", selected)
-                    self.assertIn("# Maintaining this repository", authoring.split("<!-- director-starter:2 -->", 1)[0])
 
     def test_loaded_hook_explicitly_requests_director_delegation_with_host_precedence(self):
         # Guards the host-loaded entrypoint itself; it cannot prove host permission.
@@ -191,12 +228,11 @@ class PackageBoundaryTests(unittest.TestCase):
                       "the file your next action needs.", block)
         self.assertIn("repeated means each step is fresh", block)
         self.assertIn("Search hits, diffs, tails, summaries, hashes, quotes, file existence and unprinted results are not reads.", block)
-        # This checkout's own branch keeps the earlier bridge placement until its own update.
+        # This checkout's own root AGENTS.md carries the managed block unedited (its 3.3 move), so the
+        # re-entry sentence reaches its loaded text exactly once, in the block's Reading rule.
         authoring = (PATTERN.parent / "AGENTS.md").read_text(encoding="utf-8")
-        present = " ".join(authoring.split("When `.director/START.md` exists in this checkout:", 1)[1].split("\nOtherwise:\n", 1)[0].split())
-        self.assertEqual(present.count(reentry), 1)
-        self.assertIn("that Project Director check. Preserve project/host authority. " + reentry +
-                      " Directors, delegate project investigations", present)
+        self.assertEqual(authoring.count(raw), 1)
+        self.assertEqual(" ".join(authoring.split()).count(reentry), 1)
         # The marker is the retained interface; wording changes keep it.
         self.assertTrue(raw.startswith("<!-- director-starter:2 -->\n"))
         self.assertTrue(raw.endswith("<!-- /director-starter:2 -->\n"))
