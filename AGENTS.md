@@ -112,7 +112,7 @@ checkout alone assigns no Director role.
 Project-owned: written once at install; updates never replace it. Keep it under 3,000 bytes; if the roster outgrows it, move the table to `.director/ROSTER.md` and name that file here.
 
 - Check command: `python3 .director/startup_check.py --root .director --receipt .director/receipts/self-3.3-4d1bdbb-20261113.technical.json --config .director/config.json --guard .director/PROJECT.md --guard .director/CAPABILITY_POLICY.md`
-- Read before your first reply: `.director/PROJECT.md`, then `.director/CAPABILITY_POLICY.md` (startup authority for every role, with "Maintaining this repository" above).
+- Read before your first reply: `.director/PROJECT.md`, then `.director/CAPABILITY_POLICY.md`. Every role, workers included, reads both before its first action; they are startup authority with "Maintaining this repository" above.
 - Read before named work (write each as: file, before which work): `.director/STATE.md`, before any request, source or learning store operation, including the requests card's read-only views; `.director/LEARNING.md`, before a learning command; the README, rationale and design files `.director/PROJECT.md` names, before source maintenance; `site/README.md`, before site work; `TINKA.md`, before Tinka board work.
 - Request store: the existing native store, schema 2 `director-request-bundles`, written only through `.director/tools/requests.py`; `.director/requests.py` adds the `status`, `current` and `continuation` views over it. Manuals: `.director/STATE.md`, then API.md, TOOLING.md and RECORDS.md. No init, migration or second store.
 - Learning commands: `python3 .director/adapters/canonical_learning.py`, in place of the knowledge card's `.director/canonical_learning.py`.

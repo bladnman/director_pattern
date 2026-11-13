@@ -130,6 +130,7 @@ class PackageBoundaryTests(unittest.TestCase):
         self.assertEqual(guards, [".director/PROJECT.md", ".director/CAPABILITY_POLICY.md"])
         first_reply = re.search(r"^- Read before your first reply: (.*)$", section, re.M).group(1)
         self.assertLess(first_reply.index("`.director/PROJECT.md`"), first_reply.index("`.director/CAPABILITY_POLICY.md`"))
+        self.assertIn("Every role, workers included, reads both before its first action", first_reply)
         self.assertIn("`.director/ROLE_INDEX.md`", re.search(r"^- Roster: (.*)$", section, re.M).group(1))
         # The tracked file is public: no private project or request identity.
         self.assertIsNone(re.search(r"\b(?:PROJ|REQ|UR)-[0-9a-f]{32}\b", authoring))
