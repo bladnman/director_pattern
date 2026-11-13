@@ -1931,3 +1931,143 @@ passed **230 tests**. This checkout's own read-only startup check still reported
 establish wording, placement and checker compatibility only. The live
 post-compaction and resume cases above have not run, host import expansion was not
 observed, and no installed project has taken 3.2.
+
+## Standing block and cards (starter 3.3) — November 11, 2026
+
+These checks cover the [R10 decision](RATIONALE.md#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes)
+to move the Director's standing rules and Recovery into the AGENTS.md block, with
+detail on cards, and the [matrix section](BEHAVIOR_PARITY.md#standing-block-and-cards--november-11-2026)
+that dispositions the 3.2 route against it. Starter revision 3.3 exists on a branch.
+It is not merged, not published and not accepted.
+
+### Static checks
+
+From the repository root on the branch, `python3 -m pytest development/tests -q`
+passed **263 tests**. The cases added or moved for this change are in
+`development/tests/test_block_route.py`, `test_startup_check.py`, `test_package.py`,
+`test_first_use.py` and `test_flat_starter.py`. They establish:
+
+- **Text and placement.** The block is one marked region of 7,993 bytes within its
+  8,000-byte cap (the staffing card is 6,303 of its 6,500); the role gate, the ten duties, the check paragraph, the Recovery
+  steps, the read rules, the table, the Summaries rule and the pinned sentences are
+  present once and in order; every section after the gate names its audience; no
+  standing text or card names a model; every file the table names ships in the
+  manifest; every card and manual ends with its END line; START.md and DIRECTOR.md
+  are stubs without rules; the cards carry the obligations moved from START, DIRECTOR
+  and OPERATIONS; no payload text links to the removed OPERATIONS sections.
+- **Installer.** A scratch install writes the block and then the project section,
+  reports their bytes and caps, and its own check reports `evidence_matched`. An
+  over-cap block or card refuses before any write. A repeat install keeps an edited
+  project section and the project's own AGENTS.md text and treats an edited block as
+  drift. A pristine rollback removes the cards folder. The manifest accepts only flat
+  names and one `cards/` folder.
+- **Checker.** The block route passes with a hook target ending in `WORKER.md`,
+  `director_block: unchanged` and the project section within its cap. These malformed
+  cases block without writes: a block whose rules are gutted, negated, or changed by
+  one sentence with the markers intact; a full earlier START.md, junk, or a missing
+  file in a stub's place; a missing, duplicated, unclosed, fenced or reversed project
+  section; a section that is empty, has no check command, or exceeds 3,000 bytes; an
+  invalid or missing recorded block baseline; an old bridge pointing at the stub.
+  The earlier START.md route still passes with its own full files. Generated first
+  use records the block baseline in its receipt. The update-discovery hint reads only
+  the local cache.
+- **The move from 3.2.** A test builds a 3.2 installation from a fixture of the exact
+  3.2 startup files, confirms the 3.2 checker accepts it, adds project text around
+  the bridge, a project role, an update policy and a captured request, performs the
+  file operations of UPDATES' steps 1 to 6, and reaches `evidence_matched` with the
+  project content intact. A move stopped after the payload is replaced and before the
+  block is merged blocks with the named gap.
+
+An independent review ran on November 11. Its nine findings were applied in a rework:
+the block and stubs are enforced by the check; Recovery has one timing; resumption is
+task-bound; the staffer reads the selection and authority part of a named role file;
+the project section lists first-reply reads and named-work reads separately;
+read-only store views need the requests card alone; and the move records its trials
+as pending, needs the owner's go-ahead under automatic mode and is strong-tier work.
+A final commit the same day closed five further items: a missing block baseline
+blocks on the block route; Recovery step 4 sends a SitRep after a break only if one
+is overdue or its last time is unknown; the range-and-total-length, combined-output
+and existence/unprinted read rules are back in the block; the staffing card names the
+assignment role and the exact task/action trigger map; and the gate names the user's
+authority.
+
+**What the static checks do not show:** that a host loads the block; that an agent
+runs the check, performs Recovery, opens a card before its action or reads it to the
+END line; that a summary carries what the Summaries rule asks; or that any installed
+project can make the move. The scripted move measures the block and section caps
+only, not a host's instruction cap, and involves no agent.
+
+### Live observations
+
+**The regression case, November 9 (draft, before 3.3).** On one host, two sessions
+of a draft block with eight cards, each with one manually forced compaction: after
+the compaction both sessions reran the check and showed the badge, opened **zero
+cards**, and performed no recovery; the recovery steps were then on a card. This is
+the failure the November 11 change answers.
+
+**November 11, one host, pre-rework build.** The build tested was the 3.3 block
+before the Recovery-timing and store-view changes. Two sessions, each with one real
+forced compaction, plus one new conversation. As reported to this record (transcripts
+are kept privately and were not re-examined by the author of this entry):
+
+| Observation | Result |
+|---|---|
+| Check after compaction | Rerun in both sessions; the badge was kept. |
+| Recovery after compaction | Performed through the store in both sessions; re-entry was reported in that reply. |
+| Staffing and requests cards | Read fresh before acting, in both sessions. |
+| Delegation | Before and after compaction, in both sessions. |
+| Supervision and knowledge cards after compaction | Skipped in one of two sessions; that reply carried no SitRep. |
+| Recovery of in-flight work | Not observed: work was already finished at each compaction. |
+| Worker tier choice | Confounded by a visible budget figure; shows nothing about tier choice. |
+
+These are two sessions and one conversation on one host. They support that Recovery
+written in the standing block is performed after a compaction where the same steps
+on a card were not opened. They give no rate and do not show the reworked build.
+
+**November 11, in-flight trial, one host, one session, reworked build.** The build
+tested was the reworked block before the final commit's small wording changes. A
+real compaction happened while two delegated workers were still running. No budget
+figure was shown to the model. As reported to this record (the transcript is kept
+privately and was not re-examined by the author of this entry):
+
+| Observation | Result |
+|---|---|
+| Check after compaction | Rerun; the badge was kept on turn-ending replies. |
+| Held work found | The read-only status and continuation views were run on both held requests. |
+| Order of card and views | The Director had read 0 bytes of the store manuals and read the requests card immediately **after** the views, not before. The block routes the views through the card. **Open.** |
+| Re-entry report | Given, with the correct count and both workers named. |
+| Duplicate work | None: no re-dispatch; both original workers completed. |
+| Supervision card | Read fresh before evaluating the returns. |
+| Staffing card | Read fresh before two follow-on dispatches. |
+| Store manuals | Reread before store writes. |
+| SitReps | None in the re-entry reply (deferred to the next due time); sent on schedule later. The build tested still said to send one "now"; the final commit's conditional wording was not the text under test. |
+| Tier and effort | The strong tier at high effort for all four dispatches. |
+| Closing the requests through the store | Not reached: a 15-minute harness limit ended the session with a second round of workers out. |
+
+**Observed once; no rate implied; resume, repeated compaction and other hosts still
+unverified.** The final commit's wording has no live run.
+
+### Not verified
+
+| Scenario | Status |
+|---|---|
+| Recovery of work still running at a compaction | Observed once (above); closing the requests through the store not reached |
+| The read-only store views run after the requests card, as the block routes them | Not observed: the one trial ran them before the card |
+| A correction recorded or an outcome closed through the knowledge card | Not reached in any trial |
+| The final commit's wording (conditional SitRep, restored read rules, missing baseline blocks) | Static tests only; no live run |
+| Session resume | Not run |
+| Repeated compaction in one session | Not run |
+| A new conversation with work out from an earlier one | Not run |
+| Another host | Not run |
+| A host that does not pass AGENTS.md to subagents; a scoped child Director; a worker after its own compaction | Not run |
+| A spawned report-back agent classed as a worker; a peer-project session told its role | Not run |
+| A failed check followed by a read of the badge card | Not run |
+| A generated project's first use on the block route | Not run (helper route is a static test) |
+| A mature project's move from 3.2, with its own guards, store and role index | Not run |
+| This source checkout's own move | Not run; its AGENTS.md and installation remain on the 3.2 route |
+| Five-minute SitRep cadence, knowledge lookup, capture and split, steering, return evaluation on the block route | Not measured |
+
+The pending scenarios of [November 9](#compaction-re-entry--november-9-2026) were
+written for the 3.2 route. Their Director case is partly answered by the
+observations above on a different route; their worker, resume and installed-project
+cases stay pending.

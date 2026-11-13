@@ -110,3 +110,5 @@ Incremental reviews do not connect every past batch into global trends. Targeted
 historical research/optional Architect may be justified by real evidence; it costs
 execution and context. Pending capture, saved proposal, owner acceptance, updated
 routing and demonstrated later use are distinct states, never automatic learning.
+
+END LEARNING.md

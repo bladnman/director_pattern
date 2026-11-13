@@ -120,10 +120,13 @@ acceptance/unfinished commitment. A sent message never proves transfer or livene
 ## Learning and operations
 
 [LEARNING.md](LEARNING.md) specifies bounded typed canonical notes and real review
-initiation/recovery. [OPERATIONS.md](OPERATIONS.md) separates role/display identity,
-installation evidence, staffing/effort/verification and role upkeep.
+initiation/recovery. [OPERATIONS.md](OPERATIONS.md) specifies installation
+evidence and the check's structures; [cards/staffing.md](cards/staffing.md) covers
+role/display identity, staffing/effort/verification and role upkeep.
 [UPDATES.md](UPDATES.md) restores active-session daily discovery, project preferences
 and actual pinned safe updates. These action documents add no startup actors.
 
 After a store-replacement or configuration-fence rejection, reopen the current
 store; never retry through an old loaded instance. This also applies to init.
+
+END API.md

@@ -32,9 +32,16 @@ VIDEO_GUARDS = ['.director/adapters/video.md', '.team/roles/director-startup.md'
 VIDEO_PLACEHOLDERS = ['requests/.gitkeep', 'requests/archive/.gitkeep',
                       'requests/working/.gitkeep', 'requests/user-requests/.gitkeep',
                       'walks/.gitkeep']
-HOOK = ('<!-- director-starter:2 -->\n'
-        'Read .director/START.md before the first ordinary reply.\n'
-        '<!-- /director-starter:2 -->\n')
+STARTER = REPO / 'pattern/starter'
+# Current route: the standing Director block plus the project-owned section.
+HOOK = (STARTER / 'agents/block.md').read_text() + '\n' + (STARTER / 'agents/project-section.md').read_text()
+ROUTE_FILES = ['WORKER.md', 'OPERATIONS.md', 'startup_check.py', 'START.md', 'DIRECTOR.md', 'first_use.py', 'FIRST_USE.md',
+               *('cards/' + p.name for p in sorted((PAYLOAD / 'cards').glob('*.md')))]
+# Earlier route, kept by a project that has not moved yet: exact revision 3.2 startup files.
+OLD = Path(__file__).resolve().parent / 'fixtures/starter_3_2'
+OLD_HOOK = ('<!-- director-starter:2 -->\n'
+            'Read .director/START.md before the first ordinary reply.\n'
+            '<!-- /director-starter:2 -->\n')
 
 
 def sha(data):
@@ -71,18 +78,23 @@ class FirstUseTests(unittest.TestCase):
                 result[name] = ('directory',)
         return result
 
-    def seed(self, profile='code', generated=True, git=False):
+    def seed(self, profile='code', generated=True, git=False, earlier_route=False):
         self.serial += 1
         project = self.base / ('project-' + str(self.serial))
         project.mkdir()
         # Copy the actual implementation and preserved native API, never Store.init.
-        for name in ['START.md', 'DIRECTOR.md', 'OPERATIONS.md', 'startup_check.py',
-                     'first_use.py', 'FIRST_USE.md']:
-            self.write(project, '.director/' + name, (PAYLOAD / name).read_bytes())
+        if earlier_route:
+            for name in ['START.md', 'DIRECTOR.md', 'OPERATIONS.md']:
+                self.write(project, '.director/' + name, (OLD / name).read_bytes())
+            for name in ['startup_check.py', 'first_use.py', 'FIRST_USE.md']:
+                self.write(project, '.director/' + name, (PAYLOAD / name).read_bytes())
+        else:
+            for name in ROUTE_FILES:
+                self.write(project, '.director/' + name, (PAYLOAD / name).read_bytes())
         for name in ['PROJECT.md', 'TEMPLATE.md']:
             self.write(project, '.director/' + name,
                        'Synthetic project-owned authority; preserve its existing tracker.\n')
-        self.write(project, 'AGENTS.md', HOOK)
+        self.write(project, 'AGENTS.md', OLD_HOOK if earlier_route else HOOK)
         self.write(project, '.director/.gitignore',
                    'INSTANCE.json\n.first-use.json\n.first-use.lock\n.requests.lock\n'
                    'receipts/\nPROJECT.local.md\n')
@@ -168,6 +180,39 @@ class FirstUseTests(unittest.TestCase):
         before = self.tree(project)
         self.assertEqual(self.ensure(project, ok=False)['status'], 'blocked')
         self.assertEqual(before, self.tree(project))
+
+    def test_generated_project_route_follows_the_marked_block(self):
+        # File/route structure only: which startup files first use requires, never agent behavior.
+        project = self.seed()
+        self.assertEqual(self.ensure(project)['status'], 'prepared')
+        result = self.check(project)
+        self.assertEqual(result['startup_hook']['target'], '.director/WORKER.md')
+        self.assertIn('project_section', result)
+        # First use records the managed block's baseline, which the ordinary check requires on this route.
+        self.assertEqual(self.read(project, RECEIPT)['director_block_sha256'],
+                         sha((STARTER / 'agents/block.md').read_bytes()))
+        self.assertEqual(result['director_block'], 'unchanged')
+        # A project still on the earlier START.md route keeps working with its own full START.md.
+        earlier = self.seed(earlier_route=True)
+        self.assertEqual(self.ensure(earlier)['status'], 'prepared')
+        result = self.check(earlier)
+        self.assertEqual(result['startup_hook']['target'], '.director/START.md')
+        self.assertIn('route_note', result)
+        self.assertNotIn('director_block_sha256', self.read(earlier, RECEIPT))
+        # The block route without its project-owned section, or missing a card baseline, cannot initialize.
+        for name, change in (('no project section', lambda p: (p / 'AGENTS.md').write_text((STARTER / 'agents/block.md').read_text())),
+                             ('card outside transport', lambda p: None)):
+            with self.subTest(case=name):
+                broken = self.seed()
+                change(broken)
+                if name == 'card outside transport':
+                    self.revise_transport(broken, lambda v: v['managed_files'].pop('.director/cards/requests.md'))
+                else:
+                    self.revise_transport(broken, lambda v: v['managed_files'].update(
+                        {'AGENTS.md': sha((broken / 'AGENTS.md').read_bytes())}))
+                before = self.tree(broken)
+                self.assertEqual(self.ensure(broken, ok=False)['status'], 'blocked')
+                self.assertEqual(before, self.tree(broken))
 
     def test_two_generated_instances_allocate_distinct_real_native_identities(self):
         ids = []
@@ -292,7 +337,7 @@ class FirstUseTests(unittest.TestCase):
             'schema': lambda r: r.update(schema_version=True),
             'source': lambda r: r['source'].update(sha='3' * 40),
             'backend': lambda r: r.update(backend={'kind': 'project-contract', 'path': 'AGENTS.md'}),
-            'managed map': lambda r: r['managed_files'].pop('.director/START.md'),
+            'managed map': lambda r: r['managed_files'].pop('.director/WORKER.md'),
             'native acceptance': lambda r: r['technical_check'].update(native_startup='passed'),
             'human acceptance': lambda r: r['technical_check'].update(human_acceptance='passed'),
             'warning delivery': lambda r: r['privacy'].update(source_warning_delivery='delivered'),
@@ -395,7 +440,7 @@ class FirstUseTests(unittest.TestCase):
                 if mutation == 'source':
                     self.revise_transport(project, lambda p: p['source'].update(url='https://invalid.example/source'))
                 elif mutation == 'partial':
-                    (project / '.director/DIRECTOR.md').unlink()
+                    (project / '.director/cards/staffing.md').unlink()
                 else:
                     marker = self.read(project, INSTANCE)
                     marker[{'digest': 'provenance_sha256', 'profile': 'template_id', 'uuid': 'generation_id'}[mutation]] = '' if mutation == 'profile' else 'invalid'
@@ -405,7 +450,7 @@ class FirstUseTests(unittest.TestCase):
                 self.assertEqual(before, self.tree(project))
 
     def test_drift_and_symlinks_never_bless_or_write_through_user_files(self):
-        for name in ['.director/START.md', '.director/tools/requests.py', '.director/PROJECT.md']:
+        for name in ['.director/WORKER.md', '.director/cards/badge.md', '.director/tools/requests.py', '.director/PROJECT.md']:
             with self.subTest(drift=name):
                 project = self.seed()
                 self.write(project, name, b'Changed, unreviewed bytes\n')

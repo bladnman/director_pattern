@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated November 9, 2026. This repository authors a
+Living design rationale · updated November 11, 2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -31,6 +31,14 @@ The latest [flat-starter decision](#r18--start-flat-and-make-learning-an-explici
 supersedes the earlier normal Request Manager/Recorder route for new starter
 installations. Earlier dated decisions remain below as history; existing
 installations retain their authority until explicitly integrated.
+
+A November 11, 2026 candidate, starter revision 3.3, moves the Director's standing
+rules into a marked block in AGENTS.md and the detail onto cards read before named
+actions. It is implemented on a branch and is not merged, published or accepted; its
+supersessions are listed under
+[R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes).
+Until it is accepted, the 3.2 route described in the earlier dated entries remains
+the source candidate's current route.
 
 ## R1 — One accountable conversation, without a forced organization
 
@@ -690,6 +698,94 @@ copying of authoring material, or unintended publication of private evidence.
 
 ## R9 — Make attention and active supervision visible without decoration
 
+**November 11 — what 🎬 certifies, how the Director's rules are checked, and the end
+of the OPERATIONS-split deferral (starter revision 3.3; implemented on a branch, not
+merged, published or accepted):** These three changes belong to the move of the
+Director's rules into the AGENTS.md block, recorded under
+[R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes).
+
+*What 🎬 certifies.* Before (October 31 below, and R18's "preserved checked-marker
+meaning"): the badge followed a passed check plus the actor's confirmation of
+"complete selected reads", role and guard authority and backend binding. The
+read claim existed because a hook or receipt can imply instructions were loaded when
+they were not. Now: 🎬 means that the Project Director's own run of the project
+section's check command, after the latest compaction or resume, reported
+`evidence_matched`, and that the actor confirmed the items the check lists in
+`actor_must_confirm`. The first of those items changed from "resolved Project Director
+role and complete startup reads" to "resolved Project Director role". The badge no
+longer claims that a chain of startup files was read, because there is no such chain:
+the rules are in the host-loaded block. The project section's "read before your first
+reply" files are still read completely before the check, and the badge card says they
+are the instructions the actor confirms as complete and free of conflict. Cost: a
+badge now says nothing about whether any card or manual was read, and whether the
+host actually loaded the block is, as before, not proved by the check. The detail of
+what to confirm (an intact block cannot excuse a conflicting role default or a
+competing tracker elsewhere; an unrelated receipt-listed file is not a backend
+declaration; an omitted guard is not checked) used to be read before every first
+reply as part of OPERATIONS' installation-evidence section. It is now on
+[cards/badge.md](../pattern/starter/payload/cards/badge.md), which the block's table
+names only for a failed check or a change to the check or the loading route. On a
+passing check the actor confirms from the four short item strings alone. That is a
+weakening, recorded as such in the
+[matrix](BEHAVIOR_PARITY.md#standing-block-and-cards--november-11-2026). Oracle:
+`test_check_and_badge_paragraph_is_for_the_project_director_only`,
+`test_card_audiences_and_moved_obligations` (the badge card holds no startup-read
+claim), `test_fresh_check_is_readonly_and_does_not_claim_consumption_role_or_ledger`.
+The design proposal listed the badge's meaning as the owner's call; that call is not
+separately recorded here.
+
+*How the Director's rules are checked.* Before (November 2 below): the checker
+required known matching hashes for START, DIRECTOR, OPERATIONS and itself, so an
+edited foundation could not sit under a badge, while AGENTS.md was project
+composition whose snapshot was only reported. The update guide preserved
+customizations inside the marked block. Now: on the block route the checker requires
+matching hashes for WORKER.md, OPERATIONS.md, itself, the two redirect stubs and the
+seven cards, and it compares the block's own bytes, marker line to marker line, with
+the receipt's `director_block_sha256`. A block that differs blocks the check; the
+block is managed text, and a project's own wording belongs in the project section or
+the surrounding file. The rest of AGENTS.md stays project composition under the
+November 2 rule. A missing, duplicated, empty or over-cap project section blocks. A
+block that still points at START.md is the earlier route: it passes only while
+START.md, DIRECTOR.md, OPERATIONS.md and the checker match their recorded baselines
+and START.md is the earlier full file; once START.md is the stub, the check blocks
+and names the unfinished update. The first rework let a receipt with no recorded
+block baseline pass, adding only an `actor_must_confirm` item; any block that kept
+the markers and named WORKER.md would then have passed. The final commit of the same
+day closes that: on the block route a receipt without `director_block_sha256` blocks
+the check, and the installer, generated first use and the move each record it. Cost:
+a block-route project whose receipt predates the baseline is blocked until a reviewed
+update records it. This narrows the October 29
+and November 2 regression case "an update preserves customized text inside and
+outside the hook": text inside the block is now moved out, not kept in place.
+Oracle: `test_gutted_or_negated_director_block_blocks_the_check` (the review's
+known-bad cases: rules gutted, negated, or one sentence reversed with the markers
+intact), `test_redirect_stubs_are_hash_checked_on_the_block_route`,
+`test_project_section_is_required_once_beside_the_block`,
+`test_earlier_start_route_passes_only_with_its_own_full_startup_files`,
+`test_old_bridge_pointing_at_the_redirect_stub_is_an_unfinished_update`.
+
+*The November 7 deferral.* The November 7 triage deferred splitting OPERATIONS'
+installation-evidence section into a short per-conversation route and an explicitly
+triggered diagnosis part until the field's first-minutes tool sequence and one
+post-setup conversation were measured, and proposed a static test pinning the
+first-reply trigger prose before any split. The November 9 entry at the top of this
+section said that deferral stayed in force. 3.3 makes the split: the per-conversation
+route is the block's check paragraph, pass and fail handling is on the badge card,
+and structures stay in OPERATIONS. **The deferral is superseded without its
+measurement condition being met**; neither measurement was taken. The static pin now
+exists in a different form (the block's check paragraph, above). The triage's own
+oracle, "after any split, a blocked check still reaches the diagnosis text", is met
+in text: a blocked check's `next` field names the badge card
+(`test_gutted_or_negated_director_block_blocks_the_check` asserts it). Whether an
+agent then opens it is not observed.
+
+**Status:** implemented on a branch and statically tested; independently reviewed
+November 11. Live: in two sessions on one host the Director reran the check after a
+forced compaction and kept the badge; see
+[validation](DESIGN_NOTES.md#standing-block-and-cards-starter-33--november-11-2026)
+for what that does and does not show. A failed check followed by a badge-card read
+has not been observed.
+
 **November 9 — the video template reads its large docs at task time, not as startup
 guards (template-local; decided and staged):** For the My Work video template only,
 the three large video docs (`docs/DIRECTOR.md`, `docs/PROCESS.md`,
@@ -1038,6 +1134,189 @@ if selections feel forced, categories harden into authority signals, or rotation
 and late-report protection diverge across owners.
 
 ## R10 — Assign roles explicitly; preserve project ownership across entry routes
+
+**November 11 — the Director's standing rules move into the AGENTS.md block; detail
+moves to cards read before named actions (starter revision 3.3):** The November 9
+sentence below asks an agent to read START and its role package again after a
+compaction. Two things were then seen. A November 9 draft of a short block plus
+separate cards was tried on one host in two sessions with one forced compaction each:
+after the compaction neither session opened any card, and the card that held the
+recovery steps was missed before the first project action. In the matching control
+sessions on the 3.2 route the agent did re-read DIRECTOR completely, but OPERATIONS
+only partly in one of two. The November 7 investigation quoted below had found no
+complete startup re-read after any of 21 compactions. The working inference, still a
+hypothesis, is that a rule which must hold after a break has to sit in the text the
+host restores by itself, and that a file behind a trigger is not reliably opened.
+
+**Decided, November 11:** the owner decided to build the refactor with recovery moved
+into the always-loaded block. That decision is the only one recorded here as the
+owner's. The individual changes of meaning listed below are implemented on a branch;
+where one needed its own owner call in the design proposal, that call is not recorded
+in this entry and stays acceptance-blocking.
+
+**Implemented on a branch as starter revision 3.3 (not merged, not published, not
+accepted):** the [installer](../pattern/starter/install.py) writes a marked Director
+block from [agents/block.md](../pattern/starter/agents/block.md) into the project's
+root AGENTS.md (7,993 bytes; the installer refuses above 8,000), followed by a
+project-owned section from
+[agents/project-section.md](../pattern/starter/agents/project-section.md) (cap 3,000
+bytes). The block holds the role gate, ten every-turn duties for Directors, the
+Project Director's check and 🎬 paragraph, four Recovery steps, the read rules, a
+"Before you / Read" table, a rule for what summaries carry, and a roster rule. The
+project section holds the check command, two guard lists ("read before your first
+reply" and "read before named work"), the request-store line, the role-file locator
+and a roster, or the name of the project's existing role index. Seven cards in
+`.director/cards/` (staffing, requests, supervision, knowledge, update-check, privacy,
+badge) carry the detail and are read before the action the table names. START.md and
+DIRECTOR.md remain only as hash-checked redirect stubs with no rules.
+[OPERATIONS](../pattern/starter/payload/OPERATIONS.md) keeps the check's structures
+and the context-budget preflight. The cards, WORKER.md and the manuals end with an
+`END <path>` line, and a complete read is one that reaches it. The marker stays
+`director-starter:2`.
+
+**What this supersedes.** Earlier text stays below as history. Each item names the
+previous decision and the failure it prevented, what replaces it, the cost, and the
+regression case. Test names are in `development/tests/`.
+
+1. **Where the Director's rules are loaded from** (this section, October 24, October
+   31 and November 9; [R18](#r18--start-flat-and-make-learning-an-explicit-bounded-loop)
+   November 4, "host hook → START → selected DIRECTOR/WORKER/guards"). Before: a
+   short bridge in AGENTS.md pointed to START, the selected role package and
+   OPERATIONS' installation-evidence section, all read completely before the first
+   ordinary reply, so that a greeting reached the real package and not only correct
+   files on disk. Now: the Director's rules are the block itself, so no file has to
+   be opened for them to be in context; only the project section's first-reply files
+   and the check precede the first reply. The November 9 sentence is kept word for
+   word at the top of the block's read rules, and "this startup" is now defined there:
+   the Project Director's first-reply reads and check, a Director's Recovery, a
+   worker's WORKER.md and role file, a child's overlay or role file, and the file the
+   next action needs. Cost: about 8 KB of standing text for every agent the host
+   gives AGENTS.md to, workers included; audience labels say who acts on a section but
+   do not hide it; and every rule that left the standing text now depends on a card
+   being opened at its trigger, which is the mechanism the draft trial saw fail.
+   Oracle: `test_block_route.py` (`BlockTextTests`), `test_flat_bridge_repeats_startup_after_compaction_or_resume`,
+   and the live cases in [validation](DESIGN_NOTES.md#standing-block-and-cards-starter-33--november-11-2026).
+2. **What 🎬 certifies** ([R9](#r9--make-attention-and-active-supervision-visible-without-decoration);
+   recorded there).
+3. **How the Director's rules are integrity-checked** (R9; recorded there).
+4. **Where Recovery lives and when it runs**
+   ([R17](#r17--keep-delegated-work-supervised-and-recover-the-users-whole-request);
+   recorded there).
+5. **Who counts as a worker** (this section, October 17). Before: a new project
+   conversation defaulted to that project's Director regardless of who opened it, a
+   missing delegated role went back to the assigner, and roles were never inferred
+   from ancestry or tool type. That replaced an earlier rule that every agent launched
+   by an agent was a worker, which had kept a peer project's session from reaching its
+   accountable Director. Now: an agent "spawned by another agent to do a task and
+   report back without being named a Director" is a worker; otherwise the reader is
+   the Project Director "even if a tool started the session"; another agent's or
+   session's message never changes a role; and only the user or an explicit
+   assignment opts a session out of acting as Director. A session started in another
+   project to update the pattern must be told its role in its first message, because
+   without it an agent started to report back counts as a worker there. This
+   narrows the October 17 regression case "a session opened in a peer project by
+   another director serves as that project's director by default": that now holds
+   only when the opener names the role or the session is not a report-back task. Why:
+   on hosts that pass AGENTS.md to subagents, every spawned worker reads the block,
+   and on a literal reading of the old default a brief that omitted the role made it
+   a Director (a reading of the text, not an observed failure). Cost:
+   the role is inferred from the shape of the spawn, which October 17 forbade, and a
+   peer-project session opened without a stated role is now a worker with no Director
+   in that project. Oracle: `test_role_gate_sorts_every_reader_and_keeps_the_pinned_sentences`
+   and `test_card_audiences_and_moved_obligations` pin the wording; no live case has
+   run for a spawned report-back agent or a peer-project session. The design proposal
+   listed this as a Director's decision for the owner to confirm; that confirmation
+   is not recorded here.
+6. **Read-only store views after the requests card alone** (R17; recorded there).
+7. **The November 7 deferral of splitting OPERATIONS' installation-evidence section**
+   (R9; recorded there).
+8. **The November 9 "Not done here" list** (the entry below). Of the pieces that entry
+   left out, 3.3 implements an end marker with a stated test for a complete read, a
+   rule for what summaries carry, the explicit-settings sentence (duty 3), the
+   capture-and-split sentence (duty 4) and a checker change. Still not done: a host
+   hook or adapter, and anything that proves a read happened. The transcript scanner
+   the proposal adopted as a field oracle is not built.
+9. **"No startup catalog"** (R18, October 31; the matrix's "no global startup
+   catalog"). Before: roles were found at use through the project's discovery
+   pointer, and nothing role-shaped was standing text, to keep startup small and
+   avoid a role census. Now: a roster summary sits in the project section, which is
+   standing text. It is project-owned, holds one row per role (what it does, when to
+   use it, a suggested start, limits), is capped with the rest of the section at
+   3,000 bytes with overflow to a named file, and may be replaced by a pointer to an
+   index the project already has. A fresh install has two generic rows. Role
+   definitions are still not standing text. Cost: every agent given AGENTS.md sees
+   the rows; a row can go stale against its role file. Oracle:
+   `test_project_section_is_project_owned_and_within_its_cap`; the checker blocks a
+   section over its cap (`test_project_section_is_required_once_beside_the_block`).
+   Listed in the proposal as the owner's call; not separately recorded.
+10. **Package acknowledgment, for Directors only** (this section, October 21, October
+    24 and October 29: the actor reads and acknowledges its package before acting,
+    and an incomplete read cannot be acknowledged as loaded). A Director no longer
+    loads a package, so it gives no acknowledgment; the visible signal is 🎬 or a
+    stated gap, and after a break the Recovery report line. WORKER.md keeps "Briefly
+    acknowledge the resolved package once" for workers. Cost: a scoped child Director,
+    which shows no 🎬, now has no acknowledgment at its first start; its Recovery
+    report line appears only after a break or at its first reply that acts. Listed in
+    the proposal as the owner's call; not separately recorded.
+11. **Two read-efficiency sentences are dropped** (this section, October 30: "no
+    separate verification round trip is needed after each successful read"). START's
+    "Read known independent files together when their combined output fits" and
+    "Coverage shown in the read needs no separate verification call" have no
+    successor text. They limited cost, not safety. WORKER.md keeps "Batch independent
+    reads only". Two smaller clauses of START also have no successor: "with room for
+    tool framing", and "Installer/source documentation is not startup". Three safety
+    rules that the first rework had left only in WORKER.md are back in the block's
+    read rules in the final commit: each range shows its range and the file's total
+    length, combined output stays bounded, and file existence and unprinted results
+    are not reads.
+12. **The update receipt may precede its fresh-session trials, for this move only**
+    ([R11](#r11--update-from-a-pinned-public-source-without-replacing-project-state);
+    recorded there).
+
+**What stays, with no supersession.** Staffing keeps the October 30 decision in this
+section ("separate selection from execution knowledge"): the staffer chooses from the
+roster row and then, before dispatch, reads the selection and authority part of the
+role file the row or the project section names; the executor reads the rest. The
+design proposal had suggested routing from roster rows alone; the independent review
+kept the recorded behaviour, and no supersession is written. The pinned delegation
+sentence, the gap-and-stop fallback, explicit tier and effort on every dispatch, the
+partner rule, the SitRep paragraph and example, the first-reply check before a
+greeting, generated-project first use before the check, and the worker and scoped
+child exclusions from the check and 🎬 are carried over; the
+[matrix](BEHAVIOR_PARITY.md#standing-block-and-cards--november-11-2026) says where
+each lives and which triggers are unproven. New in the payload, from an owner rule
+previously held only as project knowledge: the staffing card's routing ladder (do it
+yourself; a worker; a scoped child Director for long, multi-round or multi-worker
+work).
+
+**Tradeoff.** The block trades a smaller, cheaper first reply and rules that survive
+a compaction for two risks. The detail on the cards is reached only if the agent
+opens the card at its trigger, and the block alone produces plausible behaviour, so a
+skipped card is hard to see. And about 8 KB is now paid on every turn by every
+agent the host gives the file to. The block is managed text: a project can no longer
+adapt wording inside it, only beside it.
+
+**Regression cases.** The November 9 draft trial is the known-bad case: after a
+forced compaction, zero cards opened and no recovery. A passing run shows, after each
+compaction, a fresh check before the first 🎬, the Recovery steps performed through
+the store with the "Re-entered:" line in that reply, and the agent's own complete
+read of each card, through its END line, before the action it governs. A search hit,
+a diff or a worker's quote of an END line does not count as a read. A spawned
+report-back agent shows no check and no 🎬. An edited block, a changed stub and an
+empty or over-cap project section each block the check.
+
+**Status.** Decided: build the refactor with recovery in the always-loaded block
+(owner, November 11). Implemented: on a branch as starter revision 3.3, with an
+independent review on November 11 whose nine findings were applied and a final
+commit the same day that closed five further items (a missing block baseline now
+blocks; the SitRep after a break is conditional; three read rules are back in the
+block; the staffing card names the assignment role and the exact task/action trigger
+map again; the gate names the user's authority). Verified statically and in three
+limited live trials on one host, with the limits recorded in
+[validation](DESIGN_NOTES.md#standing-block-and-cards-starter-33--november-11-2026).
+Not merged, not published, not accepted. This source checkout's own installation and
+its guarded AGENTS branch still use the 3.2 route, and no installed project has made
+the move. The unknowns listed in the matrix are acceptance-blocking.
 
 **November 9 — repeat startup after every compaction or session resume:** The
 maintainer observed that after compaction the host reloads AGENTS.md, but the agent
@@ -1630,6 +1909,70 @@ separate from the fresh affected retry; neither successful startup nor this narr
 correction establishes universal host compliance.
 
 ## R11 — Update from a pinned public source without replacing project state
+
+**November 11 — the move from revision 3.2 to the AGENTS.md block is a reviewed
+manual operation (starter revision 3.3; implemented on a branch, not merged,
+published or accepted):** The route change recorded under
+[R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes)
+cannot reach an installed project by replacing managed files: the block in AGENTS.md
+must be replaced, a project section written from the project's own reviewed state,
+and START.md and DIRECTOR.md turned into stubs. Starter
+[UPDATES](../pattern/starter/payload/UPDATES.md), "Move to the AGENTS.md block",
+gives seven ordered steps: back up; replace the managed payload, moving any local
+addition to the removed files or sections into a project-owned file first; replace
+the block byte for byte from the pinned revision; add the project section once and
+fill it from the project's check command, guards, store files, role-file locator and
+roster or existing role index; measure against the block, section and host caps;
+write the receipt with the new baselines and `director_block_sha256`; run the check
+exactly as the section states it.
+
+Three rules are new and narrow earlier ones:
+
+- **A receipt may precede required checks, for this move only.** The November 7 and
+  earlier rule is that an update receipt is written only after every required check
+  succeeds, so a project never looks adopted when it is not. The block-route check
+  needs the new receipt to run, so here the receipt is written before the fresh host
+  trials, records each of them as pending, and must not report the move as adopted
+  until they pass. Cost: a receipt exists while trials are open, and only its own
+  pending entries say so.
+- **Automatic mode never starts the move.** The standing "automatic" preference
+  authorizes compatible reversible updates without repeated permission. The move
+  changes the loaded startup chain, so an automatic result that would bring it waits
+  for the owner's explicit go-ahead.
+- **The move is not a lighter-tier case.** November 7 named an ordinary compatible
+  update as bounded, checked work that fits a lighter tier. The move is strong-tier
+  work at high effort with the required independent review.
+
+The block's text is managed; the update guide's earlier promise to preserve
+customizations inside the marked block now means moving them to the project section
+or the surrounding file and reporting anything whose place is unclear (see
+[R9](#r9--make-attention-and-active-supervision-visible-without-decoration)). An
+installation interrupted after the payload is replaced and before the block is
+merged has an old block pointing at a stub; the check blocks and names the unfinished
+update. A project may keep its earlier START.md route by a deliberate reviewed
+decision, keeping its earlier START.md, DIRECTOR.md and OPERATIONS.md and recording
+the choice. The November 7 rule that each installation is updated from its own
+project is unchanged; a session started in another project for an update now must be
+told its role in its first message (R10, item 5).
+
+**Regression cases:** A 3.2 installation with project text around its bridge, a
+project role, an update policy and a captured request makes the move and keeps all
+of them; its check then reports `evidence_matched`, a hook target ending in
+`WORKER.md` and `director_block: unchanged`. A move stopped before the block is
+merged blocks with the named gap. An automatic result that would bring the move does
+not start it.
+
+**Status:** implemented on a branch.
+`test_a_3_2_installation_moves_to_the_block_and_keeps_project_content` scripts the
+file operations of steps 1 to 6 against a fixture of the exact 3.2 startup files and
+reaches `evidence_matched`;
+`test_a_move_interrupted_before_the_block_is_merged_blocks_with_a_named_gap` and
+`test_update_guide_documents_the_move` cover the rest. The scripted move measures
+the byte caps only, not a host's instruction cap, and runs no agent. No installed
+project has made the move: not a mature project with its own guards, store or role
+index, and not this source checkout. The fresh host trials the guide requires
+(a first reply, a reply after a forced compaction, a worker start) have not run on
+any moved project.
 
 **November 7 — each installation is updated from its own project, an ordinary
 update is bounded and checked, and the starter gets a readable revision:** In a field
@@ -2365,6 +2708,89 @@ or project-owned callers require repeated reconstruction after compatible update
 
 ## R17 — Keep delegated work supervised and recover the user’s whole request
 
+**November 11 — Recovery steps live in the standing block and also run in a new
+conversation; read-only store views need the requests card alone (starter revision
+3.3; implemented on a branch, not merged, published or accepted):** Part of the move
+recorded under
+[R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes).
+
+*Where Recovery lives and when it runs.* Before (November 2 below, and R10 November
+9): the recovery rule was a passage of the Director foundation ("On recovery,
+retrieve all task-bound request IDs, including terminal ones, through the
+continuation view ... correct a false terminal claim ... A completed milestone does
+not finish the whole ask"), reached only by re-reading that file after a break. It
+existed because a parent marked done with finished children had been treated as a
+finished request. In the November 9 draft trial the same steps sat on a card, and
+after a forced compaction neither of two sessions opened it. Now: four numbered
+steps (find held work, reconcile it with current evidence, resume ownership, report)
+are written in the block, so no file must be opened to learn them. They are part of
+startup after a compaction or session resume, before the next reply, and in a new
+conversation they run before the first reply that acts on the project, which closes
+the proposal's known gap of work still out from an earlier conversation. The check's
+output also carries a `next` line pointing to them on every run. Step 3 is
+task-bound: the Director resumes the outcomes this conversation holds or the user
+names, and other open requests stay with their owners. Step 4 asks for a visible
+line in that reply, "Re-entered: N requests held; N others open; N workers out",
+with "check run" added by the Project Director. Cost: about 1.1 KB of standing text
+for every reader, and a store read at the first acting reply of every new
+conversation even when nothing is held.
+
+*The SitRep after a break keeps the November 7 rule.* The November 7 entry below
+restored "after compaction or session resume, report once promptly only if one is
+overdue or timing is unknown", and the supervision card keeps that sentence. The
+first rework's step 4 said to send a SitRep "now" whenever work was out, without
+that condition. The final commit of the same day makes step 4 conditional: "With
+work out, if a 📋 SitRep is overdue or its last time unknown, send one now and time
+the next from it." The block, the card and November 7 now agree; nothing is
+superseded.
+
+*Read-only store views.* Before (R10 October 30, R9 October 31): the store manuals
+(API, TOOLING, RECORDS) are read completely before any store operation, so that a
+revision, journal or recovery rule cannot be skipped; the first-reply check was
+deliberately kept from activating them. Recovery after every break would otherwise
+cost about 36 KB of manual reads before the first reply. Now, with the bundled store
+only: three views that change no record (`status`, `continuation`, `current`) may be
+run after reading [cards/requests.md](../pattern/starter/payload/cards/requests.md)
+alone. The card explains each field and every gap value the helper can return. Any
+store write, and `recover`, which is a write, still require the three manuals first;
+a project with its own store reads the files its project section names. This is the
+narrow form of a wider proposal (routine write commands on the card), which is not
+built and not decided. Cost: an agent reads store output without the manuals'
+context, and the card repeats part of the manuals and can drift from them. **Open:**
+in the one in-flight trial the Director ran the status and continuation views before
+it read the requests card, having read none of the manuals; it read the card
+immediately afterwards. The block routes the views through the card, and that order
+was not followed. Oracle:
+`test_card_audiences_and_moved_obligations` ties every gap name on the card to the
+helper's source; `test_table_names_only_shipped_files_and_every_card_has_a_trigger`.
+
+**Regression cases:** After a forced compaction with requests held and a worker out,
+the next reply follows a fresh check, performs the four steps through the store,
+carries the "Re-entered:" line and continues the existing worker by handle rather
+than starting a duplicate. A terminal parent with unfinished obligations is found
+through the continuation view's `terminal_with_unfinished_obligations` gap and
+corrected by the store's legal route. A second conversation does not adopt another
+conversation's open requests. A new conversation with work out from an earlier one
+runs the steps before its first acting reply. The known-bad case is the November 9
+draft trial: zero cards opened, no recovery.
+
+**Status:** implemented on a branch;
+`test_recovery_steps_live_in_the_block_not_on_a_card` pins the steps and their
+timing. Live, one host, on the build before the Recovery-timing and store-view
+changes: in two sessions, each with one real forced compaction, the Director reran
+the check, performed Recovery through the store and reported re-entry. Work was
+already finished at each compaction. Live, one host, one session, on the reworked
+build before the final commit's wording changes, with a real compaction while two
+delegated workers were still running: the Director reran the check, ran the
+read-only views on both held requests, reported re-entry with the correct count and
+both workers named, and did not re-dispatch; both original workers completed with no
+duplicate. It sent no SitRep in the re-entry reply and sent them on schedule later.
+Closing the requests through the store was not reached. **Observed once; no rate
+implied; resume, repeated compaction and other hosts still unverified.** A new
+conversation with work out is also not verified, and the final commit's wording has
+no live run
+([validation](DESIGN_NOTES.md#standing-block-and-cards-starter-33--november-11-2026)).
+
 **November 7 — update staffing (cross-reference):** An ordinary compatible update
 is bounded, well specified and checked by the required independent review: a lighter
 capability tier at high effort, or the strong tier at medium, with that review kept
@@ -2696,6 +3122,23 @@ history and unrun acceptance gates. Static edits can establish preservation and
 reachability; the next actual selected use must establish uptake.
 
 ## R18 — Start flat and make learning an explicit bounded loop
+
+**November 11 — the starter's route changes; its shape does not (cross-reference):**
+Starter revision 3.3, implemented on a branch and recorded under
+[R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes),
+supersedes two statements in this section. The November 4 plan below preserved "host
+hook → START → selected DIRECTOR/WORKER/guards"; the active route is now the
+host-loaded block in AGENTS.md, with cards read before named actions, and START and
+DIRECTOR are redirect stubs. The October 31 correction below said no "startup
+catalog returns"; a project-owned roster summary now sits in the standing project
+section (R10, item 9). The rest stands: one Project Director, bounded workers, no
+mandatory Recorder, manager, setup actor or identity pool, the established
+request-bundle backend, and the bounded learning loop, which now lives on the
+knowledge card and in LEARNING. The checked-marker meaning preserved on October 31
+is narrowed as
+[R9](#r9--make-attention-and-active-supervision-visible-without-decoration) records.
+The [matrix](BEHAVIOR_PARITY.md#standing-block-and-cards--november-11-2026) carries
+the obligation-by-obligation disposition against the previous route.
 
 **Later November 4 — one deterministic generated setup, then the normal route:**
 [R9](#r9--make-attention-and-active-supervision-visible-without-decoration) adds a

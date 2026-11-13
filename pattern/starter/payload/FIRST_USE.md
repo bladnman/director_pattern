@@ -62,6 +62,9 @@ recovery route; no implicit rollback, migration or new identity follows. Keep th
 machine-local intent/lock files and the absolute-path instance marker excluded
 under the selected template's privacy policy.
 
+On the AGENTS.md block route the technical receipt also records
+`director_block_sha256`, which the ordinary check requires.
+
 A completed receipt is reused without initialization or rewriting. A missing
 receipt with existing state must be restored or reconciled; never allocate another
 ID. The exact owned intent may restore a missing receipt only with its matching
@@ -87,3 +90,5 @@ multi-machine transaction or authenticate source evidence.
 The selected native init CLI has a 15-second timeout. Managed code is rechecked
 immediately before execution; the local cooperating-writer contract does not protect
 against a hostile process replacing code between verification and execution.
+
+END FIRST_USE.md

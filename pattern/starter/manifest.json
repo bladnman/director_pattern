@@ -1,7 +1,7 @@
 {
   "format": "director-flat-starter",
   "starter_version": 3,
-  "starter_revision": "3.2",
+  "starter_revision": "3.3",
   "state_schema": 2,
   "state_format": "director-request-bundles",
   "payload": [
@@ -22,6 +22,13 @@
     "startup_check.py",
     "context_check.py",
     "first_use.py",
-    "FIRST_USE.md"
+    "FIRST_USE.md",
+    "cards/staffing.md",
+    "cards/requests.md",
+    "cards/supervision.md",
+    "cards/knowledge.md",
+    "cards/update-check.md",
+    "cards/privacy.md",
+    "cards/badge.md"
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "format": "director-flat-starter",
+  "starter_version": 3,
+  "starter_revision": "3.2",
+  "state_schema": 2,
+  "state_format": "director-request-bundles",
+  "payload": [
+    "START.md",
+    "DIRECTOR.md",
+    "WORKER.md",
+    "LEARNING.md",
+    "API.md",
+    "OPERATIONS.md",
+    "UPDATES.md",
+    "RECORDS.md",
+    "TOOLING.md",
+    "requests.py",
+    "request_store.py",
+    "canonical_learning.py",
+    "update_check.py",
+    ".gitignore",
+    "startup_check.py",
+    "context_check.py",
+    "first_use.py",
+    "FIRST_USE.md"
+  ]
+}
