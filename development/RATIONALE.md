@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated November 11, 2026. This repository authors a
+Living design rationale · updated November 13, 2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -40,7 +40,39 @@ supersessions are listed under
 Until it is accepted, the 3.2 route described in the earlier dated entries remains
 the source candidate's current route.
 
+A November 13, 2026 source change, starter revision 3.4, keeps that route and adds
+four rules from a field report: a call in a roster role's domain goes to that role;
+the Director looks back at closure or a retro for recurring role-less work and steps
+that do not earn their cost; such a step can be the better route it recommends; and a
+quiet stretch with work out does not pause the SitRep cadence. It is recorded under
+[R18](#r18--start-flat-and-make-learning-an-explicit-bounded-loop) and cross-referenced
+from R1, R2, R10, R11 and R17; it is reviewed with findings applied, and not yet
+accepted by the maintainer or published.
+
 ## R1 — One accountable conversation, without a forced organization
+
+**November 13 — a step that does not earn its cost can be the better route
+(cross-reference):** The November 7 partner rule below maps a request onto the
+project's established mechanism. The November 13 field report (recorded under
+[R18](#r18--start-flat-and-make-learning-an-explicit-bounded-loop)) found that rule
+read as "every recorded step is fixed": no step was ever proposed for a cut. The
+requests card now says the established mechanism is the default route, not a fixed
+law: when one of its steps is not earning its cost on this request, the Director says
+so and recommends the cut or merge as a ❓ once; until the user chooses, the step is
+kept, and a step that keeps not earning its cost goes to the look-back
+([R18](#r18--start-flat-and-make-learning-an-explicit-bounded-loop)) rather than
+being asked again on every request. The user still decides, and where a project rule
+forbids the cut the Director gives the permitted route. **Regression case:** a
+recorded step that cannot change the result of a small request is named with its
+source and cost, and the cut is one ❓; the step still runs until the user chooses. A
+Director that skips it silently, asks again on every later request, or keeps applying
+it without ever saying so, fails.
+**Status:** Decided by this repository's Project Director on November 13, 2026, from
+the maintainer's field report, and implemented in the starter source as revision 3.4.
+An independent review the same day, with its findings applied, accepted it; the
+maintainer's acceptance and publication are pending. Static tests only; no live run
+yet, and installed copies keep their adopted text until updated. Oracle:
+`test_a_step_not_earning_its_cost_is_asked_once_and_kept_until_the_user_chooses`.
 
 **November 7 — act as the user's partner, map the request onto the project's own
 route, and judge a better route on merit:** An independent audit of a session that
@@ -177,6 +209,17 @@ record mapping only; no live manager behavior has been observed
 ([scenarios](DESIGN_NOTES.md#request-manager-scenarios--october-21-2026)).
 
 ## R2 — Protect judgment and conversation from execution/bookkeeping
+
+**November 13 — the direct-answer category is narrowed by domain (cross-reference):**
+The later November 1 entry below kept acceptance judgments among the Director's
+direct work and named misclassifying a review as discussion as the hypothesis for an
+undelegated review. The November 13 field case is a second instance of the same
+shape: a call that belonged to a roster role was handled as discussion. Duty 2 now
+excludes a judgment, draft or rule in a roster role's domain from what the Director
+answers itself, even in chat
+([R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes),
+November 13). Discussion, simple lookups and the Director's acceptance of a returned
+whole result stay direct.
 
 **November 7 — set capability and effort explicitly on every dispatch; the strong
 default is the strong tier at high effort:** An independent audit of a session that
@@ -1135,6 +1178,73 @@ and late-report protection diverge across owners.
 
 ## R10 — Assign roles explicitly; preserve project ownership across entry routes
 
+**November 13 — a call in a roster role's domain goes to that role, from the Director
+too (starter revision 3.4):** October 21 below decided that "no generic engineer
+substitutes for a matching maintained role", and the staffing card keeps "a general
+worker never silently replaces a maintained role". Both govern whom the Director
+staffs, not what it answers itself. In the field report recorded under
+[R18](#r18--start-flat-and-make-learning-an-explicit-bounded-loop) (November 13), the
+project had a packaging role whose file held an explicit rule about how large a claim
+a title or thumbnail may make. When the owner raised his own title and thumbnail in
+conversation, the Director judged them itself, raised a worry that the role's rule
+already answered, and was corrected twice. Duty 2 let it answer "discussion, simple
+lookups and acceptance judgments" with no exception for a call a role owns, so its
+place in the route let it bypass the role that reads the rule. A project-owned cause
+contributed: the project's own packaging-check guidance did not send that check to
+the packaging role. That guidance is the project's, and the project is changing it
+on its own authority; this entry changes only the pattern.
+
+Duty 2, the staffing card's first rung and the requests card's "answer discussion
+directly" now add: a judgment, draft or rule in a roster role's domain goes to that
+role, even in chat. The staffing card adds that accepting a return against the whole
+request stays the Director's. This extends October 21's no-substitution to the
+Director. The Director still routes from the roster row and the role file's selection
+and authority part, never from the role's craft knowledge. So that a domain stays
+visible when a roster grows, the installer's project section now says to keep one
+line per role's domain in the section if the roster moves to a file; existing
+sections are project-owned and do not get that sentence from an update.
+**Cost:** a routed remark costs a normal capture and brief like any other dispatch.
+That is intended: the call then reaches the role whose file holds its rules. A
+Director may also route a remark that needed no specialist, and the domain is judged
+from a roster row that can be stale. **Regression cases:** the owner asks in chat
+what the Director thinks of a title, and the project has a packaging role: the
+Director captures the question and briefs that role instead of judging the title; a
+project with no matching role gets a direct answer; the Director's acceptance of a
+returned result against the whole request stays its own.
+
+To fit the 8,000-byte cap without dropping a rule, the same revision tightens six
+block phrases and keeps their meaning: the gate's "project/host authority, the user's
+authority" becomes "project, host and user authority"; duty 2 drops the "Directors,"
+vocative inside the Directors-only duties and says "evaluate returns"; the Reading
+rule says "Cards, WORKER.md and the table's manuals"; the knowledge row says "look up
+knowledge" and the update row "a Director Pattern update anywhere". The knowledge
+row's trigger also becomes "close an outcome, or hold or brief a retro".
+
+**Narrowed, not only tightened: the Roster rule.** Before: "Before dispatch read the
+selection and authority part of any role file the row or section names; the rest is
+for its executor." Now: "Before dispatch read only the selection and authority part
+of the role file its row names." Two things change. A permission ("the rest is for
+its executor", which left the rest unread but allowed) becomes a limit ("only"), in
+line with the accepted rule that the Director routes from roster summaries and does
+not read the executor's craft. And the file is the one the role's row names; a role
+file reached only through the project section's locator is no longer named by this
+sentence, though the section's own role-file line still says to read its selection and
+authority part. The October 30 behavior (the staffer reads the selection and
+authority part before dispatch) is kept. The block is 7,997 bytes. The staffing card
+is tightened the same way to stay within 6,500 bytes ("that owns its sub-request and
+staffs its workers", "host controls", "as chosen above, and set in the host's
+controls", and "at every depth" moved into the opening line), with meaning kept. This checkout's own root
+AGENTS.md keeps the 3.3 block until its own reviewed update; the package test now
+accepts there either the current block or the published 3.3 block, byte for byte, by
+hash.
+
+**Status:** Decided by this repository's Project Director on November 13, 2026, from
+the maintainer's field report, and implemented in the starter source as revision 3.4.
+An independent review the same day, with its findings applied, accepted it; the
+maintainer's acceptance and publication are pending. Static tests only; no live run
+yet, and installed copies keep their adopted text until updated. Oracle: `test_a_call_in_a_roster_roles_domain_goes_to_that_role_even_in_chat`
+and the updated pins in `test_block_route.py` and `test_package.py`.
+
 **November 11 — the Director's standing rules move into the AGENTS.md block; detail
 moves to cards read before named actions (starter revision 3.3):** The November 9
 sentence below asks an agent to read START and its role package again after a
@@ -1909,6 +2019,43 @@ separate from the fresh affected retry; neither successful startup nor this narr
 correction establishes universal host compliance.
 
 ## R11 — Update from a pinned public source without replacing project state
+
+**November 13 — update an installed block (starter revision 3.4):** 3.4 is the first
+block change after the move, and the guide had no step for an installation already
+on the block. Starter [UPDATES](../pattern/starter/payload/UPDATES.md) gains "Update
+an installed block": back up; in the file the check selects, replace everything
+between the marker lines with the incoming block byte for byte; leave the project
+section and all other text untouched, first moving any project wording from an edited
+block into the section and measuring as in the move's step 5; write the receipt with the changed cards' and payload files'
+baselines and the new `director_block_sha256`; point the check and `update_check.py`
+at it; and run the check, which must report `evidence_matched` and `director_block:
+unchanged`. Only the `--receipt` paths in the section's check and update-check
+commands change. A project with its own `director-pattern:start` / `director-pattern:end`
+pair puts those lines in place of the incoming block's first and last lines, and
+`director_block_sha256` hashes the block as it stands, from its opening marker line
+through its closing marker line and newline, which is what the checker hashes.
+**Correction to the published 3.3 guidance:** the move's step 3 said such a project
+"keeps its marker lines around the same incoming text". Read literally, that nests two
+marker pairs, and the checker, which accepts exactly one pair, then blocks. Step 3 now
+says the project's lines replace the block's own first and last lines. No known
+installation followed the literal reading; the field project's block carries only its
+own pair.
+**Superseded in part:** November 11's "a receipt may precede required
+checks, for this move only". The check reads the receipt, so every block update has
+the same ordering; the receipt records the selected fresh host trials as pending and
+the update is not reported adopted until they pass. The "Validate and record" and
+move steps now say so. **Regression case:** a 3.3 installation with an edited project
+section takes 3.4; the section's bytes are unchanged apart from the `--receipt`
+paths, custom markers stay in place, and the check reports `evidence_matched` and
+`director_block: unchanged`. **Status:** Decided by this repository's Project Director on November 13, 2026, from
+the maintainer's field report, and implemented in the starter source as revision 3.4.
+An independent review the same day, with its findings applied, accepted it; the
+maintainer's acceptance and publication are pending. Static tests only; no live run
+yet, and installed copies keep their adopted text until updated. Oracle:
+`test_update_guide_updates_an_installed_block_without_touching_the_section` and
+`test_a_3_3_installation_updates_its_block_and_keeps_the_section_and_markers`, which
+scripts steps 1 to 4 against a fixture of the exact 3.3 files 3.4 changes, with and
+without custom markers. No installation, including this checkout, has taken it.
 
 **November 11 — the move from revision 3.2 to the AGENTS.md block is a reviewed
 manual operation (starter revision 3.3; implemented on a branch, not merged,
@@ -2708,6 +2855,26 @@ or project-owned callers require repeated reconstruction after compatible update
 
 ## R17 — Keep delegated work supervised and recover the user’s whole request
 
+**November 13 — a quiet stretch does not pause the SitRep cadence:** The November 7
+rule below checks on every turn whether a SitRep is due, but a turn comes only when a
+worker returns or the user writes. In the November 13 field report (recorded under
+[R18](#r18--start-flat-and-make-learning-an-explicit-bounded-loop)) SitReps lapsed
+during such stretches until the Director set a five-minute background timer itself.
+The supervision card now says: when no worker return or user message may arrive
+before the next SitRep is due, arm a supported background timer or wait that leaves
+you available to the user and brings you back by then; a quiet stretch does not pause
+the cadence; if the host has none, say so once and send each due SitRep at your next
+turn. This completes the card's "supported waits must leave both cadences
+usable". The interval is unchanged and no host tool is named. **Regression case:**
+two long-running workers and a silent user: a labeled SitRep arrives about every five
+minutes without any return or message to prompt it; on a host with no timer or wait,
+one statement says so and the November 7 fallback applies. **Status:** Decided by this repository's Project Director on November 13, 2026, from
+the maintainer's field report, and implemented in the starter source as revision 3.4.
+An independent review the same day, with its findings applied, accepted it; the
+maintainer's acceptance and publication are pending. Static tests only; no live run
+yet, and installed copies keep their adopted text until updated.
+Oracle: `test_a_quiet_stretch_does_not_pause_the_sitrep_cadence`.
+
 **November 11 — Recovery steps live in the standing block and also run in a new
 conversation; read-only store views need the requests card alone (starter revision
 3.3; implemented on a branch, not merged, published or accepted):** Part of the move
@@ -3122,6 +3289,76 @@ history and unrun acceptance gates. Static edits can establish preservation and
 reachability; the next actual selected use must establish uptake.
 
 ## R18 — Start flat and make learning an explicit bounded loop
+
+**November 13 — look back on the work: propose a role for recurring work and a cut for
+a step that does not earn its cost (starter revision 3.4):** A field report from an
+adopting video project, written after it shipped a video and held a retro (the run
+used starter 3.2 text; the project moved to 3.3 after the ship, and the rules at
+issue read the same in both),
+named one kind of mistake in several places: the Director treated the roster and the
+recorded steps as a fixed lookup table, not as something it routes through and
+maintains. Recurring work (after-action reviews, analysis of the owner's own edits,
+overnight render and upload chains) was briefed from scratch to general workers each
+time, and no role was ever proposed. Every recorded step was applied as fixed
+procedure, and none was ever proposed for a cut or merge. A process answer given once
+in chat was never found again. The existing loop questions structure only after a
+failure: incidents feed a bounded review and perhaps a `structure` proposal, and a
+repeated failure calls for reassessment. Work that recurs without a correction, and a
+step that costs more than it returns, trigger nothing, and closure upkeep covers only
+the touched path, "not a role census"
+([R17](#r17--keep-delegated-work-supervised-and-recover-the-users-whole-request),
+October 30). The diagnosis is the Director's; that the missing trigger caused the
+behavior is a hypothesis.
+
+The knowledge card gains a "Look back on the work" paragraph; the block's table
+sends "close an outcome, or hold or brief a retro" to that card, and the staffing
+card's brief says a retro or look-back brief carries the card's two questions. At meaningful closure, and at any
+retro or after-action, the Director asks two questions of the work this conversation
+held, not of all history: what was briefed more than once, or rebuilt from scratch,
+that no roster role holds; and which recorded steps, records or rules cost more than
+they returned, or could merge. Each supported answer goes to the user as one ❓
+proposal: a role (what its file would hold, its roster row) or a cut or merge (the
+step's source, its cost, what would break). A step whose source is a user rule, an
+authority gate or required independent review stays unless the user changes it. A
+proposal changes nothing until the user decides; an accepted one becomes a request
+for the owning maintainer, and a new role is registered before use. One repeat is a
+candidate, not a department; nothing is proposed when nothing recurred and every
+step earned its cost. A delegated look-back carries both questions, and the answers are kept where
+the project keeps findings the user reads back, not only in chat.
+
+**Why/tradeoff:** This keeps "departments follow recurring responsibility and
+coordination needs observed in real work" (below) and gives the observation a place
+where the work is still in view. It stays bounded: two questions about one
+conversation's work, no count threshold, no automatic role creation, no upstream
+retro role, and no change to LEARNING or the store. A count threshold was rejected
+because a count already "never creates a department" and one repeat can be worth
+naming. The cost is a short step at closure and a ❓ per proposal; the risk is
+proposals on thin evidence, which "say how thin the evidence is" limits.
+
+**Residual risk, knowingly accepted:** the look-back lives on a card, and the card is
+read only if the Director opens it at the table's trigger; the November 11 matrix
+already lists that trigger as unproven for this card, and one earlier session skipped
+it after a compaction. Moving the paragraph into the block was not possible within
+its 8,000-byte cap without dropping a rule. The table row now names a retro, and the
+staffing card puts the questions in every retro brief, which narrows the gap but
+does not close it. The Director accepted this risk on November 13; a live retro is
+the oracle.
+
+**Regression cases:** In a retro after the same analysis was briefed from scratch
+three times, the Director proposes one role as a ❓, naming what its file would hold
+and its roster row, and registers it only after the user accepts. A closure where
+nothing recurred and every step earned its cost proposes nothing. A step whose cost
+exceeds its return is named with its source and what would break; a step from a user
+rule, an authority gate or required independent review is not cut without the user.
+A delegated retro brief carries both questions. The answers end up where the project
+keeps findings, not only in a chat reply. A Director that adds a role, cuts a step or
+edits a role file on its own fails.
+
+**Status:** Decided by this repository's Project Director on November 13, 2026, from
+the maintainer's field report, and implemented in the starter source as revision 3.4.
+An independent review the same day, with its findings applied, accepted it; the
+maintainer's acceptance and publication are pending. Static tests only; no live run
+yet, and installed copies keep their adopted text until updated. The [matrix](BEHAVIOR_PARITY.md#field-report-triage--november-13-2026) holds the dispositions and [validation](DESIGN_NOTES.md#field-report-triage-starter-34--november-13-2026) the checks.
 
 **November 11 — the starter's route changes; its shape does not (cross-reference):**
 Starter revision 3.3, implemented on a branch and recorded under

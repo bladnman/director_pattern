@@ -48,6 +48,10 @@ overdue or you cannot tell when the last one was sent, report once promptly and
 time the next from it. Without any time source, say so once and report at each
 user message or held-stream change instead. Stricter host progress updates stay
 concise and separate; supported waits must leave both cadences usable.
+When no worker return or user message may arrive before the next SitRep is due, arm
+a supported background timer or wait that leaves you available to the user and
+brings you back by then; a quiet stretch does not pause the cadence. If the host has
+none, say so once and send each due SitRep at your next turn.
 
 For a full SitRep, for example (a table where it renders well; the same columns as
 lines also work):

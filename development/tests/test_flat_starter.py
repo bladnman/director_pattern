@@ -59,8 +59,8 @@ class StarterInstallTests(unittest.TestCase):
         receipt = json.loads((self.target / '.director/install.json').read_bytes())
         self.assertEqual(receipt['starter_version'], 3)
         # Instruction wording / static only: the readable revision is recorded beside the format number.
-        self.assertEqual(receipt['starter_revision'], '3.3')
-        self.assertEqual(result['starter_revision'], '3.3')
+        self.assertEqual(receipt['starter_revision'], '3.4')
+        self.assertEqual(result['starter_revision'], '3.4')
         self.assertEqual(receipt['technical_check']['acceptance'], 'not implied')
         for path, digest in receipt['managed'].items():
             self.assertEqual(hashlib.sha256((self.target / path).read_bytes()).hexdigest(), digest)

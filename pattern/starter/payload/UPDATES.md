@@ -277,7 +277,8 @@ prior and incoming hook, and merge only the needed change. Report, rather than
 move, content whose ownership is unclear or that applies to only one host.
 Preserve all unrelated bytes and project-specific instructions, including
 customizations inside the block. Do not append a duplicate hook. For the standing
-Director block, follow "Move to the AGENTS.md block" below: its text is managed, and
+Director block, follow "Move to the AGENTS.md block" below, or "Update an installed
+block" once that move is done: its text is managed, and
 a project's own wording moves to the project section instead of being lost. If the block or
 applicable authority is ambiguous, retain the original and report the incomplete
 integration for review. Verify the actual loaded route and select affected startup
@@ -309,7 +310,9 @@ ordinary reviewed update, in this order:
    not edit it. Move a project's own wording from inside the old block into the
    project section or the surrounding project text, and report anything whose place
    is unclear. A project using the `director-pattern:start` / `director-pattern:end`
-   markers keeps its marker lines around the same incoming text.
+   markers puts its two marker lines in place of the incoming block's first and last
+   lines, around the same incoming text; the block's own marker lines are not kept
+   inside them, because the check accepts exactly one marker pair.
 4. Directly below the block, add the project section once, starting from
    `pattern/starter/agents/project-section.md`. Fill it from this project's reviewed
    state, not from defaults: its exact check command (existing `--receipt`,
@@ -333,12 +336,13 @@ ordinary reviewed update, in this order:
 6. Once the file checks above pass, write the update receipt with the new managed baselines (WORKER.md,
    OPERATIONS.md, startup_check.py, each card, the stubs and the other payload files)
    and `director_block_sha256`, the SHA-256 of the block from its opening marker line
-   through its closing marker line and newline. Point the project section's check
+   through its closing marker line and newline (the project's own marker lines, when
+   it uses them). Point the project section's check
    command at that receipt with `--receipt`, and use the same receipt for
    `update_check.py`. The check needs this receipt, so it is written before the fresh
    host trials of step 7: record each of those trials in it as pending, and record
-   their results when they run. This is the one case where a receipt precedes a
-   required check; it must not report the move as adopted until they pass.
+   their results when they run. Only here and in a later block update does a receipt
+   precede a required check; it must not report the move as adopted until they pass.
 7. Run the check command exactly as the project section states it. It must report
    `evidence_matched`, `startup_hook.target` ending in `WORKER.md` and
    `director_block: unchanged`. An edited block, an empty or over-cap project section and
@@ -356,6 +360,34 @@ blocks with that gap: finish the move or restore the backup; do not leave it mix
 An installation that keeps its earlier START.md route by a deliberate reviewed
 decision keeps its earlier START.md, DIRECTOR.md and OPERATIONS.md too, and records
 that choice in its receipt.
+
+### Update an installed block
+
+An installation already on the block (its block names `.director/WORKER.md`) takes a
+later block change as part of its ordinary reviewed update:
+
+1. Back up and verify the hook source, every managed file to be changed and the
+   current receipt, as above.
+2. In the file the check selects, replace everything from the opening marker line
+   through the closing marker line with the incoming `pattern/starter/agents/block.md`,
+   byte for byte. A project that uses its own marker pair (`director-pattern:start` /
+   `director-pattern:end`) puts its two marker lines in place of the incoming block's
+   first and last lines and keeps the text between them byte for byte. Leave all other
+   text untouched, including the `director-project` section, except the `--receipt`
+   paths that step 3 changes. If the installed block differs from its recorded
+   baseline, first move the project's own wording from it into the project section,
+   as in the move above, then measure as in the move's step 5; never drop it.
+3. Once the file checks pass, write the update receipt with the new baselines of each
+   changed card and payload file and the new `director_block_sha256`: the SHA-256 of
+   the block as it now stands in the file, from its opening marker line through its
+   closing marker line and newline, the project's own marker lines included. Change
+   the `--receipt` path in the project section's check command, and in its
+   update-check command if it states one, to the new receipt. The check reads this
+   receipt, so as in the move it precedes any fresh host trials the table below
+   selects for the change; record them as pending, then their results, and do not
+   report the update as adopted until they pass.
+4. Run the check command exactly as the project section states it. It must report
+   `evidence_matched` and `director_block: unchanged`.
 
 Inspect helper/config/store schema compatibility before replacing a bundled helper.
 An incompatible or uncertain schema blocks that part of the update; preserve the
@@ -428,8 +460,9 @@ not fail a routine update or become passed through evidence reuse. A newly requi
 check that is blocked or unrun leaves that part incomplete, never passed.
 
 Only after all checks required for this update succeed, write the update receipt
-(the one exception is the move to the AGENTS.md block, whose receipt is written before
-its fresh host trials and records them as pending) under `.director/receipts/`: source URL/full SHA, prior revision, selected managed
+(the exceptions are the move to the AGENTS.md block and a later block update, whose
+receipt the check reads, so it is written before their fresh host trials and records
+them as pending) under `.director/receipts/`: source URL/full SHA, prior revision, selected managed
 paths and resulting SHA-256 baseline hashes, startup wiring/hash, preserved
 adaptations, backup location/hashes, scope and reason, performed checks, reused
 evidence and limits, and carried-forward gaps. Update the project's source pointer

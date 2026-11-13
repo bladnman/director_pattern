@@ -2071,3 +2071,58 @@ The pending scenarios of [November 9](#compaction-re-entry--november-9-2026) wer
 written for the 3.2 route. Their Director case is partly answered by the
 observations above on a different route; their worker, resume and installed-project
 cases stay pending.
+
+## Field report triage (starter 3.4) — November 13, 2026
+
+These checks cover the [triage](BEHAVIOR_PARITY.md#field-report-triage--november-13-2026)
+of a video project's retro report and its revision 3.4 changes, recorded under
+[R18](RATIONALE.md#r18--start-flat-and-make-learning-an-explicit-bounded-loop) with
+cross-references in R1, R2, R10, R11 and R17. The field account is the adopting
+project's, not re-verified here; its causes are hypotheses. The run it describes used
+starter 3.2 text; the rules at issue read the same in 3.3.
+
+### Static checks
+
+From the repository root,
+`PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests`
+passed **263 tests** before the change and **269** after the review rework and the
+re-review's final edits;
+`git diff --check` passed. The new cases are `FieldReportNovember13Tests` in
+`test_block_route.py` (the role-domain sentence in duty 2 and on the staffing and
+requests cards, with the project section's domain line; the knowledge card's
+look-back paragraph, its table row and the retro-brief field; the requests card's
+ask-once step cut; the supervision card's quiet-stretch sentence; and UPDATES'
+"Update an installed block" with its custom-marker rule) and
+`test_a_3_3_installation_updates_its_block_and_keeps_the_section_and_markers`. That
+test builds a 3.3 installation from `fixtures/starter_3_3` (exact copies, at commit
+9f7a492, of the files 3.4 changes), with project text, a releaser row and a
+`--receipt` in both the check and update-check commands; performs UPDATES' steps 1
+to 4, once with the standard markers and once with `director-pattern:start` /
+`director-pattern:end`; and checks that everything outside the block, the section
+included, is unchanged apart from the `--receipt` paths, that the custom marker lines
+stay and the block's own marker lines are not kept inside them, that a nested second
+pair (the literal reading of the published 3.3 step 3) blocks the check, that the receipt's
+block hash equals the hash of the block as it stands, and that the check reports
+`evidence_matched` and `director_block: unchanged`. The custom-marker wording was
+checked against `startup_check.py`: it accepts exactly one marker pair and hashes
+from the opening marker line through the closing marker line and newline.
+
+The block is 7,997 of 8,000 bytes; the staffing card is 6,491, the requests card
+5,549, the supervision card 5,457 and the knowledge card 4,280, each within 6,500;
+the project section template is 1,189 of 3,000. The package test that pinned this
+checkout's root AGENTS.md to the current block byte for byte now accepts the current
+block or the published 3.3 block, by hash, with a note to drop the 3.3 entry when
+this checkout updates; this checkout's own check still reports `evidence_matched`
+and `director_block: unchanged`.
+
+These establish wording, placement, caps and scripted file operations only.
+
+### Not verified
+
+| Scenario | Status |
+|---|---|
+| A question in chat inside a roster role's domain is captured and briefed to that role; one with no matching role is answered directly | Not run |
+| A retro proposes one role as a ❓ for work briefed from scratch several times, and proposes nothing when nothing recurred and every step earned its cost | Not run |
+| A step that does not earn its cost is named with its source, its cut asked once as a ❓, and the step kept until the user chooses | Not run |
+| A quiet stretch with work out still gets a SitRep about every five minutes; a host without a timer gets one statement and a SitRep at each next turn | Not run |
+| An installed 3.3 project, including this checkout, takes the block update | Not run; scripted fixture test only |

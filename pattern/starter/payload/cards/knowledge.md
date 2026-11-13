@@ -1,6 +1,6 @@
 # Knowledge: lookup, corrections and closure
 
-Looking up knowledge for a task is for every role; recording corrections and closing outcomes are Director work. Paths are in `.director/`.
+Looking up knowledge for a task is for every role; recording corrections, closing outcomes and looking back on the work are Director work. Paths are in `.director/`.
 
 Load the project's required canonical I/O instructions before querying knowledge.
 At task time, if canonical task/audience vocabulary is not already known from the
@@ -38,5 +38,20 @@ mandatory staffing does not delete the callable responsibility. Register
 new/renamed/retired responsibilities in the project roster
 before use (`cards/staffing.md`); preserve applicable authority and evaluate the next selected use.
 This is bounded affected-use upkeep, not a role census or automatic department creation.
+
+**Look back on the work.** At meaningful closure, and whenever you or the user look
+back on how work went (a retro or after-action), ask two questions of the work this
+conversation held, not of all history: what did we brief more than once, or rebuild
+from scratch, that no roster role holds; and which recorded steps, records or rules
+cost more than they returned, or could merge? Bring each supported answer to the user
+as one ❓ proposal: a role (what its file would hold, its roster row) or a cut or merge
+(the step's source, its cost, what would break). Keep a step whose source is a user
+rule, an authority gate or required independent review unless the user changes it.
+A proposal changes nothing until the user decides; an accepted one becomes a request
+for the owning maintainer, and a new role is registered before use
+(`cards/staffing.md`). One repeat is a candidate, not a department: say how thin the
+evidence is, and propose nothing when nothing recurred and every step earned its
+cost. A delegated look-back carries both questions in its brief. Keep the answers
+where the project keeps findings the user reads back, not only in chat.
 
 END cards/knowledge.md

@@ -30,6 +30,24 @@ def markdown_links(path):
         yield unquote(parts.path)
 
 
+# This checkout's own installation is an ordinary installed project: its root AGENTS.md carries a published
+# managed block byte for byte, either the current starter block or the 3.3 block it installed on November 13,
+# 2026, until its own reviewed update ("Update an installed block" in UPDATES.md) brings the newer one.
+# Expiry: drop the "3.3" entry when this checkout takes its own block update; then only the current block passes.
+INSTALLED_BLOCK_SHA256 = {"3.3": "713642601d987d2a1e79b033c6fb09a15ae4aba0af2937f09d5051bd31ebdcb2"}
+
+
+def installed_block(test, authoring):
+    """The one managed block in root AGENTS.md, checked to be a published block byte for byte."""
+    found = re.findall(r"<!-- director-starter:2 -->\n.*?<!-- /director-starter:2 -->\n", authoring, re.S)
+    test.assertEqual(len(found), 1, "root AGENTS.md must hold exactly one managed block")
+    current = (PATTERN / "starter/agents/block.md").read_text(encoding="utf-8")
+    digest = hashlib.sha256(found[0].encode()).hexdigest()
+    test.assertTrue(found[0] == current or digest in INSTALLED_BLOCK_SHA256.values(),
+                    "root AGENTS.md must hold a published managed block byte for byte")
+    return found[0]
+
+
 class PackageBoundaryTests(unittest.TestCase):
     def manifest(self, root):
         manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
@@ -111,7 +129,7 @@ class PackageBoundaryTests(unittest.TestCase):
         # project-owned paragraph above it keeps the block inert in a clone without the
         # private installation.
         authoring = (PATTERN.parent / "AGENTS.md").read_text(encoding="utf-8")
-        block = (PATTERN / "starter/agents/block.md").read_text(encoding="utf-8")
+        block = installed_block(self, authoring)
         self.assertEqual(authoring.count(block), 1, "root AGENTS.md must hold the managed block byte for byte")
         self.assertEqual(authoring.count("<!-- director-starter:2 -->"), 1)
         before, after = authoring.split(block, 1)
@@ -206,9 +224,10 @@ class PackageBoundaryTests(unittest.TestCase):
         # merely the retained legacy guide. This is instruction wiring, not uptake.
         text = " ".join((PATTERN / "starter/agents/block.md").read_text(encoding="utf-8").split())
         self.assertIn("Default to Project Director unless explicitly assigned a worker or scoped child Director role", text)
-        self.assertIn("Directors, delegate project investigations, reviews and changes to bounded subagents before doing the detailed work", text)
-        self.assertIn("Scope assignments, stay available to the user, and evaluate the returned results", text)
-        self.assertIn("Preserve project/host authority", text)
+        # Revision 3.4 drops the "Directors," vocative inside the Directors-only duties; the sentence is unchanged otherwise.
+        self.assertIn("Delegate project investigations, reviews and changes to bounded subagents before doing the detailed work", text)
+        self.assertIn("Scope assignments, stay available to the user and evaluate returns", text)
+        self.assertIn("Preserve project, host and user authority", text)
         self.assertNotIn("when permitted", text)
         self.assertNotIn("no mandatory", text)
         self.assertIn("Workers, delegate useful independent subsets within your assigned scope", text)
@@ -229,10 +248,10 @@ class PackageBoundaryTests(unittest.TestCase):
                       "the file your next action needs.", block)
         self.assertIn("repeated means each step is fresh", block)
         self.assertIn("Search hits, diffs, tails, summaries, hashes, quotes, file existence and unprinted results are not reads.", block)
-        # This checkout's own root AGENTS.md carries the managed block unedited (its 3.3 move), so the
-        # re-entry sentence reaches its loaded text exactly once, in the block's Reading rule.
+        # This checkout's own root AGENTS.md carries a published managed block unedited (its 3.3 move, or a
+        # later update), so the re-entry sentence reaches its loaded text exactly once, in the block's Reading rule.
         authoring = (PATTERN.parent / "AGENTS.md").read_text(encoding="utf-8")
-        self.assertEqual(authoring.count(raw), 1)
+        self.assertEqual(authoring.count(installed_block(self, authoring)), 1)
         self.assertEqual(" ".join(authoring.split()).count(reentry), 1)
         # The marker is the retained interface; wording changes keep it.
         self.assertTrue(raw.startswith("<!-- director-starter:2 -->\n"))
@@ -260,8 +279,13 @@ class PackageBoundaryTests(unittest.TestCase):
         block, worker = read("agents/block.md"), read("payload/WORKER.md")
         staffing, requests = read("payload/cards/staffing.md"), read("payload/cards/requests.md")
         # Standing block (duty 2): delegate first, answer discussion directly, gap-and-stop without subagents.
-        self.assertIn("Directors, delegate project investigations, reviews and changes to bounded subagents before doing the detailed work", block)
+        self.assertIn("Delegate project investigations, reviews and changes to bounded subagents before doing the detailed work", block)
         self.assertIn("Answer discussion, simple lookups and acceptance judgments yourself", block)
+        # Revision 3.4: the role-domain exception sits beside the direct-answer rule, in the block and on the card.
+        domain = "a judgment, draft or rule in a roster role's domain goes to that role, even in chat."
+        self.assertIn("acceptance judgments yourself; " + domain, block)
+        self.assertIn("- Discussion, simple lookups and acceptance judgments: do them yourself. A " + domain[2:]
+                      + " Accepting a return against the whole request stays yours.", staffing)
         self.assertIn("If subagents are unavailable or prohibited, report the gap and stop that work instead of doing it", block)
         self.assertIn("| staff or brief work, set tier and effort, or change a role | cards/staffing.md |", block)
         # Staffing card: role choice from the roster, the executor's own reads, and a scope that permits them.
@@ -269,7 +293,7 @@ class PackageBoundaryTests(unittest.TestCase):
         # Recorded behaviour (staffer reads the selection/authority package): a route prohibition in a role file reaches selection.
         self.assertIn("Before dispatch, when the row or the project section names a role file, read its selection and authority part", staffing)
         self.assertIn("Its executor reads the rest completely before acting; you need not", staffing)
-        self.assertIn("Before dispatch read the selection and authority part of any role file the row or section names", block)
+        self.assertIn("Before dispatch read only the selection and authority part of the role file its row names.", block)
         self.assertIn("the role ID, its role file and the instructions it must read; its scope must permit those reads", staffing)
         self.assertIn("**Applicable knowledge:** the selector tags or query context", staffing)
         self.assertIn("Settle missing or conflicting role limits with the owner before that dispatch", staffing)
@@ -389,7 +413,7 @@ class PackageBoundaryTests(unittest.TestCase):
     def test_starter_manifest_records_revision_and_format_number(self):
         # Static manifest check only; the installer's receipt is checked in test_flat_starter.
         manifest = json.loads((PATTERN / "starter/manifest.json").read_text(encoding="utf-8"))
-        self.assertEqual(manifest["starter_revision"], "3.3")
+        self.assertEqual(manifest["starter_revision"], "3.4")
         self.assertEqual(manifest["starter_version"], 3)
 
     def test_updates_run_through_each_projects_own_director(self):
@@ -445,7 +469,7 @@ class PackageBoundaryTests(unittest.TestCase):
             "an agent the user directs there",
         ):
             self.assertEqual(updates.count(phrase), 1, phrase)
-        self.assertIn("discuss or plan a Director Pattern update, here or elsewhere | cards/update-check.md; before planning, all of UPDATES.md |", block)
+        self.assertIn("discuss or plan a Director Pattern update anywhere | cards/update-check.md; before planning, all of UPDATES.md |", block)
         for phrase in (
             "This card is the explicit instruction to set capability and reasoning effort on every dispatch, including on hosts that reserve those controls for explicit instructions",
             "Hosts often fall back to the parent's settings, so leaving one out is not a choice",

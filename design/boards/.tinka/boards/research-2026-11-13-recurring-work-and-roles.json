@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 2,
+  "id": "research-2026-11-13-recurring-work-and-roles",
+  "ownerItemId": "research-2026-11-13-recurring-work-and-roles",
+  "title": "2026-11-13 · Why a Director never proposes a role, and lets specialist calls drift to itself",
+  "description": "Implemented as starter 3.4; independent review accepted; maintainer acceptance, publication and installation pending. Report and 12-page slides.",
+  "createdAt": "2026-11-13T23:33:12.349Z",
+  "updatedAt": "2026-11-13T23:33:21.592Z",
+  "placements": [
+    {
+      "x": 40,
+      "y": 40,
+      "width": 760,
+      "height": 1000,
+      "z": 0,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-0608b80e-c0bf-4dbb-8d9e-ec167191df05",
+      "itemId": "recurring-roles-report"
+    },
+    {
+      "x": 850,
+      "y": 40,
+      "width": 1002,
+      "height": 766,
+      "z": 1,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1000,
+          "height": 720
+        }
+      },
+      "id": "placement-abed5585-da48-4d81-8123-462eafd96286",
+      "itemId": "recurring-roles-slides"
+    }
+  ],
+  "reviewOrder": [
+    "placement-0608b80e-c0bf-4dbb-8d9e-ec167191df05",
+    "placement-abed5585-da48-4d81-8123-462eafd96286"
+  ],
+  "rounds": [],
+  "decorations": []
+}

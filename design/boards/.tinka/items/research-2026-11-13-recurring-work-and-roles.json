@@ -1,0 +1,20 @@
+{
+  "id": "research-2026-11-13-recurring-work-and-roles",
+  "title": "2026-11-13 · Why a Director never proposes a role, and lets specialist calls drift to itself",
+  "description": "Diagnosis accepted; implemented as starter 3.4; independent review accepted; maintainer acceptance, publication and installation pending; static tests only, no live trials. One kind of mistake: the roster and recorded steps are treated as a fixed lookup table. Markdown report and a 12-page telling. Facts, hypotheses and pending items labelled.",
+  "build": {
+    "state": "review",
+    "message": "Implemented as starter 3.4; independent review accepted; maintainer acceptance, publication and installation pending.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-13T23:33:07.393Z",
+  "updatedAt": "2026-11-13T23:33:12.349Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "childBoardId": "research-2026-11-13-recurring-work-and-roles"
+}

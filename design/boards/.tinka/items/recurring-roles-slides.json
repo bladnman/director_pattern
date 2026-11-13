@@ -1,0 +1,26 @@
+{
+  "id": "recurring-roles-slides",
+  "title": "Paged slides",
+  "description": "12 self-contained pages: the short version, what happened, one kind of mistake, problems 1 to 3, the implemented block and cards, the update route, what stays, regression oracle, status and remaining risk. Arrow keys, Space or buttons; light and dark; readable at phone width.",
+  "content": {
+    "kind": "html",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-13-recurring-work-and-roles/slides.html"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "12 pages. Implemented as starter 3.4; independent review accepted; maintainer acceptance, publication and installation pending.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-13T23:33:21.592Z",
+  "updatedAt": "2026-11-13T23:33:21.592Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

@@ -13,7 +13,7 @@ reviewed instruction/adapter integration, not a fresh installer or second ledger
 The [design-obligation matrix](https://github.com/bladnman/director_pattern/blob/main/development/BEHAVIOR_PARITY.md) explains the
 old reasons, revised routes, evidence and remaining verification limits.
 
-The manifest's `starter_revision` (now 3.3) is a readable revision number bumped with
+The manifest's `starter_revision` (now 3.4) is a readable revision number bumped with
 each published payload change; `starter_version` stays the install-format number.
 
 Revision 3.3 changes where the Director's rules live. The installer writes a marked
@@ -28,6 +28,18 @@ source is [agents/block.md](agents/block.md) and the section's is
 An installation at revision 3.2 or earlier moves through its own reviewed update:
 [UPDATES](payload/UPDATES.md), "Move to the AGENTS.md block". Static checks and the
 installer do not show that an agent follows the block after a compaction.
+
+Revision 3.4 keeps that route and adds four rules:
+
+- A judgment, draft or rule in a roster role's domain goes to that role, even in chat.
+- At closure or a retro the Director asks what recurring work has no role and which
+  steps cost more than they return, and proposes each change to the user.
+- A step not earning its cost is recommended for a cut once, as a ❓, and kept until
+  the user chooses.
+- A quiet stretch with work out does not pause the SitRep cadence.
+
+An installation already on the block takes it through [UPDATES](payload/UPDATES.md),
+"Update an installed block".
 
 ## Install beside ordinary notes and assets
 

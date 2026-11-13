@@ -1,7 +1,7 @@
 <!-- director-project -->
 ## This project's Director settings
 
-Project-owned: written once at install; updates never replace it. Keep it under 3,000 bytes; if the roster outgrows it, move the table to `.director/ROSTER.md` and name that file here.
+Project-owned: written once at install; updates never replace it. Keep it under 3,000 bytes; if the roster outgrows it, move the table to `.director/ROSTER.md` and name that file here. If the roster moves to a file, keep one line per role's domain here.
 
 - Check command: `python3 .director/startup_check.py`
 - Read before your first reply: nothing yet.

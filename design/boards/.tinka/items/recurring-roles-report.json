@@ -1,0 +1,26 @@
+{
+  "id": "recurring-roles-report",
+  "title": "Report (markdown)",
+  "description": "Status, short answer, the field report distilled, diagnosis per problem with file evidence, what 3.4 implements (block, cards, project section, update route), what did not change, design-intent disposition, regression oracle, remaining risk.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-13-recurring-work-and-roles/report.md"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Implemented as starter 3.4; independent review accepted; maintainer acceptance, publication and installation pending.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-13T23:33:20.260Z",
+  "updatedAt": "2026-11-13T23:33:20.260Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}
