@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dev and public split</title>
-<meta name="description" content="A paged telling of the November 13, 2026 investigation: should Director Pattern's personal and exploratory work live apart from the open-source repository, as Tinka's dev and public pair does? Decision: a sibling workspace. Updated November 14, 2026: the migration plan was accepted and approved, and the migration is in progress.">
+<meta name="description" content="A paged telling of the November 13, 2026 investigation: should Director Pattern's personal and exploratory work live apart from the open-source repository, as Tinka's dev and public pair does? Decision: a sibling workspace. Updated November 14, 2026: the migration plan was accepted and approved. Steps S1 to S9 are done; the live trials are pending.">
 <style>
 :root{
   --bg:#f5f3ee;--surface:#ffffff;--ink:#1c2229;--muted:#5a6470;--line:#d6d0c4;
@@ -106,8 +106,9 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   <div class="chips">
     <span class="chip ok">Decided: sibling workspace</span>
     <span class="chip ok">Plan approved: November 14</span>
-    <span class="chip mid">Migration in progress</span>
-    <span class="chip warn">Open: host settings</span>
+    <span class="chip ok">S1 to S9 done</span>
+    <span class="chip mid">Pending: live trials (S10)</span>
+    <span class="chip warn">Unverified: host settings</span>
   </div>
   <p style="margin-top:14px">Labels: <span class="tag fact">Fact</span> seen in a file or layout · <span class="tag dec">Decision</span> chosen by the maintainer · <span class="tag pend">Open</span> not yet decided.</p>
 </div></section>
@@ -197,20 +198,19 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 </div></section>
 
 <section class="slide" aria-label="8. Where it stands"><div class="inner">
-  <p class="kicker">Status · November 14, 2026</p>
+  <p class="kicker">Status · November 14, 2026, later in the day</p>
   <h2>Where it stands now</h2>
   <div class="tablewrap"><table>
     <tr><th>Item</th><th>State</th></tr>
     <tr><td>Migration plan</td><td><span class="tag dec">Decision</span>Accepted, and approved by the maintainer</td></tr>
-    <tr><td>Migration</td><td><span class="tag impl">In progress</span>Starting with the workspace move</td></tr>
-    <tr><td>Sibling workspace</td><td><span class="tag dec">Decision</span>Chosen November 13</td></tr>
-    <tr><td>Exploratory boards</td><td><span class="tag dec">Decision</span>Stay public</td></tr>
-    <tr><td>Originals</td><td><span class="tag dec">Decision</span>Stay local-only</td></tr>
-    <tr><td>Public history</td><td><span class="tag dec">Decision</span>No rewrite</td></tr>
-    <tr><td>Finished work</td><td><span class="tag dec">Decision</span>Committed and pushed, unless the maintainer says not to</td></tr>
-    <tr><td>Host settings for the dev workspace</td><td><span class="tag pend">Open</span>Not yet decided</td></tr>
+    <tr><td>S1 to S6: sibling workspace</td><td><span class="tag fact">Done</span>Created; installation backed up and moved with hash checks; startup check passes there; independent check found no problems; private remote confirmed private, then pushed.</td></tr>
+    <tr><td>S7 to S9: public cleanup</td><td><span class="tag fact">Done</span>Public <code>AGENTS.md</code> holds only maintainer rules and the Tinka pointer. New tests check that no installation is here; all 271 tests pass. Dated rationale entry passed independent review after fixes. Merged and pushed.</td></tr>
+    <tr><td>Both repositories</td><td><span class="tag fact">Fact</span>The check reports both clean</td></tr>
+    <tr><td>S10: live trials</td><td><span class="tag pend">Pending</span>First reply, after a compaction, a worker start, and a fresh session in the public checkout</td></tr>
+    <tr><td>Host settings for sibling access</td><td><span class="tag pend">Open</span>Unverified until the live trials</td></tr>
+    <tr><td>Decisions</td><td><span class="tag dec">Decision</span>Exploratory boards stay public; originals stay local-only; no history rewrite; finished work is committed and pushed unless the maintainer says not to</td></tr>
   </table></div>
-  <p>Results will be added as steps finish. The full account is in <code>report.md</code>.</p>
+  <p><strong>Earlier (at plan approval):</strong> the migration was in progress, starting with the workspace move. The full account is in <code>report.md</code>.</p>
 </div></section>
 
 </main>

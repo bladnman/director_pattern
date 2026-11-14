@@ -1,14 +1,14 @@
 {
   "id": "research-2026-11-13-dev-public-split",
   "title": "2026-11-13 · Should personal work live apart from the open-source repo?",
-  "description": "Decision: a sibling workspace beside the public repo, as Tinka does, rather than a private copy with a push-to-public rule. November 14, 2026: the migration plan was accepted and approved; migration in progress, starting with the workspace move. One choice open: host settings for the dev workspace. Markdown report and an 8-page telling. Facts, decisions and open items labelled.",
+  "description": "Decision: a sibling workspace beside the public repo, as Tinka does, rather than a private copy with a push-to-public rule. November 14, 2026: the migration plan was accepted and approved; steps S1 to S9 are done and both repositories are clean. Pending: the live fresh-session trials (S10); host settings for sibling access unverified until then. Markdown report and an 8-page telling. Facts, decisions and open items labelled.",
   "build": {
     "state": "review",
-    "message": "Plan accepted and approved November 14; migration in progress."
+    "message": "November 14: S1 to S9 done; live trials pending."
   },
   "schemaVersion": 2,
   "createdAt": "2026-11-14T01:41:28.160Z",
-  "updatedAt": "2026-11-14T10:01:15.421Z",
+  "updatedAt": "2026-11-14T11:09:35.356Z",
   "revisions": [],
   "review": {
     "note": "",

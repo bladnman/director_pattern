@@ -1,7 +1,7 @@
 {
   "id": "dev-public-split-report",
   "title": "Report (markdown)",
-  "description": "Status, the question, how Tinka splits dev and public, Director Pattern today, options A and B compared, the decision, the accepted plan (layout, steps S0 to S10, decisions made), the November 13 open choices with their November 14 decisions, next.",
+  "description": "Status, the question, how Tinka splits dev and public, Director Pattern today, options A and B compared, the decision, the accepted plan (layout, steps S0 to S10, decisions made), the November 13 open choices with their November 14 decisions, November 14 progress (S1 to S9 done, live trials pending), next.",
   "content": {
     "kind": "markdown",
     "resource": {
@@ -11,11 +11,11 @@
   },
   "build": {
     "state": "review",
-    "message": "Updated November 14: plan accepted and approved; migration in progress."
+    "message": "Updated November 14: S1 to S9 done; live trials pending."
   },
   "schemaVersion": 2,
   "createdAt": "2026-11-14T01:41:31.403Z",
-  "updatedAt": "2026-11-14T10:01:16.708Z",
+  "updatedAt": "2026-11-14T11:09:36.934Z",
   "revisions": [],
   "review": {
     "note": "",

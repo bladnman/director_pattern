@@ -9,8 +9,9 @@ Investigation · November 13, 2026
 | Question | Answered: use a sibling workspace |
 | Decision | Made by the maintainer, November 13, 2026 |
 | Migration plan | Accepted, and approved by the maintainer on November 14, 2026 |
-| Migration | In progress, starting with the workspace move |
-| Open choices | One left: host settings for the dev workspace |
+| Migration | Steps S1 to S9 done. S10, the live trials, is pending. |
+| Both repositories | Committed and pushed; the check reports both clean |
+| Open | Host settings for sibling access: unverified until the live trials |
 
 **Labels.** **Fact:** seen in a file, layout or record. **Decision:** chosen by the
 maintainer. **Proposal:** a plan not yet carried out. **Open:** not yet decided.
@@ -138,9 +139,44 @@ its decision beside it.
 4. **Was open.** Whether to scrub public Git history. The default is no.
    **Decided (November 14, 2026).** No history rewrite. Cleanup moves forward only.
 
+## Progress (November 14, 2026)
+
+**Fact.** Steps S1 to S6 are done.
+
+- The private sibling workspace was created.
+- The local installation was backed up and moved, with hash checks.
+- Its startup check passes in the sibling workspace.
+- An independent check found no problems before the first push.
+- The private remote was confirmed private, then pushed.
+
+**Fact.** Steps S7 to S9 are done.
+
+- The public `AGENTS.md` now holds only the maintainer rules and the Tinka pointer.
+- New package tests check that the public checkout holds no installation. The full
+  suite passes: 271 tests.
+- A dated rationale entry records the change. It passed independent review after
+  fixes.
+- The cleanup was merged and pushed to `main`.
+
+**Fact.** The both-repositories check reports both clean.
+
+**Pending.** Step S10, the live trials in fresh sessions:
+
+- a first reply in the sibling workspace;
+- a reply after a compaction;
+- a worker start;
+- a fresh session in the public checkout.
+
+**Open.** Whether the dev workspace's host settings for sibling access work. This
+stays unverified until the live trials run.
+
 ## Next
 
-The migration is in progress, starting with the workspace move. Results will be
+**Earlier (November 14, at plan approval).** The migration is in progress, starting
+with the workspace move.
+
+**Now (November 14, later).** Steps S1 to S9 are done. The live trials (S10) are
+next. Results will be
 added to this board as steps finish. Earlier findings stay visible next to any
 correction.
 
