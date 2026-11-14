@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated November 13, 2026. This repository authors a
+Living design rationale · updated November 14, 2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -39,6 +39,8 @@ supersessions are listed under
 [R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes).
 Until it is accepted, the 3.2 route described in the earlier dated entries remains
 the source candidate's current route.
+*November 14 addition:* 3.3 and 3.4 are now published on `main`; acceptance still
+waits on fresh host trials.
 
 A November 13, 2026 source change, starter revision 3.4, keeps that route and adds
 four rules from a field report: a call in a roster role's domain goes to that role;
@@ -48,6 +50,15 @@ quiet stretch with work out does not pause the SitRep cadence. It is recorded un
 [R18](#r18--start-flat-and-make-learning-an-explicit-bounded-loop) and cross-referenced
 from R1, R2, R10, R11 and R17; it is reviewed with findings applied, and not yet
 accepted by the maintainer or published.
+
+On November 14, 2026, the maintainer's own installation moved out of this repository
+into a private sibling workspace. Before, it sat here, ignored, so Git never carried it off this machine.
+This repository now holds no installation. The entry under
+[R14](#r14--commit-the-installation-with-the-project) supersedes the ignored-installation
+choice and the public half of the November 13 move of that installation to the 3.3
+block, with cross-references in R8, R10 and R11. The move is implemented and
+hash-verified; the public cleanup's merge and push and the live fresh-session trials
+are pending.
 
 ## R1 — One accountable conversation, without a forced organization
 
@@ -716,6 +727,15 @@ or shows that guidance is unreachable or no longer improves behavior.
 
 ## R8 — Separate the installed method from its workshop
 
+**November 14 — the maintainer's installation leaves the workshop (cross-reference):**
+The maintainer's own Director installation, exact sources and preserved originals
+now live in a private sibling workspace, not ignored inside this repository
+([R14](#r14--commit-the-installation-with-the-project), November 14). This
+repository still holds the method and its public workshop together, as chosen below.
+The Consequence below, that raw conversations and internal references remain
+private, now holds structurally rather than by an ignore rule. Its Revisit trigger,
+unintended publication of private evidence, is the case the move guards against.
+
 **November 1 route correction:** Supported v1 adoption examples now name
 README-v1/INSTALL-v1 and their manifest explicitly; an explicit lean choice links
 to that route. The current starter remains tracked-only. Reusing renamed generic
@@ -1237,6 +1257,11 @@ controls", and "at every depth" moved into the opening line), with meaning kept.
 AGENTS.md keeps the 3.3 block until its own reviewed update; the package test now
 accepts there either the current block or the published 3.3 block, byte for byte, by
 hash.
+*November 14 addition:* that package test is superseded. This repository's AGENTS.md
+carries no block; `test_public_checkout_claims_no_local_installation` and
+`test_public_clone_tracks_no_installation_and_still_ignores_one` assert it. The block
+now sits in the private sibling workspace, under that workspace's own check
+([R14](#r14--commit-the-installation-with-the-project), November 14).
 
 **Status:** Decided by this repository's Project Director on November 13, 2026, from
 the maintainer's field report, and implemented in the starter source as revision 3.4.
@@ -1427,6 +1452,21 @@ limited live trials on one host, with the limits recorded in
 Not merged, not published, not accepted. This source checkout's own installation and
 its guarded AGENTS branch still use the 3.2 route, and no installed project has made
 the move. The unknowns listed in the matrix are acceptance-blocking.
+*November 14 addition:* 3.3 and 3.4 are now published on `main`; acceptance still
+waits on fresh host trials.
+
+**Later status, November 13 and 14 (dated addition; the paragraph above is kept as
+written):** On November 13, after 3.3 was published, this checkout's own installation
+moved to the block route. Its root AGENTS.md then carried the managed block, the
+project section and a paragraph applying them only when the ignored installation was
+present. On November 14 the installation left this repository for a private sibling
+workspace, and that public half of the move is superseded
+([R14](#r14--commit-the-installation-with-the-project), November 14). This
+repository's AGENTS.md now holds the maintainer rules only and has no guarded
+branch. The installation keeps the same block, byte for byte, in the private
+workspace's AGENTS.md, where its fresh host trials are still pending. The 3.4
+entry's statement that this checkout's root AGENTS.md keeps the 3.3 block until its
+own reviewed update now applies to the private workspace's AGENTS.md instead.
 
 **November 9 — repeat startup after every compaction or session resume:** The
 maintainer observed that after compaction the host reloads AGENTS.md, but the agent
@@ -1536,6 +1576,10 @@ is explicitly assigned, and START distinguishes an explicit role assignment from
 the task itself. The public checkout's absent-installation branch still grants no
 Director role. The owning regression checks both adopted/absent routes and explicit
 workers, not a promise that every host loads or follows the files.
+*November 14 addition:* this repository no longer has an adopted or absent branch.
+The maintainer's installation moved to a private sibling workspace, and this
+checkout's AGENTS.md holds only the maintainer rules, which assign no Director role
+([R14](#r14--commit-the-installation-with-the-project), November 14).
 
 START also directly requires instructions to return and be read before dependent
 commands, and the project's required canonical I/O instructions before knowledge
@@ -2056,6 +2100,9 @@ yet, and installed copies keep their adopted text until updated. Oracle:
 `test_a_3_3_installation_updates_its_block_and_keeps_the_section_and_markers`, which
 scripts steps 1 to 4 against a fixture of the exact 3.3 files 3.4 changes, with and
 without custom markers. No installation, including this checkout, has taken it.
+*November 14 addition:* that installation has since left this repository for a private
+sibling workspace ([R14](#r14--commit-the-installation-with-the-project), November 14);
+it still has not taken 3.4.
 
 **November 11 — the move from revision 3.2 to the AGENTS.md block is a reviewed
 manual operation (starter revision 3.3; implemented on a branch, not merged,
@@ -2523,6 +2570,108 @@ structure only. No live fresh-session selection or explicit-invocation trial is
 claimed; running chats can retain earlier loaded instructions.
 
 ## R14 — Commit the installation with the project
+
+**November 14 — the maintainer's installation moves to a private sibling workspace
+(supersedes this repository's ignored installation):** The October 21 decision below
+records a deliberate local choice: "This source repository still ignores its own
+`/.director/`", because the repository is public and an installation here holds the
+maintainer's exact conversations. The choice kept that material off the public
+remote, at the cost this decision exists to prevent. Ignored files reach no clone,
+no remote and no other machine, so the request history, exact sources and receipts
+lived on one disk. On November 13 that installation also moved to the 3.3 block route
+([R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes)).
+The move put the managed block, its project section and a paragraph applying them
+only when the ignored installation was present into this repository's root
+AGENTS.md. For every public reader that text was inert, and every agent that loaded
+the file paid for it ([R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes)
+November 11 on the per-turn cost).
+
+**Decided:** the maintainer chose a private sibling workspace on November 13 and
+approved the migration plan on November 14. The installation, its canonical store
+and the preserved originals live in a private workspace beside this checkout.
+Sessions that maintain the method start there and edit this repository in place.
+The workspace holds no copy of the method, and no private material moves into this
+repository. Cleanup here moves forward only: public history is not rewritten.
+Finished work in either repository is committed and pushed unless the maintainer
+says not to.
+**Considered alternative:** a private copy of this repository with a rule to push
+changes to the public one. It was rejected because two copies of the source drift
+whenever an agent forgets the rule.
+
+**Design-intent disposition.** *Affected:* the October 21 sentence quoted above; the
+privacy consequence of [R8](#r8--separate-the-installed-method-from-its-workshop)
+(raw conversations and internal references remain private); and R10's statements
+about this checkout's own installation and its guarded AGENTS branch (November 1,
+the November 11 status, November 13). *Purpose and failure prevented:* keep exact
+sources, request history and receipts off a public remote, since deletion does not
+remove them from public history; and keep a public clone from presenting or
+activating a Director installation. *Disposition:* preserve the purpose and
+supersede the location.
+- *Preserved, now by construction.* The private store is no longer inside the public
+  working tree, so neither a removed ignore line nor a forced add can publish it.
+  This repository's ignore file keeps `/.director/` and `.reference/` as a second
+  guard. "A source checkout alone is not installation" now holds because the checkout
+  has no installation in it.
+- *Restored for the maintainer's own installation: this decision's default.* The
+  store is tracked in the private workspace and pushed to a remote that was confirmed
+  private before its first push, so the public-remote warning is not due. Backups,
+  scratch, locks and the update cache stay local. The preserved originals stay
+  local-only because of their size, so their single-disk risk is unchanged.
+- *Superseded, November 14.* The October 21 sentence that this repository ignores its
+  own `/.director/`. Also the public half of the November 13 move: the applicability
+  paragraph, managed block and project section in this repository's AGENTS.md, and
+  the package tests that pinned them there. The private half, the installation's own
+  block route, moved with its block byte for byte; its project section was re-bound
+  to a new technical record written for the move.
+- *Active route now.* This repository's AGENTS.md holds the maintainer rules, one
+  sentence that the maintainer's installation lives outside this repository, and
+  the Tinka pointer. The private workspace's AGENTS.md holds its own header, the
+  managed block byte for byte and its project section. Its startup authority lists
+  this repository's "Maintaining this repository" as an explicit read, because a
+  check there cannot hash a file outside its workspace.
+- *Kept reachable.* The maintainer rules stay startup authority for every role, now
+  through that explicit read instead of a shared file. The privacy card's "change
+  what Git tracks" trigger now applies to the private workspace's repository. The
+  role gate's "a source checkout alone assigns no Director role" still holds here,
+  with no installation branch left to choose.
+
+**Tradeoff.** There are now two repositories to keep committed and pushed. A
+project-owned sync check in the private workspace reports, for both repositories,
+uncommitted changes, unpushed commits and branches without an upstream. It makes a
+held push visible but does not prevent one. A change to the method and its private
+record are separate commits in separate repositories. Public readers lose the
+in-repository example of a mature installation; the fixtures in `test_block_route.py`
+still cover the block route.
+
+**Regression cases.** (1) This repository claims no installation. The checkout
+holds no `.director/`; neither a `git archive HEAD` export nor the index holds
+`.director/` or `.reference/`.
+AGENTS.md carries no block, project-section or starter marker and no private request,
+source or project ID, and `/.director/` and `.reference/` still match the ignore file.
+The rewritten checks in `test_package.py` cover this. A fresh session opened here
+gets the maintainer rules only, with no check and no 🎬. (2) The private workspace's
+project-section check returns `evidence_matched` with `director_block: unchanged`
+against a new technical record written for the move. A fresh session there shows the
+check and 🎬 in its first reply, runs the check again and Recovery after a forced
+compaction, and gives a spawned worker no check and no 🎬. (3) The move leaves the
+store's identity and history unchanged. A hash manifest of every installation file,
+ignored files included, and the request-status snapshot are identical before and
+after. (4) Both repositories are committed and pushed: the sync check reports clean
+for each.
+
+**Status.** *Decided:* as above. *Implemented:* the move, the re-binding, the private
+remote and the sync check in the private workspace. The public cleanup (AGENTS.md and
+the package tests) is on a branch here, not merged or pushed. *Verified:* the move was
+hash-verified, with identical manifests and request-status snapshots. The private
+workspace's check returns `evidence_matched`. The private remote was confirmed
+private before its first push. 24 fixture tests of the sync check pass. *Pending:* the
+public branch's merge and push, and with them oracle (4) for this repository; the live
+fresh-session trials for oracles (1) and (2), which are the 3.3 trials that the
+November 13 record still lists as pending, now to run in the private workspace; and
+independent review of this entry. Acceptance of the maintainer's 3.3 installation
+stays pending those trials, as before the move.
+**Revisit:** the sync check reports the same held push across many turns; store
+conflicts appear between machines; or private material appears in a public diff.
 
 **November 9 — the video template's local-only privacy choice:** The My Work video
 template keeps requests, walks, journal and team activity out of Git for every

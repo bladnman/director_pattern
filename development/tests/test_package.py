@@ -1,5 +1,5 @@
 """Check package isolation and declared payload links, not agent installation behavior."""
-import hashlib
+import io
 import json
 import ast
 import os
@@ -8,6 +8,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tarfile
 import tempfile
 import unittest
 from urllib.parse import unquote, urlsplit
@@ -30,22 +31,33 @@ def markdown_links(path):
         yield unquote(parts.path)
 
 
-# This checkout's own installation is an ordinary installed project: its root AGENTS.md carries a published
-# managed block byte for byte, either the current starter block or the 3.3 block it installed on November 13,
-# 2026, until its own reviewed update ("Update an installed block" in UPDATES.md) brings the newer one.
-# Expiry: drop the "3.3" entry when this checkout takes its own block update; then only the current block passes.
-INSTALLED_BLOCK_SHA256 = {"3.3": "713642601d987d2a1e79b033c6fb09a15ae4aba0af2937f09d5051bd31ebdcb2"}
+ROOT = PATTERN.parent
+FIXTURES = Path(__file__).resolve().parent / "fixtures"
+
+# This public checkout holds no Director installation (November 14, 2026): the maintainer's installation, store,
+# exact sources and receipts live in a private sibling workspace. Root AGENTS.md is maintainer rules only, so no
+# startup marker, project section, standing-rule text or private ID may come back into it, and the ignores stay as a
+# guard against an accidental re-add.
+STARTUP_MARKERS = ("director-starter", "director-project", "director-pattern:start", "director-pattern:end")
+PRIVATE_ID = re.compile(r"\b(?:PROJ|REQ|UR)-")
+# Every published startup text an installation could paste back: the current block and section, the 3.3 block and
+# section, the 3.2 bridge, and the v1 hook. Their wording, not only their markers, must stay out of root AGENTS.md.
+STARTUP_TEXTS = (PATTERN / "starter/agents/block.md", PATTERN / "starter/agents/project-section.md",
+                 FIXTURES / "starter_3_3/block.md", FIXTURES / "starter_3_3/project-section.md",
+                 FIXTURES / "starter_3_2/AGENTS.md")
 
 
-def installed_block(test, authoring):
-    """The one managed block in root AGENTS.md, checked to be a published block byte for byte."""
-    found = re.findall(r"<!-- director-starter:2 -->\n.*?<!-- /director-starter:2 -->\n", authoring, re.S)
-    test.assertEqual(len(found), 1, "root AGENTS.md must hold exactly one managed block")
-    current = (PATTERN / "starter/agents/block.md").read_text(encoding="utf-8")
-    digest = hashlib.sha256(found[0].encode()).hexdigest()
-    test.assertTrue(found[0] == current or digest in INSTALLED_BLOCK_SHA256.values(),
-                    "root AGENTS.md must hold a published managed block byte for byte")
-    return found[0]
+def flat(text):
+    return " ".join(text.split())
+
+
+def startup_lines():
+    """Distinctive lines of every published startup text, whitespace-normalized."""
+    install = (PATTERN / "INSTALL-v1.md").read_text(encoding="utf-8")
+    hook = re.search(r"<!-- director-pattern:start -->(.*?)<!-- director-pattern:end -->", install, re.S)
+    assert hook is not None, "INSTALL-v1 must carry the marked startup hook"
+    texts = [path.read_text(encoding="utf-8") for path in STARTUP_TEXTS] + [hook.group(1)]
+    return {flat(line) for text in texts for line in text.splitlines() if len(flat(line)) >= 40}
 
 
 class PackageBoundaryTests(unittest.TestCase):
@@ -122,91 +134,74 @@ class PackageBoundaryTests(unittest.TestCase):
             self.assertIn("DIRECTION.md", set(markdown_links(PATTERN / "engine" / definition)))
         self.assertNotIn("DIRECTION.md", set(markdown_links(PATTERN / "engine/WORKER.md")))
 
-    def test_source_hook_reaches_flat_package_or_preserves_absent_private_installation(self):
-        # Filesystem/reference wiring for both public-clone states, not model behavior.
-        # Revision 3.3 (this checkout's own move, UPDATES.md "Move to the AGENTS.md block"): the
-        # managed block sits unedited in root AGENTS.md with the project section below it; a
-        # project-owned paragraph above it keeps the block inert in a clone without the
-        # private installation.
-        authoring = (PATTERN.parent / "AGENTS.md").read_text(encoding="utf-8")
-        block = installed_block(self, authoring)
-        self.assertEqual(authoring.count(block), 1, "root AGENTS.md must hold the managed block byte for byte")
-        self.assertEqual(authoring.count("<!-- director-starter:2 -->"), 1)
-        before, after = authoring.split(block, 1)
-        self.assertIn("# Maintaining this repository", before)
-        section = re.fullmatch(r"\n(<!-- director-project -->\n.*?<!-- /director-project -->\n)(.*)", after, re.S)
-        self.assertIsNotNone(section, "the project section must sit directly below the block")
-        section, rest = section.groups()
-        self.assertLessEqual(len(section.encode()), 3000)
-        self.assertIn("## Tinka", rest)
-        command = re.search(r"^- Check command: `([^`]+)`$", section, re.M)
-        self.assertIsNotNone(command)
-        argv = command.group(1).split()
-        self.assertEqual(argv[:2], ["python3", ".director/startup_check.py"])
-        options = list(zip(argv[2::2], argv[3::2]))
-        guards = [value for key, value in options if key == "--guard"]
-        self.assertEqual(guards, [".director/PROJECT.md", ".director/CAPABILITY_POLICY.md"])
-        first_reply = re.search(r"^- Read before your first reply: (.*)$", section, re.M).group(1)
-        self.assertLess(first_reply.index("`.director/PROJECT.md`"), first_reply.index("`.director/CAPABILITY_POLICY.md`"))
-        self.assertIn("Every role, workers included, reads both before its first action", first_reply)
-        self.assertIn("`.director/ROLE_INDEX.md`", re.search(r"^- Roster: (.*)$", section, re.M).group(1))
-        # The tracked file is public: no private project or request identity.
-        self.assertIsNone(re.search(r"\b(?:PROJ|REQ|UR)-[0-9a-f]{32}\b", authoring))
-        gate = re.search(r"apply only in a checkout that holds\s+this project's adopted local installation.*?"
-                         r"when `([^`]+)` exists\. (Otherwise .*?)\n\n", before, re.S)
-        self.assertIsNotNone(gate)
-        locator, absent = gate.groups()
-        # The locator is the file the block itself routes workers to, so it exists exactly when the block can run.
-        self.assertEqual(locator, ".director/WORKER.md")
-        self.assertEqual(re.findall(r"Read\s+`([^`]+)`", block), [locator])
-        absent = " ".join(absent.split())
-        self.assertIn("repository maintainer rules above", absent)
-        self.assertIn("assigns no Director role", absent)
-        self.assertNotIn("Default to Project Director", absent)
+    def test_public_checkout_claims_no_local_installation(self):
+        # Oracle O2, static half: text and filesystem wiring only. A fresh host session getting maintainer rules
+        # only, with no check and no 🎬, is the live half and is not shown here.
+        authoring = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        self.assertIn("# Maintaining this repository", authoring)
+        self.assertIn("## Tinka", authoring)
+        for marker in STARTUP_MARKERS:
+            self.assertFalse(marker in authoring, f"root AGENTS.md must carry no {marker} marker")
+        self.assertIsNone(PRIVATE_ID.search(authoring), "root AGENTS.md must carry no project, request or source ID")
+        # Wording sentinels catch a block pasted back without its markers, or re-wrapped.
+        text = flat(authoring)
+        for line in sorted(startup_lines()):
+            self.assertFalse(line in text, f"root AGENTS.md must not carry published startup text: {line[:80]}")
+        for route in ("Default to Project Director", "- Check command:", "startup_check.py", ".director/WORKER.md",
+                      "## Local Director installation", "🎬"):
+            self.assertFalse(route in authoring, f"root AGENTS.md must not carry startup route text: {route}")
+        # No installation in this checkout, and the guard ignores stay.
+        self.assertFalse((ROOT / ".director").exists(), "the public checkout must hold no .director/")
+        ignores = (ROOT / ".gitignore").read_text(encoding="utf-8").splitlines()
+        self.assertIn("/.director/", ignores)
+        self.assertIn(".reference/", ignores)
+
+    @unittest.skipUnless(shutil.which("git"), "git is required for the tracked-file checks")
+    def test_public_clone_tracks_no_installation_and_still_ignores_one(self):
+        # What a clone of HEAD gets (git archive), what is staged for the next commit (the index), and that the
+        # root .gitignore itself, not a machine-local exclude, ignores both folders.
+        git = ["git", "-c", f"core.excludesFile={os.devnull}", "-C", str(ROOT)]
+        top = subprocess.run(git + ["rev-parse", "--show-toplevel"], capture_output=True, text=True)
+        if top.returncode or Path(top.stdout.strip()).resolve() != ROOT.resolve():
+            self.skipTest("not run from this repository's own Git work tree")
+        private = lambda name: bool({".director", ".reference"} & set(PurePosixPath(name).parts))
+        archive = subprocess.run(git + ["archive", "--format=tar", "HEAD"], capture_output=True, check=True).stdout
+        with tarfile.open(fileobj=io.BytesIO(archive), mode="r:") as exported:
+            names = exported.getnames()
+        self.assertIn("AGENTS.md", names)
+        self.assertEqual([n for n in names if private(n)], [], "a clone of HEAD must hold no .director or .reference")
+        staged = subprocess.run(git + ["ls-files", "-z"], capture_output=True, text=True, check=True).stdout.split("\0")
+        self.assertIn("AGENTS.md", staged)
+        self.assertEqual([n for n in staged if private(n)], [], "the index must hold no .director or .reference")
+        probes = [".director/x", ".director/requests/x.json", ".reference/x"]
+        run = subprocess.run(git + ["check-ignore", "-v", "--no-index", *probes], capture_output=True, text=True)
+        self.assertEqual(run.returncode, 0, run.stderr)
+        matched = {}
+        for row in run.stdout.splitlines():
+            rule, path = row.split("\t", 1)
+            source, _, pattern = rule.split(":", 2)
+            matched[path] = (source, pattern)
+        for path in probes:
+            self.assertEqual(matched.get(path, (None,))[0], ".gitignore", path)
+            self.assertFalse(matched[path][1].startswith("!"), path)
+
+    def test_flat_payload_links_resolve_inside_an_installed_copy(self):
+        # Kept from the earlier source-hook test: the starter payload copied into a .director/ reaches its real
+        # foundations and cards there, without a hidden v1 engine or index. Reference wiring, not agent reads.
         manifest = json.loads((PATTERN / "starter/manifest.json").read_text())
-        for adopted in (False, True):
-            with self.subTest(adopted=adopted), tempfile.TemporaryDirectory() as temporary:
-                checkout = Path(temporary)
-                (checkout / "AGENTS.md").write_text(authoring)
-                if adopted:
-                    for name in manifest["payload"]:
-                        target = checkout / ".director" / name
-                        target.parent.mkdir(parents=True, exist_ok=True)
-                        shutil.copy2(PATTERN / "starter/payload" / name, target)
-                    for guard in guards:
-                        (checkout / guard).write_text("Project guard fixture.\n")
-                    values = dict(options)
-                    config = checkout / values["--config"]
-                    config.write_text(json.dumps({"schema_version": 1, "record_mode": "tracked", "request_store": {
-                        "schema_version": 2, "format": "director-request-bundles", "project_id": "PROJ-" + "0" * 32}}))
-                    sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
-                    managed = {".director/" + name: sha(checkout / ".director" / name) for name in manifest["payload"]}
-                    receipt = checkout / values["--receipt"]
-                    receipt.parent.mkdir(parents=True, exist_ok=True)
-                    receipt.write_text(json.dumps({"source": {"url": "https://github.com/bladnman/director_pattern",
-                                                              "sha": "0" * 40, "published": True},
-                                                   "project_id": "PROJ-" + "0" * 32, "managed_files": managed,
-                                                   "director_block_sha256": hashlib.sha256(block.encode()).hexdigest()}))
-                present = (checkout / locator).is_file()
-                self.assertEqual(present, adopted)
-                # The section's exact command: it passes on the block route with the installation
-                # and is refused without one, where the paragraph above the block sets it aside.
-                run = subprocess.run([sys.executable, *argv[1:]], cwd=checkout, capture_output=True, text=True)
-                if adopted:
-                    result = json.loads(run.stdout)
-                    self.assertEqual(run.returncode, 0, result)
-                    self.assertEqual(result["status"], "evidence_matched")
-                    self.assertEqual(result["startup_hook"]["target"], locator)
-                    self.assertEqual(result["director_block"], "unchanged")
-                    # Reach real selected foundations and cards without a hidden v1 engine/index.
-                    for name in ("START.md", "DIRECTOR.md", "WORKER.md", *(n for n in manifest["payload"] if n.startswith("cards/"))):
-                        document = checkout / ".director" / name
-                        for link in markdown_links(document):
-                            self.assertTrue((document.parent / link).exists(), link)
-                    self.assertFalse((checkout / ".director/engine").exists())
-                else:
-                    self.assertNotEqual(run.returncode, 0)
-                    self.assertFalse((checkout / ".director").exists())
+        with tempfile.TemporaryDirectory() as temporary:
+            installed = Path(temporary) / ".director"
+            for name in manifest["payload"]:
+                target = installed / name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(PATTERN / "starter/payload" / name, target)
+            for name in ("START.md", "DIRECTOR.md", "WORKER.md", *(n for n in manifest["payload"] if n.startswith("cards/"))):
+                document = installed / name
+                for link in markdown_links(document):
+                    resolved = (document.parent / link).resolve()
+                    self.assertTrue(resolved.is_relative_to(installed.resolve()), (name, link))
+                    self.assertTrue(resolved.exists(), (name, link))
+            self.assertFalse((installed / "engine").exists())
 
     def test_loaded_hook_explicitly_requests_director_delegation_with_host_precedence(self):
         # Guards the host-loaded entrypoint itself; it cannot prove host permission.
@@ -248,11 +243,11 @@ class PackageBoundaryTests(unittest.TestCase):
                       "the file your next action needs.", block)
         self.assertIn("repeated means each step is fresh", block)
         self.assertIn("Search hits, diffs, tails, summaries, hashes, quotes, file existence and unprinted results are not reads.", block)
-        # This checkout's own root AGENTS.md carries a published managed block unedited (its 3.3 move, or a
-        # later update), so the re-entry sentence reaches its loaded text exactly once, in the block's Reading rule.
-        authoring = (PATTERN.parent / "AGENTS.md").read_text(encoding="utf-8")
-        self.assertEqual(authoring.count(installed_block(self, authoring)), 1)
-        self.assertEqual(" ".join(authoring.split()).count(reentry), 1)
+        # The installer writes this block and then the project section into AGENTS.md, so an installed project's
+        # loaded text carries the sentence exactly once, in the block's Reading rule. Read from the starter payload
+        # only: this public checkout holds no installation (test_public_checkout_claims_no_local_installation).
+        section = " ".join((PATTERN / "starter/agents/project-section.md").read_text(encoding="utf-8").split())
+        self.assertNotIn(reentry, section)
         # The marker is the retained interface; wording changes keep it.
         self.assertTrue(raw.startswith("<!-- director-starter:2 -->\n"))
         self.assertTrue(raw.endswith("<!-- /director-starter:2 -->\n"))

@@ -2114,6 +2114,11 @@ checkout's root AGENTS.md to the current block byte for byte now accepts the cur
 block or the published 3.3 block, by hash, with a note to drop the 3.3 entry when
 this checkout updates; this checkout's own check still reports `evidence_matched`
 and `director_block: unchanged`.
+*November 14 addition:* that package test is superseded. This repository's AGENTS.md
+carries no block; `test_public_checkout_claims_no_local_installation` and
+`test_public_clone_tracks_no_installation_and_still_ignores_one` assert it. The block
+now sits in the private sibling workspace, under that workspace's own check
+([dated section](#maintainer-installation-moves-to-a-private-sibling-workspace--november-14-2026)).
 
 These establish wording, placement, caps and scripted file operations only.
 
@@ -2126,3 +2131,67 @@ These establish wording, placement, caps and scripted file operations only.
 | A step that does not earn its cost is named with its source, its cut asked once as a ❓, and the step kept until the user chooses | Not run |
 | A quiet stretch with work out still gets a SitRep about every five minutes; a host without a timer gets one statement and a SitRep at each next turn | Not run |
 | An installed 3.3 project, including this checkout, takes the block update | Not run; scripted fixture test only |
+
+## Maintainer installation moves to a private sibling workspace — November 14, 2026
+
+These checks cover the [R14 supersession](RATIONALE.md#r14--commit-the-installation-with-the-project)
+of November 14, cross-referenced in R8 and R10, and the annotated
+[matrix rows](BEHAVIOR_PARITY.md#why-each-mechanism-existed-and-the-new-route) on
+cross-machine continuity and privacy awareness. The maintainer's installation, store
+and preserved originals moved out of this repository into a private sibling
+workspace. The full evidence is in a technical record kept there; this note gives
+the public-safe results.
+
+### Checks run
+
+- **The move.** A hash manifest of every installation file, ignored files included,
+  was identical before and after the move. The backup's re-extracted manifest matched
+  the live one. The request-status snapshot and total were identical, and the store
+  scan validated from the new location. The preserved originals' file count and
+  total bytes were identical. After the move the old location's check fails, as
+  expected, because its checker is no longer there. Five absolute symbolic links
+  inside the preserved originals still point at the old location and now dangle;
+  they are kept as written.
+- **The re-binding.** In the private workspace the project section's exact check
+  returns `evidence_matched` and `director_block: unchanged`, with the section within
+  its 3,000-byte cap and the guard snapshots unchanged, against a new technical record
+  written for the move. The block region there is byte-identical to the published 3.3
+  block. Its relative links resolve. A secret-pattern scan of the files to be
+  committed found nothing, and the staged list left out backups, scratch, locks, the
+  update cache and the preserved originals.
+- **The private remote** was confirmed private before its first push.
+- **The sync check.** 24 fixture tests, all passing, cover the project-owned check that reports
+  each repository's uncommitted changes, unpushed commits and branches without an
+  upstream.
+
+These are file, hash and scripted checks. They establish where the files are and
+that the check passes; they do not show that a host loads the route.
+
+### This repository
+
+The cleanup is on a branch: AGENTS.md keeps the maintainer rules, adds one sentence
+that the maintainer's installation lives outside this repository, and keeps the Tinka
+pointer. The package checks in `test_package.py` are rewritten on the same branch to
+assert that this repository carries no installation, block, project section or
+private ID and that its ignore guard still matches:
+`test_public_checkout_claims_no_local_installation` and
+`test_public_clone_tracks_no_installation_and_still_ignores_one`. On that branch the
+full suite passed 271 tests.
+
+Two earlier rows now read differently. In [3.3](#standing-block-and-cards-starter-33--november-11-2026), "This source
+checkout's own move" did happen, on November 13, and that installation then left
+this repository on November 14. In [3.4](#field-report-triage-starter-34--november-13-2026),
+"An installed 3.3 project, including this checkout, takes the block update" now
+means the installation in the private workspace. Both rows are kept as written.
+
+### Not verified
+
+| Scenario | Status |
+|---|---|
+| A fresh session in the private workspace shows the check and 🎬 in its first reply | Not run |
+| After a forced compaction there: check again, Recovery and the "Re-entered:" line | Not run |
+| A spawned worker there shows no check and no 🎬 | Not run |
+| A fresh session in this repository gets the maintainer rules only, with no check and no 🎬 | Not run |
+| The sync check reports both repositories clean after the public cleanup is merged and pushed | Not run; the public branch is not merged or pushed |
+| The host reads this repository's "Maintaining this repository" from the private workspace as its explicit read requires | Not observed |
+| Two machines working from the private workspace's remote | Not run |
