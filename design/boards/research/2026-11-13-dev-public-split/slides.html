@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dev and public split</title>
-<meta name="description" content="A paged telling of the November 13, 2026 investigation: should Director Pattern's personal and exploratory work live apart from the open-source repository, as Tinka's dev and public pair does? Decision: a sibling workspace. Migration plan in preparation; nothing has moved yet.">
+<meta name="description" content="A paged telling of the November 13, 2026 investigation: should Director Pattern's personal and exploratory work live apart from the open-source repository, as Tinka's dev and public pair does? Decision: a sibling workspace. Updated November 14, 2026: the migration plan was accepted and approved, and the migration is in progress.">
 <style>
 :root{
   --bg:#f5f3ee;--surface:#ffffff;--ink:#1c2229;--muted:#5a6470;--line:#d6d0c4;
@@ -94,7 +94,7 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 </head>
 <body>
 <header class="bar">
-  <div class="deck-title">Dev and public split · November 13, 2026</div>
+  <div class="deck-title">Dev and public split · November 13, 2026 · updated November 14</div>
   <button id="theme" type="button" aria-label="Toggle light or dark theme">Theme</button>
 </header>
 <main id="deck" aria-live="polite">
@@ -105,8 +105,9 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   <p class="lede">Director Pattern is published from one public repository. The same checkout also holds the maintainer's personal and exploratory work. Should that work live somewhere else, the way Tinka keeps a private dev workspace beside its public repo?</p>
   <div class="chips">
     <span class="chip ok">Decided: sibling workspace</span>
-    <span class="chip mid">Migration plan in preparation</span>
-    <span class="chip warn">Nothing has moved yet</span>
+    <span class="chip ok">Plan approved: November 14</span>
+    <span class="chip mid">Migration in progress</span>
+    <span class="chip warn">Open: host settings</span>
   </div>
   <p style="margin-top:14px">Labels: <span class="tag fact">Fact</span> seen in a file or layout · <span class="tag dec">Decision</span> chosen by the maintainer · <span class="tag pend">Open</span> not yet decided.</p>
 </div></section>
@@ -152,17 +153,64 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 </div></section>
 
 <section class="slide" aria-label="5. Decision and open choices"><div class="inner">
-  <p class="kicker">Where it stands</p>
+  <p class="kicker">Where it stood · November 13</p>
   <h2>Decision and open choices</h2>
-  <p><span class="tag dec">Decision</span>The maintainer chose the sibling model on November 13, 2026. An exact migration plan is being prepared. Nothing has moved yet.</p>
+  <p><span class="tag dec">Decision</span>The maintainer chose the sibling model on November 13, 2026. On that day the migration plan was still being prepared, and nothing had moved.</p>
   <div class="tablewrap"><table>
-    <tr><th>Open choice</th><th>Note</th></tr>
-    <tr><td><span class="tag pend">Open</span>Which tracked items stay public</td><td>Research boards are meant to be public distillations, so they may stay.</td></tr>
-    <tr><td><span class="tag pend">Open</span>Snapshot archive backup</td><td>Where the large archive is backed up.</td></tr>
-    <tr><td><span class="tag pend">Open</span>Timing</td><td>Relative to the 3.3 rollout still in flight.</td></tr>
-    <tr><td><span class="tag pend">Open</span>Public history</td><td>Whether to scrub it. Default: no.</td></tr>
+    <tr><th>Choice open on November 13</th><th>Decided November 14, 2026</th></tr>
+    <tr><td>Which tracked items stay public. Research boards may stay.</td><td><span class="tag dec">Decision</span>Exploratory boards stay public.</td></tr>
+    <tr><td>Where the large snapshot archive is backed up.</td><td><span class="tag dec">Decision</span>Originals stay local-only, in no repository.</td></tr>
+    <tr><td>Timing, relative to the 3.3 rollout.</td><td><span class="tag dec">Decision</span>Migrate now, starting with the workspace move.</td></tr>
+    <tr><td>Whether to scrub public history. Default: no.</td><td><span class="tag dec">Decision</span>No history rewrite.</td></tr>
   </table></div>
-  <p>The accepted plan will be added to this board when it is ready. The full account is in <code>report.md</code>.</p>
+</div></section>
+
+<section class="slide" aria-label="6. The accepted plan"><div class="inner">
+  <p class="kicker">Accepted and approved · November 14, 2026</p>
+  <h2>Where things will live</h2>
+  <div class="grid2">
+    <div class="card"><div class="label">Public repository</div>
+      <ul><li>The method: <code>pattern/</code>, <code>development/</code>, <code>site/</code>, <code>skill/</code>, README.</li><li>Root <code>AGENTS.md</code>: maintainer rules and the Tinka pointer only.</li><li>Research boards and the Tinka setup stay.</li><li>No local Director installation. Ignore rules stay as a guard.</li></ul></div>
+    <div class="card ok"><div class="label">Private sibling workspace</div>
+      <ul><li>The local Director installation and its request store, tracked privately.</li><li>The preserved originals, local-only.</li><li>Its own <code>AGENTS.md</code> with the Director block.</li><li>A check that both repositories are committed and pushed.</li></ul></div>
+  </div>
+  <p style="margin-top:14px">Every session starts in the sibling workspace. Public edits are made in place, in the public checkout. There is still one copy of the source.</p>
+</div></section>
+
+<section class="slide" aria-label="7. Steps"><div class="inner">
+  <p class="kicker">The migration, step by step</p>
+  <h2>Eleven steps</h2>
+  <div class="tablewrap"><table>
+    <tr><th>Step</th><th>What happens</th></tr>
+    <tr><td class="num">S0</td><td>Preconditions: plan approved, no other session in the public checkout, public main clean.</td></tr>
+    <tr><td class="num">S1</td><td>Create the private sibling workspace.</td></tr>
+    <tr><td class="num">S2</td><td>Freeze and back up the local installation, with a checksum manifest.</td></tr>
+    <tr><td class="num">S3</td><td>Move the installation and the originals into the sibling workspace.</td></tr>
+    <tr><td class="num">S4</td><td>Re-bind the installation there, with a new technical record and the both-repositories check.</td></tr>
+    <tr><td class="num">S5</td><td>An independent worker verifies it before any push.</td></tr>
+    <tr><td class="num">S6</td><td>Create the private remote, confirm it is private, push.</td></tr>
+    <tr><td class="num">S7</td><td>Clean the public checkout on a branch and update the tests.</td></tr>
+    <tr><td class="num">S8</td><td>Record a dated supersession in the rationale, with independent review.</td></tr>
+    <tr><td class="num">S9</td><td>Merge and push the public cleanup.</td></tr>
+    <tr><td class="num">S10</td><td>Live trials in fresh sessions in both places; record the results.</td></tr>
+  </table></div>
+</div></section>
+
+<section class="slide" aria-label="8. Where it stands"><div class="inner">
+  <p class="kicker">Status · November 14, 2026</p>
+  <h2>Where it stands now</h2>
+  <div class="tablewrap"><table>
+    <tr><th>Item</th><th>State</th></tr>
+    <tr><td>Migration plan</td><td><span class="tag dec">Decision</span>Accepted, and approved by the maintainer</td></tr>
+    <tr><td>Migration</td><td><span class="tag impl">In progress</span>Starting with the workspace move</td></tr>
+    <tr><td>Sibling workspace</td><td><span class="tag dec">Decision</span>Chosen November 13</td></tr>
+    <tr><td>Exploratory boards</td><td><span class="tag dec">Decision</span>Stay public</td></tr>
+    <tr><td>Originals</td><td><span class="tag dec">Decision</span>Stay local-only</td></tr>
+    <tr><td>Public history</td><td><span class="tag dec">Decision</span>No rewrite</td></tr>
+    <tr><td>Finished work</td><td><span class="tag dec">Decision</span>Committed and pushed, unless the maintainer says not to</td></tr>
+    <tr><td>Host settings for the dev workspace</td><td><span class="tag pend">Open</span>Not yet decided</td></tr>
+  </table></div>
+  <p>Results will be added as steps finish. The full account is in <code>report.md</code>.</p>
 </div></section>
 
 </main>

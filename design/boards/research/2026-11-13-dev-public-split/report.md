@@ -2,14 +2,15 @@
 
 Investigation · November 13, 2026
 
-**Status**
+**Status** (updated November 14, 2026)
 
 | Item | State |
 |---|---|
 | Question | Answered: use a sibling workspace |
 | Decision | Made by the maintainer, November 13, 2026 |
-| Migration plan | Being prepared. Nothing has moved yet. |
-| Open choices | Four, listed below |
+| Migration plan | Accepted, and approved by the maintainer on November 14, 2026 |
+| Migration | In progress, starting with the workspace move |
+| Open choices | One left: host settings for the dev workspace |
 
 **Labels.** **Fact:** seen in a file, layout or record. **Decision:** chosen by the
 maintainer. **Proposal:** a plan not yet carried out. **Open:** not yet decided.
@@ -68,17 +69,80 @@ backup.
 
 **Decision (maintainer, November 13, 2026).** Use the sibling model.
 
-**Proposal.** An exact migration plan is being prepared. Nothing has moved yet.
+**Proposal (November 13).** An exact migration plan is being prepared. Nothing has moved yet.
 
-## Open choices
+**Update (November 14, 2026).** The plan was accepted, and the maintainer approved it.
+The migration has started. It is summarised below.
 
-1. **Open.** Which tracked items stay public. The research boards are meant to be
+## The accepted plan
+
+**Decision (maintainer, November 14, 2026).** The migration plan is approved. Work is
+in progress. This is a short summary of it.
+
+### Target layout
+
+- **The public repository** keeps the method: `pattern/`, `development/`, `site/`,
+  `skill/` and the README. Its root `AGENTS.md` keeps only the maintainer rules and
+  the Tinka pointer. The research boards and the local Tinka setup stay here. It
+  holds no local Director installation. Its ignore rules stay as a guard against
+  adding one back by accident.
+- **A private sibling workspace** sits beside it. It holds the local Director
+  installation and its request store, now tracked in a private repository. It holds
+  the preserved originals, kept local-only. It has its own `AGENTS.md` with the
+  Director block, and a check that both repositories are committed and pushed.
+- **Every session starts in the sibling workspace.** Edits to the public method are
+  made in place, in the public checkout. There is still one copy of the source.
+
+### Steps
+
+| Step | What happens |
+|---|---|
+| S0 | Preconditions: plan approved, no other session working in the public checkout, public `main` clean and equal to its remote. |
+| S1 | Create the private sibling workspace. |
+| S2 | Freeze and back up the local installation, with a checksum manifest. |
+| S3 | Move the local installation and the originals into the sibling workspace. |
+| S4 | Re-bind the installation there: its own startup entry, updated project settings, a new technical record, and the both-repositories check. |
+| S5 | An independent worker verifies the sibling workspace before any push. |
+| S6 | Create the private remote, confirm it is private, and push. |
+| S7 | Clean the public checkout on a branch: remove this checkout's Director block, update the tests, remove merged leftovers. |
+| S8 | Record a dated supersession in the rationale, with independent review. |
+| S9 | Merge and push the public cleanup. |
+| S10 | Run live trials in fresh sessions in both places, and record the results. |
+
+### Decisions now made
+
+| Decision | Date |
+|---|---|
+| Use a sibling workspace, not a private copy | November 13, 2026 |
+| Exploratory boards stay public | November 14, 2026 |
+| Originals stay local-only | November 14, 2026 |
+| No rewrite of public Git history | November 14, 2026 |
+| Finished work is committed and pushed, unless the maintainer says not to | November 14, 2026 |
+
+**Open.** Host settings for the dev workspace.
+
+## Open choices (as of November 13), now decided
+
+The four choices below were open on November 13. Each original note is kept, with
+its decision beside it.
+
+1. **Was open.** Which tracked items stay public. The research boards are meant to be
    public distillations, so they may stay where they are.
-2. **Open.** Where the large snapshot archive is backed up.
-3. **Open.** When to migrate, relative to the 3.3 rollout that is still in flight.
-4. **Open.** Whether to scrub public Git history. The default is no.
+   **Decided (November 14, 2026).** The exploratory boards stay public.
+2. **Was open.** Where the large snapshot archive is backed up.
+   **Decided (November 14, 2026).** The originals stay local-only. They move into the
+   sibling workspace but are not committed to either repository.
+3. **Was open.** When to migrate, relative to the 3.3 rollout that is still in flight.
+   **Decided (November 14, 2026).** Migrate now. The plan was approved and work has
+   started with the workspace move.
+4. **Was open.** Whether to scrub public Git history. The default is no.
+   **Decided (November 14, 2026).** No history rewrite. Cleanup moves forward only.
 
 ## Next
 
-The accepted migration plan will be added to this board when it is ready. Earlier
-findings stay visible next to any correction.
+The migration is in progress, starting with the workspace move. Results will be
+added to this board as steps finish. Earlier findings stay visible next to any
+correction.
+
+**Earlier text (November 13).** "The accepted migration plan will be added to this
+board when it is ready." It was added on November 14, above.

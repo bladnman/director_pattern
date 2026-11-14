@@ -1,7 +1,7 @@
 {
   "id": "dev-public-split-slides",
   "title": "Paged slides",
-  "description": "5 self-contained pages: the question, how Tinka does it, Director Pattern today, two options, decision and open choices. Arrow keys, Space or buttons; light and dark; readable at phone width.",
+  "description": "8 self-contained pages: the question, how Tinka does it, Director Pattern today, two options, the November 13 choices and their decisions, target layout, steps S0 to S10, where it stands. Arrow keys, Space or buttons; light and dark; readable at phone width.",
   "content": {
     "kind": "html",
     "resource": {
@@ -11,12 +11,11 @@
   },
   "build": {
     "state": "review",
-    "message": "5 pages. Initial findings; migration plan pending.",
-    "updatedAt": 0
+    "message": "8 pages. Updated November 14: plan accepted and approved."
   },
   "schemaVersion": 2,
   "createdAt": "2026-11-14T01:41:32.670Z",
-  "updatedAt": "2026-11-14T01:41:32.670Z",
+  "updatedAt": "2026-11-14T10:01:17.921Z",
   "revisions": [],
   "review": {
     "note": "",
