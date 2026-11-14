@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 2,
+  "id": "research-2026-11-13-dev-public-split",
+  "ownerItemId": "research-2026-11-13-dev-public-split",
+  "title": "2026-11-13 · Should personal work live apart from the open-source repo?",
+  "description": "Decision: sibling workspace. Migration plan in preparation; nothing has moved yet. Report and 5-page slides.",
+  "createdAt": "2026-11-14T01:41:29.608Z",
+  "updatedAt": "2026-11-14T01:41:32.670Z",
+  "placements": [
+    {
+      "x": 40,
+      "y": 40,
+      "width": 760,
+      "height": 1000,
+      "z": 0,
+      "presentation": {
+        "mode": "panel"
+      },
+      "id": "placement-bdc328b0-886f-40e0-9b82-911fca752d91",
+      "itemId": "dev-public-split-report"
+    },
+    {
+      "x": 850,
+      "y": 40,
+      "width": 1002,
+      "height": 766,
+      "z": 1,
+      "presentation": {
+        "mode": "panel",
+        "viewport": {
+          "width": 1000,
+          "height": 720
+        }
+      },
+      "id": "placement-d0dfa2aa-9f40-4f3f-b91c-25cfed736db9",
+      "itemId": "dev-public-split-slides"
+    }
+  ],
+  "reviewOrder": [
+    "placement-bdc328b0-886f-40e0-9b82-911fca752d91",
+    "placement-d0dfa2aa-9f40-4f3f-b91c-25cfed736db9"
+  ],
+  "rounds": [],
+  "decorations": []
+}

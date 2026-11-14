@@ -5,7 +5,7 @@
   "title": "Research and diagnosis",
   "description": "Starting point for every research and diagnosis investigation. One investigation per child board, updated as findings land, told as a markdown report plus a paged telling.",
   "createdAt": "2026-11-08T01:48:03.487Z",
-  "updatedAt": "2026-11-13T23:33:07.393Z",
+  "updatedAt": "2026-11-14T01:41:38.831Z",
   "placements": [
     {
       "x": 40,
@@ -131,6 +131,29 @@
       "z": 6,
       "id": "placement-e76b6a92-9444-4fa1-8ec1-a1f02f01d3e3",
       "itemId": "research-2026-11-13-recurring-work-and-roles"
+    },
+    {
+      "x": 800,
+      "y": 2440,
+      "width": 600,
+      "height": 440,
+      "z": 7,
+      "presentation": {
+        "mode": "card"
+      },
+      "id": "placement-edd589b0-12ca-4f41-b0f0-fc9ebd22e3c7",
+      "itemId": "research-2026-11-13-dev-public-split"
+    },
+    {
+      "x": 1800,
+      "y": 0,
+      "width": 320,
+      "height": 240,
+      "z": 8,
+      "id": "placement-9c815831-e1ef-437f-a0de-ebfc448c6892",
+      "itemId": "research-2026-11-13-dev-public-split",
+      "removedAt": "2026-11-14T01:41:38.830Z",
+      "removalReason": "remove"
     }
   ],
   "reviewOrder": [
@@ -140,7 +163,8 @@
     "placement-dc03b6ba-a5ef-445a-8574-164aa3c52255",
     "placement-9f9b32f8-18c9-415a-8b7f-17825c372ee3",
     "placement-2d5b0536-c078-4881-90be-5ec46e37373b",
-    "placement-e76b6a92-9444-4fa1-8ec1-a1f02f01d3e3"
+    "placement-e76b6a92-9444-4fa1-8ec1-a1f02f01d3e3",
+    "placement-edd589b0-12ca-4f41-b0f0-fc9ebd22e3c7"
   ],
   "rounds": [],
   "decorations": []

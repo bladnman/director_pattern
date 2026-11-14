@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dev and public split</title>
+<meta name="description" content="A paged telling of the November 13, 2026 investigation: should Director Pattern's personal and exploratory work live apart from the open-source repository, as Tinka's dev and public pair does? Decision: a sibling workspace. Migration plan in preparation; nothing has moved yet.">
+<style>
+:root{
+  --bg:#f5f3ee;--surface:#ffffff;--ink:#1c2229;--muted:#5a6470;--line:#d6d0c4;
+  --accent:#2f5fa8;--warn:#b8492f;--ok:#2c7a66;--neutral:#8a93a0;
+  --warn-bg:#fbebe5;--ok-bg:#e4f2ec;--mid-bg:#f6efd9;--chip:#ebe7de;--on-accent:#ffffff;
+  --shadow:0 1px 2px rgba(20,24,30,.06),0 8px 24px rgba(20,24,30,.06);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121519;--surface:#1c2027;--ink:#e8eaee;--muted:#a3abb7;--line:#3a414c;
+    --accent:#79a6f0;--warn:#ec8569;--ok:#5fc3a8;--neutral:#8c95a3;
+    --warn-bg:#40261f;--ok-bg:#1c372f;--mid-bg:#3a331d;--chip:#272c34;--on-accent:#10141a;
+    --shadow:none;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121519;--surface:#1c2027;--ink:#e8eaee;--muted:#a3abb7;--line:#3a414c;
+  --accent:#79a6f0;--warn:#ec8569;--ok:#5fc3a8;--neutral:#8c95a3;
+  --warn-bg:#40261f;--ok-bg:#1c372f;--mid-bg:#3a331d;--chip:#272c34;--on-accent:#10141a;
+  --shadow:none;color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  display:grid;grid-template-rows:auto 1fr auto;grid-template-columns:minmax(0,1fr);-webkit-text-size-adjust:100%}
+header.bar,footer.bar{display:flex;align-items:center;gap:12px;padding:7px 16px;background:var(--surface);border-color:var(--line);border-style:solid;border-width:0}
+header.bar{border-bottom-width:1px}
+footer.bar{border-top-width:1px}
+.deck-title{font-size:13px;color:var(--muted);letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1 1 0;min-width:0}
+button{font:inherit;font-size:14px;color:var(--ink);background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;min-height:36px}
+button:hover{border-color:var(--accent)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button:disabled{opacity:.4;cursor:default}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.counter{font-variant-numeric:tabular-nums;font-size:14px;color:var(--muted);min-width:64px;text-align:center}
+.progress{flex:1;height:4px;background:var(--chip);border-radius:4px;overflow:hidden}
+.progress span{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
+main{position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;overflow:auto;padding:clamp(16px,3vw,28px) clamp(16px,4.5vw,48px);display:none}
+.slide.active{display:block}
+.inner{max-width:1040px;margin:0 auto}
+.kicker{font-size:13px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+h1{font-size:clamp(1.6rem,4.4vw,2.7rem);line-height:1.12;margin:.1em 0 .4em;letter-spacing:-.01em}
+h2{font-size:clamp(1.25rem,3vw,1.8rem);line-height:1.15;margin:0 0 .5em;letter-spacing:-.01em}
+h3{font-size:1.02rem;margin:0 0 .35em}
+p{margin:0 0 .8em}
+.lede{font-size:clamp(1rem,2.1vw,1.18rem);color:var(--muted);max-width:62ch}
+ul,ol{margin:.2em 0 .8em;padding-left:1.15em}
+li{margin:.2em 0}
+code{font:0.88em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--chip);padding:.08em .35em;border-radius:5px;overflow-wrap:anywhere}
+blockquote{margin:.4em 0 .9em;padding:.5em .9em;border-left:3px solid var(--accent);background:var(--surface);border-radius:0 10px 10px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.chip{font-size:13px;padding:4px 11px;border-radius:999px;background:var(--chip);border:1px solid var(--line)}
+.chip.ok{background:var(--ok-bg);border-color:var(--ok)}
+.chip.warn{background:var(--warn-bg);border-color:var(--warn)}
+.chip.mid{background:var(--mid-bg);border-color:var(--neutral)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);min-width:0}
+.card.warn{background:var(--warn-bg);border-color:var(--warn)}
+.card.ok{background:var(--ok-bg);border-color:var(--ok)}
+.card.mid{background:var(--mid-bg);border-color:var(--neutral)}
+.card p:last-child,.card ul:last-child,.card ol:last-child{margin-bottom:0}
+.label{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:6px;margin-right:6px;vertical-align:1px;border:1px solid var(--line);background:var(--chip)}
+.tag.fact{border-color:var(--ok)}
+.tag.hyp{border-color:var(--warn)}
+.tag.impl{border-color:var(--accent)}
+.tag.dec{border-color:var(--accent)}
+.tag.pend{border-color:var(--neutral);background:var(--mid-bg)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:.3em 0 1em}
+th,td{text-align:left;vertical-align:top;padding:7px 9px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.tablewrap{overflow-x:auto;max-width:100%}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 16px}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:7px 11px;font-size:14px}
+.flow .arrow{color:var(--muted)}
+.flow .step.gap{border-style:dashed;border-color:var(--warn);background:var(--warn-bg)}
+@media (max-width:720px){
+  .grid2,.grid3{grid-template-columns:1fr}
+  header.bar,footer.bar{padding:7px 12px;gap:8px}
+  .hide-narrow{display:none}
+}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="deck-title">Dev and public split · November 13, 2026</div>
+  <button id="theme" type="button" aria-label="Toggle light or dark theme">Theme</button>
+</header>
+<main id="deck" aria-live="polite">
+
+<section class="slide" aria-label="1. The question"><div class="inner">
+  <p class="kicker">Research and diagnosis · November 13, 2026</p>
+  <h1>Should personal work live apart from the open-source repo?</h1>
+  <p class="lede">Director Pattern is published from one public repository. The same checkout also holds the maintainer's personal and exploratory work. Should that work live somewhere else, the way Tinka keeps a private dev workspace beside its public repo?</p>
+  <div class="chips">
+    <span class="chip ok">Decided: sibling workspace</span>
+    <span class="chip mid">Migration plan in preparation</span>
+    <span class="chip warn">Nothing has moved yet</span>
+  </div>
+  <p style="margin-top:14px">Labels: <span class="tag fact">Fact</span> seen in a file or layout · <span class="tag dec">Decision</span> chosen by the maintainer · <span class="tag pend">Open</span> not yet decided.</p>
+</div></section>
+
+<section class="slide" aria-label="2. How Tinka does it"><div class="inner">
+  <p class="kicker">The model to compare</p>
+  <h2>How Tinka does it</h2>
+  <div class="flow">
+    <span class="step">Private dev workspace<br><small>store, plans, studies, boards</small></span>
+    <span class="arrow">edits in place &rarr;</span>
+    <span class="step">Public <code>tinka</code> repo<br><small>all app code, one copy</small></span>
+  </div>
+  <ul>
+    <li><span class="tag fact">Fact</span>The private workspace holds coordination: the producer store, redesign plans, design studies and boards.</li>
+    <li><span class="tag fact">Fact</span>All app code lives only in the public repo. Agents edit it in place from the dev workspace.</li>
+    <li><span class="tag fact">Fact</span>No second copy, no push-over sync. With one copy, nothing can drift.</li>
+    <li><span class="tag fact">Fact</span>A planning tool created the dev workspace.</li>
+  </ul>
+  <blockquote>The private folder holds the thinking about the code. It never holds the code.</blockquote>
+</div></section>
+
+<section class="slide" aria-label="3. Director Pattern today"><div class="inner">
+  <p class="kicker">Where things are now</p>
+  <h2>Director Pattern today</h2>
+  <div class="grid2">
+    <div class="card warn"><div class="label">Private, but backed up nowhere</div>
+      <p><span class="tag fact">Fact</span>The local Director installation and preserved snapshots are git-ignored inside the public checkout. A clone does not restore them, and a lost disk loses them.</p></div>
+    <div class="card mid"><div class="label">Personal, but public</div>
+      <p><span class="tag fact">Fact</span>Some personal material is tracked publicly: the research boards, the local Tinka setup, and this checkout's own Director block in <code>AGENTS.md</code>.</p></div>
+  </div>
+  <p style="margin-top:14px">The boundary runs through one folder, drawn by ignore rules. That keeps the private side out of Git, and also out of every backup.</p>
+</div></section>
+
+<section class="slide" aria-label="4. Two options"><div class="inner">
+  <p class="kicker">Options considered</p>
+  <h2>A private copy, or a sibling?</h2>
+  <div class="grid2">
+    <div class="card warn"><div class="label">(A) Private dev copy</div>
+      <ul><li>Duplicate the folder into a private dev repo.</li><li>Add a rule: "push changes to public".</li><li><strong>Two copies</strong> of the source.</li><li>Agents forget the rule, especially after a compaction. The copies drift.</li></ul></div>
+    <div class="card ok"><div class="label">(B) Sibling workspace</div>
+      <ul><li>A private workspace beside the public repo, like Tinka.</li><li><strong>One copy</strong> of the source, edited in place.</li><li>Nothing to sync, so nothing to forget.</li><li>Private coordination can get a real backup.</li></ul></div>
+  </div>
+</div></section>
+
+<section class="slide" aria-label="5. Decision and open choices"><div class="inner">
+  <p class="kicker">Where it stands</p>
+  <h2>Decision and open choices</h2>
+  <p><span class="tag dec">Decision</span>The maintainer chose the sibling model on November 13, 2026. An exact migration plan is being prepared. Nothing has moved yet.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Open choice</th><th>Note</th></tr>
+    <tr><td><span class="tag pend">Open</span>Which tracked items stay public</td><td>Research boards are meant to be public distillations, so they may stay.</td></tr>
+    <tr><td><span class="tag pend">Open</span>Snapshot archive backup</td><td>Where the large archive is backed up.</td></tr>
+    <tr><td><span class="tag pend">Open</span>Timing</td><td>Relative to the 3.3 rollout still in flight.</td></tr>
+    <tr><td><span class="tag pend">Open</span>Public history</td><td>Whether to scrub it. Default: no.</td></tr>
+  </table></div>
+  <p>The accepted plan will be added to this board when it is ready. The full account is in <code>report.md</code>.</p>
+</div></section>
+
+</main>
+<footer class="bar">
+  <button id="prev" type="button" aria-label="Previous page">Back</button>
+  <span class="counter" id="counter">1 / 1</span>
+  <div class="progress hide-narrow" aria-hidden="true"><span id="bar"></span></div>
+  <button id="next" type="button" class="primary" aria-label="Next page">Next</button>
+</footer>
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var i=0, counter=document.getElementById('counter'), bar=document.getElementById('bar');
+  var prev=document.getElementById('prev'), next=document.getElementById('next');
+  function fromHash(){var n=parseInt((location.hash||'').replace('#',''),10);return (n>=1&&n<=slides.length)?n-1:0;}
+  function show(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach(function(s,k){s.classList.toggle('active',k===i);});
+    counter.textContent=(i+1)+' / '+slides.length;
+    bar.style.width=((i+1)/slides.length*100)+'%';
+    prev.disabled=i===0; next.disabled=i===slides.length-1;
+    slides[i].scrollTop=0;
+    try{history.replaceState(null,'','#'+(i+1));}catch(e){}
+  }
+  prev.addEventListener('click',function(){show(i-1);});
+  next.addEventListener('click',function(){show(i+1);});
+  document.addEventListener('keydown',function(e){
+    if(e.target&&/input|textarea|select/i.test(e.target.tagName))return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'||(e.key===' '&&!e.shiftKey)){e.preventDefault();show(i+1);}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'||(e.key===' '&&e.shiftKey)){e.preventDefault();show(i-1);}
+    else if(e.key==='Home'){show(0);} else if(e.key==='End'){show(slides.length-1);}
+  });
+  var root=document.documentElement;
+  try{var t=localStorage.getItem('dps-theme');if(t)root.setAttribute('data-theme',t);}catch(e){}
+  document.getElementById('theme').addEventListener('click',function(){
+    var dark=root.getAttribute('data-theme')==='dark'||(!root.getAttribute('data-theme')&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+    var nt=dark?'light':'dark'; root.setAttribute('data-theme',nt);
+    try{localStorage.setItem('dps-theme',nt);}catch(e){}
+  });
+  show(fromHash());
+})();
+</script>
+</body>
+</html>

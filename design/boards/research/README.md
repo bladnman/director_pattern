@@ -21,6 +21,7 @@ Research and diagnosis work gets a durable, progressive Tinka report.
 | 2026-11-08 | How the Director Pattern installs into a video project (draft, corrected after independent review) | `2026-11-08-installation/` |
 | 2026-11-10 | Making the system feel alive: original diagnosis, five reviewed chapter revisions and separate category ratings. Final delivery QA and owner creative acceptance remain open. | `2026-11-10-living-system-art/` |
 | 2026-11-13 | Why a Director never proposes a role for recurring work, lets a specialist's call drift to itself, and treats every recorded step as fixed. Diagnosis accepted; implemented as starter 3.4 (static tests only); independent review accepted after findings were applied; maintainer acceptance, publication and installation pending. | `2026-11-13-recurring-work-and-roles/` |
+| 2026-11-13 | Should personal and exploratory work live apart from the open-source repo, as Tinka's dev and public pair does? Decision: a sibling workspace. Migration plan in preparation; nothing has moved yet; four choices open. | `2026-11-13-dev-public-split/` |
 
 ## Public boundary
 

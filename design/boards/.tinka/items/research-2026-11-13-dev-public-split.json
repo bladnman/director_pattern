@@ -1,0 +1,20 @@
+{
+  "id": "research-2026-11-13-dev-public-split",
+  "title": "2026-11-13 · Should personal work live apart from the open-source repo?",
+  "description": "Decision: a sibling workspace beside the public repo, as Tinka does, rather than a private copy with a push-to-public rule. Migration plan in preparation; nothing has moved yet. Four choices open. Markdown report and a 5-page telling. Facts, decision and open items labelled.",
+  "build": {
+    "state": "review",
+    "message": "Decision recorded; migration plan in preparation; nothing has moved yet.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-14T01:41:28.160Z",
+  "updatedAt": "2026-11-14T01:41:29.608Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  },
+  "childBoardId": "research-2026-11-13-dev-public-split"
+}

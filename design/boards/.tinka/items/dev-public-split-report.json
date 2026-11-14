@@ -1,0 +1,26 @@
+{
+  "id": "dev-public-split-report",
+  "title": "Report (markdown)",
+  "description": "Status, the question, how Tinka splits dev and public, Director Pattern today, options A and B compared, the decision, four open choices, next.",
+  "content": {
+    "kind": "markdown",
+    "resource": {
+      "rootId": "research",
+      "path": "2026-11-13-dev-public-split/report.md"
+    }
+  },
+  "build": {
+    "state": "review",
+    "message": "Initial findings; migration plan pending.",
+    "updatedAt": 0
+  },
+  "schemaVersion": 2,
+  "createdAt": "2026-11-14T01:41:31.403Z",
+  "updatedAt": "2026-11-14T01:41:31.403Z",
+  "revisions": [],
+  "review": {
+    "note": "",
+    "star": false,
+    "updatedAt": 0
+  }
+}

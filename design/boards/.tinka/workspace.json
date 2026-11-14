@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "id": "workspace-c1f46a1d-27b8-4521-a775-b8c0ffc96cc5",
-  "revision": 238,
+  "revision": 243,
   "createdAt": "2026-10-31T17:57:07.080Z",
-  "updatedAt": "2026-11-13T23:33:21.592Z",
+  "updatedAt": "2026-11-14T01:41:38.831Z",
   "resourceRoots": {
     "legacy": {
       "path": ".."
