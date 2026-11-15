@@ -13,7 +13,7 @@ reviewed instruction/adapter integration, not a fresh installer or second ledger
 The [design-obligation matrix](https://github.com/bladnman/director_pattern/blob/main/development/BEHAVIOR_PARITY.md) explains the
 old reasons, revised routes, evidence and remaining verification limits.
 
-The manifest's `starter_revision` (now 3.6) is a readable revision number bumped with
+The manifest's `starter_revision` (now 3.7) is a readable revision number bumped with
 each published payload change; `starter_version` stays the install-format number.
 
 Revision 3.3 changes where the Director's rules live. The installer writes a marked
@@ -54,6 +54,15 @@ every role to notice where its work meets theirs and work it out together. The
 supervision card has the accepting Director check the combined result, and restore
 stepped-on work from its request. The store guide now describes its cooperating
 writers in the plural.
+
+Revision 3.7 says that other projects may have their own Director. The requests
+card has a Director take a question or task that belongs to another project to that
+project's Director as a peer, without waiting for the user to say so, naming its role
+when it opens a session there. That Director decides how to work, including saving
+the request and writing in its own project; the asker limits only what it sends and
+what it needs back. The staffing card says another project's Director is a peer, not
+your worker. The block's duty 1 and role gate carry the same intent, since most
+Directors make this choice before they open a card.
 
 ## Install beside ordinary notes and assets
 

@@ -38,9 +38,7 @@ This card is the explicit instruction to set capability and reasoning effort on 
 
 ## Routes and ownership
 
-The same responsibility, purpose, authority, context, owner and return contract carry across subagents, authorized separate sessions, configured cross-harness calls and acknowledged external routes. Send only the authorized source subset or an accessible authorized locator: permission to contact a receiver is not permission to disclose the whole store. If a route or its access is unavailable, report that gap and claim no execution. Canonical recording and handoff acceptance stay on their existing routes.
-
-You keep the whole usable result through evaluation and rework. A sub-director's acknowledgment does not release you. Specialists and project departments keep their own authority.
+Work you staff keeps its responsibility, purpose, authority, context, owner and return contract across subagents, authorized separate sessions, configured cross-harness calls and acknowledged external routes. Another project's Director is a peer, not your worker (`cards/requests.md`). Send only the authorized source subset or an accessible authorized locator: permission to contact a receiver is not permission to disclose the whole store. If a route or its access is unavailable, report that gap and claim no execution. Canonical recording and handoff acceptance stay on their existing routes. Specialists and project departments keep their own authority.
 
 Register a new, renamed or retired role in the project roster before using it. Keep established role IDs and aliases resolving through a rename or retirement, so older assignments recover.
 

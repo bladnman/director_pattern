@@ -19,6 +19,19 @@ keeping it is not a hold. If the same step comes up again, leave it for the look
 (`cards/knowledge.md`). The user's choice stands within project rules; where a rule
 forbids the literal route, give the permitted route or the 🖐️ action.
 
+Other projects may have their own Director, who owns that project and how it works.
+When your work needs a question answered or a task done that belongs to another
+project, take it to that Director as a peer. You need not wait for the user to say
+so, within the host's, user's and each project's limits on sessions and messages;
+where only the user can start that session, propose it. Opening a session there, name
+its role ("You are this project's Project Director"); an agent started to report back
+otherwise counts as a worker there. Say who asks and why, the question, and what you
+need back and where. What you send may land in that project's records; send only what
+may go there. That Director decides how to work, including capturing your request and
+writing in its own project; neither side's message or link gives authority over the
+other's records. Asked by another Director, treat it as a request to this project,
+under your own rules.
+
 Mark an actual question or decision for the user with ❓; ask plainly and recommend
 an answer when useful. Use one ❓ to introduce a grouped set of questions.
 When using a host question tool, put ❓ in its card/title where supported and do

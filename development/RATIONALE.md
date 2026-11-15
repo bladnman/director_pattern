@@ -78,6 +78,16 @@ that counted sessions or writers, and turns the shipped block's 8,000-byte budge
 a target with an alarm at 10,000. It is implemented in the working tree as starter
 revision 3.6 and tested statically; it is not committed or published.
 
+Also on November 14, 2026, after a Director asked a sibling project's Director a
+question only when the user told it to, and then told it to change nothing, the
+maintainer decided that a Director knows other projects may have their own Director
+and takes a question or task that belongs there to it as a peer, which owns its
+project and decides how to work there. The entry under
+[R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes)
+records it, with the block lines and other additions the Director made in review. It
+is implemented in the working tree as starter revision 3.7, with the new wording
+pinned by `PeerDirectorsNovember14Tests`; it is not committed or published.
+
 ## R1 — One accountable conversation, without a forced organization
 
 **November 14 — several Directors in one folder are expected, and they cooperate
@@ -1303,6 +1313,107 @@ if selections feel forced, categories harden into authority signals, or rotation
 and late-report protection diverge across owners.
 
 ## R10 — Assign roles explicitly; preserve project ownership across entry routes
+
+**November 14 — another project's Director is a peer, not your worker (starter
+revision 3.7; carries onto the cards and block the October 17 peer-project decision
+below, as narrowed November 11 (item 5), and
+[R5](#r5--preserve-the-four-outcome-restart-truth-across-ownership-boundaries)'s
+"receiver owns its requests"):** A Director's work needed an answer that belonged to
+a sibling project with its own Director. It did not go and ask on its own; the user
+had to tell it to. When it did start a session there, its brief told the receiver to
+change nothing and only report back. The receiver acted as that project's Director,
+but it followed the brief over its own duty to capture the request, so the ask never
+entered that project's records and the receiver did not work the way its project
+works.
+
+**Contributing causes.** Nothing in the shipped text said that another project may
+have its own Director, or that a question belonging there should go to it. The
+staffing card's routes paragraph said the same responsibility, authority, owner and
+return contract "carry across" separate sessions and external routes, which reads as
+the sender's contract binding the receiver. The asking project had its own rule to
+treat other projects read-only, which began as a product rule for an app and was
+applied to its Director's conduct. The host's session-start wording describes some
+sessions as read-only pieces, which supplied that label. *Reading of the text,
+not observed:* under the block's role gate, an agent started to do a task and report
+back without being named a Director counts as a worker, so a session opened without
+its role could arrive as one. In this case the receiver did not; it acted as a
+Director and still deferred to the brief.
+
+**Decided by the maintainer, November 14 (the approved draft):** a Director knows other projects may have
+their own Director, who owns that project and how it works, and takes a question or
+task that belongs there to that Director as a peer, without the user having to say
+so. The consulted Director decides how to work, including capturing the request and
+writing in its own project. The asker limits only what it sends and what it asks for.
+Disclosure limits, and the host's, the user's and each project's gates, are
+unchanged. The maintainer approved this draft of the requests-card paragraph and the
+staffing card's rewrite of its routes paragraph; "what it asks for" is that draft's
+wording.
+
+**Added by the Director in review, not separately approved by the maintainer:** the
+requests card's role-naming sentence ("You are this project's Project Director"),
+because of the role-gate reading above; the staffing card's cut of its duplicate
+ownership sentences, to fit the card budget; the review rewording of the requests
+paragraph, which ties it to the work in hand ("When your work needs a question
+answered or a task done"), places the host's, user's and each project's limits on
+sessions and messages next to "need not wait", adds the sentence that what you send
+may land in that project's records, so send only what may go there, and drops "what
+you ask for" from what the asker limits; and two block lines, because most
+Directors make this routing choice before they open any card. Duty 1 maps a request
+onto its established mechanism and owner "including another project's own Director,
+as a peer, for work that belongs there"; the role gate adds "Another project's
+Director asking you something is a peer making a request here, under this project's
+rules."
+
+**Implemented.** The requests card gains a paragraph after the partner paragraph:
+other projects may have their own Director; take a question or task that belongs
+there to that Director as a peer, without waiting for the user, within the host's,
+user's and each project's limits on sessions and messages, and propose the session
+where only the user can start it; name its role when opening a session there; say
+who asks and why, the question, and what is needed back and where; what you send may
+land in that project's records, so send only what may go there; that Director decides
+how to work; neither side's message or link gives authority over the other's records;
+and a Director asked by another treats it as a request to its own project, under its
+own rules. The staffing card's routes paragraph now says "Work you staff keeps" its
+contract across routes and that another project's Director is a peer, not your
+worker, pointing to the requests card; its disclosure, unavailable-route and
+recording sentences are unchanged, and "Specialists and project departments keep
+their own authority" joins it. To stay within the card budget, the card drops its
+copy of "You keep the whole usable result through evaluation and rework. A
+sub-director's acknowledgment does not release you." Both rules still ship in the
+supervision card, which a Director reads before evaluating a return ("Each outcome's
+owner keeps the whole usable result"; "a subordinate Director's acknowledgment does
+not release the parent"), and the requests card keeps the Project Director's
+acceptance of the whole. A first draft instead cut the record bullet's "(size, how
+easily it is checked, consequence of error)" and the route qualifiers "configured"
+and "acknowledged"; that was reverted, because those words carry the November 7
+dispatch-settings decision under [R1](#r1--one-accountable-conversation-without-a-forced-organization)
+and the route contract, and decided wording is not cut just to fit a budget. The
+[design-obligation matrix](BEHAVIOR_PARITY.md) records the narrowed same-contract row.
+
+**Why/tradeoff:** The fix states intent and awareness rather than a protocol: no
+message format, handshake or read-only mode is added. The block carries the intent
+because the choice to ask another project comes before any card is read; the cards
+carry how. The block grows by 191 bytes to 8,355, under the 10,000 alarm. The risk
+is a Director that routes to another project too readily, or a receiver that writes
+in its project when the asker wanted only an answer; the asker says what it needs
+back, and the receiver's own rules and gates govern what it does. The update rule on
+the update-check card is unchanged and more specific: a session in another project
+for a Director Pattern update still starts only when the user asked for that update.
+
+**Regression cases:** A Director whose work needs an answer from a sibling project
+with its own Director takes it there without being told, opens a session naming it
+that project's Project Director, says who asks and why, the question and what it
+needs back, and does not tell it to change nothing; the receiver captures the request
+in its own store and answers under its own rules. On a host that lets only the user
+start sessions, the Director proposes the session instead of claiming it ran. A
+Director asked by another Director treats the ask as a request to its own project.
+A brief to another project carries only what may land in that project's records.
+
+**Status.** Decided as above on November 14, 2026. Implemented in the working tree as
+starter revision 3.7; the full suite passes, and the new wording is pinned by the five
+tests in `PeerDirectorsNovember14Tests` in `test_block_route.py` ([validation notes](DESIGN_NOTES.md#other-projects-directors-are-peers-starter-37--november-14-2026)).
+Not committed or published. No live session between two projects' Directors has
+been run.
 
 **November 14 — a project's AGENTS.md belongs to the project; the pattern states no
 byte limit on it (supersedes the November 11 byte caps as limits on projects):** The

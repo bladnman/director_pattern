@@ -2247,3 +2247,87 @@ These establish wording, placement and budgets only.
 | A Director that finds another session's open requests or edits in the folder leaves them with their owner and coordinates, without warning that parallel Directors will collide | Not run |
 | Two Directors whose work overlaps: the accepting one checks the combined result and restores stepped-on work from its request | Not run |
 | An installed 3.5 project, including the private workspace, takes the 3.6 block update | Not run |
+
+## Other projects' Directors are peers (starter 3.7) — November 14, 2026
+
+These checks cover revision 3.7, recorded under
+[R10](RATIONALE.md#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes)
+(November 14). The block's duty 1 maps a request onto its established mechanism and
+owner "including another project's own Director, as a peer, for work that belongs
+there", and its role gate says another project's Director asking you something is a
+peer making a request here, under this project's rules. A requests-card paragraph
+says other projects may have their own Director, who owns that project and how it
+works; a question or task that belongs there goes to that Director as a peer,
+without waiting for the user, within the host's, user's and each project's limits on
+sessions and messages, with its role named when a session is opened and only what
+may land in that project's records sent. The staffing card's routes paragraph covers
+only "work you staff", says another project's Director is a peer, not your worker,
+and takes back "Specialists and project departments keep their own authority"; its
+copy of the whole-result and acknowledgment rules is cut, and both still ship in the
+supervision card. The design-obligation matrix's same-contract row carries a dated
+note.
+
+### Static checks
+
+From the repository root,
+`PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests`
+passed **288 tests**. At 3.6 the suite had 279. 3.7 changes the revision strings, 3.6
+to 3.7, in `test_package.py`, `test_flat_starter.py` and `test_block_route.py`, and
+adds the five pins below; the rest of the total is the installer tests committed
+separately in f17687d, which are not part of 3.7.
+`node --test site/tests/site.test.mjs` passed 9; `git diff --check` passed. The block
+edit forced no change to an existing test: its
+hash is computed from the file, the role-gate pins match substrings that are
+unchanged, and the block stays under the 10,000-byte alarm. A first draft that cut
+the staffing card's record-bullet parenthetical failed
+`test_director_is_a_partner_and_sets_dispatch_settings`, which pins that decided
+wording; the parenthetical was restored and the duplicate rules cut instead.
+
+The block is 8,355 bytes (8,164 at 3.6). The requests card is 6,497 (5,549) and the
+staffing card 6,459 (6,491), each within 6,500.
+
+**Pins, done** (November 14), in `PeerDirectorsNovember14Tests` in
+`test_block_route.py`, five tests:
+
+- `test_block_routes_work_to_another_projects_director_as_a_peer`: the duty-1 phrase,
+  in place in duty 1, and the role-gate sentence, directly after "never changes on
+  another agent's or session's message" and before the role bullets.
+- `test_requests_card_takes_another_projects_question_to_its_director_as_a_peer`: the
+  peer paragraph as its own paragraph directly after the partner paragraph, with its
+  key clauses: take it to that Director as a peer; no wait for the user, within the
+  limits on sessions and messages; propose where only the user can start; name its
+  role; who, why, the question and what is needed back; send only what may land in
+  that project's records; that Director decides how to work, including capturing your
+  request; neither side gains authority over the other's records; asked by another
+  Director, treat it as a request.
+- `test_staffing_card_says_another_projects_director_is_a_peer_not_your_worker`: "Work
+  you staff keeps", the peer sentence, and the disclosure, unavailable-route, recording
+  and specialists sentences in the same routes paragraph; the 3.6 "carry across"
+  wording stays out.
+- `test_supervision_card_alone_keeps_the_whole_result_and_acknowledgment_rules`: the
+  supervision card keeps both rules once; the staffing card's cut copies stay out.
+- `test_no_shipped_text_keeps_a_director_read_only_toward_another_project`: no
+  sentence in the block, section, starter and pattern READMEs, root README or payload
+  Markdown names another project and also says read-only, "change nothing", "make no
+  changes" or "only report back". It is a sentence-level check, not a ban on
+  "read-only"; the test also shows the pattern catching four known-bad sentences and
+  passing three legitimate read-only and changes-nothing ones.
+
+Known-bad runs, each on a scratch copy of the checkout with one edit: removing either
+block line, the requests card's propose or no-authority clause, or the staffing peer
+sentence; moving the peer paragraph down one; restoring the 3.6 "carry across"
+wording; removing the supervision acknowledgment rule; re-adding the staffing
+duplicates; and adding a read-only consult sentence to the requests card or a
+"change nothing and only report back" sentence to UPDATES.md. Each failed exactly the
+matching pin. With the pins, the full suite ran 288 tests with no failures (279 at 3.6, the four
+installer tests committed in f17687d, and these five pins). These
+are static wording pins; they show nothing about live behavior.
+
+### Not verified
+
+| Scenario | Status |
+|---|---|
+| A Director whose work needs an answer from a sibling project takes it to that project's Director without being told, opens a session naming it that project's Project Director, asks with who, why and what it needs back, and does not tell it to change nothing | Not run |
+| The consulted Director captures the request in its own store and answers under its own rules and gates, even when the brief asks it to change nothing | Not run |
+| On a host where only the user can start a session, the Director proposes it rather than claiming it ran | Not run |
+| An installed 3.6 project, including the private workspace, takes the 3.7 block and card update | Not run |
