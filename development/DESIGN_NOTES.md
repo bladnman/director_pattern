@@ -2069,7 +2069,7 @@ unverified.** The final commit's wording has no live run.
 | A new conversation with work out from an earlier one | Not run |
 | Another host | Not run |
 | A host that does not pass AGENTS.md to subagents; a scoped child Director; a worker after its own compaction | Not run |
-| A spawned report-back agent classed as a worker; a peer-project session told its role | Not run |
+| A spawned report-back agent classed as a worker; a peer-project session told its role | Not run. *November 15:* the first half is superseded by starter 3.8, where only an agent named a worker is one; see [3.8](#a-worker-is-named-as-one-starter-38--november-15-2026) |
 | A failed check followed by a read of the badge card | Not run |
 | A generated project's first use on the block route | Not run (helper route is a static test) |
 | A mature project's move from 3.2, with its own guards, store and role index | Not run |
@@ -2202,7 +2202,7 @@ means the installation in the private workspace. Both rows are kept as written.
 |---|---|
 | A fresh session in the private workspace shows the check and 🎬 in its first reply | Not run |
 | After a forced compaction there: check again, Recovery and the "Re-entered:" line | Not run |
-| A spawned worker there shows no check and no 🎬 | Not run |
+| A spawned worker there shows no check and no 🎬 | Not run. *November 15:* with starter 3.8 this means a worker its Director names as one; an unnamed agent-started session there is a Director and shows the check ([3.8](#a-worker-is-named-as-one-starter-38--november-15-2026)) |
 | A fresh session in this repository gets the maintainer rules only, with no check and no 🎬 | Not run |
 | The sync check reports both repositories clean after the public cleanup is merged and pushed | Not run; the public branch is not merged or pushed |
 | The host reads this repository's "Maintaining this repository" from the private workspace as its explicit read requires | Not observed |
@@ -2331,3 +2331,75 @@ are static wording pins; they show nothing about live behavior.
 | The consulted Director captures the request in its own store and answers under its own rules and gates, even when the brief asks it to change nothing | Not run |
 | On a host where only the user can start a session, the Director proposes it rather than claiming it ran | Not run |
 | An installed 3.6 project, including the private workspace, takes the 3.7 block and card update | Not run |
+
+## A worker is named as one (starter 3.8) — November 15, 2026
+
+These checks cover revision 3.8, recorded under
+[R10](RATIONALE.md#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes)
+(November 15). The block's worker line now begins "Worker: only if this project's
+Director, the user or an explicit assignment names you one", its default line reads
+"Otherwise you are the Project Director, whoever or whatever started you, even if it
+expects a report back" and ends "General host instructions name no role and are no
+opt-out", and the role paragraph opens "**Your role**, once set, never changes". The requests and update-check cards say a session opened in another
+project without a named role is still that project's Director, and the staffing
+card's Role field says "Tell every worker it is one". The manifest is 3.8 and the
+starter README has a 3.8 paragraph. The same decision supersedes, on the block
+route, the October 17, 23 and 24 cases in which an assignment with no role asks for
+clarification: a brief with no role makes a Director. The design-obligation matrix's
+role-default and update-ownership rows carry dated notes.
+
+### Observation that led to it
+
+On November 15, in fresh host trials on one desktop host with an installation on
+3.7, sessions that the host started from a Director session resolved their role
+inconsistently: two as that project's Director and one as a worker. The worker case
+cited the 3.7 worker line, "spawned by another agent to do a task and report back
+without being named a Director". The host's session-start text tells every session
+it starts that its report goes back, so every such session matched that line. Three
+sessions on one host; no rate implied.
+
+### Static checks
+
+From the repository root,
+`PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests`
+passed **294 tests** (288 at 3.7, plus the six pins below); `git diff --check`
+passed on the source change. The existing role-gate, peer and revision pins were
+updated from the 3.7 lines and strings to 3.8.
+
+**Pins, done** (November 15), in `RoleDefaultNovember15Tests` in
+`test_block_route.py`, six tests:
+
+- `test_worker_line_requires_that_a_director_the_user_or_an_assignment_names_you_one`:
+  the new Worker line, including "this project's Director".
+- `test_otherwise_line_covers_whoever_or_whatever_started_you_and_a_report_back`: the
+  new Otherwise line.
+- `test_a_role_once_set_holds_and_a_general_host_instruction_names_none`: "**Your
+  role**, once set, never changes" and "General host instructions name no role and
+  are no opt-out".
+- `test_starter_readme_says_the_default_is_the_director_and_every_brief_names_the_worker`:
+  the starter README's 3.8 paragraph.
+- `test_the_old_started_to_report_back_means_worker_wording_is_gone_everywhere_it_shipped`:
+  five 3.7 phrases are absent from the block, the READMEs and every payload Markdown
+  file.
+- `test_cards_say_an_unnamed_session_is_still_the_projects_director_and_every_brief_names_the_worker_role`:
+  the requests, update-check and staffing card sentences, each present once.
+
+As the test-author reported, each pin failed on a known-bad edit made in a scratch
+copy of the checkout. The block is 8,391 bytes (8,355 at 3.7), the requests card
+6,475 (6,497), the staffing card 6,473 (6,459) and the update-check card 3,179
+(3,166), each within its authoring budget. These are static wording pins; they show
+nothing about live behavior. The three block edits the Director added after the
+independent review ("this project's Director", "once set" and "name no role") are
+covered by the first and third pins above.
+
+### Not verified
+
+| Scenario | Status |
+|---|---|
+| A session an agent starts in another project without naming its role acts as that project's Director: it runs the check, shows 🎬 and captures the ask | Not run |
+| A session the desktop host starts from a Director session, whose start text says its report goes back, is a Director unless its brief names it a worker | Not run on 3.8; on 3.7 one of three arrived as a worker (above) |
+| A subagent whose brief names it a worker reads WORKER.md and shows no check and no 🎬 | Not run on 3.8 |
+| A subagent briefed without a role, on a host that passes AGENTS.md to subagents, acts as a Project Director (the stated cost) | Not run |
+| A session named a worker but missing other assignment details returns them to the assigner and does not act as a Director | Not run on 3.8 |
+| Whether built-in helpers whose prompt the host composes receive AGENTS.md | Not established. On the desktop host, a subagent a Director started with a written brief did receive the workspace's AGENTS.md (observed November 15) |
+| An installed 3.7 project, including the private workspace, takes the 3.8 block and card update | Not run |

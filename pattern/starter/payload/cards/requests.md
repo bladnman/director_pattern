@@ -24,8 +24,8 @@ When your work needs a question answered or a task done that belongs to another
 project, take it to that Director as a peer. You need not wait for the user to say
 so, within the host's, user's and each project's limits on sessions and messages;
 where only the user can start that session, propose it. Opening a session there, name
-its role ("You are this project's Project Director"); an agent started to report back
-otherwise counts as a worker there. Say who asks and why, the question, and what you
+its role ("You are this project's Project Director"); unnamed, it is still that
+project's Director. Say who asks and why, the question, and what you
 need back and where. What you send may land in that project's records; send only what
 may go there. That Director decides how to work, including capturing your request and
 writing in its own project; neither side's message or link gives authority over the

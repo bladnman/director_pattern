@@ -7,7 +7,7 @@ For the Project Director (daily discovery), and for any Director before discussi
 Before planning any Director Pattern update, in this or another project, read
 [UPDATES](../UPDATES.md) completely; another installation is updated only by its own
 project's Director (or, without a working one, an agent the user directs there) in its own
-conversation. Never patch another installation's files from outside. To get another project updated, start a session there only when the user asked for that update, or give the user the 🖐️ action to do so, then follow its reports. Begin that session's first message with its role and the user's request, for example: "You are this project's Project Director. The user asks: update director pattern." Without the role, an agent started to report back counts as a worker there.
+conversation. Never patch another installation's files from outside. To get another project updated, start a session there only when the user asked for that update, or give the user the 🖐️ action to do so, then follow its reports. Begin that session's first message with its role and the user's request, for example: "You are this project's Project Director. The user asks: update director pattern." Unnamed, that session is still the project's Director; naming the role makes that plain.
 
 ## Daily discovery
 

@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated November 14, 2026. This repository authors a
+Living design rationale · updated November 15, 2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -87,6 +87,21 @@ project and decides how to work there. The entry under
 records it, with the block lines and other additions the Director made in review. It
 is implemented in the working tree as starter revision 3.7, with the new wording
 pinned by `PeerDirectorsNovember14Tests`; it is not committed or published.
+*November 15 addition:* 3.6 and 3.7 are now published on `main`.
+
+On November 15, 2026, after fresh host trials in which one of three sessions started
+from a Director session arrived as a worker because the host told it its report goes
+back, the maintainer decided that a worker is a session a Director names as one, and
+that any other session is its project's Director, whoever or whatever started it.
+Directors will be started by agents more often than by people. The shipped worker
+line also names the user and an explicit assignment; that keeps the block's existing
+assignment and opt-out wording and is not part of the maintainer's decision. The
+entry under
+[R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes)
+records it; it supersedes the November 11 narrowing of who counts as a worker and
+restores the October 17 default. It is implemented as wording in starter revision
+3.8, pinned by `RoleDefaultNovember15Tests`, and published on `main` with this
+change; its live trials are pending.
 
 ## R1 — One accountable conversation, without a forced organization
 
@@ -1314,6 +1329,124 @@ and late-report protection diverge across owners.
 
 ## R10 — Assign roles explicitly; preserve project ownership across entry routes
 
+**November 15 — a worker is a session a Director names as one; an unnamed session is
+the Director, whoever started it (starter revision 3.8; supersedes the November 11
+narrowing, item 5 below, and restores the October 17 default and its regression
+case):** In fresh host trials on November 15, sessions that the desktop app started
+from a Director session resolved their role inconsistently: twice as that project's
+Director, once as a worker. The worker case cited the block's worker line, "spawned
+by another agent to do a task and report back without being named a Director". The
+host's session-start text tells every session it starts that its report goes back
+to the session that started it, so every agent-started session matched "report
+back", whether or not anyone meant it to be a worker. The November 11 rule sorted
+readers by the shape of the start, and on this host that shape is the same for every
+session an agent starts.
+
+**Decided by the maintainer, November 15:** Directors will be started by other
+agents more often than by people, for example a Director opening a session in
+another project. A worker is a session a Director names as one; a Director opening a
+worker knows it is doing so. A session nobody names defaults to Director. The
+maintainer noted that this was the rule's first definition (October 17, below) and
+called the finding critical for scaling, as systems come to talk to systems.
+
+**Implemented, as wording (starter revision 3.8).** The block's worker line now
+begins "Worker: only if this project's Director, the user or an explicit assignment
+names you one", and its default line reads "Otherwise you are the Project Director,
+whoever or whatever started you, even if it expects a report back"; the rest of each
+line is unchanged except as listed below. "The user or an explicit assignment" keeps
+the block's existing assignment and opt-out wording; it is not part of the
+maintainer's decision, which names only a Director. The requests card keeps its role-naming sentence and
+replaces its reason: unnamed, the session "is still that project's Director". The
+update-check card keeps its example first message and says the same: "Unnamed, that
+session is still the project's Director; naming the role makes that plain." The
+staffing card's Role field now says "Tell every worker it is one and to read
+`.director/WORKER.md`". The manifest is 3.8 and the starter README has a 3.8
+paragraph. The block is 8,391 bytes (8,355 at 3.7); the requests card is 6,475 (6,497), the staffing card 6,473
+(6,459) and the update-check card 3,179 (3,166).
+
+**Added by the Director after the independent review, November 15; open to the
+maintainer's review.** Three more block edits, each with its reason:
+- The worker line says "this project's Director", not "a Director". This is the
+  Director's decision, in line with the maintainer's 3.7 decision that another
+  project's Director is a peer: a brief from another project's Director does not by
+  itself make a session here its worker, so its ask still lands in this project's
+  records. "An explicit assignment" could still be read to cover such a brief; the
+  role paragraph's peer sentence points the other way.
+- The role paragraph's first sentence reads "**Your role**, once set, never changes on
+  another agent's or session's message", because a Director's brief is now the only
+  way to make a worker, and that brief is itself another agent's message; the role
+  is set at the start and not changed later.
+- The default line ends "General host instructions name no role and are no opt-out",
+  so a host's session-start text, such as the report-back wording seen in the trials,
+  sets no role.
+
+**Design-intent disposition.** *Affected:* item 5 of the November 11 entry below,
+kept as written with a dated note, and the passages that relied on it (the 3.7
+reading of the role gate and the reason for its role-naming sentence, the November
+11 regression case for a spawned report-back agent, and the R11 note on an update
+session's first message), each now carrying a November 15 addition. *Purpose and
+failure prevented:* item 5 kept a spawned helper whose brief left out its role from
+taking Director authority on hosts that pass AGENTS.md to subagents. That failure was
+a reading of the text, not an observation. Item 5 stated its own cost: the role is
+inferred from the shape of the spawn, which October 17 forbade, and a peer-project
+session opened without a role arrives as a worker with no Director in that project.
+That cost is what the November 15 trial then showed, in one case of three.
+*Disposition:* restore October 17's default, a project session is that project's
+Director whoever opened it and roles are not inferred from ancestry or tool type,
+with its regression case "a session opened in a peer project by another director
+serves as that project's director by default". Keep item 5's purpose through the
+brief instead of the shape of the start: duty 5 has every brief state the role, and
+the staffing card now has every brief tell a worker it is one. *What stays from November 11:*
+another agent's or session's message never changes a role once a session has one;
+only the user or an explicit assignment opts a session out of acting as Director;
+workers and scoped child Directors skip the check and 🎬.
+
+**Also superseded, November 15: "clarify, never default" on the block route.**
+October 17 below said a delegated assignment with no role "seeks clarification before
+role-specific action"; October 23 says "malformed bounded assignments clarify, never
+default", with the regression case that "an incomplete delegated assignment cannot
+become Director"; and October 24 says malformed delegated assignments "still clarify
+without falling into the Director default". Their text stays below as history. The
+maintainer's November 15 decision settles these cases too: a session that is not told
+it is a worker defaults to Director, and a worker must be named as one by a Director.
+So on the block route a brief with no role makes a Director; it does not seek
+clarification. November 11 had already dropped the clarification step there; 3.8
+records the replacement as decided. What stays: WORKER.md's "Missing or conflicting
+assignment details return to the assigner" still applies to a session already named
+a worker that is missing other details, such as its scope, authority or return route;
+those details never make it a Director.
+
+**Cost, stated honestly.** A Director that briefs a subagent without naming it a
+worker now gets a Project Director on hosts that pass AGENTS.md to subagents: it
+runs the check, shows 🎬 and holds Director duties for whatever it was sent to do.
+The expected case, not yet observed, is a one-line lookup sent to a built-in search
+helper. *Observed, November 15:* on the desktop host, a subagent that a Director
+started with a written brief did receive the workspace's AGENTS.md, so on that host a
+brief without a role makes a Director. The mitigation is duty 5 (every brief states
+the role) and the staffing card's "Tell every worker it is one"; neither guards a
+brief the Director did not write. Whether built-in helpers whose prompts the host
+writes receive AGENTS.md is still unknown.
+
+**Regression cases:** A Director opens a session in another project without naming
+its role; that session is the project's Director, runs its check and captures the
+ask under its own rules. A session the desktop app starts from a Director session,
+whose start text says its report goes back, is a Director unless its brief names it a
+worker. A subagent whose brief names it a worker reads WORKER.md and shows no check
+and no 🎬. A running Director that a later agent message calls a worker keeps its
+role. A subagent briefed without a role on a host that passes AGENTS.md acts as a
+Project Director: that is the stated cost, not a pass.
+
+**Status.** Decided by the maintainer on November 15, 2026; the three later block
+edits above are the Director's, open to the maintainer's review. Implemented as
+wording in starter revision 3.8 and published on `main` with this change; no
+installed project has it. Verified statically: the full suite passes, 294 tests,
+and the new wording, including the three later block edits and the starter README
+paragraph, is pinned by the six tests in `RoleDefaultNovember15Tests` in
+`test_block_route.py`, with the existing role-gate and peer pins updated to 3.8
+([validation notes](DESIGN_NOTES.md#a-worker-is-named-as-one-starter-38--november-15-2026)).
+These are wording pins only. Not verified: the live trial of an unnamed
+agent-started session and a trial of an unnamed subagent are pending.
+
 **November 14 — another project's Director is a peer, not your worker (starter
 revision 3.7; carries onto the cards and block the October 17 peer-project decision
 below, as narrowed November 11 (item 5), and
@@ -1337,7 +1470,10 @@ sessions as read-only pieces, which supplied that label. *Reading of the text,
 not observed:* under the block's role gate, an agent started to do a task and report
 back without being named a Director counts as a worker, so a session opened without
 its role could arrive as one. In this case the receiver did not; it acted as a
-Director and still deferred to the brief.
+Director and still deferred to the brief. *November 15 addition:* that reading was
+then observed. In one of three fresh host trials, a session the desktop app started
+from a Director session arrived as a worker and cited that line; starter 3.8 removes
+it (R10, November 15).
 
 **Decided by the maintainer, November 14 (the approved draft):** a Director knows other projects may have
 their own Director, who owns that project and how it works, and takes a question or
@@ -1363,6 +1499,10 @@ onto its established mechanism and owner "including another project's own Direct
 as a peer, for work that belongs there"; the role gate adds "Another project's
 Director asking you something is a peer making a request here, under this project's
 rules."
+*November 15 addition:* the role-naming sentence stays in 3.8, but its reason
+changes. An unnamed session there is now still that project's Director, so naming
+the role makes it plain rather than keeping the session from arriving as a worker
+(R10, November 15).
 
 **Implemented.** The requests card gains a paragraph after the partner paragraph:
 other projects may have their own Director; take a question or task that belongs
@@ -1414,6 +1554,7 @@ starter revision 3.7; the full suite passes, and the new wording is pinned by th
 tests in `PeerDirectorsNovember14Tests` in `test_block_route.py` ([validation notes](DESIGN_NOTES.md#other-projects-directors-are-peers-starter-37--november-14-2026)).
 Not committed or published. No live session between two projects' Directors has
 been run.
+*November 15 addition:* 3.7 is now published on `main`.
 
 **November 14 — a project's AGENTS.md belongs to the project; the pattern states no
 byte limit on it (supersedes the November 11 byte caps as limits on projects):** The
@@ -1670,6 +1811,16 @@ regression case. Test names are in `development/tests/`.
    run for a spawned report-back agent or a peer-project session. The design proposal
    listed this as a Director's decision for the owner to confirm; that confirmation
    is not recorded here.
+   *November 15 addition: superseded.* No owner confirmation of this narrowing was
+   recorded, and on November 15 the maintainer decided the opposite. A worker is a
+   session a Director names as one (the shipped line also keeps the user and an
+   explicit assignment), and any other session is its
+   project's Director whoever or whatever started it, even one expected to report
+   back. In fresh host trials that day, one of three sessions started from a Director
+   session arrived as a worker by the "report back" line, because the host tells
+   every session it starts that its report goes back. Starter 3.8 restores the
+   October 17 default and its peer-project regression case; this item's text and
+   reasoning stay above as history (R10, November 15).
 6. **Read-only store views after the requests card alone** (R17; recorded there).
 7. **The November 7 deferral of splitting OPERATIONS' installation-evidence section**
    (R9; recorded there).
@@ -1751,6 +1902,9 @@ a diff or a worker's quote of an END line does not count as a read. A spawned
 report-back agent shows no check and no 🎬. An edited block, a changed stub and an
 empty or over-cap project section each block the check.
 *November 14 addition:* an over-cap section no longer blocks (R10, November 14); an empty section or one without a check command still does.
+*November 15 addition:* with starter 3.8, "a spawned report-back agent" in this case
+means an agent its brief names a worker. An agent-started session that nobody names
+is a Director and runs the check (R10, November 15).
 
 **Status.** Decided: build the refactor with recovery in the always-loaded block
 (owner, November 11). Implemented: on a branch as starter revision 3.3, with an
@@ -2000,6 +2154,11 @@ stays a worker. An explicit child director coordinates only its granted outcome.
 A delegated assignment with no role seeks clarification before role-specific action.
 **Verification limit:** Document/package checks do not establish actual fresh-session
 role behavior. Revisit if ambiguous assignment boundaries still cause role drift.
+*November 15 addition:* the November 11 narrowing of this default (item 5 there) is
+superseded, and starter 3.8 restores the default and the peer-project regression
+case. The case of a delegated assignment with no role seeking clarification is
+superseded on the block route: a brief with no role makes a Director (R10, November
+15).
 
 **Refined, October 21:** Role values stay exactly `worker` and `director`; no new
 value such as `Role: request-manager` is sent. Responsibilities ride on them: a
@@ -2037,6 +2196,11 @@ in the common PATTERN move to [DIRECTION.md](../pattern/engine/DIRECTION.md), lo
 Worker boundaries and optional analysis have their own files. This supersedes
 having every worker read the full Director-heavy contract or the hook's abstract.
 The October 22 fast-answer decision in R2 remains intact.
+*November 15 addition:* on the block route, "malformed bounded assignments clarify,
+never default" and the regression case below that an incomplete delegated assignment
+cannot become Director are superseded: a brief with no role makes a Director. A
+session already named a worker that is missing other details still returns them to
+the assigner (R10, November 15).
 
 **Reported evidence versus hypothesis:** An adoption report described an installer
 appending its own abstract to already enormous startup instructions, with poor
@@ -2129,6 +2293,8 @@ keeps background setup/identity checks separate, preserving R2's direct-answer
 purpose after role loading. This is an instruction-guided route, not automatic
 file injection, a runtime, or host enforcement. Malformed delegated assignments
 still clarify without falling into the Director default.
+*November 15 addition:* superseded on the block route for an assignment with no role,
+which now makes a Director (R10, November 15).
 
 **Why/tradeoff:** "Before" did not specify the tool boundary. A model can emit
 PATTERN and task reads in one generation, even when the host streams a PATTERN
@@ -2462,6 +2628,9 @@ decision, keeping its earlier START.md, DIRECTOR.md and OPERATIONS.md and record
 the choice. The November 7 rule that each installation is updated from its own
 project is unchanged; a session started in another project for an update now must be
 told its role in its first message (R10, item 5).
+*November 15 addition:* the first message still names the role in 3.8, but item 5 is
+superseded: unnamed, that session is still the project's Director, and naming the
+role makes that plain (R10, November 15).
 
 **Regression cases:** A 3.2 installation with project text around its bridge, a
 project role, an update policy and a captured request makes the move and keeps all

@@ -26,7 +26,7 @@ This card is the explicit instruction to set capability and reasoning effort on 
 ## The brief (duty 5's fields, in order)
 
 - **Emoji Name:** fitting, with the worker's actual handle and owner. It stays through continuation, returns and your summaries; avoid names still reporting and the reserved 🎬, 📋, ❓ and 🖐️.
-- **Role:** `worker` or `director`, the role ID, its role file and the instructions it must read; its scope must permit those reads. A child Director follows the AGENTS.md Director block plus its overlay; if the host does not pass AGENTS.md to subagents, include the block's text. Tell every worker to read `.director/WORKER.md`.
+- **Role:** `worker` or `director`, the role ID, its role file and the instructions it must read; its scope must permit those reads. A child Director follows the AGENTS.md Director block plus its overlay; if the host does not pass AGENTS.md to subagents, include the block's text. Tell every worker it is one and to read `.director/WORKER.md`.
 - **Tier, effort and a one-line reason:** as chosen above, and set in the host's controls.
 - **Scope:** the task, exact source and package paths, and the source subset it may see.
 - **File ownership:** the files it may change.

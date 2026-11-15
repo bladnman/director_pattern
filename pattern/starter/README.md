@@ -13,7 +13,7 @@ reviewed instruction/adapter integration, not a fresh installer or second ledger
 The [design-obligation matrix](https://github.com/bladnman/director_pattern/blob/main/development/BEHAVIOR_PARITY.md) explains the
 old reasons, revised routes, evidence and remaining verification limits.
 
-The manifest's `starter_revision` (now 3.7) is a readable revision number bumped with
+The manifest's `starter_revision` (now 3.8) is a readable revision number bumped with
 each published payload change; `starter_version` stays the install-format number.
 
 Revision 3.3 changes where the Director's rules live. The installer writes a marked
@@ -63,6 +63,14 @@ the request and writing in its own project; the asker limits only what it sends 
 what it needs back. The staffing card says another project's Director is a peer, not
 your worker. The block's duty 1 and role gate carry the same intent, since most
 Directors make this choice before they open a card.
+
+Revision 3.8 says that a session or agent is a worker only when this project's
+Director, the user or an explicit assignment names it one. Any other reader is the
+Project Director, whoever or whatever started it, even one expected to report back: a
+Director another agent started is still a Director. So the staffing card has every
+brief tell a worker it is one, and the requests and update-check cards say that a
+session opened in another project without a named role is still that project's
+Director. A brief that leaves out the role now starts a Director, so name every worker.
 
 ## Install beside ordinary notes and assets
 

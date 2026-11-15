@@ -303,7 +303,7 @@ class PackageBoundaryTests(unittest.TestCase):
         block = " ".join((PATTERN / "starter/agents/block.md").read_text(encoding="utf-8").split())
         records = " ".join((PATTERN / "starter/payload/RECORDS.md").read_text().split())
         # Defaulted or explicitly selected, the user-facing session is the Project Director and runs the check.
-        self.assertIn("Otherwise you are the Project Director, even if a tool started the session", block)
+        self.assertIn("Otherwise you are the Project Director, whoever or whatever started you, even if it expects a report back", block)
         self.assertIn("**🎬 and the check (Project Director only).** Before your first reply, even to a greeting", block)
         self.assertIn("never the check or 🎬; report to your parent, who keeps acceptance", block)
         self.assertIn("No check, no 🎬.", block)
@@ -408,7 +408,7 @@ class PackageBoundaryTests(unittest.TestCase):
     def test_starter_manifest_records_revision_and_format_number(self):
         # Static manifest check only; the installer's receipt is checked in test_flat_starter.
         manifest = json.loads((PATTERN / "starter/manifest.json").read_text(encoding="utf-8"))
-        self.assertEqual(manifest["starter_revision"], "3.7")
+        self.assertEqual(manifest["starter_revision"], "3.8")
         self.assertEqual(manifest["starter_version"], 3)
 
     def test_updates_run_through_each_projects_own_director(self):
