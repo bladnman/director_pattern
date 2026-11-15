@@ -2399,7 +2399,76 @@ covered by the first and third pins above.
 | A session an agent starts in another project without naming its role acts as that project's Director: it runs the check, shows 🎬 and captures the ask | Not run |
 | A session the desktop host starts from a Director session, whose start text says its report goes back, is a Director unless its brief names it a worker | Not run on 3.8; on 3.7 one of three arrived as a worker (above) |
 | A subagent whose brief names it a worker reads WORKER.md and shows no check and no 🎬 | Not run on 3.8 |
-| A subagent briefed without a role, on a host that passes AGENTS.md to subagents, acts as a Project Director (the stated cost) | Not run |
+| A subagent briefed without a role, on a host that passes AGENTS.md to subagents, acts as a Project Director (the stated cost) | Not run. *Later November 15:* observed once on 3.8: nominally a Director, it ran no check, no 🎬 and no WORKER.md read ([3.9](#whoever-starts-a-session-names-a-worker-one-starter-39--november-15-2026)) |
 | A session named a worker but missing other assignment details returns them to the assigner and does not act as a Director | Not run on 3.8 |
-| Whether built-in helpers whose prompt the host composes receive AGENTS.md | Not established. On the desktop host, a subagent a Director started with a written brief did receive the workspace's AGENTS.md (observed November 15) |
+| Whether built-in helpers whose prompt the host composes receive AGENTS.md | Not established. On the desktop host, a subagent a Director started with a written brief did receive the workspace's AGENTS.md (observed November 15). *Later November 15:* a host-defined search helper did no startup reads at all; whether it received AGENTS.md is still not established ([3.9](#whoever-starts-a-session-names-a-worker-one-starter-39--november-15-2026)) |
 | An installed 3.7 project, including the private workspace, takes the 3.8 block and card update | Not run |
+
+## Whoever starts a session names a worker one (starter 3.9) — November 15, 2026
+
+These checks cover revision 3.9, recorded under
+[R10](RATIONALE.md#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes)
+(November 15, 3.9). Duty 5's role item now reads "role (tell each worker it is one:
+any agent you start unnamed, even a host helper, counts as a Director)", which in
+review replaced a draft's "name each worker one" (readable as "give each worker a
+name") and "is a Director"; the staffing card's Role
+line says "Tell every worker, helpers and lookups too, it is one and to read
+`.director/WORKER.md`"; the block's role paragraph drops "Default to Project Director
+unless explicitly assigned a worker or scoped child Director role.", whose meaning
+the three role bullets keep. The manifest is 3.9 and the starter README has a 3.9
+paragraph. The design-obligation matrix's role-default row carries a dated note.
+
+### Observations that led to it
+
+All on November 15, on the desktop host.
+
+- **Host fact: subagents get the parent's start-time instructions.** A probe ran from
+  a session that started before its block was updated to 3.8 in that same session.
+  Its subagent received the AGENTS.md the parent had loaded at its start, ran the old
+  3.7 block and called itself a worker under the report-back test. After an
+  in-session block update, that session's subagents keep the old block until a new
+  session starts. The probe is therefore not evidence about 3.8's wording, and a
+  trial of new block text must run from a session started after the install.
+- **A host-defined search helper did no startup reads at all.** Whether it received
+  AGENTS.md is not established.
+- **A valid 3.8 trial.** From a Director session started after the 3.8 install, a
+  general-purpose subagent with a roleless brief had the 3.8 Worker line. It did the
+  lookup itself, with no check, no 🎬 and no WORKER.md read. Asked its role, it said
+  it had not chosen one, agreed that by the text it was the Project Director, and
+  called skipping startup a gap. One trial; no rate implied.
+
+### Static checks
+
+From the repository root,
+`PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests`
+passed **298 tests** (294 at 3.8, plus the four pins below). The existing pins were
+updated to 3.9: the brief-fields test now compares the field names of duty 5 and the
+staffing card, since duty 5's role item now carries a parenthesis; and the two
+`test_package.py` pins of the Default sentence now assert that it is absent from the
+block. One `test_package.py` pin still asserts the sentence, in the legacy
+`INSTALL-v1.md` hook, which keeps it and is not part of the starter.
+
+**Pins, done** (November 15), in `HelpersAreDirectorsNovember15Tests` in
+`test_block_route.py`, four tests:
+
+- `test_duty_5_role_item_tells_the_starter_to_name_each_worker_even_a_host_helper`:
+  duty 5's role item.
+- `test_staffing_card_tells_every_worker_including_helpers_and_lookups_it_is_one`: the
+  staffing card's Role line.
+- `test_starter_readme_3_9_paragraph_puts_the_duty_on_the_agent_that_starts_a_session`:
+  the starter README's 3.9 paragraph.
+- `test_the_cut_default_sentence_stays_out_and_the_role_bullets_keep_its_meaning`: the
+  Default sentence stays out of the block, and the three role bullets that keep its
+  meaning are present.
+
+The block is 8,396 bytes (8,391 at 3.8) and the staffing card 6,499 (6,473), one byte inside its
+6,500 budget. These are static wording pins; they show nothing about live behavior.
+
+### Not verified
+
+| Scenario | Status |
+|---|---|
+| From a session started after the 3.9 install, a subagent briefed as a worker reads WORKER.md and shows no check and no 🎬, and one briefed with no role is compared against it | Not run |
+| A Director names a lookup or a host helper a worker in its brief, as duty 5 asks | Not run |
+| A host helper whose prompt the host writes receives AGENTS.md or the brief's role | Not established |
+| An installed 3.8 project, including the private workspace, takes the 3.9 block and card update | Not run |

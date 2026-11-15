@@ -103,6 +103,16 @@ restores the October 17 default. It is implemented as wording in starter revisio
 3.8, pinned by `RoleDefaultNovember15Tests`, and published on `main` with this
 change; its live trials are pending.
 
+Later on November 15, 2026, after a trial in which a subagent given a brief with no
+role was nominally a Director but ran no startup, the maintainer decided that this
+risk is handled by the agent that starts the session: a subagent should not be
+created without being defined as a worker. The entry under
+[R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes)
+records it, with the host fact that subagents receive the parent session's
+start-time instructions. It is implemented as wording in starter revision 3.9, pinned
+by `HelpersAreDirectorsNovember15Tests`, and published on `main` with this change;
+its live trial is pending.
+
 ## R1 — One accountable conversation, without a forced organization
 
 **November 14 — several Directors in one folder are expected, and they cooperate
@@ -1329,6 +1339,93 @@ and late-report protection diverge across owners.
 
 ## R10 — Assign roles explicitly; preserve project ownership across entry routes
 
+**November 15 — the agent that starts a session names a worker one (starter revision
+3.9; handles the cost recorded for 3.8 in the entry below):** Starter 3.8 made any
+session that nobody names a worker its project's Director, and recorded the cost: a
+Director that briefs a subagent without naming it a worker gets a Director. Three
+observations that day, on the desktop host, bear on that cost.
+
+**Observed, November 15.**
+1. *Subagents carry the parent's start-time instructions.* A probe ran from a session
+   that started before its block was updated to 3.8 in that same session. Its
+   subagent received the AGENTS.md the parent had loaded at its start, not the
+   current file, so it ran the old 3.7 block and called itself a worker under the
+   report-back test. Host fact, as observed: subagents get the parent session's loaded
+   instructions, so after an in-session block update, that session's subagents keep
+   the old block until a new session starts. This probe therefore says nothing about
+   3.8's wording.
+2. *A host-defined search helper did no startup reads at all.* Whether it received
+   AGENTS.md and ignored it, or never received it, is not established.
+3. *A valid trial on 3.8.* From a Director session started after the 3.8 install, a
+   general-purpose subagent given a brief with no role had the 3.8 Worker line. It did
+   the lookup itself, with no check, no 🎬 and no read of WORKER.md. Asked its role, it
+   said it had not chosen one; it agreed that by the text it was the Project Director
+   and called skipping startup a gap. So a roleless subagent is nominally a Director
+   but does not behave as one consistently: here it acted as neither.
+
+**Decided by the maintainer, November 15:** the 3.8 risk is handled on the creator's
+side. A subagent should not be created without being defined as a worker.
+
+**Implemented, as wording (starter revision 3.9).** Duty 5's role
+item now reads "role (tell each worker it is one: any agent you start unnamed, even a
+host helper, counts as a Director)", so the rule sits in the always-loaded text the
+starting Director has in hand when it writes the brief. In review, "tell each worker
+it is one" replaced a first draft's "name each worker one", which could be read as
+"give each worker a name", and "counts as a Director" replaced "is a Director". The
+starter README's 3.9 paragraph says such an agent "counts as a Director under the
+block, though it may not act as one". The staffing card's Role line now says
+"Tell every worker, helpers and lookups too, it is one and to read
+`.director/WORKER.md`". The role paragraph drops "Default to Project Director unless
+explicitly assigned a worker or scoped child Director role." (below). The manifest is
+3.9 and the starter README has a 3.9 paragraph. The block is 8,396 bytes (8,391 at
+3.8); the staffing card is 6,499 (6,473), one byte inside its
+6,500 budget.
+
+**Design-intent disposition of the removed Default sentence.** *Affected:* the
+sentence in the role paragraph, which descends from the November 1 decision below
+("role assignment is not a user task") that the host-loaded hook state the Project
+Director default unless a worker or scoped child Director role is explicitly
+assigned. *Purpose and failure prevented:* an ordinary assigned task must not read as
+excluding the Director default, and a session without a role assignment must reach
+its Director. *Disposition:* the meaning is kept by the three role bullets directly
+below it, which since 3.8 say the same thing in more detail: "Worker: only if this
+project's Director, the user or an explicit assignment names you one", the scoped
+child Director bullet, and "Otherwise you are the Project Director, whoever or
+whatever started you". A task that names no role is not a naming, so it falls to
+"Otherwise". The sentence repeated the bullets, and after 3.8 its "explicitly
+assigned" was a looser wording of the worker bullet's "names you one". Dropping it
+saves 95 bytes, which pays for most of duty 5's addition. The regression oracle moves
+to the bullets' pins.
+
+**Why/tradeoff.** The rule now lives with the actor who can keep it: a Director
+writing a brief can always name the role, while a started session cannot reliably
+tell from its own context what it was meant to be (observations 1 and 3). The text
+still says what an unnamed session is, so the receiving side keeps a defined answer.
+*Cost:* nothing on the receiving side changes. A Director that forgets still starts a
+nominal Director that may not act as one (observation 3), and a host helper whose
+prompt the host writes may read no startup at all (observation 2), which no brief
+fixes. Saying in duty 5 that an unnamed host helper "counts as a Director" states
+what the text makes it, not how it was seen to behave. The staffing card now has one byte of
+budget left.
+
+**Regression cases:** A Director that starts a lookup or a host helper names it a
+worker in the brief, and the helper reads WORKER.md if it does any startup. A
+subagent started with a brief that names no role and no worker is the stated failure
+of the starting Director, not of the subagent. After a Director updates its block
+inside a running session, its subagents are tested only from a new session, because
+they keep the parent's start-time instructions. A task brief that names no role still
+leaves the reader under "Otherwise", with the Default sentence gone.
+
+**Status.** Decided by the maintainer on November 15, 2026. Implemented as wording in
+starter revision 3.9 and published on `main` with this change; no installed project
+has it. Verified statically: the full suite passes, 298 tests, and the new wording is
+pinned by the four tests in `HelpersAreDirectorsNovember15Tests` in
+`test_block_route.py`, with the existing pins updated to 3.9; the pins of the Default
+sentence now assert its absence from the block. These are wording pins only
+([validation notes](DESIGN_NOTES.md#whoever-starts-a-session-names-a-worker-one-starter-39--november-15-2026)).
+Not verified: a live trial of a named against an unnamed subagent on 3.9, from a
+session started after the 3.9 install, is pending.
+
 **November 15 — a worker is a session a Director names as one; an unnamed session is
 the Director, whoever started it (starter revision 3.8; supersedes the November 11
 narrowing, item 5 below, and restores the October 17 default and its regression
@@ -1426,6 +1523,12 @@ brief without a role makes a Director. The mitigation is duty 5 (every brief sta
 the role) and the staffing card's "Tell every worker it is one"; neither guards a
 brief the Director did not write. Whether built-in helpers whose prompts the host
 writes receive AGENTS.md is still unknown.
+*Later November 15 addition:* three more observations that day (R10, November 15,
+3.9) refine this. A valid 3.8 trial of a roleless general-purpose subagent found it
+nominally a Director but running no startup, and a host-defined search helper did no
+startup reads at all; an earlier probe that ran the old block reflected the host
+giving subagents the parent's start-time instructions. The maintainer decided the
+risk is handled on the creator's side, and starter 3.9 puts the naming duty in duty 5.
 
 **Regression cases:** A Director opens a session in another project without naming
 its role; that session is the project's Director, runs its check and captures the
@@ -1435,6 +1538,8 @@ worker. A subagent whose brief names it a worker reads WORKER.md and shows no ch
 and no 🎬. A running Director that a later agent message calls a worker keeps its
 role. A subagent briefed without a role on a host that passes AGENTS.md acts as a
 Project Director: that is the stated cost, not a pass.
+*Later November 15 addition:* observed once on 3.8, such a subagent was nominally a
+Director but ran no startup (R10, November 15, 3.9).
 
 **Status.** Decided by the maintainer on November 15, 2026; the three later block
 edits above are the Director's, open to the maintainer's review. Implemented as
@@ -2039,7 +2144,9 @@ the default Director route. That is a real static ambiguity, not a proved intern
 cause of an observed actor's omitted role reads. The adopted host-loaded hook now
 states the Project Director default unless a worker or scoped child Director role
 is explicitly assigned, and START distinguishes an explicit role assignment from
-the task itself. The public checkout's absent-installation branch still grants no
+the task itself. *November 15 addition:* starter 3.9 drops the block's sentence that
+carried this default ("Default to Project Director unless explicitly assigned..."); its
+meaning stays in the three role bullets (R10, November 15, 3.9). The public checkout's absent-installation branch still grants no
 Director role. The owning regression checks both adopted/absent routes and explicit
 workers, not a promise that every host loads or follows the files.
 *November 14 addition:* this repository no longer has an adopted or absent branch.

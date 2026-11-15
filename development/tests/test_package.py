@@ -218,7 +218,9 @@ class PackageBoundaryTests(unittest.TestCase):
         # Exercise the block actually emitted by the recommended installer, not
         # merely the retained legacy guide. This is instruction wiring, not uptake.
         text = " ".join((PATTERN / "starter/agents/block.md").read_text(encoding="utf-8").split())
-        self.assertIn("Default to Project Director unless explicitly assigned a worker or scoped child Director role", text)
+        # Revision 3.9 cut the "Default to Project Director" sentence; the Otherwise bullet carries its meaning.
+        self.assertNotIn("Default to Project Director", text)
+        self.assertIn("- Otherwise you are the Project Director, whoever or whatever started you", text)
         # Revision 3.4 drops the "Directors," vocative inside the Directors-only duties; the sentence is unchanged otherwise.
         self.assertIn("Delegate project investigations, reviews and changes to bounded subagents before doing the detailed work", text)
         self.assertIn("Scope assignments, stay available to the user and evaluate returns", text)
@@ -330,7 +332,8 @@ class PackageBoundaryTests(unittest.TestCase):
         self.assertIn("keep combined output bounded", block)
         self.assertIn("If a cut-off read cannot be recovered, stop that work and say so", block)
         self.assertIn("every line to its shown total length", block)
-        self.assertIn("Default to Project Director unless explicitly assigned a worker or scoped child Director role", block)
+        self.assertNotIn("Default to Project Director", block)
+        self.assertIn("- Otherwise you are the Project Director, whoever or whatever started you", block)
         self.assertLess(knowledge.index("Load the project's required canonical I/O instructions before querying knowledge"), knowledge.index("page `canonical_learning.py selectors`"))
 
     def test_flat_action_clarifications_retain_the_fail_closed_routes(self):
@@ -408,7 +411,7 @@ class PackageBoundaryTests(unittest.TestCase):
     def test_starter_manifest_records_revision_and_format_number(self):
         # Static manifest check only; the installer's receipt is checked in test_flat_starter.
         manifest = json.loads((PATTERN / "starter/manifest.json").read_text(encoding="utf-8"))
-        self.assertEqual(manifest["starter_revision"], "3.8")
+        self.assertEqual(manifest["starter_revision"], "3.9")
         self.assertEqual(manifest["starter_version"], 3)
 
     def test_updates_run_through_each_projects_own_director(self):

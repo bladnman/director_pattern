@@ -13,7 +13,7 @@ reviewed instruction/adapter integration, not a fresh installer or second ledger
 The [design-obligation matrix](https://github.com/bladnman/director_pattern/blob/main/development/BEHAVIOR_PARITY.md) explains the
 old reasons, revised routes, evidence and remaining verification limits.
 
-The manifest's `starter_revision` (now 3.8) is a readable revision number bumped with
+The manifest's `starter_revision` (now 3.9) is a readable revision number bumped with
 each published payload change; `starter_version` stays the install-format number.
 
 Revision 3.3 changes where the Director's rules live. The installer writes a marked
@@ -71,6 +71,12 @@ Director another agent started is still a Director. So the staffing card has eve
 brief tell a worker it is one, and the requests and update-check cards say that a
 session opened in another project without a named role is still that project's
 Director. A brief that leaves out the role now starts a Director, so name every worker.
+
+Revision 3.9 puts that duty on the agent that starts a session. The block's duty 5
+has every brief tell each worker it is one, since any agent a Director starts
+unnamed, even a host helper whose type the host defines, counts as a Director under
+the block, though it may not act as one. The staffing card's Role line says the same
+holds for helpers and lookups.
 
 ## Install beside ordinary notes and assets
 
