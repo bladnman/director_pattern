@@ -328,11 +328,11 @@ ordinary reviewed update, in this order:
    FIRST_USE.md and its required reads before the first check. When a section already
    exists, never replace it; merge only what the update needs.
 5. Measure the result with `context_check.py` against the host's instruction cap
-   ([OPERATIONS.md](OPERATIONS.md#optional-context-budget-preflight)). The block must
-   stay within 8,000 bytes and the project section within 3,000; a roster that does
-   not fit moves to `.director/ROSTER.md`, named in the section. If the whole
-   instruction file would pass 24 KiB or the host's cap, report what would be cut and
-   let the owner choose; never trim project text silently.
+   ([OPERATIONS.md](OPERATIONS.md#optional-context-budget-preflight)). The project
+   owns AGENTS.md: no size limit applies to it, to the block as it stands there or to
+   the project section, and none blocks the update. If the whole instruction file
+   would pass the host's cap, report what would be cut and let the owner choose;
+   never trim project text silently.
 6. Once the file checks above pass, write the update receipt with the new managed baselines (WORKER.md,
    OPERATIONS.md, startup_check.py, each card, the stubs and the other payload files)
    and `director_block_sha256`, the SHA-256 of the block from its opening marker line
@@ -345,9 +345,9 @@ ordinary reviewed update, in this order:
    precede a required check; it must not report the move as adopted until they pass.
 7. Run the check command exactly as the project section states it. It must report
    `evidence_matched`, `startup_hook.target` ending in `WORKER.md` and
-   `director_block: unchanged`. An edited block, an empty or over-cap project section and
-   a changed stub each block the check. This is a structural change to the loaded startup
-   chain: the fresh host trials in the table below apply, including a first reply, a
+   `director_block: unchanged`. An edited block, an empty project section or one
+   without a check command, and a changed stub each block the check. This is a
+   structural change to the loaded startup chain: the fresh host trials in the table below apply, including a first reply, a
    reply after a forced compaction, and a worker start.
 
 This move is strong-tier work at high effort, with the required independent review;

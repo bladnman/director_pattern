@@ -60,6 +60,14 @@ block, with cross-references in R8, R10 and R11. The move is implemented and
 hash-verified; the public cleanup's merge and push and the live fresh-session trials
 are pending.
 
+Also on November 14, 2026, the maintainer decided that a project's AGENTS.md belongs
+to the project: the pattern states and enforces no byte limit on it, its installed
+block or its project section. The 8,000, 6,500, 4,500 and 3,000 byte budgets stay only
+as authoring rules for the text this repository ships. The entry under
+[R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes) supersedes the November 11
+caps as limits on projects. It is decided, and implemented in the working tree as
+starter revision 3.5 and tested; it is not committed or published.
+
 ## R1 — One accountable conversation, without a forced organization
 
 **November 13 — a step that does not earn its cost can be the better route
@@ -807,7 +815,8 @@ seven cards, and it compares the block's own bytes, marker line to marker line, 
 the receipt's `director_block_sha256`. A block that differs blocks the check; the
 block is managed text, and a project's own wording belongs in the project section or
 the surrounding file. The rest of AGENTS.md stays project composition under the
-November 2 rule. A missing, duplicated, empty or over-cap project section blocks. A
+November 2 rule. A missing, duplicated, empty or over-cap project section blocks
+*(November 14: the over-cap failure is superseded; see [R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes), November 14)*. A
 block that still points at START.md is the earlier route: it passes only while
 START.md, DIRECTOR.md, OPERATIONS.md and the checker match their recorded baselines
 and START.md is the earlier full file; once START.md is the stub, the check blocks
@@ -1198,6 +1207,91 @@ and late-report protection diverge across owners.
 
 ## R10 — Assign roles explicitly; preserve project ownership across entry routes
 
+**November 14 — a project's AGENTS.md belongs to the project; the pattern states no
+byte limit on it (supersedes the November 11 byte caps as limits on projects):** The
+November 11 entry below gave the standing text three caps that the starter enforced
+on the project: the installer refused a Director block over 8,000 bytes and a project
+section over 3,000, the update guide told an updater the block and section "stay
+within" those sizes, and the startup check blocked an over-cap section. The reason
+was sound: that text is paid for on every turn by every agent the host gives the file
+to, so it should stay small. The failure was in the placement. A caps rule written
+for the text we ship was applied to the project's own file.
+
+**Failure case.** A project kept its own longer `director-pattern:start` and
+`director-pattern:end` marker lines, which is what the guide's own correction
+(November 13, under [R11](#r11--update-from-a-pinned-public-source-without-replacing-project-state))
+tells it to do. The shipped block was 7,997 bytes, so three bytes of room; the
+project's markers took the installed block to 2 bytes over 8,000, and the starter 3.4
+update stopped to ask the user. The project did nothing wrong: it followed the guide.
+Its AGENTS.md was one chunk of text it owns.
+
+**Decided by the maintainer, November 14:** a project's AGENTS.md belongs to the
+project. The Director block is one chunk inside it, a managed chunk the project keeps
+byte for byte but does not have to fit into a size we picked. The shipped pattern no
+longer states or enforces a byte limit on that file, on the installed block or on the
+`director-project` section: the installer's refusal, the update guide's "stay within
+8,000 and 3,000" and the check's over-cap section failure are removed. A project
+decides how much standing text it carries. A host's own instruction limit, which
+varies by host and version, is the host's. The update guide still measures the
+result against that host cap and, if the file would pass it, reports what would be
+cut and lets the owner choose, never trimming project text silently. It restates no
+number of its own.
+
+**What stays, as a maintainer rule.** The budgets for the text this repository ships
+(block about 8,000 bytes, each card 6,500, WORKER.md 4,500, the section template
+3,000) become authoring rules in this repository's AGENTS.md, in a sentence after
+the `starter_revision` rule, checked before publishing a starter revision. A test
+that checks the shipped files against those budgets replaces the tests that pinned
+the project-side limits
+(`development/tests/test_authoring_budgets.py`). Their purpose is unchanged: keep the standing per-turn
+text small, because a larger block costs every project that adopts it. That is a
+design goal for what we ship. It is no longer a condition a project must meet to
+install or update.
+
+**Design-intent disposition.** *Affected:* November 11's cap statements (item 9, the
+installer sentence, the over-cap check) and the November 13 byte-fit tightening it
+sits beside. *Purpose and failure prevented:* standing text that grows unnoticed until
+every turn is expensive. *Disposition:* preserve the purpose as an authoring
+discipline on the shipped text; supersede the limit on the project's text. *Also
+dropped:* update-guide step 5's 24 KiB whole-file threshold, which reported what
+would be cut once the whole instruction file passed it. Its purpose was to leave room
+for nested instruction files under a host's combined cap; its disposition is that
+only the host's own cap is measured now, and the guide restates no number. Nothing
+else in the route changes: the block must still match its recorded hash, and the
+project section must still exist once and hold a check command.
+
+**Tradeoff.** A project can now grow its AGENTS.md without the
+pattern warning it, and the pattern's only guard on the shipped text is a maintainer
+check run before publishing, which a skipped check would miss. That is accepted,
+because the cost of an over-long file lands on the project that owns it, and a
+stop-and-ask on a text the project did not write is a worse failure.
+
+**Regression cases:** A project with its own longer marker lines, whose installed
+block therefore measures over 8,000 bytes, takes an update without stopping to ask,
+and its check reports `evidence_matched` and `director_block: unchanged`. A project
+section over 3,000 bytes no longer blocks the check or the installer, while an empty
+or missing section, or one without a check command, still does. A published starter
+revision whose shipped block, a card, WORKER.md or the section template exceeds its
+budget fails the maintainer's pre-publish check.
+
+**Status.** Decided by the maintainer on November 14, 2026. Implemented in the
+working tree as starter revision 3.5: the installer refusal and the check's
+cap fields and over-3,000 failure are removed, update-guide step 5 says the project
+owns AGENTS.md and no size limit applies or blocks the update, step 7 blocks only on
+an empty project section or one without a check command, and the budget sentence is
+in this repository's AGENTS.md. The tests that pinned the old limits are replaced.
+`development/tests/test_authoring_budgets.py` holds
+`test_shipped_block_cards_worker_and_section_template_fit_their_budgets` and
+`test_budgets_are_not_shipped_as_limits_on_a_project`. The field regression is
+`test_project_marker_lines_take_the_block_over_8000_bytes_and_the_update_and_check_pass`,
+with `test_installer_and_check_set_no_size_limit_on_the_block_or_section` and
+`test_a_project_section_over_3000_bytes_passes_and_reports_its_size`. Implemented and
+tested in the working tree (the full suite passes, 278 tests, as the Director
+reported); not committed or published, and no installed copy has taken 3.5. An
+independent review passed with low-severity wording fixes, which were applied. Until it
+ships, the earlier passages that state the caps as limits on a project describe the
+published 3.4 behavior, and each now points here.
+
 **November 13 — a call in a roster role's domain goes to that role, from the Director
 too (starter revision 3.4):** October 21 below decided that "no generic engineer
 substitutes for a matching maintained role", and the staffing card keeps "a general
@@ -1231,6 +1325,10 @@ what the Director thinks of a title, and the project has a packaging role: the
 Director captures the question and briefs that role instead of judging the title; a
 project with no matching role gets a direct answer; the Director's acceptance of a
 returned result against the whole request stays its own.
+
+*November 14 addition:* the 8,000-byte cap named in the next paragraph is now an
+authoring budget for the shipped block only, no longer a limit on a project's installed block
+([R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes), November 14).
 
 To fit the 8,000-byte cap without dropping a rule, the same revision tightens six
 block phrases and keeps their meaning: the gate's "project/host authority, the user's
@@ -1295,7 +1393,7 @@ block from [agents/block.md](../pattern/starter/agents/block.md) into the projec
 root AGENTS.md (7,993 bytes; the installer refuses above 8,000), followed by a
 project-owned section from
 [agents/project-section.md](../pattern/starter/agents/project-section.md) (cap 3,000
-bytes). The block holds the role gate, ten every-turn duties for Directors, the
+bytes). *(November 14: the installer's refusal and the section cap are superseded as limits on a project; see [R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes), November 14.)* The block holds the role gate, ten every-turn duties for Directors, the
 Project Director's check and 🎬 paragraph, four Recovery steps, the read rules, a
 "Before you / Read" table, a rule for what summaries carry, and a roster rule. The
 project section holds the check command, two guard lists ("read before your first
@@ -1381,9 +1479,12 @@ regression case. Test names are in `development/tests/`.
    index the project already has. A fresh install has two generic rows. Role
    definitions are still not standing text. Cost: every agent given AGENTS.md sees
    the rows; a row can go stale against its role file. Oracle:
-   `test_project_section_is_project_owned_and_within_its_cap`; the checker blocks a
+   `test_project_section_is_project_owned`; the checker blocks a
    section over its cap (`test_project_section_is_required_once_beside_the_block`).
    Listed in the proposal as the owner's call; not separately recorded.
+   *November 14 addition:* the 3,000-byte cap and the check's over-cap failure are
+   superseded as limits on a project (R10, November 14); the budget stays an authoring
+   rule for the shipped section template.
 10. **Package acknowledgment, for Directors only** (this section, October 21, October
     24 and October 29: the actor reads and acknowledges its package before acting,
     and an incomplete read cannot be acknowledged as loaded). A Director no longer
@@ -1439,6 +1540,7 @@ read of each card, through its END line, before the action it governs. A search 
 a diff or a worker's quote of an END line does not count as a read. A spawned
 report-back agent shows no check and no 🎬. An edited block, a changed stub and an
 empty or over-cap project section each block the check.
+*November 14 addition:* an over-cap section no longer blocks (R10, November 14); an empty section or one without a check command still does.
 
 **Status.** Decided: build the refactor with recovery in the always-loaded block
 (owner, November 11). Implemented: on a branch as starter revision 3.3, with an
@@ -2116,7 +2218,9 @@ gives seven ordered steps: back up; replace the managed payload, moving any loca
 addition to the removed files or sections into a project-owned file first; replace
 the block byte for byte from the pinned revision; add the project section once and
 fill it from the project's check command, guards, store files, role-file locator and
-roster or existing role index; measure against the block, section and host caps;
+roster or existing role index; measure against the block, section and host caps
+*(November 14: the block and section numbers are superseded as limits, and the
+measuring now reports against the host's own cap only; see [R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes), November 14)*;
 write the receipt with the new baselines and `director_block_sha256`; run the check
 exactly as the section states it.
 
@@ -2162,7 +2266,8 @@ file operations of steps 1 to 6 against a fixture of the exact 3.2 startup files
 reaches `evidence_matched`;
 `test_a_move_interrupted_before_the_block_is_merged_blocks_with_a_named_gap` and
 `test_update_guide_documents_the_move` cover the rest. The scripted move measures
-the byte caps only, not a host's instruction cap, and runs no agent. No installed
+the byte caps only, not a host's instruction cap, and runs no agent. *(November 14:
+the caps it measures are superseded as limits on a project; see [R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes), November 14.)* No installed
 project has made the move: not a mature project with its own guards, store or role
 index, and not this source checkout. The fresh host trials the guide requires
 (a first reply, a reply after a forced compaction, a worker start) have not run on
@@ -3488,7 +3593,8 @@ proposals on thin evidence, which "say how thin the evidence is" limits.
 read only if the Director opens it at the table's trigger; the November 11 matrix
 already lists that trigger as unproven for this card, and one earlier session skipped
 it after a compaction. Moving the paragraph into the block was not possible within
-its 8,000-byte cap without dropping a rule. The table row now names a retro, and the
+its 8,000-byte cap without dropping a rule *(November 14: that cap is now an authoring
+budget for the shipped block, not a limit on a project; see [R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes), November 14)*. The table row now names a retro, and the
 staffing card puts the questions in every retro brief, which narrows the gap but
 does not close it. The Director accepted this risk on November 13; a live retro is
 the oracle.

@@ -1978,6 +1978,15 @@ passed **263 tests**. The cases added or moved for this change are in
   project content intact. A move stopped after the payload is replaced and before the
   block is merged blocks with the named gap.
 
+*Superseded in part, November 14, 2026 (starter revision 3.5):* the cap checks
+described in the text, installer and checker bullets above (the block within 8,000
+bytes, an over-cap block or card refusing, the project section within or over 3,000
+bytes) no longer apply as limits on a project. The installer does not refuse a block
+or section for its size and the startup check does not read or block on it; the
+budgets are maintainer authoring rules for the shipped files, checked before
+publishing. See [R10](RATIONALE.md#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes), November 14.
+The measurements recorded here stay as written.
+
 An independent review ran on November 11. Its nine findings were applied in a rework:
 the block and stubs are enforced by the check; Recovery has one timing; resumption is
 task-bound; the staffer reads the selection and authority part of a named role file;
@@ -2109,7 +2118,10 @@ from the opening marker line through the closing marker line and newline.
 
 The block is 7,997 of 8,000 bytes; the staffing card is 6,491, the requests card
 5,549, the supervision card 5,457 and the knowledge card 4,280, each within 6,500;
-the project section template is 1,189 of 3,000. The package test that pinned this
+the project section template is 1,189 of 3,000. *(Superseded in part, November 14, 2026:
+these are measurements of the shipped files against budgets that are now maintainer
+authoring rules, not limits on a project's AGENTS.md; see [R10](RATIONALE.md#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes), November 14.)*
+The package test that pinned this
 checkout's root AGENTS.md to the current block byte for byte now accepts the current
 block or the published 3.3 block, by hash, with a note to drop the 3.3 entry when
 this checkout updates; this checkout's own check still reports `evidence_matched`
@@ -2154,7 +2166,7 @@ the public-safe results.
   they are kept as written.
 - **The re-binding.** In the private workspace the project section's exact check
   returns `evidence_matched` and `director_block: unchanged`, with the section within
-  its 3,000-byte cap and the guard snapshots unchanged, against a new technical record
+  its 3,000-byte cap *(November 14, 2026: the check no longer reads a section cap; see [R10](RATIONALE.md#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes), November 14)* and the guard snapshots unchanged, against a new technical record
   written for the move. The block region there is byte-identical to the published 3.3
   block. Its relative links resolve. A secret-pattern scan of the files to be
   committed found nothing, and the staged list left out backups, scratch, locks, the

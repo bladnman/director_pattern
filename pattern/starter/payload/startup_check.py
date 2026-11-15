@@ -17,7 +17,6 @@ BLOCK_ROUTE = ('WORKER.md', 'OPERATIONS.md', 'startup_check.py', 'START.md', 'DI
                *('cards/' + name + '.md' for name in CARDS))
 START_ROUTE = ('START.md', 'DIRECTOR.md', 'OPERATIONS.md', 'startup_check.py')
 STUB = '<!-- director-redirect-stub -->'
-SECTION_CAP = 3000
 NEXT = ('Reads from before the latest summary or resume are gone. Before your first project action, '
         'do the Recovery steps in the AGENTS.md Director block; before each action in its table, '
         'read the card it names.')
@@ -176,9 +175,7 @@ def project_section(text, source='AGENTS.md'):
     body = lines[markers[0][0] + 1:markers[1][0]]
     need(any(re.match(r'\s*[-*] Check command: *`[^`]+`', line) for line in body),
          'project section has no check command: restore its "- Check command: `...`" line: ' + source)
-    need(size <= SECTION_CAP, 'project section exceeds ' + str(SECTION_CAP) + ' bytes (' + str(size) +
-         '): move the roster to .director/ROSTER.md and name it in the section: ' + source)
-    return {'path': source, 'bytes': size, 'cap': SECTION_CAP, 'within_cap': True}
+    return {'path': source, 'bytes': size}
 
 
 def update_discovery(root):

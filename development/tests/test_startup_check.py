@@ -61,7 +61,8 @@ class StartupCheckTests(unittest.TestCase):
         self.assertEqual(len(r['checked_paths']),13)
         self.assertEqual(r['startup_hook']['target'],'.director/WORKER.md')
         self.assertEqual(r['director_block'],'unchanged')
-        self.assertEqual(r['project_section']['within_cap'],True)
+        # Its size is reported for information only (revision 3.5); no cap field.
+        self.assertEqual(r['project_section'],{'path':'AGENTS.md','bytes':len(installer.PROJECT_SECTION.encode())})
         self.assertEqual(r['update_check'],'due')
         self.assertIn('Recovery steps in the AGENTS.md Director block',r['next'])
         self.assertEqual(r['actor_must_confirm'][0],'resolved Project Director role')
@@ -140,21 +141,37 @@ class StartupCheckTests(unittest.TestCase):
                 before=self.tree();r=self.run_check(ok=False)
                 self.assertIn('project section missing',r['gap'])
                 self.assertEqual(before,self.tree())
-        # Project-owned: edits never block, but an empty or over-cap section is a named gap, not a pass.
+        # Project-owned: edits and length never block, but an empty section or one without a check command is a
+        # named gap, not a pass. A long section is test_a_project_section_over_3000_bytes_passes_and_reports_its_size.
         edited=section.replace('nothing yet.','`docs/RELEASE.md`.',1).replace('| `sub-director`','| `releaser` | Cut a release | strong, high | Owner approves |\n| `sub-director`')
         (self.project/'AGENTS.md').write_text('# Project\n\n'+block+'\n'+edited+'\nOwn text.\n')
         r=self.run_check()
         self.assertEqual(r['status'],'evidence_matched')
-        self.assertTrue(r['project_section']['within_cap'])
+        self.assertEqual(r['project_section'],{'path':'AGENTS.md','bytes':len(edited.encode())})
         self.assertEqual(r['director_block'],'unchanged')
-        grown=section.replace('<!-- /director-project -->','| `extra` | '+'x'*3000+' | strong, high | none |\n<!-- /director-project -->')
         empty='<!-- director-project -->\n<!-- /director-project -->\n'
         no_command=section.replace('- Check command: `python3 .director/startup_check.py`\n','')
-        for name,text,gap in (('over cap',grown,'exceeds 3000 bytes'),('empty',empty,'no check command'),('no command',no_command,'no check command')):
+        for name,text,gap in (('empty',empty,'no check command'),('no command',no_command,'no check command')):
             with self.subTest(section=name):
                 (self.project/'AGENTS.md').write_text(block+'\n'+text)
                 before=self.tree();r=self.run_check(ok=False)
                 self.assertIn(gap,r['gap']);self.assertEqual(before,self.tree())
+
+    def test_a_project_section_over_3000_bytes_passes_and_reports_its_size(self):
+        # Revision 3.5 (R10, November 14): the project owns AGENTS.md, so the check reads no section cap. A long
+        # roster stays in the section if the project wants it there; the size is reported, never a gap.
+        block,section=installer.BLOCK,installer.PROJECT_SECTION
+        grown=section.replace('<!-- /director-project -->','| `extra` | '+'x'*3000+' | strong, high | none |\n<!-- /director-project -->')
+        self.assertGreater(len(grown.encode()),3000)
+        (self.project/'AGENTS.md').write_text('# Project\n\n'+block+'\n'+grown+'\nOwn text.\n')
+        before=self.tree();r=self.run_check()
+        self.assertEqual((r['status'],r['director_block']),('evidence_matched','unchanged'))
+        self.assertEqual(r['project_section'],{'path':'AGENTS.md','bytes':len(grown.encode())})
+        self.assertEqual(before,self.tree())
+        # Length does not excuse structure: the same long section without its check command still blocks.
+        no_command=grown.replace('- Check command: `python3 .director/startup_check.py`\n','')
+        (self.project/'AGENTS.md').write_text(block+'\n'+no_command)
+        self.assertIn('no check command',self.run_check(ok=False)['gap'])
 
     def test_gutted_or_negated_director_block_blocks_the_check(self):
         # Known-bad cases from review: markers and the WORKER.md reference intact, rules gone or reversed.

@@ -22,8 +22,7 @@ GUARDS = (".director", ".producer", ".team", ".program", "requests", "AGENTS.md"
 BLOCK = (SOURCE / "agents/block.md").read_text(encoding="utf-8")
 PROJECT_SECTION = (SOURCE / "agents/project-section.md").read_text(encoding="utf-8")
 AGENTS = BLOCK + "\n" + PROJECT_SECTION
-# Byte caps: the block and section are standing context for every agent given AGENTS.md.
-BLOCK_CAP, SECTION_CAP, CARD_CAP, WORKER_CAP = 8000, 3000, 6500, 4500
+# No byte limit applies to a project's AGENTS.md, block or section: the project owns that file.
 
 
 def sha(data):
@@ -61,10 +60,6 @@ def files_for(target, initiator, opportunity, min_incidents=3, project_id=None):
     value = manifest()
     files = {".director/" + name: (SOURCE / "payload" / name).read_bytes() for name in value["payload"]}
     files["AGENTS.md"] = AGENTS.encode()
-    for label, data, cap in [("Director block", BLOCK.encode(), BLOCK_CAP), ("project section", PROJECT_SECTION.encode(), SECTION_CAP),
-                             ("WORKER.md", files[".director/WORKER.md"], WORKER_CAP),
-                             *((name, data, CARD_CAP) for name, data in files.items() if name.startswith(".director/cards/"))]:
-        require(len(data) <= cap, label + " exceeds its byte cap of " + str(cap))
     require(BLOCK.startswith("<!-- director-starter:2 -->\n") and BLOCK.endswith("<!-- /director-starter:2 -->\n")
             and PROJECT_SECTION.startswith("<!-- director-project -->\n") and PROJECT_SECTION.endswith("<!-- /director-project -->\n"),
             "malformed Director block or project section source")
@@ -167,8 +162,7 @@ def operation(mode, target, initiator="owner", opportunity="closure", min_incide
               "starter_revision": value.get("starter_revision"), "target": str(target), "files": {p: {"sha256": sha(b), "bytes": len(b)} for p, b in files.items()},
               "payload_bytes": sum(len(b) for b in files.values()),
               "version_control": version_control(target, remote_visibility),
-              "standing_bytes": {"director_block": len(BLOCK.encode()), "project_section": len(PROJECT_SECTION.encode()),
-                                 "caps": {"director_block": BLOCK_CAP, "project_section": SECTION_CAP, "card": CARD_CAP, "worker": WORKER_CAP}},
+              "standing_bytes": {"director_block": len(BLOCK.encode()), "project_section": len(PROJECT_SECTION.encode())},
               "card_bytes": {p.removeprefix(".director/cards/"): len(b) for p, b in files.items() if p.startswith(".director/cards/")},
               "startup_bytes_director": len(files["AGENTS.md"]),
               "startup_bytes_worker": len(files[".director/WORKER.md"]) + len(files["AGENTS.md"])}

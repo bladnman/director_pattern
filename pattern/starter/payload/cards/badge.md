@@ -21,7 +21,7 @@ Give the check's actual `gap` and an ordinary answer in the same turn, without �
 - The command was refused or could not run (permission, missing runtime): say exactly that, give the user the 🖐️ action that would allow it, and rerun when possible.
 - `project section missing`, or the block routes to a redirect stub: this project's update is unfinished; follow [UPDATES.md](../UPDATES.md), "Move to the AGENTS.md block".
 - `Director block differs from its recorded baseline`: the managed block was edited. Restore it from the installed revision; project wording belongs in the project section. Only a reviewed update records a new block. `Director block has no recorded baseline`: the receipt lacks `director_block_sha256`; a reviewed update records it after comparing the block with the installed revision.
-- The project section has no check command or is over 3,000 bytes: restore its `Check command` line, or move the roster to `.director/ROSTER.md` and name it there.
+- The project section has no check command: restore its `Check command` line.
 - The receipt is absent in a generated project that still awaits setup: that is first use, not a broken install; read [FIRST_USE.md](../FIRST_USE.md) and follow it before the check.
 - `startup baseline mismatch`: a managed file changed. Restore it or run a reviewed update. Never rewrite a receipt to silence drift, and never pick a receipt by recency.
 - Hook, receipt, source or backend gaps: read [OPERATIONS.md](../OPERATIONS.md) for the supported structures and the exact command options.

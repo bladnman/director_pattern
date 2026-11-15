@@ -48,13 +48,11 @@ class BlockTextTests(unittest.TestCase):
     def section(self, heading, following):
         return self.text[self.text.index(heading):self.text.index(following)]
 
-    def test_block_is_one_marked_region_within_its_byte_cap(self):
+    def test_block_is_one_marked_region(self):
+        # Its byte budget is a maintainer authoring rule, checked in test_authoring_budgets (revision 3.5).
         self.assertTrue(self.block.startswith('<!-- director-starter:2 -->\n'))
         self.assertTrue(self.block.endswith('<!-- /director-starter:2 -->\n'))
         self.assertEqual(self.block.count('director-starter:2 -->'), 2)
-        size = len(self.block.encode())
-        self.assertLessEqual(size, installer.BLOCK_CAP)
-        self.assertEqual(installer.BLOCK_CAP, 8000)
         self.assertEqual(installer.AGENTS, self.block + '\n' + installer.PROJECT_SECTION)
         # No fenced code inside the block: the checker ignores fenced lines as route evidence.
         self.assertNotIn('```', self.block)
@@ -225,13 +223,16 @@ class BlockTextTests(unittest.TestCase):
         self.assertIn('before planning, all of UPDATES.md', self.text)
         self.assertIn('cards/requests.md; before any store write, API.md, TOOLING.md, RECORDS.md', self.text)
 
-    def test_project_section_is_project_owned_and_within_its_cap(self):
+    def test_project_section_is_project_owned(self):
+        # The template's byte budget is a maintainer authoring rule (test_authoring_budgets); the section
+        # tells the project no size limit of its own (revision 3.5).
         section = installer.PROJECT_SECTION
         self.assertTrue(section.startswith('<!-- director-project -->\n'))
         self.assertTrue(section.endswith('<!-- /director-project -->\n'))
-        self.assertLessEqual(len(section.encode()), installer.SECTION_CAP)
         text = flat(section)
+        self.assertNotIn('Keep it under', text)
         for phrase in ('Project-owned: written once at install; updates never replace it.',
+                       'The roster may move to a file such as `.director/ROSTER.md`; name that file here.',
                        '- Check command: `python3 .director/startup_check.py`',
                        '- Read before your first reply: nothing yet.',
                        '- Read before named work (write each as: file, before which work): nothing yet.',
@@ -269,7 +270,6 @@ class CardAndManualTests(unittest.TestCase):
                 self.assertEqual(lines[-2], '')
                 self.assertTrue(raw.endswith('\n') and not raw.endswith('\n\n'))
                 self.assertEqual(raw.count('END cards/'), 1)
-                self.assertLessEqual(len(raw.encode()), installer.CARD_CAP)
 
     def test_manuals_and_stubs_end_with_their_end_line(self):
         for name in MANUALS + ['START.md', 'DIRECTOR.md']:
@@ -278,7 +278,6 @@ class CardAndManualTests(unittest.TestCase):
                 self.assertEqual(raw.splitlines()[-1], 'END ' + name)
                 self.assertEqual(raw.splitlines()[-2], '')
                 self.assertEqual(raw.count('\nEND ' + name + '\n'), 1)
-        self.assertLessEqual(len((PAYLOAD / 'WORKER.md').read_bytes()), installer.WORKER_CAP)
 
     def test_start_and_director_are_redirect_stubs_without_rules(self):
         for name in ('START.md', 'DIRECTOR.md'):
@@ -356,11 +355,14 @@ class CardAndManualTests(unittest.TestCase):
                        'Never rewrite a receipt to silence drift',
                        'Read every "before your first reply" file completely before the check and the badge',
                        '`Director block differs from its recorded baseline`: the managed block was edited.',
-                       'The project section has no check command or is over 3,000 bytes',
+                       'The project section has no check command: restore its `Check command` line.',
                        'The receipt is absent in a generated project that still awaits setup: that is first use, not a broken install',
                        '`Director block has no recorded baseline`: the receipt lacks `director_block_sha256`',
                        'Workers and scoped child Directors run no check, perform no root first-use setup and never show or inherit 🎬.'):
             self.assertIn(phrase, badge)
+        # Revision 3.5: the section's size is the project's; the card names no byte limit and no roster move for it.
+        self.assertNotIn('3,000', badge)
+        self.assertNotIn('move the roster', badge)
         for phrase in ('Before planning any Director Pattern update, in this or another project, read [UPDATES](../UPDATES.md) completely',
                        "another installation is updated only by its own project's Director",
                        "Never patch another installation's files from outside.",
@@ -516,7 +518,8 @@ class InstallAndUpdateTests(unittest.TestCase):
         plan = installer.operation('plan', self.project)
         self.assertEqual(plan['standing_bytes']['director_block'], len(installer.BLOCK.encode()))
         self.assertEqual(plan['standing_bytes']['project_section'], len(installer.PROJECT_SECTION.encode()))
-        self.assertEqual(plan['standing_bytes']['caps'], {'director_block': 8000, 'project_section': 3000, 'card': 6500, 'worker': 4500})
+        # Bytes for information only (revision 3.5): no caps travel with the report.
+        self.assertEqual(sorted(plan['standing_bytes']), ['director_block', 'project_section'])
         self.assertEqual(sorted(plan['card_bytes']), sorted(name + '.md' for name in CARDS))
         self.assertEqual(plan['startup_bytes_director'], len(installer.AGENTS.encode()))
         installer.operation('install', self.project)
@@ -525,7 +528,7 @@ class InstallAndUpdateTests(unittest.TestCase):
         self.assertTrue(agents.startswith('<!-- director-starter:2 -->\n'))
         self.assertLess(agents.index('<!-- /director-starter:2 -->'), agents.index('<!-- director-project -->'))
         receipt = json.loads((self.home / 'install.json').read_bytes())
-        self.assertEqual(receipt['starter_revision'], '3.4')
+        self.assertEqual(receipt['starter_revision'], '3.5')
         self.assertEqual(receipt['director_block_sha256'], sha(installer.BLOCK.encode()))
         for name in CARDS:
             self.assertIn('.director/cards/' + name + '.md', receipt['managed'])
@@ -533,15 +536,32 @@ class InstallAndUpdateTests(unittest.TestCase):
         self.assertEqual(result['status'], 'evidence_matched')
         self.assertEqual(result['startup_hook']['target'], '.director/WORKER.md')
 
-    def test_over_cap_block_or_card_refuses_before_any_write(self):
-        for attribute, value in (('BLOCK', installer.BLOCK.replace('<!-- /director-starter:2 -->', 'x' * 400 + '\n<!-- /director-starter:2 -->')),
-                                 ('PROJECT_SECTION', installer.PROJECT_SECTION.replace('<!-- /director-project -->', 'x' * 3000 + '\n<!-- /director-project -->')),
-                                 ('BLOCK', installer.BLOCK.replace('<!-- director-starter:2 -->\n', ''))):
+    def test_malformed_block_or_section_source_refuses_before_any_write(self):
+        for attribute, value in (('BLOCK', installer.BLOCK.replace('<!-- director-starter:2 -->\n', '')),
+                                 ('PROJECT_SECTION', installer.PROJECT_SECTION.replace('<!-- /director-project -->\n', ''))):
             with self.subTest(attribute=attribute), unittest.mock.patch.object(installer, attribute, value):
                 for mode in ('plan', 'install'):
-                    with self.assertRaisesRegex(ValueError, 'byte cap|malformed'):
+                    with self.assertRaisesRegex(ValueError, 'malformed'):
                         installer.operation(mode, self.project)
                 self.assertFalse(self.project.exists())
+
+    def test_installer_and_check_set_no_size_limit_on_the_block_or_section(self):
+        # Revision 3.5 (R10, November 14): the project owns AGENTS.md. A block over 8,000 bytes and a section over
+        # 3,000 install and check without a refusal; the shipped files' budgets are test_authoring_budgets' concern.
+        block = installer.BLOCK.replace('<!-- /director-starter:2 -->', 'Padding. ' * 150 + '\n<!-- /director-starter:2 -->')
+        section = installer.PROJECT_SECTION.replace('<!-- /director-project -->', '| `extra` | ' + 'x' * 3000 + ' | strong, high | none |\n<!-- /director-project -->')
+        self.assertGreater(len(block.encode()), 8000)
+        self.assertGreater(len(section.encode()), 3000)
+        with unittest.mock.patch.multiple(installer, BLOCK=block, PROJECT_SECTION=section, AGENTS=block + '\n' + section):
+            plan = installer.operation('plan', self.project)
+            self.assertEqual(plan['standing_bytes'], {'director_block': len(block.encode()), 'project_section': len(section.encode())})
+            self.assertFalse(self.project.exists())
+            installer.operation('install', self.project)
+        self.assertEqual((self.project / 'AGENTS.md').read_text(), block + '\n' + section)
+        result = self.run_json(self.home / 'startup_check.py')
+        self.assertEqual((result['status'], result['director_block']), ('evidence_matched', 'unchanged'))
+        self.assertEqual(result['startup_hook']['block_bytes'], len(block.encode()))
+        self.assertEqual(result['project_section'], {'path': 'AGENTS.md', 'bytes': len(section.encode())})
 
     def test_project_section_edits_survive_reinstall_but_block_edits_are_drift(self):
         installer.operation('install', self.project)
@@ -633,7 +653,7 @@ class InstallAndUpdateTests(unittest.TestCase):
             '- Check command: `python3 .director/startup_check.py --receipt .director/receipts/update-3.3.json`').replace(
             '| `sub-director`', '| `releaser` | Cut a release | strong, high | Owner approves every release |\n| `sub-director`')
         agents.write_text(text[:start] + installer.BLOCK + '\n' + section + text[end:])
-        self.assertLessEqual(len(section.encode()), 3000)                  # step 5 (caps only; host cap is not measured here)
+        # step 5: no size limit applies to the block or section (revision 3.5); the host cap is not measured here
         receipt = {'format': 'director-flat-starter', 'starter_version': 3, 'starter_revision': '3.3',   # step 6
                    'previous_starter_revision': '3.2',
                    'source': json.loads((self.home / 'install.json').read_bytes())['source'],
@@ -748,6 +768,25 @@ class InstallAndUpdateTests(unittest.TestCase):
                 (self.project / 'AGENTS.md').write_text(after.replace('update-3.4.json', 'update-3.3.json'))
                 self.assertEqual(self.check_as_stated(ok=False)['status'], 'blocked')
 
+    def test_project_marker_lines_take_the_block_over_8000_bytes_and_the_update_and_check_pass(self):
+        # The November 14 field case (R10): a project kept its own longer director-pattern:start / :end marker
+        # lines, as the guide says, and the installed block measured over 8,000 bytes; the 3.4 update stopped to
+        # ask. From revision 3.5 nothing measures the block against a size, so the update and check go through.
+        self.build_3_3(custom=True)
+        self.update_block()
+        after = (self.project / 'AGENTS.md').read_text()
+        block = after[after.index(self.CUSTOM[0]):after.index(self.CUSTOM[1]) + len(self.CUSTOM[1]) + 1]
+        self.assertEqual(len(block.encode()) - len(installer.BLOCK.encode()),
+                         len(''.join(self.CUSTOM)) - len('<!-- director-starter:2 --><!-- /director-starter:2 -->'))
+        self.assertGreater(len(block.encode()), 8000,
+                           'the field case needs the shipped block within 5 bytes of 8,000; pad the incoming block if it shrinks')
+        result = self.check_as_stated()
+        self.assertEqual((result['status'], result['director_block']), ('evidence_matched', 'unchanged'))
+        self.assertEqual(result['startup_hook']['marker'], 'director-pattern:start')
+        self.assertEqual(result['startup_hook']['block_bytes'], len(block.encode()))
+        section = after[after.index('<!-- director-project -->'):after.index('<!-- /director-project -->\n') + len('<!-- /director-project -->\n')]
+        self.assertEqual(result['project_section'], {'path': 'AGENTS.md', 'bytes': len(section.encode())})
+
     def test_a_3_2_installation_moves_to_the_block_and_keeps_project_content(self):
         self.build_3_2()
         owned = {name: data for name, data in self.tree().items()
@@ -772,7 +811,8 @@ class InstallAndUpdateTests(unittest.TestCase):
         self.assertEqual(result['director_block'], 'unchanged')
         self.assertEqual(result['receipt'], '.director/receipts/update-3.3.json')
         self.assertEqual(result['update_check'], 'off')
-        self.assertTrue(result['project_section']['within_cap'])
+        section = agents[agents.index('<!-- director-project -->'):agents.index('<!-- /director-project -->\n') + len('<!-- /director-project -->\n')]
+        self.assertEqual(result['project_section'], {'path': 'AGENTS.md', 'bytes': len(section.encode())})
         self.assertEqual(self.run_json(self.home / 'requests.py', 'status')['total'], 1)
         # The bare command still names the 3.2 receipt, which has no card baselines: a named gap, not a pass.
         self.assertIn('baseline', self.run_json(self.home / 'startup_check.py', ok=False)['gap'])
@@ -814,9 +854,14 @@ class InstallAndUpdateTests(unittest.TestCase):
                        'Automatic update mode never starts it unattended',
                        "and not the one-time move to the AGENTS.md block, which needs the owner's explicit go-ahead",
                        'the move to the AGENTS.md block and a later block update, whose receipt the check reads, so it is written before their fresh host trials and records them as pending',
-                       'An edited block, an empty or over-cap project section and a changed stub each block the check.'):
+                       # Revision 3.5: the project owns AGENTS.md; size never blocks the move or the check.
+                       'The project owns AGENTS.md: no size limit applies to it, to the block as it stands there or to the project section, and none blocks the update.',
+                       'If the whole instruction file would pass the host\'s cap, report what would be cut and let the owner choose;',
+                       'An edited block, an empty project section or one without a check command, and a changed stub each block the check.'):
             self.assertIn(phrase, updates)
         self.assertTrue((STARTER / 'agents/block.md').is_file() and (STARTER / 'agents/project-section.md').is_file())
+        for stale in ('over-cap', 'stay within', 'must stay within 8,000', '24 KiB'):
+            self.assertNotIn(stale, updates)
 
 
 if __name__ == '__main__':

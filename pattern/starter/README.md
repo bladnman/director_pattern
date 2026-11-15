@@ -13,7 +13,7 @@ reviewed instruction/adapter integration, not a fresh installer or second ledger
 The [design-obligation matrix](https://github.com/bladnman/director_pattern/blob/main/development/BEHAVIOR_PARITY.md) explains the
 old reasons, revised routes, evidence and remaining verification limits.
 
-The manifest's `starter_revision` (now 3.4) is a readable revision number bumped with
+The manifest's `starter_revision` (now 3.5) is a readable revision number bumped with
 each published payload change; `starter_version` stays the install-format number.
 
 Revision 3.3 changes where the Director's rules live. The installer writes a marked
@@ -40,6 +40,13 @@ Revision 3.4 keeps that route and adds four rules:
 
 An installation already on the block takes it through [UPDATES](payload/UPDATES.md),
 "Update an installed block".
+
+Revision 3.5 drops the byte budgets the starter applied to a project's files. The
+project owns its AGENTS.md: the installer, the check and the update guide no longer
+refuse, block or stop over a size the pattern sets for that file, the block as it
+stands there or the project section. The update guide still reports when the file
+would pass the host's own instruction cap, and the check still reports the
+section's size, for information.
 
 ## Install beside ordinary notes and assets
 
@@ -70,8 +77,8 @@ The manifest includes the worker foundation, the seven action cards, deferred
 operational/record/learning guides, the established backend, thin CLI, canonical-note
 learning and daily discovery. Code on disk is not startup model context. `plan`
 reports exact per-file and total bytes, the standing block and project-section bytes
-with their caps (8,000 and 3,000), each card's bytes (cap 6,500) and the worker
-foundation (cap 4,500); an over-cap block, section, card or worker file refuses. Existing privacy choices are preserved. Fresh
+and each card's bytes, for information; no size limit applies to a project's
+AGENTS.md, block or section. Existing privacy choices are preserved. Fresh
 config/request records/exact sources/receipts are Git-eligible by default so a clone
 can recover the same work. The owner warns once for a public/unknown remote and
 records actual delivery; exact pushed messages remain readable after deletion.
@@ -112,8 +119,9 @@ Mature projects state their exact receipt/config/selected-guard command in the
 project section, with the structures in OPERATIONS;
 lean/manual routes use their authoritative known contract, not invented JSON state.
 The check also reports whether daily update discovery is due, whether the block still
-matches its recorded baseline, and what to do next. An edited block, a missing,
-empty or over-cap project section, or a changed redirect stub blocks the check.
+matches its recorded baseline, and what to do next. An edited block, a missing or
+empty project section or one without a check command, or a changed redirect stub
+blocks the check.
 
 The block tells every role to repeat its startup after every compaction or session
 resume (a summary is not a re-read): the Project Director's check, a Director's

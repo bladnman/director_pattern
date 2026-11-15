@@ -39,8 +39,8 @@ facts from before a compaction or session resume.
 Its output adds `next` (what to do and read next), `update_check` (`due`, `not_due`,
 `off` or `unknown`, from the local cache only), `director_block` (`unchanged`
 against the receipt's `director_block_sha256`) and
-`project_section` (its bytes and the 3,000-byte cap). A block that differs from its
-recorded baseline blocks the check, because the block is managed text, and so does a
+`project_section` (its size in bytes, for information; no size limit applies). A
+block that differs from its recorded baseline blocks the check, because the block is managed text, and so does a
 receipt with no recorded baseline: the installer, first use and the UPDATES move each record it.
 
 A mature project supplies its exact reviewed command in the AGENTS.md project
@@ -75,7 +75,7 @@ It requires exactly one ordered pair outside Markdown code blocks and, inside it
 reference to the selected installation's WORKER.md. The same file must also hold
 exactly one ordered `director-project` / `/director-project` pair, the project-owned
 section; without it the gap is `project section missing`. The section must hold a
-`- Check command:` line and stay within 3,000 bytes, or the check blocks. Missing, duplicate,
+`- Check command:` line, or the check blocks. Missing, duplicate,
 malformed or unsupported structure gives a specific route gap. This checks structure
 only; it does not prove which entrypoint the host loaded or what the prose means.
 
