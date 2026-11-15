@@ -49,11 +49,32 @@ def manifest():
     return value
 
 
-def runtime():
-    spec = importlib.util.spec_from_file_location("flat_starter_runtime", SOURCE / "payload/request_store.py")
+def load(name, relative):
+    spec = importlib.util.spec_from_file_location(name, SOURCE / relative)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def runtime():
+    return load("flat_starter_runtime", "payload/request_store.py")
+
+
+def block_intact(data):
+    """One supported marked block whose text between its markers is the shipped block's.
+
+    The marker pair is found as the startup check finds it, so a project's own
+    `director-pattern:start` / `director-pattern:end` lines in place of the block's first
+    and last lines count as the shipped block. Missing, doubled or edited blocks do not.
+    """
+    check = load("flat_starter_check", "payload/startup_check.py")
+    try:
+        text = data.decode("utf-8")
+        _, markers = check.marked(text, "AGENTS.md", check.HOOKS, "Director block")
+    except ValueError:  # Undecodable, or not exactly one supported marker pair.
+        return False
+    raw = text.splitlines(keepends=True)  # Same line boundaries as the checker's splitlines().
+    return "".join(raw[markers[0][0] + 1:markers[1][0]]) == "".join(BLOCK.splitlines(keepends=True)[1:-1])
 
 
 def files_for(target, initiator, opportunity, min_incidents=3, project_id=None):
@@ -145,10 +166,12 @@ def operation(mode, target, initiator="owner", opportunity="closure", min_incide
         for name, data in static.items():
             path = target / name
             require(path.is_file() and not path.is_symlink(), "installed instruction drift; no implicit overwrite")
-            # AGENTS.md is composed: only the managed block must be intact; the project section and
-            # the project's own text are project-owned.
-            same = BLOCK.encode() in path.read_bytes() if name == "AGENTS.md" else path.read_bytes() == data
-            require(same, "installed instruction drift; no implicit overwrite")
+            # AGENTS.md is composed: only the managed block must be intact, under either supported
+            # marker pair; the project section and the project's own text are project-owned.
+            if name == "AGENTS.md":
+                require(block_intact(path.read_bytes()), "installed instruction drift: Director block missing, doubled, edited or unreadable; no implicit overwrite")
+            else:
+                require(path.read_bytes() == data, "installed instruction drift; no implicit overwrite")
         current = runtime().Store(target / ".director")
         current.validate()
         return {"operation": mode, "changed": False, "status": "same starter; mutable state and optional roles preserved", "target": str(target)}
