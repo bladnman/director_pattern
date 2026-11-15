@@ -43,10 +43,11 @@ failure is runtime behavior, fix it in runtime text, not only in the rationale o
 design notes. When simplifying, preserve the underlying behavior and its regression
 oracle. Bump `starter_revision` in `pattern/starter/manifest.json` with each
 published starter payload change.
-Before publishing a starter revision, keep the shipped `agents/block.md` under about
-8,000 bytes, each card under 6,500, WORKER.md under 4,500 and the project-section
-template under 3,000. These are our authoring budgets, checked here before we
-publish; never ship them as limits on a project's AGENTS.md, block or section.
+Before publishing a starter revision, keep the shipped `agents/block.md` as small as
+it can be, near 8,000 bytes; past 10,000 is the alarm to cut it back. Keep
+each card under 6,500 bytes, WORKER.md under 4,500 and the project-section template
+under 3,000. These are our authoring budgets, checked here before we publish; never
+ship them as limits on a project's AGENTS.md, block or section.
 
 Retain exact source conversations and internal reference material privately,
 separate from public documentation. Preserve originals without rewriting them;

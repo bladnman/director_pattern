@@ -1,6 +1,6 @@
 # Flat Director starter 3 — preserved records, fewer compulsory actors
 
-One Project Director stays in conversation, delegates useful bounded work and
+A Project Director stays in conversation, delegates useful bounded work and
 retains whole delivery. No mandatory manager, Recorder, identity-pool, setup-check
 or learning actor. Flat orchestration does not remove exact source/record/lifecycle,
 verification, update, supervision or project-authority obligations.
@@ -13,11 +13,11 @@ reviewed instruction/adapter integration, not a fresh installer or second ledger
 The [design-obligation matrix](https://github.com/bladnman/director_pattern/blob/main/development/BEHAVIOR_PARITY.md) explains the
 old reasons, revised routes, evidence and remaining verification limits.
 
-The manifest's `starter_revision` (now 3.5) is a readable revision number bumped with
+The manifest's `starter_revision` (now 3.6) is a readable revision number bumped with
 each published payload change; `starter_version` stays the install-format number.
 
 Revision 3.3 changes where the Director's rules live. The installer writes a marked
-Director block of about 7.9 KB into the project's AGENTS.md, followed by a
+Director block of about 8 KB into the project's AGENTS.md, followed by a
 project-owned settings section. The block holds the role gate, the ten standing
 duties, the first-reply check, the recovery steps and the reading rule, because hosts
 restore AGENTS.md after a compaction and do not restore files an agent read. Detail
@@ -47,6 +47,13 @@ refuse, block or stop over a size the pattern sets for that file, the block as i
 stands there or the project section. The update guide still reports when the file
 would pass the host's own instruction cap, and the check still reports the
 section's size, for information.
+
+Revision 3.6 says that several Directors and other actors may work in one project
+at the same time, often unaware of each other. The block's role paragraph tells
+every role to notice where its work meets theirs and work it out together. The
+supervision card has the accepting Director check the combined result, and restore
+stepped-on work from its request. The store guide now describes its cooperating
+writers in the plural.
 
 ## Install beside ordinary notes and assets
 

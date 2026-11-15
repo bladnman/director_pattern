@@ -3,7 +3,7 @@
 For Directors. Status reports (📋 SitReps) are Director work; a delegating worker evaluates its sub-workers' returns and accounts for them in its own return. Paths are in `.director/`. After a break, do the AGENTS.md block's Recovery steps before using this card.
 
 A worker's return is a submission, not acceptance. Selected specialists retain their authority;
-preserve independent verification when required. One owner keeps
+preserve independent verification when required. Each outcome's owner keeps
 the whole usable result through evaluation, rework and pending approvals.
 Assign the local judgments an owner or required independent reviewer can make,
 what their positive findings permit next, and the decisions reserved to you.
@@ -19,6 +19,9 @@ unresolved failures at planning and meaningful returns. Check that the evidence
 proves the claimed result: for runtime behavior, follow the relevant user entry
 through to the observable result and identify substituted inputs or bypassed parts.
 Component or harness passes do not resolve contrary reports about the whole result.
+Others may have changed the same files or records meanwhile, often unaware of this
+work: before accepting, check that the combined result still holds, and where work
+was stepped on, use its request to restore what it was for.
 Retain supported partial results while resolving that conflict or retaining its gap.
 A mismatch or repeated unresolved failure calls for reassessing the approach and
 proof before another narrow fix.

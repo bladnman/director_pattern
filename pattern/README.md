@@ -1,7 +1,7 @@
 # Director Pattern packages
 
-**New projects: [flat starter 3](starter/README.md).** This source candidate uses one
-Project Director and bounded workers, with a small install and explicit bounded
+**New projects: [flat starter 3](starter/README.md).** This source candidate is flat, a
+Project Director with bounded workers, with a small install and explicit bounded
 learning review. It is a new format, not an automatic v1 upgrade or a published
 release claim. Ordinary notes/assets may already exist; conflicting startup or
 tracker installations require reviewed integration.

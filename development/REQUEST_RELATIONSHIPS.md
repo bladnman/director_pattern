@@ -3,7 +3,7 @@
 **Candidate semantics · October 16, 2026.** The user authorized implementing request
 folders and these flexible links. The bundled helper now represents supported
 local relationships/handoff receipts; it is not a transport or real-store migration. Tracked
-remains the accepted default. One project and one director remain the normal case;
+remains the accepted default. A request normally stays in one project with one accountable owner;
 an external handoff is optional. No graph database or central registry is required.
 
 ## Distinct relationships, without a required tree

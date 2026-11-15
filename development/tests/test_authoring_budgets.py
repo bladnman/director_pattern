@@ -1,10 +1,12 @@
 """Maintainer authoring budgets for the standing text this repository ships.
 
 AGENTS.md, "Maintaining this repository": before publishing a starter revision, keep the
-shipped `agents/block.md` under about 8,000 bytes, each card under 6,500, WORKER.md under
-4,500 and the project-section template under 3,000. These are our authoring budgets,
-checked here before we publish; the pattern never ships them as limits on a project's
-AGENTS.md, block or section (R10, November 14, 2026).
+shipped `agents/block.md` as small as it can be, near 8,000 bytes, with past 10,000 as the alarm;
+each card under 6,500, WORKER.md under 4,500 and the project-section template under 3,000.
+These are our authoring budgets, checked here before we publish; the pattern never ships
+them as limits on a project's AGENTS.md, block or section (R10, November 14, 2026). For the
+block, near 8,000 is a target this test cannot judge; it fails only past the 10,000 alarm
+(R1, November 14, 2026, starter revision 3.6).
 
 Static byte measurements of source files only. They say nothing about what a host loads.
 """
@@ -18,8 +20,9 @@ ROOT = Path(__file__).resolve().parents[2]
 STARTER = ROOT / 'pattern/starter'
 PAYLOAD = STARTER / 'payload'
 
-# The budgets, as AGENTS.md states them. "About 8,000" is checked as at most 8,000 bytes.
-BLOCK_BUDGET = 8000
+# The budgets, as AGENTS.md states them. The block's is an alarm, not its target: the target is
+# "as small as it can be, near 8,000 bytes", which is an authoring judgment; a block past 10,000 fails.
+BLOCK_BUDGET = 10000
 CARD_BUDGET = 6500
 WORKER_BUDGET = 4500
 SECTION_TEMPLATE_BUDGET = 3000
@@ -56,11 +59,12 @@ class AuthoringBudgetTests(unittest.TestCase):
     def test_maintainer_rule_states_the_budgets_this_test_checks(self):
         # Drift guard: the constants above are the ones the maintainer rule names.
         rules = flat((ROOT / 'AGENTS.md').read_text())
-        self.assertIn('Before publishing a starter revision, keep the shipped `agents/block.md` under about 8,000 bytes, '
-                      'each card under 6,500, WORKER.md under 4,500 and the project-section template under 3,000.', rules)
+        self.assertIn('Before publishing a starter revision, keep the shipped `agents/block.md` as small as it can be, '
+                      'near 8,000 bytes; past 10,000 is the alarm to cut it back. Keep each card under 6,500 bytes, '
+                      'WORKER.md under 4,500 and the project-section template under 3,000.', rules)
         self.assertIn("These are our authoring budgets, checked here before we publish; never ship them as limits on a "
                       "project's AGENTS.md, block or section.", rules)
-        self.assertEqual((BLOCK_BUDGET, CARD_BUDGET, WORKER_BUDGET, SECTION_TEMPLATE_BUDGET), (8000, 6500, 4500, 3000))
+        self.assertEqual((BLOCK_BUDGET, CARD_BUDGET, WORKER_BUDGET, SECTION_TEMPLATE_BUDGET), (10000, 6500, 4500, 3000))
 
     def test_shipped_block_cards_worker_and_section_template_fit_their_budgets(self):
         sizes = shipped_sizes()
@@ -98,7 +102,7 @@ class AuthoringBudgetTests(unittest.TestCase):
         texts = [STARTER / 'agents/block.md', STARTER / 'agents/project-section.md',
                  STARTER / 'README.md', ROOT / 'pattern/README.md']
         texts += sorted(PAYLOAD.glob('*.md')) + sorted((PAYLOAD / 'cards').glob('*.md'))
-        number = re.compile(r'\b(?:8,000|6,500|4,500|3,000)\b')
+        number = re.compile(r'\b(?:8,000|10,000|6,500|4,500|3,000)\b')
         for path in texts:
             with self.subTest(file=path.relative_to(ROOT).as_posix()):
                 text = flat(path.read_text())

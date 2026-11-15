@@ -67,8 +67,105 @@ as authoring rules for the text this repository ships. The entry under
 [R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes) supersedes the November 11
 caps as limits on projects. It is decided, and implemented in the working tree as
 starter revision 3.5 and tested; it is not committed or published.
+*Later November 14 addition:* 3.5 is now published on `main`.
+
+Later on November 14, 2026, the maintainer stated a base intent: several Project
+Directors and other actors working in one folder at the same time is expected, not a
+hazard. They may not know about each other; they notice overlap and manage it as a
+team would, and the Director that accepts an outcome checks the combined result. The
+entry under [R1](#r1--one-accountable-conversation-without-a-forced-organization) records it, rewords phrasing
+that counted sessions or writers, and turns the shipped block's 8,000-byte budget into
+a target with an alarm at 10,000. It is implemented in the working tree as starter
+revision 3.6 and tested statically; it is not committed or published.
 
 ## R1 — One accountable conversation, without a forced organization
+
+**November 14 — several Directors in one folder are expected, and they cooperate
+(clarifies "One folder normally has one project director"; starter revision 3.6):** A
+Director in an adopting project warned the maintainer that a second Project Director
+session in the same folder would collide. The maintainer's position is that several
+Project Directors, and other actors, working in one folder at once is a core
+expectation of the design, not a hazard to prevent. Each may not know about the
+others; they notice where their work meets and manage it the way a team does, and the
+Director that accepts an outcome checks that the combined result still holds. No live
+rule forbade this, and the block already assumed it: Recovery leaves other open
+requests with their owners, a second conversation does not adopt another's requests
+([R17](#r17--keep-delegated-work-supervised-and-recover-the-users-whole-request)),
+and the store serializes cooperating writers and rejects stale revisions. But several
+sentences counted sessions or writers, among them the "Current direction" line below,
+and nothing said positively that parallel Directors are normal. That the counting
+wording primed the warning is a hypothesis; the model's own prior may explain it.
+
+The line below keeps its original wording as history. It meant that accountability
+sits with one owner per outcome and that no manager tree is required, not a limit on
+how many Director conversations run in one folder. Likewise, "another Director only
+for sustained coordination" ([R18](#r18--start-flat-and-make-learning-an-explicit-bounded-loop))
+is about a Director staffing a scoped child, not about how many sessions the user
+starts.
+
+**Implemented.** The block's role paragraph, which every role reads, gains two
+sentences after "role names grant nothing": "Other Directors and actors may be working
+here at the same time, often unaware of you; that is expected. Notice where your work
+meets theirs and work it out together." The supervision card's reconcile paragraph
+gains the acceptance check and the recovery route: others may have changed the same
+files or records meanwhile, so before accepting, check that the combined result still
+holds, and where work was stepped on, use its request to restore what it was for. Its
+"One owner keeps the whole usable result" becomes "Each outcome's owner keeps". The
+store guide's "One cooperating writer owns shared state" becomes "Cooperating writers
+share this state; the helper takes their changes one at a time", and its Git paragraph
+now says one machine writes at a time "when it moves between machines through Git",
+which is what it always meant. The source guides' counting phrases ("One Project
+Director stays", "uses one Project Director", "another Director", "no mandatory second
+Director", and "One project and one director remain the normal case" in
+[REQUEST_RELATIONSHIPS](REQUEST_RELATIONSHIPS.md)) are reworded to their meaning: one
+accountable owner per outcome, a flat shape, a scoped child Director when coordination
+warrants it.
+
+**Why/tradeoff:** The pattern states intent, not mechanics. Rules that would forbid
+changing another actor's work, require a single session, or require Git were
+considered and rejected. They create edges agents trip over later without knowing
+why, and overlap happens anyway. Requests are the durable record of what each actor
+was trying to do, so stepped-on work can be found and redone from its request;
+uncommitted work is common and is not a fault in itself. Git composes with this and
+helps, but the starter does not require it, as
+[R15](#r15--allow-subagents-at-every-level-with-named-checks-and-batched-records)'s
+November 1 supersession already holds. The risk is a Director that under-reacts to a
+real conflict; the acceptance check is the guard. The card sentence is read only at the
+card's trigger, so the always-loaded block carries the intent and the card carries the
+check.
+
+**The block's size is a target, not a cap.** The two sentences cost 167 bytes and take
+the shipped block from 7,997 to 8,164 bytes, past the 8,000 budget that
+[R10](#r10--assign-roles-explicitly-preserve-project-ownership-across-entry-routes)'s
+November 14 entry kept as an authoring rule. The maintainer decided the same day that
+8,000 is not a magic number: the block should be as small as it can be and stay near
+8,000 bytes, with an alarm as it approaches 10,000. This repository's AGENTS.md now says
+"keep the shipped `agents/block.md` as small as it can be, near 8,000 bytes; past 10,000
+is the alarm to cut it back", and the budget test fails only past 10,000. Staying near
+8,000 is an authoring judgment a test cannot make; the purpose, small standing text
+every agent pays for on every turn, is unchanged. The card, WORKER.md and
+section-template budgets are unchanged.
+
+**Regression cases:** A Director that finds another session's open requests or edits in
+the folder says so plainly, leaves those requests with their owner and goes on with its
+own work, coordinating where they meet. A Director that declares parallel Directors
+will collide, asks as a rule that one be stopped, or adopts the other's requests fails.
+A Director whose outcome touched files another actor changed checks the combined result
+before accepting, and uses the other request to restore work it stepped on. Known-bad
+case: the field warning above. A shipped block past 10,000 bytes fails the pre-publish
+budget check; one at 8,164 passes.
+
+**Status:** Decided by the maintainer on November 14, 2026, and implemented in the
+working tree as starter revision 3.6: the block, supervision card and RECORDS.md
+wording above, the source-guide rewordings, the AGENTS.md budget sentence, and
+`BLOCK_BUDGET` raised to the 10,000 alarm in `development/tests/test_authoring_budgets.py`
+with its drift guard and the shipped-number scan updated. New oracle:
+`test_parallel_directors_and_actors_are_expected_and_cooperate` (in
+`development/tests/test_block_route.py`), which pins the sentences and keeps the counting
+phrases out of shipped text; the role-gate pins carry the two new sentences. Static
+tests only. No live run shows a Director noticing overlap or checking the combined
+result; that needs a trial with two Directors in one folder. Not committed or
+published; installed copies keep their adopted text until updated.
 
 **November 13 — a step that does not earn its cost can be the better route
 (cross-reference):** The November 7 partner rule below maps a request onto the
@@ -1239,7 +1336,8 @@ number of its own.
 
 **What stays, as a maintainer rule.** The budgets for the text this repository ships
 (block about 8,000 bytes, each card 6,500, WORKER.md 4,500, the section template
-3,000) become authoring rules in this repository's AGENTS.md, in a sentence after
+3,000) *(later November 14: the block's figure is now a target near 8,000 with an alarm
+past 10,000; see [R1](#r1--one-accountable-conversation-without-a-forced-organization), November 14)* become authoring rules in this repository's AGENTS.md, in a sentence after
 the `starter_revision` rule, checked before publishing a starter revision. A test
 that checks the shipped files against those budgets replaces the tests that pinned
 the project-side limits
@@ -1287,7 +1385,8 @@ in this repository's AGENTS.md. The tests that pinned the old limits are replace
 with `test_installer_and_check_set_no_size_limit_on_the_block_or_section` and
 `test_a_project_section_over_3000_bytes_passes_and_reports_its_size`. Implemented and
 tested in the working tree (the full suite passes, 278 tests, as the Director
-reported); not committed or published, and no installed copy has taken 3.5. An
+reported); not committed or published, and no installed copy has taken 3.5 *(later
+November 14: published on `main`)*. An
 independent review passed with low-severity wording fixes, which were applied. Until it
 ships, the earlier passages that state the caps as limits on a project describe the
 published 3.4 behavior, and each now points here.
@@ -2873,6 +2972,14 @@ in shared state become common, or teams need per-person ledgers.
 
 ## R15 — Allow subagents at every level, with named checks and batched records
 
+**November 14 — parallel Directors share the tree too (cross-reference):** The
+actors this section lets work in one shared project tree include several Project
+Directors that the user starts, often unaware of each other. They notice overlap and
+work it out together, and the accepting Director checks the combined result; no
+partition, lock or Git rule is added ([R1](#r1--one-accountable-conversation-without-a-forced-organization),
+November 14). The revisit trigger below is not met: the field warning there predicted a
+collision, it did not observe one.
+
 **November 1 narrow supersession — Git is recovery support, not agent permission:**
 The October 23 "under Git" condition could prohibit even useful read-only subagents
 in a legitimately non-Git project. The owner now explicitly permits useful bounded
@@ -3543,6 +3650,14 @@ history and unrun acceptance gates. Static edits can establish preservation and
 reachability; the next actual selected use must establish uptake.
 
 ## R18 — Start flat and make learning an explicit bounded loop
+
+**November 14 — "one Project Director" means one accountable owner per outcome
+(cross-reference):** This section's "a new starter has one Project Director" and "the
+rest stands: one Project Director" describe the flat shape, one accountable owner per
+outcome with bounded workers and no manager layer. They do not limit how many Director
+conversations run in one folder; several are expected and cooperate
+([R1](#r1--one-accountable-conversation-without-a-forced-organization), November 14).
+"Use one for sustained coordination, not each branch" is about staffing a scoped child.
 
 **November 13 — look back on the work: propose a role for recurring work and a cut for
 a step that does not earn its cost (starter revision 3.4):** A field report from an

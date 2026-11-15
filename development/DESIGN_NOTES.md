@@ -2207,3 +2207,43 @@ means the installation in the private workspace. Both rows are kept as written.
 | The sync check reports both repositories clean after the public cleanup is merged and pushed | Not run; the public branch is not merged or pushed |
 | The host reads this repository's "Maintaining this repository" from the private workspace as its explicit read requires | Not observed |
 | Two machines working from the private workspace's remote | Not run |
+
+## Parallel Directors in one folder (starter 3.6) — November 14, 2026
+
+These checks cover revision 3.6, recorded under
+[R1](RATIONALE.md#r1--one-accountable-conversation-without-a-forced-organization)
+(November 14) with cross-references in R10, R15 and R18: two sentences in the block's
+role paragraph saying other Directors and actors may be working in the same folder
+and overlap is worked out together, the supervision card's combined-result check and
+request-based recovery of stepped-on work, plural wording for the store's cooperating
+writers, reworded source-guide phrases that counted sessions, and the block's budget
+turned into a target near 8,000 bytes with an alarm past 10,000.
+
+### Static checks
+
+From the repository root,
+`PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests`
+passed **279 tests**, one more than at 3.5 (the new case below);
+`python3 -B -m unittest development.tests.test_package` passed 32;
+`node --test site/tests/site.test.mjs` passed 9; `git diff --check` passed.
+`ParallelActorsNovember14Tests.test_parallel_directors_and_actors_are_expected_and_cooperate`
+pins the two role-paragraph sentences before the role bullets, the supervision-card
+sentence inside its reconcile paragraph, "Each outcome's owner keeps" and the RECORDS
+sentence, and keeps the counting phrases ("One cooperating writer", "One Project
+Director stays", "uses one Project Director", "no mandatory second Director", "will
+collide") out of the block, payload guides, cards and source guides. The role-gate
+pins carry the two new sentences. `test_authoring_budgets.py` now checks the block
+against the 10,000 alarm, and its drift guard matches the new AGENTS.md sentence.
+
+The block is 8,164 bytes (7,997 at 3.5); the supervision card is 5,694. The
+fixtures under `fixtures/starter_3_3` keep their original wording as history.
+
+These establish wording, placement and budgets only.
+
+### Not verified
+
+| Scenario | Status |
+|---|---|
+| A Director that finds another session's open requests or edits in the folder leaves them with their owner and coordinates, without warning that parallel Directors will collide | Not run |
+| Two Directors whose work overlaps: the accepting one checks the combined result and restores stepped-on work from its request | Not run |
+| An installed 3.5 project, including the private workspace, takes the 3.6 block update | Not run |

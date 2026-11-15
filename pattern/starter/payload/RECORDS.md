@@ -127,8 +127,9 @@ promise. Source cancellation alone cannot stop receiver execution.
 
 ## Persistence and interruption recovery
 
-One cooperating writer owns shared state. Mutations use event identities, expected
-revisions, preserved history, and canonical record replacement. Identical retries
+Cooperating writers share this state; the helper takes their changes one at a time.
+Mutations use event identities, expected revisions, preserved history, and
+canonical record replacement. Identical retries
 are safe under the documented event rules; stale or conflicting updates fail.
 Do not guess whether a failed call wrote: inspect its receipt, current revision,
 and pending recovery before retrying. Preserve conflicting copies for reconciliation.
@@ -150,7 +151,7 @@ default, restoring clone/cloud continuity. Git eligibility does not commit/push
 anything. A public/unknown remote requires one factual warning and durable record
 of delivery; exact inputs pushed to public history remain readable after deletion.
 Preserve all explicit project privacy opt-outs, including parent ignore rules. A
-store actually committed with the project travels to the next clone/cloud checkout. One machine writes at a time: commit and push before
+store actually committed with the project travels to the next clone/cloud checkout. When it moves between machines through Git, one machine writes at a time: commit and push before
 continuing elsewhere, and pull before the next write. Unique event IDs keep
 outcomes and sources created on different machines distinct. They do not merge two
 machines' edits to one request; that surfaces as a Git conflict. Preserve both

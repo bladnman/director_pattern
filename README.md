@@ -2,14 +2,14 @@
 
 A Project Director stays in conversation, retains the whole outcome, assigns
 bounded execution to workers, and evaluates the result through usable delivery.
-Start flat. Add another Director when sustained coordination warrants it; develop
+Start flat. Add a scoped child Director when sustained coordination warrants it; develop
 a department when recurring ownership and maintained knowledge earn their place.
 The same base role can compose scoped and domain knowledge without duplicating an
 organization at installation.
 
 **Current source candidate:** the [flat starter](pattern/starter/README.md) is the
 new-install entrypoint for a project without conflicting startup or tracker.
-It has no mandatory second Director,
+It has no mandatory child Director,
 Recorder, Architect, identity pool or setup-check actor. The Director performs
 validated recording operations and supervises workers. Durable corrections feed a
 separate bounded learning review; the Director does not reread all history at
