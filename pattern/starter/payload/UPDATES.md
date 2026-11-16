@@ -26,11 +26,12 @@ project-work step. Until it actually runs, retain the due check in context and a
 the next ordinary checkpoint; do not invent execution or a new greeting write.
 
 Use the project's authoritative receipt pointer (fresh default `.director/install.json`) to reconcile acceptance, separately from
-the current-conversation installation check and pending behavioral trials under
+the current-conversation installation check under
 [OPERATIONS](OPERATIONS.md#installation-evidence).
-An accepted baseline with a successful current setup check permits daily discovery
-despite an unrelated pending trial. A real unaccepted baseline or required unrun
-check keeps its applicable gate; discovery grants no update authorization.
+An accepted baseline with a successful current setup check permits daily discovery;
+a fresh host trial, pending or not, never holds it ("Fresh host trials" below). A
+real unaccepted baseline or required unrun check keeps its applicable gate;
+discovery grants no update authorization.
 
 The absent `update-policy.json` means **notify**. With a package change available,
 say exactly: **A new Director Pattern is available. Say “update director pattern”
@@ -339,16 +340,21 @@ ordinary reviewed update, in this order:
    through its closing marker line and newline (the project's own marker lines, when
    it uses them). Point the project section's check
    command at that receipt with `--receipt`, and use the same receipt for
-   `update_check.py`. The check needs this receipt, so it is written before the fresh
-   host trials of step 7: record each of those trials in it as pending, and record
-   their results when they run. Only here and in a later block update does a receipt
-   precede a required check; it must not report the move as adopted until they pass.
+   `update_check.py`. The check reads this receipt, so it is written before the check
+   of step 7; only here and in a later block update does a receipt precede a required
+   check. If step 7 then fails, fix the cause or restore the backup, record what
+   happened, and do not report the move finished.
 7. Run the check command exactly as the project section states it. It must report
    `evidence_matched`, `startup_hook.target` ending in `WORKER.md` and
    `director_block: unchanged`. An edited block, an empty project section or one
-   without a check command, and a changed stub each block the check. This is a
-   structural change to the loaded startup chain: the fresh host trials in the table below apply, including a first reply, a
-   reply after a forced compaction, and a worker start.
+   without a check command, and a changed stub each block the check. When it passes,
+   with the checks the table below selects and the independent review below, the
+   move is finished; no fresh host trial is required (see "Fresh host trials" below).
+   The block is the published text byte for byte, and the check shows it is in place,
+   unchanged, in the file this project's check reads; the table's trace covers how
+   the host loads that file. A conversation already running, including this one and
+   the subagents it starts, may keep the instructions it loaded at its start, so the
+   new block applies from the next new conversation.
 
 This move is strong-tier work at high effort, with the required independent review;
 it is not a lighter-tier case. Automatic update mode never starts it unattended: when
@@ -383,11 +389,12 @@ later block change as part of its ordinary reviewed update:
    closing marker line and newline, the project's own marker lines included. Change
    the `--receipt` path in the project section's check command, and in its
    update-check command if it states one, to the new receipt. The check reads this
-   receipt, so as in the move it precedes any fresh host trials the table below
-   selects for the change; record them as pending, then their results, and do not
-   report the update as adopted until they pass.
+   receipt, so as in the move it is written before the check of step 4; if that check
+   fails, fix the cause or restore the backup, and do not report the update finished.
 4. Run the check command exactly as the project section states it. It must report
-   `evidence_matched` and `director_block: unchanged`.
+   `evidence_matched` and `director_block: unchanged`. When it passes, with the
+   checks the table below selects, the block update is finished; no fresh host trial
+   is required.
 
 Inspect helper/config/store schema compatibility before replacing a bundled helper.
 An incompatible or uncertain schema blocks that part of the update; preserve the
@@ -413,14 +420,14 @@ receipt; no separate plan, schema, or test matrix is required. Use these trigger
 |---|---|
 | Prose correction or contract clarification with no behavior or startup effect | Check changed files and links, resulting merged bytes, and preservation of adaptations. Reuse still-applicable startup evidence. |
 | Helper-only change | Check helper/config/store compatibility and affected behavior in disposable fixtures; use read-only actual-state validation where supported. No fresh startup trial follows solely from a helper change. |
-| Changed role behavior without startup restructuring | Check affected definitions, references, index reachability, and preservation; run only the fresh host trials relevant to that behavior. |
-| Structural changes to the loaded startup chain, bootstrap routing, role selection/defaults, or inherited instruction placement; or a detected startup defect that requires integration | Trace the actual host-loaded hook through complete selected role/project guards, check missing/truncated reads and applicable authority, then run relevant fresh unassigned/assigned host trials before claiming their behavior. A change affecting all routes can require the whole trial set. |
+| Changed role behavior without startup restructuring | Check affected definitions, references, index reachability, and preservation. The behavior itself is the published revision's, which the pattern's maintainers test in fresh sessions; no fresh host trial is required here. |
+| Structural changes to the loaded startup chain, bootstrap routing, role selection/defaults, or inherited instruction placement; or a detected startup defect that requires integration | Trace the actual host-loaded hook through complete selected role/project guards, check missing/truncated reads and applicable authority, and run the check command. Repair a detected defect within authorized scope, or report it. No fresh host trial is required (see "Fresh host trials" below). |
 | Missing baseline or uncertain provenance | Reconstruct from the prior pinned upstream revision and review local differences, or obtain explicit review before replacement; expand startup/behavior checks only if those findings trigger them. |
 | Already-current installation | Confirm the pinned revision and inspect local drift and preservation. Report no upstream change; do not rewrite files or rerun startup/role trials without a relevant finding. |
 
 Changing required-reference phases or capability triggers is a startup/behavior
-change: audit every reachable affected path, preserve project-owned unphased
-requirements, and run the relevant progressive-loading and incomplete-result trials.
+change: audit every reachable affected path and preserve project-owned unphased
+requirements.
 Changing a flat foundation does not shorten existing custom definitions' required-reference chains. A reviewed
 local rephase must preserve exact authority, applicability, transitive dependencies
 and before-use triggers, with old/new mapping in the receipt. Retain prior
@@ -439,6 +446,30 @@ evidence and its limits. Inspect affected callers and links when a path changes.
 If a previously unknown startup defect is found, repair/verify it within authorized
 scope or report the blocked boundary; do not hide it behind the routine path.
 
+### Fresh host trials
+
+A fresh host trial opens new sessions to watch the pattern's own text at work: a
+first reply, a reply after a forced compaction, a worker start. Every installation
+receives that text byte for byte from the published revision, so these trials are
+the pattern maintainers' work: they run them on published revisions in their own
+installation. They are not part of a project's update.
+
+Updating to a published revision is finished when the checks this guide selects
+pass: the files compare cleanly, adaptations are preserved, the focused checks the
+table names pass, and the check command reports `evidence_matched` with
+`director_block: unchanged`. That holds for the move to the AGENTS.md block too. Do
+not record fresh host trials as pending, hold the update open for them, or end the
+report with a question about them. A receipt from an earlier update that lists such
+trials as pending needs nothing more: leave it as written and do not carry those
+entries forward.
+
+A user who wants more assurance can have a deeper check. You may mention once, as a
+plain statement rather than a question, that a fresh session can be opened to watch
+its first reply and a worker start; run one only when the user asks, and record what
+it showed. An unpublished or local candidate revision is not one the maintainers
+have released, so their trials have not covered it; say so in the report. A startup defect the update finds is still
+handled as above; a fresh session is one way to show a repair, not a requirement.
+
 ## Validate and record the result
 
 Check selected payload presence and affected local links, resulting merged bytes,
@@ -452,17 +483,16 @@ when templates are affected. Use read-only actual-state validation where support
 and disposable fixtures for necessary helper behavior checks, never dummy requests
 in the real backlog.
 
-When triggered above, use the relevant subset of
-[affected fresh host checks](OPERATIONS.md#installation-evidence).
-Do not claim a cold-session behavioral trial unless one actually ran. Carry forward
-known prior verification gaps with their limits; an unrelated pending trial does
+Fresh host trials are optional for an update ("Fresh host trials" above). Do not
+claim a cold-session behavioral trial unless one actually ran. Carry forward
+known prior verification gaps with their limits, apart from the fresh host trials
+above; an unrelated pending trial does
 not fail a routine update or become passed through evidence reuse. A newly required
 check that is blocked or unrun leaves that part incomplete, never passed.
 
 Only after all checks required for this update succeed, write the update receipt
 (the exceptions are the move to the AGENTS.md block and a later block update, whose
-receipt the check reads, so it is written before their fresh host trials and records
-them as pending) under `.director/receipts/`: source URL/full SHA, prior revision, selected managed
+receipt the check reads, so it is written just before that check runs) under `.director/receipts/`: source URL/full SHA, prior revision, selected managed
 paths and resulting SHA-256 baseline hashes, startup wiring/hash, preserved
 adaptations, backup location/hashes, scope and reason, performed checks, reused
 evidence and limits, and carried-forward gaps. Update the project's source pointer

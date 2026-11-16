@@ -13,7 +13,7 @@ reviewed instruction/adapter integration, not a fresh installer or second ledger
 The [design-obligation matrix](https://github.com/bladnman/director_pattern/blob/main/development/BEHAVIOR_PARITY.md) explains the
 old reasons, revised routes, evidence and remaining verification limits.
 
-The manifest's `starter_revision` (now 3.9) is a readable revision number bumped with
+The manifest's `starter_revision` (now 3.10) is a readable revision number bumped with
 each published payload change; `starter_version` stays the install-format number.
 
 Revision 3.3 changes where the Director's rules live. The installer writes a marked
@@ -77,6 +77,16 @@ has every brief tell each worker it is one, since any agent a Director starts
 unnamed, even a host helper whose type the host defines, counts as a Director under
 the block, though it may not act as one. The staffing card's Role line says the same
 holds for helpers and lookups.
+
+Revision 3.10 says that people update to get the latest version, not to test the
+pattern. A project's update to a published revision is finished when its quick
+checks pass: the files compare cleanly, adaptations are preserved, and the check
+reports `evidence_matched` with the block unchanged. That includes the one-time move
+to the AGENTS.md block. Fresh-session trials test the pattern's own text, so its
+maintainers run them on published revisions in their own installation; a project's
+Director may mention one as a deeper check, but never holds an update open for it.
+Backups, comparison, migrations, conflicts, authority and the independent review
+stay as they were.
 
 ## Install beside ordinary notes and assets
 

@@ -113,6 +113,16 @@ start-time instructions. It is implemented as wording in starter revision 3.9, p
 by `HelpersAreDirectorsNovember15Tests`, and published on `main` with this change;
 its live trial is pending.
 
+Also on November 15, 2026, after two outside projects' Directors each held a routine
+update open for four fresh-session trials and asked whether to run them, the
+maintainer decided that a user's update is finished when its quick checks show things
+still work; a deeper check may be offered but is never required. The entry under
+[R11](#r11--update-from-a-pinned-public-source-without-replacing-project-state)
+records it: fresh host trials become the maintainers' work on published revisions in
+their own installation, and the receipt-before-trials rule of November 11 and 13 is
+superseded. It is implemented as wording in starter revision 3.10, pinned by
+`UserUpdatesFinishOnChecksNovember15Tests`, and published on `main` with this change.
+
 ## R1 — One accountable conversation, without a forced organization
 
 **November 14 — several Directors in one folder are expected, and they cooperate
@@ -1974,6 +1984,9 @@ regression case. Test names are in `development/tests/`.
 12. **The update receipt may precede its fresh-session trials, for this move only**
     ([R11](#r11--update-from-a-pinned-public-source-without-replacing-project-state);
     recorded there).
+    *November 15 addition:* superseded by starter 3.10: the move finishes on its
+    check and review, and fresh host trials are the maintainers' work (R11, November
+    15).
 
 **What stays, with no supersession.** Staffing keeps the October 30 decision in this
 section ("separate selection from execution knowledge"): the staffer chooses from the
@@ -2649,6 +2662,130 @@ correction establishes universal host compliance.
 
 ## R11 — Update from a pinned public source without replacing project state
 
+**November 15 — a user's update is finished when its quick checks pass; fresh host
+trials are the maintainers' work (starter revision 3.10; supersedes November 11's
+receipt-before-trials rule, item 12 of the R10 November 11 entry, the November 13
+"pending until they pass" wording, and, for the starter route, part of the October 23
+trigger table and its pending-trial regression case):** The maintainer updated two
+outside projects from 3.3 to 3.9. Each project's Director reported the update as
+staying open until four fresh-session trials had run, and then asked whether to run
+them. The guide told them to: the move and every block update recorded the selected
+fresh host trials as pending in the receipt and did not report the update adopted
+until they passed, and the trigger table required fresh trials for any change to
+startup, role routing or role behavior.
+
+**Decided by the maintainer, November 15:** people outside are trying to update to
+the latest version, not to run test software. Whatever quick validation shows that
+things still work has to be enough for a user. A deeper check may be offered, but it
+is never required.
+
+**The argument.** A fresh host trial watches the pattern's own text at work: a first
+reply, a reply after a forced compaction, a worker start. Every installation receives
+that text byte for byte from the published revision, and `director_block: unchanged`
+proves the installed block is that text. `startup_hook.target` shows the block sits,
+unchanged, in the hook source the project's check names; the table's trace of the
+host-loaded hook covers whether the host loads that file. What is the project's own (its section, guards, store,
+roles and adaptations) is covered by the three-way comparison, the preservation
+checks and the independent review. So a trial run in a user's project mostly
+re-tests the published text, which is the same in every installation; that test
+belongs to the people who publish it, once per revision, in their own installation.
+
+**Implemented, as wording (starter revision 3.10).** In the
+starter [UPDATES](../pattern/starter/payload/UPDATES.md):
+- "Move to the AGENTS.md block" steps 6 and 7, and "Update an installed block" steps
+  3 and 4, finish on the check, with the independent review for the move. The receipt
+  is still written just before the check, because the check reads it; if the check
+  then fails, the cause is fixed or the backup restored, and the move or update is not
+  reported finished. No trial is recorded as pending, and nothing waits on one.
+- The verification table's rows for changed role behavior and for structural startup
+  changes now trace the route and run the check, repairing or reporting a detected
+  defect, with no fresh host trial required; the progressive-loading sentence no
+  longer requires its trials.
+- A new subsection, "Fresh host trials", says they are the maintainers' work on
+  published revisions in their own installation. A user's update must not record them
+  as pending, hold the update open for them, or end its report on a question about
+  them. A receipt from an earlier update that lists such trials as pending is left as
+  written and its entries are not carried forward. A deeper check may be mentioned
+  once, as a plain statement, and run only when the user asks. An unpublished or
+  local candidate revision is said to be one. A startup defect the update finds is
+  still handled; a fresh session is one way to show a repair, not a requirement.
+- "Validate and record" calls fresh host trials optional for an update, no longer
+  links OPERATIONS' installation-evidence checks from there, and keeps "Do not claim
+  a cold-session behavioral trial unless one actually ran".
+- Move step 7 now ends: "The block is the published text byte for byte, and the
+  check shows it is in place, unchanged, in the file this project's check reads; the
+  table's trace covers how the host loads that file." A conversation already running,
+  and the subagents it starts, may keep the instructions it loaded at its start, so
+  the new block applies from the next new conversation (R10, November 15, 3.9,
+  observation 1).
+- The daily-discovery paragraph now says a fresh host trial, pending or not, never
+  holds daily discovery; a real unaccepted baseline or a required unrun check keeps
+  its gate. This narrows the later October 23 clarification below ("An unrelated
+  pending trial cannot invent a new gate or block daily metadata discovery") to every
+  fresh host trial.
+- The manifest is 3.10 and the starter README has a 3.10 paragraph.
+
+**What this supersedes.** Earlier text stays as history, each with a dated note.
+1. *November 11, "A receipt may precede required checks, for this move only"*, with
+   R10 November 11 item 12: the receipt was written before the fresh host trials and
+   the move was not adopted until they passed. Its purpose was that a project never
+   looks adopted when it is not. Disposition: the purpose is kept by the check, which
+   reads the receipt and must pass, by the review, and by "do not report the move
+   finished" when the check fails; the trials leave the gate.
+2. *November 13 (3.4), "the update is not reported adopted until they pass"*, which
+   carried the same ordering to every block update. Same disposition.
+3. *October 23, part of the trigger table and one regression case, on the starter
+   route.* The table's "run only the fresh host trials relevant to that behavior" and
+   "relevant fresh unassigned/assigned host trials" are replaced by tracing the route
+   and running the check, and "A structural role-routing upgrade performs the full
+   audit and affected fresh trials" now ends at the audit and the check. The regression
+   case "A previously unrun default-Director trial remains explicitly pending through
+   an unrelated prose update" no longer applies to fresh host trials: such entries are
+   left as written and not carried forward. Other known gaps still carry forward with
+   their limits. The legacy v1 engine guide (`pattern/engine/references/UPDATES.md`)
+   is out of scope: it is unchanged and keeps its trial triggers.
+
+**What does not change.** Verified backups before change; the pinned three-way
+comparison and preservation of adaptations; separate migration decisions and their
+authorization; conflicts resolved, never silently waived; project, host and user
+authority, and each installation updated only from its own project; the required
+independent review; strong tier at high effort for the move; automatic mode never
+starting the move; and the rule that no cold-session trial is claimed unless one ran.
+
+**Out of scope for 3.10.** The public site still describes fresh-agent trials as part
+of updates. Changing it needs site work and its own deployment authorization. The
+legacy v1 engine guide is also unchanged (item 3 above).
+
+**Tradeoff.** A published revision whose maintainer trials have not run can reach
+users without anyone watching it work in a fresh session, and a user's update no
+longer catches that. Closing the gap is the maintainers' job: run the trials on each
+published revision in their own installation, and fix and republish when one fails.
+A defect that only shows with one project's own adaptations is caught only if the
+comparison, review or check sees it, or if the user asks for the deeper check.
+Whether the host actually loads the project's hook file (for example, a CLAUDE.md
+import the host does not expand) is now shown only by that static trace.
+
+**Regression cases:** A project updates from 3.3 to the latest revision; its files
+compare cleanly, its adaptations are preserved, the check reports `evidence_matched`
+with `director_block: unchanged`, and the Director reports the update finished,
+without recording trials as pending and without ending on a question about them. The
+report may say once, as a statement, that a fresh session can be opened to watch a
+first reply and a worker start; the Director runs one only when the user asks. An
+earlier receipt's pending trials stay as written and do not appear in the new
+receipt. A move whose check fails is not reported finished, and the backup is
+restored or the cause fixed. An update that finds a startup defect still repairs it or
+reports it. An update to an unpublished candidate says so.
+
+**Status.** Decided by the maintainer on November 15, 2026. Implemented as wording in
+starter revision 3.10 and published on `main` with this change; no installed project
+has it. Verified statically: the full suite passes, 305 tests, and the new wording is
+pinned by the seven tests in `UserUpdatesFinishOnChecksNovember15Tests` in
+`test_block_route.py`, with the existing pins updated to the new UPDATES wording and
+to 3.10 ([validation notes](DESIGN_NOTES.md#a-users-update-ends-on-its-quick-checks-starter-310--november-15-2026)).
+These are wording pins only. Not verified: no project has updated under 3.10, and the
+maintainers' own trials of 3.10 in their installation have not run. The legacy v1
+engine guide is out of scope and unchanged.
+
 **November 13 — update an installed block (starter revision 3.4):** 3.4 is the first
 block change after the move, and the guide had no step for an installation already
 on the block. Starter [UPDATES](../pattern/starter/payload/UPDATES.md) gains "Update
@@ -2673,7 +2810,9 @@ own pair.
 checks, for this move only". The check reads the receipt, so every block update has
 the same ordering; the receipt records the selected fresh host trials as pending and
 the update is not reported adopted until they pass. The "Validate and record" and
-move steps now say so. **Regression case:** a 3.3 installation with an edited project
+move steps now say so. *November 15 addition:* superseded by starter 3.10. A block
+update now finishes on its check; fresh host trials are the maintainers' work and are
+not recorded as pending (R11, November 15). **Regression case:** a 3.3 installation with an edited project
 section takes 3.4; the section's bytes are unchanged apart from the `--receipt`
 paths, custom markers stay in place, and the check reports `evidence_matched` and
 `director_block: unchanged`. **Status:** Decided by this repository's Project Director on November 13, 2026, from
@@ -2716,6 +2855,10 @@ Three rules are new and narrow earlier ones:
   trials, records each of them as pending, and must not report the move as adopted
   until they pass. Cost: a receipt exists while trials are open, and only its own
   pending entries say so.
+  *November 15 addition:* superseded by starter 3.10. The receipt still comes before
+  the check, which reads it, but the move finishes when the check passes with the
+  independent review; fresh host trials are not recorded as pending (R11, November
+  15).
 - **Automatic mode never starts the move.** The standing "automatic" preference
   authorizes compatible reversible updates without repeated permission. The move
   changes the loaded startup chain, so an automatic result that would bring it waits
@@ -2758,6 +2901,8 @@ project has made the move: not a mature project with its own guards, store or ro
 index, and not this source checkout. The fresh host trials the guide requires
 (a first reply, a reply after a forced compaction, a worker start) have not run on
 any moved project.
+*November 15 addition:* since starter 3.10 the guide no longer requires them of a
+project; they are the maintainers' work on published revisions (R11, November 15).
 
 **November 7 — each installation is updated from its own project, an ordinary
 update is bounded and checked, and the starter gets a readable revision:** In a field
@@ -2984,7 +3129,12 @@ role-routing upgrade performs the full audit and affected fresh trials. A missin
 baseline is safely reconstructed/reviewed before replacement, expanding tests only
 if that review finds affected behavior. A previously unrun default-Director trial
 remains explicitly pending through an unrelated prose update; it is neither newly
-passed nor a reason to block that update. An already-current check reports local
+passed nor a reason to block that update. *November 15 addition:* on the starter
+route, starter 3.10 supersedes part of this entry: the structural and role-behavior
+rows no longer require fresh host trials, the structural case ends at the audit and
+the check, and a fresh host trial left pending by an earlier update is left as
+written and not carried forward. The legacy v1 engine guide is unchanged (R11,
+November 15). An already-current check reports local
 drift without silently accepting it. Revisit if scoped checks miss a changed
 behavior or routine updates still impose unrelated installation work.
 

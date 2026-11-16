@@ -496,7 +496,9 @@ class FieldReportNovember13Tests(unittest.TestCase):
             "first move the project's own wording from it into the project section, as in the move above, then measure as in the move's step 5; never drop it",
             'from its opening marker line through its closing marker line and newline, the project\'s own marker lines included',
             "Change the `--receipt` path in the project section's check command, and in its update-check command if it states one, to the new receipt.",
-            'record them as pending, then their results, and do not report the update as adopted until they pass',
+            # Revision 3.10: a user's update finishes on its quick checks; no pending fresh host trials.
+            'The check reads this receipt, so as in the move it is written before the check of step 4; if that check fails, fix the cause or restore the backup, and do not report the update finished.',
+            'When it passes, with the checks the table below selects, the block update is finished; no fresh host trial is required.',
             'It must report `evidence_matched` and `director_block: unchanged`.',
         ):
             self.assertIn(phrase, section)
@@ -787,9 +789,8 @@ class HelpersAreDirectorsNovember15Tests(unittest.TestCase):
 
     def test_starter_readme_3_9_paragraph_puts_the_duty_on_the_agent_that_starts_a_session(self):
         readme = flat((STARTER / 'README.md').read_text())
-        self.assertIn('(now 3.9)', readme)
-        para = readme[readme.index('Revision 3.9'):]
-        para = para[:para.index(' ## ')]
+        # The (now N) marker moves with each revision; UserUpdatesFinishOnChecksNovember15Tests pins the current one.
+        para = readme[readme.index('Revision 3.9'):readme.index('Revision 3.10')]
         for phrase in ("puts that duty on the agent that starts a session.",
                        "has every brief tell each worker it is one",
                        "any agent a Director starts unnamed, even a host helper whose type the host defines, counts as a Director under the block, though it may not act as one.",
@@ -811,6 +812,96 @@ class HelpersAreDirectorsNovember15Tests(unittest.TestCase):
         self.assertIn('- Otherwise you are the Project Director, whoever or whatever started you', self.gate)
         # The role paragraph still holds the rest of what the cut sentence sat beside.
         self.assertIn("Preserve project, host and user authority, other authors' work, private sources and existing trackers; role names grant nothing.", self.gate)
+
+
+class UserUpdatesFinishOnChecksNovember15Tests(unittest.TestCase):
+    """Revision 3.10 wording (R11, November 15): a project's update to a published revision finishes on its quick checks;
+    fresh host trials are the pattern maintainers' work, not part of a user's update. Static text only: none of this
+    shows that an updater stops without a trial or leaves out the closing question in a live run."""
+
+    def setUp(self):
+        self.updates = flat((PAYLOAD / 'UPDATES.md').read_text())
+        self.trials = self.updates[self.updates.index('### Fresh host trials'):]
+        self.trials = self.trials[:self.trials.index(' ## ')] if ' ## ' in self.trials else self.trials[:3000]
+
+    def test_fresh_host_trials_are_the_maintainers_work_and_not_part_of_an_update(self):
+        self.assertEqual(self.updates.count('### Fresh host trials'), 1)
+        for phrase in (
+            'A fresh host trial opens new sessions to watch the pattern\'s own text at work: a first reply, a reply after a forced compaction, a worker start.',
+            "Every installation receives that text byte for byte from the published revision, so these trials are the pattern maintainers' work: "
+            'they run them on published revisions in their own installation. They are not part of a project\'s update.',
+        ):
+            self.assertEqual(self.trials.count(phrase), 1, phrase)
+
+    def test_an_update_is_finished_when_the_selected_checks_pass_including_the_move(self):
+        for phrase in (
+            'Updating to a published revision is finished when the checks this guide selects pass: the files compare cleanly, adaptations are preserved, '
+            'the focused checks the table names pass, and the check command reports `evidence_matched` with `director_block: unchanged`.',
+            'That holds for the move to the AGENTS.md block too.',
+        ):
+            self.assertEqual(self.trials.count(phrase), 1, phrase)
+        self.assertLess(self.trials.index('is finished when'), self.trials.index('That holds for the move'))
+
+    def test_the_do_not_list_the_old_receipts_and_the_one_time_offer(self):
+        for phrase in (
+            'Do not record fresh host trials as pending, hold the update open for them, or end the report with a question about them.',
+            'A receipt from an earlier update that lists such trials as pending needs nothing more: leave it as written and do not carry those entries forward.',
+            'You may mention once, as a plain statement rather than a question, that a fresh session can be opened to watch its first reply and a worker start; '
+            'run one only when the user asks, and record what it showed.',
+            "An unpublished or local candidate revision is not one the maintainers have released, so their trials have not covered it; say so in the report.",
+            'A startup defect the update finds is still handled as above;',
+        ):
+            self.assertEqual(self.trials.count(phrase), 1, phrase)
+        # The do-not sentence comes before the offer, so the offer never reads as a requirement.
+        self.assertLess(self.trials.index('Do not record fresh host trials as pending'), self.trials.index('You may mention once'))
+
+    def test_the_update_guide_no_longer_records_trials_as_pending_or_withholds_adoption(self):
+        # Known-bad: the 3.9 wording, in which the receipt listed fresh host trials as pending until they passed.
+        lowered = self.updates.lower()
+        for stale in ('record each of those trials in it as pending', 'records them as pending', 'record them as pending',
+                      'adopted until they pass', 'must not report the move as adopted', 'the fresh host trials in the table below apply',
+                      'run only the fresh host trials relevant to that behavior', 'relevant fresh unassigned/assigned host trials',
+                      'affected fresh host checks'):
+            self.assertNotIn(stale, lowered, stale)
+        self.assertEqual(re.findall(r'record\w*[^.]{0,80} as pending', lowered.replace('do not record fresh host trials as pending', '')), [])
+        self.assertFalse(re.findall(r'adopted until', lowered))
+
+    def test_move_and_block_update_say_no_fresh_host_trial_is_required(self):
+        move = self.updates[self.updates.index('### Move to the AGENTS.md block'):self.updates.index('### Update an installed block')]
+        self.assertEqual(move.count('When it passes, with the checks the table below selects and the independent review below, the move is finished; '
+                                    'no fresh host trial is required (see "Fresh host trials" below). The block is the published text byte for byte, '
+                                    'and the check shows it is in place, unchanged, in the file this project\'s check reads; '
+                                    "the table's trace covers how the host loads that file."), 1)
+        self.assertIn('A conversation already running, including this one and the subagents it starts, may keep the instructions it loaded '
+                      'at its start, so the new block applies from the next new conversation.', move)
+        # Step 6 writes the receipt before the check, and a failed check does not report the move finished.
+        self.assertIn('If step 7 then fails, fix the cause or restore the backup, record what happened, and do not report the move finished.', move)
+        block = self.updates[self.updates.index('### Update an installed block'):self.updates.index('Inspect helper/config/store schema compatibility')]
+        self.assertIn('the block update is finished; no fresh host trial is required.', block)
+        # The table's two rows say the same, so a trial is not selected by the kind of change either.
+        self.assertIn('no fresh host trial is required here.', self.updates)
+        self.assertIn('No fresh host trial is required (see "Fresh host trials" below).', self.updates)
+        # The independent review, backups and the rest are unchanged by this revision.
+        self.assertIn('This move is strong-tier work at high effort, with the required independent review', move)
+
+    def test_discovery_says_a_fresh_host_trial_never_holds_an_update_and_no_pending_behavioral_trials(self):
+        # Review of 3.10: the daily-discovery paragraph also carried the pending-trial idea; it now says the opposite.
+        self.assertEqual(self.updates.count('a fresh host trial, pending or not, never holds it'), 1)
+        self.assertNotIn('pending behavioral trials', self.updates.lower())
+
+    def test_starter_readme_3_10_paragraph_says_people_update_to_get_the_latest_version(self):
+        readme = flat((STARTER / 'README.md').read_text())
+        self.assertIn('(now 3.10)', readme)
+        para = readme[readme.index('Revision 3.10'):]
+        para = para[:para.index(' ## ')]
+        for phrase in ('says that people update to get the latest version, not to test the pattern.',
+                       "A project's update to a published revision is finished when its quick checks pass:",
+                       'and the check reports `evidence_matched` with the block unchanged.',
+                       'That includes the one-time move to the AGENTS.md block.',
+                       'Fresh-session trials test the pattern\'s own text, so its maintainers run them on published revisions in their own installation;',
+                       'but never holds an update open for it.',
+                       'Backups, comparison, migrations, conflicts, authority and the independent review stay as they were.'):
+            self.assertEqual(para.count(phrase), 1, phrase)
 
 
 class InstallAndUpdateTests(unittest.TestCase):
@@ -843,7 +934,7 @@ class InstallAndUpdateTests(unittest.TestCase):
         self.assertTrue(agents.startswith('<!-- director-starter:2 -->\n'))
         self.assertLess(agents.index('<!-- /director-starter:2 -->'), agents.index('<!-- director-project -->'))
         receipt = json.loads((self.home / 'install.json').read_bytes())
-        self.assertEqual(receipt['starter_revision'], '3.9')
+        self.assertEqual(receipt['starter_revision'], '3.10')
         self.assertEqual(receipt['director_block_sha256'], sha(installer.BLOCK.encode()))
         for name in CARDS:
             self.assertIn('.director/cards/' + name + '.md', receipt['managed'])
@@ -1164,11 +1255,11 @@ class InstallAndUpdateTests(unittest.TestCase):
                        'and OPERATIONS.md loses its staffing and privacy sections to the cards, only after any local addition to those files or sections is moved',
                        'name that index in the section instead of copying it; never keep two role tables',
                        "Each row's Limits (or the index entry) must carry every assignment-affecting guard",
-                       'record each of those trials in it as pending',
+                       'The check reads this receipt, so it is written before the check of step 7; only here and in a later block update does a receipt precede a required check. If step 7 then fails, fix the cause or restore the backup, record what happened, and do not report the move finished.',
                        'This move is strong-tier work at high effort, with the required independent review; it is not a lighter-tier case.',
                        'Automatic update mode never starts it unattended',
                        "and not the one-time move to the AGENTS.md block, which needs the owner's explicit go-ahead",
-                       'the move to the AGENTS.md block and a later block update, whose receipt the check reads, so it is written before their fresh host trials and records them as pending',
+                       'the move to the AGENTS.md block and a later block update, whose receipt the check reads, so it is written just before that check runs',
                        # Revision 3.5: the project owns AGENTS.md; size never blocks the move or the check.
                        'The project owns AGENTS.md: no size limit applies to it, to the block as it stands there or to the project section, and none blocks the update.',
                        'If the whole instruction file would pass the host\'s cap, report what would be cut and let the owner choose;',

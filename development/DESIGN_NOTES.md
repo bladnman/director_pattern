@@ -2472,3 +2472,84 @@ The block is 8,396 bytes (8,391 at 3.8) and the staffing card 6,499 (6,473), one
 | A Director names a lookup or a host helper a worker in its brief, as duty 5 asks | Not run |
 | A host helper whose prompt the host writes receives AGENTS.md or the brief's role | Not established |
 | An installed 3.8 project, including the private workspace, takes the 3.9 block and card update | Not run |
+
+## A user's update ends on its quick checks (starter 3.10) — November 15, 2026
+
+These checks cover revision 3.10, recorded under
+[R11](RATIONALE.md#r11--update-from-a-pinned-public-source-without-replacing-project-state)
+(November 15). In the starter UPDATES, the move to the AGENTS.md block (steps 6 and 7)
+and "Update an installed block" (steps 3 and 4) finish on the check, with the
+independent review for the move; the verification table's role-behavior and
+structural rows trace the route and run the check instead of requiring fresh host
+trials; a new "Fresh host trials" subsection makes them the maintainers' work on
+published revisions in their own installation, forbids recording them as pending,
+holding an update open for them or ending on a question about them, leaves earlier
+pending entries as written, and allows one plain mention of a deeper check, run only
+when the user asks; and a note says a running conversation keeps its start-time
+instructions, so the new block applies from the next conversation. Move step 7 ends
+that the check shows the block "is in place, unchanged, in the file this project's
+check reads; the table's trace covers how the host loads that file", and the
+daily-discovery paragraph says a fresh host trial, pending or not, never holds daily
+discovery. The manifest is
+3.10 and the starter README has a 3.10 paragraph. The design-obligation matrix's R11
+row and its 3.3 notes carry dated notes.
+
+### Field report that led to it
+
+On November 15 the maintainer updated two outside projects from 3.3 to 3.9. In each,
+the project's Director reported the update as staying open until four fresh-session
+trials had run and then asked whether to run them, as the 3.9 guide told it to.
+
+### Host fact it relies on
+
+A running conversation, and the subagents it starts, keep the instructions the
+conversation loaded at its start (observed once, on the desktop host, November 15;
+see
+[3.9](#whoever-starts-a-session-names-a-worker-one-starter-39--november-15-2026)). So
+after an update the new block applies from the next new conversation, and a
+maintainers' trial of a revision runs from a session started after its install.
+
+### Static checks
+
+From the repository root,
+`PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s development/tests`
+passed **305 tests** (298 at 3.9, plus the seven pins below). The existing pins were
+updated to the new UPDATES wording and to the 3.10 revision string, and the step-7
+and do-not pins to the review's wording.
+
+**Pins, done** (November 15), in `UserUpdatesFinishOnChecksNovember15Tests` in
+`test_block_route.py`, seven tests:
+
+- `test_fresh_host_trials_are_the_maintainers_work_and_not_part_of_an_update`: the
+  "Fresh host trials" subsection says they are the maintainers' work on published
+  revisions.
+- `test_an_update_is_finished_when_the_selected_checks_pass_including_the_move`: the
+  finished-when sentence, and that it holds for the move.
+- `test_the_do_not_list_the_old_receipts_and_the_one_time_offer`: the do-not list,
+  earlier receipts' pending entries left as written, and the once-only offer of a
+  deeper check.
+- `test_the_update_guide_no_longer_records_trials_as_pending_or_withholds_adoption`:
+  the old pending-trial wording is absent, matched case-insensitively and by pattern.
+- `test_move_and_block_update_say_no_fresh_host_trial_is_required`: move step 7,
+  block-update step 4 and the verification table's rows require no trial.
+- `test_starter_readme_3_10_paragraph_says_people_update_to_get_the_latest_version`:
+  the starter README's 3.10 paragraph.
+- `test_discovery_says_a_fresh_host_trial_never_holds_an_update_and_no_pending_behavioral_trials`:
+  the daily-discovery paragraph says a fresh host trial, pending or not, never holds
+  it.
+
+The starter UPDATES is 38,081 bytes (36,118 at 3.9). The legacy v1 engine guide,
+`pattern/engine/references/UPDATES.md`, is out of scope and unchanged; it keeps its
+trial triggers. These are static wording pins; they show nothing about live behavior.
+Also out of scope: the public site still describes fresh-agent trials as part of
+updates; changing it needs site work and its own deployment authorization.
+
+### Not verified
+
+| Scenario | Status |
+|---|---|
+| A project updates from an earlier revision to 3.10; the check passes, and its Director reports the update finished without recording trials as pending or ending on a question about them | Not run |
+| The same report mentions a deeper check at most once, as a statement, and runs one only when the user asks | Not run |
+| An update whose earlier receipt lists fresh host trials as pending leaves them as written and does not carry them into the new receipt | Not run |
+| A move whose check fails is not reported finished, and the backup is restored or the cause fixed | Not run |
+| The maintainers run fresh host trials of 3.10 in their own installation, from a session started after its install | Not run |
