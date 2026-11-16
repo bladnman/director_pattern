@@ -47,6 +47,10 @@ distinguish source/fixture checks from actual agent observations and remaining
 adoption gates. These documents and tests are not installation payload. A source
 checkout alone does not install the pattern or confer Director authority.
 
+The maintainer’s Tinka app, visual experiments and board history live outside this
+shipping repository. They are not required to install, use or maintain the public
+method; public rationale and validation remain in `development/`.
+
 Assignment roles remain `worker` and `director`. A scoped coordinating Director,
 reviewer or domain specialist is a maintained responsibility, not a new role value,
 permission grant or promise of a live agent. Independent testing and existing

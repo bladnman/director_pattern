@@ -1,5 +1,28 @@
 # Preserving the design obligations in the flat foundation
 
+## Visual workshop relocation — November 16, 2026
+
+Affected intent: R8 separates the installable method from authoring material.
+The earlier TINKA.md → tinka/app → design/boards route in the public checkout is
+retired; the same files and route move to the separate development workspace.
+Public contracts, tests and starter payload remain here and unchanged by the move.
+Board discovery, stable identities, saved layouts, local notes, offline restoration
+packages and resources must survive. Public access to workshop experiments is
+intentionally removed; public installation must have no dependency on them.
+
+Oracles: byte-preservation inventory before explicit locator updates; relocated
+workspace validation and HTTP resource checks; no app or boards in the source
+working tree; unchanged pattern payload; independent migration review. Missing
+resources or broken active authoring pointers block acceptance. Historic receipts
+retain their original locators. Publication and Git-history removal are separate.
+
+Executed locally: 778/778 preserved files; valid workspace with 64 items and 11
+boards; 71/71 resource paths served; unchanged pattern payload; independent
+review found no blocking issue. `test_shipping_checkout_excludes_visual_workshop`
+prevents reintroducing the app/boards at the repository boundary. Earlier published
+trees are unchanged by a new cleanup commit.
+
+
 Correction review · October31,2026 · **scoped source and target gates accepted, with declared limits**.
 Flat orchestration removes compulsory actors, not the reasons the previous design
 existed. Reusing code proves neither good assignments nor actual host behavior.

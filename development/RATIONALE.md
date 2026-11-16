@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated November 15, 2026. This repository authors a
+Living design rationale · updated November 16, 2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -876,6 +876,35 @@ this is authoring guidance, not automatic installation of director behavior here
 or shows that guidance is unreachable or no longer improves behavior.
 
 ## R8 — Separate the installed method from its workshop
+
+**November 16 — visual workshop leaves the shipping checkout:** The maintainer
+decided that the Tinka application, restoration packages, board metadata and visual
+experiments belong in the separate development workspace. This supersedes the
+November 14 statement that this repository retains the entire public workshop.
+Generic rationale, contracts and tests remain here; the installable method is
+unchanged. Preservation replaces deletion: move the complete visual workspace,
+including ignored local state, retain a recovery copy, and rebind its current app
+configuration and authoring pointers. Historic evidence stays unchanged.
+
+**Intent disposition:** R8's self-contained installation and separation of method
+from authoring tools are preserved. The former repository-local TINKA.md route is
+removed; development-workspace guidance now routes to its local TINKA.md and app.
+This intentionally removes public checkout access to the visual experiments; no
+public contract or installation step may depend on those private materials.
+Regression oracles: every moved file matches its preserved bytes before explicit
+locator edits; board IDs, metadata and resource files survive; the relocated app
+serves the same boards from its new root; the shipping checkout has no app/board
+files; pattern payload bytes remain unchanged. Independent review and the executed
+checks are required before accepting the move. This is a local relocation, not a
+release, history rewrite or claim that older commits contain no visual material.
+
+**Local verification:** all 778 moved files matched their preservation inventory;
+independent review rechecked the archive and move with no missing files or blocking
+findings. The relocated workspace validates (64 items, 11 boards), all 71 resource
+paths load, and pattern payload bytes are unchanged. Current guidance and local
+identity settings are the explicit post-move edits. The shipping boundary is pinned
+by `test_shipping_checkout_excludes_visual_workshop`; publishing this cleanup does
+not rewrite earlier published trees.
 
 **November 14 — the maintainer's installation leaves the workshop (cross-reference):**
 The maintainer's own Director installation, exact sources and preserved originals

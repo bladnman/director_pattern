@@ -60,6 +60,8 @@ rationale, and tests remain outside the installable `pattern/`.
 
 The maintainer's local Director installation lives outside this repository.
 
-## Tinka
+## Visual development
 
-Read [TINKA.md](TINKA.md) before working with this project's Tinka boards. It identifies the boards and explains how to restore the pinned app on a new machine without a skill.
+The design workspace and Tinka installation belong in the maintainer's development
+workspace, outside this shipping repository. Do not install Tinka or add its boards,
+packages or local state here. Public rationale and tests remain in development/.

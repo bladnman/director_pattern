@@ -58,3 +58,9 @@ temp/
 /.director/
 # Legacy local Producer Pattern installation kept private
 /.producer/
+
+# Visual workshop belongs outside the shipping source repository.
+/tinka/
+/design/boards/
+/.tinka/
+/TINKA.md

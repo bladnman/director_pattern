@@ -61,6 +61,15 @@ def startup_lines():
 
 
 class PackageBoundaryTests(unittest.TestCase):
+    def test_shipping_checkout_excludes_visual_workshop(self):
+        # Authoring assets must not silently rejoin the independently usable method.
+        for relative in ("tinka", "design/boards", ".tinka", "TINKA.md"):
+            with self.subTest(relative=relative):
+                self.assertFalse((ROOT / relative).exists(), relative)
+        ignore = (ROOT / ".gitignore").read_text(encoding="utf-8").splitlines()
+        for rule in ("/tinka/", "/design/boards/", "/.tinka/", "/TINKA.md"):
+            self.assertIn(rule, ignore)
+
     def manifest(self, root):
         manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["schema_version"], 1)
@@ -139,7 +148,8 @@ class PackageBoundaryTests(unittest.TestCase):
         # only, with no check and no 🎬, is the live half and is not shown here.
         authoring = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
         self.assertIn("# Maintaining this repository", authoring)
-        self.assertIn("## Tinka", authoring)
+        self.assertIn("## Visual development", authoring)
+        self.assertIn("Do not install Tinka or add its boards", authoring)
         for marker in STARTUP_MARKERS:
             self.assertFalse(marker in authoring, f"root AGENTS.md must carry no {marker} marker")
         self.assertIsNone(PRIVATE_ID.search(authoring), "root AGENTS.md must carry no project, request or source ID")
