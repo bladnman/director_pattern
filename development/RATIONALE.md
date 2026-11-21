@@ -1,6 +1,6 @@
 # Why the Director Pattern has this shape
 
-Living design rationale · updated November 16, 2026. This repository authors a
+Living design rationale · updated November 21, 2026. This repository authors a
 candidate pattern; it has not automatically adopted or installed that pattern.
 This document explains the current reasoning, tradeoffs, and revisit triggers.
 It is not an activity log or a claim that every design direction is approved.
@@ -3340,6 +3340,15 @@ structure only. No live fresh-session selection or explicit-invocation trial is
 claimed; running chats can retain earlier loaded instructions.
 
 ## R14 — Commit the installation with the project
+
+**November 21, 2026 — deciding what to track.** When someone first sees
+`.director/` in Git status, the leading dot says nothing about what belongs in
+Git. The project's configuration, roles and workflow belong in its history so a
+collaborator gets them in a fresh clone. Preserve existing privacy choices.
+The [privacy card](../pattern/starter/payload/cards/privacy.md) covers local
+scratch and backups, durable requests and sources, and the one-time warning at
+first capture when a remote is public or its visibility is unknown. The project
+decides when to commit and push.
 
 **November 14 — the maintainer's installation moves to a private sibling workspace
 (supersedes this repository's ignored installation):** The October 21 decision below

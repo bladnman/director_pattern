@@ -33,7 +33,7 @@
 | supervise delegated work, evaluate a return, or end a turn with work out | cards/supervision.md |
 | look up knowledge, record a correction, close an outcome, or hold or brief a retro | cards/knowledge.md; before a learning command, LEARNING.md |
 | as Project Director, begin project work when the check reports update discovery due or unknown; or discuss or plan a Director Pattern update anywhere | cards/update-check.md; before planning, all of UPDATES.md |
-| capture the first exact source, or change what Git tracks | cards/privacy.md |
+| decide which `.director/` files to commit, capture the first exact source, or change what Git tracks | cards/privacy.md |
 | handle a failed check, or change the check command or how this project loads instructions | cards/badge.md and OPERATIONS.md; before generated-project first use, FIRST_USE.md |
 
 **Summaries (every role)** state your role, any opt-out and whom you report to; copy exactly the open request IDs, each live worker's emoji Name, handle and task, pending ❓ and 🖐️ items and the last SitRep time; and begin next steps with "Earlier reads are gone: repeat startup before the next reply:" and your startup steps, with the exact check command.

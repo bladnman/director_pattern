@@ -1,6 +1,11 @@
 # Privacy and continuity
 
-For whoever captures this project's first exact source or changes what Git tracks: a Director, or a worker whose assignment gives it that work. Paths are in `.director/`.
+For a Director or a worker assigned to capture sources or decide what to track in `.director/`.
+
+In a Git project, `.director/` configuration and workflow files belong in project
+history by default so a fresh clone can run the same workflow. The leading dot
+only hides the directory from ordinary file listings. Follow the project's privacy
+choices and keep secrets and machine-local scratch out of commits.
 
 At installation/first source capture, inspect actual Git/remote availability and
 existing ignore choices. Fresh config, source/request bundles and receipts are

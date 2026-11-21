@@ -891,9 +891,8 @@ class UserUpdatesFinishOnChecksNovember15Tests(unittest.TestCase):
 
     def test_starter_readme_3_10_paragraph_says_people_update_to_get_the_latest_version(self):
         readme = flat((STARTER / 'README.md').read_text())
-        self.assertIn('(now 3.10)', readme)
-        para = readme[readme.index('Revision 3.10'):]
-        para = para[:para.index(' ## ')]
+        self.assertIn('(now 3.11)', readme)
+        para = readme[readme.index('Revision 3.10'):readme.index('Revision 3.11')]
         for phrase in ('says that people update to get the latest version, not to test the pattern.',
                        "A project's update to a published revision is finished when its quick checks pass:",
                        'and the check reports `evidence_matched` with the block unchanged.',
@@ -934,7 +933,7 @@ class InstallAndUpdateTests(unittest.TestCase):
         self.assertTrue(agents.startswith('<!-- director-starter:2 -->\n'))
         self.assertLess(agents.index('<!-- /director-starter:2 -->'), agents.index('<!-- director-project -->'))
         receipt = json.loads((self.home / 'install.json').read_bytes())
-        self.assertEqual(receipt['starter_revision'], '3.10')
+        self.assertEqual(receipt['starter_revision'], '3.11')
         self.assertEqual(receipt['director_block_sha256'], sha(installer.BLOCK.encode()))
         for name in CARDS:
             self.assertIn('.director/cards/' + name + '.md', receipt['managed'])

@@ -13,7 +13,7 @@ reviewed instruction/adapter integration, not a fresh installer or second ledger
 The [design-obligation matrix](https://github.com/bladnman/director_pattern/blob/main/development/BEHAVIOR_PARITY.md) explains the
 old reasons, revised routes, evidence and remaining verification limits.
 
-The manifest's `starter_revision` (now 3.10) is a readable revision number bumped with
+The manifest's `starter_revision` (now 3.11) is a readable revision number bumped with
 each published payload change; `starter_version` stays the install-format number.
 
 Revision 3.3 changes where the Director's rules live. The installer writes a marked
@@ -87,6 +87,10 @@ maintainers run them on published revisions in their own installation; a project
 Director may mention one as a deeper check, but never holds an update open for it.
 Backups, comparison, migrations, conflicts, authority and the independent review
 stay as they were.
+
+Revision 3.11 points Directors and workers to the privacy card when deciding
+which `.director/` files to commit. Configuration and workflow files belong in
+project history by default, subject to the project's privacy choices.
 
 ## Install beside ordinary notes and assets
 
