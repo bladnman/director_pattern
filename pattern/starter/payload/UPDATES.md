@@ -186,19 +186,27 @@ setup receipt, PROJECT (and any local overlay an older installation uses), confi
 canonical tracker, local adapters, and current installed files. Do not infer actual
 role, model support, or current worker liveness from a saved receipt.
 
+For a starter 3 upgrade, read `pattern/starter/MIGRATIONS.md` from the same pinned
+incoming source before comparing or applying files. Use the applicable revision
+entries in the update plan, including when skipping revisions. The notes are
+upgrade guidance in staging, outside the installed payload. On an explicit
+same-revision update, revisit an applicable entry only when existing evidence
+points to an outstanding migration (including a matching legacy issue with no
+recorded outcome).
+
 ## Compare before replacing
 
 Before edits, create a unique dated backup under `.director/backups/` of every
-managed file and startup file to be changed, with original paths and SHA-256
+file to be changed, including applicable migration paths, with original paths and SHA-256
 hashes. Verify backup bytes. Backups stay local through `.director/.gitignore`;
 committed history already keeps prior versions. If the installation has no
 `.director/.gitignore` yet, add the incoming one first (it is a new managed file),
 then write backups. Receipts live under `.director/receipts/` and follow the project's existing privacy/version-control choice.
 
-Preserve the project's version-control choices. An installation whose files are
-ignored, under the earlier private default or by deliberate choice, stays ignored:
-keep that privacy choice; a user may separately choose to track reviewed nonprivate files.
-Never silently start tracking, untrack, or rewrite history.
+Preserve the project's version-control choices, including ignored files. Follow the
+pinned migration entry to narrow a proven obsolete setup default in a manual update.
+Change a deliberate or uncertain local policy only with the project owner's explicit
+authorization for that policy and scope. Leave the Git index and history untouched.
 
 Compare three versions for each selected managed path:
 
@@ -223,12 +231,17 @@ provenance is a review requirement, never evidence that replacement is safe. Mis
 baselines alone do not require a full startup audit or fresh-agent trial.
 
 Preserve enduring project context/overlays, authorized budget/authority policy,
-conditional custom adapters, additions to `.director/.gitignore`, state mode,
+conditional custom adapters, additions to `.director/.gitignore` that are outside
+the reviewed migration scope, state mode,
 stable project/request IDs, sources and attachments, request history, activity,
 decisions, and actual handles. Preserve the project-owned role index, definitions,
 applicable overrides and guardrails, identity roster/cursor, and current activity.
 These are project-owned; an initialized roster or cursor never overwrites current
 state. A replacement identity pool is an adaptation, merged like any other.
+Review any migration-specific change to project-owned instructions on its own
+merits, including in the project section if it contains the affected rule. Apply
+only the authorized change, trace its loaded route and record it in the receipt.
+Replacing the managed block does not itself change project-owned wording.
 
 Preservation does not promote old environment mappings into current authority.
 When PROJECT or another loaded instruction contains model/provider/version IDs,
@@ -423,7 +436,8 @@ receipt; no separate plan, schema, or test matrix is required. Use these trigger
 | Changed role behavior without startup restructuring | Check affected definitions, references, index reachability, and preservation. The behavior itself is the published revision's, which the pattern's maintainers test in fresh sessions; no fresh host trial is required here. |
 | Structural changes to the loaded startup chain, bootstrap routing, role selection/defaults, or inherited instruction placement; or a detected startup defect that requires integration | Trace the actual host-loaded hook through complete selected role/project guards, check missing/truncated reads and applicable authority, and run the check command. Repair a detected defect within authorized scope, or report it. No fresh host trial is required (see "Fresh host trials" below). |
 | Missing baseline or uncertain provenance | Reconstruct from the prior pinned upstream revision and review local differences, or obtain explicit review before replacement; expand startup/behavior checks only if those findings trigger them. |
-| Already-current installation | Confirm the pinned revision and inspect local drift and preservation. Report no upstream change; do not rewrite files or rerun startup/role trials without a relevant finding. |
+| Applicable migration | Use its focused checks and the normal comparison, backup and independent review. Record the disposition in the existing update record. |
+| Already-current installation | Confirm the pinned revision and inspect local drift and preservation. Report no upstream change and any separately verified outstanding migration work; do not rewrite files or rerun startup/role trials without a relevant finding. |
 
 Changing required-reference phases or capability triggers is a startup/behavior
 change: audit every reachable affected path and preserve project-owned unphased

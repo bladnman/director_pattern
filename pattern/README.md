@@ -18,6 +18,12 @@ payload. An installation at revision 3.2 or earlier does not get this by reinsta
 it moves through its own reviewed update, under
 [UPDATES](starter/payload/UPDATES.md), "Move to the AGENTS.md block".
 
+**Updating installed starter 3:** begin in the project's own conversation with
+"update director pattern" and follow its installed update pointer. If that pointer
+is absent or unusable, resolve published `main` to one exact commit and read its
+starter [update guide](starter/payload/UPDATES.md) in staging. Use the applicable
+[migration notes](starter/MIGRATIONS.md) from that same pinned revision.
+
 ```sh
 python3 pattern/starter/install.py plan --target /path/to/project
 python3 pattern/starter/install.py install --target /path/to/project

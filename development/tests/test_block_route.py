@@ -891,7 +891,7 @@ class UserUpdatesFinishOnChecksNovember15Tests(unittest.TestCase):
 
     def test_starter_readme_3_10_paragraph_says_people_update_to_get_the_latest_version(self):
         readme = flat((STARTER / 'README.md').read_text())
-        self.assertIn('(now 3.11)', readme)
+        self.assertIn('(now 3.12)', readme)
         para = readme[readme.index('Revision 3.10'):readme.index('Revision 3.11')]
         for phrase in ('says that people update to get the latest version, not to test the pattern.',
                        "A project's update to a published revision is finished when its quick checks pass:",
@@ -933,13 +933,26 @@ class InstallAndUpdateTests(unittest.TestCase):
         self.assertTrue(agents.startswith('<!-- director-starter:2 -->\n'))
         self.assertLess(agents.index('<!-- /director-starter:2 -->'), agents.index('<!-- director-project -->'))
         receipt = json.loads((self.home / 'install.json').read_bytes())
-        self.assertEqual(receipt['starter_revision'], '3.11')
+        self.assertEqual(receipt['starter_revision'], '3.12')
         self.assertEqual(receipt['director_block_sha256'], sha(installer.BLOCK.encode()))
         for name in CARDS:
             self.assertIn('.director/cards/' + name + '.md', receipt['managed'])
         result = self.run_json(self.home / 'startup_check.py')
         self.assertEqual(result['status'], 'evidence_matched')
         self.assertEqual(result['startup_hook']['target'], '.director/WORKER.md')
+
+    def test_migration_notes_are_reachable_from_pinned_guidance_without_becoming_startup_payload(self):
+        incoming = (PAYLOAD / 'UPDATES.md').read_text()
+        pin_section = incoming.split('## Pin and inspect the incoming revision', 1)[1].split('\n## ', 1)[0]
+        locator = 'pattern/starter/MIGRATIONS.md'
+        self.assertIn(f'`{locator}`', pin_section)
+        self.assertTrue((ROOT / locator).is_file())
+
+        installer.operation('install', self.project)
+        self.assertFalse(list(self.project.rglob('MIGRATIONS.md')))
+        self.assertNotIn('MIGRATIONS.md', (self.project / 'AGENTS.md').read_text())
+        self.assertNotIn('MIGRATIONS.md', (self.home / 'cards/update-check.md').read_text())
+        self.assertEqual(self.run_json(self.home / 'startup_check.py')['status'], 'evidence_matched')
 
     def test_malformed_block_or_section_source_refuses_before_any_write(self):
         for attribute, value in (('BLOCK', installer.BLOCK.replace('<!-- director-starter:2 -->\n', '')),

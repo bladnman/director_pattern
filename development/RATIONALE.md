@@ -2691,6 +2691,52 @@ correction establishes universal host compliance.
 
 ## R11 — Update from a pinned public source without replacing project state
 
+**November 21 — carry applicable upgrade steps in the incoming package
+(starter revision 3.12).** A project can update directly from its installed pin to
+the latest supported revision. It may never see the release where an older default
+was corrected. The [3.11 tracking guidance](#r14--commit-the-installation-with-the-project)
+explains which configuration and workflow files should reach a clone, but prose
+alone leaves an inherited blanket ignore in force. Instructions that exist only
+in the intermediate release leave the same gap for anyone who skips it.
+
+During the existing pin-and-inspect phase of
+[UPDATES](../pattern/starter/payload/UPDATES.md#pin-and-inspect-the-incoming-revision),
+read the compact, cumulative [migration note](../pattern/starter/MIGRATIONS.md)
+from the exact incoming source and consider matching entries in revision order.
+Keep each applicable entry in later incoming
+packages while any supported upgrade path can still need it. Retire an entry only
+when those paths are out of scope, and retain historical source pins for review
+and recovery. This adds a read at upgrade time. Fresh installs and ordinary
+startup use their existing routes, without carrying migration history in the
+installed payload.
+
+**Design-intent disposition.** The earlier starter update rule preserved an
+ignored installation whether the blanket rule came from a private default or a
+project decision. Preserve intentional privacy and treat uncertain provenance
+conservatively. Narrow the blanket rule only where an older installer, stencil
+or installation record establishes that it is an obsolete inherited default
+and the proposed change is authorized. The installed revision and a matching
+ignore line alone cannot establish who chose the rule. Assess the actual Git
+result, including stronger excludes, and limit new eligibility to individually
+reviewed, shareable configuration and workflow files. Exact sources, requests,
+other private or unreviewed material, and machine-local scratch retain their
+exclusions. With no Git repository, the entry requires no change. Record the
+disposition and checks in the existing update record so that repeating an update
+at the same pin can evaluate a missing disposition without repeating a completed
+change. Backups, independent review, and acceptance stay with the existing update
+route. Standing automatic update permission allows inspecting and recording the
+finding. Applying a migration edit requires an explicit update instruction and
+the project's existing authority.
+
+**Regression cases.** From a proven old baseline, update directly to a later pin
+that still carries the entry. Check that only the reviewed paths become eligible,
+private and machine-local paths remain ignored, and the index stays unchanged.
+Repeat at the same pin and check for no duplicate edit. Run the same review against
+an explicit opt-out, an identical-looking rule with uncertain provenance, a stronger
+ignore and a project without Git. Check that fresh install and ordinary startup
+need no migration note. These are verification criteria for the source candidate.
+Installed behavior and publication require their own evidence.
+
 **November 15 — a user's update is finished when its quick checks pass; fresh host
 trials are the maintainers' work (starter revision 3.10; supersedes November 11's
 receipt-before-trials rule, item 12 of the R10 November 11 entry, the November 13

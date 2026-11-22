@@ -1,5 +1,19 @@
 # Preserving the design obligations in the flat foundation
 
+## Cumulative upgrade notes — November 21, 2026
+
+The following disposition applies to the starter 3.12 source candidate.
+
+| Obligation | Active route and disposition | Regression oracle |
+|---|---|---|
+| **Direct updates from supported pins** (R11). A project that skips the revision that introduced a correction still needs any applicable upgrade step. | This project's update reads [UPDATES](../pattern/starter/payload/UPDATES.md#pin-and-inspect-the-incoming-revision) and the [cumulative migration note](../pattern/starter/MIGRATIONS.md) at the exact incoming pin. Carry entries while supported paths can need them and preserve historical pins. Fresh installation, daily discovery and startup keep their existing routes. | A fixture upgrades from an earlier supported pin to a later package that carries the applicable entry. A same-pin rerun evaluates a missing disposition and leaves a completed change alone. The note stays outside the installed payload. |
+| **Clone continuity and project privacy** (R14/R16). An inherited blanket ignore can hide shared workflow files, and a local opt-out can look identical. | Preserve explicit or ambiguous privacy rules. Where installation provenance establishes an obsolete default, review the proposed narrowing under the project's existing update authority. Limit new Git eligibility to reviewed, shareable workflow and configuration files. Keep private paths and the index intact. | Inspect effective ignore results and index status for a proven legacy default, an explicit opt-out, unknown provenance, stronger ignore rules and no Git. Existing scope and rollback checks apply. Automatic mode can inspect and record. A migration edit needs an explicit update instruction. |
+
+These cases define the proof required for the disposition in
+[R11](RATIONALE.md#r11--update-from-a-pinned-public-source-without-replacing-project-state).
+Source and fixture checks only cover the behavior they exercise. Installed-project
+results and publication are separate.
+
 ## Visual workshop relocation — November 16, 2026
 
 Affected intent: R8 separates the installable method from authoring material.
